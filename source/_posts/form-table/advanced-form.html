@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Advanced Form</title>
+<style type="text/css">
+<!--
+
+body {
+	font: 62.5%/1 "Myriad Pro", Frutiger, "Lucida Grande", "Lucida Sans", "Lucida Sans Unicode", Verdana, sans-serif;
+}
+
+.clear {
+  clear: both;
+}
+
+form {
+  font-size: 1.4em;
+	width: 45em;
+}
+
+/* fieldset styling */
+fieldset {
+	margin: 1em 0; /*  space out the fieldsets a little*/
+	padding: 1em;
+	border : 1px solid #ccc;
+	background-color:#F5F5F5
+}
+
+/* legend styling */
+legend {
+	font-weight: bold;
+}
+
+form div {
+  position: relative;
+	width: 100%;
+	padding: 0.4em 0;
+	clear: both;
+}
+
+/* style for  labels */
+label {
+	float: left;
+	clear: left;
+	width: 10em;
+}
+
+/* style for required labels */
+label .required {
+	font-size: 0.83em;
+	color:#760000;
+}
+
+/* style error messages */
+label .feedback {
+	position: absolute;
+	left: 31em;
+  right: 0;
+	top: 0.5em;
+	font-weight: bold;
+	color:#760000;
+	padding-left: 20px;
+	background: url(img/error.png) no-repeat left top;
+}
+
+/* :KLUDGE: Explicitly set the width for IE6- */
+* html .feedback{
+  width: 10em;
+}
+
+input {
+  width: 20em;
+	font-size: inherit;
+}
+
+input[type="text"], textarea {
+	border-top: 2px solid #999;
+	border-left: 2px solid #999;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+input.radio, input.checkbox, input.submit {
+  width: auto;
+}
+
+/* style form elements on focus */
+input:focus, textarea:focus {
+	background: #ffc;
+}
+
+
+textarea {
+	width: 100%;
+	height: 10em;
+}
+
+/* Date of Birth form styling */
+
+#monthOfBirthLabel, #yearOfBirthLabel {
+  text-indent: -1000em;
+	width: 0;
+}
+
+#dateOfBirth {
+  width: 3em;
+	margin-right: 0.5em;
+}
+
+#monthOfBirth {
+  width: 10em;
+	margin-right: 0.5em;
+}
+
+#yearOfBirth {
+  width: 5em;
+}
+
+/* Color form styling */
+#favoriteColor {
+  margin: 0;
+	padding: 0;
+	border: none;
+	background: transparent;
+}
+
+#favoriteColor h2 {
+  width: 10em;
+	float: left;
+	font-size: 1em;
+	font-weight: normal;
+}
+
+#favoriteColor .col {
+  width: 8em;
+	float: left;
+	clear: none;
+}
+
+#favoriteColor label {
+	float: none;
+}
+
+#remember-me .radio {
+	margin-right: 1em;
+}
+
+/* Button styling */
+
+button {
+  width: 200px;
+  height: 50px;
+  border: 1px solid #989898;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;
+   border-radius: 6px;
+   background: url(img/button-bg.png) #c5e063 bottom left repeat-x;
+  -moz-box-shadow: 2px 2px 2px #ccc;
+  -webkit-box-shadow: 2px 2px 2px #ccc;
+  box-shadow: 2px 2px 2px #ccc;
+   color: #fff;
+   font-size: 26px;
+   font-weight: bold;
+   text-shadow: 1px 1px 1px #666;
+}
+
+-->
+</style>
+</head>
+
+<body>
+
+<form id="comments_form" action="#" method="post">
+
+<fieldset>
+	<legend>Your Contact Details</legend>
+	<div>
+	<label for="author">Name: <em class="required">(Required)</em></label>
+	<input name="author" id="author" type="text" />
+	</div>
+	
+	<div>
+	<label for="email">Email Address is really, really, really really long: <em class="feedback">Incorrect email address. Please try again.</em></label>
+	<input name="email" id="email" type="text" />
+	</div>
+	
+	<div>
+	<label for="url">Web Address:</label>
+	<input name="url" id="url" type="text" />
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Personal Information</legend>
+	
+	<div>
+	<label for="author">Place of Birth: </label>
+	<select>
+  <option value="USA" selected="selected">USA</option>
+  <option value="UK">United Kingdom</option>
+  </select>
+	</div>
+	
+	<div>
+	<label for="dateOfBirth">Date of Birth:</label>
+  <input name="dateOfBirth" id="dateOfBirth" type="text"  />
+	
+  <label id="monthOfBirthLabel" for="monthOfBirth">Month of Birth:</label>
+  <select name="monthOfBirth" id="monthOfBirth">
+  <option value="1">January</option>
+  <option value="2">February</option>
+  <option value="3">March</option>
+  </select>
+	
+  <label id="yearOfBirthLabel" for="yearOfBirth">Year of Birth:</label>
+  <input name="yearOfBirth" id="yearOfBirth" type="text" />
+	</div>
+	
+	<fieldset id="favoriteColor">
+	<h2>Favorite Color:</h2>
+	
+	<div class="col">
+	<div>
+	<label><input class="checkbox" id="red" name="red" type="checkbox" value="red" />red</label>
+	</div>
+	
+	<div>
+	<label><input class="checkbox" id="yellow" name="yellow" type="checkbox" value="yellow" />yellow</label>
+	</div>
+	
+	<div>
+	<label><input class="checkbox" id="pink" name="pink" type="checkbox" value="pink" />pink</label>
+	</div>
+	
+	<div>
+	<label><input class="checkbox" id="green" name="green" type="checkbox" value="green" />green</label>
+	</div>
+  </div>
+	
+	<div class="col">
+	<div>
+	<label><input class="checkbox" id="orange" name="orange" type="checkbox" value="orange" />orange</label>
+	</div>
+	
+	<div>
+	<label><input class="checkbox" id="purple" name="purple" type="checkbox" value="purple" />purple</label>
+	</div>
+	
+	<div>
+	<label><input class="checkbox" id="blue" name="blue" type="checkbox" value="blue" />blue</label>
+	</div>
+	
+	<div>
+	<label><input class="checkbox" id="other" name="other" type="checkbox" value="other" />other</label>
+	</div>	
+  </div>
+	</fieldset>
+	
+
+	
+</fieldset>
+
+<fieldset>
+	<legend>Comments</legend>
+	<div>
+	<label for="text">Message: <em class="required">(Required)</em></label>
+	<textarea name="text" id="text" cols="20" rows="10"></textarea>
+	</div>
+</fieldset>
+
+<fieldset id="remember-me">
+	<legend>Remember Me</legend>
+		<div>
+		<label for="remember-yes"><input id="remember-yes" class="radio" name="remember" type="radio" value="yes" />Yes</label>
+		</div>
+		
+		<div>
+		<label for="remember-no"><input id="remember-no" class="radio" name="remember" type="radio" value="no" checked="checked" />No</label>
+		</div>
+		
+</fieldset>
+
+<div>
+<button type="submit">Book Now »</button>
+</div>
+
+</form>
+</body>
+</html>
