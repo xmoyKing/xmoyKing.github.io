@@ -263,3 +263,12 @@ Tree.prototype = {
 
 
 ### 37. 认识到this变量的隐式绑定问题
+编写一个读取CSV(逗号分割型取值)数据的类, 构造函数需要一个可选的分隔器字符数组并构造出一个自定义的正则表达式将每一行分为不同的条目.
+```js
+function CVSReader(separators){
+    this.separators = separators || [","];
+    this.regexp = new RegExp(this.separators.map(function(sep){
+        return "\\" + sep[0];
+    }).join("|"));
+}
+
