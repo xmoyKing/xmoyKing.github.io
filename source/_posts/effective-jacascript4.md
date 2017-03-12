@@ -272,3 +272,297 @@ function CVSReader(separators){
     }).join("|"));
 }
 
+// CSV 类 read 方法, 将输入字符串划分为一个二维数组
+CSVReader.prototype.read = function(str){
+    var lines = str.trim().split(/\n/);
+    return lines.map(function(line){
+        return line.split(this.regexp); // 错误的 this 引用
+    });
+}
+
+var reader = new CSVReader();
+reader.read("a,b,c\nd,e,f\n"); // [["a,b,c"],["d,e,f"]]
+```
+上段代码由于this的错误, 引用了lines.regexp (this.regexp) 而lines没有regexp属性, 所以结果返回line.split(underfined), 解决的方法有三种:
+
+1. map方法接受的第二个参数,表示内部的this对象的绑定对象
+```js
+CSVReader.prototype.read = function(str){
+    var lines = str.trim().split(/\n/);
+    return lines.map(function(line){
+        return line.split(this.regexp); // 此时的this表示外部传入的实例对象 
+    }, this); // 将调用read方法的实例对象传入
+}
+
+var reader = new CSVReader();
+reader.read("a,b,c\nd,e,f\n"); // [["a","b","c"],["d","e","f"]]
+```
+2. 可以在外部函数保存this的引用
+```js
+CSVReader.prototype.read = function(str){
+    var lines = str.trim().split(/\n/);
+    var self = this; // self表示外部的实例对象
+    return lines.map(function(line){
+        return line.split(self.regexp); // 显示获取self的的regexp属性
+    });
+}
+
+var reader = new CSVReader();
+reader.read("a,b,c\nd,e,f\n"); // [["a","b","c"],["d","e","f"]]
+```
+3. ES5中,可以使用回调函数的bind方法
+```js
+CSVReader.prototype.read = function(str){
+    var lines = str.trim().split(/\n/);
+    return lines.map(function(line){
+        return line.split(this.regexp); // 此时的this表示外部传入的实例对象 
+    }.bind(this)); // 使用bind方法绑定外部的实例对象
+}
+
+var reader = new CSVReader();
+reader.read("a,b,c\nd,e,f\n"); // [["a","b","c"],["d","e","f"]]
+```
+
+1. **this变量的作用域总是由其最近的封闭函数所确定**
+2. **使用一个局部变量(通常self,me)使得this绑定对于内部函数是可用的**
+
+### 38. 在子类的构造函数中调用父类的构造函数
+场景图是一个对象集合,包含了该场景图中的所有的对象(角色), 以及对底层图形的引用(context), 基于canvas
+```js
+function Scene(context, width, height, images){
+    this.context = context;
+    this.width = width;
+    this.height = height;
+    this.images = images;
+    this.actors = [];
+}
+
+Scene.prototype.register = function(actor){
+    this.actors.push(actor);
+};
+
+Scene.prototype.unregister = function(actor){
+    var i = this.actors.indexOf(actor);
+    if(i >= 0){
+        this.actors.splice(i, 1);
+    }
+};
+
+Scene.prototype.draw = function(){
+    this.context.clearRect(0,0,this.width,this.height);
+    for(var a = this.actors, i = 0, n = a.length; i < n; ++i){
+        a[i].draw();
+    }
+};
+
+// 角色继承自基类Actor, 每个角色存储自身场景的引用以及坐标位置, 同时将自身添加到角色注册表中
+function Actor(scene, x, y){
+    this.scene = scene;
+    this.x = x;
+    this.y = y;
+    scene.register(this);
+}
+// moveTo改变角色的坐标, 同时重绘场景
+Actor.prototype.moveTo = function(x,y){
+    this.x = x;
+    this.y = y;
+    this.scene.draw();
+}
+// 角色离开场景后需要从注册表中删除它并重绘场景
+Actor.prototype.exit = function(){
+    this.scene.unregister(this);
+    this.scene.draw();
+}
+// 每个actor有一个type字段, 用来查找它在图表中的图像
+Actor.prototype.draw = function(){
+    var image = this.scene.images[this.type];
+    this.scene.context.drawImage(image, this.x, this.y);
+}
+
+Actor.prototype.width = function(){
+    return this.scene.images[this.type].width;
+}
+
+Actor.prototype.height = function(){
+    return this.scene.images[this.type].height;
+}
+```
+所有的特定角色都是Actor的子类, 例如太空飞船,SpaceShip类
+ 1. 先调用Actor的构造函数能保证通过Actor创建的所有实例属性都被添到新对象中, 
+ 2. 然后再定义自身的实例属性,比如分数,point
+ 3. 最后为了使SpaceShip成为Actor的一个正确子类, 原型必须继承自Actor.prototype, 这种扩展最好使用使用Object.create方法
+```js
+function SpaceShip(scene, x, y){
+    Actor.call(this, scene, x, y); //子类构造函数必须显示调用父类Actor的构造函数, 同时将接收者绑定为自己
+    this.points = 0;
+}
+SpaceShip.prototype = Object.create(Actor.prototype);
+
+// 创建了SpaceShip的原型对象后, 就可以添加被所有实例共享的属性和方法
+SpaceShip.prototype.type = 'spaceShip';
+SpaceShip.prototype.scorePoint = function(){
+    this.point++;
+};
+SpaceShip.prtotype.left = function(){
+    this.moveTo(Math.max(this.x - 10, 0), this.y);
+};
+SpaceShip.prototype.right = function(){
+    var maxWidth = this.scene.width - this.width();
+    this.moveTo(Math.min(this.x + 10, maxWidth), this.y);
+}
+```
+
+若使用Actor的构造函数来创建SpaceShip的原型对象, 会有几个问题,没有任何合理的参数传递给Actor, 
+```js
+SpaceShip.prototype = new Actor();
+```
+
+![子类的继承构造层次结构](6.png)
+
+1. **在子类构造函数中显示传入this作为显示的接收者调用父类的构造函数**
+2. **使用Object.create函数来构造子类的原型对象以避免调用父类的构造函数**
+
+### 39. 不要重用父类的属性名
+为每一个Actor实例添加一个唯一的ID
+```js
+function Actor(scene, x, y){
+    this.scene = scene;
+    this.x = x;
+    this.y = y;
+    this.id = ++Actor.nextID;
+    scene.register(this);
+}
+Actor.nextID = 0;
+```
+当使用此方法为Actor的子类也添加唯一ID时
+```js
+function Alien(scene, x, y, direction, speed, strength){
+    Actor.call(this, scene, x, y);
+    this.direction = direction;
+    this.speed = speed;
+    this.strength = strength;
+    this.damage = 0;
+    this.id = ++Alien.nextID; // 与Actor中的id冲突
+}
+Alien.nextID = 0;
+```
+由于两个类都给实例属性id写入数据, 所以会冲突. 属性存储在实例对象上是一个字符串, 若在继承体系中的两个类指向相同的属性名, 那么它们指向同一个属性.
+
+解决的方法是两个类使用不同的属性名标识id
+```js
+this.actorID = ++Actor.nextID;
+...
+this.alienID = ++Alien.nextID;
+```
+
+1. **留意父类使用的所有属性名**
+2. **不要在子类中重用父类的属性名**
+
+### 40. 避免继承标准类
+ES标准预定义了很多重要的类, 它们有很多特殊的行为, 所以很难写出行为正确的子类. 比如Array类
+```js
+// 一个抽象的目录类, 继承数组的所有行为
+function Dir(path, entries){
+    this.path = path;
+    for(var i = 0, n = entries.length; i < n; ++i){
+        this[i] = entries[i];
+    }
+}
+Dir.prototype = Object.create(Array.prototype);
+
+var dir = new Dir("/tmp/mysite", ["index.html","script.js","style.css"]);
+dir.length; // 0 , 不是预期的3, 破坏了数组的length属性的预期行为
+```
+失败的原因是length属性只对内部被标记为"真正的"数组的特殊对象起作用. 在ES5标准中,它是一个不可见的内部属性, 称为[[class]].
+
+JS并不具备内部类系统, 不要被名字误导, [[class]]的值仅仅是一个简单的标签.
+
+数组对象(通过Array构造函数或[]语法创建)被加上了值为"Array"的[[class]]属性, 函数被加上了值为"Function"的[[class]]属性, 以此类推...
+
+
+**[[class]]属性对length的作用为**: 
+
+length的行为值被定义在内部属性为[[class]]的值为"Array"的特殊对象中, JS保持length属性与该对象的索引属性的数量同步. 
+
+但当扩展Array类时, 子类的实例并不是通过`new Array()`或字面量`[]`语法创建的, 所以, Dir的实例的[[class]]属性值为"Object".
+
+默认的`Object.prototype.toString`方法可以通过查询其接收者的内部[[class]]属性来创建对象的通用描述.
+```js
+var dir = new Dir('/',[]);
+Object.prototype.toString.call(dir); // [object Object]
+Object.prototype.toString.call([]); // [object Array]
+```
+
+所以, 更好的实现方法是
+```js
+function Dir(path, entries){
+    this.path = path;
+    this.entries = entries;
+}
+// 在原型中重新定义Array的方法,将相应的方法委托给entries属性来完成
+Dir.prototype.forEach = function(f, thisArg){
+    if(typeof thisArg === 'undefined'){
+        thisArg = this;
+    }
+    this.entries.forEach(f, thisArg);
+}
+```
+
+ES标准库的大多数构造函数都有类型的问题, 某些属性或方法需要有正确的内部属性, 而子类却无法提供. 
+
+所以, 最好避免继承标准类: Array, Boolean, Date, Function, Number, RegExp, String.
+
+1. **继承标准类往往由于一些特殊的内部属性,如[[class]]而被破坏**
+2. **使用属性委托优于继承标准类**
+
+### 41. 将原型视为实现细节
+一个对象给其使用者提供了简单,强大的操作集. 使用者与一个对象最基本的交互是获取属性值和调用其方法. 这些操作不在意属性存储在原型继承结构的那个位置上.
+
+无论实现对象时将属性"加"在对象原型链的那个位置, 只要其值保持不变, 这些基本操作的行为也不会变. 简言之**原型是一种对象行为的实现细节**.
+
+JS提供的**内省机制(introspection mechanisms)**来检查对象的细节.`Object.prototype.hasOwnProperty`方法确实一个属性是否为自己的属性, 而不是继承而来的.
+
+``Object.getPropertyOf`和`__proto__`特性允许程序员便利对象的原型链并单独查询其原型对象.
+
+1. **对象是接口,原型是实现**
+2. **避免检查无法控制的对象的原型结构**
+3. **避免检查实现无法控制的对象内部属性**
+
+### 42. 避免使用猴子补丁
+由于对象共享原型, 因此每一个对象都可以增加,删除,修改原型的属性, 这种被称为**猴子补丁(monkey-patching)**
+
+比如,若数组缺少一个方法,可以立即在数组的原型上添加它, 结果是每一个数组实例都可以使用这个方法了.
+```js
+Array.prototype.split = function(i){
+    return [this.slice(0, i), this.slice(i)];
+}
+```
+但当多个库给同一个原型打补丁的时候, 问题就暴露了, 另一个库可能也给数组加了`split`方法,这样程序就有可能出错.
+```js
+Array.prototype.split = function(){
+    var i = Math.floor(this.length / 2);
+    return [this.slice(0, i), this.slice(i)];
+}
+```
+
+尽管猴子补丁很危险, 但是有一个很可靠的使用场景: **polyfill**, 一些新标准API可能在一些浏览器中并没有支持,但是许多程序或库却依赖这些方法.
+
+这种时候, 由于这些API的行为是标准化的, 因此实现这些方法并不会造成库之间的不兼容.
+
+检测`Array.prototype.map`是否存在, 以确保内置的实现不会被覆盖, 一般而言,内置的实现更搞笑, 测试更充分.
+```js
+if(typeof Array.prototype.map !== "function"){
+    Array.prototype.map = function(f, thisArg){
+        var result = [];
+        for(var i = 0, n = this.length; i < n; ++i){
+            result[i] = f.call(thisArg, this[i], i);
+        }
+        return result;
+    };
+}
+```
+
+1. **避免使用轻率的猴子补丁**
+2. **记录程序库所执行的所有猴子补丁**
+3. **考虑通过将修改置于一个到处函数中, 使猴子补丁成为不可选的**
+4. **使用猴子补丁为缺失的标准API提供polyfill**
