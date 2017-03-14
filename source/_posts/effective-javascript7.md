@@ -129,6 +129,45 @@ function downloadOneAsync(urls, onsuccess, onfailure){
 ### 65. 不要在计算时阻塞事件队列
 为了保持客户端应用程序的高度交互性和确保所有传入的请求在服务器程序中得到了充分的服务,保持事件循环的每轮次尽可能短是很重要的. 否则,事件队列会滞销, 其增长速度会超过分发处理事件程序的速度.
 
+当程序需要执行代价高昂的计算时如何办呢? 目前没有完全正确的答案, 但是一般是使用Worker API的并发机制.
+```js
+// 比如下面是一个用于搜索大量可移动距离的人工智能游戏
+var ai = new Worker('ai.js');
+```
+使用ai.js源文件作为worker的脚本, 产生一个新的线程独立的事件队列的并发执行线程. 该worker运行在一个完全隔离的状态, 没有任何程序对象能直接访问. 但程序可与worker之间可以用字符串messages来交互.
+```js
+var userMove = '...';
+
+ai.postMessage(JSON.stringify({userMove: userMove}));
+```
+`postMessage`的参数被作为一个消息增加到worker的事件队列中,为了处理worker的响应, 游戏需要注册一个事件处理程序.
+```js
+ai.onmessage = function(event){
+    executeMove(JSON.parse(event.data).computerMove);
+}
+```
+
+在ai.js文件中, 写了worker监听消息并执行计算下一步移动所需的工作.
+```js
+self.onmessage = function(event){
+    var userMove = JSON.parse(event.data).userMove;
+    var computerMove = computeNextMove(userMove);
+    var message = JSON.stringify({
+        computerMove: computerMove
+    });
+
+    self.postMessage(message);
+};
+
+function computerNextMove(userMove){
+    ...
+}
+```
+Worker这样的API有时传递消息的开销可能很昂贵. 而且若没有这样的API,则可以将算法分解为多个步骤, 每个步骤组成一个工作块. 
+
+
+
+
 1. **避免在主事件队列中执行代价高昂的算法**
 2. **在支持Worker API的平台, 该API可以用来在一个独立的事件队列中运行长计算程序**
 3. **在Worker API不可用或代价昂贵的环境中, 考虑将计算程序分解到事件循环的多个轮次中**
