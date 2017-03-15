@@ -1,5 +1,5 @@
 ---
-title: effective-javascript7
+title: effective-javascript笔记-7
 date: 2017-03-9 08:34:20
 tags:
   - js
@@ -409,6 +409,83 @@ function downloadCachingAsync(url, onsuccess, onerror){
 4. **使用异步的API, 比如setTimeout函数来调度异步回调函数,使其运行于另一个回合**
 
 ### 68. 使用Promise模式清洁异步逻辑
+目前非常流行的构建异步API的方法为promise模式. 基于promise的API不接受回调函数作为参数, 相反, 它返回一个promise对象, 该对象通过其自身的`then`方法接收回调函数.
+```js
+// 普通回调模式
+downloadAsync('file.txt', function(file){
+    console.log('file: '+file);
+})
+
+// promise模式
+var p = downLoadP('file.txt');
+
+p.then(function(file){
+    console.log('file: '+file);
+})
+```
+上述两种方式的简单对比看不出有什么大的不同, 但promise的改进在于它们的组合性. 传递给then方法的回调函数不仅执行, 也可以传递返回结果. 通过回调函数返回一个值, 可以构造一个新的promise.
+```js
+var fileP = downloadP('file.txt');
+
+var lengthP = fileP.then(function(file){
+    return file.length;
+});
+
+lengthP.then(function(length){
+    console.log('length: '+length);
+});
+```
+可以将promise的方法理解为表示最终值的对象. 它封装了一个还未完成的并发操作, 但最终会产生一个结果值. then方法可以接收一个代表某种类型的最终值的promise对象, 并产生一个新的promise对象来代表另一种类型的最终值, 而不管回调函数返回了什么.
+
+从现有的promise中构建新的promise的能力带来了很大的灵活性,且简单强大. 比如,构造一个程序用于拼接多个promise的结果
+```js
+// 通过join函数能构建promise对象
+var filesP = join( downloadP('file1.txt'), downloadP('file2.txt'), downloadP('file3.txt') );
+
+filesP.then(function(files){
+    console.log('file1: '+files[0]);
+    console.log('file2: '+files[1]);
+    console.log('file3: '+files[2]);
+});
+```
+
+promise还有一个`when`方法, 用法与`then`类似.
+```js
+var file1P = downloadP('file1.txt'),
+    file2P = downloadP('file2.txt'), 
+    file3P = downloadP('file3.txt') );
+
+when([file1P, file2P, file3P],function(files){
+    console.log('file1: '+files[0]);
+    console.log('file2: '+files[1]);
+    console.log('file3: '+files[2]);
+});
+```
+
+promise通过then方法的返回值来联系结果, 或通过join函数能构建promise对象, 而不是在并行的回调函数间共享数据结构. 这本质上是安全的, 因为它避免了数据竞争.
+
+同时promise风格也是有序的, 但比笨重的嵌套模式清晰的多, 错误处理也会通过promise自动传播, 可以为整个序列提供一个error回调函数, 而不是将error回调传递给每一步.
+
+数据竞争在某些情况下是有用的,promise也提供了这种应用场景. 比如当需要从多个不同服务器下载同一份文件, 选择最先完成的那份. `select(或choose)`函数接收几个promise并返回最先完成的那个文件的promise(即几个promise彼此竞争).
+```js
+var fileP = select( downloadP('http://example1.com/file.txt'), 
+    downloadP('http://example2.com/file.txt'), 
+    downloadP('http://example3.com/file.txt') );
+
+fileP.then(function(file){
+    console.log('file: '+file);
+}
+```
+select的另一个用法是当超时的时候能终止操作.
+```js
+var fileP = select(downloadP('http://example1.com/file.txt'), timeoutError(2000));
+
+fileP.then(function(file){
+    console.log('file: '+file);
+}, function(error){
+    console.log('I/O error or timeout: '+ error);
+});
+```
 
 1. **promise代表最终值, 即并行操作完成时最终产生的结果**
 2. **使用promise组合不同的并行操作**
