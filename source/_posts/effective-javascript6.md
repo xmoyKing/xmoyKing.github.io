@@ -1,5 +1,5 @@
 ---
-title: effective-javascript6
+title: effective-javascript笔记-6
 date: 2017-03-6 22:30:04
 tags:
   - js
