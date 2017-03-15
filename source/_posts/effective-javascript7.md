@@ -164,9 +164,64 @@ function computerNextMove(userMove){
 }
 ```
 Worker这样的API有时传递消息的开销可能很昂贵. 而且若没有这样的API,则可以将算法分解为多个步骤, 每个步骤组成一个工作块. 
+```js
+// 搜索社交网络图的工作表
+Member.prototype.inNetwork = function(other){
+    var visited = {};
+    var worklist = [this];
+    while(worklist.length > 0){
+        var member = worklist.pop();
+        // ...
+        if(member === other){
+            return true;
+        }
+    }
+    return false;
+};
+```
+若while循环代价太高, 搜索时间会很长, 同时阻塞程序事件队列. 即使用Worker, 也不方便, 因为它需要复制整个网络图的状态或在worker中存储网络图的状态, 并需要频繁使用消息传递来更新和查询网络.
 
+由于该算法是在whie循环内迭代,可以将它定义为步骤集的序列, 通过增加一个回调参数将`inNetWork`转换为一个匿名函数.
 
+```js
+// 将while循环替换为一个匿名的递归函数
+Member.prototype.inNetwork = function(other, callback){
+    var visited = {};
+    var worklist = [this];
+    function next(){
+        if(worklist.length === 0){
+            callback(false);
+            return;
+        }
+        
+        var member = worklist.pop();
+        // ...
+        if(member === other){
+            callback(true);
+            return true;
+        }
+        // ...
+        setTimeout(next, 0); // 下一次迭代
+    }
+    setTimeout(next, 0); // 第一次迭代
+};
+```
+以上代码中的`setTimeout`能立刻将回调函数添加到事件队列中, 但还可以用更好的方法替代. 比如`postMessage`.
 
+同时, 若每轮次next只执行一次算法,则可能效率太低, 可以增加每轮次的迭代次数.
+```js
+// 在next函数的主体外围使用循环计数器
+Member.prototype.inNetwork = function(other, callback){
+    // ...
+    function next(){
+        for(var i = 0; i < 10; ++i){
+            // ...
+        }
+        setTimeout(next, 0);
+    }
+    setTimeout(next, 0);
+};
+```
 
 1. **避免在主事件队列中执行代价高昂的算法**
 2. **在支持Worker API的平台, 该API可以用来在一个独立的事件队列中运行长计算程序**
@@ -175,12 +230,178 @@ Worker这样的API有时传递消息的开销可能很昂贵. 而且若没有这
 ### 66. 使用计数器来执行并行操作
 并发事件是JS中不确定性的主要来源, 程序的执行顺序并不能保证与事件发生的顺序一致.
 
+工具函数`downloadAllAsync`接收一个URL数组并下载所有文件, 返回一个存储了文件内容的数组, 每个URL对应一个字符串.downloadAllAsync不仅可以清理嵌套回调函数,而且能并行下载文件. 可以在一次事件循环中启动所有的文件的下载.
+
+每次下载成功, 就将文件内容传入result数组, 若所有URL都成功下载,则调用onsuccess回调函数, 若有任何失败, 则调用onerror回调函数, `result = null`能保证若多次下载失败,onerror只被调用一次, 即第一次错误发生时.
+```js
+function downloadAllAsync(urls, onsuccess, onerror){
+    var result = [], length = urls.length;
+
+    if(length === 0){ // 若没有需要下载的url,则直接调用成功事件并返回结果.
+        setTimeout(onsuccess.bind(null, result), 0);
+        return;
+    }
+
+    urls.forEach(function(url){
+        downloadAsync(url, function(text){
+            if(result){
+                // 存在竞争条件, 可能会出错
+                result.push(text); 
+                if(result.length === url.length){
+                    onsuccess(result);
+                }
+            }
+        }, function(error){
+            if(result){
+                result = null;
+                onerror(error);
+            }
+        });
+    });
+}
+
+// 使用
+var filenames = [
+    'huge.txt', // 大文件
+    'tiny.txt', // 小文件
+    'medium.txt' // 中等大小文件
+];
+
+downloadAllAsync(filnames, function(files){
+    // 以下顺序无法保证
+    console.log('huge.file', files[0].length);
+    console.log('tiny.file', files[1].length);
+    console.log('medium.file', files[2].length);
+}, function(error){
+    console.log('error: '+ error);
+});
+
+```
+以上函数中, 当一个程序依赖于特定的事件顺序才能正常工作时, 程序就会出现数据竞争(data race), 数据竞争指多个并发操作可以修改共享的数据结构, 这取决于他们真正发生的顺序,而不是调用顺序.
+
 当一个程序依赖于特定的时间顺序才能正常工作时, 这个程序会遭受数据竞争, 数据竞争是指多个并发操作可以修改共享的数据结构, 这取决于他们的发生顺序.
+
+
+若想要不依赖事件的执行顺序而总是得到顺序的结果,我们需要将结果存储在原始索引的位置.而不是每次`push`到结果数组.
+```js
+function downloadAllAsync(urls, onsuccess, onerror){
+    var result = [], length = urls.length;
+
+    if(length === 0){ // 若没有需要下载的url,则直接调用成功事件并返回结果.
+        setTimeout(onsuccess.bind(null, result), 0);
+        return;
+    }
+
+    urls.forEach(function(url, i){
+        downloadAsync(url, function(text){
+            if(result){
+                result[i] = text; // 将结果字符串存储在原始索引处
+                if(result.length === url.length){
+                    onsuccess(result);
+                }
+            }
+        }, function(error){
+            if(result){
+                result = null;
+                onerror(error);
+            }
+        });
+    });
+}
+```
+但以上程序还是会出错, 那就是若索引为`length-1`的文件先下载好, 比如共3个文件,索引为2的文件先下载好,这将导致`result.length`被更新为3, 用户的success回调函数将被过早的调用,其参数为一个不完整的数组.
+
+正确的实现应该是使用一个计数器来追踪操作数量.
+```js
+function downloadAllAsync(urls, onsuccess, onerror){
+    var result = [], pending = urls.length;
+
+    if(pending === 0){ // 若没有需要下载的url,则直接调用成功事件并返回结果.
+        setTimeout(onsuccess.bind(null, result), 0);
+        return;
+    }
+
+    urls.forEach(function(url, i){
+        downloadAsync(url, function(text){
+            if(result){
+                result[i] = text; // 将结果字符串存储在原始索引处
+                --pending; // 表示完成一次操作
+                if(pending === 0){
+                    onsuccess(result);
+                }
+            }
+        }, function(error){
+            if(result){
+                result = null;
+                onerror(error);
+            }
+        });
+    });
+}
+```
 
 1. **JS程序中的事件发生是不确定的,即顺序是不可预测的**
 2. **使用计数器避免并行操作中数据竞争**
 
 ### 67. 绝不要同步调用异步的回调函数
+假设有一个downloadAsync的变种版本, 它能缓存已经下载的文件, 避免多次下载同一个文件. 在文件已经缓存的情况下, 立即调用回调函数.
+```js
+// 缓存使用Dict类
+var cache = new Dict();
+
+function downloadCachingAsync(url, onsuccess, onerror){
+    if(cache.has(url)){
+        onsuccess(cache.get(url)); // 直接调用
+        return;
+    }
+    return downloadAsynce(url, function(file){
+        cache.set(url, file);
+        onsuccess(file);
+    }, onerror);
+}
+```
+通常情况下,downloadCachingAsync会立即提供缓存的数据, 但会有一些小问题. 首先它改变了操作的预期顺序, 比如对一个正常的异步API应该是用可预测的顺序来记录日志.
+```js
+downloadAsync('file.txt', function(file){
+    console.log('finished');
+});
+console.log('starting');
+```
+而使用上面的downloadCachingAsync实现, 则上述的日志可能会以任意顺序记录事件, 因为文件是否被缓存对日志顺序有很大影响.
+
+除了日志的顺序, 异步API的目的是维持事件循环中每轮的严格分离, 这简化了并发, 通过减轻每轮事件循环的代码量而不用担心其他代码并发修改共享的数据结构. 同步调用异步回调违反了分离, 导致在当前轮完成之前, 代码用于执行一轮隔离的事件循环.
+
+比如, 下面程序用一个剩余文件队列给用户下载和显示消息
+```js
+downloadCachingAsync(remaining[0], function(file){
+    remaining.shift();
+    // ...
+});
+
+status.display('downloading '+ remaining[0] + '...');
+```
+若同步调用该函数, 那么将显示错误的文件名的消息, 若队列为空时, 会显示undefined.
+
+同步的调用异步回调函数可能导致一些问题, 64条中解释了异步回调函数本质上是以空的调用栈来调用, 因此将异步的循环实现为递归函数是安全的, 完全没有累积超越调用栈空间的危险. 
+
+同步的调用不能保证这点, 因而会使得一个表面上异步循环很可能会耗尽调用栈空间. 另一个问题是异常,对于上述的downloadCachingAsync实现, 若回调函数抛出一个异常, 它将会在每轮的事件循环中, 也就是开始下载时而不是期望的一个分离的回合抛出该异常.
+
+为了确保总是异步调用回调函数, 可以使用已经存在的异步API, 使用通用的setTimeout在事件队列中增加一个回调函数.
+```js
+var cache = new Dict();
+
+function downloadCachingAsync(url, onsuccess, onerror){
+    if(cache.has(url)){
+        var cached = cache.get(url);
+        setTimeout( onsuccess.bind(null, cached), 0); // 使用bind将结果保存为onsuccess回调函数的第一个参数
+        return;
+    }
+    return downloadAsynce(url, function(file){
+        cache.set(url, file);
+        onsuccess(file);
+    }, onerror);
+}
+```
 
 1. **即使可以立即得到数据,也绝不要同步地调用异步回调函数**
 2. **同步地调用异步的回调函数扰乱了预期的操作序列, 并可能导致意向不到的交错代码**
