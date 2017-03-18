@@ -68,6 +68,11 @@ tags: [interview, fe, links]
 
 [clearfix清除浮动进化史](http://www.admin10000.com/document/6259.html)
 
+[使用 CSS3 实现超炫的 Loading（加载）动画效果](http://www.cnblogs.com/lhb25/p/loading-spinners-animated-with-css3.html)
+
+[css3(border-radius)边框圆角详解](http://blog.sina.com.cn/s/blog_61671b520101gelr.html)
+
+
 ---
 
 
