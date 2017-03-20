@@ -6,7 +6,7 @@ tags: [interview, fe]
 
 [2017年年初前端面试总结](http://www.jianshu.com/p/30965d1fe6a6)
 
-
+[80% 应聘者都不及格的 JS 面试题](https://juejin.im/post/58cf180b0ce4630057d6727c)
 
 ----
 
