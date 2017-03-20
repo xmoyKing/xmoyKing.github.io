@@ -26,6 +26,12 @@ tags: [interview, fe, links]
 
 [CSS资料全方位不全搜罗](https://zhuanlan.zhihu.com/p/25263081)
 
+[你可能不知道的10个设计神器（内附使用教程）](http://www.zcool.com.cn/article/ZNDM4NjY4.html)
+
+前端入门及学习路线，分两部分，一个是HTML和CSS基础，一个是Javascript。由于是译文，资源和链接都是英文的:
+1. [前端开发，从草根到英雄（第一部分）](http://www.jianshu.com/p/8e639ae10dfe#)
+2. [前端开发，从草根到英雄（第二部分）](http://www.jianshu.com/p/e2be2bb9d229)
+
 ---
 
 ## 前端知识点 ##
