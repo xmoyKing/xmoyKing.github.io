@@ -41,7 +41,7 @@ if (page.archive){
     <%- partial('article', {item: item, index: true}) %>
   <% }); %>
 
-  <%- partial('pagination') %>
+  <%- partial('post/navigation') %>
 <% } else { %>
 <section id="services">
     <div class="container">
@@ -71,9 +71,24 @@ if (page.archive){
                 </div>
             </div>    
         </div>
+
+        <nav class="pagination" role="pagination">
+            <% if (page.prev) { %>
+            <a class="pull-left" href="<%- url_for(page.prev.path) %>" style="float: left;">
+                ← <%- page.prev.title %>
+            </a>
+            <% } %>
+            <% if (page.next) { %>
+            <a class="pull-right" href="<%- url_for(page.next.path) %>">
+                <%- page.next.title %> →
+            </a>
+            <% } %>
+        </nav>
+        
     </div>
 </section> 
 <% } %>
+
 <section id="statement">
     <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
         <div class="row">

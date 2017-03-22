@@ -1,6 +1,7 @@
 ---
 title: 前端面试题-2-知识点/连接合集
 date: 2017-02-12 16:42:15
+update: 2017-03-22 16:42:15
 tags: [interview, fe, links]
 ---
 
@@ -60,7 +61,7 @@ tags: [interview, fe, links]
 
 [CSS 性能优化笔记](https://segmentfault.com/a/1190000007336987) *内含其他性能优化链接*
 
-[前端优化带来的思考，浅谈前端工程化](https://m.baidu.com/from=1000953c/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%40224_220%2Cta%40iphone___3_534/baiduid=FE246B2BFA10E135A0644D21067634EC/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&lid=11826066442304375679&order=2&fm=alop&tj=www_normal_2_0_10_title&vit=osres&m=8&srd=1&cltj=cloud_title&asres=1&nt=wnor&title=%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96%E5%B8%A6%E6%9D%A5%E7%9A%84%E6%80%9D%E8%80%83%2C%E6%B5%85%E8%B0%88%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96-%E5%8F%B6%E5%B0%8F%E9%92%97-%E5%8D%9A%E5%AE%A2%E5%9B%AD&dict=30&w_qd=IlPT2AEptyoA_yk5xOsa93ux_EBUaocnuiC&sec=18824&di=99563c2874c8a94c&bdenc=1&tch=124.0.301.236.0.0&nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRASzLnKXaNIE8svSPQpt5Ywk_f2mYn7hZ_wvQkfjS&eqid=a41ea0c5a7b848001000000258a01d99&wd=&clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22www_normal%22%2C%22t%22%3A1486888359100%2C%22xpath%22%3A%22div-a-h3%22%7D)
+[前端优化带来的思考，浅谈前端工程化](http://www.cnblogs.com/yexiaochai/p/4901341.html)
 
 [Javascript模块化编程(一):模块的写法 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2012/10/javascript_module.html) *后面还有2（CommonJS规范）和3（require.js库使用），都需要看*
 
@@ -78,6 +79,7 @@ tags: [interview, fe, links]
 
 [css3(border-radius)边框圆角详解](http://blog.sina.com.cn/s/blog_61671b520101gelr.html)
 
+[Ajax知识体系大梳理](http://louiszhai.github.io/2016/11/02/ajax/)*非常全，而且讲到浏览器四种线程之间的配合*
 
 ---
 
