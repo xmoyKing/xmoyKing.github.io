@@ -81,6 +81,13 @@ tags: [interview, fe, links]
 
 [Ajax知识体系大梳理](http://louiszhai.github.io/2016/11/02/ajax/)*非常全，而且讲到浏览器四种线程之间的配合*
 
+[浓缩解读《JavaScript设计模式与开发实践》①](http://www.jianshu.com/p/4829d45eb714)*后面还有2和3，都得看看*
+1. 主要讲设计模式的用途，以及原型继承的各方面特性
+2. 主要讲this、call和apply
+3. 主要讲闭包和高阶函数，包括命令模式，AOP，函数柯里化（这里代码有错误）。
+
+[一次完整的HTTP请求过程（以chrome为例）](http://linux5588.blog.51cto.com/65280/1351007)*其中有谈到计算机网络，操作系统文件管理，浏览器渲染参考*
+
 ---
 
 
