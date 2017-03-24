@@ -1,6 +1,7 @@
 ---
 title: effective-javascript笔记-3
 date: 2017-02-27 19:42:53
+categories: fe
 tags:
   - js
   - effective javascript
@@ -449,7 +450,6 @@ trace; // [f1, f2]
 function f(n){
     return n === 0 ? getCallStack() : f(n-1);
 }
-
 var trace = f(1); // infinite loop
 ```
 问题出在由于函数`f`递归调用其自身, 因此其`caller`属性会自动更新,指回到函数`f`. 此时函数`getCallStack`会陷入查找函数`f`的死循环中.
@@ -459,8 +459,9 @@ var trace = f(1); // infinite loop
 所以ES5规范的严格模式下, 获取`arguments`对像的`caller / callee`属性会出错.
 ```js
 function f(){
-    'use strict';
+    ;"use strict"; 
     return f.caller;
 }
 f(); // error: caller may not be accessed on strict functions
 ```
+<!-- 由于主题theme样式问题，use strict前若没有分号会出现行错乱的方式 -->

@@ -65,7 +65,7 @@ function makeSandwich(){
   return make('jelly');
 }
 makeSandwich(); // 'peanut butter and jelly'
-```  
+```
 make函数中引用了外部的magic变量
 
 
@@ -81,18 +81,15 @@ function sandwichMaker(){
 var f = sandwichMaker(); 
 f('jelly'); // 'peanut butter and jelly'
 f('bananas'); // 'peanut butter and bananas'
-```  
-与第一例子几乎一样,但是不是返回调用后的make函数,而是返回make函数本身,  
-因此,`f`的值为内部的make函数,调用f实际上调用了make函数,但即使`sandwichMaker`已经返回,  
-make函数仍然记着了`magic`的值  
+```
+与第一例子几乎一样,但是不是返回调用后的make函数,而是返回make函数本身,因此,`f`的值为内部的make函数,调用f实际上调用了make函数,但即使`sandwichMaker`已经返回,make函数仍然记着了`magic`的值。
 
 **闭包工作原理:**  
-JS的函数值在内部存储他们可能会引用的定义在其内封闭作用域的变量.  
-那些在其涵盖的作用域内跟踪变量的函数被成为**闭包**.  
-make函数就是一个闭包,它引用了两个外部变量,`magic`和`filling`,  
-每当make函数被调用的时,其代码都能引用到这两个变量,因为闭包存储了这些变量.  
+JS的函数值在内部存储他们可能会引用的定义在其内封闭作用域的变量.
 
-函数可以引用在其作用域内的任何变量,包括参数和外部变量,所以,可以修改sandwichMaker函数:
+那些在其涵盖的作用域内跟踪变量的**函数**被称为**闭包**.make函数就是一个闭包,它引用了两个外部变量,`magic`和`filling`,每当make函数被调用,其代码都能引用到这两个变量,因为闭包存储了这些变量.  
+
+函数可以引用在其作用域内的任何变量,包括参数和外部变量:
 ```js
 function sandwichMaker(magic){
   function make(filling){
@@ -100,18 +97,17 @@ function sandwichMaker(magic){
   }
   return make;
 }
+
 var f = sandwichMaker('ham'); 
 f('jelly'); // 'ham and jelly'
 f('bananas'); // 'ham and bananas'
-
 
 var f = sandwichMaker('turkey'); 
 f('cheess'); // 'turkey and cheess'
 f('bananas'); // 'turkey and bananas'
 ```
 
-闭包是JS最有用的特性之一, 也是许多库和惯用法的核心.  
-JS还提供了一种更方便的构造闭包的字面量语法--函数表达式.  
+闭包是JS最有用的特性之一,也是许多库和惯用法的核心.JS还有一种更方便的构造闭包的方法，即函数表达式（字面量语法）.  
 ```js
 function sandwichMaker(magic){
   return function (filling){
@@ -119,12 +115,10 @@ function sandwichMaker(magic){
   }
 }
 ```
-该函数表达式是匿名的,由于只需一个make函数能产生新的函数值,  
-而不打算在局部调用它,因此没有必要给该函数命名
+该函数表达式是匿名的,由于只需一个make函数能产生新的函数值,而不打算在局部调用它,因此没有必要给该函数命名
 
 #### 3. 闭包可以更新外部变量的值
-实际上,闭包存储的是外部变量的引用,而不是值的copy.  
-因此,对任何具有访问这些外部变量的闭包,都可以更新他们.
+实际上,闭包存储的是外部变量的引用,而不是值的copy.因此,对任何具有访问这些外部变量的闭包,都可以更新他们.
 ```js
 function box(){
   var val = undefined;
@@ -154,25 +148,23 @@ function isWinner(player, others){
   return player.score > highest;
 }
 ```
-由于for循环内部声明的player局部变量,每次都会重写同一个变量,  
-所以return语句将player看作others的最后一个元素,而不是最初的player参数了.
-[变量作用域提升][1.png]
+由于for循环内部声明的player局部变量,每次都会重写同一个变量, 所以return语句将player看作others的最后一个元素,而不是最初的player参数了.
+![变量作用域提升](1.png)
 
-JS没有块级作用域的例外是异常处理, `try...catch`语句将捕捉的异常绑定到一个变量,  
-而该变量的作用域只是catch语句块.
+JS没有块级作用域的例外是异常处理, `try...catch`语句将捕捉的异常绑定到一个变量,而该变量的作用域只是catch语句块.
 ```js
 function test(){
-  var x = 'var',
-    result = [];
+  var x = 'var', result = [];
   try {
     throw 'exception';
   }catch(x){
-    x = 'catch';
+    x = 'catch'; // 此行的x已经是在块级作用域下了，所以随着作用域结束而销毁了
+    console.log(x); // 'catch'
   }
   result.push(x);
   return result;
 }
-test(); // ['var', 'var']
+test(); // ['var']
 ```
 
 **1. 在代码块中的变量声明会被隐式地提升到封闭函数的顶部**  
@@ -184,8 +176,8 @@ test(); // ['var', 'var']
 ```js
 function wrapElements(a){
   var result = [], i , n;
-  for(i = 0; n = a.length; i < n; ++i){
-    result[i] = function(){ return a[i];};
+  for(i = 0, n = a.length; i < n; ++i){
+    result[i] = function(){ return a[i] };
   }
   return result;
 }
@@ -194,27 +186,22 @@ var wrapped = wrapElements([10,20,30,40]);
 var f = wrapped[0];
 f(); // ?
 ```
-编写人可能希望输出10, 但实际上它输出undefied,  
+希望输出10, 但实际上它输出undefied,  
 
-搞清楚该例子是理解绑定和赋值的区别, 在运行时进入一个作用域,  
-JS会为每一个绑定到该作用域的变量在内存内分配一个"槽"(slot)  
-wrapElements函数绑定了三个局部变量: `result, i, n`, 因此,  
-当它被调用的时候,wrapElements函数会为这三个变量分配槽. 在每次迭代中  
-循环体都会为嵌套函数分配一个闭包.  
+搞清楚该例子是理解绑定和赋值的区别, 在运行时进入一个作用域, JS会为每一个绑定到该作用域的变量在内存内分配一个"槽"(slot)
 
-这个例子的坑在于: 编写人似乎期望该函数存储的是嵌套函数创建时变量i的值,  
-但实际存储的是变量i的引用. 由于每次函数创建后变量i的值都发生了变化,  
-因此,内部函数最终看到的是变量i的最后的值,而最后的值索引为4, undefined
+`wrapElements`函数绑定了三个局部变量: `result, i, n`, 因此, 当它被调用的时候,wrapElements函数会为这三个变量分配槽. 在每次迭代中循环体都会为嵌套函数分配一个闭包.  
 
-所以需要注意,**闭包存储的是其外部变量的引用而不是值**  
-解决的方法是创建一个嵌套函数并立即调用它来强制创建一个局部作用域.
+这个例子的坑在于: 期望该函数存储的是嵌套函数创建时变量i的值, 但实际存储的是变量i的引用. 由于每次函数创建后变量i的值都发生了变化, 因此,内部函数最终看到的变量i的值为4, 而`a[4]`值为undefined
+
+所以需要注意, **闭包存储的是其外部变量的引用而不是值** 解决的方法是创建一个嵌套函数并立即调用它来强制创建一个局部作用域.
 ```js
 function wrapElements(a){
   var result = [];
-  for(var i = 0; n = a.length; i < n; ++i){
+  for(var i = 0, n = a.length; i < n; ++i){
     (function(){
       var j = i; //使用j这个局部变量保存每一次i的值
-      result[i] = function(){ return a[j];};
+      result[i] = function(){ return a[j] };
     })()
   }
   return result;
@@ -224,22 +211,21 @@ function wrapElements(a){
 ```js
 function wrapElements(a){
   var result = [];
-  for(var i = 0; n = a.length; i < n; ++i){
+  for(var i = 0, n = a.length; i < n; ++i){
     (function(j){
-      result[i] = function(){ return a[j];};
+      result[i] = function(){ return a[j] };
     })(i)
   }
   return result;
 }
 ```
-但是这种IIFE的方式也存在一些弊端,如:  
-代码块不能包含任何跳出块的break语句和continue语句,  
-代码块引用了this或特别的arguments变量时,IIFE会改变它们
+但是这种IIFE的方式也存在一些弊端,如:
+代码块不能包含任何跳出块的`break`语句和`continue`语句, 代码块引用了`this`或`arguments`变量时,IIFE会改变它们
 
 **1. 理解绑定与赋值的区别**  
 **2. 闭包通过引用而不是值捕捉外部变量**  
 **3. 使用IIEF来创建局部变量**  
-**4. 当心IIFE中的代码块可能修改预期行为**  
+**4. IIFE中的代码块可能修改预期行为**  
 
 
 ### 14. 当心命名函数表达式的作用域
@@ -247,21 +233,23 @@ function wrapElements(a){
 function double(x){ return x * 2; } // 命名函数声明
 var f = function double(x){ return x * 2; }; // 命名函数表达式
 var f = function(x){ return x * 2; }; // 匿名函数表达式
-// 匿名和命名函数表达式的区别在于: 后者会绑定到与其函数名相同的变量上, 
+// 匿名和命名函数表达式的区别在于: 命名函数表达式会绑定到与其函数名相同的变量上, 
 // 这个变量可以作为函数内的一个局部变量,可以用来写递归函数表达式
+
+// 假设有tree是二叉树类型
 var f = function find(tree, key){
   if(!tree) return null;
   if(tree.key === key) return tree.value;
-  return find(tree.left, key) ||
-          find(tree.right, key);
+  return find(tree.left, key) || find(tree.right, key);
 };
 // 注意,find变量名仅仅只能用于其自身,不像函数声明,
 // 命名函数表达式不能通过其内部的函数名在外部调用
+
 find(mytree, 'foo'); // error: find is not defined
+// 然而事实上，chrome下能成功运行
 ```
 
-使用命名函数表达式进行递归似乎没必要,因为外部作用域的函数名也可以达到同样的效果,  
-命名函数表达式真正的用处在于**调试**, 在栈跟踪中,函数表达式的名称通常作为入口使用,  
+使用命名函数表达式进行递归似乎没必要,因为外部作用域的函数名也可以达到同样的效果, 命名函数表达式真正的用处在于**调试**, 在栈跟踪中,函数表达式的名称通常作为入口使用,  
 
 **1. 在Error对象和调试器中使用命名函数表达式改进栈跟踪**  
 **2. 在ES3和有问题的JS环境中需要记住:函数表达式作用域会被Object.prototype污染**  
@@ -273,7 +261,7 @@ find(mytree, 'foo'); // error: find is not defined
 ```js
 function f(){return 'global';}
 function test(x){
-  function f(){return 'local';}
+  function f(){return 'local';} // 覆盖外部global的同名函数
   var result = [];
   if(x){ result.push(f()); }
   result.push(f());
@@ -295,9 +283,10 @@ function test(x){
   return result;
 }
 
-test(true); // ['local', 'local'] 而不是 ['local', 'global']
+test(true); // ['local', 'local'] 而非 ['local', 'global']
 test(false); // ['local'] 而不是 ['global']
-// 以上有些环境下执行结果并不一样
+// 上行的test(false)在有些环境下执行结果并不一样，在chrome 57下为 Error: f is not a function
+// 因为函数声明提升，但是并没有将完整的函数体也提前
 ```
 
 **1. 始终将函数声明置于程序或被包含的函数的最外层以避免不可移植的行为**  
@@ -305,6 +294,7 @@ test(false); // ['local'] 而不是 ['global']
 
 
 ### 16. 避免使用eval创建局部变量
+eval能将字符串解析为js语句并执行
 ```js
 function test(x){
   eval('var y=x;');
@@ -312,7 +302,7 @@ function test(x){
 }
 test('hello'); // 'hello'
 ```
-
+eval函数直接执行赋予了外部调用者能改变test函数内部作用域的能力.
 ```js
 var y = 'global';
 function test(src){
@@ -321,8 +311,8 @@ function test(src){
 }
 test('var y = "local";'); // 'local'
 test('var z = "local";'); // 'global'
-// 上例中,eval函数直接执行赋予了外部调用者能改变test函数内部作用域的能力.
 
+// 使用IIFE能避免污染内部作用域
 var y = 'global';
 function test(src){
   (function (){ eval(src); })();
@@ -331,13 +321,12 @@ function test(src){
 test('var y = "local";'); // 'global'
 test('var z = "local";'); // 'global'
 ```
-
 **1. 避免使用eval函数创建的变量污染调用者的作用域**
 **2. 若eval函数代码可能创建全局变量,将此调用封装到嵌套的函数中以防止作用域污染**  
 
 
 ### 17. 间接调用eval函数优于直接调用
-eval函数不仅仅是一个函数, 因为eval函数具有访问调用它时的整个作用域的能力.  
+eval函数不仅仅是一个函数, 因为eval函数具有访问调用它时的整个作用域的能力.
 一般情况下,函数调用涉及eval标识符时,被认为是直接调用eval函数
 ```js
 var x = 'global';
@@ -347,9 +336,10 @@ function test(){
 }
 test(); // 'local'
 ```
-这种情况下, 编译器需要确保被执行的程序具有完全访问调用者局部作用域的权限,  
-而其他调用eval函数的方法被认为是间接的,这些方式在全局作用域内对eval函数的参数求值.  
-例如,绑定eval函数到另外一个变量名, 通过该变量名调用函数会使代码失去对所有局部作用域的访问能力
+这种情况下, 编译器需要确保被执行的程序具有完全访问调用者局部作用域的权限
+
+而其他调用eval函数的方法被认为是间接的,这些方式在全局作用域内对eval函数的参数求值.
+例如绑定eval函数到另外一个变量名, 通过该变量名调用函数会使代码失去对所有局部作用域的访问能力
 ```js
 var x = 'global';
 function test(){
@@ -358,6 +348,7 @@ function test(){
   return f('x');
 }
 test(); // 'global'
+// 在chrome下为 Error: f is not a function
 ```
 编写间接调用eval函数的一种简单方式是使用表达式序列运算符(逗号`,`)和一个毫无意义的数字字面量  
 `(0,eval)(src);`这种方式被认为是间接调用eval函数.  
