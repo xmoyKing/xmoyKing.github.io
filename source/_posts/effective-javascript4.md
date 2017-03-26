@@ -1,6 +1,8 @@
 ---
-title: effective-jacascript笔记-4
+title: effective-javascript笔记-4
 date: 2017-03-01 11:30:28
+updated: 2017-03-25
+categories: [fe]
 tags:
   - js
   - effective javascript
@@ -9,7 +11,7 @@ tags:
 
 ## 对象和原型
 
-### 30. 理解prototype, getPrototypeOf 和 __proto__之间的不同
+### 30. 理解 prototype, getPrototypeOf 和 __proto__ 之间的不同
 原型包含三个独立但相关的访问器. 这三个访问器的命名对`prototype`属性做了一些变化.
 1. `C.prototype`用于建立由`new C()`创建的对象的原型
 2. `Object.getPrototypeOf(obj)`是ES5中用来获取`obj`对象的原型对象的标准方法
@@ -31,37 +33,32 @@ User.prototype.checkPw = function(pw){
 
 var u = new User('ssss', '0ef678sdsg567afh8dadsadasd');
 ```
-
 `User`函数带有一个默认的`prototype`属性,其包含一个开始几乎为空的对象. 在上例中,添加了两个方法到`User.prototype`对象. `toString`和`checkPw`方法. 当使用`new`操作符创建`User`的实例时, 产生的对象`u`会自动获得分配的原型对象, 这个对象存储在`User.prototype`中.
 
 ![User构造函数及其实例的原型关系](1.png)
 
 构造函数的`prototype`属性用来设置新实例的原型关系.
 
-
 ES5中的函数`Object.getPrototypeOf()`可以用于检索现有对象的原型. 如:   
 ```js
 Object.gePrototypeOf(u) === User.prototype; // true
 ```
-
-
 非标准的检索对象原型的方法, `__proto__`属性.
 ```js
 u.__proto__ === User.prototype; // true
 ```
-
 JS中的类 本质上是一个构造函数(`User`)与一个用于在该类(`User.prototype`)实例间共享方法的原型对象的结合.
 
 1. **C.prototype属性是new C()创建的对象的原型**
 2. **Object.getPrototypeOf(obj)是ES5中检索对象原型的标准函数**
-3. **obj.__proto__是检索对象原型的非标准方法**
+3. **`obj.__proto__`是检索对象原型的非标准方法**
 4. **类是由一个构造函数和一个关联的原型组成的一种设计模式**
 
-### 31. 使用Object.getPrototypeOf函数而不是使用__proto__属性
+### 31. 使用Object.getPrototypeOf函数而不是使用`__proto__`属性
 无论何时,`getPrototypeOf`函数都是有效的,而且它是提取对象原型更加标准,可移植的方法. 由于`__proto__`属性会污染所有的对象,因此会有一些它引发的错误.
 
-### 32. 始终不要修改__proto__属性
-__proto__属性提供了修改对象原型链的能力,而`Object.getPrototypeOf()`方法却不能修改. 所以尽量不要修改此属性,会破坏程序的可移植问题. 
+### 32. 始终不要修改`__proto__`属性
+`__proto__`属性提供了修改对象原型链的能力,而`Object.getPrototypeOf()`方法却不能修改. 所以尽量不要修改此属性,会破坏程序的可移植问题. 
 
 另一个问题是性能, 所有的现代JS引擎都深度优化了获取和设置对象属性的行为, 因为这些都是一些最常见的JS程序的操作. 这些优化都是基于引擎在对象结构的认识上, 当修改对象的内部结构(如添加或删除该对象或其原型链中的对象的属性), 将会使一些优化失效. 
 
@@ -72,7 +69,7 @@ __proto__属性提供了修改对象原型链的能力,而`Object.getPrototypeOf
 修改对象的原型链会交换对象的整个继承层次结构, 某些情况下这些操作可能会有用,但保持继承层次结构稳定是基本准则.
 
 ### 33. 使构造函数与new操作符无关
-当使用类型30条中的User函数创建一个构造函数时, 程序需要依赖`new`操作符来调用该构造函数, 若忘记使用`new`关键字,则函数的接收者将会是全局对象.
+当使用30条中的User函数创建一个构造函数时, 程序需要依赖`new`操作符来调用该构造函数, 若忘记使用`new`关键字,则函数的接收者将会是全局对象.
 ```js
 var u = User('bbbb', '790af7657ds6ad45adsa');
 u; // undefined
@@ -84,13 +81,12 @@ this.pwHash; // '790af7657ds6ad45adsa'
 若在严格模式下,那么它的接收者默认为`undefined`. 这种情况下,错误的调用会导致错误, `User`的第一行试图给`this.name`赋值时, 会抛出`TypeError`错误.
 ```js
 function User(name, pwHash){
-    'use strict';
+    ;'use strict';
     this.name = name;
     this.pwHash = pwHash;
 }
 var u = User('bbbb', '790af7657ds6ad45adsa');  // error: this is undefined
 ```
-
 可以用一个简单的方法检测函数的接收者是否为正确的`User`实例,即检测是否使用`new`操作符
 ```js
 function User(name, pwHash){
@@ -101,7 +97,6 @@ function User(name, pwHash){
     this.pwHash = pwHash;
 }
 ```
-
 使用这种方式,不管是以普通函数还是以构造函数的方式调用`User`函数,它都返回一个继承自`User.prototype`的对象.
 ```js
 var x = User('bbbb', '790af7657ds6ad45adsa');
@@ -139,9 +134,7 @@ if(typeof Object.create === 'undefined'){
 
 构造函数覆盖模式即JS允许`new`表达式的结果可以被构造函数中的显示`return`语句所覆盖. 当`User`函数返回`self`对象时, `new` 表达式的结果就变成self对象, 该对象可能是另一个绑定到`this`的对象.
 
-防范误用构造函数可能没有那么重要!尤其是在局部作用域内使用构造函数的时候.
-
-但最有用的在于理解若以错误的方式调用构造函数会照成的严重后果, 且在文档花构造函数期望使用`new`操作符调用是很重要, 尤其是在跨大型代码库中共享构造函数或该构造函数来自一个共享库时.
+防范误用构造函数可能没有那么重要,尤其是在局部作用域内使用构造函数的时候. 但最有用的在于理解若以错误的方式调用构造函数会照成的严重后果, 且在文档化构造函数期望使用`new`操作符调用是很重要, 尤其是在跨大型代码库中共享构造函数或该构造函数来自一个共享库时.
 
 1. **通过使用new操作符或Object.create方法在构造函数定义中调用自身使得该构造函数与调用语法无关.**
 2. **当一个函数期望使用new操作符调用时,清晰地文档化该函数**
@@ -161,8 +154,7 @@ function User(name, pwHash){
     };
 }
 ```
-大多数情况下都能正常运行,但若构造多个`User`类的实例时, 区别就暴露了.
-
+大多数情况下都能正常运行,但若构造多个`User`类的实例时, 问题就暴露了.
 ```js
 var u1 = new User(/**/);
 var u2 = new User(/**/);
@@ -208,9 +200,7 @@ function User(name, pwHash){
 2. **将局部变量作为私有数据从而通过方法实现信息隐藏**
 
 ### 36. 只将实例状态存储在实例对象中
-理解原型对象与其实例之间的一对多的关系对于实现正确的对象行为是非常重要的. 错误的做法是将每一实例的数据存储到原型中.
-
-如: 一个树型数据结构, 将存储子节点的数组放置在原型对象中将会导致实现被完全破坏
+理解原型对象与其实例之间的一对多的关系对于实现正确的对象行为是非常重要的. 错误的做法是将每一实例的数据存储到原型中. 如: 一个树型数据结构, 将存储子节点的数组放置在原型对象中将会导致实现被完全破坏
 ```js
 function Tree(x){
     this.value = x;
@@ -283,9 +273,8 @@ CSVReader.prototype.read = function(str){
 var reader = new CSVReader();
 reader.read("a,b,c\nd,e,f\n"); // [["a,b,c"],["d,e,f"]]
 ```
-上段代码由于this的错误, 引用了lines.regexp (this.regexp) 而lines没有regexp属性, 所以结果返回line.split(underfined), 解决的方法有三种:
-
-1. map方法接受的第二个参数,表示内部的this对象的绑定对象
+上段代码由于this的错误, 引用了`lines.regexp (this.regexp)` 而lines没有regexp属性, 所以结果返回`line.split(underfined)`, 解决的方法有三种:
+1.map方法接受的第二个参数,表示内部的this对象的绑定对象
 ```js
 CSVReader.prototype.read = function(str){
     var lines = str.trim().split(/\n/);
@@ -297,7 +286,7 @@ CSVReader.prototype.read = function(str){
 var reader = new CSVReader();
 reader.read("a,b,c\nd,e,f\n"); // [["a","b","c"],["d","e","f"]]
 ```
-2. 可以在外部函数保存this的引用
+2.可以在外部函数保存this的引用
 ```js
 CSVReader.prototype.read = function(str){
     var lines = str.trim().split(/\n/);
@@ -310,7 +299,7 @@ CSVReader.prototype.read = function(str){
 var reader = new CSVReader();
 reader.read("a,b,c\nd,e,f\n"); // [["a","b","c"],["d","e","f"]]
 ```
-3. ES5中,可以使用回调函数的bind方法
+3.ES5中,可以使用回调函数的bind方法
 ```js
 CSVReader.prototype.read = function(str){
     var lines = str.trim().split(/\n/);

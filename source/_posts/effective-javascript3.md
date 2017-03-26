@@ -1,7 +1,8 @@
 ---
 title: effective-javascript笔记-3
 date: 2017-02-27 19:42:53
-categories: fe
+updated: 2017-03-25
+categories: [fe]
 tags:
   - js
   - effective javascript
@@ -47,8 +48,7 @@ u.name; // aa
 **3. 构造函数需要通过new运算符调用,并产生一个新的对象作为其接收者**
 
 ### 19. 熟练掌握告诫函数
-高阶函数无非是那些将函数作为参数或者返回值的函数,  
-将函数作为参数(通常称为回调函数,因为高阶函数'随后调用')  
+高阶函数无非是那些将函数作为参数或者返回值的函数, 将函数作为参数(通常称为回调函数,因为高阶函数'随后调用')  
 ```js
 var names = ['fred', 'wilma', 'pebbles'];
 var upper = [];
@@ -63,8 +63,7 @@ var upper = names.map(function(name){
 });
 ```
 
-创建高阶函数抽象有很多好处,实现中存在一些棘手问题,比如正确获取循环边界条件,  
-他们可以被放置在高阶函数的实现中.将一些常见的模式移到高阶的工具函数中是一个好习惯.
+创建高阶函数抽象有很多好处,但在编码中需要注意一些问题,比如正确获取循环边界条件, 在高阶函数的实现中，将一些常见的模式移到高阶的工具函数中是一个好习惯.
 ```js
 // 创建一个字符串,通过循环连接
 function buildStr(n, cb){
@@ -76,7 +75,7 @@ function buildStr(n, cb){
 }
 
 var alphabet = buildStr(26, function(i){
-    return String.fromCharCode(aIndex + i);
+    return String.fromCharCode('a'.charCodeAt() + i);
 });
 alphabet; // 'abcdefghigklmnopqrstuvwxyz'
 
@@ -86,24 +85,22 @@ var digits = buildStr(10, function(i){
 digits; // '0123456789'
 
 var random = buildStr(8, function(i){
-    return String.fromCharCode(Math.floor(Math.random() * 26) + aIndex);
+    return String.fromCharCode('a'.charCodeAt() + Math.floor(Math.random() * 26));
 });
-random; // 'asdfghjk'
+random; // 随机值
 ```
 
 ### 20. 使用call方法自定义接收者来调用方法
-通常情况下, 函数或方法的接收者(即绑定到特殊关键字`this`的值) 是由调用者的语法决定的. 方法调用语法将方法被查找的对象绑定到this变量.
+通常情况下, 函数或方法的接收者(即绑定到特殊关键字`this`的值) 是由调用者的语法决定的. 方法调用将方法的被查找对象绑定到this变量.
 
 然而, 有时需要自定义接收者来调用函数, 因为该函数可能并不是期望的接收者对象的属性.   
 
-一种方式是, 将方法或作为一个新的属性添加到接收者对象中
+一种方式是, 将方法作为一个新的属性添加到接收者对象中，但这种方法是有问题的, 直接修改obj对象往往会出问题, 因为obj对象可能已经存在了一个`temporary`属性, 或者`temporary`属性是不可修改的， 或者对象可能被冻结(frozen)或密封(seal)以防止添加任何新属性.
 ```js
 obj.temporary = f; 
 var result = obj.temporary(arg1, arg2, arg3);
 delete obj.temporary;
 ```
-这种方法是有问题的, 直接修改obj对象往往会出问题, 因为obj对象可能已经存在了一个`temporary`属性, 或者`temporary`属性是不可修改的.  
-或者对象可能被冻结(frozen)或密封(seal)以防止添加任何新属性.
 
 此时, 可以使用函数对象的`call`方法来自定义接收者. `f.call(obj, arg1, arg2, arg3)`, 它的行为与`f(arg1, arg2, arg3)`类似.  
 但, 不同的是, 第一个参数提供了一个显示的接收者对象.
@@ -115,7 +112,7 @@ dict.hasOwnProperty = 1;
 dict.hasOwnProperty('foo'); // error: 1 is not a function, 此时hasOwnProperty被覆盖为一个属性了, 而不是一个方法
 ```
 
-使用`hasOwnProperty`方法的call方法是调用字典对象中的方法成为可能,即使`hasOwnProperty`方法并没有在该对象中定义.
+call方法使调用字典对象中的方法成为可能,即使`hasOwnProperty`方法并没有在该对象中定义.
 ```js
 var hasOwnProperty = {}.hasOwnProperty;
 dict.foo = 1;
@@ -124,8 +121,7 @@ hasOwnProperty.call(dict, 'foo'); // true
 hasOwnProperty.call(dict, 'hasOwnProperty'); // false
 ```
 
-当定义高阶函数时, `call`方法也很有用, 高阶函数的一个惯用法是接收一个可选的参数作为调用该函数的接收者.   
-例如, 表示键值对列表的对象
+当定义高阶函数时, `call`方法也很有用, 高阶函数的一个惯用法是接收一个可选的参数作为调用该函数的接收者. 例如, 表示键值对列表的对象
 ```js
 // 允许table对象的使用者将一个方法作为table.forEach的回调函数f, 并可自定义接收者
 var table = {
@@ -160,8 +156,8 @@ table1.forEach(table2.addEntry, table2);
 
 
 ### 22. 使用arguments创建可变参数的函数
-可变参数提供灵活的接口, 不同的调用者可使用不同数量的参数来调用他们.  
-但提供一个可变参数的函数版本的同时也最好提供一个显示指定数组的固定元数的版本.  
+可变参数提供灵活的接口, 不同的调用者可使用不同数量的参数来调用他们. 但提供一个可变参数的函数版本的同时也最好提供一个显示指定数组的固定元数的版本. 
+
 或者,使用一个函数封装版本, 内部用固定元数的函数来实现可变参数函数.
 ```js
 function average(){
@@ -207,16 +203,14 @@ function values(){
     }
 }
 ```
-由于新的arguments变量被隐式的绑定到每一个函数内, 所以next函数有自己的arguments变量,  
-解决方案是使用一个变量a记住原来的arguments变量,在嵌套函数内使用变量a
+由于新的arguments变量被隐式的绑定到每一个函数内, 所以next函数有自己的arguments变量, 解决方案是使用一个变量a记住原来的arguments变量,在嵌套函数内使用变量a
 
 **1. 当引用arguments时需要注意嵌套层级**  
-**2. 绑定一个明确作用域的引用到arguments碧昂了,在嵌套函数内使用**
+**2. 绑定一个明确作用域的引用到arguments,在嵌套函数内使用**
 
 ### 25. 使用bind方法提取具有确定接收者的方法
 
-一个普通的函数 与 对象中值为函数的属性(方法) 没有区别,所以可以将对象的方法提取出来作为高阶函数的回调函数.  
-能很方便的重用一些现有的方法达到预期目标,但此时需要在注意被提取方法的接收者绑定到使用该函数的对象上,即`this`的值!
+一个普通的函数与对象中值为函数的属性(方法)没有区别,所以可以将对象的方法提取出来作为高阶函数的回调函数. 能很方便的重用一些现有的方法达到预期目标,但此时需要注意被提取方法的接收者绑定到使用该函数的对象上,即`this`的值!
 
 以下是一个字符串缓冲对象作为实例:
 ```js
@@ -236,17 +230,13 @@ var buffer = {
 var source = ['567', '-', '1234'];
 source.forEach(buffer.add); // error: entries is undefined
 ```
-此处报错是由于`source`中没有`entries`属性,也就是说,`buffer`的`add`方法的调用者不是`buffer`对象,  
-而是不知道的其他位置调用了`add`方法,所以没有找到`entries`属性,  
-此处的`forEach`方法的实现是使用全局对象作为默认的接收者的, 要想正确使用`forEach`方法,  
-可以提供第二个参数,将回调函数的接收者传入  
+此处报错是由于`source`中没有`entries`属性,也就是说,`buffer`的`add`方法的调用者不是`buffer`对象, 而是不知道的其他对象调用了`add`方法,所以没有找到`entries`属性, 此处的`forEach`方法的实现是使用全局对象作为默认的接收者的, 要想正确使用`forEach`方法, 可以提供第二个参数,将回调函数的接收者传入  
 ```js 
 source.forEach(buffer.add, source);
 buffer.join(); // '567-1234'
 ```
 
-但并不是所有函数都提供了作为回调函数的接收者的参数, 此时,我们可以使用一个局部匿名函数,  
-在这个局部函数中显示调用回调函数,这种方法非常常见,而ES5的标准库中也直接支持使用这种方法.
+但并不是所有函数都提供了作为回调函数的接收者的参数, 此时,我们可以使用一个局部匿名函数, 在这个局部函数中显示调用回调函数,这种方法非常常见,而ES5的标准库中也直接支持使用这种方法.
 ```js
 source.forEach(function(s){
     buffer.add(s);
@@ -254,13 +244,11 @@ source.forEach(function(s){
 buffer.join(); // '567-1234'
 ```
 
-第二种解决的方法,那就是`bind`方法, 其实函数对象都有bind方法,该方法接受一个对象,   
-并产生一个新的函数,功能与原函数相同, 以传入的对象为调用者,调用这个新的函数:   
+第二种解决的方法,那就是`bind`方法, 其实函数对象都有bind方法,该方法接受一个对象, 并产生一个新的函数,功能与原函数相同, 以传入的对象为调用者,调用这个新的函数
 ```js
 source.forEach(buffer.add.bind(buffer));
 ```
-也就是说,此时`buffer.add.bind(buffer)`创建了一个新的函数,而不是原来的`buffer.add`函数了,  
-同时它的接收者绑定到了buffer对象上,而原来的则不变.
+也就是说,此时`buffer.add.bind(buffer)`创建了一个新的函数,而不是原来的`buffer.add`函数了, 同时它的接收者绑定到了buffer对象上,而原来的则不变.
 ```js
 buffer.add === buffer.add.bind(buffer); // false
 ```
@@ -286,15 +274,11 @@ var urls = paths.map(function(path){
 var urls = paths.map(simpleURL.bind(null,'http', siteDomain));
 ```
 
-使用 `simpleURL.bind` 产生一个委托到`simpleURL`的新函数. `bind`方法的第一个参数提供接收者的值.  
-由于`simpleURL`不需要引用`this`变量, 所以可以使用任何值, 使用`null`或`undefined`是惯用方法.    
-`simpleURL.bind`的其余参数传递给`simpleURL`方法,
-
+使用 `simpleURL.bind` 产生一个委托到`simpleURL`的新函数. `bind`方法的第一个参数提供接收者的值. 由于`simpleURL`不需要引用`this`变量, 所以可以使用任何值, 使用`null`或`undefined`是惯用方法. `simpleURL.bind`的其余参数传递给`simpleURL`方法,
 
 使用单个参数`path`调用`simpleURL.bind`, 则该执行结果是一个委托到`simpleURL('http', siteDomain, path)`的函数.
 
-将函数与其参数的一个子集绑定的技术称为函数柯里化(currying), 以逻辑学家Haskell Curry的名字命名.   
-比起显示的封装函数, 函数柯里化是一种简洁的,使用更少引用来实现函数委托的方式.
+将函数与其参数的一个子集绑定的技术称为函数柯里化(currying), 以逻辑学家Haskell Curry的名字命名. 比起显示的封装函数, 函数柯里化是一种简洁的,使用更少引用来实现函数委托的方式.
 
 **1. 使用bind方法实现函数柯里化, 即创建一个固定需求参数子集的委托函数**  
 **2. 传入null和undefined作为接收者的参数来实现函数柯里化, 从而忽略其接收者**
@@ -302,7 +286,7 @@ var urls = paths.map(simpleURL.bind(null,'http', siteDomain));
 ### 27. 使用闭包而不是字符串来封装代码
 函数是一种将代码作为数据结构存储的便利方式, 这些代码可以随后被执行. 这使得高阶函数抽象如`map, forEach`成为可能,也是JS异步I/O方法的核心.
 
-也可以将代码表示为字符串,传如`eval`函数达到相同的目的.
+也可以将代码表示为字符串,传入`eval`函数达到相同的目的.
 ```js
 function repeat(n, action){
     for(var i = 0; i < n; ++i){
@@ -333,10 +317,7 @@ function benchmark(){
     return timings;
 }
 ```
-该函数会导致repeat函数引用全局的start和end变量. 会使程序行为变得不可预测,同时eval函数的另一个问题是优化.    
-JS引擎很难优化字符串中的代码, 因为编译器不能早的获取源代码来即使优化代码. 然而函数表达式在其代码出现的同时就能被编译.
-
-
+该函数会导致repeat函数引用全局的start和end变量. 会使程序行为变得不可预测,同时eval函数的另一个问题是优化. JS引擎很难优化字符串中的代码, 因为编译器不能早的获取源代码来即使优化代码. 然而函数表达式在其代码出现的同时就能被编译.
 
 正确的方式是使用函数而不是字符串
 ```js
@@ -372,18 +353,17 @@ JS函数`toString`方法能将函数源代码作为字符串输出
     return x + 1;
 }).toString(); // 'function(x){\n return x + 1;\n}'
 ```
-这种反射获取函数源代码的功能很强大, 但是使用函数对象`toString`方法有严重的局限性.
+这种反射获取函数源代码的功能很强大, 但使用函数对象`toString`方法有严重的局限性.
 
 ES标准并没有对函数对象的`toString`方法的返回结果做规定, 也就是说不同的JS引擎可以有不同的结果.
 
-同时,当使用了由宿主环境的内置哭提供的函数后, 该方法也可能会失败
+同时,当使用了由宿主环境的内置库提供的函数后, 该方法也可能会失败
 ```js
 (function(x){
     return x + 1;
-}).bind(16).toString(); // 'function(x){\n [native code]\n}'
+}).bind(16).toString(); // 'function(x){ [native code] }'
 ```
 由于很多宿主环境下`bind`函数是有其他变成语言实现的(一般为C++), 宿主环境提供的是一个编译后的函数, 在此环境下函数没有JS的源代码用于显示.  
-
 
 同时,该方法生成的源代码并不展示闭包中保存的与内部变量引用相关的值.
 ```js
@@ -391,7 +371,7 @@ ES标准并没有对函数对象的`toString`方法的返回结果做规定, 也
     return function(y){
         x + y;
     }
-})(42).toString(); // 'function(y){\n return x + y;\n}'
+})(42).toString(); // 'function(y){ return x + y; }'
 ```
 此处尽管函数是一个一个绑定`x`为42的闭包, 但结果字符串仍包含一个引用x的变量.
 
@@ -400,8 +380,7 @@ ES标准并没有对函数对象的`toString`方法的返回结果做规定, 也
 **3. 应该避免使用函数对象的toString方法**
 
 ### 29. 避免使用非标准的栈检查属性
-许多JS环境都提供检查调用栈的功能, 调用栈是指当前正在执行的活动函数链. 在某些环境中,每个`arguments`对象都含有两个额外的属性:   
-`arguments.callee` 和 `arguments.caller`, 前者指向使用该`arguments`对象被调用的函数. 后者指向调用该arguments对象的函数.
+许多JS环境都提供检查调用栈的功能, 调用栈是指当前正在执行的活动函数链. 在某些环境中,每个`arguments`对象都含有两个额外的属性: `arguments.callee` 和 `arguments.caller`, 前者指向使用该`arguments`对象被调用的函数. 后者指向调用该arguments对象的函数.
 
 `arguments.callee`除了允许匿名函数递归调用其自身外, 就没有更多的用途了.
 ```js
@@ -456,7 +435,7 @@ var trace = f(1); // infinite loop
 
 虽然我们检测该循环,但是在函数`f`调用其自身之前也没有关于哪个函数调用了它的信息. 因为其他调用栈的信息已经丢失.
 
-所以ES5规范的严格模式下, 获取`arguments`对像的`caller / callee`属性会出错.
+所以严格模式下, 获取`arguments`对像的`caller / callee`属性会出错.
 ```js
 function f(){
     ;"use strict"; 
