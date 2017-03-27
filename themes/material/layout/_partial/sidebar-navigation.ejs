@@ -56,6 +56,43 @@
         <% } %>
     <% } %>
 
+    <!-- Tags  -->
+    <% if(theme.sidebar.tags.use === true) { %>
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                <% if(theme.sidebar.tags.icon) { %>
+                    <i class="material-icons sidebar-material-icons"><%= theme.sidebar.tags.icon %></i>
+                <% } %>
+                Tags 
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li><a class="sidebar_archives-link" href="/tags">Tagclouds<span class="sidebar_archives-count"><%= site.tags.length %></span></a></li>
+            <li style="padding: 0 5px 5px;">
+                <%- list_tags({
+                    show_count: false,
+                    class: 'sidebar_tags',
+                    style: 'none',
+                    separator: ' '
+                }) %>
+            </li>
+            <style>
+            .sidebar .sidebar-nav li a.sidebar_tags-link {
+                display: inline;
+                padding: 0 5px;
+                line-height: 16px;
+            }
+            .sidebar .sidebar-nav li:hover a.sidebar_tags-link{
+                color: #000 !important;
+            }
+            </style>
+            </ul>
+        </li>
+        <% if(theme.sidebar.archives.divider === true) { %>
+            <li class="divider"></li>
+        <% } %>
+    <% } %>
+
     <!-- Categories  -->
     <% if(theme.sidebar.categories.use === true) { %>
         <li class="dropdown">

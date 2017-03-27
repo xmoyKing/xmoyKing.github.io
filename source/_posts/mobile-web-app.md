@@ -3,7 +3,7 @@ title: 移动Web端知识点集合
 date: 2017-03-17 10:25:56
 updated: 2017-03-17
 categories: [fe]
-tags: [mobile, we-app, links]
+tags: [mobile, web-app, links]
 ---
 
 ### 链接
