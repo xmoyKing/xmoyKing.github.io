@@ -11,7 +11,7 @@ tags:
 
 ## 对象和原型
 
-### 30. 理解 prototype, getPrototypeOf 和 __proto__ 之间的不同
+### 30. 理解 prototype, getPrototypeOf 和 `__proto__` 之间的不同
 原型包含三个独立但相关的访问器. 这三个访问器的命名对`prototype`属性做了一些变化.
 1. `C.prototype`用于建立由`new C()`创建的对象的原型
 2. `Object.getPrototypeOf(obj)`是ES5中用来获取`obj`对象的原型对象的标准方法
@@ -255,7 +255,7 @@ Tree.prototype = {
 ### 37. 认识到this变量的隐式绑定问题
 编写一个读取CSV(逗号分割型取值)数据的类, 构造函数需要一个可选的分隔器字符数组并构造出一个自定义的正则表达式将每一行分为不同的条目.
 ```js
-function CVSReader(separators){
+function CSVReader(separators){
     this.separators = separators || [","];
     this.regexp = new RegExp(this.separators.map(function(sep){
         return "\\" + sep[0];
