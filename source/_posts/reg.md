@@ -1,6 +1,8 @@
 ---
 title: 正则表达式基本运用
 date: 2017-01-22 12:43:59
+updated: 2017-01-22
+categories: [fe]
 tags: reg
 ---
 

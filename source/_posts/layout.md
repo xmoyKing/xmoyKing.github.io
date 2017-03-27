@@ -1,6 +1,8 @@
 ---
 title: 精通CSS笔记-布局
 date: 2017-01-30 19:59:54
+updated: 2017-01-30
+categories: [fe]
 tags: [css, CSS-Mastery, Note]
 ---
 

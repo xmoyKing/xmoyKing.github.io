@@ -1,7 +1,8 @@
 ---
 title: 前端面试题-2-知识点/连接合集
 date: 2017-02-12 16:42:15
-update: 2017-03-22 16:42:15
+updated: 2017-03-22
+categories: [fe]
 tags: [interview, fe, links]
 ---
 

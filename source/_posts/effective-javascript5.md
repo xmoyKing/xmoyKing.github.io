@@ -1,6 +1,8 @@
 ---
 title: effective-javascript笔记-5
 date: 2017-03-03 16:45:45
+updated: 2017-03-25
+categories: [fe]
 tags:
   - js
   - effective javascript
@@ -9,7 +11,7 @@ tags:
 
 ## 数组和字典
 
-将对象作为集合的用法,如不同数目元素的聚集数据结构
+将对象作为集合的用法
 
 ### 43. 使用Object的直接实例构造轻量级字典
 JS对象的一个核心是一个字符串属性名称与属性值的映射表. 可以通过`for in`循环枚举对象属性名.
@@ -23,7 +25,7 @@ for(var name in dict){
 
 people; // ["alice: 34",  "bob: 24", "chris: 62"]
 ```
-但,`for in`循环除了枚举自身的属性外,还会枚举继承过来的属性.
+但`for in`循环除了枚举自身的属性外,还会枚举继承过来的属性.
 ```js
 function NaiveDict(){}
 
@@ -47,7 +49,7 @@ dict.chris = 62;
 
 dict.count(); // 5, 算上了count和toString
 ```
-一个类似的错误是使用数组类型来表示字典, 当有别的库扩展了数组的原型的时候, 也会出现上述问题. 这被称为**原型污染**
+类似的错误比如使用数组表示字典, 当有别的库扩展了数组的原型的时候, 也会出现上述问题. 这被称为**原型污染**
 
 当使用直接的对象字面量时, 只会受到`Object.prototype`的影响.
 ```js
@@ -71,16 +73,16 @@ names; // ["alice", "bob"]
 function C(){}
 C.prototype = null;
 
-// 但实例话该构造函数仍然得到Object的实例
+// 但实例化该构造函数仍然得到Object的实例
 var o = new C();
-Object.getPropertyOf(o) === null; // false
-Object.getPropertyOf(o) === Object.prototype; // true
+Object.getPrototypeOf(o) === null; // false
+Object.getPrototypeOf(o) === Object.prototype; // true
 ```
 
 ES5提供了标准的方法来创建一个没有原型的对象, `Object.create`函数能使用一个用户指定的原型链和一个属性表示符动态的构造对象.属性描述符描述了新对象属性的值及特性.
 ```js
 var x = Object.create(null);
-Object.getPrototypeOf(o) === null; // true
+Object.getPrototypeOf(o) === null; // true // PS: 在chrome下为false
 
 // 若环境不支持Object.create, 则可以使用__proto__属性
 var x = {__proto__: null};
@@ -88,9 +90,9 @@ x instanceof Object; // false
 ```
 
 1. **在ES5中, 使用Object.create(null)创建自由原型的空对象是不太容易被污染的**
-2. **在一些老环境中, 考虑使用{__proto__: null}**
-3. **__proto__既不标准,也不是完全可移植的, 可能在未来被移除**
-4. **绝不要使用__proto__作为字典中的key, 一些环境下将其作为特殊的属性**
+2. **在一些老环境中, 考虑使用{`__proto__`: null}**
+3. **`__proto__`既不标准,也不是完全可移植的, 可能在未来被移除**
+4. **绝不要使用`__proto__`作为字典中的key, 一些环境下将其作为特殊的属性**
 
 
 ### 45. 使用hasOwnProperty方法以避免原型污染
@@ -98,8 +100,8 @@ x instanceof Object; // false
 ```js
 var dict = {};
 "alice" in dict; // false
-"toString" in dict; // true;
-"vauleOf" in dict; // true;
+"toString" in dict; // true
+"vauleOf" in dict; // true // PS: chrome下为false
 
 //可以使用hasOwnProperty方法, 它能避免原型污染
 dict.hasOwnProperty("alice"); // false
@@ -133,7 +135,7 @@ Dict.prototype.get = function(key){
         : undefined;
 };
 
-Dict.propotype.set = function(key, val){
+Dict.prototype.set = function(key, val){
     this.elements[key] = val;
 };
 
@@ -178,7 +180,7 @@ Dict.prototype.get = function(key){
         : undefined;
 };
 
-Dict.propotype.set = function(key, val){
+Dict.prototype.set = function(key, val){
     if(key === "__proto__"){
         this.hasSpecialProto = true;
         this.specialProto = val;
@@ -205,7 +207,7 @@ dict.has('__proto__'); // false
 1. **使用hasOwnProperty方法避免原型污染**
 2. **使用词法作用域和call方法避免覆盖hasOwnProperty方法**
 3. **考虑在封装hasOwnProperty的类中实现字典操作**
-4. **使用字典类避免将__proto__作为key使用**
+4. **使用字典类避免将`__proto__`作为key使用**
 
 ### 46. 使用数组而不是使用字典来存储有序集合
 因为使用`for in`循环来枚举对象属性应该与顺序无关,而ES标准也没有对枚举对象属性的顺序做出定义. 
@@ -222,7 +224,7 @@ Object.prototype.allKeys = function(){
         }
         return result;
 };
-({a:1, b:2, c:3}).allKeys(); // ["allKeys","a","b","c"]
+({a:1, b:2, c:3}).allKeys(); // ["a","b","c","allKeys"]
 ```
 
 解决的方法是,使用一个命名函数,而不是在原型对象上添加共享的方法.
@@ -238,7 +240,7 @@ function allKeys(obj){
 
 ES5提供了一种友好的在`Object.prototype`中添加属性的机制.使用`defineProperty`方法. 可以定义一个对象的属性并指定该属性的元数据.
 ```js
-Object.defineProperty(Object.property, "allkeys", {
+Object.defineProperty(Object.prototype, "allkeys", {
     value: function(){
         var result = [];
         for(var key in this){
@@ -317,7 +319,103 @@ a.inNetwork(f); // false
 
 若我们修改了被枚举对象, 则不能确保`for in`循环的行为是预期的了.
 
-#48条未完成,
+尝试自己控制循环而不使用内置的forEach，同时使用自己的字典抽象以避免原型污染，实现方式为将字典放置在WorkSet类中来追踪当前集合中的元素数量
+```js
+function WorkSet(){
+    this.entries = new Dict();
+    this.count = 0;
+}
+
+WorkSet.prototype.isEmpty = function(){
+    return this.count === 0;
+}
+
+WorkSet.prototype.add = function(key, val){
+    if(this.entries.has(key)){
+        return;
+    }
+    this.entries.set(set, key);
+    this.count++;
+}
+
+WorkSet.prototype.get = function(key){
+    return this.entries.get(key);
+}
+
+WorkSet.prototype.remove = function(key){
+    if(!this.entries.has(key)){
+        return;
+    }
+    this.entries.remove(key);
+    this.count--;
+}
+```
+为了提取集合中的某个元素，需要给Dict类添加一个新的方法
+```js
+Dict.prototype.pick = function(){
+    for(var key in this.elements){
+        if(this.has(key)){
+            return key;
+        }
+    }
+    throw new Error("empty dictionary");
+}
+
+WorkSet.prototype.pick = function(){
+    return this.entries.pick();
+}
+```
+现在可以使用while循环类实现inNetwork方法，每次选择任意元素并从工作集中删除。
+```js
+Member.prototype.inNetwork = function(other){
+    var visited = {};
+    var workset = new WorkSet();
+    workset.add(this.name, this);
+    while(!workset.isEmpty()){
+        var name = workset.pick();
+        var member = workset.get(name);
+        workset.remove(name);
+        if(name in visited){
+            continue;
+        }
+        visited[name] = member;
+        if(member === other){
+            return true;
+        }
+        member.friends.forEach(function(friend){
+            workset.add(friend.name, friend);
+        });
+    }
+    return false;
+};
+```
+pick方法是不确定的，因为`for in`循环的枚举顺序的不确定，所以可以考虑确定的工作集算法，将工作集改为列表，存储在数组中，inNetwork方法总是用相同的顺序遍历图
+```js
+Member.prototype.inNetwork = function(other){
+    var visited = {};
+    var worklist = [this];
+    
+    while(worklist.length > 0){
+        var member = worklist.pop();
+        if(member.name in visited){
+            continue;
+        }
+        visited[member.name] = member;
+        if(member === other){
+            return true;
+        }
+        member.friends.forEach(function(friend){
+            worklist.push(friend);
+        });
+    }
+    return false;
+};
+```
+
+1. **当使用for in循环枚举一个对象的属性时，要确保不修改该对象**
+2. **当迭代一个对象时，若该对象的内容可能会在循环期间被改变，应该使用while循环或for循环代替for in循环**
+3. **为了在不断变化的数据结构中能够预测枚举，考虑使用一个有序的数据结构，如数组，而不是使用字典对象**
+
 
 ### 49. 数组迭代优先选择for循环,而不是for in循环
 下面这段代码mean的输出值为多少?
@@ -327,21 +425,22 @@ var total = 0;
 for(var score in scores){
     total += score;
 }
-var mean = total / score.length;
+var mean = total / scores.length;
 mean; // ?
 ```
 答案并不是88(正常的逻辑下), 也不是21(for in循环枚举的是key, 这里的key为 0, 1, 2, 3, 4, 5, 6). 
 
-而是17636.571428571428, 因为字符串的`+=`操作,total变量最后的值为`"00123456"`, 而这里是将一个字符串按照8进制转化为十进制之后,再除以7得到的17636.571428571428
+*而是17636.571428571428, 因为字符串的`+=`操作,total变量最后的值为`"00123456"`, 而这里是将一个字符串按照8进制转化为十进制之后,再除以7得到的17636.571428571428*
+**经chrome测试，结果为`NaN`，total变量最后的值为`"00123456remove"`**
 
 正确的方法(得到88的方法)为使用for循环.
 ```js
 var scores = [98, 74, 85, 77, 93, 100, 89];
 var total = 0;
-for(var i = 0, n = score.length; i < n; ++i){
-    total += score[i];
+for(var i = 0, n = scores.length; i < n; ++i){
+    total += scores[i];
 }
-var mean = total / score.length;
+var mean = total / scores.length;
 mean; // 88
 ```
 注意变量`n`的使用, 若循环体不修改数组, 则每次迭代中, 循环都会简单的重新计算数组的长度.

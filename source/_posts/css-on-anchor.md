@@ -1,6 +1,8 @@
 ---
 title: 精通CSS笔记-对链接应用样式
 date: 2017-01-29 15:01:35
+updated: 2017-01-29
+categories: [fe]
 tags: [css, CSS-Mastery, Note]
 ---
 

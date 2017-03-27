@@ -1,6 +1,8 @@
 ---
 title: 11个纯CSS3实现的加载动画
 date: 2017-03-20 09:02:46
+updated: 2017-03-20
+categories: [fe]
 tags: [css3, loading]
 ---
 

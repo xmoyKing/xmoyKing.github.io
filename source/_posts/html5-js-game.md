@@ -1,7 +1,9 @@
 ---
 title: HTML5/JS实现的网页游戏
 date: 2017-02-21 16:24:26
-tags: [html5, js]
+updated: 2017-02-21
+categories: [fe, game]
+tags: [html5, js, game]
 ---
 
 [分享几个令人震撼的JS和HTML5游戏](http://www.oschina.net/news/30457/js-html5-games)

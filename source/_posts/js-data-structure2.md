@@ -1,6 +1,8 @@
 ---
 title: javascript数据结构与算法笔记-ES6
 date: 2017-02-21 21:48:56
+updated: 2017-02-21
+categories: [fe]
 tags: [js, data structure, algorithms, note]
 ---
 

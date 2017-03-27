@@ -1,6 +1,8 @@
 ---
 title: 前端面试题-1-各大公司前端面试题集
 date: 2017-02-11 10:10:56
+updated: 2017-02-11
+categories: [fe]
 tags: [interview, fe]
 ---
 

@@ -511,7 +511,7 @@ ES标准库的大多数构造函数都有类型的问题, 某些属性或方法�
 
 JS提供的**内省机制(introspection mechanisms)**来检查对象的细节.`Object.prototype.hasOwnProperty`方法确实一个属性是否为自己的属性, 而不是继承而来的.
 
-``Object.getPropertyOf`和`__proto__`特性允许程序员便利对象的原型链并单独查询其原型对象.
+`Object.getPropertyOf`和`__proto__`特性允许程序员便利对象的原型链并单独查询其原型对象.
 
 1. **对象是接口,原型是实现**
 2. **避免检查无法控制的对象的原型结构**
@@ -538,7 +538,7 @@ Array.prototype.split = function(){
 
 这种时候, 由于这些API的行为是标准化的, 因此实现这些方法并不会造成库之间的不兼容.
 
-检测`Array.prototype.map`是否存在, 以确保内置的实现不会被覆盖, 一般而言,内置的实现更搞笑, 测试更充分.
+检测`Array.prototype.map`是否存在, 以确保内置的实现不会被覆盖, 一般而言,内置的实现更高效, 测试更充分.
 ```js
 if(typeof Array.prototype.map !== "function"){
     Array.prototype.map = function(f, thisArg){
@@ -553,5 +553,5 @@ if(typeof Array.prototype.map !== "function"){
 
 1. **避免使用轻率的猴子补丁**
 2. **记录程序库所执行的所有猴子补丁**
-3. **考虑通过将修改置于一个到处函数中, 使猴子补丁成为不可选的**
+3. **考虑通过将修改置于一个导出函数中, 使猴子补丁成为不可选的**
 4. **使用猴子补丁为缺失的标准API提供polyfill**
