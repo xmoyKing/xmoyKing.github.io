@@ -36,6 +36,7 @@ Restangular
 withCredentials
 X-Request-With
 mongolab
+$evalAsync
 ```
 
 12章之前的一些章节看的不是很明白，有很多超前的知识点或没有解释清楚的概念
