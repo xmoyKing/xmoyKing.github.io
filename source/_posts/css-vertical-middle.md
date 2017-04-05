@@ -6,6 +6,8 @@ tags: [css, vertical-middle]
 
 参考:[CSS垂直居中的11种实现方式](http://www.cnblogs.com/zhouhuan/p/vertical_center.html)
 
+[CSS居中完整指南](http://www.w3cplus.com/css/centering-css-complete-guide.html) 翻译自：[Centering in CSS: A Complete Guide](https://css-tricks.com/centering-css-complete-guide/)
+
 当外围是一个div(块级元素)或一个li(半内联元素)是不一样, 同时使一个行内元素或一个块级元素的垂直居中的方法也不一样.
 
 行内元素又分可替换元素和非替换元素,
