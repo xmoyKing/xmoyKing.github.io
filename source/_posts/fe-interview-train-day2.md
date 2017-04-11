@@ -5,6 +5,9 @@ updated:
 categories: [fe]
 tags: [interview, fe]
 ---
+
+[技术之瞳 阿里巴巴技术笔试心得](技术之瞳 阿里巴巴技术笔试心得-2016.11-p260.pdf)
+
 ## 第四章 Web前端开发
 ### HTTP协议
 > 4.4 请描述HTTP协议与HTTPS协议，分析两者的相同点和不同点
