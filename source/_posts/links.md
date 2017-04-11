@@ -121,7 +121,6 @@ tags: [interview, fe, links]
 
 [深入理解 Express.js](http://blog.jobbole.com/41325/)
 
-
 ---
 
 ## JS题目 ##
@@ -133,6 +132,9 @@ tags: [interview, fe, links]
 
 1. ["1", "2", "3"].map(parseInt) 的输出为other，[解析](https://segmentfault.com/a/1190000000411840)
 
+---
+
+[使用jquery获取url及url参数的方法](http://www.cnblogs.com/babycool/p/3169058.html)
 
 -----
 
