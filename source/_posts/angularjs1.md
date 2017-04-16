@@ -16,14 +16,23 @@ updated: 2017-04-02 09:13:07
 ### AngularJS权威教程 刷第一遍, 翻译的不好，不通顺，而且小错误也挺多
 
 从第8章开始遇到的一些不太清楚的指令或函数：
-```js
-$rootScope
+
+$injector
+
+
+[（三）ng-app的使用困惑和angularJS框架的自动加载](http://blog.csdn.net/aitangyong/article/details/39694579)*关于ng-app的加载问题，后面还有4，5，6*
+*第7个中的声明依赖的方式没看懂*
+
+$rootScope 
+  [(九)通过几段代码，理清angularJS中的$injector、$rootScope和$scope的概念和关联关系](http://blog.csdn.net/aitangyong/article/details/40267583)*系列博客，博客中对angular，做了类比java web中的一些概念*
+
+
+
 compile
 link
 postLink
 run
 $watch
-$injector
 $parse
 $apply
 XSFR令牌
@@ -37,7 +46,9 @@ withCredentials
 X-Request-With
 mongolab
 $evalAsync
-```
+$render
+$setViewValue
+
 
 12章之前的一些章节看的不是很明白，有很多超前的知识点或没有解释清楚的概念
 
