@@ -23,9 +23,30 @@ $injector
 [（三）ng-app的使用困惑和angularJS框架的自动加载](http://blog.csdn.net/aitangyong/article/details/39694579)*关于ng-app的加载问题，后面还有4，5，6*
 *第7个中的声明依赖的方式没看懂*
 
-$rootScope 
-  [(九)通过几段代码，理清angularJS中的$injector、$rootScope和$scope的概念和关联关系](http://blog.csdn.net/aitangyong/article/details/40267583)*系列博客，博客中对angular，做了类比java web中的一些概念*
+$rootScope [(九)通过几段代码，理清angularJS中的$injector、$rootScope和$scope的概念和关联关系](http://blog.csdn.net/aitangyong/article/details/40267583)*系列博客，博客中对angular，做了类比java web中的一些概念*
 
+[(十一)通过angularjs的ng-repeat指令看scope的继承关系](http://blog.csdn.net/aitangyong/article/details/44086137)
+关于js中的引用和基本传值的问题：
+```js
+var obj = {"name":"aty"};  
+              
+wrongChangeName(obj);  
+alert(obj.name);//仍然是aty
+              
+rightChangeName(obj);  
+alert(obj.name);//hehe
+              
+function rightChangeName(obj)  
+{  
+    obj.name="hehe";  
+}  
+  
+function wrongChangeName(obj)  
+{  
+    obj = {"name":"hehe"};  
+}  
+```
+在其他作用域下修改一个对象，应该通过属性的方式修改而不是使用新的对象字面量覆盖
 
 
 compile
