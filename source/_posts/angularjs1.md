@@ -17,7 +17,7 @@ updated: 2017-04-02 09:13:07
 
 从第8章开始遇到的一些不太清楚的指令或函数：
 
-$injector
+$injector [AngularJS API之$injector ---- 依赖注入](http://www.cnblogs.com/xing901022/p/4941166.html)
 
 
 [（三）ng-app的使用困惑和angularJS框架的自动加载](http://blog.csdn.net/aitangyong/article/details/39694579)*关于ng-app的加载问题，后面还有4，5，6*
@@ -48,11 +48,19 @@ function wrongChangeName(obj)
 ```
 在其他作用域下修改一个对象，应该通过属性的方式修改而不是使用新的对象字面量覆盖
 
+$scope.$digest() [(十五)在controller之外修改$scope中的数据，双向绑定特性失效，不能自动刷新](http://blog.csdn.net/aitangyong/article/details/45092271)*手动触发digest循环检测脏值*
+
+[ (十八)angularjs中模块bootstrap后,动态注册新的controller](http://blog.csdn.net/aitangyong/article/details/48135961)*18，19都没懂*
+
+[Think in AngularJS：对比jQuery和AngularJS的不同思维模式](http://damoqiongqiu.iteye.com/blog/1926475)
 
 compile
 link
 postLink
-run
+[angularjs指令中的compile与link函数详解](http://www.jb51.net/article/58229.htm)
+
+run [ AngularJS模块详解](http://blog.csdn.net/woxueliuyun/article/details/50962645)
+
 $watch
 $parse
 $apply
