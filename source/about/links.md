@@ -93,7 +93,6 @@ tags: [interview, fe, links]
 
 ---
 
-
 [面试开发常用的 JavaScript 知识点总结](http://www.codeceo.com/article/about-javascript-knowledge.html)
 
 [基于webpack的前端工程化方案（纯静态页面）](https://github.com/chenli1989/webpack-MultPage-static)
@@ -108,6 +107,7 @@ tags: [interview, fe, links]
 [前端开发者必不得不知的ES6十大特性](http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/?utm_source=tuicool&utm_medium=referral)
 *10种特性的简短介绍和使用方式*
 
+promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
 ## nodejs
 
