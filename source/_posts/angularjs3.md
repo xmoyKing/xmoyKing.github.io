@@ -19,7 +19,7 @@ angularjs是一个框架，不是库，库是为了方便程序员，基本不�
 
 来源自：[全栈 ES6、AngularJS、NodeJS与KOA实战](http://edu.csdn.net/course/detail/3181/53312?auto_start=1)
 
-
+### angularjs
 ```html
 <script>  
 window.onload = function(){
@@ -61,9 +61,51 @@ for(var i=0;i<arr.length;i++){
 showCtrl.apply(null, args);
 ```
 
+### ES6
 ES6 to ES5 转换库 traceur.js (google出品)
 
 块级作用域，解构赋值
 
-map / reduce 的思想
+map / reduce 的思想： 云计算中的 “打散” / "汇总"
 
+generator： 分步执行，与异步相配合,function后有一个*号，而且return语句无用，同时自带了一些方法
+```js
+function* show(){
+  yield 1;
+  yield 5;
+}
+
+var gen = show(); // 此时并不是真的执行show，而是创建了gen对象
+console.log(gen.next()); // value: 12, done: false
+console.log(gen.next()); // value: 5, done: false
+console.log(gen.next()); // value: undefined, done: false
+```
+
+### koa
+koa重度依赖ES6，性能比Express好，
+
+1. npm install koa
+2. 新建server.js
+
+```js
+const koa = require('koa')
+const server = koa();
+
+server.use(function* (next){
+  this.body = 'abc';
+  yield next;
+});
+
+server.use(function* (){
+  this.body += 'd';
+  this.throw(404, 'not founded ~'); //特地throw一个错误
+});
+
+server.on('error',function(err){ // 出错时，捕获错误
+  console.error('error', err);
+})
+
+server.listen(8080); 
+
+// 打开浏览器localhost:8080 输出 abcd
+```
