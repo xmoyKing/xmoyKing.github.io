@@ -37,3 +37,33 @@ window.onload = function(){
 HTML5新属性 `oninput` 能监听输入框的输入事件
 
 `ng-init` 完成变量初始化，使用逗号或分号定义多个变量
+
+依赖注入的原理：根据函数，根据函数声明中的参数的名称查找$scope内的相应对象
+```js
+var $scope={a: 12, b: 5, c: 99, qq: 55, i: 99};
+//由函数定义决定参数——餐馆
+function showCtrl(c, i, qq){
+  alert(arguments.length);
+  console.log(arguments);
+}
+//1.知道show要了什么
+var str=showCtrl.toString();
+str=str.split('{')[0].match(/\(.*\)/)[0].replace(/\s+/g, '');
+str=str.substring(1, str.length-1);
+var arr=str.split(',');
+
+//2.给它相应的东西
+var args=[];
+for(var i=0;i<arr.length;i++){
+  args[i]=$scope[arr[i]];
+}
+
+showCtrl.apply(null, args);
+```
+
+ES6 to ES5 转换库 traceur.js (google出品)
+
+块级作用域，解构赋值
+
+map / reduce 的思想
+

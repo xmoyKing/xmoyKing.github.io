@@ -6,7 +6,7 @@ categories: [fe]
 tags: [interview, fe, links]
 ---
 
-## 前端知识合集 ##
+## 前端资源 ##
 
 [w3cplus](http://www.w3cplus.com/)
 
@@ -33,6 +33,8 @@ tags: [interview, fe, links]
 前端入门及学习路线，分两部分，一个是HTML和CSS基础，一个是Javascript。由于是译文，资源和链接都是英文的:
 1. [前端开发，从草根到英雄（第一部分）](http://www.jianshu.com/p/8e639ae10dfe#)
 2. [前端开发，从草根到英雄（第二部分）](http://www.jianshu.com/p/e2be2bb9d229)
+
+[httpbin(1): HTTP Request & Response Service](http://httpbin.org/) 免费可以用来测试的http请求、响应服务
 
 ---
 
@@ -98,6 +100,10 @@ tags: [interview, fe, links]
 [基于webpack的前端工程化方案（纯静态页面）](https://github.com/chenli1989/webpack-MultPage-static)
 
 [HTTPS 为什么更安全](https://gold.xitu.io/post/58a8f3295c497d005fbd58b1)
+
+
+## 设计、模版
+[设计导航](http://idesign.qq.com/#!index/feed/id/14)
 
 
 ## ES6 ##
