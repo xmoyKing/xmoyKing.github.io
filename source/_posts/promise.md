@@ -1,12 +1,12 @@
 ---
-title: Promise相关知识点
+title: Promise1-相关知识点
 categories:
   - fe
 tags:
   - fe
   - promise
-date: 2017-04-18 16:36:18
-updated: 2017-04-18 16:36:18
+date: 2017-04-8 16:36:18
+updated: 
 ---
 
 记录学习Promise的过程，以及查到的一些资料和博客，知识点，主要参考：Promises迷你书电子版（中文版）

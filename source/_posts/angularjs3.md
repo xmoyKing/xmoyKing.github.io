@@ -8,7 +8,7 @@ tags:
   - angularjs
   - NodeJs
   - KOA
-date: 2017-04-18 17:28:19
+date: 2017-04-5 17:28:19
 updated: 
 ---
 
@@ -84,21 +84,27 @@ console.log(gen.next()); // value: undefined, done: false
 ### koa
 koa重度依赖ES6，性能比Express好，
 
-1. npm install koa
+1. npm install koa koa-static
 2. 新建server.js
 
 ```js
-const koa = require('koa')
-const server = koa();
+const koa = require('koa');
+const static = require('koa-static'); // 返回静态文件的插件
+const server = new koa();
+
+server.use(static('./www/')); //若能在www目录找到则返回静态文件，否则使用后面的
 
 server.use(function* (next){
+  console.log(this.req.url); //获取请求路径
+  // this.response.attachment('./file.txt'); //将文件作为附件发送出去
+
   this.body = 'abc';
   yield next;
 });
 
 server.use(function* (){
   this.body += 'd';
-  this.throw(404, 'not founded ~'); //特地throw一个错误
+  // this.throw(404, 'not founded ~'); //特地throw一个错误
 });
 
 server.on('error',function(err){ // 出错时，捕获错误
@@ -106,6 +112,6 @@ server.on('error',function(err){ // 出错时，捕获错误
 })
 
 server.listen(8080); 
-
-// 打开浏览器localhost:8080 输出 abcd
+// 直接打开浏览器localhost:8080 输出 abcd
 ```
+打开浏览器，若输入localhost:8080/* 能在www目录找到则返回静态文件，否则使用后面的,而其他目录输出abcd.

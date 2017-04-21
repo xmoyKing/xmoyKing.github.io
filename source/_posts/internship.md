@@ -1,6 +1,6 @@
 ---
 title: 在AM学到的小技巧
-date: 2017-03-09 13:58:45
+date: 2017-03-01 13:58:45
 updated: 
 tags: internship fe
 ---
@@ -32,3 +32,9 @@ function getUrlParam(name) {
     return null; //返回参数值
 }
 ```
+
+新建软连接：[Windows下硬链接、软链接和快捷方式的区别](http://www.2cto.com/os/201204/129305.html)
+
+在目录下：D:\htdocs\real-auto-mooc\server\clouds\web>
+
+mklink /J admin-dev D:\htdocs\admin-client

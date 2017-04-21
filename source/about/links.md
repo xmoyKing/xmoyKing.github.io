@@ -127,6 +127,8 @@ promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-
 
 [深入理解 Express.js](http://blog.jobbole.com/41325/)
 
+[forever让nodejs应用后台应用](http://tcrct.iteye.com/blog/2043644)
+
 ---
 
 ## JS题目 ##
