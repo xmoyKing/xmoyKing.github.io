@@ -83,3 +83,70 @@ describe('basic test', function(){
 
 正常失败:
 ![正常失败](3.png)
+
+### Mocha & Promise
+对Promise进行测试的时候，不使用done，而是返回一个promise对象,具体示例如下：
+```js
+var assert = require('assert');
+describe('Promise Test',function(){
+  it('should return a promise object', function(){
+    var promise = Promise.resolve(1);
+    return promise.then(function(value){
+      assert(value === 1); // 测试成功
+    });
+  });
+
+  it('should be fail', function(){
+    return Promise.resolve().then(function(){
+      assert(false); // 测试失败
+    });
+  });
+});
+```
+采用这种方式，当assert失败的时候，测试也就是失败了，能从根本上省略如then(done, done)这样与测试逻辑无直接关系的代码。
+![Promise Test](4.png)
+
+但是上述的失败是预定的，若发生了非预定的失败的时候，还是按照Mocha的写法来测试就会有问题。
+```js
+// 对Error Object进行测试
+function mayRejected(){
+  return Promise.reject(new Error('woo'));
+}
+
+it('is bad pattern', function(){
+  return mayRejected().catch(function(error){
+    assert(error.message === 'woo');
+  });
+});
+```
+当上面测试代码中的promise对象变为Rejected的时候，会调用onRejceted中注册的函数，也就是`function(error){assert(error.message === 'woo');}`, 从而测试成功。
+
+但是若mayRejected中的代码不是reject而是resolve时，测试会一直成功，因为promise会返回一个Fulfill状态，而catch中注册的onRejected函数并不会被调用，所以测试会一直通过，显示passed。
+```js
+// 对Error Object进行测试
+function mayRejected(){
+  return Promise.resolve();
+}
+
+it('is bad pattern', function(){
+  return mayRejected().catch(function(error){
+    assert(error.message === 'woo');
+  });
+});
+```
+为了解决这个问题，我们可以在catch前加入一个then调用，可以理解为若成功调用了then，那么测试就失败了。
+```js
+function failTest(){
+  throw new Error('Expected promise to be rejected but it was fulfilled');
+}
+function mayRejected(){
+  return Promise.resolve();
+}
+it('should bad pattern', function(){
+  return mayRjected().then(failTest).catch(function(error){
+    assert.deepEqual(error.message === 'woo');
+  });
+});
+```
+但是上述代码也有一个问题，若failTest本身出错了呢？ 它抛出的异常会被catch捕捉。
+
