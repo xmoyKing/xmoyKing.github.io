@@ -148,5 +148,104 @@ it('should bad pattern', function(){
   });
 });
 ```
-但是上述代码也有一个问题，若failTest本身出错了呢？ 它抛出的异常会被catch捕捉。
+但是上述代码也有一个问题，若failTest本身出错了呢？ 它抛出的异常会被catch捕捉，同时传递给catch的Error对象是AssertionError类型。
 
+所以此时，需要在测试代码中明确指定Fulfilled和Rejected两种状态下的处理流程，这样的话，就能在promise变为Fulfilled状态的时候编写失败的测试代码了。
+```js
+function mayRejected(){
+  return Promise.resolve();
+}
+it('catch -> then', function(){
+  return mayRejected().then(failTest, function(err){
+    assert(error.message === 'woo');
+  });
+});
+```
+
+前面说过，推荐then - catch的方式编写promise，而不是then(onFulfilled, onRejected), 因为Promise提供了强大的错误处理机制，但是在测试环境下，Promise的错误机制反而限制了测试失败的代码，所以不得不使用then的写法，这样才能明确promise在各种状态下进行何种处理。
+
+总结：
+1. 在普通的使用情况中，采用then - catch的流程比较容易理解，在处理错误的时候能带来很多方便
+2. 在测试时，将测试代码集中到then中处理，能将AssertionError对象传递到测试框架中
+
+### 可控测试（controllable tests）
+什么是可控测试？ 对一个待测的Promise对象，若能实现如下2点，则称为可控测试，
+1. 若编写预期为Fulfilled状态的测试的话，
+  - Rejected的时候要Fail
+  - assertion的结果不一致的时候要Fail
+2. 若预期为Rejected状态的话
+  - 结果为Fulfilled测试为Fail
+  - assertion的结果不一致的时候要Fail
+也就是说，一个测试用例应该包含下面的测试内容， 
+1. 结果满足Fulfilled / Rejected之一
+2. 对传递给assertion的值进行检查
+
+比如，如下的then代码就是一个期望结果为Rejected的测试
+```js
+promise.then(failTest, function(error){
+  // 通过assertion验证error对象
+  assert(error instanceof Error);
+});
+```
+
+由于在编写测试代码时，需要明确指定promise状态为Fulfilled或Rejected之一，而then在调用的时候可以省略参数，有时可能忘记加入使测试失败的条件，此时，可以定义一个helper函数，用来设置promise为期望的状态, 关于helper函数，可以查看[azu/promise-test-helper](https://github.com/azu/promise-test-helper)
+```js
+var assert = require('assert');
+describe('Promise Test',function(){
+
+  // 一个名为shouldRejected的helper函数
+  function shouldRejected(promise){
+    return {
+      'catch': function(fn){
+        return promise.then(function(){
+          throw new Error('Expected promise to be reject but it was fulfilled');
+        }, function(reason){
+          fn.call(promise, reason);
+        });
+      }
+    };
+  }
+
+  it('should be rejected', function(){
+    var promise = Promise.reject(new Error('human error'));
+    return shouldRejected(promise).catch(function(error){
+      assert(error.message === 'human error');
+    });
+  });
+
+});
+```
+上述代码中，shouldRejected函数接收一个promise对象作为参数，并且返回一个带有catch方法的对象，在这个catch中可以使用和onRejected里一样的代码，因此可以在catch使用基于assertion方法的测试代码。
+
+在shouldRejected外部，是和普通promise处理相同流程的代码：
+1. 将需要测试promise对象传递给shouldRejected方法
+2. 在返回的对象里catch方法中编写进行onRejected处理的代码
+3. 在onRejected里使用assertion进行判断
+
+在使用shouldRejected函数的时候，若Fulfilled被调用了的话，则会throw一个异常，测试会显示失败。类似的，可以编写一个shouldFulfilled的helper函数, 结构类似。
+```js
+var assert = require('assert');
+describe('Promise Test',function(){
+
+  // 一个名为shouldFulfilled的helper函数
+  function shouldFulfilled(promise){
+    return {
+      'then': function(fn){
+        return promise.then(function(value){
+          fn.call(promise, value);
+        }, function(reason){
+          throw new Error(reason);
+        });
+      }
+    };
+  }
+
+  it('should be resolve', function(){
+    var promise = Promise.resolve('value');
+    return shouldFulfilled(promise).then(function(value){
+      assert(value === 'value');
+    });
+  });
+
+});
+```

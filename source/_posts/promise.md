@@ -9,11 +9,11 @@ date: 2017-04-8 16:36:18
 updated: 
 ---
 
-记录学习Promise的过程，以及查到的一些资料和博客，知识点，主要参考：Promises迷你书电子版（中文版）
+记录学习Promise的过程，以及查到的一些资料和博客，知识点，主要参考：[JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
-[Promises迷你书电子版（中文版）](javascript-promise-book.pdf)
+[PDF: Promises迷你书电子版（中文版）](javascript-promise-book.pdf)
 
-[Github:Promises迷你书电子版（中文版）](https://github.com/liubin/promises-book/)
+[Github: Promises迷你书电子版（中文版）](https://github.com/liubin/promises-book/)
 
 
 ### 一个简单的Promise示例：
