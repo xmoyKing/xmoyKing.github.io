@@ -93,6 +93,82 @@ notifyMsgPromise('Hi').then(function(notification){
 4. 弹出对话框并被拒绝，catch方法会被调用
 即：当使用原生的WN时，需要对上述四种程序进行处理，可以将四种情况包装简化为两种处理方式。
 
+### WN包装函数wrapper
+*PS:貌似同前面没什么差别，暂时没记录*
+
+### Thenable
+thenable就是一个具有then方法的对象，下面在回调函数风格的代码中增加一个返回值为thenable类型的方法，具体如下：
+```js
+function notifyMsg(msg, opts, cb){
+  if(Notification && Notification.permission === 'granted'){
+    var notification = new Notification(msg, opts);
+    cb(null, notification);
+
+  }else if(Notification.requestPermission){
+    Notification.requestPermission(function(status){
+      if(Notification.permission !== status){
+        Notification.permission = status;
+      }
+      if(status === 'granted'){
+        var notification = new Notification(msg, opts);
+        cb(null, notification);
+      }else{
+        cb(new Error('user denied'));
+      }
+    });
+
+  }else{
+    cb(new Error('do not support Notification'));
+  }
+}
+
+// 返回thenable
+function notifyMsgThenable(msg, opts){
+  return {
+    'then': function(resolve, reject){
+      notifyMsg(msg, opts, function(error, notification){
+        if(error){
+          reject(error);
+        }else{
+          resolve(notification);
+        }
+      });
+    }
+  };
+}
+
+// 执行
+Promise.resolve(notifyMsgThenable('message')).then(function(notification){
+    console.log(notification);
+}).catch(function(error){
+    console.error(error);
+});
+```
+上述代码中的notifyMsgThenable方法返回的对象有then方法，then方法的参数和`new Promise(function(resolve, reject){})`一样，在确定时调用resolve，拒绝时调用reject。
+
+notifyMsgThenable和notifyMsgPromise一样，Promise.resolve(thenable)都能调用，这里的thenable是一个promise对象。
+
+这种Thenable对象的封装表现为回调和Promise风格之间，即：Callback - Thenable - Promise. 这种Thenable最大的用处可能是能将一个对象在不同的Promise类库（基于Promise标准，但实现不同，可能有一些独特的方法和限制）之间进行转换。
+
+比如类库Q的Promise实例为Q Promise，就提供了ES6 Promises的实例对象不具备的方法，如：`promise.finally(cb) 和 promise.nodeify(cb)`。
+
+```js
+// 将ES6 Promise转换为Q Promise
+var Q = require('Q');
+
+// ES6中的promise对象
+var promise = new Promise(function(resolve){
+  resolve(1);
+});
+
+// 转换为Q promise对象
+Q(promise).then(function(value){
+  console.log(value);
+}).finally(function(){
+  console.log('finally');
+});
+```
+上述代码中promise对象在创建时具备then方法， 因此可以通过Q(thenable)将这个对象转换为Q Promise对象。
 
 
 ## 使用reject而不是throw
