@@ -172,6 +172,71 @@ Q(promise).then(function(value){
 
 
 ## 使用reject而不是throw
+Promise的构造函数，以及被then调用执行的函数可以认为是在try catch中执行的，所以这些代码中即使执行了throw语句，也不会导致程序异常终止。
+若在Promise中使用throw语句，会被catch捕获，同时promise对象变为Rejected状态
+```js
+var promise = new Promise(function(resolve, reject){
+  throw new Error('message');
+});
+
+promise.catch(function(error){
+  console.error(error); // 'message'
+});
+```
+上述代码运行不会出问题，但是在更改promise对象状态的时候，使用reject方法更合理更清晰。
+```js
+var promise = new Promise(function(resolve, reject){
+  reject('message');
+});
+
+promise.catch(function(error){
+  console.error(error); // 'message'
+});
+```
+使用reject还有一个好处：throw语句无法区分是否是我们主动抛出的还是其他的非预期的异常导致的，而reject可以确定是我们主动调用的。
+
+当在then中进行reject，想要像下面那样在then中进行reject？
+```js
+var promise = Promise.resolve();
+promise.then(function(value){
+  setTimeout(function(){
+    //... 一段时间后若还没处理完则进行reject
+  }, 1000);
+  // 一些耗时任务
+  somethingHardwork();
+}).catch(function(error){
+  // 捕获超时错误
+});
+```
+上述代码需要在then中reject调用，但是传递给当前的回调函数的参数只有前面的一个promise对象，该怎么办？
+此处需要利用then中的return功能，返回值不仅仅是简单的字面量，还可以是复杂的对象类型，这个返回的值能传给后面的then或catch。同时若返回一个promise对象，则可以根据这个promise对象状态，在下一个then中指定回调函数的onFulfilled和onRjected的哪一个调用是确定的。
+```js
+var promise = Promise.resolve();
+promise.then(function(){
+  var retPromise = new Promise(function(resolve, reject){
+    // resolve和reject的状态是onFulfilled或onRejected
+  });
+  return retPromise;
+}).then(onFulfilled, onRejected);
+```
+上述代码，then的待用函数promise对象的状态来决定的。
+
+也就是说，这个retPromise对象状态为Rejected，会调用后面then的onRejeected方法。
+```js
+var onRejected = console.error.bind(console);
+var promise = Promise.resolve();
+promise.then(function(){
+  var retPromis = new Promise(function(resolve, reject){
+    reject(new Error('this promise is rejected'));
+  });
+}).catch(onRejected);
+// 下面代码是对上面代码的简化
+var onRejected = console.error.bind(console);
+var promise = Promise resolve();
+promise.then(function(){
+  return Promise.reject(new Error('this promise is rejected'));
+}).catch(onRejected);
+```
 
 ## Defferred 和 Promise
 
