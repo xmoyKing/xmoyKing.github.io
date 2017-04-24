@@ -1,5 +1,5 @@
 ---
-title: Promise4-高级进阶
+title: Promise4-高级进阶(resolve,reject)
 categories:
   - fe
 tags:
@@ -237,13 +237,3 @@ promise.then(function(){
   return Promise.reject(new Error('this promise is rejected'));
 }).catch(onRejected);
 ```
-
-## Defferred 和 Promise
-
-## 使用Promise.race 和 delay取消XHR
-
-## Promise.prototype.done
-
-## 方法链
-
-## 基于Promise顺序处理

@@ -66,6 +66,8 @@ tags: [interview, fe, links]
 
 [前端优化带来的思考，浅谈前端工程化](http://www.cnblogs.com/yexiaochai/p/4901341.html)
 
+[前端性能优化----yahoo前端性能团队总结的35条黄金定律](http://www.ayqy.net/blog/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96%EF%BC%9A%E9%9B%85%E8%99%8E35%E6%9D%A1/?utm_source=tuicool&utm_medium=referral)
+
 [Javascript模块化编程(一):模块的写法 - 阮一峰的网络日志](http://www.ruanyifeng.com/blog/2012/10/javascript_module.html) *后面还有2（CommonJS规范）和3（require.js库使用），都需要看*
 
 [JavaScript内存泄露的4种方式及如何避免](http://developer.51cto.com/art/201605/511624.htm)*常见的客户端 JavaScript 内存泄露，以及如何使用 Chrome 开发工具发现问题*
