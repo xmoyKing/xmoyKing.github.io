@@ -5,8 +5,8 @@ categories:
 tags:
   - fe
   - bower
-date: 2017-04-18 21:40:53
-updated: 2017-04-18 21:40:53
+date: 2016-09-18 21:40:53
+updated: 2016-09-18 21:40:53
 ---
 
 参考自：[bower解决js的依赖管理](http://blog.fens.me/nodejs-bower-intro/)
