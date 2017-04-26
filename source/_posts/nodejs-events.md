@@ -94,13 +94,13 @@ process.nextTick(function(){
 process.nextTick(function(){
   console.log('next tick 2');
 });
-// 输出：
+```
+输出：
 next tick 1
 next tick 2
 Immediate Timer 1
 Immediate Timer 2
 nexttick.js Exists
-```
 
 ### 实现事件发射器和监听器
 创建自定义事件，并实现监听器和回调。
@@ -183,12 +183,12 @@ account.deposit(220);
 account.deposit(320);
 account.deposit(600);
 account.withdraw(1200);
-// 输出
+```
+输出
 Account balance: $220
 Account balance: $540
 Account balance: $1140
 Goal Achieved
-```
 
 ## 实现回调
 回调有三种具体的实现：
@@ -230,7 +230,9 @@ show.seeCar('Porsche');
 show.seeCar('Bugatti');
 show.seeCar('Lamborghini');
 show.seeCar('Aston Martin');
-// 输出
+
+```
+输出
 Saw a Ferrai
 Saw a blue Ferrai
 Saw a Porsche
@@ -241,7 +243,6 @@ Saw a Lamborghini
 Saw a blue Lamborghini
 Saw a Aston Martin
 Saw a blue Aston Martin
-```
 
 ### 在回调中实现闭包
 异步回调往往与闭包有关，闭包（Closure）是一个JS术语，表示变量绑定到一个函数的作用域，但不绑定到它的父函数的作用域，当执行一个异步回调时，父函数的作用域可能修改（比如遍历并每次迭代时改变值）。
@@ -272,14 +273,15 @@ for(var i in cars){
     });
   })(message);
 }
-// 输出
+```
+输出
 Normal Callback Saw a Bugatti
 Normal Callback Saw a Bugatti
 Normal Callback Saw a Bugatti
 Closure Callback Saw a Ferrari
 Closure Callback Saw a Porsche
 Closure Callback Saw a Bugatti
-```
+
 在这个测试中，为了使回调真正的异步，使用process.nextTick()方法来调度回调函数。
 
 在程序中第一个for循环实现基本的回调函数，但是汽车名都是最后一个，因为每次循环迭代时，message的值都在变化。
@@ -308,10 +310,10 @@ function logCars(cars){
 }
 var cars = ['Ferrari', 'Porsche', 'Bugatti', 'Lamborghini', 'Aston Martin'];
 logCars(cars);
-// 输出
+```
+输出
 Saw a Aston Martin
 Saw a Lamborghini
 Saw a Bugatti
 Saw a Porsche
 Saw a Ferrari
-```
