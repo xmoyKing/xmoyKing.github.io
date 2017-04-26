@@ -36,6 +36,8 @@ tags: [interview, fe, links]
 
 [httpbin(1): HTTP Request & Response Service](http://httpbin.org/) 免费可以用来测试的http请求、响应服务
 
+[移动web资源整理](http://www.cnblogs.com/PeunZhang/p/3407453.html)
+
 ---
 
 ## 前端知识点 ##

@@ -38,3 +38,9 @@ function getUrlParam(name) {
 在目录下：D:\htdocs\real-auto-mooc\server\clouds\web>
 
 mklink /J admin-dev D:\htdocs\admin-client
+
+`<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">` 的作用：[话说神奇的content="IE=edge,chrome=1"的meta标签内容](http://www.cnblogs.com/lovecode/articles/3377505.html)
+
+`<meta name="renderer" content="webkit|ie-comp|ie-stand">`的作用：[浏览器内核控制标签meta说明](http://se.360.cn/v6/help/meta.html)
+
+有的时候将一个span设置为inline-block后，同时设置50%宽度会出现换行现象，这种时候需要设置为block和float:left即可解决行内元素换行问题
