@@ -12,3 +12,8 @@ and the avatar (the plain Lion) you saw is one of my favorite picture.
 and I am a postgraduate student at SSE.USTC now. 
 
 I like IT, especially Web related technologies.
+
+# Resume:
+[简历-单页-2017.4.pdf](./欧勇前端简历-单页-2017.4.pdf)
+
+[简历-多页-2017.4.pdf](./欧勇的简历-多页-2017.4.pdf)
