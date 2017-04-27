@@ -5,8 +5,8 @@ categories:
 tags:
   - fe
   - npm
-date: 2017-04-21 09:35:30
-updated: 2017-04-21 09:35:30
+date: 2016-09-21 09:35:30
+updated: 2016-09-21 09:35:30
 ---
 
 ### npm help
