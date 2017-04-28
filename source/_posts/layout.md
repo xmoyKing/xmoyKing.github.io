@@ -44,7 +44,7 @@ Flex也有行内元素和块级元素的区别：`display:flex, display: inline-
     - wrap （换行 从上到下） 
     - wrap-reverse （换行 从下到上）
 3. flex-flow：是flex-direction和flex-wrap的简写，默认为row nowrap
-4. justify-content：决定项目在主轴上的对齐方式,类似word中的对其方式，主轴就是direction中排列的方向，属性值可以有：
+4. justify-content：决定项目在水平轴上的对齐方式,类似word中的对其方式，属性值可以有：
     - flex-start（以水平排列为例：左对齐） 
     - flex-end（右对齐） 
     - center（居中对齐） 
