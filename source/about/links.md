@@ -97,6 +97,8 @@ tags: [interview, fe, links]
 
 [用纯CSS实现的箭头](http://ourjs.com/detail/532bc9f36922aa7e1d000001)
 
+[详解JS原型链与继承](http://louiszhai.github.io/2015/12/15/prototypeChain/)
+
 ---
 
 [面试开发常用的 JavaScript 知识点总结](http://www.codeceo.com/article/about-javascript-knowledge.html)
