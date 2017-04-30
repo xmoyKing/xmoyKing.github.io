@@ -5,8 +5,8 @@ categories:
 tags:
   - nodejs
   - fs
-date: 2016-09-28 10:32:45
-updated: 2016-09-28 10:32:45
+date: 2016-10-28 10:32:45
+updated: 2016-10-28 10:32:45
 ---
 
 参考自:[Node.js 文档](http://nodejs.cn/api/fs)

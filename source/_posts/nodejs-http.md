@@ -5,8 +5,8 @@ categories:
 tags:
   - nodejs
   - http
-date: 2016-09-28 10:32:45
-updated: 2016-09-28 10:32:45
+date: 2016-10-28 10:32:45
+updated: 2016-10-28 10:32:45
 ---
 
 Node最重要的能力就是能非常迅速的实现HTTP和HTTPS服务，node提供内置的http和https模块。http模块是底层的，不提供路由，cookie，缓存等功能。
