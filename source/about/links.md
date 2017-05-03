@@ -99,14 +99,15 @@ tags: [interview, fe, links]
 
 [详解JS原型链与继承](http://louiszhai.github.io/2015/12/15/prototypeChain/)
 
----
-
 [面试开发常用的 JavaScript 知识点总结](http://www.codeceo.com/article/about-javascript-knowledge.html)
 
 [基于webpack的前端工程化方案（纯静态页面）](https://github.com/chenli1989/webpack-MultPage-static)
 
 [HTTPS 为什么更安全](https://gold.xitu.io/post/58a8f3295c497d005fbd58b1)
 
+---
+
+[秋水不寒:总结自己及转载的互联网公司前端面试](http://blog.csdn.net/column/details/web-interview.html)
 
 ## 设计、模版
 [设计导航](http://idesign.qq.com/#!index/feed/id/14)
