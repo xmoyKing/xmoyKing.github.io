@@ -107,7 +107,7 @@ tags: [interview, fe, links]
 
 ---
 
-[秋水不寒:总结自己及转载的互联网公司前端面试](http://blog.csdn.net/column/details/web-interview.html)
+[BAT及各大互联网公司2014前端笔试面试题--JavaScript篇](http://www.cnblogs.com/coco1s/p/4029708.html)
 
 ## 设计、模版
 [设计导航](http://idesign.qq.com/#!index/feed/id/14)
