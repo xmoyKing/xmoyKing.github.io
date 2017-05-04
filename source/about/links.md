@@ -105,9 +105,12 @@ tags: [interview, fe, links]
 
 [HTTPS 为什么更安全](https://gold.xitu.io/post/58a8f3295c497d005fbd58b1)
 
+[说说JSON和JSONP，也许你会豁然开朗，含jQuery用例](http://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html)
+
+[BAT及各大互联网公司2014前端笔试面试题--JavaScript篇](http://www.cnblogs.com/coco1s/p/4029708.html)*博主还有很多优秀博文值得学习*
+
 ---
 
-[BAT及各大互联网公司2014前端笔试面试题--JavaScript篇](http://www.cnblogs.com/coco1s/p/4029708.html)
 
 ## 设计、模版
 [设计导航](http://idesign.qq.com/#!index/feed/id/14)
