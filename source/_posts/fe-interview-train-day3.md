@@ -19,7 +19,7 @@ tags: [interview, fe, links, lib, jquery]
   - [jquery--选择器sizzle源码分析](http://www.cnblogs.com/mw666666/archive/2013/04/15/3023169.html?utm_source=tuicool&utm_medium=referral)
 - 最后有关于jQuery中jsonp的原理解析
 
-## 其他知识点 ##
+- [【深入浅出jQuery】源码浅析--整体架构](http://www.cnblogs.com/coco1s/p/5261646.html)
 
 [jQuery原型链和静态函数列表图](http://www.cnblogs.com/monsterooo/p/5476860.html)
 

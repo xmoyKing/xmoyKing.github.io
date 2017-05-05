@@ -13,7 +13,7 @@ tags: reg
 - split			分割字符串，获得数组
 
 ## RegExp对象 ##
-- JS风格 —— `new RegExp(“a”, “i”)`
+- JS风格 —— `new RegExp("a", "i")`
 - perl风格 —— `/a/i`
 
 ### search 字符串搜索 ###
@@ -67,40 +67,40 @@ alert(str.match(re));
 
 ### 常用正则例子 ###
 - 校验邮箱：行首行尾 去除空格：`^\s*|\s*$`
+```js
+var re=/^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
 
-    ```js
-    var re=/^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
-    
-    if(re.test(oTxt.value))
-    {
-        alert('对了');
-    }
-    else
-    {
-        alert('你写错了');
-    }
-    ```
+if(re.test(oTxt.value))
+{
+    alert('对了');
+}
+else
+{
+    alert('你写错了');
+}
+```
 - 匹配中文：`[\u4e00-\u9fa5]`
 - 完美版getByClass： 单词边界：\b
-
-    ```js
-    function getByClass(oParent, sClass)
+```js
+function getByClass(oParent, sClass)
+{
+    var aEle=oParent.getElementsByTagName('*');
+    var aResult=[];
+    var re=new RegExp('\\b'+sClass+'\\b', 'i');
+    var i=0;
+    
+    for(i=0;i<aEle.length;i++)
     {
-        var aEle=oParent.getElementsByTagName('*');
-        var aResult=[];
-        var re=new RegExp('\\b'+sClass+'\\b', 'i');
-        var i=0;
-        
-        for(i=0;i<aEle.length;i++)
+        //if(aEle[i].className==sClass)
+        //if(aEle[i].className.search(sClass)!=-1)
+        if(re.test(aEle[i].className))
         {
-            //if(aEle[i].className==sClass)
-            //if(aEle[i].className.search(sClass)!=-1)
-            if(re.test(aEle[i].className))
-            {
-                aResult.push(aEle[i]);
-            }
+            aResult.push(aEle[i]);
         }
-        
-        return aResult;
     }
-    ```
+    
+    return aResult;
+}
+```
+
+[正则表达式符号解释](http://www.cnblogs.com/yirlin/archive/2006/04/12/373222.html)
