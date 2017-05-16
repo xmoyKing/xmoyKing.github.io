@@ -60,3 +60,17 @@ button, button:hover, button:active, button:focus {
     -webkit-tap-highlight-color: transparent;
 }
 ```
+
+Baidu第二次电面问到的问题：
+1. JS中直接定义的字符串和new String()出来的字符串有什么区别：
+[怎么解释 JavaScript 中的一切皆是对象，拿字符串来说，new 出的和普通方法创建的字符串有哪些方面的区别？](https://www.zhihu.com/question/24851153)
+[js中，字符串字面量和通过构造函数得到字符串有什么本质区别嘛？](https://segmentfault.com/q/1010000000642852)
+2. JS中数组的map方法
+[JavaScript中的数组遍历forEach()与map()方法以及兼容写法](http://www.cnblogs.com/jocyci/p/5508279.html)
+3. CSS中，border-radius的顺序，以及值的几种方法
+4. Angularjs应用优化技巧
+5. 前端项目代码组织，及项目复杂度问题
+6. js中的稀松数组的问题:遍历时会跳过空白的，而不是undefined，即占位
+[javascript中的稀疏数组(sparse array)和密集数组](http://blog.csdn.net/aitangyong/article/details/40191305/)
+7. match方法
+
