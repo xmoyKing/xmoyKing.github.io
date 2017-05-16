@@ -26,8 +26,6 @@ tags: [interview, fe, links]
 
 [JavaScript 全栈工程师培训教程- 阮一峰](http://www.ruanyifeng.com/blog/2016/11/javascript.html)
 
-[CSS资料全方位不全搜罗](https://zhuanlan.zhihu.com/p/25263081)
-
 [你可能不知道的10个设计神器（内附使用教程）](http://www.zcool.com.cn/article/ZNDM4NjY4.html)
 
 前端入门及学习路线，分两部分，一个是HTML和CSS基础，一个是Javascript。由于是译文，资源和链接都是英文的:
