@@ -74,3 +74,34 @@ Baidu第二次电面问到的问题：
 [javascript中的稀疏数组(sparse array)和密集数组](http://blog.csdn.net/aitangyong/article/details/40191305/)
 7. match方法
 
+placeholder颜色设置方式
+```css
+::-webkit-input-placeholder { /* WebKit browsers */ 
+color: #999; 
+} 
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+color: #999; 
+} 
+::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+color: #999; 
+} 
+:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+color: #999; 
+} 
+```
+
+锯齿边框
+```css
+.coupon li .fr::before{
+    content: ' ';
+    background: radial-gradient(transparent 0, transparent 4px, #41caed 4px);
+    background-size: 11px 10px;
+    background-position: -1px 10px;
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+```
+
