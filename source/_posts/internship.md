@@ -16,7 +16,7 @@ onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut=
 ```
 
 注意一些列表中，若内容不是固定字数的，一定要加上css省略
-css实现一行内省略号,同时若出现换行则失效，所以需要禁止换行`nobr`标签和`white-space : normal/nowrap`
+css实现一行内省略号,同时若出现换行则失效，所以需要禁止换行`nobr`标签和`white-space : normal/nowrap`, 同时，在android手机上（andriod 7）会出现字体上方2px左右被截取的bug，iphone上没有此问题
 ```css
 overflow: hidden;
 text-overflow: ellipsis; 

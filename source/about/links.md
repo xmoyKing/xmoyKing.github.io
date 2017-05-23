@@ -38,7 +38,7 @@ tags: [interview, fe, links]
 
 ---
 
-## 前端知识点 ##
+## 林散知识点 ##
 
 [css position 初解10步](http://blog.jobbole.com/49320/)
 
@@ -106,6 +106,8 @@ tags: [interview, fe, links]
 [说说JSON和JSONP，也许你会豁然开朗，含jQuery用例](http://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html)
 
 [BAT及各大互联网公司2014前端笔试面试题--JavaScript篇](http://www.cnblogs.com/coco1s/p/4029708.html)*博主还有很多优秀博文值得学习*
+
+[CSS background 属性](http://www.cnblogs.com/darcrand-blog/p/5770181.html)
 
 ---
 
