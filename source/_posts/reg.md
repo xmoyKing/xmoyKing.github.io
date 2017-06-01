@@ -104,3 +104,12 @@ function getByClass(oParent, sClass)
 ```
 
 [正则表达式符号解释](http://www.cnblogs.com/yirlin/archive/2006/04/12/373222.html)
+
+
+输入框禁止输入非数字的正则匹配
+```js
+onkeyup="value=value.replace(/[^\d]/g,'')" 
+
+onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
+```
+

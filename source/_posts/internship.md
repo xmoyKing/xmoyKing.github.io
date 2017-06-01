@@ -33,6 +33,26 @@ function getUrlParam(name) {
 }
 ```
 
+jquery 表单序列化为json，
+```js
+$.fn.serializeObject = function() {
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        
+        if (o[this.name] !== undefined) { // 值不为undefined，已经存在对应的键值对了，此时为键值对为数组类型
+            if (!o[this.name].push) { // 若第一次重复（第二次找到该name值）则直接转换为存储数组
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || ''); // 直接插入已建立的数组中
+        } else { // 值为undefined，则表示还没有存在该键值对，添加此键值对同时将false转换为空
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+```
+
 新建软连接：[Windows下硬链接、软链接和快捷方式的区别](http://www.2cto.com/os/201204/129305.html)
 
 在目录下：D:\htdocs\real-auto-mooc\server\clouds\web>
