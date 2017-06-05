@@ -109,6 +109,8 @@ tags: [interview, fe, links]
 
 [CSS background 属性](http://www.cnblogs.com/darcrand-blog/p/5770181.html)
 
+[JS魔法堂：函数节流（throttle）与函数去抖（debounce）](http://www.cnblogs.com/fsjohnhuang/p/4147810.html)
+
 ---
 
 
