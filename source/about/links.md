@@ -113,6 +113,8 @@ tags: [interview, fe, links]
 
 [margin系列](http://www.ituring.com.cn/space/personalarticle/161000?pcid=370)*看完才知道从前的自己对margin一无所知*
 
+[:after和:before炫酷用法总结](http://www.cnblogs.com/cheerful-queen/p/4971484.html)
+
 ---
 
 
