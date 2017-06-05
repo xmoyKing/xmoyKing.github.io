@@ -125,7 +125,15 @@ color: #999;
 }
 ```
 
+对url的操作一定需要自己封装，
+
+同时对form表单的操作，同时也需要自己封装一套前端校验的类
+
 `word-break: break-all;` 针对长的单词，设置单词内换行，可以避免多余单词溢出
 
-
-
+对iphone5宽度适配
+```css
+@media screen and (max-width: 320px) {
+    /* */
+}
+```
