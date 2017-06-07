@@ -113,7 +113,11 @@ tags: [interview, fe, links]
 
 [margin系列](http://www.ituring.com.cn/space/personalarticle/161000?pcid=370)*看完才知道从前的自己对margin一无所知，由于博主链接的个人博客地址挂掉了，所以图片和外链无法访问，有机会帮忙重新复写一遍*
 
-[:after和:before炫酷用法总结](http://www.cnblogs.com/cheerful-queen/p/4971484.html)
+[:after和:before炫酷用法总结](http://www.cnblogs.com/cheerful-queen/p/4971484.html)*最后给出的一些demo链接很有价值，尤其是链向tympanus.net的demo,最后引发了如下讲解CSS Counter的博文*
+
+[CSS Counters](http://www.w3cplus.com/css3/css-counters.html)
+
+
 
 ---
 
