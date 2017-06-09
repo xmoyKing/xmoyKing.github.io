@@ -36,6 +36,8 @@ tags: [interview, fe, links]
 
 [移动web资源整理](http://www.cnblogs.com/PeunZhang/p/3407453.html)
 
+[收藏指数满格！帮你打包前端之巅一整年好文！](https://zhuanlan.zhihu.com/p/27283922)*前端之巅公众号文章很多都是精华啊！*
+
 ---
 
 ## 林散知识点 ##
@@ -117,6 +119,9 @@ tags: [interview, fe, links]
 
 [CSS Counters](http://www.w3cplus.com/css3/css-counters.html)
 
+[CSS Animations VS the Web Animations API：案例学习](http://www.cnblogs.com/yangyoucun/p/6849918.html)
+
+[简编漫画介绍WebAssembly](http://hicc.me/an-abridged-cartoon-introduction-to-webassembly/)
 
 
 ---
