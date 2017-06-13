@@ -138,6 +138,14 @@ color: #999;
 }
 ```
 
+输入框仅允许输入数字(使用正则替换所有非数字)
+```js 
+style="ime-mode:Disabled" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
+```
+
+`user-select:none;` css设置此属性可以在用户双击文字时不选中
+
+
 CSS媒体查询总结，(CSS3 Media Queries在iPhone4和iPad上的运用)[http://www.w3cplus.com/css3/css3-media-queries-for-iPhone-and-iPads]*目前iphone4已经淘汰，最低为iphone5，但是分辨率没有什么变化，依然可以使用*
 
 [使用transform将固定大小移动端页面改为自适应页面](https://github.com/peunzhang/pageResponse)
