@@ -121,8 +121,9 @@ tags: [interview, fe, links]
 
 [CSS Animations VS the Web Animations API：案例学习](http://www.cnblogs.com/yangyoucun/p/6849918.html)
 
-[简编漫画介绍WebAssembly](http://hicc.me/an-abridged-cartoon-introduction-to-webassembly/)
+[简编漫画介绍WebAssembly](http://hicc.me/an-abridged-cartoon-introduction-to-webassembly/)*目前浏览器实现和普及还待观望*
 
+[浏览器同源政策及其规避方法](http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html)*主要学习如何规避，或者说如何解决跨域问题，无论是JSONP或是CORS，都是需要服务器配合的*
 
 ---
 
