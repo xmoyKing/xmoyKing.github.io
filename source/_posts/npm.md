@@ -49,3 +49,9 @@ cnpm install [module name]
 3. 如果有大变动，向下不兼容，需要更新X位。
 版本号有了这个保证后，在申明第三方包依赖时，除了可依赖于一个固定版本号外，还可依赖于某个范围的版本号。例如"argv": "0.0.x"表示依赖于0.0.x系列的最新版argv。
 
+
+### 遇到的一些坑
+
+关于node项目中生产的package-lock.json文件，只有npm 5以上才会有：
+[说说 npm 5 的新坑](https://toutiao.io/posts/hrihhs/preview)
+

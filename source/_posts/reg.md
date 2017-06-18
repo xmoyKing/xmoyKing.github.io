@@ -6,6 +6,9 @@ categories: [fe]
 tags: reg
 ---
 
+推荐参考: [正则表达式30分钟入门教程](https://deerchao.net/tutorials/regex/regex.htm)
+
+
 ## 复习字符串操作 ##
 - search			查找
 - substring		获取子字符串
