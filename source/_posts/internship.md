@@ -159,3 +159,8 @@ CSS媒体查询总结，(CSS3 Media Queries在iPhone4和iPad上的运用)[http:/
 
 关于git文件三种状态及其之间的转换规则：[Git中三种文件状态及其转换](http://phplaber.iteye.com/blog/1699926)
 
+
+hexo博客遇到如下报错，可以试着重新安装.`npm install hexo-renderer-sass`
+`ERROR Plugin load failed: hexo-renderer-sass Error: Cannot find module 'node-sass'`
+注意：最开始试过重新安装node-sass, 但报没有python运行环境，猜测应该不是这个的问题，因为node安装包的时候就不需要python才对。
+
