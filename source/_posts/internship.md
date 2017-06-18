@@ -158,6 +158,7 @@ CSS媒体查询总结，(CSS3 Media Queries在iPhone4和iPad上的运用)[http:/
 
 
 关于git文件三种状态及其之间的转换规则：[Git中三种文件状态及其转换](http://phplaber.iteye.com/blog/1699926)
+在vscode新安装后使用内置git提交的时候会有类似`Changes not staged for commit`的提示，点击always即可（表示一键add并且commit，但是需要手动push）
 
 
 hexo博客遇到如下报错，可以试着重新安装.`npm install hexo-renderer-sass`

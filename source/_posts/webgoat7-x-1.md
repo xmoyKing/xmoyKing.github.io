@@ -43,25 +43,31 @@ git clone https://github.com/WebGoat/WebGoat.git
 git clone https://github.com/WebGoat/WebGoat-Lessons.git
 ```
 
-4.输入`cd WebGoat`目录进入webgoat文件夹下，如下图所示：
+4.输入`cd WebGoat`目录进入webgoat文件夹下
 
 5.输入`git checkout 7.1`命令，如果按照原来的输入，编译的时候是按照8.0编译的，结果报错（checkout命令用于在多个tag版本间切换）
 
-6.输入`mvn clean compile install`， 刚开始的时候，它会先下载一些东西，时间很长，所以需要保持良好网络，之后开始编译，第二次之后的编译就会非常快了 ，如下：
+6.输入`mvn clean compile install`， 刚开始的时候，它会先下载一些东西，时间很长，所以需要保持良好网络，之后开始编译，第二次之后的编译就会非常快了 ，
 
-7.进入到WebGoat-Lessons目录下如图：
+7.进入到WebGoat-Lessons
 
 8，此处要输入`git checkout develop`，输入git checkout 7.1报错,因为webgoat-lessons下并没有7.1tag，所以会报错，其实模式即为develop
 
-9.输入`mvn package` 编译，第一次还是很慢，结果如下：
+9.输入`mvn package` 编译，第一次还是很慢
 
 10.输入xcopy "target\plugins\*.jar" "..\WebGoat\webgoat-container\src\main\webapp\plugin_lessons\"将编译好的课程文件复制到webgoat中，如下：(这一步其实就是负责所有的webgoat-lession目录下的生成的jar包到webgoat中，所以可以按照路径自己手动复制)
 
 11.输入`cd ..` 返回上一目录。这里文档提供了三种方法运行服务，第一种使用Maven Tomcat插件做示范(因为webgoat内置tomcat，所以可以直接使用mvn开启这个内置的tomcat服务)
-12.输入`cd WebGoat`进入WebGoat目录，如下：
-13.输入`mvn -pl webgoat-container tomcat7:run-war`安装插件，并开启服务，第一次时很慢，结果如下：
+
+12.输入`cd WebGoat`进入WebGoat目录，
+
+13.输入`mvn -pl webgoat-container tomcat7:run-war`安装插件，并开启服务，第一次时很慢，
 
 14.然后可以开始按照实验步骤和提示做安全实验了。
 
-####以CSRF系列实验为例
-通过CSRF学习webgoat下的相一般流程如下
+**开发版修改java源码文件的位置是WebGoat-Lessons内，而不是WebGoat**
+以cross-site-scripting为例，源码位置在：
+`WebGoat-Lessons\cross-site-scripting\src\main\java\org\owasp\webgoat\plugin\crosssitescripting`
+
+修改完后就需要重新执行上面9-13步，然后输入上次的用户名就可以继续实验了。
+
