@@ -125,6 +125,12 @@ tags: [interview, fe, links]
 
 [浏览器同源政策及其规避方法](http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html)*主要学习如何规避，或者说如何解决跨域问题，无论是JSONP或是CORS，都是需要服务器配合的*
 
+[如何绕过chrome的弹窗拦截机制](http://www.cnblogs.com/foru/p/3924385.html?utm_source=tuicool)
+
+[关于网站图标favicon.ico那点事儿，你造吗？](http://zhangge.net/4344.html)
+
+
+
 ---
 
 

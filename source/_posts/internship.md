@@ -165,4 +165,4 @@ hexo博客遇到如下报错，可以试着重新安装.`npm install hexo-render
 `ERROR Plugin load failed: hexo-renderer-sass Error: Cannot find module 'node-sass'`
 注意：最开始试过重新安装node-sass, 但报没有python运行环境，猜测应该不是这个的问题，因为node安装包的时候就不需要python才对。
 
-[如何绕过chrome的弹窗拦截机制](http://www.cnblogs.com/foru/p/3924385.html?utm_source=tuicool)
+关于表单自动提交，可以监听document的keyup事件，若e.keyCode === 13则表示回车
