@@ -166,3 +166,21 @@ hexo博客遇到如下报错，可以试着重新安装.`npm install hexo-render
 注意：最开始试过重新安装node-sass, 但报没有python运行环境，猜测应该不是这个的问题，因为node安装包的时候就不需要python才对。
 
 关于表单自动提交，可以监听document的keyup事件，若e.keyCode === 13则表示回车
+
+[js 怎样判断用户是否在浏览当前页面](https://zhidao.baidu.com/question/541794991.html)
+```js
+var hiddenProperty = 'hidden' in document ? 'hidden' :    
+    'webkitHidden' in document ? 'webkitHidden' :    
+    'mozHidden' in document ? 'mozHidden' :    
+    null;
+var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+var onVisibilityChange = function(){
+    if (!document[hiddenProperty]) {    
+        console.log('页面非激活');
+    }else{
+        console.log('页面激活')
+    }
+}
+document.addEventListener(visibilityChangeEvent, onVisibilityChange);
+```
+
