@@ -10,17 +10,17 @@ date: 2017-06-21 17:21:48
 updated: 2017-06-21 17:21:48
 ---
 
-本文译至[Typographic Design Patterns And Best Practices](https://www.smashingmagazine.com/2009/08/typographic-design-survey-best-practices-from-the-best-blogs/)总结部分。
+本文译至[Typographic Design Patterns And Best Practices](https://www.smashingmagazine.com/2009/08/typographic-design-survey-best-practices-from-the-best-blogs/#conclusion)总结部分。
 
 [Web设计中网页字体排版指南PDF，英文原件](./web-type-guidlines.pdf)*译者PS:主要讨论对英语的网页排版*
 
 
-### 总结：
+### 总结
 
 在网页设计设置中字体，本文给出了一些通用指南，但**并不是完全有科学依据**的，而仅仅只是一个大致的指导：
 
- 1. serif或sans-serif字体中的任何一种都可以用于文本正文和标题，但**实际使用中，sans-serif字体更常用一些**
- 2. 标题常用字体：
+1. serif或sans-serif字体中的任何一种都可以用于文本正文和标题，但**实际使用中，sans-serif字体更常用一些**
+2. 标题常用字体：
     - Georgia
     - Arial
     - Helvetica
