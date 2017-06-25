@@ -1,7 +1,7 @@
 ---
-title: Linux常用网络工具
+title: Linux Network Tools
 categories:
-  - report
+  - it
 tags:
   - linux
   - network
@@ -12,7 +12,7 @@ updated: 2017-06-25 10:09:30
 主要总结了一些Linux下不熟悉但是却常用的网络工具，包括nc（NetCat）、iptables（linux下的防火墙）、raw socket（原始套接字）、 sniffer（嗅探器）、以及ip/icmp报头格式。（主要是英语，未做翻译）。
 
 
-### 自带网络命令
+### Some instructs
 
 #### `ifconfig`	
 Network configuration and status
@@ -183,13 +183,38 @@ ARP poisoning:
 - DoS: by associating a nonexistent MAC address to the IP address of the victim’s default gateway
 
 
-### ip/icmp报头格式
+#### Netwox
+Tool to send out network packets of different types and with different contents (Netwag is the GUI version)
+Netwox consists 222 tools, each with a specific number, some should work with root privilige
+`Netwox number [parameters …]`
+
+```
+netwox 72 --help
+```
+Title: Scan ARP (EthIp spoof)
+Usage: `netwox 72 -i ips [-d device] [-E eth] [-I ip]`
+Parameters:
+```
+ -i|--ips ips                   list/range of IP addresses {1.2.3.4,5.6.7.8}
+ -d|--device device             spoof device {Eth0}
+ -E|--src-eth eth               source ethernet address {0:a:a:a:a:a}
+ -I|--src-ip ip                 source IP address {1.2.3.4}
+ --help2                        display help for advanced parameters
+ ```
 
 
-### iptables工具
-
-
-### raw socket原始套接字
-
-
-### sniffer嗅探器工具
+```
+netwox 80 –eth –ip –eth-dst  --ip-dst
+```
+Title: Periodically send ARP replies
+Usage: `netwox 80 -e eth -i ip [-d device] [-E eth] [-I ip] [-s uint32]`
+Parameters:
+```
+ -e|--eth eth                   ethernet address {00:0C:29:26:7F:F0}
+ -i|--ip ip                     IP address {192.168.206.161}
+ -d|--device device             device for spoof {Eth0}
+ -E|--eth-dst eth               to whom answer {0:8:9:a:b:c}
+ -I|--ip-dst ip                 to whom answer {5.6.7.8}
+ -s|--sleep uint32              sleep delay in ms {1000}
+ --help2                        display full help
+```
