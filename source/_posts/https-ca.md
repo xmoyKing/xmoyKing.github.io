@@ -1,9 +1,8 @@
 ---
 title: 自建CA并将网站改为HTTPS协议网站
 categories:
-  - report
+  - it
 tags:
-  - report
   - ca
   - https
   - openssl
