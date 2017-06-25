@@ -9,7 +9,7 @@ date: 2017-06-25 10:09:30
 updated: 2017-06-25 10:09:30
 ---
 
-主要总结了一些Linux下不熟悉但是却常用的网络工具，包括nc（NetCat）、iptables（linux下的防火墙）、raw socket（原始套接字）、 sniffer（嗅探器）、以及ip/icmp报头格式。（主要是英语，未做翻译）。
+主要总结了一些Linux下不熟悉但是却常用的网络工具，包括nc（NetCat）、iptables（linux下的防火墙）、raw socket（原始套接字）、 sniffer（嗅探器）、以及ip/icmp报头格式。（主要是英语，未做翻译, 但给出中文参考博客）。
 
 
 ### Some instructs
@@ -129,6 +129,8 @@ echo -e "GET / HTTP/1.0\n\n" | nc localhost 80
 which will show the homepage with header; nc doesn't do httpsmeans it will show success with `nc -vv localhost 443`; but not homepage
 
 #### `nmap`
+Reference In Chinese：[Nmap参考指南中文版](http://www.nmap.com.cn/doc/manual.shtm)
+
 Nmap is the most popular scanning tool used on the Internet.
 ```
 nmap  localhost
