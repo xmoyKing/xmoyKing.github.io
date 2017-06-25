@@ -184,4 +184,5 @@ var onVisibilityChange = function(){
 document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 ```
 
-> Shell Code 小节处的堆栈图示没看懂，需要解释
+> Shell Code 小节处的堆栈图示没看懂，需要解释, 主要是看懂，堆栈的顺序以及每个函数调用顺序和返回地址，同时需要注意如何防止缓冲区溢出攻击
+3种手段防止攻击：
