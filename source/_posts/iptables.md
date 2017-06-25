@@ -12,7 +12,8 @@ updated: 2017-06-25 15:46:48
 Reference In Chinese:[iptables超全详解](http://www.linuxidc.com/Linux/2016-09/134832.htm)
 
 Stateful firewall
-- Traditional: to allow outgoing website visiting and to drop other communication
+- Traditional: 
+  To allow outgoing website visiting and to drop other communication
   To allow input tcp with source port 80 and ack
   Can’t visit websites on ports other than 80
 - To use stateful firewall
@@ -54,10 +55,12 @@ To change the source IP of a ping packet sent out from our machine
 
 ---- 
 
+
+`sudo sysctl –p /etc/sysctl.conf`
+Find  /etc/sysctl.conf
+
 To act as a firewall (protect inner network)
 To enable packet forward
-  Find  /etc/sysctl.conf
-  sudo sysctl –p /etc/sysctl.conf
   to redirect the input packet to a specific website
     To change the source and dst
   to change the reply packet to a specific source and port
