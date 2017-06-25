@@ -184,3 +184,4 @@ var onVisibilityChange = function(){
 document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 ```
 
+> Shell Code 小节处的堆栈图示没看懂，需要解释
