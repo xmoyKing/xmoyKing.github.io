@@ -97,7 +97,7 @@ OPTIONS:
 ```
 
 #### netcat
-参考资料：[Linux nc命令用法收集](http://www.cnblogs.com/jnxb/p/3940593.html)
+Reference In Chinese：[Linux nc命令用法收集](http://www.cnblogs.com/jnxb/p/3940593.html)
 
 Copies data across network connections.
 Uses UDP or TCP.
