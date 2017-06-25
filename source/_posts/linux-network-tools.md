@@ -5,8 +5,8 @@ categories:
 tags:
   - linux
   - network
-date: 2017-06-25 10:09:30
-updated: 2017-06-25 10:09:30
+date: 2017-06-15 10:09:30
+updated: 2017-06-15 10:09:30
 ---
 
 主要总结了一些Linux下不熟悉但是却常用的网络工具，包括nc（NetCat）、iptables（linux下的防火墙）、raw socket（原始套接字）、 sniffer（嗅探器）、以及ip/icmp报头格式。（主要是英语，未做翻译, 但给出中文参考博客）。
