@@ -129,7 +129,7 @@ echo -e "GET / HTTP/1.0\n\n" | nc localhost 80
 which will show the homepage with header; nc doesn't do httpsmeans it will show success with `nc -vv localhost 443`; but not homepage
 
 #### `nmap`
-Reference In Chinese：[Nmap参考指南中文版](http://www.nmap.com.cn/doc/manual.shtm)
+Reference In Chinese：[Nmap参考指南(Man Page)](https://nmap.org/man/zh/)
 
 Nmap is the most popular scanning tool used on the Internet.
 ```
