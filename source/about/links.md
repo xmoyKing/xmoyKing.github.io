@@ -87,6 +87,8 @@ tags: [interview, fe, links]
 [css3(border-radius)边框圆角详解](http://blog.sina.com.cn/s/blog_61671b520101gelr.html)
 
 [Ajax知识体系大梳理](http://louiszhai.github.io/2016/11/02/ajax/)*非常全，而且讲到浏览器四种线程之间的配合*
+[AJAX工作原理及其优缺点](http://www.cnblogs.com/SanMaoSpace/archive/2013/06/15/3137180.html)*简版*
+
 
 [浓缩解读《JavaScript设计模式与开发实践》①](http://www.jianshu.com/p/4829d45eb714)*后面还有2和3，都得看看*
 1. 主要讲设计模式的用途，以及原型继承的各方面特性
