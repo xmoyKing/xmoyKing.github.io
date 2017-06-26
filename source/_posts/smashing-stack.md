@@ -14,7 +14,6 @@ updated: 2017-06-10 09:25:05
 
 参考博客：
 [缓冲区溢出攻击原理分析](http://blog.csdn.net/linyt/article/details/43315429)
-[缓冲区溢出攻击的原理分析与防范](https://wenku.baidu.com/view/b7fe13a7ed630b1c59eeb59a.html)
 
 参考译文：[smashing the stack for fun and profit 译文](http://www.itwendao.com/article/detail/397706.html)
 PDF原件:[smashing-stack.pdf](./smashing-stack.pdf)

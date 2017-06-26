@@ -1,5 +1,5 @@
 ---
-title: linux_rootkit
+title: Linux Rootkit
 categories:
   - it
 tags:

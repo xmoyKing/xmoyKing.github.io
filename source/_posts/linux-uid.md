@@ -1,10 +1,10 @@
 ---
-title: linux_uid
+title: Linux Uid
 categories:
   - it
 tags:
-  - linux uid
-  - 
+  - linux 
+  - uid
 date: 2017-06-12 23:47:02
 updated: 2017-06-12 23:47:02
 ---
