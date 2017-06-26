@@ -2,7 +2,7 @@
 title: 在AM学到的小技巧
 date: 2017-03-01 13:58:45
 updated: 
-tags: internship fe
+tags: mixed
 ---
 
 1. 无js实现替换原始checkbox radio, :checked和:hover的使用
@@ -184,3 +184,4 @@ var onVisibilityChange = function(){
 document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 ```
 
+[git pull时遇到error: cannot lock ref ](http://blog.csdn.net/qq_15437667/article/details/52479792)
