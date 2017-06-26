@@ -1,7 +1,7 @@
 ---
 title: j2ee + websocket + mysql 实现简单监控系统
 categories:
-  - report
+  - it
 tags:
   - fe
   - j2ee

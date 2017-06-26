@@ -1,7 +1,7 @@
 ---
 title: j2ee课程：理解并实现ssh核心原理 + ssh实践
 categories:
-  - report
+  - it
 tags:
   - j2ee
   - ssh
