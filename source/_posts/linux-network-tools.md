@@ -45,7 +45,8 @@ Options
 -t	set type of service
 -v	verbose output
 
-#### `Tracert` in Windows
+like `Tracert` in Windows
+
 #### `nslookup` 
 online web tool to lookup and find IP address information in the DNS (Domain Name System)
 #### `host` 
@@ -129,7 +130,9 @@ echo -e "GET / HTTP/1.0\n\n" | nc localhost 80
 which will show the homepage with header; nc doesn't do httpsmeans it will show success with `nc -vv localhost 443`; but not homepage
 
 #### `nmap`
-Reference In Chinese：[Nmap参考指南(Man Page)](https://nmap.org/man/zh/)
+Reference In Chinese：
+[Nmap扫描原理与用法](http://www.2cto.com/article/201210/158960.html) *推荐阅读：快速入门原理+实践*
+[Nmap参考指南(Man Page)](http://www.nmap.com.cn/doc/manual.shtm) *详细介绍*
 
 Nmap is the most popular scanning tool used on the Internet.
 ```
