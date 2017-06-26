@@ -184,8 +184,3 @@ var onVisibilityChange = function(){
 document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 ```
 
-
-[缓冲区溢出攻击原理分析](http://blog.csdn.net/linyt/article/details/43315429)
-[缓冲区溢出攻击的原理分析与防范](https://wenku.baidu.com/view/b7fe13a7ed630b1c59eeb59a.html)
-
-Shell Code 小节处的堆栈图示没看懂，需要解释, 主要是看懂，堆栈的顺序以及每个函数调用顺序和返回地址，同时需要注意如何防止缓冲区溢出攻击

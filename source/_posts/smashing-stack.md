@@ -10,7 +10,11 @@ date: 2017-06-23 09:25:05
 updated: 2017-06-23 09:25:05
 ---
 
-本文主要学习内容为"利用缓冲区溢出获取Root Shell",结合译文以及原文做出笔记和备注,.
+本文主要学习内容为"利用缓冲区溢出获取Root Shell",结合译文以及原文做出笔记和备注,目的是了解堆栈的顺序以及每个函数调用顺序和返回地址，同时需要注意如何防止缓冲区溢出攻击。
+
+参考博客：
+[缓冲区溢出攻击原理分析](http://blog.csdn.net/linyt/article/details/43315429)
+[缓冲区溢出攻击的原理分析与防范](https://wenku.baidu.com/view/b7fe13a7ed630b1c59eeb59a.html)
 
 参考译文：[smashing the stack for fun and profit 译文](http://www.itwendao.com/article/detail/397706.html)
 PDF原件:[smashing-stack.pdf](./smashing-stack.pdf)
@@ -27,4 +31,5 @@ PDF原件:[smashing-stack.pdf](./smashing-stack.pdf)
 即由于每次调用其他函数都需将新函数的参数和局部变量入栈,由于堆栈是高地址向低地址增长,而函数调用入栈的顺序为: 函数形参-调用(SP)-局部变量. 所以结果为函数形参的地址比SP高, 而SP地址又比局部变量高, 所以对FP来说,参数偏移量为正, 局部变量偏移量为负
 
 
+**Shell Code 小节处的堆栈图示没看懂，需要解释**
 
