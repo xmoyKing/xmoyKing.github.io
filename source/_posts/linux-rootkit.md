@@ -4,6 +4,7 @@ categories:
   - it
 tags:
   - linux
+  - security
   - rootkit
 date: 2017-06-25 23:48:55
 updated: 2017-06-25 23:48:55

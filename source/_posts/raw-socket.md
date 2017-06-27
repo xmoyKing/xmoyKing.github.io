@@ -4,6 +4,11 @@ categories:
   - it
 tags:
   - network
+  - linux
+  - security
+  - ip
+  - icmp
+  - ip/icmp
   - raw socket
   - ping
 date: 2017-06-17 15:26:35
