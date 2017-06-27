@@ -4,6 +4,16 @@ categories:
   - it
 tags:
   - security
+  - css
+  - https
+  - xss
+  - natcat
+  - linux
+  - ip/icmp
+  - nmap
+  - iptables
+  - rootkit
+  - buffer overflow
 date: 2017-06-26 18:59:09
 ---
 
@@ -68,6 +78,7 @@ date: 2017-06-26 18:59:09
 ----
 
 ### nc（NetCat）
+[Linux nc命令用法收集](http://www.cnblogs.com/jnxb/p/3940593.html)
 `nc -l 1234`是什么意思
   作为服务器监听本机的1234端口
 
@@ -165,7 +176,7 @@ Rootkit是一种特殊的恶意软件，它的功能是在安装目标上隐藏�
 Rootkit一般都和木马、后门等其他恶意程序结合使用;
 Rootkit通过加载特殊的驱动，修改系统内核，进而达到隐藏信息的目的。
 2. 系统调用劫持过程
-[](http://blog.sina.com.cn/s/blog_596d00a70100jpa7.html)
+[linux 系统调用中断劫持实现—原理和代码。](http://blog.sina.com.cn/s/blog_596d00a70100jpa7.html)
 在linux中使用0x80 异常实现系统调用，因此，主要的实现路径：获得中断向量表->获得系统调用中断处理函数地址->获得系统调用符号表->修改对应变量的偏移值指向新的系统调用程序(后门程序)。
 3. `/proc`作用，`ps`命令工作原理
 [Linux proc详解](http://blog.csdn.net/rzhzhz/article/details/7247912)
