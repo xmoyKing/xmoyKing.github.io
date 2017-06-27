@@ -165,7 +165,7 @@ date: 2017-06-26 18:59:09
   ```sh
   sudo iptables -P INPUT DROP #关闭所有表的INPUT链，即不接受任何发至本机的包
   sudo iptables -A INPUT -p tcp -sport 80 -j ACCEPT #接收所有协议为tcp源端口为80的发至本机的包
-  # 由于https的端口地址为443而不是80，所以应该将80换为80
+  # 由于https的端口地址为443而不是80，所以应该将80换为443
   ```
 
 ----
@@ -177,8 +177,9 @@ Rootkit是一种特殊的恶意软件，它的功能是在安装目标上隐藏�
 Rootkit一般都和木马、后门等其他恶意程序结合使用;
 Rootkit通过加载特殊的驱动，修改系统内核，进而达到隐藏信息的目的。
 2. 系统调用劫持过程
-[Linux系统调用详解（如何实现机制）](http://www.2cto.com/os/201603/491871.html)
+[系统调用的实现原理](http://blog.csdn.net/chosen0ne/article/details/7721550)
 [linux 系统调用中断劫持实现—原理和代码。](http://blog.sina.com.cn/s/blog_596d00a70100jpa7.html)
+[Linux系统调用_详细全过程(PPT)](https://wenku.baidu.com/view/d5db076a7e21af45b307a89b.html)
 在linux中使用0x80 异常实现系统调用，因此，主要的实现路径：获得中断向量表->获得系统调用中断处理函数地址->获得系统调用符号表->修改对应变量的偏移值指向新的系统调用程序(后门程序)。
 3. `/proc`作用，`ps`命令工作原理
 [Linux proc详解](http://blog.csdn.net/rzhzhz/article/details/7247912)
