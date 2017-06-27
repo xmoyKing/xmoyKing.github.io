@@ -5,25 +5,26 @@ categories:
 tags:
   - security
 date: 2017-06-26 18:59:09
-updated: 2017-06-26 18:59:09
 ---
 
 
 ### Web
 1. 什么是盒模型
-  网页设计中常听的属性名：内容(content)、填充(padding)、边框(border)、边界(margin)， CSS盒子模式都具备这些属性。
+  CSS盒子模式即具备这些属性：内容(content)、内边距(padding)、边框(border)、外边距(margin)。
   这些属性我们可以用日常生活中的常见事物——盒子作一个比喻来理解，所以叫它盒子模式。
-  CSS盒子模型就是在网页设计中经常用到的CSS技术所使用的一种思维模型。
+  ![标准盒模型](box_model.jpg)
 2. CSS定位方式及其特性
   [百度百科：CSS定位](http://baike.baidu.com/item/CSS%E5%AE%9A%E4%BD%8D)
   [HTML和CSS高级指南之二——定位详解](http://www.w3cplus.com/css/advanced-html-css-lesson2-detailed-css-positioning.html)
-  static 没有特别的设定，遵循基本的定位规定，不能通过z-index进行层次分级。
+  static 默认值，遵循基本的定位规定，不能通过z-index进行层次分级。
   relative 不脱离文档流，参考自身静态位置通过 top(上),bottom（下）,left（左）,right（右） 定位，并且可以通过z-index进行层次分级。
-  absolute 脱离文档流，通过 top,bottom,left,right 定位。选取其最近的父级定位元素，当父级 position 为 static 时，absolute元素将以body坐标原点进行定位，可以通过z-index进行层次分级。
-  fixed 固定定位，这里他所固定的对像是可视窗口而并非是body或是父级元素。可通过z-index进行层次分级。
+  absolute 脱离文档流，通过 top,bottom,left,right 定位。选取其最近的父级定位元素，当所有父级 position 为 static 时，absolute元素将以body坐标原点进行定位，可以通过z-index进行层次分级。
+  fixed 固定定位，参考对像是可视窗口而并非是body或是父级元素。可通过z-index进行层次分级。
 3. 点击劫持/利用CSS盗取浏览历史
   利用不可见的iframe覆盖在伪装页面上，骗取用户对实际页面进行操作。
   利用浏览器对超链接不同状态下（未访问状态、鼠标hover/focus状态、已访问状态）链接的颜色的不同，可以知道用户的访问历史。
+
+----
 
 ### HTTPS
 1. HTTPS的作用
@@ -36,23 +37,25 @@ updated: 2017-06-26 18:59:09
   - 提升公司品牌形象和可信度：网站部署SSL证书，让您的网站与其他网站与众不同。部署了SSL证书的网站会在浏览器地址栏显示https绿色安全小锁，如果是部署的EV SSL证书还会显示绿色地址栏和单位名称。可告诉用户其访问的是安全、可信的站点，可以放心的进行操作和交易，有效提升公司的品牌信息和可信度。
 2. CSRF是什么，如何利用HTTPS防御CSRF
   [了解XSS/CSRF](http://xmoyking.github.io/2017/06/06/xss-csrf/)
-  CSRF攻击的主要目的是让用户在不知情的情况下攻击自己已登录的一个系统，类似于钓鱼。如用户当前已经登录了邮箱，或bbs，同时用户又在使用另外一个，已经被你控制的站点，我们姑且叫它钓鱼网站。这个网站上面可能因为某个图片吸引你，你去点击一下，此时可能就会触发一个js的点击事件，构造一个bbs发帖的请求，去往你的bbs发帖，由于当前你的浏览器状态已经是登陆状态，所以session登陆cookie信息都会跟正常的请求一样，纯天然的利用当前的登陆状态，让用户在不知情的情况下，帮你发帖或干其他事情。
+  CSRF攻击的主要目的是让用户在不知情的情况下攻击用户当前已登录的某个网站，类似于钓鱼。如用户当前已经登录了邮箱，或bbs，同时用户又登录另外一个已经被攻击者控制的站点，我们姑且叫它钓鱼网站。用户一登陆钓鱼网站，此时可能就会触发一个js的点击事件，构造一个bbs发帖的请求，去往你的bbs发帖，由于当前你的浏览器状态已经是登陆状态，所以session登陆cookie信息都会跟正常的请求一样，纯天然的利用当前的登陆状态，让用户在不知情的情况下，攻击者完成了攻击。
   CSRF防御
   - 通过 referer、token 或者 验证码 来检测用户提交。
   - 尽量不要在页面的链接中暴露用户隐私信息。
   - 对于用户修改删除等操作最好都使用post操作 。
   - 避免全站通用的cookie，严格设置cookie的域。
 
+----
+
 ### XSS
 1. XSS原理、如何防御
   [了解XSS/CSRF](http://xmoyking.github.io/2017/06/06/xss-csrf/)
-  恶意攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的特殊目的。
-  XSS防御：
+  攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的特殊目的。
+  防御：
   - 编码：不能对用户所有输入保持原样对用户输入的数据写入HTML文档
   - 过滤：把输入不合法的过滤掉，保持安全性
 2. HTTPONLY属性作用
   [利用HTTP-only Cookie缓解XSS之痛](http://netsecurity.51cto.com/art/200902/111143.htm)
-  特性是为Cookie提供了一个新属性，用以阻止客户端脚本访问Cookie，缓解跨站点脚本攻击带来的信息泄露风险。
+  为Cookie提供的一个新属性，阻止客户端脚本访问Cookie，缓解跨站点脚本攻击带来的信息泄露风险。
   使用HTTP-only Cookie后，Web 站点就能排除cookie中的敏感信息被发送给黑客的计算机或者使用脚本的Web站点的可能性。
 3. Ajax异步特性
   [Ajax知识体系大梳理](http://louiszhai.github.io/2016/11/02/ajax/)*非常全，而且讲到浏览器四种线程之间的配合*
@@ -62,10 +65,13 @@ updated: 2017-06-26 18:59:09
   传统的Web应用交互由用户触发一个HTTP请求到服务器,服务器对其进行处理后再返回一个新的HTHL页到客户端, 每当服务器处理客户端提交的请求时,客户都只能空闲等待,并且哪怕只是一次很小的交互、只需从服务器端得到很简单的一个数据,都要返回一个完整的HTML页,而用户每次都要浪费时间和带宽去重新读取整个页面。这个做法浪费了许多带宽，由于每次应用的交互都需要向服务器发送请求，应用的响应时间就依赖于服务器的响应时间。这导致了用户界面的响应比本地应用慢得多。
   与此不同，AJAX应用可以仅向服务器发送并取回必需的数据，它使用SOAP或其它一些基于XML的Web Service接口，并在客户端采用JavaScript处理来自服务器的响应。因为在服务器和浏览器之间交换的数据大量减少，结果我们就能看到响应更快的应用。同时很多的处理工作可以在发出请求的客户端机器上完成，所以Web服务器的处理时间也减少了。
 
+----
 
 ### nc（NetCat）
 `nc -l 1234`是什么意思
   作为服务器监听本机的1234端口
+
+----
 
 ### Linux权限
 1. `chmod 4755 some_binary`的作用
@@ -74,11 +80,13 @@ updated: 2017-06-26 18:59:09
   Linux权限入门：[Linux下用户组、文件权限详解](http://www.cnblogs.com/123-/p/4189072.html)
   Linux特殊权限标志位：[ Linux文件权限标志uid gid](http://blog.csdn.net/u011191259/article/details/50316581)
 
+----
+
 ### IP/ICMP
+[IP/ICMP Security](http://xmoyking.github.io/2017/06/23/ip-icmp/)
 1. 通常的IP头最开始的01000101表示什么意思
   表示IP版本和头部长度，0100表示ipv4，0101表示头部长度为5，单位为4字节，即头部长度为20字节
 2. 为什么IP需要分片
-  [IP/ICMP Security](http://xmoyking.github.io/2017/06/23/ip-icmp/)
   在IP层一个IP报文包括头部最大长度为65535字节，但是在其他层，比如链路层以太网最大的帧长度为1500，这种情况下为了保存数据的完整，就必须将IP进行分片。
 3. TearDrop的原理（IP分片攻击）
   [什么是Teardrop攻击](http://blog.csdn.net/nny715/article/details/7354961)
@@ -87,10 +95,13 @@ updated: 2017-06-26 18:59:09
 4. ICMP重定向攻击原理
   [ICMP重定向原理](http://www.2cto.com/net/201310/253089.html)
   ICMP重定向报文是ICMP控制报文中的一种。在特定的情况下，当路由器检测到一台机器使用非优化路由的时候，它会向该主机发送一个ICMP重定向报文，请求主机改变路由。
-  Attacker伪装路由器Router发送ICMP重定向包给受害者Victim,通知其改变发包地址为Other，受害者收到重定向包后将包发到改变自己的地址到
+  attacker伪装路由器router发送ICMP重定向包给受害者victim,通知其改变发包地址为other，受害者victim收到重定向包后将包发到改变自己的地址到指定的other处。
+
+----
 
 
 ### Nmap
+[Nmap扫描原理与用法](http://www.2cto.com/article/201210/158960.html)
 1. nmap判断OS原理
   Nmap使用TCP/IP协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由此不同的TCP/IP方案中可能都有自己的特定方式。Nmap主要是根据这些细节上的差异来判断操作系统的类型的。
   具体实现方式如下：
@@ -105,8 +116,10 @@ updated: 2017-06-26 18:59:09
 3. nmap idle scan原理
   伪造身份去扫描目标网络，所以看起来就像是无辜的Zombie主机在扫描。
   1.探查Zombie的IP ID并记录下来。
-  2.在Zombie主机上伪造一个包，然后把包发送给目标主机端口。根据端口的状态，目标主机可能会也有可能不会导致Zombie主机IPID值增加。
-  3.再探查Zombie主机的IP ID。比较两次得到IPID值
+  2.在Zombie主机上伪造一个包，然后把包发送给目标主机端口。根据端口的状态，目标主机可能会也有可能不会导致Zombie主机IP ID值增加。
+  3.再探查Zombie主机的IP ID。比较两次得到IP ID值就能分析出目标的端口信息。
+
+----
 
 ### iptables
 1. NAT原理
@@ -143,6 +156,8 @@ updated: 2017-06-26 18:59:09
   # 由于https的端口地址为443而不是80，所以应该将80换为80
   ```
 
+----
+
 ### Rootkit
 1. 什么是Rootkit
 [百度百科：Rootkit](http://baike.baidu.com/link?url=n2HGAdcR9MOmSyTE5iN81Br2YBjje4WJteb3H2SNZ8tpK94FAD1--jkBKXc5G8IL50vM1qKeKTGtuiZN88F8xK)
@@ -160,13 +175,17 @@ Rootkit通过加载特殊的驱动，修改系统内核，进而达到隐藏信�
 在/proc目录下存在大量以数字为名的子目录，这个数字就是相关进程的进程ID，这些目录就是系统当前运行进程的proc抽象。每一个目录都以相关联的活动系统进程PID为目录名，在目录下包含了一些文件，用于显示进程相关的信息，其中有一个status文件保存着当前该进程状态总览，包含进程名字、当前状态和各种信息统计。
 `ps`命令就是通过读取每一个进程目录下的status文件，并最终整理输出。
 
+----
+
 
 ### Buffer Overflow
-**建议直接看此参考博客**：[缓冲区溢出攻击原理分析](http://blog.csdn.net/linyt/article/details/43315429)
+[缓冲区溢出攻击原理分析](http://blog.csdn.net/linyt/article/details/43315429)
 1. 发生函数调用时的堆栈结构（通用）
 ![函数调用时的堆栈结构](./stack.png)
 2. 如何利用Buffer Overflow获取Rootshell
 由于buf变量在栈中的位置，当buf变量发生溢出时，就会往高地址空间覆盖。先是覆盖main函数的其它局部变量，然后是父函数的ebp，再次是当前函数的返回地址eip，最后是父函数的栈空间。
 在buf中存放着精心设置过的内容，比如修改后的返回地址以及shellcode，同时将修改后返回地址覆盖在原返回地址处指向shellcode，当函数返回时，ret指令将0xffffd710弹出到寄存器，结果就是执行shellcode。
+
+----
 
 [DOS(拒绝服务攻击总结): SYN Foold ，IP欺骗DOS ，UDP洪水，Ping洪流 ，teardrop ，Land ，Smurf ，Fraggle 攻击 原理](http://blog.csdn.net/zhangnn5/article/details/6525442)
