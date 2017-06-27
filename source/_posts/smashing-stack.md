@@ -12,8 +12,7 @@ updated: 2017-06-10 09:25:05
 
 本文主要学习内容为"利用缓冲区溢出获取Root Shell",结合译文以及原文做出笔记和备注,目的是了解堆栈的顺序以及每个函数调用顺序和返回地址，同时需要注意如何防止缓冲区溢出攻击。
 
-参考博客：
-[缓冲区溢出攻击原理分析](http://blog.csdn.net/linyt/article/details/43315429)
+参考博客：[缓冲区溢出攻击原理分析](http://blog.csdn.net/linyt/article/details/43315429)
 
 参考译文：[smashing the stack for fun and profit 译文](http://www.itwendao.com/article/detail/397706.html)
 PDF原件:[smashing-stack.pdf](./smashing-stack.pdf)
