@@ -1,5 +1,5 @@
 ---
-title: 信息安全小结(简要涉及Web、网络、Linux)
+title: 信息安全小结
 categories:
   - it
 tags:
@@ -17,6 +17,7 @@ tags:
 date: 2017-06-26 18:59:09
 ---
 
+简要涉及Web、网络、Linux等攻击原理和防御方式。
 
 ### Web
 1. 什么是盒模型
