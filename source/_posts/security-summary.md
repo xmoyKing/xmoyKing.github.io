@@ -150,20 +150,20 @@ date: 2017-06-26 18:59:09
 3. iptables 4表5链及其作用
   4个表:filter,nat,mangle,raw，默认表是filter（没有指定表的时候就是filter表）。
   表的处理优先级：raw>mangle>nat>filter。
-  - filter：一般的过滤功能
+  - filter：包过滤
   - nat:用于nat功能（端口映射，地址映射等）
-  - mangle:用于对特定数据包的修改
-  - raw:有限级最高，设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能
+  - mangle:包修改
+  - raw:设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能
   5个链：PREROUTING,INPUT,FORWARD,OUTPUT,POSTROUTING。
   - PREROUTING:数据包进入路由表之前
-  - INPUT:通过路由表后目的地为本机
-  - FORWARDING:通过路由表后，目的地不为本机
+  - INPUT:通过路由表后目标为本机
+  - FORWARDING:通过路由表后，目标不为本机
   - OUTPUT:由本机产生，向外转发
   - POSTROUTIONG:发送到网卡接口之前。
 4. 利用iptables禁止外部访问，内部可访问https网站
   [iptables超全详解](http://www.linuxidc.com/Linux/2016-09/134832.htm)
   ```sh
-  sudo iptables -P INPUT DROP #关闭filter表的INPUT链，即不接受任何发至本机的包
+  sudo iptables -P INPUT DROP #设置所有INPUT链默认规则为丢弃所有包，即不接受任何发至本机的包
   sudo iptables -A INPUT -p tcp -sport 80 -j ACCEPT #接收所有协议为tcp源端口为80的发至本机的包
   # 由于https的端口地址为443而不是80，所以应该将80换为443
   ```
@@ -190,8 +190,6 @@ Rootkit通过加载特殊的驱动，修改系统内核，进而达到隐藏信�
   6. 恢复堆栈，最后返回到用户态。本次系统调用过程完成。
 系统调用劫持即修改routine的地址，指向攻击者设定的函数地址即可。
 在linux中使用0x80 异常实现系统调用，因此，主要的实现路径：获得中断向量表->获得系统调用中断处理函数地址->获得系统调用符号表->修改对应变量的偏移值指向新的系统调用程序(后门程序)。
-
-
 3. `/proc`作用，`ps`命令工作原理
 [Linux proc详解](http://blog.csdn.net/rzhzhz/article/details/7247912)
 `proc`是Linux内核信息的抽象文件接口，大量内核中的信息以及可调参数都被作为常规文件映射到一个目录树中，这样我们就可以简单直接的通过echo或cat这样的文件操作命令对系统信息进行查取和调整了。同时proc也提供了一个接口，使得我们自己的内核模块或用户态程序可以通过proc进行参数的传递。在当今的Linux系统中，大量的系统工具也通过proc获取内核参数，例如ps、lspci等等，没有proc它们将可能不能正常工作。 
