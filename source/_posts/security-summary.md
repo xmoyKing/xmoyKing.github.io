@@ -163,7 +163,7 @@ date: 2017-06-26 18:59:09
 4. 利用iptables禁止外部访问，内部可访问https网站
   [iptables超全详解](http://www.linuxidc.com/Linux/2016-09/134832.htm)
   ```sh
-  sudo iptables -P INPUT DROP #关闭所有表的INPUT链，即不接受任何发至本机的包
+  sudo iptables -P INPUT DROP #关闭filter表的INPUT链，即不接受任何发至本机的包
   sudo iptables -A INPUT -p tcp -sport 80 -j ACCEPT #接收所有协议为tcp源端口为80的发至本机的包
   # 由于https的端口地址为443而不是80，所以应该将80换为443
   ```
