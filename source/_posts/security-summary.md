@@ -160,12 +160,16 @@ date: 2017-06-26 18:59:09
   - FORWARDING:通过路由表后，目标不为本机
   - OUTPUT:由本机产生，向外转发
   - POSTROUTIONG:发送到网卡接口之前。
-4. 利用iptables禁止外部访问，内部可访问https网站
+4. iptables实例
   [iptables超全详解](http://www.linuxidc.com/Linux/2016-09/134832.htm)
+  [iptables使用范例详解](http://www.linuxidc.com/Linux/2014-03/99159.htm)
+  利用iptables禁止外部访问，内部可访问https网站
   ```sh
+  # 以下命令存在的一些问题：
   sudo iptables -P INPUT DROP #设置所有INPUT链默认规则为丢弃所有包，即不接受任何发至本机的包
   sudo iptables -A INPUT -p tcp -sport 80 -j ACCEPT #接收所有协议为tcp源端口为80的发至本机的包
   # 由于https的端口地址为443而不是80，所以应该将80换为443
+  # 同时，output不做任何限制，只用对input链做出规则即可实现限制某种访问
   ```
 
 ----

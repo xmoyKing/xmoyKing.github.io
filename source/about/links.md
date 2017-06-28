@@ -40,6 +40,15 @@ tags: [interview, fe, links]
 
 ---
 
+## 友链/博客
+
+[ZhangShu](https://sherry-zhang.github.io/)
+
+[@何海宝](http://www.hehaibao.com/)
+
+
+---
+
 ## 林散知识点 ##
 
 [css position 初解10步](http://blog.jobbole.com/49320/)
