@@ -129,7 +129,10 @@ color: #999;
 
 同时对form表单的操作，同时也需要自己封装一套前端校验的类
 
-`word-break: break-all;` 针对长的单词，设置单词内换行，可以避免多余单词溢出
+`word-break: break-all;` 针对长的英文单词，设置单词内换行，可以避免多余单词溢出
+
+`white-space: nowrap;` 强制不换行，避免内部块级元素最大宽度适应父元素
+
 
 对iphone5宽度适配
 ```css
