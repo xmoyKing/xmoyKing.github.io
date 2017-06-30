@@ -188,3 +188,6 @@ document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 ```
 
 [git pull时遇到error: cannot lock ref ](http://blog.csdn.net/qq_15437667/article/details/52479792)
+
+判断元素的隐藏和显示，主要通过获取元素节点的hidden和visible两个属性来进行判断，比如jquery
+[怎样判断jQuery 元素是否显示与隐藏](https://zhidao.baidu.com/question/2012860650995212108.html)
