@@ -36,6 +36,8 @@ tags: [interview, fe, links]
 
 [移动web资源整理](http://www.cnblogs.com/PeunZhang/p/3407453.html)
 
+[Alloyteam：移动web问题小结](http://www.alloyteam.com/2015/06/yi-dong-web-wen-ti-xiao-jie/)
+
 [收藏指数满格！帮你打包前端之巅一整年好文！](https://zhuanlan.zhihu.com/p/27283922)*前端之巅公众号文章很多都是精华啊！*
 
 ---
@@ -159,6 +161,16 @@ tags: [interview, fe, links]
 promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
 ## nodejs
+
+[从零开始nodejs系列文章](http://blog.fens.me/series-nodejs/)
+
+[Nodejs中文社区资料](https://cnodejs.org/getstart)
+
+[Nodejs官方文档(英文](http://nodejs.cn/doc/node/documentation.html)
+
+[Nodejs与mysql实现增删改查示例1](http://blog.csdn.net/gebitan505/article/details/46346917)
+
+[Nodejs与mysql实现增删改查示例2](http://www.cnblogs.com/tinyphp/p/4931336.html)
 
 [10个常见的Node.js面试题](http://www.admin10000.com/document/6715.html)
 
