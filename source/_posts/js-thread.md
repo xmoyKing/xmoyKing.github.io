@@ -33,5 +33,5 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 
 [深入 HTML5 Web Worker 应用实践：多线程编程](https://www.ibm.com/developerworks/cn/web/1112_sunch_webworker/)
 
-
+[HTML5之Javascript多线程](http://blog.sina.com.cn/s/blog_63940ce201018lyh.html)*有讲共享型SharedWebWorker*
 
