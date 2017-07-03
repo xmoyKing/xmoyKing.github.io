@@ -22,6 +22,10 @@ overflow: hidden;
 text-overflow: ellipsis; 
 white-space: nowrap;
 ```
+当行高限制了，overflow:hidden 有bug，上下端会被截取1-2px，解决方法：
+使用padding代替margin、line-height
+
+
 
 ```js
 // 解析URL
@@ -191,3 +195,6 @@ document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 
 判断元素的隐藏和显示，主要通过获取元素节点的hidden和visible两个属性来进行判断，比如jquery
 [怎样判断jQuery 元素是否显示与隐藏](https://zhidao.baidu.com/question/2012860650995212108.html)
+
+
+[针对FireFox,Chrome,Opera的CSS Hack](http://jingyan.baidu.com/article/fdffd1f8383c28f3e98ca13e.html)
