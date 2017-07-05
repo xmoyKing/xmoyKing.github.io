@@ -198,3 +198,8 @@ document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 
 
 [针对FireFox,Chrome,Opera的CSS Hack](http://jingyan.baidu.com/article/fdffd1f8383c28f3e98ca13e.html)
+
+
+当jquery无法设置某些表单元素的状态时，则可以使用原生js对表单元素设置状态，比如checkbox，select
+
+js中的函数重复声明则会覆盖，但不存在重载，所以重复定义不会有问题，但是重复的对同一元素添加事件监听会导致多个事件依次响应。
