@@ -212,3 +212,4 @@ padding-right: 14px;
 background: url(../../../images/icon-db-arrow.png) no-repeat center right;
 ```
 
+在url中传中文，需要使用`escape()`对中文进行转码,然后对应的`unescape()`解码
