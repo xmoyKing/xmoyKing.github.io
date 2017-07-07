@@ -203,3 +203,12 @@ document.addEventListener(visibilityChangeEvent, onVisibilityChange);
 当jquery无法设置某些表单元素的状态时，则可以使用原生js对表单元素设置状态，比如checkbox，select
 
 js中的函数重复声明则会覆盖，但不存在重载，所以重复定义不会有问题，但是重复的对同一元素添加事件监听会导致多个事件依次响应。
+
+关于使文本尾部始终紧跟一个图标的方法，无论是字体超出隐藏还是正常状态（灵活使用background设置在文本框邮编）：
+```css
+display: inline-block;
+max-width: 110px;
+padding-right: 14px;
+background: url(../../../images/icon-db-arrow.png) no-repeat center right;
+```
+
