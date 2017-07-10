@@ -62,6 +62,7 @@ app.listen(80);
 /static/first.html 内容：
 ```html
 <!doctype html>
+
 <html ng-app="firstApp">
   <head>
     <title>First AngularJS App</title>

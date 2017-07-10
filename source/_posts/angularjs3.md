@@ -1,5 +1,5 @@
 ---
-title: angularjs入门笔记-3-全栈实战ES6,angularjs,NodeJs,KOA
+title: angularjs入门笔记-3-小试牛刀 ES6,angularjs,NodeJs,KOA
 categories:
   - fe
 tags:
