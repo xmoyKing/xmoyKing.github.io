@@ -5,6 +5,8 @@ updated:
 tags: mixed
 ---
 
+主要记录在实习过程中遇到的一些小问题以及对应的解决方法。
+
 1. 无js实现替换原始checkbox radio, :checked和:hover的使用
 2. 语义化的标签结构,h* 和 p 以及 span 的用法
 3. 写js一定注意加号 以及 dom 缓存
