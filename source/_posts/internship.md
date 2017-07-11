@@ -215,3 +215,10 @@ background: url(../../../images/icon-db-arrow.png) no-repeat center right;
 ```
 
 在url中传中文，需要使用`escape()`对中文进行转码,然后对应的`unescape()`解码
+
+[多行文本溢出显示省略号(…)全攻略](http://www.css88.com/archives/5206)
+```css
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+```

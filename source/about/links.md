@@ -142,7 +142,9 @@ tags: [interview, fe, links]
 
 [关于网站图标favicon.ico那点事儿，你造吗？](http://zhangge.net/4344.html)
 
+[关于CSS的will-change属性的介绍](http://www.w3cplus.com/css3/introduction-css-will-change-property.html)
 
+[多行文本溢出显示省略号(…)全攻略](http://www.css88.com/archives/5206)
 
 ---
 
