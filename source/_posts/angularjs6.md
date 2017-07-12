@@ -207,3 +207,5 @@ todo.json中存储着一些数据，这些数据使用ajax动态加载到ng应�
 </html>
 
 ```
+
+![本篇博客源码地址](https://github.com/xmoyKing/pro-ng-learning-test/tree/master/demo-source-ng6)
