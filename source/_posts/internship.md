@@ -222,3 +222,5 @@ display: -webkit-box;
 -webkit-box-orient: vertical;
 -webkit-line-clamp: 3;
 ```
+
+[IOS：Safari不兼容Javascript中的Date问题](http://www.cnblogs.com/Fooo/p/5284421.html)
