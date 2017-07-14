@@ -57,6 +57,7 @@ server.js #启动静态服务器的入口文件
 3. 易于与不同的路由url结合，修改对应的视图
 
 ```html
+
 <!DOCTYPE html>
 <html ng-app="sportsStore">
 <head>
@@ -66,7 +67,8 @@ server.js #启动静态服务器的入口文件
     <link href="bootstrap-theme.css" rel="stylesheet" />
     <script>
         angular.module("sportsStore", ["customFilters", "cart", "ngRoute"])
-        .config(function ($routeProvider) {
+        // 调用模块上的config对象设置路由，在模块被载入而应用还未执行前调用（即完成配置及初始化应用的功能）
+        .config(function ($routeProvider) { // 此处的$routeProvider是$route服务的服务提供器（所谓的"服务提供器"简单认为暴露的接口即可）
             // 定义每个路由路径对应的局部视图
             $routeProvider.when("/complete", {
                 templateUrl: "/views/thankYou.html"
@@ -83,7 +85,7 @@ server.js #启动静态服务器的入口文件
             $routeProvider.when("/products", {
                 templateUrl: "/views/productList.html"
             });
-
+            // 定义其他情况下的路由视图（包括默认不输入任何路径的情况下）
             $routeProvider.otherwise({
                 templateUrl: "/views/productList.html"
             });
@@ -106,7 +108,7 @@ server.js #启动静态服务器的入口文件
         Error ({{data.error.status}}). The product data was not loaded.
         <a href="/app.html" class="alert-link">Click here to try again</a>
     </div>
-    <ng-view />   <!-- 加载局部视图的指令  -->
+    <ng-view />   <!-- 加载局部视图的指令，此指令是在ngRoute模块中定义的  -->
 </body>
 </html>
 ```
@@ -126,7 +128,7 @@ angular.module("sportsStore")
             .success(function (data) {
                 $scope.data.products = data;
             })
-            .error(function (error) {
+            .error(function (error) { // 当加载数据出错时显示提示信息
                 $scope.data.error = error;
             });
     });
