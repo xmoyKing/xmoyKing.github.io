@@ -17,16 +17,7 @@ updated: 2017-06-15 10:09:30
 
 ### Some instructs
 
-#### `ifconfig`
-Network configuration and status
-`ifconfig` – status of all network interfaces
-`ifconfig eth0` – status of ethernet 0 connection
-`ifconfig eth0 down` – shuts ethernet 0 down
-`ifconfig eth0 up` – starts ethernet 0
-`ifconfig eth0 172.16.13.97` – assigns IP address to ethernet 0
-`man ifconfig` – more info
-
-#### `route` 
+#### route
 Configure or report status of host's routing table
 ```
 route -n
@@ -251,3 +242,4 @@ Parameters:
  -s|--sleep uint32              sleep delay in ms {1000}
  --help2                        display full help
 ```
+
