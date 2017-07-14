@@ -12,12 +12,12 @@ date: 2017-06-15 10:09:30
 updated: 2017-06-15 10:09:30
 ---
 
-主要总结了一些Linux下不熟悉但是却常用的网络工具，包括nc（NetCat）、iptables（linux下的防火墙）、raw socket（原始套接字）、 sniffer（嗅探器）、以及ip/icmp报头格式。
+主要总结了一些Linux下不熟悉但是却常用的网络工具,包括nc(NetCat),iptables(linux下的防火墙),raw socket(原始套接字), sniffer(嗅探器),以及ip/icmp报头格式。
 
 
 ### Some instructs
 
-#### `ifconfig`	
+#### `ifconfig`
 Network configuration and status
 `ifconfig` – status of all network interfaces
 `ifconfig eth0` – status of ethernet 0 connection
@@ -148,7 +148,7 @@ nmap –O 192.168.137.1
 
 ```
 ##### TCP SYN scanning
-这是Nmap默认的扫描方式，通常被称作半开放扫描（Half-open scanning）。该方式发送SYN到目标端口，如果收到SYN/ACK回复，那么判断端口是开放的；如果收到RST包，说明该端口是关闭的。如果没有收到回复，那么判断该端口被屏蔽（Filtered）。因为该方式仅发送SYN包对目标主机的特定端口，但不建立的完整的TCP连接，所以相对比较隐蔽，而且效率比较高，适用范围广。
+这是Nmap默认的扫描方式，通常被称作半开放扫描(Half-open scanning)。该方式发送SYN到目标端口，如果收到SYN/ACK回复，那么判断端口是开放的；如果收到RST包，说明该端口是关闭的。如果没有收到回复，那么判断该端口被屏蔽(Filtered)。因为该方式仅发送SYN包对目标主机的特定端口，但不建立的完整的TCP连接，所以相对比较隐蔽，而且效率比较高，适用范围广。
 
 ##### TCP connect scanning
 TCP connect方式使用系统网络API connect向目标主机的端口发起连接，如果无法连接，说明该端口关闭。该方式扫描速度比较慢，而且由于建立完整的TCP连接会在目标机上留下记录信息，不够隐蔽。所以，TCP connect是TCP SYN无法使用才考虑选择的方式。
@@ -157,8 +157,8 @@ TCP connect方式使用系统网络API connect向目标主机的端口发起连�
 简要的介绍版本的侦测原理。
 版本侦测主要分为以下几个步骤：
 首先检查open与open|filtered状态的端口是否在排除端口列表内。如果在排除列表，将该端口剔除。
-如果是TCP端口，尝试建立TCP连接。尝试等待片刻（通常6秒或更多，具体时间可以查询文件nmap-services-probes中Probe TCP NULL q||对应的totalwaitms）。通常在等待时间内，会接收到目标机发送的“WelcomeBanner”信息。nmap将接收到的Banner与nmap-services-probes中NULL probe中的签名进行对比。查找对应应用程序的名字与版本信息。
-如果通过“Welcome Banner”无法确定应用程序版本，那么nmap再尝试发送其他的探测包（即从nmap-services-probes中挑选合适的probe），将probe得到回复包与数据库中的签名进行对比。如果反复探测都无法得出具体应用，那么打印出应用返回报文，让用户自行进一步判定。
+如果是TCP端口，尝试建立TCP连接。尝试等待片刻(通常6秒或更多，具体时间可以查询文件nmap-services-probes中Probe TCP NULL q||对应的totalwaitms)。通常在等待时间内，会接收到目标机发送的“WelcomeBanner”信息。nmap将接收到的Banner与nmap-services-probes中NULL probe中的签名进行对比。查找对应应用程序的名字与版本信息。
+如果通过“Welcome Banner”无法确定应用程序版本，那么nmap再尝试发送其他的探测包(即从nmap-services-probes中挑选合适的probe)，将probe得到回复包与数据库中的签名进行对比。如果反复探测都无法得出具体应用，那么打印出应用返回报文，让用户自行进一步判定。
 如果是UDP端口，那么直接使用nmap-services-probes中探测包进行探测匹配。根据结果对比分析出UDP应用服务类型。
 如果探测到应用程序是SSL，那么调用openSSL进一步的侦查运行在SSL之上的具体的应用类型。
 如果探测到应用程序是SunRPC，那么调用brute-force RPC grinder进一步探测具体服务。
@@ -166,7 +166,7 @@ TCP connect方式使用系统网络API connect向目标主机的端口发起连�
 ##### OS侦测原理
 Nmap使用TCP/IP协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由此不同的TCP/IP方案中可能都有自己的特定方式。Nmap主要是根据这些细节上的差异来判断操作系统的类型的。
 具体实现方式如下：
-Nmap内部包含了2600多已知系统的指纹特征（在文件nmap-os-db文件中）。将此指纹数据库作为进行指纹对比的样本库。
+Nmap内部包含了2600多已知系统的指纹特征(在文件nmap-os-db文件中)。将此指纹数据库作为进行指纹对比的样本库。
 分别挑选一个open和closed的端口，向其发送经过精心设计的TCP/UDP/ICMP数据包，根据返回的数据包生成一份系统指纹。
 将探测生成的指纹与nmap-os-db中指纹进行对比，查找匹配的系统。如果无法匹配，以概率形式列举出可能的系统。
 
