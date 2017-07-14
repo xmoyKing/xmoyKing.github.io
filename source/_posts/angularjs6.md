@@ -23,25 +23,26 @@ node_modules #node包目录
 server.js #启动静态服务器的入口文件
 ```
 
-
+### node插件connect创建静态服务器
 其中server.js使用到了connect,而connect分为两种版本，一个2.x,一个是最新的3.x
 参考[node报错：connect.static is not a function](https://segmentfault.com/q/1010000005090969)
 
+安装connect2:
+`npm install connect@2.x.x --save`
 若使用2.x则创建Web服务器的代码如下：
 ```js
-// 安装connect2命令:
-// npm install connect@2.x.x --save
 var connect = require('connect');
 
 connect.createServer(
     connect.static("./angularjs")
 ).listen(5000);
 ```
+
+使用如下命令安装connect3:
+`npm install connect --save`
+`npm install server-static --save`
 而在最新的connect3版本中，将非核心功能分离，由一些中间件实现
 ```js
-// 使用如下命令安装库:
-// npm install connect --save
-// npm install server-static --save
 var connect = require('connect');
 var serverStatic = require('serve-static');
 
@@ -59,6 +60,7 @@ todo.json中存储着一些数据，这些数据使用ajax动态加载到ng应�
 ```
 
 
+### todo.html
 为了方便，将所有的html和ngjs逻辑都在todo.html中，
 同时将代码解释以注释的形式直接写在代码中，更加清晰和方便。
 ```html
