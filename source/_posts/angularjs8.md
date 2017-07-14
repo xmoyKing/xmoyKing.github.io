@@ -1,5 +1,5 @@
 ---
-title: angularjs入门笔记-8-AngularJS静态购物网站产品列表Demo
+title: angularjs入门笔记-8-购物网站产品列表Demo
 categories:
   - fe
 tags:
@@ -10,6 +10,9 @@ updated: 2017-05-05 10:56:41
 ---
 
 延续上次学习的静态demo，angularjs6，本次做一个简单的实现分页，可分类展示产品的购物小demo
+
+产品列表界面效果如下图:
+![产品列表Demo界面](1.png)
 
 ### 目录组织结构：
 ```s
