@@ -3,6 +3,7 @@ title: 在AM学到的小技巧
 date: 2017-03-01 13:58:45
 updated: 
 tags: mixed
+top: true
 ---
 
 主要记录在实习过程中遇到的一些小问题以及对应的解决方法。
@@ -224,3 +225,8 @@ display: -webkit-box;
 ```
 
 [IOS：Safari不兼容Javascript中的Date问题](http://www.cnblogs.com/Fooo/p/5284421.html)
+
+有的时候想要使用表单的一些属性，但是又不想使用默认的验证方式，比如`<input type="email" name="user_email" />`会自动使用浏览器的邮箱验证，但是样式可能与站点不符，一般的做法中，这时只能使用`type="text"`了，但是其实此时可以在form表单上指定novalidate 属性。
+这样告诉浏览器不对输入进行验证的表单。
+
+
