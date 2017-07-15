@@ -70,7 +70,7 @@ Flex也有行内元素和块级元素的区别：`display:flex, display: inline-
 3. flex-shrink：决定item的缩小比例，默认为1，负值无效，当空间不足时，等比例缩小，越大缩小比例越大，基数为最大的数
 4. flex-basis：决定item占据的水平轴空间，默认为auto（item的原始大小）
 5. flex：是grow、shrink和basis的简写，默认值为0 1 auto，单个快捷值auto表示1 1 auto，none表示0 0 auto，建议用flex代替三个分离的属性，因为浏览器能推算相关的值
-6. align-self：决定当前item的对齐方式，可以不同于其他item，即该值会覆盖align-itmes的值，默认为auto，表示继承父元素align-items属性，若没有父元素则等同于stretch
+6. align-self：决定当前item的对齐方式，可以不同于其他item，即该值会覆盖align-items的值，默认为auto，表示继承父元素align-items属性，若没有父元素则等同于stretch
 
 具体布局实例参考：[Flex 布局教程：实例篇](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
 
