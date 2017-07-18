@@ -48,11 +48,11 @@ var server = deployd({
   env: 'demo',
   db: {
     host: '远程mongodb域名或ip',
-    port: 端口,
+    port: '数据库端口',
     name: '数据库名',
     credentials: {
-      username: '用户名',
-      password: '密码'
+      username: '数据库用户名',
+      password: '数据库密码'
     }
   }
 });
