@@ -230,3 +230,5 @@ display: -webkit-box;
 这样告诉浏览器不对输入进行验证的表单。
 
 关于优化的问题，不应该过早优化，在遇到实际问题需要解决前，不应该过早优化，优化应该是解决问题。不要忙于优化而降低了开发效率，因为开发的时间很重要，应该将时间花在解决实际问题上。
+
+关于`withCridential=true`的问题：[使用withCredentials发送跨域请求凭据](http://zawa.iteye.com/blog/1868108) , 以及 [跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
