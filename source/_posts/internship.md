@@ -232,3 +232,15 @@ display: -webkit-box;
 关于优化的问题，不应该过早优化，在遇到实际问题需要解决前，不应该过早优化，优化应该是解决问题。不要忙于优化而降低了开发效率，因为开发的时间很重要，应该将时间花在解决实际问题上。
 
 关于`withCridential=true`的问题：[使用withCredentials发送跨域请求凭据](http://zawa.iteye.com/blog/1868108) , 以及 [跨域资源共享 CORS 详解](http://www.ruanyifeng.com/blog/2016/04/cors.html)
+
+H5移动端使用定位改变top和left模拟元素移动，在一些配置低的手机上非常卡顿。
+
+关于浏览器的可是区域/窗口宽高，以及文档宽高:[js/jquery获取浏览器窗口可视区域高度和宽度以及滚动条高度实现代码](http://www.jb51.net/article/32679.htm)：
+```js
+$(window).height()  // 窗口可视区域高度， jq写法
+    document.documentElement.clientHeight // 原生写法
+$(document).height() // 整个文档的高度（真正的高）
+    document.body.offsetHeight // 原生写法
+$(document).scrollTop() // 滚动条距文档顶部的高度（能获得已经滚动多少距离）
+    document.body.scrollTop // 原生写法
+```
