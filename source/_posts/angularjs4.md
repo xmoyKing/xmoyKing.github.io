@@ -180,7 +180,7 @@ app/views/tpl/welcome.html代码如下：
 <p>welcome {{username}}</p>
 ```
 
-最后执行`npm start`即可在浏览器的localhost:3000打开这个demon应用了
+最后执行`npm start`即可在浏览器的localhost:3000打开这个demo应用了
 ![运行截图](2.png)
 
 ![生成的dom结构](3.png)
