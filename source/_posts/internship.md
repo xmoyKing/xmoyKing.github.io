@@ -244,3 +244,14 @@ $(document).height() // 整个文档的高度（真正的高）
 $(document).scrollTop() // 滚动条距文档顶部的高度（能获得已经滚动多少距离）
     document.body.scrollTop // 原生写法
 ```
+
+
+图片容错
+```js
+function imgerror(img, src){
+    img.src = src || "img src";
+    img.onerror = null;
+}
+```
+
+使用window.open()打开的新窗口会有一个opener对象，是对父窗口的引用。
