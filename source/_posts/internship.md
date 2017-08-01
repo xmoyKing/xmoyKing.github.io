@@ -255,3 +255,57 @@ function imgerror(img, src){
 ```
 
 使用window.open()打开的新窗口会有一个opener对象，是对父窗口的引用。
+
+
+
+
+
+关于IE与placeholder的支持问题：
+[完美解决IE不支持placeholder的问题](http://blog.csdn.net/qq80583600/article/details/62423408)
+
+
+在IE下的各种奇特表现：一个input输入框，若只设置line-height而不设置height，则line-height无法将input撑高，为原始默认值，而只有设置了height才能将input撑高。
+```css
+.number [type=text]{
+    width: 50px;
+    height: 27px; /* 此height是关键 */
+    line-height: 25px;
+    border: 1px solid #bfbfbf;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0;
+}
+```
+
+同时，内部绝对定位元素是以a元素为准，而不是a的带相对定位的li父元素，所以需要显示设置其宽高，
+```css
+.iconwrap.cart:hover>.drop a {
+    height: 40px;
+    width: 100%;
+    position: relative;
+    display: block;
+}
+```
+
+元素设置为绝对定位后,必须显示重置line-height为normal,否则top和bottom会起反作用
+```css
+.iconwrap.cart:hover>.drop .pricewrap,
+.iconwrap.cart:hover>.drop .title{
+    left: 80px;
+    font-size: 12px;
+    line-height: normal;
+}
+.iconwrap.cart:hover>.drop .title{
+    top: 0;
+    color: #333;
+}
+.iconwrap.cart:hover>.drop .pricewrap{
+    bottom: 0;
+}
+.iconwrap.cart:hover>.drop .icon-trash{
+    bottom: 0;
+    right: 0;
+    line-height: normal;
+    color: #c8c8c8;
+}
+```
