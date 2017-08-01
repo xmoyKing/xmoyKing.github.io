@@ -88,7 +88,7 @@ button, button:hover, button:active, button:focus {
 }
 ```
 
-Baidu第二次电面问到的问题：
+被BD2问到的一些问题：
 1. JS中直接定义的字符串和new String()出来的字符串有什么区别：
 [怎么解释 JavaScript 中的一切皆是对象，拿字符串来说，new 出的和普通方法创建的字符串有哪些方面的区别？](https://www.zhihu.com/question/24851153)
 [js中，字符串字面量和通过构造函数得到字符串有什么本质区别嘛？](https://segmentfault.com/q/1010000000642852)
