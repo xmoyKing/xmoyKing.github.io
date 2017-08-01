@@ -255,3 +255,6 @@ function imgerror(img, src){
 ```
 
 使用window.open()打开的新窗口会有一个opener对象，是对父窗口的引用。
+
+
+关于iOS8下H5页面的排版混乱问题，以及IE9兼容问题：
