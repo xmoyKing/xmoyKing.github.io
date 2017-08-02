@@ -209,3 +209,8 @@ promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-
 -----
 
 [一灯学堂学习路径](http://www.yidengxuetang.com/recruit/?f=zhangxinxu.com)
+
+
+## Python
+
+[Python3入门-廖雪峰博课](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)*非常非常适合入门*
