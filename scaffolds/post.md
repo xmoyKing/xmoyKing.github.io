@@ -1,7 +1,7 @@
 ---
 title: {{ title }}
 date: {{ date }}
-updated: {{ date }}
+updated: 
 categories: [fe]
 tags: [fe]
 ---

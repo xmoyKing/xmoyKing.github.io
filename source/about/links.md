@@ -213,4 +213,4 @@ promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-
 
 ## Python
 
-[Python3入门-廖雪峰博课](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)*非常非常适合入门*
+[Python3入门-by廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)*非常非常适合入门*
