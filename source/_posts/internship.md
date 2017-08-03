@@ -314,3 +314,33 @@ function imgerror(img, src){
 
 ff和chrome下对弹出窗口设置的实现不太一样,代码：`window.open('',"_blank",'width=800');`
 在ff下，宽度设置，高度自适应，但是在chrome下，没有设置高度则宽度也不会被设置，而是自动适应父窗口。
+
+在IE9中对span设置inline-block同时与input组合使用并设置高度时，可能会出现高度不一致的情况（有的时候会一致，有的时候不会，这种情况无法准确定位原因）
+```html
+<label class="number"><span class="minus">-</span><input type="text" value="5"><span class="add">+</span></label>
+```
+```css
+.number span {
+    display: inline-block;
+    box-sizing: border-box;
+    line-height: 25px;
+    height: 27px;
+    width: 15px;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #bfbfbf;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.number [type=text] {
+    width: 50px;
+    height: 27px;
+    line-height: 25px;
+    border: 1px solid #bfbfbf;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0;
+}
+```
