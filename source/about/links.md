@@ -148,6 +148,8 @@ tags: [interview, fe, links]
 
 [自定义浏览器滚动条的样式，打造属于你的滚动条风格](https://www.lyblog.net/detail/314.html)
 
+[JavaScript 编码规范](http://topdna.org/tech/js-style/#more)
+
 ---
 
 
