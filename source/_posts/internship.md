@@ -344,3 +344,10 @@ ff和chrome下对弹出窗口设置的实现不太一样,代码：`window.open('
     padding: 0;
 }
 ```
+
+在IE中，css去除ie自带的input删除功能
+```css
+input::-ms-clear{display:none;}
+```
+
+IE下，使用window.open()打开新窗口bug：打开百度这样的正常域名就可以，但是打开自己本地的网站（127.0.0.1或localhost）就是空白页,目前不知道是什么原因，解决方法，使用a标签跳转，同时在js中location.href是可以使用的
