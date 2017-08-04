@@ -29,7 +29,6 @@ white-space: nowrap;
 使用padding代替margin、line-height
 
 
-
 ```js
 // 解析URL
 function getUrlParam(name) {
@@ -61,7 +60,7 @@ $.fn.serializeObject = function() {
 ```
 
 新建软连接：[Windows下硬链接、软链接和快捷方式的区别](http://www.2cto.com/os/201204/129305.html)
-
+        [windows 文件文件夹映射junction和mklink，创建软硬链接](http://happyqing.iteye.com/blog/2256875)
 在目录下：D:\htdocs\real-auto-mooc\server\clouds\web>
 
 mklink /J admin-dev D:\htdocs\admin-client
