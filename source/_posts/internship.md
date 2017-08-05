@@ -29,7 +29,6 @@ white-space: nowrap;
 使用padding代替margin、line-height
 
 
-
 ```js
 // 解析URL
 function getUrlParam(name) {
@@ -61,7 +60,7 @@ $.fn.serializeObject = function() {
 ```
 
 新建软连接：[Windows下硬链接、软链接和快捷方式的区别](http://www.2cto.com/os/201204/129305.html)
-
+        [windows 文件文件夹映射junction和mklink，创建软硬链接](http://happyqing.iteye.com/blog/2256875)
 在目录下：D:\htdocs\real-auto-mooc\server\clouds\web>
 
 mklink /J admin-dev D:\htdocs\admin-client
@@ -287,7 +286,7 @@ function imgerror(img, src){
 }
 ```
 
-元素设置为绝对定位后,必须显示重置line-height为normal,否则top和bottom会起反作用
+元素设置为绝对定位后,必须显示重置line-height为normal,否则top和bottom会起反作用, 在IE中line-height与其他标准浏览器有兼容性问题，
 ```css
 .iconwrap.cart:hover>.drop .pricewrap,
 .iconwrap.cart:hover>.drop .title{
@@ -314,6 +313,10 @@ function imgerror(img, src){
 
 ff和chrome下对弹出窗口设置的实现不太一样,代码：`window.open('',"_blank",'width=800');`
 在ff下，宽度设置，高度自适应，但是在chrome下，没有设置高度则宽度也不会被设置，而是自动适应父窗口。
+
+IE下，使用window.open()打开新窗口bug：打开百度这样的正常域名就可以，但是打开自己本地的网站（127.0.0.1或localhost）就是空白页,目前不知道是什么原因，解决方法，使用a标签跳转，同时在js中location.href是可以使用的
+
+
 
 在IE9中对span设置inline-block同时与input组合使用并设置高度时，可能会出现高度不一致的情况（有的时候会一致，有的时候不会，这种情况无法准确定位原因）
 ```html
@@ -343,4 +346,9 @@ ff和chrome下对弹出窗口设置的实现不太一样,代码：`window.open('
     box-sizing: border-box;
     padding: 0;
 }
+```
+
+在IE中，css去除ie自带的input删除功能
+```css
+input::-ms-clear{display:none;}
 ```
