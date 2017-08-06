@@ -352,3 +352,8 @@ IE下，使用window.open()打开新窗口bug：打开百度这样的正常域�
 ```css
 input::-ms-clear{display:none;}
 ```
+
+
+[chrmo下ng报错：An invalid form control with name='' is not focusable？](https://segmentfault.com/q/1010000007018226)
+出现该错误的原因是chrome发现了有隐藏（display:none）的required需求元素，所以会出错。
+将ng-show改为ng-if，从隐藏标签变为移除dom，可以避免这个错误。
