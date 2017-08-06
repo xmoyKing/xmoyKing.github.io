@@ -357,3 +357,7 @@ input::-ms-clear{display:none;}
 [chrmo下ng报错：An invalid form control with name='' is not focusable？](https://segmentfault.com/q/1010000007018226)
 出现该错误的原因是chrome发现了有隐藏（display:none）的required需求元素，所以会出错。
 将ng-show改为ng-if，从隐藏标签变为移除dom，可以避免这个错误。
+
+[angular中使用$http.post后台无法接收到数据](http://www.jb51.net/article/76147.htm)
+
+[后端接收不到AngularJs中$http.post发送的数据的问题](http://www.cnblogs.com/doforfuture/p/5641909.html)
