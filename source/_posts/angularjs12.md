@@ -102,7 +102,7 @@ ng中的各个部分都可以使用指令。
 ### 模版指令
 ng包含了一些可使用模版生成html的指令，使得根据数据集合向模版添加一些基本的逻辑变得更加方便。
 
-- ng-cloak， 用css样式隐藏内联的绑定表达式，但在第一次加载时会短暂可见
+- ng-cloak， 用css样式隐藏内联的绑定表达式，但在第一次加载页面时ng的绑定表达式会短暂可见
 - ng-include, 向dom中插入一段html
 - ng-repeat，迭代的数组中或对象中的单项数据生成html
 - ng-repeat-start, 表示包含多个顶层元素的重复区域的开始部分，具体看示例
@@ -217,3 +217,47 @@ $scope.viewFile = function () {
 ```html
 <ng-include src="viewFile()"></ng-include>
 ```
+
+使用ng-switch也能做到切换局部的视图：
+
+```html
+<div class="well">
+    <div class="radio" ng-repeat="button in ['None', 'Table', 'List']">
+        <label>
+            <input type="radio" ng-model="data.mode" 
+                    value="{{button}}" ng-checked="$first" />
+            {{button}}
+        </label>
+    </div>
+</div>
+
+<div ng-switch on="data.mode">
+    <div ng-switch-when="Table">
+        <table class="table">
+            <thead>
+                <tr><th>#</th><th>Action</th><th>Done</th></tr>
+            </thead>
+            <tr ng-repeat="item in todos" ng-class="$odd ? 'odd' : 'even'">
+                <td>{{$index + 1}}</td>
+                <td ng-repeat="prop in item">{{prop}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-switch-when="List">
+        <ol>
+            <li ng-repeat="item in todos">
+                {{item.action}}<span ng-if="item.complete"> (Done)</span>
+            </li>
+        </ol>
+    </div>
+    <div ng-switch-default>
+        Select another option to display a layout
+    </div>
+</div>
+```
+
+![ng-switch](7.png)
+
+区别：
+ng-switch用于文档间较小代码块的切换，ng-switch指令所需的内容是作为html文档的一部分的，而ng-include多用于处理较复杂或较多且独立的局部片段，尤其是需要在不同地方包含相同的内容时，局部视图有助于减少重复。
+
