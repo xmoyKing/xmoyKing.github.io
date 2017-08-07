@@ -150,6 +150,8 @@ tags: [interview, fe, links]
 
 [JavaScript 编码规范](http://topdna.org/tech/js-style/#more)
 
+[简述 OAuth 2.0 的运作流程](http://www.barretlee.com/blog/2016/01/10/oauth2-introduce/)
+
 ---
 
 
