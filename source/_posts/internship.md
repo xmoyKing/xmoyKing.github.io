@@ -361,3 +361,13 @@ input::-ms-clear{display:none;}
 [angular中使用$http.post后台无法接收到数据](http://www.jb51.net/article/76147.htm)
 
 [后端接收不到AngularJs中$http.post发送的数据的问题](http://www.cnblogs.com/doforfuture/p/5641909.html)
+
+hexo下的bug，在markdown中双写大括号,如下：
+```
+{{}}
+```
+必须使用整段代码的语法，而不是用行内代码的转义，否则会出现render错误，提示
+```
+unexpected token: }}
+```
+
