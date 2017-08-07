@@ -152,6 +152,8 @@ tags: [interview, fe, links]
 
 [简述 OAuth 2.0 的运作流程](http://www.barretlee.com/blog/2016/01/10/oauth2-introduce/)
 
+[request payload到底是什么东西？为何java后端收不到请求参数](http://blog.csdn.net/mhmyqn/article/details/25561535)
+
 ---
 
 
