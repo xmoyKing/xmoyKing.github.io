@@ -203,3 +203,286 @@ $scope.addNewItem = function (newItem) {
 
 要向通过ng处理到form元素，并自动设置一些表单元素的校验工作，需要设置一些属性，比如form表单的name属性。
 
+form表单元素其实只是在表单校验的时候需要，若是普通的双向绑定，即使不用form元素也没问题。
+
+ng使用标准html元素来配置表单校验，但是由于浏览器对这些标准html属性的行为不一致，所以需要先使用novalidate属性禁用表单的默认验证，这个属性是定义在html5规范中的，表示不需要浏览器验证表单。
+
+ng-submit指令为表单提交事件指定响应行为，将在表单提交时触发。
+
+input元素的type值类型：
+- checkbox 复选框
+- radio 单选框
+- text 文本
+- email 邮件,H5加入
+- number 数值,H5加入
+- url URL地址,H5加入
+
+ng用一些特殊变量来增强表单元素，可以这些变量检查表单的单个元素或者整体有效性
+- $pristine 若用户没有与元素/表单交互返回true
+- $dirty 若用户与元素/表单交互返回true
+- $valid 当元素/表单的校验有效返回true
+- $invalid 当元素/表单校验无效返回true
+- $error 提供校验错误的详细信息
+
+
+### 两种ng校验信息展示方法
+ng为报告实时校验信息提供两种机制：css类和变量。
+
+ng校验用到的css类，当符合规则时，ng将自动添加如下的css类名到元素/表单上：
+- ng-pristine 若用户没有与元素/表单交互
+- ng-dirty 若用户与元素/表单交互
+- ng-valid 当元素/表单的校验有效
+- ng-invalid 当元素/表单校验无效
+
+只要使用ng去验证，所以可以直接定义css规则即可展示不同状态的表单，也可以配合ng-class指令使用。
+
+
+在ng中，使用变量作为验证信息展示媒介时，使用表单验证一定要添加name值，无论是表单还是元素，因为ng是通过name属性来自动获取该元素的，比如myForm.userEmail.$error.email
+
+```html
+<html ng-app="exampleApp">
+<head>
+    <title>Forms</title>
+    <script src="angular.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script>
+        angular.module("exampleApp", [])
+            .controller("defaultCtrl", function ($scope) {
+                $scope.addUser = function (userDetails) {
+                    $scope.message = userDetails.name
+                        + " (" + userDetails.email + ") (" + userDetails.agreed + ")";
+                }
+
+                $scope.message = "Ready";
+            });
+    </script>
+    <style>
+        form .ng-invalid-required.ng-dirty { background-color: lightpink; }
+        form .ng-invalid-email.ng-dirty { background-color: lightgoldenrodyellow; }
+        form .ng-valid.ng-dirty { background-color: lightgreen; }
+        span.summary.ng-invalid { color: red; font-weight: bold; }
+        span.summary.ng-valid { color: green; }
+        div.error {color: red; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+        <form name="myForm" novalidate ng-submit="addUser(newUser)">
+            <div class="well">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input name="userEmail" type="email" class="form-control"
+                           required ng-model="newUser.email">
+                    <div class="error" 
+                          ng-show="myForm.userEmail.$invalid && myForm.userEmail.$dirty">                        
+                        <span ng-show="myForm.userEmail.$error.email">
+                            Please enter a valid email address
+                        </span>
+                        <span ng-show="myForm.userEmail.$error.required">
+                            Please enter a value
+                        </span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"
+                        ng-disabled="myForm.$invalid">OK</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+```
+
+![使用变量获取验证表单信息](3.png)
+
+上述变量方法将所有错误的类型和提示信息都提前写入到html中，这样不是很好看，而且很冗余，不方便，这时，就可以通过控制器将这些验证提示信息整合起来。
+
+```html
+<html ng-app="exampleApp">
+<head>
+    <title>Forms</title>
+    <script src="angular.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script>
+        angular.module("exampleApp", [])
+            .controller("defaultCtrl", function ($scope) {
+                $scope.addUser = function (userDetails) {
+                    $scope.message = userDetails.name
+                        + " (" + userDetails.email + ") (" + userDetails.agreed + ")";
+                }
+
+                $scope.message = "Ready";
+
+                $scope.getError = function (error) {
+                    if (angular.isDefined(error)) {
+                        if (error.required) {
+                            return "Please enter a value";
+                        } else if (error.email) {
+                            return "Please enter a valid email address";
+                        }
+                    }
+                }
+
+            });
+    </script>
+
+    <style>
+        form .ng-invalid-required.ng-dirty { background-color: lightpink; }
+        form .ng-invalid-email.ng-dirty { background-color: lightgoldenrodyellow; }
+        form .ng-valid.ng-dirty { background-color: lightgreen; }
+        span.summary.ng-invalid { color: red; font-weight: bold; }
+        span.summary.ng-valid { color: green; }
+        div.error {color: red; font-weight: bold;}
+    </style>
+</head>
+<body>
+    <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+        <form name="myForm" novalidate ng-submit="addUser(newUser)">
+            <div class="well">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input name="userEmail" type="email" class="form-control"
+                        required ng-model="newUser.email">
+                    <div class="error" ng-show="myForm.userEmail.$invalid && myForm.userEmail.$dirty">
+                        {{getError(myForm.userEmail.$error)}}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"
+                        ng-disabled="myForm.$invalid">OK</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+```
+
+
+直到现在，ng提供了一种实时验证的方法，每当用户与表单交互时就会验证，这种方式其实并不是特别常用，因为这会让用户被验证信息弄得很烦。
+
+这时，可以考虑使用不直接将验证情况反馈出来，而是通过ng-class在form上绑定一个ng-invalid的类，然后在submit时在去显示验证信息。
+
+```html
+<html ng-app="exampleApp">
+<head>
+    <title>Forms</title>
+    <script src="angular.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script>
+        angular.module("exampleApp", [])
+            .controller("defaultCtrl", function ($scope) {
+
+                $scope.addUser = function (userDetails) {
+                    if (myForm.$valid) {
+                        $scope.message = userDetails.name
+                            + " (" + userDetails.email + ") (" 
+                            + userDetails.agreed + ")";
+                    } else {
+                        $scope.showValidation = true;
+                    }
+                }
+
+                $scope.message = "Ready";
+
+                $scope.getError = function (error) {
+                    if (angular.isDefined(error)) {
+                        if (error.required) {
+                            return "Please enter a value";
+                        } else if (error.email) {
+                            return "Please enter a valid email address";
+                        }
+                    }
+                }
+            });
+    </script>
+    <style>
+        form.validate .ng-invalid-required.ng-dirty { background-color: lightpink; }
+        form.validate .ng-invalid-email.ng-dirty { 
+            background-color: lightgoldenrodyellow; }
+        div.error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+        <form name="myForm" novalidate ng-submit="addUser(newUser)"
+              ng-class="showValidation ? 'validate' : ''">
+            <div class="well">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input name="userEmail" type="email" class="form-control"
+                           required ng-model="newUser.email">
+                    <div class="error" ng-show="showValidation">
+                        {{getError(myForm.userEmail.$error)}}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">OK</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+```
+
+ng在input元素上提供了额外的属性：
+- ng-change 指定表达式，当元素内容改变时计算求值
+- ng-minlength 最小字符数
+- ng-maxlength
+- ng-pattern 将内容用正则表达式验证
+- ng-required 通过数据绑定required属性值
+注，当type属性设置为email，number，url时就不用设置ng-pattern了
+
+当type为checkbox时，ng提供的额外属性
+- ng-true-value 被勾选时绑定表达式的值
+- ng-false-value 取消勾选时绑定表达式的值
+
+### 关于select的使用
+select有一些特别需要注意的地方，这一点与其他表单元素不同，需要特殊对待
+```html
+<html ng-app="exampleApp">
+<head>
+    <title>Forms</title>
+    <script src="angular.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script>
+        angular.module("exampleApp", [])
+            .controller("defaultCtrl", function ($scope) {
+                $scope.todos = [
+                    { id: 100, action: "Get groceries", complete: false },
+                    { id: 200, action: "Call plumber", complete: false },
+                    { id: 300, action: "Buy running shoes", complete: true }];
+            });
+    </script>
+</head>
+<body>
+    <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+        <form name="myForm" novalidate>
+            <div class="well">
+                <div class="form-group">
+                    <label>Select an Action:</label>
+                    <select ng-model="selectValue" 
+                            ng-options="item.id as item.action for item in todos">
+                        <option value="">(Pick One)</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="well">
+                <p>Selected: {{selectValue || 'None'}}</p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+```
+
+![select选项](4.png)
+
+select中的`<option value="">(Pick One)</option>`是作为默认选项存在的
+
+同时select也提供了分组功能，只要修改迭代即可
+```
+item.id as item.action group by item.place for item in todos
+```
