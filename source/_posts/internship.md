@@ -371,3 +371,4 @@ hexo下的bug，在markdown中双写大括号,如下：
 unexpected token: }}
 ```
 
+在绑定label时，若lable中有checkbox这样自身带有点击效果的元素，则绑定的点击事件会被触发两次，解决的方法就是，将label中的checkbox移到外面，然后用for指定id。
