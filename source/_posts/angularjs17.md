@@ -1,5 +1,5 @@
 ---
-title: angularjs入门笔记-17-自定义指令
+title: angularjs入门笔记-17-自定义指令1
 categories:
   - fe
 tags:
@@ -261,4 +261,195 @@ template也可以指定一个函数来表示生成模版，该函数调用时会
 </script>
 ```
 
-templateUrl可以指定使用外部模版时的url地址，这个地址可以是字符串，
+templateUrl可以指定使用外部模版时的url地址，这个地址可以是字符串，也可以是由表达式或函数返回的字符串。
+```js
+templateUrl: function (elem, attrs) {
+    return attrs["template"] == "table" ?
+        "tableTemplate.html" : "itemTemplate.html";
+}
+```
+
+#### 通过scope控制指令作用域
+有的时候，需要对指令的作用域做限制，虽然可以通过创建新建控制器来指定指令的作用域，但有更简单方法是使用scope属性，当scope值为true时，表示每个指令实例将创建自己的作用域，同时会继承父作用域。
+
+```html
+<html ng-app="exampleApp">
+<head>
+    <title>Directive Scopes</title>
+    <script src="angular.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script type="text/ng-template" id="scopeTemplate">
+        <div class="panel-body">
+            <p>Name: <input ng-model="data.name" /></p>
+            <p>City: <input ng-model="city" /></p>
+            <p>Country: <input ng-model="country" /></p>
+        </div>
+    </script>
+    <script type="text/javascript">
+        angular.module("exampleApp", [])
+            .directive("scopeDemo", function () {
+                return {
+                    template: function() {
+                        return angular.element(
+                            document.querySelector("#scopeTemplate")).html();
+                    },
+                    scope: true
+                }
+            })
+        .controller("scopeCtrl", function ($scope) {
+            $scope.data = { name: "Adam" };
+            $scope.city = "London";
+        });
+    </script>
+</head>
+<body ng-controller="scopeCtrl">
+    <div class="panel panel-default">
+        <div class="panel-body" scope-demo></div>
+        <div class="panel-body" scope-demo></div>
+    </div>
+</body>
+</html>
+```
+
+本例中，data.name属性会在指令的各个实例之间贡献，而绑定到该属性的输入框将同步更新。
+city属性将在控制器的作用域上被直接赋值，而所有指令的作用域会使用同一值初始化，但若指令中的输入框元素被修改后，则会在指令自己的作用域上创建同名变量覆盖，以后更改的也是自己的同名变量。
+country这个属性没有被赋值初始化，所以当相应输入框被修改时，指令的每个实例将会创建独立的country属性。
+
+<p data-height="265" data-theme-id="0" data-slug-hash="BdwZJP" data-default-tab="html,result" data-user="xmoyking" data-embed-version="2" data-pen-title="自定义隔离作用域指令" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/BdwZJP/">自定义隔离作用域指令</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+有时，这种默认继承覆盖父作用域同名变量的行为会给程序带来一些不受控制的感觉，这时候就需要一个彻底隔绝的全新作用域，当scope设置为一个对象时，比如空对象`{}`，就可以创建这样一个隔离的作用域。
+
+当设置scope为{}时，所有留个输入框都将是空白，因为默认没有从父作用域继承任何数据，只有编辑时才会在自己的指令作用域中隐式创建数据。
+
+但有的时候，又不能完全隔绝作用域，因为会使得指令输入和输出数据变得麻烦，这时，需要用到ng提供的指定作用域选项来控制父子作用域间的关系。
+
+设置指令作用域内的一个属性为单向映射：
+```js
+<html ng-app="exampleApp">
+<head>
+    <title>Directive Scopes</title>
+    <script src="angular.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script type="text/ng-template" id="scopeTemplate">
+        <div class="panel-body">
+            <p>Data Value: {{local}}</p>
+        </div>
+    </script>
+    <script type="text/javascript">
+        angular.module("exampleApp", [])
+            .directive("scopeDemo", function () {
+                return {
+                    template: function() {
+                        return angular.element(
+                            document.querySelector("#scopeTemplate")).html();
+                    },
+                    scope: {
+                        local: "@nameprop"
+                    }
+                }
+            })
+        .controller("scopeCtrl", function ($scope) {
+            $scope.data = { name: "Adam" };
+        });
+    </script>
+</head>
+<body ng-controller="scopeCtrl">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Direct Binding: <input ng-model="data.name" />
+        </div>
+        <div class="panel-body" scope-demo nameprop="{{data.name}}"></div>
+        <div class="panel-body" scope-demo nameprop="{{data.name + 'Freeman'}}"></div>
+    </div>
+</body>
+</html>
+```
+local属性告诉ng需要在指令作用域上根据nameprop定义一个新的属性，local属性以@为前缀，指定local值应该从一个来自nameprop的html标签属性的单向绑定来获取，即通过nameprop中的表达式指定指令作用域中local的值。
+这里存在了两层数据绑定，第一层是控制器作用域中的data.name属性绑定至隔离指令作用域中的local属性，这个绑定是由html元素属性值确定的,上例中两个nameprop中的表达式不一样。
+第二层是将隔离指令作用域中的local属性绑定值指令模版中的内联的单向绑定表达式。
+
+<p data-height="265" data-theme-id="0" data-slug-hash="MvEvje" data-default-tab="html,result" data-user="xmoyking" data-embed-version="2" data-pen-title="自定义指令隔离作用域双向绑定" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/MvEvje/">自定义指令隔离作用域双向绑定</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+
+当需要使用双向绑定时，需要将`@`更换为`=`，同时在模版中使用ng-model指定双向绑定,即：
+```js
+scope: {
+    local: "@nameprop"
+}
+
+nameprop="data.name"
+
+<p>Data Value: <input ng-model="local" /></p>
+```
+
+最后一种是将一个需要计算的表达式作为属性，并在其作用域中进行计算,直接看例子：
+```html
+<html ng-app="exampleApp">
+<head>
+    <title>Directive Scopes</title>
+    <script src="angular.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <script type="text/ng-template" id="scopeTemplate">
+        <div class="panel-body">
+            <p>Name: {{local}}, City: {{cityFn()}}</p>
+        </div>
+    </script>
+    <script type="text/javascript">
+        angular.module("exampleApp", [])
+            .directive("scopeDemo", function () {
+                return {
+                    template: function () {
+                        return angular.element(
+                            document.querySelector("#scopeTemplate")).html();
+                    },
+                    scope: {
+                        local: "=nameprop",
+                        cityFn: "&city"
+                    }
+                }
+            })
+        .controller("scopeCtrl", function ($scope) {
+            $scope.data = {
+                name: "Adam",
+                defaultCity: "London"
+            };
+
+            $scope.getCity = function (name) {
+                return name == "Adam" ? $scope.data.defaultCity : "Unknown";
+            }
+        });
+    </script>
+</head>
+<body ng-controller="scopeCtrl">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Direct Binding: <input ng-model="data.name" />
+        </div>
+        <div class="panel-body" scope-demo 
+             city="getCity(data.name)" nameprop="data.name"></div>
+    </div>
+</body>
+</html>
+```
+
+使用`&`指定作为前缀，指定提供表达式计算的函数，在指令模版被渲染时才进行计算。
+
+`cityFn: "&city"`中的city表示指令中html属性名，其属性值将会绑定到cityFn函数名上，当指令模版中的该函数被调用时就需要计算表达式了，由`getCity(data.name)`这个表达式计算得出，即当name为Adam时，返回London。
+
+<p data-height="265" data-theme-id="0" data-slug-hash="PKJKNL" data-default-tab="result" data-user="xmoyking" data-embed-version="2" data-pen-title="自定义指令，隔离作用域计算表达式" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/PKJKNL/">自定义指令，隔离作用域计算表达式</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+但我们需要的数据不是来自外部的父作用域时（data.name）,而是指令作用域内部时，我们可以这样做：
+```js
+<div class="panel-body" scope-demo  city="getCity(nameVal)" nameprop="data.name"></div>
+
+<p>Name: {{local}}, City: {{cityFn({nameVal: local})}}</p>
+```
+指定getCity接收一个名为nameVal的变量，然后在指令模版中显示传入`{nameVal: local}`对象，将nameVal传入，由此可见，真正的调用顺序，由指令模版-》指令作用域-》控制器作用域。
+
+上述关于scope的用法，尤其是三种前缀，需要多多练习直至熟悉掌握。
