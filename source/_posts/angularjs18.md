@@ -176,6 +176,9 @@ transclude(childScope, function(clone){
         <td>{{item.name}}</td>
         <td><input ng-model='item.quantity' /></td>
     </script>
+    <script type="text/ng-template" id="resetTemplate">
+        <td colspan="2"><button ng-click="reset()">Reset</button></td>
+    </script>
     <script>
         angular.module("exampleApp", [])
         .controller("defaultCtrl", function ($scope) {
@@ -199,7 +202,7 @@ transclude(childScope, function(clone){
                 transclude: true,
                 scope: { value: "=productTable", data: "=productData" },
                 controller: function ($scope, $element, $attrs) {
-                    this.updateTotal = function() {
+                    this.updateTotal = function () {
                         var total = 0;
                         for (var i = 0; i < $scope.data.length; i++) {
                             total += Number($scope.data[i].quantity);
@@ -208,17 +211,34 @@ transclude(childScope, function(clone){
                     }
                 }
             }
+        })
+        .directive("resetTotals", function () {
+            return {
+                scope: { data: "=productData", propname: "@propertyName" },
+                template: document.querySelector("#resetTemplate").outerText,
+                require: "^productTable",
+                link: function (scope, element, attrs, ctrl) {
+                    scope.reset = function () {
+                        for (var i = 0; i < scope.data.length; i++) {
+                            scope.data[i][scope.propname] = 0;
+                        }
+                        ctrl.updateTotal();
+                    }
+                }
+
+            }
         });
     </script>
 </head>
 <body ng-controller="defaultCtrl">
     <div class="panel panel-default">
         <div class="panel-body">
-            <table class="table table-striped" product-table="totalValue" 
+            <table class="table table-striped" product-table="totalValue"
                    product-data="products" ng-transclude>
                 <tr><th>Name</th><th>Quantity</th></tr>
                 <tr ng-repeat="item in products" product-item></tr>
                 <tr><th>Total:</th><td>{{totalValue}}</td></tr>
+                <tr reset-totals product-data="products" property-name="quantity"></tr>
             </table>
         </div>
     </div>
@@ -242,3 +262,119 @@ transclude(childScope, function(clone){
 
 
 ### 创建自定义表单元素
+ng-model指令能以多种方法捕获输入数据，允许我们定义组件时创建出特有的表单元素。
+
+```html
+<html ng-app="exampleApp">
+<head>
+    <title>CustomForms</title>
+    <script src="angular.js"></script>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <style>
+        *.error { color: red; font-weight: bold; }
+    </style>
+    <script type="text/ng-template" id="triTemplate">
+        <div class="well">
+            <div class="btn-group">
+                <button class="btn btn-default">Yes</button>
+                <button class="btn btn-default">No</button>
+                <button class="btn btn-default">Not Sure</button>
+            </div>
+            <span class="error" ng-show="myForm.decision.$error.confidence">
+                You need to be sure
+            </span>
+        </div>
+    </script>
+    <script>
+        angular.module("exampleApp", [])
+        .controller("defaultCtrl", function ($scope) {
+            $scope.dataValue = "Not Sure";
+        })
+        .directive("triButton", function () {
+            return {
+                restrict: "E",
+                replace: true,
+                require: "ngModel",
+                template: document.querySelector("#triTemplate").outerText,
+                link: function (scope, element, attrs, ctrl) {
+
+                    var validateParser = function (value) {
+                        var valid = (value == "Yes" || value == "No");
+                        ctrl.$setValidity("confidence", valid);
+                        return valid ? value : undefined;
+                    }
+
+                    ctrl.$parsers.push(validateParser);
+
+                    element.on("click", function (event) {
+                        setSelected(event.target.innerText);
+                        scope.$apply(function () {
+                            ctrl.$setViewValue(event.target.innerText);
+                        });
+                    });
+
+                    var setSelected = function (value) {
+                        var buttons = element.find("button");
+                        buttons.removeClass("btn-primary");
+                        for (var i = 0; i < buttons.length; i++) {
+                            if (buttons.eq(i).text() == value) {
+                                buttons.eq(i).addClass("btn-primary");
+                            } 
+                        }
+                    }
+
+                    ctrl.$render = function () {
+                        validateParser(ctrl.$viewValue);
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+<body ng-controller="defaultCtrl">
+    <form name="myForm" novalidate>
+        <div><tri-button name="decision" ng-model="dataValue" /></div>
+    </form>
+</body>
+</html>
+```
+
+<p data-height="265" data-theme-id="0" data-slug-hash="JyrgqB" data-default-tab="result" data-user="xmoyking" data-embed-version="2" data-pen-title="自定义表单元素" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/JyrgqB/">自定义表单元素</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+当dataValue属性在指令外被修改时，能够改变显示的按钮状态，通过替换ngModel控制器所定义的$render函数，原来的函数调用setSelected函数，当值在指令外被修改并且需要更新内容时，$render方法会被ng-model指令调用，通过读取$viewValue属性可拿到最新的值。
+```js
+ctrl.$render = function () {
+    setSelected(ctrl.$viewValue || "Not Sure");
+}
+```
+ngModel控制器提供了一些基本方法和属性：
+- $render() 当数据绑定的值发生变化时ngModel控制器调用更新UI的函数，通常会用自定义控制器覆盖该函数。
+- $setViewValue(value) 更新数据绑定值
+- $viewValue 返回格式化后的值
+- $modelValue 从作用域返回未格式化的值
+- $formatters 将$modelValue转成$viewValue的格式化函数数组
+
+当用户单击按钮时将变化通过ng-model指令传播到作用域
+```js
+element.on("click", function (event) {
+    setSelected(event.target.innerText);
+    scope.$apply(function () {
+        ctrl.$setViewValue(event.target.innerText);
+    });
+});
+```
+$setViewValue方法调用时，ngModel控制器不会自动调用$render方法，所以需要在click事件中显式调用setSelected。
+
+表单还需要一个很重要的功能就是验证，在本例中定义了一个名为confidence的验证错误属性，同时定义了一个叫validateParser的函数用于解析数据绑定的值，验证值并返回结果，通过`ctrl.$parser.push(validateParser)`注册该解析器。
+
+ngModel控制器提供的验证方法和属性：
+- $setPristine() 将校验状态重置，同时会阻止继续校验
+- $isEmpty() 可设置指令表示该控件无值，默认实现为查找空字符串`''`,`null`,`undefined`等值
+- $parsers 一个校验函数组成的数组
+- $error 返回一个对象，其各个属性对应各个校验错误信息
+- $pristine 若控件未修改，返回true
+- $dirty
+- $valid
+- $invalid
