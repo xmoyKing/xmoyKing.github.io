@@ -4,6 +4,7 @@ categories:
   - fe
 tags:
   - fe
+  - angularjs
 date: 2017-05-25 10:17:34
 updated:
 ---

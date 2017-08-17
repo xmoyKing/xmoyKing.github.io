@@ -372,3 +372,5 @@ unexpected token: }}
 ```
 
 在绑定label时，若lable中有checkbox这样自身带有点击效果的元素，则绑定的点击事件会被触发两次，解决的方法就是，将label中的checkbox移到外面，然后用for指定id。
+
+使用css动画时，`animation-fill-mode:forwards`可让动画停留在最后一帧，不加的话 在1s钟之后 动画会回到初始帧
