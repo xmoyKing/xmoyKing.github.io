@@ -374,3 +374,15 @@ unexpected token: }}
 在绑定label时，若lable中有checkbox这样自身带有点击效果的元素，则绑定的点击事件会被触发两次，解决的方法就是，将label中的checkbox移到外面，然后用for指定id。
 
 使用css动画时，`animation-fill-mode:forwards`可让动画停留在最后一帧，不加的话 在1s钟之后 动画会回到初始帧
+
+jq有一个grep方法，能够过滤数组, 第一个参数为数组，第二个是判断函数，函数执行时会传入两个参数，第一个参数为元素，第二个参数为元素索引
+```js
+jQuery.grep(arr, function(e, i ) {
+    return ( e !== 5 && i > 4 );
+});
+```
+
+在windows下，使用textarea获取内容时，需要注意换行为两个符号`\r\n`，分割字符串时一定要对这两个特殊的转义字符做判断。
+```js
+str.split(/[\n\r、]/)
+```
