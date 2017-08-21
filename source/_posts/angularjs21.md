@@ -241,7 +241,6 @@ ng内置的$q服务来获取和管理promises，$q服务定义了一些方法：
 </body>
 </html>
 ```
-![promises](2.png)
 
 <p data-height="265" data-theme-id="0" data-slug-hash="BdrVQv" data-default-tab="result" data-user="xmoyking" data-embed-version="2" data-pen-title="promises" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/BdrVQv/">promises</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
