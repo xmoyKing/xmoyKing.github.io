@@ -386,3 +386,17 @@ jQuery.grep(arr, function(e, i ) {
 ```js
 str.split(/[\n\r、]/)
 ```
+
+H5本地预览图片,采用base64方式
+```js
+// 判断浏览器是否支持FileReader接口  
+if (typeof FileReader == 'undefined') {
+    alert('浏览器太老了，不支持预览图片，请更换现代浏览器');
+    // return false;
+}
+var reader = new FileReader();   //将文件以Data URL形式读入页面  
+reader.readAsDataURL(file);
+reader.onload = function (e) {
+    var picUrl = this.result;
+}
+```
