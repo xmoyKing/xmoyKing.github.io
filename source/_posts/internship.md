@@ -400,3 +400,14 @@ reader.onload = function (e) {
     var picUrl = this.result;
 }
 ```
+
+离开页面时弹出提示框，询问是否确定离开
+```js
+$(window).on('beforeunload', function(e){
+    e = e || window.event; //此方法为了在firefox中的兼容
+    if (e) {
+        e.returnValue = '确定要离开此页吗?'; // For IE and Firefox prior to version 4
+    }
+    return '...'; // 貌似弹出对话框的内容和title于代码中返回的字符串无关，测自chrome
+});
+```
