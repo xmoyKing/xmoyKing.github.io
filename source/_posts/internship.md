@@ -411,3 +411,20 @@ $(window).on('beforeunload', function(e){
     return '...'; // 貌似弹出对话框的内容和title于代码中返回的字符串无关，测自chrome
 });
 ```
+
+当点击弹出文件选择框慢是由于文本输入框中的accept设置为通配符，此时解决的方法为具体设置为某确定的类型， [input[file]标签的accept=”image/*”属性响应很慢的解决办法](http://www.dengzhr.com/frontend/1059?utm_source=tuicool&utm_medium=referral)
+```html
+<input type="file" accept="images/*">
+```
+同时，如下的file包裹在button中时，点击button，chrome下正常弹出文本框，而在firefox下，无法触发文本选择框。 将button改为span，同时span上不能绑定点击事件，否则也无法弹出文本选择框。 
+```html
+<button type="button" class="pr">
+    文件上传按钮
+    <input type="file" class="pa" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+</button>
+
+<span class="pr button">
+    文件上传按钮
+    <input type="file" class="pa firfox" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+</span>
+```
