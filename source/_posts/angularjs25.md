@@ -1,5 +1,5 @@
 ---
-title: angularjs入门笔记-25-&provider和&injector服务
+title: angularjs入门笔记-25-$provider和$injector服务
 categories:
   - fe
 tags:
