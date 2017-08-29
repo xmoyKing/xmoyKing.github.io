@@ -6,7 +6,7 @@ tags:
   - fe
   - angularjs
   - jasmine
-date: 2017-06-28 09:17:43
+date: 2017-07-15 09:17:43
 updated:
 ---
 

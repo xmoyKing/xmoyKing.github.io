@@ -7,7 +7,7 @@ tags:
   - angularjs
   - rest
   - deployd
-date: 2017-05-29 22:58:23
+date: 2017-07-02 22:58:23
 updated:
 ---
 

@@ -6,7 +6,7 @@ tags:
   - fe
   - angularjs
   - promises
-date: 2017-05-28 10:24:24
+date: 2017-06-28 10:24:24
 updated:
 ---
 
