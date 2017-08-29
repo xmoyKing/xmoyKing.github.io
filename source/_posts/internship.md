@@ -100,7 +100,7 @@ button, button:hover, button:active, button:focus {
 [javascript中的稀疏数组(sparse array)和密集数组](http://blog.csdn.net/aitangyong/article/details/40191305/)
 7. match方法
 
-placeholder颜色设置方式
+placeholder颜色设置方式, 一下样式中，webkit需要单独写，否则无效
 ```css
 ::-webkit-input-placeholder { /* WebKit browsers */ 
 color: #999; 
@@ -427,4 +427,19 @@ $(window).on('beforeunload', function(e){
     文件上传按钮
     <input type="file" class="pa firfox" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
 </span>
+```
+
+IE11 下无法识别CSS的`initial`属性值，但是可以识别`auto`属性值，所以，若需要重置css的某个属性，尽量使用`auto`
+![initial]
+
+在placeholder中若需要换行，则可使用HTML实体字符`&#10`，表示换行符
+
+pre 自动换行
+```css
+pre{  
+    white-space: -moz-pre-wrap;   
+    white-space: -o-pre-wrap;    
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
 ```
