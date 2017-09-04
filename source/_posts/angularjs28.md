@@ -1,5 +1,5 @@
 ---
-title: angularjs中级实践-28-
+title: angularjs巩固实践-28-
 categories:
   - fe
 tags:
