@@ -3,7 +3,7 @@ title: 在AM学到的小技巧
 date: 2017-03-01 13:58:45
 updated: 
 tags: mixed
-top: true
+top:
 ---
 
 主要记录在实习过程中遇到的一些小问题以及对应的解决方法。
