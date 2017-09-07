@@ -2,8 +2,8 @@
 title: 知识点/连接合集
 date: 2017-01-01 16:42:15
 updated: 
-categories: [fe]
-tags: [interview, fe, links]
+categories: it
+tags: [fe, links]
 ---
 
 ## 前端资源 ##
@@ -154,13 +154,10 @@ tags: [interview, fe, links]
 
 [request payload到底是什么东西？为何java后端收不到请求参数](http://blog.csdn.net/mhmyqn/article/details/25561535)
 
+[如何优雅的选择字体(font-family)](https://segmentfault.com/a/1190000006110417)
+
 ---
 
-
-## 设计、模版
-[设计导航](http://idesign.qq.com/#!index/feed/id/14)
-
-[FWA](https://thefwa.com)*罗列顶尖交互和视觉效果网站及APP*
 
 ## ES6 ##
 
@@ -220,3 +217,10 @@ promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-
 ## Python
 
 [Python3入门-by廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)*非常非常适合入门*
+
+
+## 设计、模版
+[设计导航](http://idesign.qq.com/#!index/feed/id/14)
+
+[FWA](https://thefwa.com)*罗列顶尖交互和视觉效果网站及APP*
+

@@ -113,3 +113,13 @@ XSFR令牌
 
 18,19章没有看,后面的章节在特定情况下还是很有价值的，但是目前初学ng的情况下没有必要深入。
 
+### AngularJS深度剖析与最佳实践
+ngRoute一般用法：
+```js
+$routeProvider.when('/url',{
+  templateUrl: 'path/to/template.html',
+  controller: 'SomeCtrl',
+});
+```
+工作原理：
+监听$locationChangeSuccess事件，每次URL（包括hash部分）发生变化时触发，更加$routeProvider/$stateProvider中注册的路由表中的URL部分
