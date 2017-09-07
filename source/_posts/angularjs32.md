@@ -1,5 +1,5 @@
 ---
-title: angularjs巩固实践-32
+title: angularjs巩固实践-32-依赖注入
 categories:
   - fe
 tags:
