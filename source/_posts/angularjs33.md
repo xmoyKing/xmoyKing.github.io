@@ -32,7 +32,7 @@ var giveMe = function(config){
   // 跟registry中保存的是同一个实例
 };
 
-// 注册表，这里保存了可注入的对象，包括一个名为config的对象
+// 全局注册表对象，这里保存了可注入的对象，包括一个名为config的对象
 var registry = {
   config : {
     delay : 1
@@ -66,3 +66,51 @@ var inject = function(func, thisForFunc){
 实际上，DI需要考虑很多问题，但是基本原理是这样。
 
 #### ng中的DI
+ng中,主要的一些编程元素都需要通过某种方式注册进去，比如`myModule.service('serviceName', function()..)`,实际就是把后面的函数加入容器中，并且命名为serviceName，以供后续使用。
+
+ng的实现中使用了延迟初始化，即，只有当对象被用到时，才会被创建，否则不会创建，这种延迟初始化提高了启动速度。
+
+问题，ng的容器是什么？
+与上面的伪代码不同，ng中不存在真正的全局对象，所以可以放心的在页面中添加多个ng-app而不用担心他们互相干扰。但容器又需要一个公用的地方来存放这些“名字和对象”的注册表（Registry), 在ng中，这个注册表就是module，所以一个app可以使用很多不同名字的module，他们之间可以存在依赖关系。`angular.module('someModule',['dep1', 'dep2'])`, 这种划分module有利于程序的文件组织和复用。
+
+根据DI的原理，可以发现，所有被注入的对象都是单例对象，只创建一次然后多次复用，因此若需要在ng中跨Controller共享数据或相互通信，则创建一个Service/Value/Constant，然后将他们分别注入到多个Controller中，这写Controller就自然共享同一个对象了。
+
+另外，DI的实现需要容器进行处理，所以，ng中只有某几种函数可以使用依赖注入，分别是：controller、service/factory/provider、directive、filter、animation、config、run、decorator。简单的说，通过module注册进来的函数都可以使用，因为module负责管理这些注入的服务。其中provider比较特殊，在它的声明和$get函数中都是可以注入的，但注入的内容有限制，如：
+```js
+angular.module('com.ngnice.app').provider('test', function(/* 此处只能注入constant和已定义的provider，不能注入服务 */){
+  this.$get = function(/* 此处可以注入服务，就像在controller函数中一样 */){
+    ...
+  };
+});
+```
+
+看似DI的使用受限，但由于js作用域特殊，在外层函数中定义的变量可被内层函数使用，而几乎所有的ng代码都被包含在上述的几个函数中，所以通常情况下，只要注入一次就可以到处使用。
+
+但，当出现循环依赖时就不能使用依赖注入了，必须使用手动注入的方式解决循环依赖问题，即通过$injector在代码执行时获取指定名称的服务，比如当$http和interceptor服务之间出现了循环依赖，解决方法为：`$injector.get('$http')`。
+
+#### DI与minify
+大多数情况下，在项目发布时都需要对代码进行压缩（minify），即减少js文件大小，同时能起到一些混淆加密的作用。简单的说就是将参数以及部分变量、函数名进行重命名，这种方法方式一般的项目能正常工作，但ng项目例外。
+
+由于ng的DI机制是根据参数名进行注入的，所以对参数名进行重命名会破坏ng的DI机制。所以若不进行特殊的处理，minify后的代码在执行时肯定会报错的，提示找不到服务。
+
+不过由于minify不能修改字符串，所以利用这点，ng的处理方法就是用数组代替函数，如：
+```js
+angular.module('com.ngnice.app').controller('TestController', ['$http', '$timeout', function($http, $timeout){
+  ...
+}]);
+```
+也就是说，数组的最后一个元素是函数，前面都是字符串格式的服务名，同时函数的参数与这些服务名一一对应。
+
+另外一种解决的方式是使用annotation（注解）, 如下代码需要依赖$http和$route：
+```js
+var MyController = function(obfuscatedScope, obfuscatedRoute){
+   //...
+};
+
+// 给MyController函数添加一个$inject属性，一个数组，指定了需要被注入的对象
+MyController['$inject'] = ['$scope', '$route'];
+```
+
+上述两种方式都又一个麻烦的地方，那就是当依赖（被注入的对象）改变时要同时修改两个地方。
+
+不过，在实际的实现种，ng提供了对此进行处理的工具，ngAnnotate(原ngMin)，它的作用就是找到代码种的controller的定义，然后将它修改为annotation的形式。所以一般ng项目在build过程中都会先调用ngAnnotate，然后在minify。
