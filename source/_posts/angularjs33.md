@@ -24,3 +24,45 @@ updated:
 
 #### 如何用js实现DI
 在js中实现DI，看似很难，其他原理很简单，关键是函数对象的toString()方法。在js中，对一个函数对象执行toString(),返回值是函数的源码，拿到源码后就可以对函数的声明进行解析了。
+伪代码如下：
+```js
+// giveMe函数声明了一个叫config的参数，希望容器根据这个名字找到同名对象，并且注入
+var giveMe = function(config){
+  // 经过注入后，此处config的内容为{delay: 1}
+  // 跟registry中保存的是同一个实例
+};
+
+// 注册表，这里保存了可注入的对象，包括一个名为config的对象
+var registry = {
+  config : {
+    delay : 1
+  }
+};
+
+// 注入函数，此处用来演示注入容器的行为
+// thisForFunc 用于在需要时，调用者可以额外指定一个this，以避免this错误的问题
+var inject = function(func, thisForFunc){
+  // 获取func的源码，这样能知道func需要什么参数
+  var sourceCode = func.toString();
+  // 用正则表达式解析源码
+  var matcher =  sourceCode.match(/* 正则表达式较复杂省略 */);
+  // 从matcher中解析出各个参数的名称、解析过程省略
+  var objectIds = ...
+
+  // 准备调用func时用的参数表
+  var objects = [];
+  for(var i = 0; i < objectIds.length; ++i){
+    var objectName = objectIds[i];
+    // 根据对象名称查出相应的对象
+    var object = registry[objectName];
+    // 放到数组中准备作为参数传递过去
+    objects.push(object);
+  }
+  // 调用apply同调func函数，并将参数传过去
+  func.apply(thisForFunc || func, objects);
+}
+```
+使用时调用 `inject(giveMe)` 或 `inject(giveMe, anotherThis)` 即可.
+实际上，DI需要考虑很多问题，但是基本原理是这样。
+
+#### ng中的DI
