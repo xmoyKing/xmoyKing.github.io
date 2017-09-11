@@ -12,6 +12,34 @@ updated: 2016-10-21 09:35:30
 ### npm help
 大部分情况使用`install，update，uninstall`即可,也使用`npm help`能查看npm的官方帮助：[npm官方文档](https://docs.npmjs.com/)
 
+常用命令：
+```
+npm install <name>安装nodejs的依赖包
+
+例如npm install express 就会默认安装express的最新版本，也可以通过在后面加版本号的方式安装指定版本，如npm install express@3.0.6
+
+npm install <name> -g  将包安装到全局环境中
+
+npm list -g --depth 0 若需要查看本机已安装的全局包：
+
+npm view <name>  versions  查看一个包的全部版本：
+
+npm install -g 升级所有全局包
+
+npm remove <name> 移除
+
+npm update <name> 更新
+
+npm ls 列出当前安装的了所有包
+
+npm root 查看当前包的安装路径
+
+npm root -g  查看全局的包的安装路径
+
+npm help  帮助，如果要单独查看install命令的帮助，可以使用的npm help install
+```
+
+
 **若使用linux，则有可能需要使用sudo执行命令。**
 
 ```shell
@@ -54,4 +82,5 @@ cnpm install [module name]
 
 关于node项目中生产的package-lock.json文件，只有npm 5以上才会有：
 [说说 npm 5 的新坑](https://toutiao.io/posts/hrihhs/preview)
+
 
