@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-19-模块与服务协作
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-06-02 15:20:19
 updated:

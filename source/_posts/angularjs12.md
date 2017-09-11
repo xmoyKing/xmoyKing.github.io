@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-12-绑定和模版指令
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-17 19:15:19
 updated: 2017-05-17 19:15:19

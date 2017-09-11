@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-2-理解AngularJS的优势
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-04-03 15:56:41
 updated: 2017-04-03 15:56:41

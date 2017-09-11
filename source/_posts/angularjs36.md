@@ -1,9 +1,8 @@
 ---
 title: angularjs巩固实践-36-$parse和$eval、$observe和$watch
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-08-12 10:40:09
 updated:

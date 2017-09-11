@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-7-AngularJS+MongoDB+Nodejs
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-03 15:56:41
 updated: 2017-05-03 15:56:41

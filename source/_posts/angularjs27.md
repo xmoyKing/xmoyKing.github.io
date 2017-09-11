@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-27-单元测试2
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
   - jasmine
 date: 2017-07-18 13:52:40

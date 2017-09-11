@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-20-针对错误、表达式、全局对象的服务
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-27 15:27:49
 updated:

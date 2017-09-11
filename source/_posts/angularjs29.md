@@ -1,9 +1,8 @@
 ---
 title: angularjs巩固实践-29-指令复习
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-07-22 21:41:01
 updated:

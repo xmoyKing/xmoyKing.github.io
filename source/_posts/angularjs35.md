@@ -1,9 +1,8 @@
 ---
 title: angularjs巩固实践-35-指令生命周期
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-08-09 20:36:50
 updated:

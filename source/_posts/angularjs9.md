@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-9-购物网站-添加购物车和路由功能
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-08 14:09:25
 updated: 2017-05-08 14:09:25

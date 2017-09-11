@@ -1,9 +1,8 @@
 ---
 title: angularjs巩固实践-32-ng启动过程
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-07-31 22:56:53
 updated:

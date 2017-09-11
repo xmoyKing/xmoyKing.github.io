@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-21-ajax和promises
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
   - promises
 date: 2017-06-28 10:24:24

@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-23-视图服务
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-07-05 10:28:37
 updated:

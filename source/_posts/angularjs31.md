@@ -1,9 +1,8 @@
 ---
 title: angularjs巩固实践-31-Promise复习
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
   - promise
 date: 2017-07-28 22:36:56

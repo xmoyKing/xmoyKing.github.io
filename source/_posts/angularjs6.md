@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-6-做一个todo小程序
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-01 14:34:50
 updated: 2017-05-01 14:34:50

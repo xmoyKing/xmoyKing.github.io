@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-10-使用deployd作为服务器，增加订单功能
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
   - deployd
 date: 2017-05-11 17:45:58

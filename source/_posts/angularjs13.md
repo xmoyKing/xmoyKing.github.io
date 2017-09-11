@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-13-元素和事件指令
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-18 08:41:45
 updated:

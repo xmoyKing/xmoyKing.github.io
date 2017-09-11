@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-22-RESTful
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
   - rest
   - deployd

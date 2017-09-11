@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-4-angularjs1,express4,
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
   - express4
 date: 2017-04-6 21:53:19

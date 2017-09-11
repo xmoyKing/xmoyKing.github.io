@@ -1,9 +1,8 @@
 ---
 title: angularjs巩固实践-34-脏检查机制
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-08-07 18:19:58
 updated:

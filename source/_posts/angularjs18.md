@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-18-自定义指令2
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-28 10:17:34
 updated:

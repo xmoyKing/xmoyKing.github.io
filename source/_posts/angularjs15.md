@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-15-控制器和作用域
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-24 22:27:04
 updated:

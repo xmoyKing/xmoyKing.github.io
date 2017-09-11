@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-14-表单
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-20 11:07:57
 updated:

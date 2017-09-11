@@ -1,9 +1,8 @@
 ---
-title: angularjs入门笔记-1-知识点-AngularJS权威教程
+title: angularjs入门笔记-1-知识点
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
   - links
 date: 2017-04-02 09:13:07

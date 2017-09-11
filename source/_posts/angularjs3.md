@@ -1,9 +1,9 @@
 ---
 title: angularjs入门笔记-3-小试牛刀 ES6,angularjs,NodeJs,KOA
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
+  - angularjs
   - ES6
   - angularjs
   - NodeJs

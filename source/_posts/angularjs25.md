@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-25-$provider和$injector服务
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-07-13 11:00:56
 updated:

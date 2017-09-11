@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-16-过滤器
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-25 19:03:45
 updated:

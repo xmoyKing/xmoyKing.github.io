@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-11-后台管理系统
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
   - deployd
 date: 2017-05-14 13:28:21

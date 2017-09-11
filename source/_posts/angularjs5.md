@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-5-模块和依赖注入
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-04-30 22:58:43
 updated: 2017-04-30 22:58:43

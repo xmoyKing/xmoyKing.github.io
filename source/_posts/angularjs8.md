@@ -1,9 +1,8 @@
 ---
 title: angularjs入门笔记-8-购物网站产品列表Demo
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-05-05 10:56:41
 updated: 2017-05-05 10:56:41

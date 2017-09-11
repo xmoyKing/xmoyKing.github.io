@@ -1,9 +1,8 @@
 ---
 title: angularjs巩固实践-33-依赖注入
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-08-04 17:25:26
 updated:

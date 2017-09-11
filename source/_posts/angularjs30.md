@@ -1,9 +1,8 @@
 ---
 title: angularjs巩固实践-30-服务复习
 categories:
-  - fe
+  - angularjs
 tags:
-  - fe
   - angularjs
 date: 2017-07-25 22:00:40
 updated:
