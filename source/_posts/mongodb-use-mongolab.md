@@ -1,9 +1,9 @@
 ---
 title: 使用mongolab在线免费服务测试mongodb
 categories:
-  - fe
+  - mongodb
 tags:
-  - fe
+  - mongolab
   - mongodb
 date: 2016-11-18 15:54:48
 updated: 2016-11-18 15:54:48
