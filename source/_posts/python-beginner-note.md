@@ -1,7 +1,7 @@
 ---
 title: python3入门-廖雪峰python3教程笔记
 categories:
-  - it
+  - python
 tags:
   - python
   - note

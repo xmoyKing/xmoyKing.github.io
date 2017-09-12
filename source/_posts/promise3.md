@@ -3,7 +3,6 @@ title: Promise3-测试
 categories:
   - fe
 tags:
-  - fe
   - promise
   - mocha
 date: 2017-04-11 17:20:43

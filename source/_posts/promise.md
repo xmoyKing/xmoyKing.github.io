@@ -3,7 +3,6 @@ title: Promise1-相关知识点
 categories:
   - fe
 tags:
-  - fe
   - promise
 date: 2017-04-8 16:36:18
 updated: 

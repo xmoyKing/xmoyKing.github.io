@@ -3,7 +3,6 @@ title: Promise4-高级进阶(resolve,reject)
 categories:
   - fe
 tags:
-  - fe
   - promise
   - web notifications
 date: 2017-04-13 22:54:03

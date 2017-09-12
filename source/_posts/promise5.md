@@ -3,7 +3,6 @@ title: Promise5-高级进阶(deferred,race)
 categories:
   - fe
 tags:
-  - fe
   - promise
   - deferred
 date: 2017-04-14 08:36:26
