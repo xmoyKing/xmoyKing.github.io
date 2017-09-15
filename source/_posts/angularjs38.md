@@ -109,3 +109,196 @@ app.config(function($compileProvider){
   $compileProvider.debugInfoEnable(false);
 });
 ```
+
+#### 其他指令中的watchers函数
+不仅ng的表达式会使用$scope.$watch API添加watchers，ng内置的大部分指令也一样。
+- ngBind:
+  它和ng表达式很像，都是绑定特定表达式的值到DOM的内容，并保持与scope同步，不同之处在于它需要一个HTML节点并以attribute属性的方式标记，简单来说，除开一些细微的区别(防止ng表达式闪烁的问题)，ng表达式算是ngBind的特定语法糖。
+```js
+var ngBindDirective = ngDirective({
+  compile: function(templateElement){
+    templateElement.addClass('ng-binding');
+    return function(scope, element, attr){
+      element.data('$binding', attr.ngBind);
+      scope.$watch(attr.ngBind, function ngBindWatchAction(value){
+        // 故意使用 == 而不是 ===，因为需要捕获当值为null或undefined的时候
+        element.text(value == undefined ? '' : value);
+      });
+    };
+  }
+});
+```
+  $scope.$watch的注册代码：watchers函数为ngBind attribute的值，处理函数则是用表达式计算的结果去更新DOM的文本内容。
+
+- ngShow / ngHide:
+  根据表达式的计算结果来控制显示/隐藏DOM节点的指令。
+```js
+var ngShowDirective = ['$animate', function($animate){
+  return function(scope, element, attr){
+    scope.$watch(attr.ngShow, function ngShowWatchAction(value){
+      $animate[toBollean(value) ? 'removeClass' : 'addClass'](element, 'ng-hide');
+    });
+  };
+}];
+
+
+var ngHideDirective = ['$animate', function($animate){
+  return function(scope, element, attr){
+    scope.$watch(attr.ngHide, function ngHideWatchAction(value){
+      $animate[toBollean(value) ? 'addClass' : 'removeClass'](element, 'ng-hide');
+    });
+  };
+}];
+```
+若有太多watcher函数，例如超过2000个，那么每次$digest循环时，肯定比较慢，这是脏检查的性能瓶颈。解决的方案是：减少$watch,移除不必要的$watch.
+
+#### 慎用$watch和及时销毁
+想要提高ng的性能，那么在开发时就应该尽量减少显示使用$scope.$watch。ng内置的很多指令能满足大部分的业务需求，特别是能够复用ng内置的UI事件指令（ngChange,ngClick）时，就不要添加额外$watch。
+
+对于不再使用的$watch函数，尽早释放，$scope.$watch函数的返回值就是用于释放watcher的函数，如下例（实现单次绑定）：
+```js
+angular.module('com.ngnice.app').controller('DemoController', function($scope){
+  var vm = this;
+  vm.count = 0;
+  var textWatch = $scope.$watch('demo.updated', function(newVal, oldVal){
+    if(newVal !== oldVal){
+      vm.count++;
+      textWatch();
+    }
+  });
+  return vm;
+});
+```
+
+#### one-time 绑定
+在开发中，常有很多静态数据构成的页面，如静态商品、订单的显示，他们后绑定了数据后，在当前的Model就不再改变了。比如，需要一个会议例程的展示界面，常规的ng方式是使用ng-repeat来渲染列表：
+
+HTML:
+```html
+<ul>
+  <li ng-repeat="session in sessions">
+    <div class="info">
+      {{session.name}} - {{session.room}} - {{session.hour}} - {{session.speaker}}
+    </div>
+    <div class="likes">
+      {{session.likes}} likes!
+      <button ng-click="likeSession(session)">Like it!</button>
+    </div>
+  </li>
+</ul>
+```
+
+JS:
+```js
+angular.module('com.ngnice.app').controller('MainController', function($scope){
+  $scope.sessions = [/*...*/];
+  $scope.likeSession = function(session){
+    // ...
+  }
+});
+```
+普通的实现非常简单，但若sessions非常多，比如300个，那么会产生多少个$watch? 上例中每一个session有5个绑定，额外的ng-repeat一个，将会产生1501个$watch,。问题就在于每次用户点击button，ng就会去检查name，room等5个属性是不是被改变了。
+
+而除了button之外，所有的数据都是静态数据，那么既然某些数据Model不会被改变，是否可以让ng不对这些数据进行脏检查呢？但$watch在第一次确实必要的，因为初始化时需要用静态信息填充DOM，所以若能换为单次绑定（one-time）则再好不过了。
+
+ng中，单次绑定的定义是：**单词表达式在第一次$digest完成后，将不再计算（监测属性的变化）**
+ng1.3为ng表达式引入了新语法，以“::”作为前缀的表达式为one-time绑定：
+```html
+<ul>
+  <li ng-repeat="session in sessions">
+    <div class="info">
+      {{::session.name}} - {{::session.room}} - {{::session.hour}} - {{::session.speaker}}
+    </div>
+    <div class="likes">
+      {{session.likes}} likes!
+      <button ng-click="likeSession(session)">Like it!</button>
+    </div>
+  </li>
+</ul>
+```
+若在1.3之前的版本想要实现one-time绑定该如何实现呢？ 有牛人已经实现了：[Bindonce](https://github.com/Pasvaz/bindonce)
+```js
+<ul>
+  <li ng-repeat="session in sessions">
+    <div class="info">
+      <span bo-text="session.name"></span> - 
+      <span bo-text="session.room"></span> - 
+      <span bo-text="session.hour"></span> - 
+      <span bo-text="session.speaker"></span>
+    </div>
+    <div class="likes">
+      {{session.likes}} likes!
+      <button ng-click="likeSession(session)">Like it!</button>
+    </div>
+  </li>
+</ul>
+```
+
+需要引入bindonce库，并依赖模块，JS:
+```js
+angular.module('com.ngnice.app',['pasvaz.bindonce']);
+```
+
+#### 滚屏加载
+另外一种性能解决方案是滚屏加载（Endless Scrolling / unpagination）,用于大量数据显示时，又不分页，一般是当滚屏到底部时加载新数据到页面底部。开源组件[ngInfiniteScroll](https://sroze.github.io/ngInfiniteScroll/)的 [Demo](https://sroze.github.io/ngInfiniteScroll/demo_async.html)：
+
+HTML:
+```html
+<div ng-app='myApp' ng-controller='DemoController'>
+  <div infinite-scroll='reddit.nextPage()' infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1'>
+    <div ng-repeat='item in reddit.items'>
+      <span class='score'>{{item.score}}</span>
+      <span class='title'>
+        <a ng-href='{{item.url}}' target='_blank'>{{item.title}}</a>
+      </span>
+      <small>by {{item.author}} -
+        <a ng-href='http://reddit.com{{item.permalink}}' target='_blank'>{{item.num_comments}} comments</a>
+      </small>
+      <div style='clear: both;'></div>
+    </div>
+    <div ng-show='reddit.busy'>Loading data...</div>
+  </div>
+</div>
+```
+
+JS:
+```js
+var myApp = angular.module('myApp', ['infinite-scroll']);
+
+myApp.controller('DemoController', function($scope, Reddit) {
+  $scope.reddit = new Reddit();
+});
+
+// Reddit constructor function to encapsulate HTTP and pagination logic
+myApp.factory('Reddit', function($http) {
+  var Reddit = function() {
+    this.items = [];
+    this.busy = false;
+    this.after = '';
+  };
+
+  Reddit.prototype.nextPage = function() {
+    if (this.busy) return;
+    this.busy = true;
+
+    var url = "https://api.reddit.com/hot?after=" + this.after + "&jsonp=JSON_CALLBACK";
+    $http.jsonp(url).success(function(data) {
+      var items = data.data.children;
+      for (var i = 0; i < items.length; i++) {
+        this.items.push(items[i].data);
+      }
+      this.after = "t3_" + this.items[this.items.length - 1].id;
+      this.busy = false;
+    }.bind(this));
+  };
+
+  return Reddit;
+});
+```
+
+#### 其他
+解决性能问题的方案还有很多，将其他更高效的第三方非ng组件封装为ng组件，需要注意scope和model的同步，以及合理的触发$apply更新view，比如通过[ngReact](https://github.com/ngReact/ngReact)将React组件应用到ng中。
+
+重要提醒：**其实ng的脏检查机制并不慢**，ng为此专门做了很多优化，在大多数情况下，ng的watcher机制比很多模版引擎更快，因为ng不需要通过大范围的DOM操作来更新View，它每次更新的区域很小，DOM操作更少，而DOM操作的代价远远高于JS运算，在有些浏览器中，修改DOM的速度甚至比JS运算速度慢1000倍。
+
+同时，随着ES的新标准Object.obserse的使用，ng2.0改用它来代替“脏检查”，运行性能显著提高，尤其是针对Mobile开发的ionic这类框架，非常有利。
