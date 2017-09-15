@@ -121,4 +121,42 @@ $routeProvider.when('/url',{
 });
 ```
 工作原理：
-监听$locationChangeSuccess事件，每次URL（包括hash部分）发生变化时触发，更加$routeProvider/$stateProvider中注册的路由表中的URL部分
+监听$locationChangeSuccess事件，每次URL（包括hash部分）发生变化时触发，更新$routeProvider/$stateProvider中注册的路由表中的URL部分。
+
+#### 总是用ng-model作为输出
+在写指令时，有三种方式可以输出操作结果：
+1. 写回调函数，当有需要输出的内容时调用，并传入结果
+2. 传入哈希对象，然后对它的属性赋值
+3. 依赖ngModel指令，并传入值
+
+以分页控件为例，回调函数的方式最直接，缺点是使用不方便，必须在控制器中写一个回调函数来接收结果，并赋值给一个内部变量。
+
+哈希对象的方式，`<pagination page="page">`在指令中，可以对page.index进行赋值，于是传入者的page对象的index属性被修改了。有一些问题：
+首先，不能直观的预料到这个指令会怎么进行输出，page属性没有任何特别之处，其他指令也多半不会使用。
+其次，page应该有一个范围限制，无法进行校验，除非给page新填一个属性。
+最后，若使用者想在其变化时做一些操作，则不得不绑定一个回调函数的属性。
+
+以上的问题通过ngModel都可以解决：
+首先，ngModel作为输出的标准方式，一看就知道指令要输出什么。
+其次，ngModel有一系列的错误校验机制，可对ngModel的内容进行校验，其实用单独的指令来校验结果更好，能让指令的职责更单一，更内聚。
+最后，ngModel有标准的通知时间，也就是ng-change指令，当屡次在input指令上看到ng-change指令时，也需要会认为这个input的通知事件，但实际收ngModel的通知事件，换句话说，有ngMode的地方就可以使用ng-change事件。
+```js
+directive('pagination', function(){
+  return {
+    restrict: 'E',
+    require: 'ngModel',
+    link: function(scope, elm, iAttrs, ngModeController){
+      // ...
+      someEvent(function(index){ // 当某些事件触发时改变ngModel的值
+        ngModelController.$setViewValue(index);
+      });
+      // ...
+    }
+  };
+});
+```
+
+#### 打包代替动态加载
+前端有一个非常著名的库叫require.js,用于动态加载js文件，曾经让非常多的人着迷。但是其初衷并不是仅仅动态加载。而是在于模块化，用于弥补js语言的一些缺陷。
+
+不过ng自己内置了模块化系统，所以require.js就不是必须的了。当有一些第三方库很大，确实需要动态加载，则进行局部化的动态加载，比如Highchart等插件，定义一个Highchart指令，当它首次使用时才动态加载highchart.js，加载完毕后调用其中的函数。这样能让整体代码尽量简化同时加快启动速度。
