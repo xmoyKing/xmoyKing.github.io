@@ -1,5 +1,5 @@
 ---
-title: 在AM学到的小技巧
+title: 小技巧集合
 date: 2017-03-01 13:58:45
 updated: 
 tags: mixed
@@ -442,4 +442,14 @@ pre{
     word-wrap: break-word;
     white-space: pre-wrap;
 }
+```
+
+允许forever时，若以及存在log文件，则需要加上-a才可以重新start一个新的脚本,比如启动一个express项目：
+```js
+forever start -a ./bin/www
+```
+
+对git项目加tag时，一定要将tag先push，否则chechkout到其他分支或标签后会丢失更新，同时默认的git push不会上传所有的tag和branch，需要手动指定：
+```js
+git push origin v0.1.0
 ```
