@@ -160,3 +160,35 @@ directive('pagination', function(){
 前端有一个非常著名的库叫require.js,用于动态加载js文件，曾经让非常多的人着迷。但是其初衷并不是仅仅动态加载。而是在于模块化，用于弥补js语言的一些缺陷。
 
 不过ng自己内置了模块化系统，所以require.js就不是必须的了。当有一些第三方库很大，确实需要动态加载，则进行局部化的动态加载，比如Highchart等插件，定义一个Highchart指令，当它首次使用时才动态加载highchart.js，加载完毕后调用其中的函数。这样能让整体代码尽量简化同时加快启动速度。
+
+
+#### 在非独立作用域指令中实现scope绑定
+假设有一个指令的使用形式如下：
+HTML:
+```html
+<some-directive name="1+1" value="1+1" on-event="vm.test(age)"></some-directive>
+```
+自定义指令通过scope表达式进行绑定，JS:
+```js
+directive('someDirective', function(){
+  return {
+    // ...
+    scope: {
+      name: '@', // 绑定字面量，把值作为字符串进行解释
+      value: '=', // 绑定变量，把值作为scope上的表达式进行解释
+      onEvent: '&', // 绑定事件，调用方式为on-event(value)或on-event($event, value)
+    }
+  };
+});
+```
+上述自定义指令很简单，但有一个问题，`scope:{}`的形式让这个指令自动具有了独立作用域，而这将导致无法在同一个原生上使用其他需要作用域的指令。
+
+对于装饰器型指令来说，解决的方法时不适用scope绑定表达式，而自己实现类似的效果。
+
+实现绑定name属性非常简单，attrs.name,因为是字面量，只需要通过attrs直接获取字符串即可，结果为1+1。
+
+实现绑定value属性需要一个函数的帮助，`scope.$eval(attrs.value)`, 它会在指令的当前作用域上计算value对于的表达式，结果为2。
+
+实现绑定event属性，表达式如下：`scope.$eval(attrs.onEvent, {$event:event, age:30})`。理解这个表达式需要明白：
+scope.$evel是一个函数，它可以接受2个参数，第一个是要计算的表达式，第二个是计算时可访问的上下文对象。比如在使用on-event(age) / on-event($event, age) / on-event(age, $event)等方式调用时，除了可以使用scope中的变量外，还可以访问$event和age这两个变量。
+然后，ng在这个scope上把onEvent的值vm.test(age)作为一个表达式进行解释，这个表达式的参数时一个叫age的变量，于是ng就从scope和额外变量上找名为age的属性作为参数传入，结果时vm.test函数所接收到的参数为30
