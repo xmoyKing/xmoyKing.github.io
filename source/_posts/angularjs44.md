@@ -20,4 +20,20 @@ updated:
 
 这种应用场景下，ng的解决方案是$http的interceptor，因为每一个后端API都会直接或间接通过$http来调用，所以只要有一个Interceptor来拦截responseError，就能直到服务器端发回的每一条错误消息，只要对这些错误消息的状态码进行判断，就可以进行统一处理。比如：404时弹出对话框，告知用户api不存在，500时就显示错误详情，401时弹出登录框，用户不需跳转其他页面即可完成登录，这个过程不需要任何路由切换，也不需要保存任何状态，最妙的是，可以通过Promise机制来让登录过程对调用者透明。
 
-以ui-router为例，看看如何解决这个问题
+但有的时候不希望用户进入路由，这种情况该如何解决？ 以ui-router为例，看看ng如何解决这个问题：
+1. 事件方案：  ui-router通过$stateChangeStart事件开放对路由切换的控制权,因为需要一个相对集中的权限控制点，所以写再run回调中：
+```js
+angular.module('com.ngnice.app').run(function($rootScope){
+  $rootScope.$on('$stateChangeStart', function(event, state, params){
+    var allowed = function(state, params){
+       // todo: 根据state和params判断是否可授权，返回true/false
+    };
+
+    if(!allowed(state, params)){
+      event.preventDefault();
+    }
+  });
+});
+```
+只要实现allowed即可决定路由是否允许进入
+2. resolve方案：
