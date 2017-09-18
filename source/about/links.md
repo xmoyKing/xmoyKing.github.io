@@ -224,3 +224,7 @@ promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-
 
 [FWA](https://thefwa.com)*罗列顶尖交互和视觉效果网站及APP*
 
+[微信小程序设计指南](https://mp.weixin.qq.com/debug/wxadoc/design/index.html)
+现在APP界面风格趋势大都趋近于简约风，而国内APP中，微信的UI设计得就挺不错，这段时间看了下微信小程序，发现可以从微信小程序设计指南学习一些通用的移动端UI设计规范。
+
+总原则：功能确定-》元素少-》体验统一-》界面美观
