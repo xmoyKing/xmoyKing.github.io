@@ -90,7 +90,7 @@ $stateProvider.state('default', {
   }
 });
 ```
-注：卫兵函数不能写成服务，否则只会被调用依次，并且存成单例对象，而期望每次进入本路由都执行。
+注：卫兵函数不能写成服务，否则只会被调用一次，并且存成单例对象，而期望每次进入本路由都执行。
 
 ```js
 angular.module('com.ngnice.app').config(function($stateProvider, $urlRouterProvider, resolver){
