@@ -5,7 +5,7 @@ categories:
 tags:
   - angularjs
   - code conventions
-date: 2017-09-18 16:42:05
+date: 2017-09-03 16:42:05
 updated:
 ---
 
