@@ -147,3 +147,13 @@ angular.module('com.ngnice.app').directive('directiveName', function(){
     };
 });
 ```
+
+### 模版
+#### 表达式绑定
+ng在浏览器解析表达式时，可能出现闪烁问题，为了实现更好的用户体验，应该使用ng-bind或抱在ng-cloak指令中的ng表达式来防止页面渲染时的闪烁。
+
+#### src/href问题
+当直接在src或href属性中插入`{ {} }`表达式时，浏览器会在表达式被解析之前，尝试一次错误的加载，这回出现一个多余的404错误，所以ng专门提供ng-src、ng-href指令来代替src、href属性，可以安全的嵌入表达式。
+
+#### class优于style
+对css来说，直接用style属性在html节点上是一种不好的方式，不便于维护和复用前端样式，所以应优先用class，ng中的ngClass和ngStyle也是如此，只有在需要动态计算位置等场景下，使用ngStyle才是合理的。
