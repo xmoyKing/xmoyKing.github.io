@@ -1,5 +1,5 @@
 ---
-title: angularjs巩固实践-48-常见“坑”-1
+title: angularjs巩固实践-48-常见“坑”-1-module函数的声明和获取重载
 categories:
   - angularjs
 tags:
@@ -8,9 +8,8 @@ date: 2017-09-7 23:38:53
 updated:
 ---
 
-记录一些需要特别注意的的地方与坑
+常见“坑”系列：记录一些需要特别注意的的地方与坑。
 
-#### module函数的声明和获取重载
 Module是ng中重要模块组织方式，将一组业务组件（Controller，Service，Filter，Directive...)内聚地封装在一起，将代码按照业务领域划分一个模块，然后在其他模块中声明对这个模块的依赖。这样能更好的“分离关注点”，实现“高内聚低耦合”，“高内聚低耦合”中内聚指的是模块或对象内部的完整性，一组紧密联系的逻辑应该封装在同一个代码单元（模块/对象），而不是分散，耦合指的是代码单元之间的依赖成都，如一个模块的修改会引起另一个模块随之修改则说明这两个模块之间是紧耦合。
 
 同时Module也是ng的代码入口，只有在声明了Module的情况下，才能定义ng组件（Controller，Service，Filter，Directive，Config，Run等）
@@ -20,7 +19,7 @@ Module的定义为：`angular.module('app', [])`,module函数接受三个参数�
 - require，模块的依赖，它指当前模块所依赖的其他模块，需注意，若在此没有声明模块的依赖，则无法在当前模块中使用来自所依赖模块的任何组件。require参数是可选的，若没有传递该参数则表示获取module，反之则表示创建module。
 - configFn，模块的启动配置函数，该函数会在ng的config阶段被调用，实现对Provider的全局配置，如$routeProvider的路由信息配置，该配置函数等同于`module.config`方式声明配置信息，一般用`module.config`方式声明。configFn参数是可选的。
 
-推荐，将ng组件放在独立文件内，用一个单独的module文件来创建module和声明module的依赖，其他文件则只获取module，同时在打包或script引入时，需要先加载创建module的文件，然后再加载其他注册ng组件的文件，在FrontJet中，集成了一个gulp-angular-filesort插件，它会自动完成排序工作，保证先加载创建文件。
+推荐将ng组件放在独立文件内，用一个单独的module文件来创建module和声明module的依赖，其他文件则只获取module，同时在打包或script引入时，需要先加载创建module的文件，然后再加载其他注册ng组件的文件，在FrontJet中，集成了一个gulp-angular-filesort插件，它会自动完成排序工作，保证先加载创建文件。
 
 有一个`ng:areq`的问题:`[ng:areq] Argument 'DemoController' is not a function, got undefined!`
 出现的原因若不是忘记定义Controller，那就很有可能时多次创建module，在每次创建module时，都会导致之前创建的module定义信息被清空，以定义的ng组件也会丢失，以下时ng源码：
