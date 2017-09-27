@@ -2,7 +2,7 @@
 title: js-event-wheel
 date: 2017-01-22 11:46:52
 updated: 2017-01-22
-categories: [fe]
+categories: js
 tags: js
 ---
 1. 自定义滚动条实例

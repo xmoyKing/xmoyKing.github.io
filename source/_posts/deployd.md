@@ -1,9 +1,8 @@
 ---
 title: deployd入门安装
 categories:
-  - fe
+  - Nodejs
 tags:
-  - fe
   - node
   - mongodb
   - deployd

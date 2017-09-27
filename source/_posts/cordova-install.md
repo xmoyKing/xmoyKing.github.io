@@ -1,9 +1,10 @@
 ---
 title: cordova / ionic 安装配置出错解决办法集合
 categories:
-  - fe
+  - cordova
 tags:
-  - fe
+  - cordova
+  - ionic
 date: 2017-04-02 11:17:52
 updated: 2017-04-02 11:17:52
 ---

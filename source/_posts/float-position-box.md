@@ -2,7 +2,7 @@
 title: 精通CSS笔记-盒模型&定位&浮动
 date: 2017-01-28 16:31:48
 updated: 2017-01-28
-categories: [fe]
+categories: css
 tags: [css, CSS-Mastery, Note]
 ---
 

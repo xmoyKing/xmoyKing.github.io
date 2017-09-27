@@ -1,7 +1,7 @@
 ---
 title: 【转载/整理】关于某某服务器的术语的含义和理解
 categories:
-  - it
+  - mixed
 tags:
   - it
   - server-term

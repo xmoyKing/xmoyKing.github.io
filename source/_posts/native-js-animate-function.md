@@ -2,7 +2,7 @@
 title: 原生js动画函数
 date: 2017-01-20 20:02:18
 updated: 2017-01-20
-categories: [fe]
+categories: js
 tags: [js, animate]
 ---
 

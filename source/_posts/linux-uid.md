@@ -1,7 +1,7 @@
 ---
 title: Linux Uid
 categories:
-  - it
+  - linux
 tags:
   - linux 
   - uid

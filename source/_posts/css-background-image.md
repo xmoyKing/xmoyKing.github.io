@@ -2,7 +2,7 @@
 title: 精通CSS笔记-背景图片
 date: 2017-01-29 11:16:26
 updated: 2017-01-29
-categories: [fe]
+categories: css
 tags: [css, CSS-Mastery, Note]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 缓冲区溢出攻击获取Root Shell原理
 categories:
-  - it
+  - mixed
 tags:
   - security
   - C

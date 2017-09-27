@@ -1,9 +1,9 @@
 ---
 title: jQuery实现图片瀑布流展示
 categories:
-  - fe
+  - jquery
 tags:
-  - fe
+  - js
   - jquery
 date: 2016-11-01 16:21:34
 updated: 2016-11-01 16:21:34

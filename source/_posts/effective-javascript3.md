@@ -2,10 +2,10 @@
 title: effective-javascript笔记-3
 date: 2017-02-27 19:42:53
 updated: 2017-03-25
-categories: [fe]
+categories: js
 tags:
   - js
-  - effective javascript
+  - effective-javascript
   - note
 ---
 

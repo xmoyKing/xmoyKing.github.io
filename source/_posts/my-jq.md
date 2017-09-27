@@ -2,8 +2,8 @@
 title: 类似jQuery的简单自制库
 date: 2017-01-22 11:51:08
 updated: 2017-01-22
-categories: [fe]
-tags: [js, lib]
+categories: js
+tags: [js, lib, jquery]
 ---
 
 

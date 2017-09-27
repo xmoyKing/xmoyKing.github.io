@@ -2,7 +2,7 @@
 title: 精通CSS笔记-列表样式和导航条
 date: 2017-01-30 10:24:29
 updated: 2017-01-30
-categories: [fe]
+categories: css
 tags: [css, CSS-Mastery, Note]
 ---
 

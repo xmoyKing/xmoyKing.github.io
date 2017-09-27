@@ -1,7 +1,7 @@
 ---
 title: Promise3-测试
 categories:
-  - fe
+  - promise
 tags:
   - promise
   - mocha

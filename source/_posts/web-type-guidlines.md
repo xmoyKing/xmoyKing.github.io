@@ -1,10 +1,10 @@
 ---
 title: Web设计中网页字体排版指南
 categories:
-  - fe
+  - css
 tags:
-  - fe
-  - type
+  - css
+  - typographic
   - translation
 date: 2017-06-21 17:21:48
 updated: 2017-06-21 17:21:48

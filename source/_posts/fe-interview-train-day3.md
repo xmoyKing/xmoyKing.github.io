@@ -2,8 +2,8 @@
 title: 前端面试题-3-库分析/链接
 date: 2017-02-16 21:36:33
 updated: 2017-02-16
-categories: [fe]
-tags: [interview, fe, links, lib, jquery]
+categories: interview
+tags: [interview, links, lib, jquery]
 ---
 
 以下链接知识点有重叠之处，需多加参考，查缺补漏，巩固查询。

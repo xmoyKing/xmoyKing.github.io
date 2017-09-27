@@ -2,7 +2,7 @@
 title: 移动Web端知识点集合
 date: 2017-03-17 10:25:56
 updated: 
-categories: [fe]
+categories: html5
 tags: [mobile, web-app, links]
 ---
 

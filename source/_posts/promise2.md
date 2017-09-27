@@ -1,7 +1,7 @@
 ---
 title: Promise2-实践练习
 categories:
-  - fe
+  - promise
 tags:
   - promise
 date: 2017-04-10 17:27:46

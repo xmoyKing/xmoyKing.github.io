@@ -1,7 +1,7 @@
 ---
 title: Raw Socket 原始套接字
 categories:
-  - it
+  - linux
 tags:
   - network
   - linux

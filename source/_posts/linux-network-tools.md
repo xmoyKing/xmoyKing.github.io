@@ -1,7 +1,7 @@
 ---
 title: Linux Network Tools 
 categories:
-  - it
+  - linux
 tags:
   - linux
   - security

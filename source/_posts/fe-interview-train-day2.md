@@ -2,8 +2,8 @@
 title: 前端面试题-2-阿里技术之瞳前端问答题
 date: 2017-02-12 16:42:15
 updated: 
-categories: [fe]
-tags: [interview, fe]
+categories: interview
+tags: [interview]
 ---
 
 [技术之瞳 阿里巴巴技术笔试心得](技术之瞳 阿里巴巴技术笔试心得-2016.11-p260.pdf)

@@ -2,7 +2,7 @@
 title: Javascript难题小集
 date: 2017-03-23 09:26:27
 updated: 2017-03-23
-categories: [fe]
+categories: js
 tags: [js, questions]
 ---
 

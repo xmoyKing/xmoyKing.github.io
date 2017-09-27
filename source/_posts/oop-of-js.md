@@ -2,7 +2,7 @@
 title: js实现面向对象
 date: 2017-01-21 14:57:06
 updated: 2017-01-21
-categories: [fe]
+categories: js
 tags: [js, oop]
 ---
 

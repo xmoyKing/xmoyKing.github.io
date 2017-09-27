@@ -1,8 +1,9 @@
 ---
 title: effective javascript笔记-1
+categories: js
 tags:
   - js
-  - effective javascript
+  - effective-javascript
   - note
 date: 2017-02-24 11:43:18
 ---

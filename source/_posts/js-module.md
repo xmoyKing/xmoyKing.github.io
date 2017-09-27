@@ -1,9 +1,8 @@
 ---
 title: javascript模块化
 categories:
-  - fe
+  - js
 tags:
-  - fe
   - js
   - module
 date: 2016-11-07 19:05:34

@@ -1,7 +1,7 @@
 ---
 title: 了解XSS/CSRF
 categories:
-  - it
+  - mixed
 tags:
   - xss
   - csrf

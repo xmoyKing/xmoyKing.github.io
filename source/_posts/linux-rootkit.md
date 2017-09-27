@@ -1,7 +1,7 @@
 ---
 title: Linux Rootkit
 categories:
-  - it
+  - linux
 tags:
   - linux
   - security

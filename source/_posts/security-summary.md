@@ -1,7 +1,7 @@
 ---
 title: 信息安全小结
 categories:
-  - it
+  - mixed
 tags:
   - security
   - css

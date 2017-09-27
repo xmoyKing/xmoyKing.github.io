@@ -1,9 +1,9 @@
 ---
 title: Express4-1入门配置
 categories:
-  - fe
+  - express
 tags:
-  - fe
+  - node
   - express4
 date: 2017-04-30 11:53:55
 updated: 2017-04-30 11:53:55

@@ -1,9 +1,8 @@
 ---
 title: jQuery实现分页
-categories:
-  - fe
+categories: jquery
 tags:
-  - fe
+  - js
   - jquery
   - pagination
 date: 2016-11-05 16:23:49

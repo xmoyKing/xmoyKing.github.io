@@ -1,9 +1,7 @@
 ---
 title: javascript多线程
-categories:
-  - fe
+categories: js
 tags:
-  - fe
   - js
   - Concurrent.Thread.js
   - webwork
