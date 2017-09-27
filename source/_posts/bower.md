@@ -1,9 +1,8 @@
 ---
 title: bower入门使用
 categories:
-  - fe
+  - mixed
 tags:
-  - fe
   - bower
 date: 2016-09-18 21:40:53
 updated: 2016-09-18 21:40:53

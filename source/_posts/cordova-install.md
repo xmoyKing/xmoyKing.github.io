@@ -1,7 +1,6 @@
 ---
 title: cordova / ionic 安装配置出错解决办法集合
-categories:
-  - cordova
+categories: mixed
 tags:
   - cordova
   - ionic

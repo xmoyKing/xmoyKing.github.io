@@ -1,9 +1,8 @@
 ---
 title: 前端调试Debug
 categories:
-  - fe
+  - mixed
 tags:
-  - fe
   - debug
   - chrome
 date: 2016-09-24 15:58:06

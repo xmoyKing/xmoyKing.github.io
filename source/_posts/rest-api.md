@@ -1,7 +1,7 @@
 ---
 title: 如何设计友好的REST API
 categories:
-  - rest
+  - mixed
 tags:
   - rest
 date: 2017-09-14 21:59:04

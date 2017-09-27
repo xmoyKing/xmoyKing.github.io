@@ -2,7 +2,7 @@
 title: HTML5/JS实现的网页游戏
 date: 2017-02-21 16:24:26
 updated: 2017-02-21
-categories: html5
+categories: mixed
 tags: [html5, js, game]
 ---
 

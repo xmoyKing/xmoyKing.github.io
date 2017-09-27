@@ -1,6 +1,6 @@
 ---
 title: jQuery实现分页
-categories: jquery
+categories: js
 tags:
   - js
   - jquery
