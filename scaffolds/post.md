@@ -2,6 +2,7 @@
 title: {{ title }}
 date: {{ date }}
 updated: 
-categories: [fe]
-tags: [fe]
+categories: js
+tags: 
+ - js
 ---
