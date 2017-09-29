@@ -1,5 +1,5 @@
 ---
-title: JavaScript高级程序设计-3-基本概念
+title: JavaScript高级程序设计-3-基本概念1-数据类型
 categories: js
 tags:
   - js
