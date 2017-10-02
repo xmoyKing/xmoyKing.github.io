@@ -126,5 +126,35 @@ console.log(num.toPrecision(3)); // "99.0"
 
 
 #### String类型
+String类型是字符串的对象保证类型，String对象的方法也可以在所有基本的字符串值中访问到，其中valueOf、toString、toLocalString都返回对象表示的基本字符串值。
 
+而length属性表示字符串包含字符数量，此处的数量1个也包含双字节字符。
 
+String类型提供了很多方法，用于辅助完成对ES中字符串的解析和操作。
+- 字符方法：charAt、charCodeAt接收一个表示字符索引位置的参数，charAt返回给定位置的字符，charCodeAt返回字符编码。
+- 字符串操作方法：concat用于链接字符串，slice、substr、substring能基于原字符串创建新字符串，都接收1/2个参数，第一个是指定字符串开始的位置，第二个是结束位置。但substr的第二个参数指定的是字符串长度。同时substring会自动将较小的参数作为开始，较大参数作为结束。
+但若参数为负时，三者的行为就有却别了，slice会将传入的负值与字符串长度加上，substr会将第一个负值参数加上字符串长度，而将第二个负值参数转换为0，而substring将会把所有负值转换为0，
+- 字符串位置方法：indexOf和lastIndexOf方法，从字符串中搜索给定的子字符串，然后返回子字符串的位置，未找到则返回-1.
+- trim方法，H5新添加的方法，创建字符串的一个副本，删除前后所有空格。
+- 字符串大小写转换方法：toLowerCase、toLocalLowerCase、toUpperCase、toLocalUpperCase。
+- 字符串模式匹配方法：
+  1. match在字符串上调用接收一个正则表达式/RegExp对象作为参数，这个方法本质上与调用RegExp的exec方法相同。
+  2. search方法的参数与match相同，返回第一个匹配项的索引，未找到则返回-1.
+  3. replace方法接收两个参数，第一个为RegExp对象或一个字符串（字符串不会被转为正则表达式），第二个参数表示将要替换的字符串，可以是表达式或函数。同时第二参数中可以使用特殊的字符序列（正则表达式的短名）。
+  4。 split方法，基于指定分割符将字符串分割为多个子串，两个参数，第一个参数是分割符，可以字符串，也可以是RegExp对象，第二个参数用于指定数组的大小，限制返回的数组元素个数。
+  5. localCompare方法，比较两个字符串，返回1/0/-1。（需注意的是这个方法跟地区有关）
+  6. fromCharCode方法，是String构造函数的静态方法，接收一个或多个字符编码将他们转为一个字符串。
+  7. HTML方法：一些简化js动态格式化HTML的方法，建议不使用
+
+### 单体内置对象
+ECMA-262对内置对象的定义是：由ES实现提供的、不依赖于宿主环境的对象，这些对象在ES程序执行之前就已经存在。即开发者无需显式实例化内置对象，因为他们一开始就实例化了。比如Object、Array、String.还有两个单体内置对象：Global和Math
+
+#### Global对象
+Global对象（全局对象）是ES中非常特殊的一个对象，因为这个对象存在但却无法访问。即不属于任何其他对象的属性和方法就是Global的属性和方法，其实，没有全局变量或全局函数，所有在全局作用域中定义的属性和函数，都是Global对象的属性。比如isNaN、parseInt等，下面列出了Global包含的其他常用方法：URI编码方法（encodeURI、encodeURIComponent），eval方法
+
+Global对象也有属性，大部分都是一些特殊的值：undefined、NaN、Infinity等，同时，所有原生引用类型的构造函数，如Object、Function、String也都是Global的属性。
+
+ES虽然没有指出如何直接访问Global对象，但Web浏览器将这个全局对象作为window对象的一部分实现了，因此浏览器环境下，全局对象的所有变量和函数，都成为了window对象的属性。
+
+#### Math对象
+ES提供了一个公用对象，用于保持数学公式或信息。具体有那些方法和属性，请查看[JavaScript Math 对象](http://www.w3school.com.cn/jsref/jsref_obj_math.asp)
