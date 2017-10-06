@@ -150,11 +150,69 @@ String类型提供了很多方法，用于辅助完成对ES中字符串的解析
 ECMA-262对内置对象的定义是：由ES实现提供的、不依赖于宿主环境的对象，这些对象在ES程序执行之前就已经存在。即开发者无需显式实例化内置对象，因为他们一开始就实例化了。比如Object、Array、String.还有两个单体内置对象：Global和Math
 
 #### Global对象
-Global对象（全局对象）是ES中非常特殊的一个对象，因为这个对象存在但却无法访问。即不属于任何其他对象的属性和方法就是Global的属性和方法，其实，没有全局变量或全局函数，所有在全局作用域中定义的属性和函数，都是Global对象的属性。比如isNaN、parseInt等，下面列出了Global包含的其他常用方法：URI编码方法（encodeURI、encodeURIComponent），eval方法
+Global对象（全局对象）是ES中非常特殊的一个对象（指的是ES中定义的全局对象，而不是浏览器中实现的全局对象），因为这个对象存在但却无法访问。即不属于任何其他对象的属性和方法就是Global的属性和方法，其实，没有全局变量或全局函数，所有在全局作用域中定义的属性和函数，都是Global对象的属性。比如isNaN、parseInt等，Global包含的其他常用方法：
+- URI编码方法：encodeURI（用于整个URI，不会对本身属于URI的特殊字符进行编码，如冒号、斜杠、问号、井号等）、encodeURIComponent（用于URI中的某一段，会对它发现的任何非标准字符进行编码），替代ES3废弃的escape和unescape方法。
+  一般是对整个URI使用encodeURI，而对附加在现有URI后面的字符串使用encodeURIComponent，在实践中常对查询字符串参数进行URI编码。
+  这两个对应的解码方法为decodeURI，decodeURIComponent。
+```js
+var uri = 'https://www.shanbay.com/bad links.html#start';
+encodeURI(uri); // "https://www.shanbay.com/bad%20links.html#start"
+encodeURIComponent(uri); // "https%3A%2F%2Fwww.shanbay.com%2Fbad%20links.html%23start"
+```
+- eval方法，非常强大，就像一个完整的ES解析器，接受ES字符串，将其解析运行为实际的ES语句。通过eval执行的代码被认为是包含该次调用的执行环境的一部分，因此被执行的代码具有与该执行环境相同的作用域链，所以通过eval执行的代码可以引用在包含环境中定义的遍历。
+```js
+var msg = 'hello world';
+eval('console.log(msg);'); // 'hello world';
+
+// 反过来调用依然成立
+eval("var msg = 'hello world';" );
+console.log(msg);  // 'hello world';
+```
+上述代码中，msg是在eval调用环境之外定义的，但其仍能访问msg字符串。但需要注意的是eval中创建的任何变量或函数都不会被提升，因为在解析代码时，他们都是被包含在一个字符串中的，还不是可执行代码，直到eval执行时才创建。
+使用eval需要特别小心，在严格模式，禁止从外部访问eval创建的任何变量或函数，同时不能为eval赋值。尽量不使用eval函数。
 
 Global对象也有属性，大部分都是一些特殊的值：undefined、NaN、Infinity等，同时，所有原生引用类型的构造函数，如Object、Function、String也都是Global的属性。
 
-ES虽然没有指出如何直接访问Global对象，但Web浏览器将这个全局对象作为window对象的一部分实现了，因此浏览器环境下，全局对象的所有变量和函数，都成为了window对象的属性。
+ES虽然没有指出如何直接访问Global对象，但Web浏览器将这个全局对象作为window对象的一部分实现了，因此浏览器环境下，全局对象的所有变量和函数，都成为了window对象的属性。即，可以通过在全局环境下返回`this`或直接使用`window`变量获取全局对象。
 
 #### Math对象
 ES提供了一个公用对象，用于保持数学公式或信息。具体有那些方法和属性，请查看[JavaScript Math 对象](http://www.w3school.com.cn/jsref/jsref_obj_math.asp)
+
+一些常用方法：
+- min/max方法：
+```js
+// 直接将多个参数传入方法
+Math.min(4,6,10,1,0,-1); // -1
+
+// 用于数组时，将Math当做apply的第一个参数，设置正确的this值
+var a = [4,6,10,1,0,-1];
+Math.max.apply(Math, a); // 10
+```
+- 舍入方法
+ - ceil 向上舍入
+ - floor 向下舍入
+ - round 标准舍入（四舍五入）
+- random方法，返回 0 ~ 1 之间的一个随机数
+```js
+// 值 = Math.floor(Match.random() * 总数 + 最小值);
+var num = Math.floor(Math.random() * 10 + 1); // 返回1 ~ 10的随机数
+```
+
+### 小结
+对象在JS中被称为引用类型的值，而有一些内置的引用类型可用来创建特定的对象，总结如下：
+- 引用类型与传统面向对象程序设计中的类类似，但实现不同
+- Object是一个基础类型，其他所有类型都从Object继承了基础的行为
+- Array类型是一组值的有序列表，同时提供了操作和转换这些值的功能
+- Date类型提供了关于日期和时间的信息，包括当前日期和时间，以及相关的计算功能
+- RegExp类型是一个ES支持正则表达式的接口，提供了一些正则表达式功能
+
+函数实际上是Function类型的实例，因此函数也是对象，而由于函数是对象，所以函数也拥有方法，可以用来增强其行为。
+
+因为有了基本包装类型，所以JS中的基本类型值可以被当做对象来方法，三种基本包装类型分别是Boolean、Number、String，他们有一些共同点：
+- 每个包装类型都映射同名的基本类型
+- 在读取模式下访问基本类型值时，会创建对应的基本保证类型的一个对象，从而方便了数据的操作
+- 操作基本类型值的语句执行后会立即销毁新创建的包装对象
+
+在所有代码执行之前，作用域就已经存在两个内置对象Global和Math：
+- 在大多数ES实现中都不能直接访问Global对象，但Web浏览器实现了对应为全局对象的window对象，全局变量和函数都是Global对象的属性
+- Math对象提供了很多属性和方法，用于辅助完成复杂的数学计算任务
