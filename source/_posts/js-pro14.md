@@ -218,3 +218,70 @@ var application = function(){
 简而言之，如必须创建一个对象并以某些数据对其进行初始化，同时还要公开一些能够访问这些私有数据的方法，那么就可以使用模块模式。以这种模式创建的每个单例都是Object的实例，因为最终要通过一个对象字面量来表示它。由于单例通常都是作为全局对象存在的，不会通过它传递函数，因此，也没有必要使用instanceof操作符来检查其对象类型。
 
 #### 增强的模块模式
+进一步改进模块模式，即在返回对象之前加入对其增强的代码，这种增强的模块模式适合那些单例必须时某种类型的实例，同时还必须添加某些属性或方法对其加以增强的情况。如下：
+```js
+var singleton = function(){
+  // 私有方法和属性
+  var privateVariable = 10;
+  function privateFunction(){
+    return false;
+  }
+
+  // 创建对象
+  var object = new CustomType();
+
+  // 添加特权/公有方法和属性
+  object.publicProperty = true;
+  object.publicMethod =  function(){
+    privateVariable++;
+    return privateFunction();
+  }
+  return object;
+}();
+```
+又比如前面例子中的application对象必须时BaseComponent实例，那么可以修改为如下：
+```js
+var application = function(){
+  // 私有
+  var components = new Array();
+
+  // 初始化
+  components.push(new BaseComponent());
+
+  // 创建application的一个局部副本
+  var app = new BaseComponent();
+
+  // 公有
+  app.getComponentCount = function(){
+      return components.length;
+  };
+  app.registerComponent = function(component){
+    if(typeof component == 'object'){
+      components.push(component);
+    }
+  };
+  
+  return app;
+}();
+```
+修改后的application单例中，主要的不同在于命名变量app的创建过程，因为它必须时BaseComponent的实例，这个实例实际上时application对象的局部变量版，此后，又为app对象添加了能够访问私有变量的公有方法。最后返回app对象，结果仍然时将它赋给全局变量application。
+
+### 小结
+在js中，函数表达式非常有用，使用函数表达式可以无需对函数命名，从而实现动态编程，你们函数，也称为拉姆达函数，是一种使用js函数的强大方式，总结函数表达式的特点如下：
+- 函数表达式不同于函数声明，函数声明要求有名字，但函数表达式不需要，没有名字的函数表达式也称为匿名函数
+- 在无法确定如何引用函数的情况下，递归函数会变得比较复杂
+- 递归函数应该始终使用arguments.callee来递归地调用自身，不要使用函数名——函数名可能会发生变化
+
+当函数内部定义了其他函数时，就创建了闭包，闭包有权访问包含函数内部的所有变量，原理如下：
+- 在后台执行环境中，闭包的作用域链包含着它自己的作用域、包含函数的作用域和全局作用域
+- 通常，函数的作用域极其所有变量都会在函数执行结束后被销毁，但使用函数返回一个闭包时，这个函数的作用域将会一直存在直到闭包被销毁。
+
+使用闭包可以在js中模仿块级作用域（js本身没有块级作用域的概念），要点如下：
+- 创建并立即调用一个函数，这样既可以执行其中的代码，又不会在内存留下对该函数的引用
+- 立即调用函数的内部的所有变量都会在调用后立即销毁，除非将某些变量赋值给了包含作用域（即外部作用域）中的变量
+
+闭包还可以用于在对象中创建私有变量，特点如下：
+- 即使js没有正式的私有对象属性的概念，但可以使用闭包实现公有方法，通过其访问在包含作用域中定义的变量
+- 可以使用构造函数模式、原型模式来实现自定义类型的特权方法，也可以使用模块模式，增强的模块模式来实现单例的特权方法
+
+js中函数表达式和闭包都非常有用，利用他们能实现非常多的功能，但过多使用闭包会导致性能下降，因为创建闭包必须维护额外的作用域，会占用大量内存。
