@@ -453,3 +453,33 @@ forever start -a ./bin/www
 ```js
 git push origin v0.1.0
 ```
+
+当将页面覆盖遮罩时，常常需要禁止滚轮滚动，即将页面overflow设置为hidden，由于滚轮消失会导致页面扩大，有一个明显的向右移动的切换。若想要平稳的切换遮罩层则需要特别注意。
+```js
+// 禁止滚动时，增加body右边距，防止页面因为没有滚动条发生偏移
+(function () {
+    var w1 = $(window).width();
+    var $body = $("html");
+    $body.addClass('oh');
+    var w2 = $(window).width();
+    $body.removeClass('oh');
+
+    console.log(w2, w1, w2-w1);
+    $("<style type='text/css'>.stop-scrolling{margin-right:" + (w2 - w1) + "px;}</style>").appendTo("head");
+})();
+
+// 显示遮罩时使用语句
+$("html").css("overflow", "hidden").addClass("stop-scrolling");
+// 隐藏时则
+$("html").css("overflow", "auto").removeClass("stop-scrolling");
+```
+
+有的时候需要动态插入iframe，然后获取iframe中的元素,并对其进行操作，通过jquery则可以这样做，onload用于检测页面加载是否完成(对于script元素也可以这样做，同样的原理)：
+```js
+var frame = $('<iframe frameborder="0" src="..." id="previewIframe"></iframe>');
+$('body').append(frame);
+frame[0].onload = function () {
+    $(frame[0].contentDocument).find('body,pre').css('margin','0'); // 将默认样式覆盖
+    ... 
+}
+```
