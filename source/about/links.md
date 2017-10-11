@@ -156,6 +156,9 @@ tags: [fe, links]
 
 [如何优雅的选择字体(font-family)](https://segmentfault.com/a/1190000006110417)
 
+[半深入理解CSS3 object-position/object-fit属性](http://www.zhangxinxu.com/wordpress/2015/03/css3-object-position-object-fit/)
+
+
 ---
 
 
