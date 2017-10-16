@@ -81,5 +81,3 @@ cnpm install [module name]
 
 关于node项目中生产的package-lock.json文件，只有npm 5以上才会有：
 [说说 npm 5 的新坑](https://toutiao.io/posts/hrihhs/preview)
-
-
