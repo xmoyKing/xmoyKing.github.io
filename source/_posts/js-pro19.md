@@ -28,3 +28,46 @@ var supportsDOM2Views = document.implementation.hasFeature('Views', '2.0');
 var supportsDOM2HTML = document.implementation.hasFeature('HTML', '2.0');
 var supportsDOM2XML = document.implementation.hasFeature('XML', '2.0');
 ```
+
+#### 针对XML命名空间的变化
+XML命名空间，不同XML文档的元素可以混合在一起，共同构成格式良好的文档，且不必担心命名冲突。从技术上，HTML是不支持XML命名空间的，但XHTML支持XML命名空间。
+
+**但由于H5的流行，XHTML现在已经被抛弃了，同时，关于命名空间在实际中运用非常少，所以本章略过笔记**
+
+#### 其他变化
+DOM的其他部分在DOM2核心中也有一些变化。
+
+##### DocumentType类型变化
+**由于H5，所以略过**
+
+##### Document类型变化
+该类型添加了一个与命名空间无关的方法，importNode，该方法用于从一个文档中取得一个节点，然后将其导入到另一个文档。该方法使用很少，略过
+
+##### Node类型变化
+Node类型添加了isSupported方法，与DOM1中的document.implementation.hasFeature方法类似，该方法用于确定当前节点具有什么能力，这个方法接受的参数也与hasFeature相同：特性名、版本号。返回布尔值。此方法使用是需谨慎，最好使用能力检测代替。
+
+DOM3引入两个比较节点的方法isSameNode、isEqualNode。都接收一个节点作为参数，并在相同/相等时返回true。所谓相同即两个节点引用的是一个对象。所谓相等即节点类型、属性、甚至子节点属性等都相等。
+
+DOM3的setUserData方法能将额外数据指定给节点，该方法有三个参数：键名、值、处理函数。使用getUserData依据键名获取值。
+处理函数在当节点被修改时（复制、删除、重命名、引入新文档）调用，处理函数接受5个参数：表示操作类型的数值（1表示复制、2表示导入、3表示删除、4表示重命名），键，值，源节点，目标节点。在删除时，源节点为null，在复制节点时，目标节点为null。
+```js
+document.body.setUserData('name','king',func);
+document.body.getUserData('name'); // 'king'
+
+function func(operation, key, value, src,dest){
+  if(operation == 1){
+    // ...
+  }
+}
+```
+
+##### 框架变化
+框架和内嵌框架分别用HTMLFrameElement和HTMLIFrameElementI表示，在DOM2中都添加了一个新属性，contentDocument，该属性包含一个指针，指向表示框架内容的文档对象，在此之前，无法直接通过元素取得这个文档对象(只能用frames集合)。
+
+contentDocument属性是Document类型的实例，因此能使用document对象的所有属性和方法，在IE8前无效，但支持contentWindow属性，该属性返回框架的window对象。
+```js
+var iframe = document.getElementById('myiframe');
+var framedoc = iframe.contentDocument || iframe.contentWindow.document; 
+```
+
+### 样式
