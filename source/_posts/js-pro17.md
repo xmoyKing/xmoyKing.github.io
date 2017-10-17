@@ -216,3 +216,189 @@ Element类型用于表现XML或HTML元素，提供对元素标签名、子节点
 所以，一般情况下，通过js以编程方式操作js时使用对象属性，而不是getAttribute方法。只有在获取自定义属性时（以`data-`开头的属性）才使用getAttribute方法。
 
 ##### 设置属性
+与getAttribute对应的方法是setAttribute，这个方法接受两个参数：要设置的属性名和值，若属性值存在则替换，若不存在则新增。
+
+通过这个setAttribute方法即可以操作HTML标准属性也可以操作自定义属性，同时通过这个方法设置的属性名会被统一转换为小写形式，即“ID”最终会变为“id”。
+
+同时，由于HTML标准属性值的特殊性，直接给属性赋值也可以设置属性的值，但自定义的属性值不会自动成为元素属性。
+```js
+div.id = 'someId'。
+
+div.mycolor = 'red';
+div.getAttribute('mycolor'); // null
+```
+
+removeAttribute方法能彻底删除元素的属性。此方法一般是用做序列化DOM元素，通过它来删除非指定的属性。
+```js
+div.removeAttribute('class');
+```
+
+##### attributes属性
+Element类型是使用attributes属性的唯一一个DOM节点类型，attributes属性中包含一个NamedNodeMap，与NodeList类似，也是一个动态的集合，元素的每一个属性都由一个Attr节点表示，每个节点都保存在NamedNodeMap对象中。NamedNodeMap对象拥有如下方法：
+- getNamedItem(name) 返回nodeNade属性等于name的节点
+- removeNameItem(name) 从列表中删除nodeNamde属性等于namde的节点
+- setNameItem(node) 向列表中添加节点，以节点的nodeName属性为索引
+- item(pos) 返回位于pos位置处的节点
+attributes属性中包含一系列节点，每个节点的nodeName就是属性的名称，而节点的nodeValue就是属性值，比如取得元素的id属性：
+```js
+var id = element.attributes.getNamedItem('id').nodeValue;
+var id = element.attributes['id'].nodeValue; // 等效
+
+element.attributes['id'].nodeValue = 'something'; // 设置为新值
+```
+一般来说，除了在遍历元素的属性之外，多用getAttribute、setAttribute、removeAttribute。
+
+##### 创建元素
+使用document.createElement方法可以创建新元素，这个方法只接收一个表示创建元素的标签名作为参数，同时在HTML文档中，这个参数不区分大小写，但XML中区分。
+
+使用createElement方法创建新元素的同时，也为新元素设置了ownerDocument属性，此时可以操作元素的属性，为其添加更多子节点或执行其他操作, 但设置了这些值仅仅只是在内存中赋予了相应的信息，而新元素没有被添加到文档树中，因此这些属性此时不会影响浏览器的显示。可使用appendChild、insertBefore、replaceChild方法将新元素插入到文档树中。
+
+一旦将元素添加到文档树中后，浏览器就会立即渲染该元素，此后对该元素的任何修改都会反映到浏览器中。
+```js
+var div = document.createElement('div');
+
+div.id = 'myDiv';
+div.className = 'box';
+
+document.body.appendChild(div);
+```
+
+##### 元素的子节点
+元素可以有任意数目的子节点和后代节点，因为元素可以是其他元素的子节点，元素的childNodes属性中包含了它所有子节点，这些子节点可以是元素，文本节点，注释，甚至处理指令。
+
+不同浏览器在处理这些节点上存在差异。比如：
+```js
+<ul class="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+```
+IE解析时会认为ul元素有3个子节点，分别是3个li元素，而其他浏览器会认为ul有7个元素，包括3个li元素和4个文本节点，因为li与li和ul之间的空白符，若将这些空白符删除则数目相同。
+
+因此使用childNodes时，必须注意子节点的数目差异，同时需要检查nodeType属性。
+
+有的时候若需要获取元素的特定子元素时可以通过调用元素的getElementsByTagName方法，通过元素调用该方法时搜索起点是当前元素，因此只返回当前元素的后代（不仅仅是直系子节点，也包含嵌套的子节点）。
+
+#### Tex类型
+文本节点由Text类型表示，包含的是可以照字面解释的纯文本内容，不包含HTML代码，但可以是转义后的HTML字符。具有如下特定：
+- nodeType为3
+- nodeName为"#text"
+- nodeValue为节点所包含的文本
+- parentNode是一个Element
+- 不支持子节点
+可通过nodeValue/data属性访问Text节点中包含的文本，这两个属性中包含的值相同，nodeValue/data相互映射，length属性保存节点中字符的数目，即：nodeValue.length和data.length相同。下列是其他可操作的方法：
+- appendData(text) 将text添加到节点的末尾
+- deleteData(offset, count) 从offset指定的位置开始删除count个字符 
+- insertData(offset, text) 从offset出开始插入text
+- replaceData(offset, count, text) 用text替代从offset位置开始到offset+count为止的文本。
+- splitText(offset) 从offset处将文本节点分为两个文本节点
+- substringData(offset, count) 提取从offset开始到offset+count为止的字符串
+默认情况下，若一个可包含内容的元素（如div）必须有内容存在时才有文本节点，且最多只能有一个文本节点。
+
+同时修改文本节点时字符串会进行HTML编码，即大于、小于、引号会被转义,准确的说其实是在向DOM插入文本之前会对其插入内容进行HTML编码：
+```js
+div.firstChild.nodeValue = 'come <strong> HERE </strong>!';
+// 会被转义为 come &lt;strong&gt; HERE &lt;/strong&gt;!
+```
+
+##### 创建文本节点
+使用document.createTextNode()可以创建新的文本节点，作为参数的文本将按照HTML编码。
+
+在创建新文本节点的同时，也会为其设置ownerDocument属性，同时需要将文本节点插入到文档树中否则无法在浏览器看到。
+
+当向同一个元素插入多个文本节点后，相邻的文本会连起来显示（仅仅是显示上）。
+
+##### 规范化文本节点
+当DOM文档中存在相邻的同胞文本节点很容易导致混乱，因为无法分清文本节点表示的字符串。所以需要一个将相邻文本节点合并的方法，该方法定义在Node类型中，所以所有的节点类型都存在，名为normalize。
+
+浏览器在解析文档时永不会创建相邻的文本节点，所以使用normalize的情况只会执行DOM操作时使用。
+
+##### 分割文本节点
+而splitText方法就是与normalize方法相反的操作，将一个文本节点分割为2个文本节点，该方法返回一个新的文本节点。此方法常用于从文本节点中提取数据。
+
+#### Comment类型
+注释在DOM中是通过Comment类型来表示的，其与Text类型继承自相同的积累，因此它拥有除splitText之外的所有操作方法，同时也可以通过nodeVlue和Data属性来取得注释内容，而且其也不支持子节点。
+
+createComment可以创建一个注释节点，但需要注意的是一定要保证它们是html元素的后代，因为浏览器不会识别位于`</html>`标签之后的注释。
+
+一般使用很少。
+
+#### CDATASection类型
+CDATASection类型只针对XML文档，表示CDATA区域，与Comment类型类似。
+
+#### DocumentType类型
+DocumentType类型使用的也很少，其包含doctype相关的信息，不支持子节点。
+
+在DOM1级中，DocumentType对象不能动态创建，只能通过浏览器解析文档代码的方式来创建，支持的浏览器会将其DocumentType对象保存在document.doctype中。该对象有三个属性：
+- name，表示文档类型的名称
+- entities，文档类型描述的实体的NamedNodeMap对象
+- notations，文档类型描述的符号的NamedNodeMap对象
+在HTML文档中，只有name属性有用，即出现在`<! DOCTYPE` 之后的文本
+
+#### DocumentFragment类型
+DocumentFragment类型在文档中没有对应的标记，DOM规定文档片段（ Document Fragment）是一种“轻量级”文档，可以包含和控制及诶但，但不像完整的文档那样占用额外的资源。
+
+文档片段不能直接添加到文档中，但将其作为一个“仓库”使用，即可以在其中保存将要添加到文档的节点。文档片段继承了Node的所有方法，可以执行所有文档的DOM操作。
+
+同一个文档片段保存创建的新节点，然后再一次性将他们添加到我能当中，能避免浏览器的反复渲染。
+
+#### Attr类型
+元素属性在DOM中以Attr类型表示，在所有浏览器中，都可以访问Attr类型的构造函数和原型，元素属性就是元素对象的attributes属性中的节点。
+
+Attr类型虽然也是节点，但却不认为是DOM文档树的一部分，其有三个属性：
+- name 属性名（与nodeName相同）
+- value 属性值（与nodeValue相同）
+- specified 布尔值，用于区别属性是在代码中指定的还是默认的
+
+createAttribute方法可以创建新的属性节点，要将新的属性节点添加到元素上必须使用setAttributeNode方法。对应的还是getAttributeNode方法来获取属性值。
+
+该类型的直接使用非常少，一般使用getAttribute、setAttribute、removeAttribute要方便很多。
+
+### DOM操作技术
+多数的DOM操作都很简明，但由于浏览器的不兼容等问题，有时却不像表面的那么简单。
+
+#### 动态脚本
+使用`<script>`元素可以向页面中插入js代码，而动态脚本指的是页面加载时不存在，但将来的某一时刻通过修改DOM动态添加的脚本，跟HTML中script元素一样，创建动态脚本有2种方式：插入外部文件或直接插入js代码
+
+动态加载的外部js文件能够直接立即运行：
+```js
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = 'outer.js';
+document.body.appendChild(script);
+```
+行内方式：
+```js
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.appendChild(document.createTextNode('function sayHid(){alert(1);}'));
+document.body.appendChild(script);
+```
+上述行内方式在IE中会报错，因为IE将script视为一个特殊的元素，不允许访问其子节点。但可以通过script的text属性来指定js代码。
+而这种行内方式代码可以在加载后执行，但相当于将相同字符串传递给eval。
+
+#### 动态样式
+同动态脚本一样，动态样式也是页面加载完成后动态添加到页面中的。将css样式包含到HTML中的元素有两个，分别是link元素，用于包含外部的文件，style元素用于指定嵌入的样式。
+
+与动态脚本一样处理即可达到动态样式的目的。但需要注意的是，需要将link元素添加到head元素中。
+
+#### 操作表格
+table元素是HTML中最复杂的结构之一，涉及的表格标签多，比如表格行，单元格，表头等标签，所以往往通过DOM方法操作表格需要编写大量代码。因此DOM对table、tbody、tr添加了一些快捷属性和方法同于操作表格。例如：[HTML DOM Table 对象](http://www.w3school.com.cn/jsref/dom_obj_table.asp)、
+[HTML DOM TableRow 对象](http://www.w3school.com.cn/jsref/dom_obj_tablerow.asp)
+
+#### NodeList的使用
+理解NodeList及NamedNodeMap、HTMLCollection对象是理解DOM的关键，这三个集合都是动态的，即，每当文档结构发生变化时，它们都会更新。因此它们始终保存最新最准确的信息，从本质上说，所有的NodeList对象在访问DOM文档时都是执行的实时查询。
+
+### 小结
+DOM是语言中立的API，用于访问HTML和XML文档，DOM1级将HTML和XML文档形象的当做一个层次化节点树，可以使用js来操作这个节点树，进而改变底层文档的外观和构造。
+
+DOM由各种节点构成，简要总结如下：
+- 最基本的节点类型是Node，用于抽象的表示文档中一个独立的部分，所有其他类型都继承自Node
+- DOcument类型表示整个文档，是一组分层节点的根节点，在js中，document对象是Document类型的一个实例，通过document对象有多种方式可以获取节点
+- Element节点表示文档中所有HTML或XML元素，可操作这些元素的内容和属性
+- 另外还有一些其他节点类型，如文本内容，注释、文档类型、CDATA区域、文档片段
+
+访问DOM的操作一般是直观简单的，但处理脚本和样式元素时需要注意。
+
+理解了DOM操作类型，也就理解了为何DOM操作会对性能影响很大。DOM操作往往是js中开销最大的部分，因访问NodeList导致的问题较多，NodeList对象都是动态的，所以每次访问NodeList对象都会运行一次查询，所以最好的办法就是尽量减少DOM操作。
