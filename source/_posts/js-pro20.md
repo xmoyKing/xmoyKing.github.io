@@ -292,4 +292,30 @@ screenX/screenY可以确定鼠标相对屏幕的坐标信息。
 
 DOM2级事件规范提供了event.detail属性，用于给出有关事件的更多信息。比如对鼠标事件来说，detail中就包含了表示给定位置上发生多少次单击的数值。IE也提供了一些属性，但用处不大。
 
-鼠标事件中还有一类滚轮事件，即mousewheel事件。当用户通过鼠标滚路与页面交互时就会触发该事件，该事件可以在任何元素上触发，且会冒泡到window对象（IE8下为document对象）上。
+鼠标事件中还有一类滚轮事件，即mousewheel事件。当用户通过鼠标滚路与页面交互时就会触发该事件，该事件可以在任何元素上触发，且会冒泡到window对象上（IE8下为document对象）。event.wheelDelta属性表示滚轮的数量（120的倍数，上+下-）。
+
+Firefox支持一个类似的事件，DOMMouseScroll，该事件与mousewheel一样，滚轮信息保存在detail属性中（+-3的倍数）。
+
+在触摸设备上（iPhone/iPad Safari），支持的事件有如下特性：
+- 不支持dblclick事件，双击浏览器会放大窗口，且无法改变该行为。
+- 轻击可单击元素（如链接，或注册了onclick的元素）会触发mousemove事件，若此操作导致内容变化则不再有其他事件发生，若无变化，则依次发生mousedown、mouseup、click事件。轻击不可单击元素不会触发任何事件。
+- mousemove事件也会触发mouseover/mouseout事件
+- 两个手机放在屏幕上且滚动会触发mousewheel/scroll事件
+
+关于无障碍性：
+- 使用click事件执行代码（屏幕阅读器无法触发onmousedown）
+- 不使用onmouseover（屏幕阅读器无法触发）
+- 不要用dblclick，键盘无法触发此事件
+
+#### 键盘与文本事件
+DOM3级事件为键盘事件制定了规范，所有元素都支持如下3个事件，但一般用在文本框上：
+- keydown，按下任意键触发，若按住不放，则重复触发
+- keypress，按下字符键触发，若按住部分，则重复触发
+- keyup，释放按下的键时触发
+当用户按了一个字符键时，首先触发keydown，然后是keypress，最后是keyup。其中keydown和keypress都是在文本框改变之前触发，而keyup则在文本框改变之后触发。
+
+文本事件至于一个，textInput，该事件是keypress的补充，目的是为了在文本显示给用户之前更容易拦截文本，在文本插入文本框之前会触发textInput事件。此时event.data中保存着实际输入的字符。
+
+当keydown和keyup发生时，event.keyCode表示按下的键值码，对字符键，值与ASCII码中的小写字母和数字对应。
+
+当keypress发生时，event.charCode表示按下的字符键，然后基于可以用String.fromCharCode将其转换为实际的字符，浏览器之间有差异，需要先检测是否可用。
