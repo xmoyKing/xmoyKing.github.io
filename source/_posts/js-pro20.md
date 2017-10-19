@@ -319,3 +319,218 @@ DOM3级事件为键盘事件制定了规范，所有元素都支持如下3个事
 当keydown和keyup发生时，event.keyCode表示按下的键值码，对字符键，值与ASCII码中的小写字母和数字对应。
 
 当keypress发生时，event.charCode表示按下的字符键，然后基于可以用String.fromCharCode将其转换为实际的字符，浏览器之间有差异，需要先检测是否可用。
+
+#### 变动事件
+DOM2级的变动（mutation）事件能在DOM中的某一部分发生变化时触发，变动事件是为XML/HTML DOM设计的，与语言无关，DOM2级定义了如下变动事件：
+- DOMNodeInserted，当一个节点作为子节点被插入到另一个节点中时触发
+- DOMNodeInsertedIntoDocument，在一个节点被直接插入到文档或通过子树间接插入文档后触发，此事件在DOMNodeInserted之后触发
+- DOMNodeRemoved，当节点从父节点被移除时触发
+- DOMNodeRemovedFromDocument
+- DOMAttrModified， 在属性被修改后触发
+- DOMCharacterDataModified，在文本节点的值发生变化时触发
+- DOMSubtreeModified，在DOM结构中发生任何变化时触发，此事件在其他任何事件触发后都会触发。
+
+DOM3级事件支持的变动事件（废除了部分）
+##### 删除节点
+使用removeChild或replaceChild时，首先触发DOMNodeRemoved事件，事件的event.target是被删节点，event.relatedTarget是父节点，此时，节点尚未从其父节点删除，因此parentNode属性仍然有效（同event.relatedTarget），此事件会冒泡，因此可以在DOM任何层次上处理。
+
+若被删除的节点包含子节点，则其所有子节点以及被删除的节点会相继触发DOMNodeRemovedFromDocument事件，但此事件不会冒泡，所以只有直接指定给其中一个子节点的事件处理程序才会被调用，此事件的目标是相应子节点或被删除的节点，除此之外event对象不包含其他信息。
+
+然后触发的是DOMSubtreeModified，此事件的event.target是被删节点的父节点，此时event对象不包含其他信息。
+
+##### 插入节点
+在使用appendChild、replaceChild、insertBefore向DOM插入节点时，会先触发DOMNodeInserted事件，此事件的event.target是被插入的节点，relatedTarget是父节点，此事件被触发时，节点已经被插入到了新的父节点中，由于此事件会冒泡，因此可以在DOM的各个层次处理它。
+
+然后会在新插入的节点上触发DOMNodeInsertedIntoDocument事件，此事件不冒泡，因此必须在插入节点之前对它添加这个事件处理程序，此事件的target是被插入节点，除此之外event对象不包含其他信息。
+
+最后一个触发的事件是DOMSubtreeModified，此事件的event.target是新插入节点的父节点。
+
+#### HTML5事件
+H5详细列出了浏览器应该支持的所有事件，但并不是所有事件都被所有浏览器支持。
+##### contextmenu事件
+单击鼠标右键能调出上下文菜单，contextmenu事件用于表示何时应该显示上下文菜单，以便取消默认的上下文菜单而提供自定义的菜单。
+
+由于contextmenu冒泡，因此可以为document指定一个事件处理程序。此事件的target是用户操作的元素，可以用preventDefault取消此事件，同时由于contextmenu属于鼠标事件，所以其事件对象中包含与光标位置有关的所有属性。
+
+通常contextmenu事件用来显示自定义上下文菜单，使用onclick来隐藏该菜单。
+
+##### beforeunload事件
+beforeunload发生在window对象上，作用是在页面被卸载（关闭）前可以有一个提示框，能够阻止关闭页面，但不能彻底阻止，此事件将弹出提示框询问是否真的要关闭。
+
+为了弹出对话框，必须将event.returnValue设置为显示给用户的字符串（IE/Firefox），同时将字符串作为函数的返回值（Chrome/Safari）。
+
+##### DOMContentLoaded事件
+与window的load事件（一切都加载完，包括js、css、img）不同，DOMContentLoaded事件是在形成完整的DOM树之后就触发，此时不管img、js、css、或其他资源是否加载完毕。即，DOMContentLoaded事件能让用户尽早的与页面进行交互。
+
+DOMContentLoaded事件可以添加在document或window对象上（其target值为document，所以其实是发生在document上，冒泡到window上）。DOMContentLoaded事件的event对象不会提供额外信息。
+
+对于不支持DOMContentLoaded事件的浏览器，可在页面加载期间设置一个0毫秒的定时器`setTimeout(func, 0)`，表示在当前js处理完成后立即运行这个函数，在页面下载和构建期间，只有一个js处理过程，因此这个定时器会在该过程结束后立即触发。
+
+因为这个定时器能否在DOM加载完后立即执行（如DOMContentLoaded事件执行的时间点）取决于浏览器和页面中的其他代码，所以为了确保有效，必须将其作为页面中第一个定时器，同时最好能最先执行。但即使如此，也无法保证该定时器一定早于load事件。
+
+##### readystatechange事件
+readystatechange事件在IE、Firefox、Opera下可用。
+
+这个事件的目的是提供与文档或元素的加载状态有关的信息，但此事件的行为有时候比较难以预测。支持此事件的对象都有一个readyState属性，该属性值有5种：
+- uninitialized,为初始化，对象存在但未初始化
+- loading，加载中，对象正在加载数据
+- loaded，加载完成，对象加载数据完成
+- interactive，可交互，可以操作对象，但还没完全加载完
+- complete，完成，对象已经加载完毕
+并非所有对象都会经历readyState这几个阶段，即，若某几个阶段不适用于对象，则该对象完全可能跳过该阶段，但并没有规定那个阶段适合于那个对象，所以，readystatechange事件可能会少于4次，且readyState属性值也不总是连续的。
+
+对document而言，值为interactive的readyState会在与DOMContentLoaded大致相同的时刻触发readystatechange事件，此时，DOM树已经加载完成，可以安全操作，因此会进入interactive阶段，但图像或其他外部文件不一定可用。
+
+此事件的event不会提供任何信息，包括target属性。
+
+在与load事件一起使用时，无法预测两个事件触发的先后顺序，在页面包含较多或较大外部资源时，load事件触发之前会进入交互阶段，但若页面包含资源较小较少，则很难确定readystatechange事件和load事件发生的顺序。
+
+同时interactive和complete阶段的顺序也如load和readystatechange事件一样，顺序无法精确定下，因此为了尽快执行代码，有必要同时检测交互和完成阶段：
+```js
+EventUtil.addHandler(document, 'readystatechange', function(event){
+  if(document.readyState == 'interactive' || document.readyState == 'complete'){
+    EventUtil.removeHandler(document, 'readystatechange', arguments.callee);
+    // content loaded;
+  }
+});
+```
+如此，若已经进入交互阶段或完成阶段则removeHandler，是为了避免在其他阶段执行该事件处理程序。这样就达到与DOMContentLoaded相近的效果。
+
+另外，script（IE/Opera）和link（IE）元素也会触发readystatechange事件，可用来确定外部的js和css文件是否加载完成。而基于元素触发的readystatechange事件也需要向对待document那样，同时检测loaded和complete阶段。
+
+##### pageshow和pagehide事件
+现在浏览器（IE9+）有一个特性，**往返缓存（back-forward cache, bfcache）**,可以在用户使用“后退”/“前进”按钮时加快页面的转换速度，这个缓存不仅保存着页面数据，还保存了DOM和js状态，实际上就是将整个页面都保存在了内存中。若页面位于bfcache，你们再次打开页面就不会触发load事件，因此提供了一些新事件用于支持bfcache的行为：
+
+pageshow事件就是在页面显示时触发，无论该页面是否来自bgcache，在重新加载的页面中，pageshow会在load事件触发后触发，而对bfcache中的页面，pageshow会在页面状态完全回复时触发。
+
+注意，此事件的target是document，但必须将事件处理程序添加到window。
+
+pageshow事件的event对象中有一个布尔值属性，persisted，若页面被保存在bfcache中则为true，否则为false。通过检测persisted属性，可以根据页面在bfcache中的状态来确定是否需要采取其他操作。
+
+与pageshow事件对应的是pagehide事件，对pagehide事件，persisted为true则表示页面卸载后会被保存在bfcache中，否则为false，因此第一次触发pageshow时，persisted值一定是false。
+
+##### hashchange事件
+hashchange事件是在url中的hash字符串发生变化时触发，在ajax应用中，经常会用到url参数来保存状态或导航信息。
+
+hashchange事件需要添加到window对象上，此时event对象会额外有oldURL和newURL属性（IE/Safari不支持），分别表示hash变化前后的完整URL。
+
+#### 设备事件
+设备事件（device event）可以让开发者确定用户在如何使用设备，但某些API还是特定浏览器厂商的事件，而未成为标准：
+1. orientationchange事件，确定用户何时将设备由横向查看切换为纵向查看模式，移动safari的window.orientation属性可能取3种值：0表示纵向，90表示左旋转横向（主屏幕按钮在右侧），-90相反。
+2. MozOrientation事件，当设备的加速计检测到设备方向改变时触发，但与orientationchange事件不同，该事件提供一个平面的方向变化。
+3. deviceorientation事件，与MozOrientation事件类似，但其目的是表示设备在空间中的朝向。
+4. devicemotion事件，展示设备移动（不仅仅是设备方向改变）
+
+#### 触摸与手势事件
+触摸与手势事件都是由apple引入的，开始只有移动版的safari支持，后来移动版的webkit（包括android）也开始支持，只针对触摸设备的事件
+##### 触摸事件
+- touchstart，当手指触摸屏幕时触发，即使已经有一个手指放在屏幕上也会触发
+- touchmove，当手指在屏幕上滑动时连续触发,取消此事件会阻止滚动
+- touchend，当手指从屏幕上移开时触发
+- touchcancel，当系统停止跟踪触摸时触发（确切的事件不太清楚）
+上述几个事件都会冒泡，也都可通过preventDefault阻止取消，每个触摸事件的event对象都提供了鼠标事件中常见的属性。除了常见的DOM属性外，还有3个用于跟踪触摸的属性：
+- touches，表示当前跟踪的触摸操作的Touch对象的数组
+- targetTouches，特定于事件目标的Touch对象的数组
+- changedTouches，表示自上次触摸依赖发生了什么改变的Touch对象的数组
+
+每个Touch对象包含下列属性：
+- clientX/clientY，触摸目标在视口中的x/y坐标
+- pageX/pageY，触摸目标在页面中的x/y坐标
+- screenX/screenY，触摸目标在屏幕中的x/y坐标
+- identifier，标志触摸的唯一ID
+- target，触摸的DOM节点目标
+
+在触摸屏幕上的元素时，事件发生顺序如下（包括鼠标事件也会被触发）：
+- touchstart
+- mouseover
+- mousemove(一次)
+- mousedown
+- mouseup
+- click
+- touchend
+
+##### 手势事件
+当两个手指触摸屏幕时会产生手势，手势通常会改变显示项的大小，或渲染显示项：
+- gesturestart，当一个手指已经按在屏幕上，而另一个手指又触摸屏幕时触发
+- gesturechange，当触摸屏幕的任何一个手指的位置发生变化时触发
+- gestureend，当任何一个手指从屏幕上移开时触发
+这些事件都会冒泡，同时这些事件的target是两个手指都位于其范围内的那个元素。
+
+触摸事件和手势事件之间存在关联，当一个手指放在屏幕上时，会触发touchstart，若同时另一个手指也放在屏幕上，则会西安出发gesturestart事件，随后触发基于该手指的touchstart事件，若手指在屏幕上滑动则会触发gesturechange事件，但只要有一个手指移开就会触发gestureend事件，然后基于该手指触发touchend。
+
+与触摸事件一样，每个手势事件的event对象包含标准的鼠标事件属性，同时额外还有rotation和scale。rotation表示手指变化引起的旋转角度，负值表示逆时针旋转。scale表示手指间距离的变化情况，从1开始随距离拉大而增长，距离缩短而减小。
+
+### 内存和性能
+由于事件处理程序为Web应用提供交互能力，所以很容易导致页面添加大量的处理程序，在js中，添加到页面上的事件处理程序数量会直接关系到页面的整体运行性能。原因之一是每个函数都是对象，都会占用内容，内存中对象越多，性能就越差。其次必须事先指定所有事件处理程序而导致的DOM访问次数，会延迟整个页面的交互就绪时间。
+
+#### 事件委托
+对“事件处理程序过多”问题的解决方案就是事件委托，事件委托利用事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件，如click事件会一直冒泡到document层次，即只需要为整个页面指定一个onclick事件处理程序，而不必为每个单击的元素单独添加。
+
+若可行的话，考虑为document对象添加一个事件处理程序，用以处理页面上发生的某种特定类型的事件，优点如下：
+- document对象很快就可以访问，而且可以在页面生命周期的任何时间点上为它添加事件处理程序（无需等DOMContentLoaded、load事件），即，只要可单击的元素出现在页面上即可执行注册的功能。
+- 在页面中设置事件处理程序所需的事件更少，只添加一个事件处理程序所需的DOM引用更少，所花的时间更少。
+- 整个页面占用的内存空间更少，能够提升整体性能
+最适合采用事件委托的事件包括：click、mousedown、mouseup、keydown、keypress。mouseover/mousout事件也冒泡，但处理不易且一般需要计算元素位置（当鼠标从一个元素移到其他子节点时，或者当鼠标移出该元素时，都会触发mouseout事件）
+
+#### 移除事件处理程序
+当内存中保存着过时不用的“空事件处理程序（dangling event handler）”是造成web内存和性能的主要原因。
+
+每当事件处理程序指定给元素时，运行中的浏览器代码与支持页面交互的js代码之间会建立一个连接。采用事件委托可以减少连接数量。在不需要的时候移除事件处理程序也可以解决此问题。
+
+有两种情况下会造成空事件处理程序，第一种是从文档中移除带有事件处理程序的元素时，比如removeChild/replaceChild/innerHTML将页面中某一部分移除，此时，原来添加到元素中的事件处理程序内存就有可能无法被正常回收。此种情况，最好在移除元素之前先移除事件，其次，通过事件委托将事件注册到更高层元素上也可以避免这种问题。
+
+另一个种就是卸载页面时，要解决这种情况，最好的方法就是在页面卸载之前，通过onunload将事件都移除，若以前是通过事件委托注册的事件那么此时移除的事件就能大大减少（跟踪的事件处理程序越少，移除就越容易），简单的说就是通过onload添加的最后都要通过onunload移除。
+
+### 模拟事件
+模拟事件就是通过js可以在任意时刻触发特定的事件，而此时的事件就如同浏览器原生的事件一样，该冒泡、该执行的都会继续执行。
+
+在测试web应用时，模拟触发事件是非常有用的。DOM2级规范谓词规定了模拟特定事件的方式，（IE8-有特殊,暂时忽略）。
+
+#### DOM中的事件模拟
+可以在document对象上使用createEvent方法创建event对象，接收一个参数，表示要创建的事件类型的字符串，在DOM2级中，所有字符串都使用英文复数形式，在DOM3级改为了单数。
+- UIEvents，一般化的UI事件，鼠标和键盘事件都继承自UI事件，DOM3中为UIEvent
+- MouseEvents，一般化的鼠标事件
+- MutationEvents，一般化的DOM变动事件
+- HTMLEvents，一般化的HTML事件，无对应的DOM3级事件
+创建了event对象后，还需要使用与事件有关的信息对其进行初始化，每种类型的event对象都有一个特殊的方法，为它传入适当的数据可以初始化该event对象，不同类型的方法名不同，取决于createEvent中使用的参数。
+最后一步就是触发事件，需要使用dispatchEvent方法，传入表示要触发事件的event对象即可。
+
+##### 模拟鼠标事件
+`createEvent('MouseEvents')`返回的event对象有一个initMouseEvent方法，用于指定与该鼠标事件有关的信息，该方法接收15个参数，分别与鼠标事件中每个典型属性一一对应。如type、bubbles、cancelable、view（几乎都是设置为document.defaultView）等。
+
+##### 模拟键盘事件
+DOM2级事件中没有单独对键盘事件做出规定，而仅仅是在草案中提及，DOM3级事件中的键盘事件其实就是DOM2级草案中的事件。
+
+传入"KeyboardEvent"可以创建一个键盘事件，返回的事件对象会包含一个initKeyEvent方法，该方法接收参数：
+- type
+- bubbles
+- cancelable
+- view
+- key，表示按下的键的键码
+- location,整数，表示按下哪里的键，0默认为主键盘，1表示左，2表示右，3表示数字键盘，4表示移动设置（虚拟键盘），5表示手柄
+- modifiers，字符串，空格分隔的修改键列表，如"Shift Ctrl"
+- repeat,整数，在一行中按了多少次这个键
+
+Firefox中传入"KeyEvents"创建。
+
+##### 模拟其他事件
+此处指的是变动事件和HTML事件，一般用的较少，略过。
+
+##### 自定义DOM事件
+DOM3级定义了“自定义事件”，自定义事件不是DOM原生触发的，而是开发者创建的事件。
+
+传入"CustomEvent"创建一个自定义DOM事件,返回的事件对象中有一个initCustomEvent方法。
+
+#### IE8-中的事件模拟
+思路与DOM的类似，但每一步骤采用了不一样的方法名好方式。
+
+调用document.createEventObject方法在IE中创建event对象，但与DOM不同，此方法不接受参数，而是返回一个通用event对象，然后手动显式设置该对象中所有必要的信息。最后在目标元素上调用fireEvent方法，此方法接收2个参数，事件处理程序名和上一步的event对象。
+
+### 小结
+事件是将js同网页联系在一起的主要方式，DOM3级事件规范和H5定义了常见的大多数事件，但仅仅是基本事件，浏览器厂商同时也实现了自己的专有事件。
+事件是js最重要的主题之一，深入理解事件的工作机制以及它们对性能的影响至关重要，在使用时需要考虑内存和性能问题：
+- 有必要限制一个页面中事件处理程序的数量，数量太多会导致占用大量内存，而且会让用户感觉页面延迟高
+- 建立在事件冒泡机制之上的事件委托技术，从而有效减少事件处理程序的数量
+- 建议在浏览器卸载页面之前移除页面中移除事件处理程序
+
+使用js模拟事件，DOM2级和DOM3级事件规范规定了模拟事件的方法，为模拟各种事件提供了方便。
