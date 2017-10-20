@@ -79,3 +79,28 @@ save方法能给将所有的绘制上下文的设置和变换保存起来（入�
 - (HTML的img对象, x, y, 图像宽, 图像高)
 - (HTML的img对象, 源x, 源y, 源图像宽, 源图像高, 目标x, 目标y, 目标图像宽, 目标图像高)
 
+通过toDataURL方法可以将图像导出为base64格式的数据。
+
+#### 阴影
+2D上下文能根据以下属性值自动为形状或路径绘制阴影。
+- shadowColor, 用CSS格式颜色表示的阴影颜色，默认黑色
+- shadowOffsetX，x轴方向上的阴影偏移量，默认为0
+- shadowOffsetY
+- shadowBlur，模糊的像素数，默认0
+
+#### 渐变
+渐变由CanvasGradient实例表示，通过2D上下文创建或修改，调用createLinearGradient方法创建一个新的线性渐变，接收4个参数：起点x坐标，起点y坐标，终点x坐标，终点y坐标，该方法返回一个CanvasGradient实例。创建了渐变对象后，使用addColorStop方法来指定色标，参数为色标位置（0 - 1的数字）和CSS颜色值。
+
+创建径向渐变（放射渐变）使用createRadialGradient方法，该方法接收6个参数：对应这两个圆的圆心和半径。可以将径向渐变想象成一个长圆桶，而这个6个参数指定的就是桶的2个圆形开口的位置，就可以达到像旋转圆锥体的效果，比如若两个圆为同心圆，则效果为一个向外扩散的径向渐变。
+
+#### 模式
+模式其实就是重复的图像，可以用来填充或描边图像，调用createPattern方法并传入2个参数：一个img/video/canvas元素和一个表示如何重复图像的字符串（同background-repeat属性值一样）
+
+#### 使用图像数据
+通过getImageData方法可以取得原始图像数据，参数为：x，y，宽，高。比如取得左上角（10, 5），50x50的图像数据`context.getImageData(10,5,50,50)`,返回一个ImageData的实例，每个ImageData对象有3个属性，width、height、data，其中data是一个数组，保存着每个像素的数据（分别是：红、绿、蓝、透明度），操作这些图像数据可以实现很多功能。
+
+
+#### 合成
+还有2个属性是所有绘制操作都有的，globalAlpha用于指定所有绘制的透明度，默认0，最大1。
+
+globalCompositionOperation属性表示绘制后的图形怎样与先绘制的图形结合，这个属性的值是字符串，具体是怎么样的效果最好通过实例查看。[HTML 5 canvas globalCompositeOperation 属性](http://www.w3school.com.cn/tags/canvas_globalcompositeoperation.asp)
