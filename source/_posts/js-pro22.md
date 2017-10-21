@@ -4,7 +4,7 @@ categories: js
 tags:
   - js
   - js-pro
-  - Canvas
+  - canvas
 date: 2016-09-09 19:53:56
 updated:
 ---
