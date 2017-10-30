@@ -101,12 +101,51 @@ function handleKeyPress(event){
   event = EventUtil.getEvent(event);
   if(event.keyCode == 13){
     var target = EventUtil.getTarget(event);
+    // 上面为事件处理，下面为应用逻辑
     var value = 5 * parseInt(target.value);
     if(value > 10){
       document.getElementById('errmsg').style.display = 'block';
     }
+
   }
 }
 ```
+上例的事件处理程序除了包含应用逻辑，还进行了事件处理，这种方式的问题主要有2种：
+首先，除了通过事件之外就在没有方法执行应用逻辑，这样调试很困难，若没有发生预期的结果怎么办？是不是表示事件处理程序没有被调用还是指应用逻辑失败？
+其次，若一个后续的事件引发同样的应用逻辑，那么就必须复制功能代码或者将代码抽取到一个单独的函数中，但无论那种，都要做更多的改动。
 
+较好的方法就是将应用逻辑和事件处理程序相分离，各自处理，一个事件处理程序应该从事件对象中提取相关信息，并将信息传递到处理应用逻辑的某个方法中。修改如下：
+```js
+// 事件处理
+function handleKeyPress(event){
+  event = EventUtil.getEvent(event);
+  if(event.keyCode == 13){
+    var target = EventUtil.getTarget(event);
+    validate(target.value);
+  }
+}
 
+// 应用逻辑
+function validate(value){
+    var value = 5 * parseInt(value);
+    if(value > 10){
+      document.getElementById('errmsg').style.display = 'block';
+    }
+}
+```
+如此改动后，validate中没有任何东西会依赖事件处理程序的代码，它只接收一个值然后执行逻辑计算。
+
+从事件处理程序中分离应用逻辑的好处如下：
+1. 更容易更改触发特定过程的事件，比如：若最开始由鼠标点击触发，但现在也需要按键触发，那么这样修改更容易。
+2. 可以在不附加到事件的情况下测试代码，使其更容易创建单元测试或自动化应用流程。
+
+应用和业务逻辑之间松散耦合的原则如下：
+- 勿将event对象传给其他方法，只传来自event对象中所需的数据
+- 任何可以在应用层面的动作都应该可以在不执行任何事件处理程序的情况下进行
+- 任何事件处理程序都只应该处理事件，然后将处理转交给应用逻辑。
+
+#### 其他实践技巧
+可维护的js并不仅仅是关于如何格式化代码，它还关系到代码做什么的问题，多人协作的情况下，应该确保每个人所使用的开发环境都一致，同时坚持一些好的编程实践：
+
+##### 尊重对象所有权
+js的动态性质使得几乎任何东西在任何时间都可以修改，虽然在ES5中通过引入防篡改对象得以改变，
