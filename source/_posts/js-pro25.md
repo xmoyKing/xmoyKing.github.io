@@ -1,5 +1,5 @@
 ---
-title: JavaScript高级程序设计-25-高级技巧-1
+title: JavaScript高级程序设计-25-高级技巧
 categories: js
 tags:
   - js
