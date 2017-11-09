@@ -68,7 +68,7 @@ npm install -g cnpm --registry=https://registry.npm.taobao.org
 cnpm install [module name]
 ```
 
-### 版本号
+### NPM的版本号
 使用NPM下载和发布代码时都会接触到版本号。NPM使用语义版本号来管理代码
 语义版本号分为X.Y.Z三位，分别代表主版本号、次版本号和补丁版本号。当代码变更时，版本号按以下原则更新。
 1. 如果只是修复bug，需要更新Z位。
@@ -76,6 +76,13 @@ cnpm install [module name]
 3. 如果有大变动，向下不兼容，需要更新X位。
 版本号有了这个保证后，在申明第三方包依赖时，除了可依赖于一个固定版本号外，还可依赖于某个范围的版本号。例如"argv": "0.0.x"表示依赖于0.0.x系列的最新版argv。
 
+[语义化版本 2.0.0](http://semver.org/lang/zh-CN/)
+
+### 安装依赖包的版本问题
+
+[NPM依赖包版本号~和^的区别及最佳实践](http://blog.csdn.net/u014291497/article/details/70148468)
+
+[node.js模块依赖及版本号](https://www.cnblogs.com/xiyangbaixue/p/4123085.html)
 
 ### 遇到的一些坑
 
