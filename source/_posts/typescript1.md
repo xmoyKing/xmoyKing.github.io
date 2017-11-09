@@ -17,6 +17,8 @@ TypeScript在ES6的基础上增强了类型校验、接口、装饰器等。
 
 详细可参考[TypeScript中文网-文档简介](https://www.tslang.cn/docs/home.html)
 
+本系列笔记来自《揭秘 Angular 2》一书的TypeScript入门部分。
+
 通过npm安装：
 ```js
 npm install -g typescript@2.0.0
