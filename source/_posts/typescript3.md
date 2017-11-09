@@ -1,278 +1,300 @@
 ---
-title: TypeScript入门-3-装饰器/泛型/其他
+title: TypeScript入门-3-模块/接口
 categories: TypeScript
 tags:
   - js
   - typescript
-date: 2017-11-08 15:35:13
+date: 2017-09-23 13:59:53
 updated:
 ---
 
-### 装饰器
-装饰器（Decorators）是一种特殊类型的声明，它可以被附加到类声明、方法、属性或参数上，用来给附着的主体进行装饰，装饰器由`@`符号紧接一个函数名称，形如@expression, expression求值后必须是一个函数，在函数执行的时候装饰器的声明方法会被执行。
+### 模块
+ES6引入了模块的概念，在TypeScript中也支持模块的使用
 
-#### 方法装饰器
-方法装饰器是在声明一个方法之前被声明的（紧贴着方法声明），它会被应用到方法的属性描述符上，可以用来监视、修改或替换方法定义。
+模块是自声明的，两个模块之间的关系是通过在文件级别上使用import和export来建立的，TypeScript和ES6一样，任何包含顶级import或export的文件都会当初一个模块。
+
+模块在其自身的作用域里执行，而不是在全局作用域里，定义在一个模块里的变量、函数、类在模块外部是不可见的，除非明确使用export导出它们，类似的，若需要使用其他模块导出变量、函数、类和接口时，必须先通过import导入它们。
+
+模块使用模块加载器导入它的依赖，模块加载器在代码运行时会查找并加载模块间的所有依赖，在Angular中，常用的模块加载器有SystemJs和Webpack。
+
+#### 模块导出方式
+模块导出方式分为3种，可以导出变量、函数、类、类型别名、接口给外部模块。
+
+##### 导出声明
+任何模块都能够通过export关键字来导出：
 ```js
-// TypeScript源码：
-// 方法装饰器
-declare type MethodDecorator = <T>(target: Object, propertyKey: string | symbol, descriptor: TypePropertyDescriptor<T>) => TypePropertyDescriptor<T> | void;
-```
-方法装饰器表达式会在运行时当做函数被调用，传入3个参数：
-- target 类的原型对象
-- propertyKey 方法的名字
-- descriptor 成员属性描述
-其中descriptor的类型为TypePropertyDescriptor:
-```js
-interface TypePropertyDescriptor<T> {
-  enumerable?: boolean; // 是否可遍历
-  configurable?: boolean; // 属性描述符是否可改变或属性是否可删除
-  writable?: boolean; // 是否可修改
-  value?: T; // 属性的值
-  get?: ()=> T; // 属性的访问器函数（getter）
-  set?: (value: T) => void; // 属性的设置器函数（setter）
-}
-```
-方法装饰器实例：
-```js
-// 定义一个@log装饰器
-function log(targe: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>){
-  let origin = descriptor.value;
-  descriptor.value = function(...args: any[]){
-    console.log('args: ' + JSON.stringify(args)); // 调用前
-    let result = origin.apply(this, args); // 调用方法
-    console.log('Result-' + result); // 调用后
-    return result;
-  };
-  return descriptor;
+export const COMPANY = 'KING'; // 导出变量
+
+export interface IdentityValidate{ // 导出接口
+  isStagff(s: string): boolean;
 }
 
-// 使用
-class TestClass{
-  @log
-  testMethod(arg: string){
-    return 'logMsg: ' + arg;
-  }
-}
-
-new TestClass().testMethod('test method decorator');
-// 输出：
-// arg: ["test method decorator"]
-// Result-logMsg: test method decorator
-```
-
-#### 类装饰器
-类装饰器是在声明一个类之前被声明的,
-```js
-// 类装饰器
-declare type ClassDecorator = <TFunction extends Function>(target: TFunction) => TFunction | void;
-```
-```js
-
-// 定义一个@Component类装饰器
-function Component(component){
-  return (target: any) => {
-    return componentClass(target, component);
-  }
-}
-
-// 实现componentClass
-function componentClass(targe: any, component?: any): any {
-  var original = target;
-  // 由于需要返回一个新的构造函数，所以必须自己处理原型链，有些繁琐
-  function construct(constructor, args) { // 处理原型链
-    let c: any = function (){
-      return constructor.apply(this, args);
-    };
-
-    c.prototype = constructor.prototype;
-    return new C;
-  }
-
-  let f: any = (...args) => { // 打印参数
-    console.log('selector: ' + component.selector);
-    console.log('template: ' + component.template);
-    console.log(`Person: ${original.name}(${JSON.stringify(args)})`);
-    return construct(original, args);
-  };
-
-  f.prototype = original.prototype;
-  return f; // 返回构造函数
-}
-
-// 使用类装饰器
-@Component({
-  selector: 'person',
-  template: 'person.html'
-})
-class Person {
-  constructor(
-    public firstName: string,
-    public secondNmae: string
-  ){}
-}
-
-// 测试
-let p = new Person('ng', 'js');
-// 输出：
-// selector: person
-// template: person.html
-// Person: Person(['ng', 'js'])
-```
-
-#### 参数装饰器
-
-```js
-// 参数装饰器
-declare type ParameterDecorator = (target: Object, propertyKey: string | symbol, parameterIndex: number) => void;
-```
-参数装饰器的3个参数：
-- target 对应静态成员来说是类的构造函数，对于实例成员是类的原型对象
-- propertyKey 参数名称
-- parameterIndex 参数在函数参数列表中的索引
-```js
-// 定义
-function inject(targe: any, propertyKey: string | symbol, parameterIndex: number){
-  console.log(target);
-  console.log(propertyKey);
-  console.log(parameterIndex);
-}
-// 使用
-class userService {
-  login(@inject name: string){}
-}
-// 输出：
-// Object
-// login
-// 0
-```
-
-#### 属性装饰器
-属性装饰器是用来修饰类的属性，声明和被调用方式跟其他类似。
-```js
-// 属性装饰器
-declare type PropertyDecorator = (target: Object, propertyKey: string | symbol) => void;
-```
-
-#### 装饰器组合
-TypeScript支持多个装饰器同时应用到一个声明上，实现多个装饰器的复合使用：
-```js
-// 从左到右书写
-@decoratorA @decoratorB param
-// 从上到下书写
-@decoratorA 
-@decoratorB 
-functionA
-```
-当多个装饰器应用到同一个声明上时，处理步骤如下：
-- 从左到右（上到下）依次执行装饰器函数，得到返回结果
-- 返回结果会被当做函数，从左到右（上到下）依次调用
-
-```js
-function Component(component){
-  console.log('selector: ' + component.selector);
-  console.log('template: ' + component.template);
-  console.log('component init');
-  return (target: any) => {
-    console.log('component call');
-    return target;
-  } 
-}
-
-function Directive(directive){
-  console.log('directive init');
-  return (target: any) => {
-    console.log('directive call');
-    return target;
-  } 
-}
-
-@Component({select: 'person', template: 'person.html'})
-@Directive()
-class Person{}
-
-// 测试
-let p = new Person();
-// 输出：
-// selector: person
-// template: person.html
-// component init
-// directive init
-// component call
-// directive call
-```
-
-### 泛型
-在实际开发时，定义的API不仅仅要考虑功能是否健全，还是要考虑复用性，更多的时候需要支持不定的数据类型，而泛型（Generic）就是用来实现不定类型的。
-
-比如一个最小堆算法，需要同时支持数字和字符串类型，若把集合类型改为任意值类型（any）则等于放弃类型检查，一般是希望返回的类型需要和参数类型一致：
-```js
-class MinHeap<T> {
-  list: T[] = [];
-
-  add(element: T): void {
-    // 比较，并将最小值放在数组头部
-  }
-
-  min(): T {
-    return this.list.length ? this.list[0] : null;
-  }
-}
-
-// 使用 数字类型
-let heap1 = new MinHeap<number>();
-heap1.add(3);
-heap1.add(5);
-console.log(heap1.min());
-// 使用 字符串类型
-let heap2 = new MinHeap<string>();
-heap2.add('a');
-heap2.add('c');
-console.log(heap2.min());
-```
-
-泛型也支持函数，比如如下zip函数将两个数组压缩到一起, 声明两个泛型T1和T2：
-```js
-function zip<T1, T2>(list1: T1[], list2: T2[]): [T1, T2][] {
-  let len = Math.min(list1.length, list2.length);
-  let ret = [];
-  for(let i = 0; i < len; i++) {
-    ret.push([list1[i], list2[i]]);
-  }
-  return ret;
-}
-// 此处的泛型不能是其他未使用过的类型
-console.log(zip<number, string>([1,2,3], ['s1', 's2', 's3']));
-```
-
-### TypeScript其他
-TypeScript其他一些周边，如编译配置文件，声明文件，编码工具等。
-
-编译配置文件：
-tsc编译器有很多命令行参数，都写在命令行上会非常麻烦，tsconfig.json文件则用于解决编译参数的问题，类似package.json文件搜索方式，当运行tsc时，编译器从当前目录向上手势tsconfig.json文件来加载配置。
-
-具体配置文件详细说明可参阅官网。
-
-声明文件：
-JS语言本身没有静态类型检查功能，TS编译器也只提供了ES标准中的标准库类型声明，只能识别TS代码中的类型，若引入第三方JS库，如jQuery，lodash等，则需要声明文件来辅助开发，在TS中，声明文件是以`.d.ts`为后缀的文件，主要作用是描述一个JS模块文件所有导出的接口类型信息。
-
-从TS2.0开始，直接使用npm来获取声明文件：
-```js
-npm install --save @type/lodash
-```
-实际上@type/lodash来自DefinitelyTyped项目（github.com/DefinitelyTyped）,在ts中使用该模块则可以直接导入：
-```js
-import * as _ from "lodash";
-
-_.padStart('hello ng!', 2, ' ');
-```
-也可以通过编译配置文件来自动导入这些模块：
-```js
-{
-  "compilerOptions": {
-    "types": ["lodash", "koa"]
+export class ErpIdentityValide implements IdentityValidate { // 导出类
+  isStaff(erp: string){
+    return erpService.contains(erp); // 判断是否为内部员工
   }
 }
 ```
 
-编码工具推荐使用VS Code，其对TS的集成度最好，而且免费。
+##### 导出语句
+当需要对导出的模块进行重命名时，就用导出语句：
+```js
+class ErpIdentityValide implements IdentityValidate { // 导出类
+  isStaff(erp: string){
+    return erpService.contains(erp); // 判断是否为内部员工
+  }
+}
+
+export { ErpIdentityValide };
+export { ErpIdentityValide as FooIdentityValidate };
+```
+
+##### 模块包装
+有时候需要修改和扩展已有模块，并导出供其他模块调用，这时就用模块包装来再次导出：
+```js
+// 导出原先的验证器，但重命名
+export { ErpIdentityValide as RegExpBasedZipCodeValidator } form "./ErpIdentityValide";
+```
+一个模块可以包裹多个模块，并把新的内容以一个新的模块导出：
+```js
+export * from "./IdentityValidate";
+export * from "./ErpIdentityValide";
+```
+
+#### 模块导入方式
+模块导入和导出相对，可以import关键字来导入当前模块依赖的外部模块：
+```js
+// 默认导入
+import { ErpIdentityValide } from "./ErpIdentityValide";
+let erpValide = new ErpIdentityValide();
+
+// 别名导入
+import { ErpIdentityValidate as ERP} from "./ErpIdentityValide";
+let erpValidor = new ERP();
+```
+
+#### 模块的默认导出
+模块可以用default关键字实现默认导出功能，每个模块都可以有一个模块导出，类和函数声明可以直接省略导出名来实现默认导出，默认导出有利于减少调用方调用模块的层数，省去冗余模块前缀：
+```js
+// 默认导出类
+// ErpIdentityValidate.ts
+export default class ErpIdentityValidate implements IdentityValidate{
+  isStaff(erp: string){
+    return erpService.contains(erp);
+  }
+}
+
+// test.ts
+import Validator from "./ErpIdentityValidate";
+let erp = new Validator();
+
+// 默认导出函数
+// nameServiceValidate.ts
+export default function(s: string){
+  return nameService.contains(s);
+}
+// test.ts
+import validate from "./nameServiceValidate";
+let name = "Foo";
+console.log(`"${name}" ${validate(name) ? "matches" : "doest not match"}`);
+
+
+// 默认导出值
+// constantService.ts
+export default "Foo";
+
+// test.ts
+import name from "./constantService";
+console.log(name);
+```
+
+#### 模块设计原则
+在模块设计中，共同遵循一些原则有利于更好的编写和维护项目代码，比如：
+
+##### 尽可能在顶层导出
+顶层导出可以降低调用方使用难度，过多的`.`操作使开发者需要记住很多细节，所以尽量使用默认导出或顶层导出，单个对象（类或函数等）可以采用默认导出的方式。
+
+但若要返回多个对象时，可以采用顶层导出的方式，调用的时候再明确的列出导入的对象名即可。
+```js
+// ModuleTest.ts
+export class ClassTest{
+  // ...
+}
+export funcTest(){
+  // ...
+}
+
+// test.ts
+import { ClassTest, funcTest } from "./ModuleTest";
+let C = new ClassTest();
+funcTest();
+```
+##### 明确的列出导入的名字
+在导入的时候尽可能明确的指定导入对象的名称，这样只要接口不变，调用方式就可以不变，从而降低了导入和导出模块的耦合度，做到面向接口编程。
+
+##### 使用命名空间模式导出
+```js
+// ModuleTest.ts
+export class ClassTest{
+  // ...
+}
+export class ClassTest2(){
+  // ...
+}
+export class ClassTest3(){
+  // ...
+}
+
+// test.ts
+import * as largeModule from "./ModuleTest";
+let C = new largeModule.ClassTest();
+```
+
+##### 使用模块包装进行扩展
+可能进程需要去扩展一个模块的功能，尽量不要去修改原对象而是导出一个新的对象来提供新的功能：
+```js
+// ModuleA.ts
+export class ModuleA{
+  constructor() { /***/ }
+  sayHello(){
+    // ...
+  }
+}
+
+// ModuleB.ts
+imprt { ModuleA } from "./ModuelA.ts"
+export class ModuleB extends ModuleA{
+  constructor() { /***/ }
+  sayHi(){
+    // ...
+  }
+}
+export { ModuleB as ModuleA };
+
+// test.ts
+import { ModuleA } from "./ModuleB";
+let C = new ModuleA();
+```
+
+### 接口
+接口在面向对象设计中非常重要，TypeScript接口的使用方式类似Java，同时增加了灵活性，包括属性、函数、可索引（Indexable Types）和类等
+
+#### 属性类型接口
+在TypeScript中使用interface关键字来定义接口：
+```js
+interface FullName{
+  firstName: string;
+  secondName: string;
+}
+
+function printLabel(name: FullName){
+  console.log(name.firstName + ' ' + name.secondName);
+}
+
+let myObj = { age: 10, firstName: 'Jim', secondName: 'Ray'};
+printLabel(myObj);
+```
+上述代码中，FullName接口包含两个属性，且都是字符串类型，而传给printLabel方法的对象只要形式上满足接口的要求即可，接口类型检查器不会去检查属性的顺序，但要保证对应属性存在且类型匹配。
+
+TypeScript还提供了可选属性，可选属性对可能存在的属性进行预定义，并兼容不传值的情况，带有可选属性的几口与普通接口定义方式差不多，只要多加一个`?`符号即可：
+```js
+interface FullName{
+  firstName: string;
+  secondName?: string;
+}
+
+let myObj = { age: 10, firstName: 'Jim'}; // 由于secondName可选，所以可以不传
+printLabel(myObj);
+```
+
+#### 函数类型接口
+接口除了描述带有属性和普通对象外，也能描述函数类型，定义函数类型接口时，需要明确定义函数的参数列表和返回值类，且参数列表的每个参数都要有参数名和类型：
+```js
+interface encrypt{
+  (val:string, salt:string):string
+} 
+
+let md5: encrypt;
+md5 = function(val:string, salt:string){
+  console.log('orign value:' + val);
+  let encryptValue = doMd5(val, salt); // doMd5仅用于mock
+  console.log('encrypt value:' + encryptValue);
+  return encryptValue;
+}
+
+let pwd = md5('password', 'angular');
+```
+对于函数类型接口需要注意：
+1. 函数的参数名，使用时的参数个数需与接口定义的参数相同，对应位置变量的数据类型需保持一致，参数名可以不一样。
+2. 函数返回值，函数的返回值类型与接口定义的返回值类型要一致。
+
+#### 可索引类型接口
+可索引类型接口用来描述那些可以通过索引得到的类型，比如userArray[i], userObject['name']这样的，它包含一个索引签名，表示用来索引的类型与返回值类型，即通过特定的索引来得到指定类型的返回值。
+```js
+interface UserArray {
+  [index: number]: string
+}
+interface UserObject {
+  [index: string]: string
+}
+
+let userArray: UserArray;
+let userObject: UserObject;
+
+userArray = ["X00", "X11"];
+userArray = {"name": "X11"};
+
+console.log(userArray[0]);
+console.log(userObject['name']);
+```
+
+#### 类类型接口
+类类型即可用来规范一个类的内容
+```js
+interface Animal{
+  name: string;
+  setName(n:string): void;
+}
+// 在类中具体实现
+class Dog implements Animal {
+  name: string;
+  setName(n: string){
+    this.name = n;
+  }
+  constructor(n: string){ }
+}
+```
+
+#### 接口扩展
+和类一样，接口也可以实现相互扩展，即能将成员从一个接口复制到另一个里面，这样可以更灵活的将接口拆分到可复用的模块里
+```js
+interface Animal{
+  eat(): void;
+}
+
+interface Person extends Animal{
+  talk(): void;
+}
+
+class Programmer{
+  coding(): void{
+    console.log('coding ... ');
+  }
+}
+
+class Fronter extends Programmer implements Person{
+  eat(){
+    console.log('animal eat');
+  }
+  talk(){
+    console.log('person talk');
+  }
+  coding(): void{
+    console.log('fronter coding ... ');
+  }
+}
+
+// 通过组合基础类来实现接口扩展，可以更灵活复用模块
+let ft = new Fronter();
+ft.coding();
+```

@@ -1,5 +1,5 @@
 ---
-title: TypeScript入门-1-基本类型/函数/类
+title: TypeScript入门-1-基本类型
 categories: TypeScript
 tags:
   - js
@@ -81,21 +81,20 @@ console.log(c); // 3
 
 #### 任意值类型 any
 任意值类型针对编程时类型不确定的变量使用，任意值类型可以让这些变量跳过编译阶段的类型检查，一般用于3种情况：
-1.变量的值会动态变化，比如来自第三方库或用户输入
+
+变量的值会动态变化，比如来自第三方库或用户输入
 ```js
 let x: any = 1; // 数字
 x = 'ng'; // 字符串
 x = false; // 布尔值
 ```
-
-- 改写现有代码时，任意值运行在编译时可选的包含或移除类型检查
+改写现有代码时，任意值运行在编译时可选的包含或移除类型检查
 ```js
 let x: any = 3;
 x.fooFunc(); // 因为不知道到fooFunc在运行时是否存在，所以不检测，不报错
 x.toFixed(); // 数组类型存在此方法
 ```
-
-- 定义存储各种类型的数组时
+定义存储各种类型的数组时
 ```js
 let arr: any[] = [1, 'ng', false];
 ```
@@ -164,3 +163,114 @@ function loop(): never {
 }
 
 ```
+
+### 声明和解构
+在TypeScript中支持var、let、const三种声明方式
+
+#### let声明
+let和var声明变量的写法类似，但不同与var，let声明的变量只在块级作用域内有效,同时，在相同的作用域，let不允许变量被重复声明，而var则是无论声明多少次，最近依次声明值有效。
+
+此外需要注意在函数参数同名的情况：
+```js
+function func(x){
+  let x = 1; // 报错，已经在函数参数声明了
+}
+
+function func(condition, x){
+  if(condition){
+    let x = 1; // 不报错，覆盖函数同名参数的局部变量声明
+    return x; // 返回的是局部块级作用域的x
+  }
+  return x;
+}
+```
+
+#### const声明
+const声明和let声明类似，与let有一样的作用域规则，但const声明的是常量，常量不能被重新赋值，但若定义的常量是对象，对象里的属性值却可以被重新赋值。
+```js
+const CAT_NUM = 9;
+const kitty = {
+  name: 'kat',
+  num: CAT_NUM
+}
+
+kitty = { // 报错，
+  name: 'caut',
+  num: CAT_NUM
+}
+
+kitty.name = 'caut'; // 通过
+kitty.num++ ; // 通过
+```
+
+#### 解构
+解构是ES6的一个特性，所谓解构就是将声明的一组变量与相同结构的数组或对象的元素数值一一对应，并将变量相对应元素进行赋值，解构可以非常容易的实现多返回值的场景，不仅写法简洁，而且代码可读性很强。
+
+TS中支持数组和对象解构两种不同的解构类型。
+
+##### 数组解构
+数组解构是最简单的解构类型.
+```js
+let input = [1,2];
+let [first, second] = input;
+console.log(first, second);
+
+// 作用与已声明的变量
+[first, second] = [second,first]; // 变量交换
+
+// 或作用于函数参数
+function f([first, second] = [number, number]){
+  console.log(first + second);
+}
+f([1,2]); // 输出 3
+```
+在数组结构使用rest参数语法（形式为`...variableName`）创建一个剩余变量列表，`...`三个连续小数点表示展开操作符，用于创建可变长的参数列表，使用起来非常方便。
+```js
+let [first, ...rest] = [1,2,3,4];
+
+console.log(first); // 1
+console.log(rest); // [2,3,4]
+```
+
+##### 对象解构
+对象解构最有用的是在一些原本需要多行编写的代码，用对象解构的方式编写一行就能完成。
+```js
+let test = {x:0, y:10, width: 10, height: 20};
+let {x, y, width, height} = test;
+console.log(x, y, width, height);
+```
+
+总的而言，解构是很方便的语法，但需要注意，在深层嵌套时比较容易出错。
+
+
+### TypeScript其他
+TypeScript其他一些周边，如编译配置文件，声明文件，编码工具等。
+
+编译配置文件：
+tsc编译器有很多命令行参数，都写在命令行上会非常麻烦，tsconfig.json文件则用于解决编译参数的问题，类似package.json文件搜索方式，当运行tsc时，编译器从当前目录向上手势tsconfig.json文件来加载配置。
+
+具体配置文件详细说明可参阅官网。
+
+声明文件：
+JS语言本身没有静态类型检查功能，TS编译器也只提供了ES标准中的标准库类型声明，只能识别TS代码中的类型，若引入第三方JS库，如jQuery，lodash等，则需要声明文件来辅助开发，在TS中，声明文件是以`.d.ts`为后缀的文件，主要作用是描述一个JS模块文件所有导出的接口类型信息。
+
+从TS2.0开始，直接使用npm来获取声明文件：
+```js
+npm install --save @type/lodash
+```
+实际上@type/lodash来自DefinitelyTyped项目（github.com/DefinitelyTyped）,在ts中使用该模块则可以直接导入：
+```js
+import * as _ from "lodash";
+
+_.padStart('hello ng!', 2, ' ');
+```
+也可以通过编译配置文件来自动导入这些模块：
+```js
+{
+  "compilerOptions": {
+    "types": ["lodash", "koa"]
+  }
+}
+```
+
+编码工具推荐使用VS Code，其对TS的集成度最好，而且免费。
