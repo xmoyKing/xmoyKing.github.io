@@ -1,5 +1,5 @@
 ---
-title: Angular2快速入门
+title: Angular2快速入门-Hello World
 categories: Angular
 tags:
   - js
@@ -12,6 +12,8 @@ updated:
 一步一步的学习手动搭建简单的Angular2开发环境。
 
 本系列笔记来自[《揭秘 Angular 2》](https://github.com/angular-programming)一书。
+
+[DEMO源码](https://github.com/xmoyKing/Angular2-Demo-Hello-World)
 
 ### Hello World
 先从Hello World开始，一个字母一个字母的码~ 
@@ -65,6 +67,41 @@ updated:
 ```
 reflect-metadata和zone.js作为Angular项目依赖的ployfill。
 
+**提前注明测试运行结果：**
+> 非常遗憾，上述代码由于Angular依赖包的版本问题，虽然npm start后webpack会报错，提示找不到'Promise','IterableIterator','PropertyKey'等东西，但localhost:3000却可以运行，且webpack-dev-sever也可以实现动态修改代码，同步更新到浏览器。
+
+官方源码中的fix方式为锁定依赖包版本号, 具体如下：
+```js
+{
+  "name": "HelloWorld",
+  "version": "1.0.0",
+  "description": "Hello-world project for Angular 2",
+  "scripts": {
+    "server": "webpack-dev-server --inline --colors --progress --port 3000",
+    "start": "npm run server"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/core-js": "0.9.34",
+    "ts-loader": "1.2.0",
+    "typescript": "2.0.0",
+    "webpack": "1.12.9",
+    "webpack-dev-server": "1.14.0"
+  },
+  "dependencies": {
+    "@angular/common": "2.0.0",
+    "@angular/compiler": "2.0.0",
+    "@angular/core": "2.0.0",
+    "@angular/platform-browser": "2.0.0",
+    "@angular/platform-browser-dynamic": "2.0.0",
+    "core-js": "2.4.1",
+    "reflect-metadata": "0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "0.6.26"
+  }
+}
+```
+
 #### tsconfig.json文件
 tsconfig.json放在根目录下，配置TypeScript编译器的编译参数。主要的配置参数说明如下：
 - module 组织代码的方式
@@ -76,15 +113,15 @@ tsconfig.json放在根目录下，配置TypeScript编译器的编译参数。主
 ```js
 {
   "compilerOptions": {
-    "module": "common.js",
+    "module": "commonjs",
     "target": "es5",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicityAny": true,
-    "suppressImplicityAnyIndexErrors": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
     "typeRoots": [
       "./node_modules/@types/"
     ]
@@ -98,7 +135,7 @@ tsconfig.json放在根目录下，配置TypeScript编译器的编译参数。主
 
 #### 源文件
 
-app.component.ts文件中为创建组件的代码
+src/app.component.ts文件中为创建组件的代码
 ```js
 // app.component.ts
 import { Component } from '@angular/core'; //从Angular基础包@Angular/core中引入组件模块
@@ -121,7 +158,7 @@ Angular应用需要用模块来组织一些功能紧密相关的代码块，每�
 ```ts
 // app.module.ts
 import { NgModule } from '@angular/core'; // NgModule用于定义模块的装饰器
-import { BrowserModule } from '@angular/plantform-browser'; 
+import { BrowserModule } from '@angular/platform-browser'; 
 import { AppComponent } from './app.component'; 
 
 @NgModule({ 
@@ -137,16 +174,15 @@ main.ts文件作为项目入口文件，通过这个文件来串联整个项目�
 启动应用主要依赖于Angular自带的platformBrowserDynamic函数和应用模块AppModule，然后调用bootstrapModule方法来编译启动AppModule模块。
 ```js
 // main.ts
-import 'reflect-metadata';
+// import 'reflect-metadata';
+import 'core-js';
 import 'zone.js';
-import { platformBrowserDynamic } from '@angular/plantform-browser-dynamic';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app.module';
 
-plantformBroswerDynamic()
+platformBrowserDynamic()
   .bootstrapModule(AppModule)
-  .catch(
-    err = > console.error(err)
-  );
+  .catch( (err: any) => console.error(err));
 ```
 
 宿主页面index.html,
