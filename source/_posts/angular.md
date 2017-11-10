@@ -19,7 +19,7 @@ updated:
 先从Hello World开始，一个字母一个字母的码~ 
 
 现有大局观，从项目目录结构开始：
-```js
+```ts
 // 项目根目录
 - package.json // 项目依赖包配置文件
 - tsconfig.json // 配置TypeScript编译器的编译参数
@@ -35,7 +35,7 @@ updated:
 #### package.json
 项目依赖包配置文件,描述npm包的所有的相关信息。
 其中scripts配置用npm调用的一些脚本，或封装一些命令。
-```js
+```ts
 {
   "name": "HelloWorld",
   "version": "1.0.0",
@@ -71,7 +71,7 @@ reflect-metadata和zone.js作为Angular项目依赖的ployfill。
 > 非常遗憾，上述代码由于Angular依赖包的版本问题，虽然npm start后webpack会报错，提示找不到'Promise','IterableIterator','PropertyKey'等东西，但localhost:3000却可以运行，且webpack-dev-sever也可以实现动态修改代码，同步更新到浏览器。
 
 官方源码中的fix方式为锁定依赖包版本号, 具体如下：
-```js
+```ts
 {
   "name": "HelloWorld",
   "version": "1.0.0",
@@ -110,7 +110,7 @@ tsconfig.json放在根目录下，配置TypeScript编译器的编译参数。主
 - emitDecoratorMetadata 让TypeScript支持为带有装饰器的声明生成元数据
 - experimentalDecorators 是否启用实验性装饰器特性
 - typeRoots 指定第三方库的类型定义文件的存放位置，一般为node_modules/@types文件夹
-```js
+```ts
 {
   "compilerOptions": {
     "module": "commonjs",
@@ -136,7 +136,7 @@ tsconfig.json放在根目录下，配置TypeScript编译器的编译参数。主
 #### 源文件
 
 src/app.component.ts文件中为创建组件的代码
-```js
+```ts
 // app.component.ts
 import { Component } from '@angular/core'; //从Angular基础包@Angular/core中引入组件模块
 
@@ -172,7 +172,7 @@ export class AppModule{}
 
 main.ts文件作为项目入口文件，通过这个文件来串联整个项目，在src目录下创建。
 启动应用主要依赖于Angular自带的platformBrowserDynamic函数和应用模块AppModule，然后调用bootstrapModule方法来编译启动AppModule模块。
-```js
+```ts
 // main.ts
 // import 'reflect-metadata';
 import 'core-js';
@@ -205,7 +205,7 @@ platformBrowserDynamic()
 其中bundle.js是Webpack打包命令运行后生成的文件，hello-world标签就是在根组件app.component.ts中定义的selector。
 
 以上Hello World项目就搭建完成了，但运行需通过打包工具（Webpack/Gulp/Grunt/FIS3等）打包编译后才能运行。此处采用的打包工具是在devDependencies中定义的webpack，webpack-dev-server是一个小型服务器工具，项目在开发阶段可以在这个服务器上运行，Webpack的配置文件为webpack.config.js，文件放在根目录下。
-```js
+```ts
 // webpack.config.js
 var webpack = require('webpack');
 var path = require('path');
