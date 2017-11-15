@@ -26,7 +26,7 @@ updated:
 | `<a class="edit" (click)="editContact()">编辑</a>` | 事件绑定 | 单击元素时会触发click事件，需要时也可以传递$event对象，如`(click)="editContact($event)"` | `(事件)="模板语法"`或`on-事件="模板语句"` |
 | `<div [(title)]="name"></div>` | 双向绑定 | 组件和模板间双向数据绑定，等价于`<div [title]="name" (titleChange)="name=$event"></div>` | `[(绑定目标)]="模板表达式"`或`bindon-绑定目标="模板表达式"` |
 | `<input type="text" ##name name="name" id="name" /><p>｛｛name.value｝｝</p>` | 模板局部变量 | 在当前模板中创建一个对id值为name的input元素的引用变量name，相当于`document.getElementById('name')` | `##变量名`或`ref-变量名` |
-| `<p>张三的生日是｛｛birthdat I date ｝｝</p>` | 管道操作符 | 元素数据birthday经管道转换后输出期望数据并显示在模板中 | `输入数据 I 管道名:管道参数` |
+| `<p>张三的生日是｛｛birthdat 管道操作符 date ｝｝</p>` | 管道操作符 | 元素数据birthday经管道转换后输出期望数据并显示在模板中 | `输入数据 管道操作符 管道名:管道参数` |
 | `<p>｛｛detail?.telNum ｝｝</p>` | 模板表达式操作符 | 模板表达式操作符表明detail.telNum属性不是必须存在的，若其值为undefined，那么后面的表达式将被忽略，不会引发异常 | `?.` |
 | `<p *myUnless="boolValue">myUnless is false now.</p>` | 星号前缀 | 使用星号前缀可以简化对结构指令的使用，Angular会将带有星号的指令引用替换成带有`<template>`标签的代码，等价于`<template [myUnless]="boolValue"><p>myUnless is false now.</p></template>` | `*指令` |
 
@@ -196,10 +196,93 @@ Angular提供NgModel指令可以更方便的进行双向绑定：
 />
 ```
 
+##### 双向绑定的原理
+[(ngModel)]可以拆分为ngModel和ngModelChange两部分，其中，ngModel是作为NgModel指令的输入属性用来设置元素的值，ngModelChange作为NgModel指令的输出属性用来监听元素值是否变化。
+
+ngModelChange属性并不会生成DOM事件，实际上它是一个EvenEmiiter类型对象，[(ngModel)]的具体实现为：
+```ts
+@Directive({
+  selector: "[ngModel]",
+  host: {
+    "[value]": "ngModel",
+    "(input)": "ngModelChange.next($event.target.value)"
+  }
+})
+class NgModelDirective{
+  @Input() ngModel: ang;
+  @Output() ngModelChange: EventEmitter = new EventEmitter();
+}
+```
+上述代码中设计指令相关知识，host属性用来描述和指令元素相关的输入输出属性变化，即当[ngModel]的ngModelChange事件发生时就会触发input事件，当[ngModel]的ngModel值变化时就会更新value属性。
+
+Angular提供了一种双向数据绑定的语法，即[(x)],也就是说当Angular解析一个[(x)]的绑定目标时，相当于为这个x指令绑定一个名为x的输入属性和一个名为xChange的输出属性,例如：
+```html
+<span [(x)]="e"></span>
+<!-- 等价于 -->
+<span [x]="e" (xChange)="e=$event"></span>
+```
+总的来说，双向数据绑定实际上就是通过输入属性存储数据，同时通过一个与之对应的输出属性(输入属性+Change后缀)监听输入属性的数据变化来触发相应的事件。
+
+以创建一个支持双向绑定的组件为例，绑定一个number的输入输出属性，同时在组件中需要定义一个@Output输出属性来匹配@Input输入属性：
+```ts
+// amount.component.ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'amount',
+  template: `
+  <span>
+    子组件当前值：{{value}} - <button (click)="increment()">增加</button>
+  </span>
+  `
+})
+export class AmountComponent {
+  @Input() value: number = 0;
+  @Output() valueChange: EventEmitter<number> = new EventEmitter<number>();
+
+  increment(){
+    this.value++;
+    this.valueChange.emit(this.value);
+  }
+}
+```
+```ts
+// app.component.ts
+import { Component, Input } from '@angular/core';
+import { AmountComponent } from './amount.component';
+
+@Component({
+  selector: 'app',
+  template: `
+  <div>
+    <div>
+      <span>Number 1: </span>
+      <amount [(value)]="number1"></amount>
+    </div>
+    <div>
+      <span>Number 2: </span>
+      <amount [value]="number2" (valueChange)="number2=$event"></amount>
+    </div>
+    <ul>
+      <li>Number 1: 父组件当前值：{{ number1 }}</li>
+      <li>Number 2: 父组件当前值：{{ number2 }}</li>
+    </ul>
+  </div>
+  `
+})
+export class Parent {
+  number1: number = 0;
+  number2: number = 1;
+}
+```
+
 #### 输入、输出属性
 有时，输入、输出属性名的语义不是很明确，可能描述不清这个属性的作用或者功能，因此，给输入、输出属性名定义一个有语义的别名是非常有必要的，定义别名有2种方式：
 1. 通过@Input和@Output装饰其为属性指定别名，语法形如：`@Output(别名) 事件属性名="..."`， 例如给一个自定义事件定义了一个别名goto，`@Output('goto') clicks= new EventEmitter<number>();`
 2. 采用组件（指令）元数据的inputs或outputs数组可以为属性指定别名，语法形如：`outputs: ['组件属性名: 别名']`
+
+
+
 
 ### 内置指令
 在Angular中，指令作用在特定的DOM元素上，可以扩展这个元素的功能，为元素增加新的行为，Angular框架本身自带一些指令，如NgClass、NgStyle、NgIf、NgFor、NgSwitch等。
