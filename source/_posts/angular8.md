@@ -1,5 +1,5 @@
 ---
-title: Angular2入门-服务与RxJS-1
+title: Angular2入门-服务
 categories: Angular
 tags:
   - js
@@ -11,7 +11,7 @@ updated:
 
 在Angular中，服务用于书写可重用的公共功能（如日志处理、权限管理等）和复杂业务逻辑、对应应用程序的模块化有着很重要的意义。
 
-介绍Angular服务的概念，优点、以及如何创建和使用服务，然后介绍内置服务HTTP服务，HTTP服务是基于RxJS异步库（基于响应式编程范式实现）编写的，最后介绍RxJS及其背后的响应式编程理念
+介绍Angular服务的概念，优点、以及如何创建和使用服务，然后介绍内置服务HTTP服务，HTTP服务是基于RxJS异步库（基于响应式编程范式实现）编写的。
 
 ### Angular服务
 Angular服务一般封装了某种特定功能的独立模块，它可以通过注入的方式供外部调用，服务在Angular中使用非常广泛，比如：
@@ -283,3 +283,221 @@ export class ContactComponent {
 }
 ```
 需注意：在ContactComponent的getContacts()方法中，_http.get()并没有发出请求，因为RxJS中的Observable实现的是“冷”模式，只有当它被getContacts().subscribe订阅之后才会发出请求。
+
+为通讯录示例增加添加/编辑联系人的功能(HTTP POST)。
+服务端的接口符合REST规范，添加联系人和拉取联系人的URL路径一样，至少METHOD不同，添加/编辑使用POST方法，并且在请求体中新增Contact对象的联系人数据。
+
+服务端的接口在接收到数据并验证通过后会生成唯一id并保存到数据库中，然后以JSON格式放回带id的新联系人数据。因为要发起POST请求，并且在请求体中传递JSON数据，所以要设置HTTP请求头Content-Type为'application/json'。
+
+首先导入Headers和RequestOptions对象：
+```ts
+import { Headers, RequestOptions } from '@angular/http';
+```
+然后在ContactService服务中新增一个addContact()方法：
+```ts
+// contact.service.ts
+// ...
+addContact(contact: Contact): Observable<Contact> {
+  let body = JSON.stringify(contact);
+  let headers = new Headers({'Content-Type': 'application/json'});
+  let options = new RequestOptions({headers: headers});
+
+  return this._http.post(CONTACT_URL, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+}
+// ...
+```
+Headers是RequestOptions的一个属性，RequestOptions作为第三个参数传递给HTTP服务的post()方法，这样就可达到自定义请求头的目的。
+即使Content-Type已经被指定为JSON类型，但服务端仍然只接收字符串，所以请求前需要将对象转换为JSON字符串。
+
+在组件中使用addContact()方法和使用getContact方法一样：
+```ts
+// list.component.ts
+// ...
+addContact(contact: Contact){
+  if(!contact) return;
+
+  this._contactService.addContact(contact)
+      .subscribe(
+        contact => this.contacts.push(contact),
+        error => this.errorMessage = <any>error
+      );
+}
+```
+在组件的addContact()方法中订阅ContactService中addContact()方法返回的Observable实例，请求返回时会把新联系人数据追加到contacts数组，然后Angular渲染更新展示。
+
+另外HTTP服务返回的Observable对象可以方便的转换成Promise对象，以下为ContactService服务的Promise版本：
+```ts
+// Promise版本
+// contact.service.ts  
+import { Injectable } from '@angular/core';
+import { Http, RequestOptions } from '@angular/http';
+import { Promise } from 'rxjs/Rx';
+
+const CONTACT_URL = `./app/contacts.json`;
+
+@Injectable()
+export class ContactService{
+  constructor(private _http: http){}
+
+  getContacts(): Promise<any[]> {
+    return this._http.get(CONTACT_URL)
+                .toPromise()
+                .then(this.extractData)
+                .catch(this.handleError);
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    return body.data || {};
+  }
+
+  private handleError(error: any){
+    let errMsg = (error.message) ? error.message :
+              error.status ? `${error.status} - ${error.statusText}` : `Server error`;
+    console.error(errMsg); // 打印
+    return Promise.reject(errMsg);
+  }
+}
+```
+
+##### JSONP
+这一技术的起因在浏览器同源策略的访问限制。关于同源策略不细讲，只谈解决方法。
+若服务器和浏览器都支持CORS（Cross-Origin Resource Sharing）协议，则AJAX不受同源策略的限制。CORS是W3C的标准。若两端不方便实施CORS，则可以选择JSONP方案，它适用于任何浏览器。
+
+因为script标签请求资源不会受同源策略限制，而JSONP就是利用script的特性来绕过同源策略，使用JSONP的关键在于利用script标签来发起GET请求，这个请求中传递callback参数给服务端，然后服务端返回一段JS代码，一般以callback函数包裹着JSON数据的形式返回，当script标签请求完成后会自动执行这段代码，所以可以在预先定义好的全局方法callbak中接收和处理JSON数据，注意JSONP只能发起GET请求，在需要发起POST请求的场景中并不适用。
+
+HTTP服务中包含了JSONP服务，示例如下：
+```ts
+// contact.service.ts  
+import { Injectable } from '@angular/core';
+import { Jsonp, URLSearchParams } from '@angular/http';
+
+@Injectable()
+export class ContactService{
+  constructor(private _jsonp: Jsonp){}
+
+  getContacts() {
+    let URL = 'http://xxx.host.com/contacts';
+    let params = new URLSearchParams();
+    params.set('format', 'json');
+    params.set('callback', 'JSONP_CALLBACK');
+
+    return this._jsonp
+                .get(URL, {search: params})
+                .map(res => res.json())
+                .subscribe(
+                  contacts => this.contacts = contacts,
+                  error => this.errorMessage = <any>error
+                );
+  }
+}
+```
+
+##### HttpModule
+HttpModule是在@angular/http中定义的用于封装HTTP相关功能的模块，它包含了HTTP服务，同时也包含HTTP所依赖的其他服务，HttpModule模块主要包含服务如下：
+- HTTP: 封装了常用的HTTP请求方法
+- BrowserXhr：用于创建XMLHTTPRequest实例的工厂
+- XHRBackend：用于创建了XHRConnection实例，该实例会使用BrowserXhr对象来处理请求
+- XSRFStrategy：接口，它定义了配置XSRF攻击保护的方式，目前Angular提供了CookieXSRFStrategy类帮助设置Request Header，用于防止XSRF攻击
+- RequestOptions：封装了HTTP请求参数，BaseRequestOptions是它的子类，默认将请求设置为GET
+方式
+- ResponseOptions：封装了HTTP响应参数，BaseResponseOptions是它的子类，默认将响应设置为成功
+以上服务为Angular默认提供的服务，实际开发用的较多的是HTTP服务，其他服务较少。
+
+开发时，一般会对所有请求做统一处理，例如添加一些必要的HTTP自定义请求头域，或在后端返回某个错误时进行统一处理，如401错误码，或者统一在请求发出前显示“加载中”的状态并在请求返回后关闭该状态等。这种情况下，就可以通过实现ConnectionBackend类并重写createConnection()方法来实现。
+
+首先编写一个HttpInterceptor服务，对请求发送前后进行处理：
+```ts
+// http-interceptor.ts
+import { Injectable } from '@angular/core';
+import { Request, Response } from '@angular/http';
+import { Observable } from 'rxjs';
+
+@Injectable()
+export class HttpInterceptor{
+  beforeRequest(request: Request): Request {
+    // 请求发出前的处理逻辑
+    console.log(request);
+    return request;
+  }
+
+  afterResponse(res: Observable<Response>):Observable<any> {
+    // 请求响应后的处理逻辑
+    res.subscribe((data)=>{
+      console.log(data);
+    });
+    return res;
+  }
+}
+```
+接着实现ConnectionBackend抽象类，目的是封装XHRBackend服务，在XHRBackend创建XHRConnection实例前后进行相应的逻辑处理：
+```ts
+// http-interceptor-backend.ts
+import { Injectable } from '@angular/core';
+import { ConnectionBackend, XHRConnection, XHRBackend, Request } from '@angular/http';
+import { HttpInterceptor } from './http-interceptor';
+
+@Injectable()
+export class HttpInterceptorBackend implements ConnectionBackend {
+  constructor(
+    private _httpInterceptor: HttpInterceptor,
+    private _xhrBackend: XHRBackend
+  ){}
+
+  createConnection(request: Request): XHRConnection {
+    let interceptor = this._httpInterceptor;
+
+    // 请求发出前，拦截请求并调用HttpInterceptor对象的beforeRequest()方法
+    let req = interceptor.beforeRequest ? interceptor.beforeRequest(request) : request;
+    // 通过XHRBackend对象创建XHRConnection实例
+    let result = this._xhrBackend.createConnection(req);
+    // 在得到响应后，拦截并调用HttpInterceptor对象的afterResponse方法
+    result.response = interceptor.afterResponse ? interceptor.afterResponse(result.response) : result.response;
+
+    return result;
+  }
+}
+```
+
+Angular的HttpModule源码中，HTTP服务默认是使用XHRBackend对象作为构造函数的第一个参数创建的，为了使HttpInterceptorBackend拦截生效，需要将创建HTTP服务时的第一个参数改为HttpInterceptorBackend对象，因此定义一个新的httpFactory工厂方法：
+```ts
+// HttpModule源码
+// ...
+export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): HTTP {
+  return new Http(xhrBackend, requestOptions);
+}
+// ...
+```
+对应HttpModule源码，重写httpFactory方法
+```ts
+// http-factory.ts
+import { RequestOptions, Http } from '@angular/http';
+import { HttpInterceptorBackend } from './http-interceptor-backend';
+
+export function httpFactory(httpInterceptorBackend: HttpInterceptorBackend, requestOptions: RequestOptions): HTTP {
+  return new Http(httpInterceptorBackend, requestOptions);
+}
+```
+最后在根模块中导入以上定义的服务即可：
+```ts
+// app.module.ts
+import { Http, RequestOptions } from '@angular/http';
+import { HttpInterceptorBackend } from './interceptor/http-interceptor-backend';
+import { HttpInterceptor } from './interceptor/http-interceptor';
+import { httpFactory } from './interceptor/http-factory';
+
+// ...
+  providers: [
+    // ...
+    HttpInterceptorBackend, HttpInterceptor,
+    {
+      provide: Http, 
+      useFactory: httpFactory, 
+      deps: [HttpInterceptorBackend, RequestOptions]
+    }
+  ]
+// ...
+```
+如此之后，通过HTTP服务发出任何一个HTTP请求时，在控制台都能打印出Request对象和Response对象。
