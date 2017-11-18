@@ -78,8 +78,8 @@ RouterOutlet指令的作业是在组件的模板中开辟出一块区域，用�
 ### 路由策略
 Angular提供PathLocationStrategy和HashLocationStrategy两种路由策略，分别表示使用URL的path部分和hash部分来进行路由匹配。
 以通讯录联系人列表页的配置项为例：
-- 使用PathLocationStrategy策略，URL是`http://www.host.com/list`
-- 使用HashLocationStrategy策略，URL是`http://www.host.com/#/list`
+- 使用PathLocationStrategy策略，URL是`http://localhost:3000/list`
+- 使用HashLocationStrategy策略，URL是`http://localhost:3000/#/list`
 
 #### HashLocationStrategy策略
 HashLocationStrategy策略是Angular最为常见的策略，原理是利用了浏览器在处理hash部分的两个特性：
@@ -99,7 +99,7 @@ export class AppModule{}
 #### PathLocationStrategy策略
 PathLocationStrategy使用URL的path部分来进行路由匹配，因此与HashLocationStrategy策略不同，浏览器会将配置项对应的URL原封不动的发送到服务器。
 
-作为Angular的默认路由策略，其最大的有点在于为服务器端渲染提供了可能，比如，当使用PathLocationStrategy策略获取联系人列表页时，浏览器会向服务器发送请求`http://www.host.com/list`，服务器可以通过解析URL上的path部分`/list`得知所访问的页面，对其进行渲染并将结果返回给浏览器，而当使用HashLocationStrategy策略时，由于hash不会发送到服务器，所以个页面请求的都是同一个URL，导致服务器无法通过URL得知所要访问的页面，也就无从渲染了。
+作为Angular的默认路由策略，其最大的有点在于为服务器端渲染提供了可能，比如，当使用PathLocationStrategy策略获取联系人列表页时，浏览器会向服务器发送请求`http://localhost:3000/list`，服务器可以通过解析URL上的path部分`/list`得知所访问的页面，对其进行渲染并将结果返回给浏览器，而当使用HashLocationStrategy策略时，由于hash不会发送到服务器，所以个页面请求的都是同一个URL，导致服务器无法通过URL得知所要访问的页面，也就无从渲染了。
 
 使用PathLocationStrategy策略必须满足3个条件：
 1. 浏览器支持H5的history.pushState()方法，此方法是RouterLink指令在跳转时即使更改了URL的path部分也不会引起页面刷新的关键。
@@ -129,10 +129,10 @@ ANgular应用进行页面跳转有2种方式。
 ```html
 <!-- app/shared/footer.component.html -->
 <nav>
-  <!-- http://www.xxx.com/collection -->
+  <!-- http://localhost:3000/collection -->
   <a [routerLink]="['/collection']"> <i>收藏</i></a>
 
-  <!-- http://www.xxx.com/list -->
+  <!-- http://localhost:3000/list -->
   <a [routerLink]="['/list']"> <i>通讯录</i></a>
 </nav>
 ```
@@ -156,10 +156,10 @@ RouterLink指令的一个特性就是它可以应用在任何HTML元素上，使
 ```html
 <!-- footer.component.html -->
 <nav>
-  <!-- http://www.xxx.com/collection -->
+  <!-- http://localhost:3000/collection -->
   <a [routerLink]="['/collection']" routerLinkActive="active"> <i>收藏</i></a>
 
-  <!-- http://www.xxx.com/list -->
+  <!-- http://localhost:3000/list -->
   <a [routerLink]="['/list']"> <i>通讯录</i></a>
 </nav>
 ```
@@ -167,10 +167,10 @@ RouterLink指令的一个特性就是它可以应用在任何HTML元素上，使
 ```html
 <!-- footer.component.html -->
 <nav routerLinkActive="active">
-  <!-- http://www.xxx.com/collection -->
+  <!-- http://localhost:3000/collection -->
   <a [routerLink]="['/collection']"> <i>收藏</i></a>
 
-  <!-- http://www.xxx.com/list -->
+  <!-- http://localhost:3000/list -->
   <a [routerLink]="['/list']"> <i>通讯录</i></a>
 </nav>
 ```

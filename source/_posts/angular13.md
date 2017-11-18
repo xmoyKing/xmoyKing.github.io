@@ -283,3 +283,93 @@ export class OperateComponent implements OnInit {
 Angular应用由一个根模块和任意多个特性模块组成，一个大型的应用通常包含很多特性模块，若在首屏加载时便将所有的特性模块加载进来，对于用户体验和服务器负载均会不利，为此，Angular路由提供了对特性模块进行延迟加载的支持，使得只有在真正需要某一个模块的时候，才将其加载进来。
 
 #### 延迟加载实现
+通讯录只有一个根模块，为了演示如何进行特性模块的延迟加载，将OperateComponent组件从根模块中抽取出来，单独为其创建一个OperateModule模块，与根模块需要初始化各项路由服务不同，特性模块仅需要对其路由进行解析，因此子路由模块通过调用RouterModule.forChild()方法来创建。
+```ts
+// operate.module.ts
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { Routes, RouterModule } from '@angular/router';
+import { OperateComponent } from '../widget/operate.component';
+import { ContactService } from '../service/contact.service';
+
+const operateRoutes: Routes = [
+  {path: 'id/:id', component: OperateComponent },
+  {path: 'isAdd/:isAdd', component: OperateComponent }
+];
+
+@NgModule({
+  imports: [BrowserModule, FormsModule, RouterModule.forChild(operateRoutes)],
+  declarations: [OperateComponent],
+  providers: [ContactService]
+})
+export class OperateModule {}
+```
+此后OperateComponent组件便不再需要在根模块AppModule中导入。
+```ts
+// app.module.ts
+@NgModule({
+  declarations: [
+    // OperateComponent,
+    // ...
+  ],
+  // ...
+})
+export class AppModule{}
+```
+最后需要对根模块的路由配置进行修改，通过配置项的loadChildren属性来指定需要进行延迟加载的模块：
+```ts
+// app.routes.ts
+// ...
+export const rootRouterConfig: Routes = [
+  // OperateComponent组件的配置项已在OperateModule模块定义，故不需要下面的配置了
+  // {path: 'operate/id/:id', component: OperateComponent },
+  // {path: 'operate/isAdd/:isAdd', component: OperateComponent }
+  { path: 'operate', loadChildren: 'app/router/operate.module.ts#OperateModule'}
+];
+```
+
+#### 模块加载拦截
+默认情况下，若URL匹配到延迟加载的配置项，相应的特性模块便会被加载进来，若想动态判断是否对该模块进行加载，可以使用CanLoad拦截。
+
+CanLoad拦截的用法和CanActivate等其他拦截类似，首先实现CanLoad接口来创建拦截服务，由于在触发CanLoad拦截时，相应的特性模块还未被加载，因此能传递给canLoad()方法的只有延迟加载配置项的信息：
+```ts
+// can-load-guard.ts
+import { Injectable } from '@angular/core';
+import { CanLoad, Route } from '@angular/router';
+
+@Injetable()
+export class CanLoadGuard implements CanLoad {
+  canLoad(route: Route){
+    // route参数为延迟加载配置项
+    console.log(route.path); // 输出 operate
+    if(/* 运行加载 */){
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
+```
+接着，在延迟加载配置项中指定CanLoad拦截服务：
+```ts
+// app.routes.ts
+import { CanLoadGuard } from '../service/can-load-guard';
+
+export const rootRouterConfig: Routes = [{
+  path: 'operate',
+  loadChildren: 'app/router/operate.module.ts#OperateModule',
+  canLoad: [CanLoadGuard]
+}];
+```
+最后，将CanLoad拦截服务注入根模块：
+```ts
+// app.module.ts
+import { CanLoadGuard } from '../service/can-load-guard';
+
+@NgModule({
+  // ...
+  providers: [CanLoadGuard]
+})
+export class AppModule{}
+```

@@ -39,7 +39,8 @@ document.body.click(); // 模 拟 用 户 点 击
 
 当然我们还可以随意增加或者删除订阅者，增加任何订阅者都不会影响发布者代码的编写：
 ```js
-document.body.addEventListener( 'click', function(){ alert( 2); }, false ); document.body.addEventListener( 'click', function(){ alert( 3); }, false ); document.body.addEventListener( 'click', function(){ alert( 4); }, false ); document.body.click(); // 模 拟 用 户 点 击
+document.body.addEventListener( 'click', function(){ alert( 2); }, false ); document.body.addEventListener( 'click', function(){ alert( 3); }, false ); document.body.addEventListener( 'click', function(){ alert( 4); }, false ); 
+document.body.click(); // 模 拟 用 户 点 击
 ```
 注 意， 手 动 触 发 事 件 更 好 的 做 法 是 IE 下 用 fireEvent， 标 准 浏 览 器 下 用 dispatchEvent 实 现。
 
@@ -59,7 +60,7 @@ salesOffices.listen = function( fn ){ // 增 加 订 阅 者
 }; 
 
 salesOffices.trigger = function(){ // 发 布 消 息 
-  for( var i = 0, fn; fn = this.clientList[ i + + ]; ){ 
+  for( var i = 0, fn; fn = this.clientList[ i++ ]; ){ 
     fn.apply( this, arguments ); // (2) // arguments 是 发 布 消 息 时 带 上 的 参 数 
   } 
 };
@@ -84,17 +85,17 @@ var salesOffices = {}; // 定 义 售 楼 处
 salesOffices.clientList = {}; // 缓 存 列 表， 存 放 订 阅 者 的 回 调 函 数 
 salesOffices.listen = function( key, fn ){ 
   if ( !this.clientList[ key ] ){ // 如 果 还 没 有 订 阅 过 此 类 消 息， 给 该 类 消 息 创 建 一 个 缓 存 列 表 
-  this.clientList[ key ] = []; } this.clientList[ key ]. push( fn ); // 订 阅 的 消 息 添 加 进 消 息 缓 存 列 表 
+  this.clientList[ key ] = []; } this.clientList[ key ].push( fn ); // 订 阅 的 消 息 添 加 进 消 息 缓 存 列 表 
 };
 
 salesOffices.trigger = function(){ // 发 布 消 息 
   var key = Array.prototype.shift.call( arguments ), // 取 出 消 息 类 型 
   fns = this.clientList[ key ]; // 取 出 该 消 息 对 应 的 回 调 函 数 集 合 
-  if ( !fns | | fns.length = = = 0 ){ // 如 果 没 有 订 阅 该 消 息， 则 返 回   
+  if ( !fns || fns.length === 0 ){ // 如 果 没 有 订 阅 该 消 息， 则 返 回   
     return false; 
   } 
   
-  for( var i = 0, fn; fn = fns[ i + + ]; ){ 
+  for( var i = 0, fn; fn = fns[ i++ ]; ){ 
     fn.apply( this, arguments ); // (2) // arguments 是 发 布 消 息 时 附 送 的 参 数 
   } 
 }; 
@@ -112,3 +113,55 @@ salesOffices.trigger( 'squareMeter88', 2000000 ); // 发 布 88 平 方 米 房 
 salesOffices.trigger( 'squareMeter110', 3000000 ); // 发 布 110 平 方 米 房 子 的 价 格
 ```
 很明显，现在订阅者可以只订阅自己感兴趣的事件了。
+
+#### 发布－订阅模式的通用实现
+现在我们已经看到了如何让售楼处拥有接受订阅和发布事件的功能。假设现在小明又去另一个售楼处买房子，那么这段代码是否必须在另一个售楼处对象上重写一次呢，有没有办法可以让所有对象都拥有发布—订阅功能呢？
+
+JavaScript作为一门解释执行的语言，给对象动态添加职责是理所当然的事情。所以我们把发布—订阅的功能提取出来，放在一个单独的对象内：
+```js
+var event = { 
+  clientList: [], 
+  listen: function( key, fn ){ 
+    if ( !this.clientList[ key ] ){ 
+      this.clientList[ key ] = []; 
+    } 
+    this.clientList[ key ].push( fn ); // 订 阅 的 消 息 添 加 进 缓 存 列 表 
+  }, 
+  trigger: function(){ 
+    var key = Array.prototype.shift.call( arguments ), // (1); 
+        fns = this.clientList[ key ]; 
+    if ( !fns || fns.length === 0 ){ // 如 果 没 有 绑 定 对 应 的 消 息 
+      return false; 
+    } 
+    for( var i = 0, fn; fn = fns[ i++ ]; ){ 
+      fn.apply( this, arguments ); // (2) // arguments 是 trigger 时 带 上 的 参 数 
+    } 
+  }
+};
+```
+再定义一个installEvent函数，这个函数可以给所有的对象都动态安装发布—订阅功能：
+```js
+var installEvent = function( obj ){ 
+  for ( var i in event ){ 
+    obj[ i ] = event[ i ]; 
+  } 
+};
+```
+来测试一番，我们给售楼处对象salesOffices动态增加发布—订阅功能：
+```js
+var salesOffices = {}; 
+installEvent( salesOffices ); 
+salesOffices.listen( 'squareMeter88', function( price ){ // 小 明 订 阅 消 息 
+  console.log( '价 格 = ' + price ); 
+}); 
+
+salesOffices.listen( 'squareMeter100', function( price ){ // 小 红 订 阅 消 息 
+  console.log( '价 格 = ' + price ); 
+}); 
+
+salesOffices.trigger( 'squareMeter88', 2000000 ); // 输 出： 2000000 
+salesOffices.trigger( 'squareMeter100', 3000000 ); // 输 出： 3000000
+```
+
+####　取消订阅的事件
+有时候，我们也许需要取消订阅事件的功能。比如小明突然不想买房子了，为了避免继续接收到售楼处推送过来的短信，小明需要取消之前订阅的事件。现在我们给event对象增加remove方法：
