@@ -8,7 +8,11 @@ date: 2017-11-19 23:51:14
 updated:
 ---
 
-假设有一个快餐店，而我是该餐厅的点餐服务员，那么我一天的工作应该是这样的：当某位客人点餐或者打来订餐电话后，我会把他的需求都写在清单上，然后交给厨房，客人不用关心是哪些厨师帮他炒菜。我们餐厅还可以满足客人需要的定时服务，比如客人可能当前正在回家的路上，要求1个小时后才开始炒他的菜，只要订单还在，厨师就不会忘记。客人也可以很方便地打电话来撤销订单。另外如果有太多的客人点餐，厨房可以按照订单的顺序排队炒菜。这些记录着订餐信息的清单，便是命令模式中的命令对象。
+假设有一个快餐店，而我是该餐厅的点餐服务员，那么我一天的工作应该是这样的：
+
+当某位客人点餐或者打来订餐电话后，我会把他的需求都写在清单上，然后交给厨房，客人不用关心是哪些厨师帮他炒菜。我们餐厅还可以满足客人需要的定时服务，比如客人可能当前正在回家的路上，要求1个小时后才开始炒他的菜，只要订单还在，厨师就不会忘记。
+
+客人也可以很方便地打电话来撤销订单。另外如果有太多的客人点餐，厨房可以按照订单的顺序排队炒菜。这些记录着订餐信息的清单，便是命令模式中的命令对象。
 
 #### 命令模式的用途
 命令模式是最简单和优雅的模式之一，命令模式中的命令（command）指的是一个执行某些特定事情的指令。
@@ -21,14 +25,17 @@ updated:
 
 除了这两点之外，命令模式还支持撤销、排队等操作.
 
-####命令模式的例子——菜单程序
+#### 命令模式的例子——菜单程序
 假设我们正在编写一个用户界面程序，该用户界面上至少有数十个Button按钮。因为项目比较复杂，所以我们决定让某个程序员负责绘制这些按钮，而另外一些程序员则负责编写点击按钮后的具体行为，这些行为都将被封装在对象里。
 
 在大型项目开发中，这是很正常的分工。对于绘制按钮的程序员来说，他完全不知道某个按钮未来将用来做什么，可能用来刷新菜单界面，也可能用来增加一些子菜单，他只知道点击这个按钮会发生某些事情。那么当完成这个按钮的绘制之后，应该如何给它绑定onclick事件呢？
 
 回想一下命令模式的应用场景：
+
 有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁，也不知道被请求的操作是什么，此时希望用一种松耦合的方式来设计软件，使得请求发送者和请求接收者能够消除彼此之间的耦合关系。
+
 我们很快可以找到在这里运用命令模式的理由：点击了按钮之后，必须向某些负责具体行为的对象发送请求，这些对象就是请求的接收者。但是目前并不知道接收者是什么对象，也不知道接收者究竟会做什么。此时我们需要借助命令对象的帮助，以便解开按钮和负责具体行为对象之间的耦合。
+
 设计模式的主题总是把不变的事物和变化的事物分离开来，命令模式也不例外。按下按钮之后会发生一些事情是不变的，而具体会发生什么事情是可变的。通过command对象的帮助，将来我们可以轻易地改变这种关联，因此也可以在将来再次改变按钮的行为。
 
 首先在页面中完成3个button按钮的“绘制”，接下来定义setCommand函数，setCommand函数负责往按钮上面安装命令。可以肯定的是，点击按钮会执行某个command命令，执行命令的动作被约定为调用command对象的execute()方法。虽然还不知道这些命令究竟代表什么操作，但负责绘制按钮的程序员不关心这些事情，他只需要预留好安装命令的接口，command对象自然知道如何和正确的对象沟通：
@@ -145,13 +152,13 @@ var pos = document.getElementById('pos');
 var moveBtn = document.getElementById('moveBtn');
 var cancelBtn = document.getElementById('cancelBtn');
 var MoveCommand = function(receiver, pos) {
-		this.receiver = receiver;
-		this.pos = pos;
-		this.oldPos = null;
-	};
+    this.receiver = receiver;
+    this.pos = pos;
+    this.oldPos = null;
+};
 MoveCommand.prototype.execute = function() {
-	this.receiver.start('left', this.pos, 1000, 'strongEaseOut');
-	this.oldPos = this.receiver.dom.getBoundingClientRect()[this.receiver.propertyName]; // 记 录 小 球 开 始 移 动 前 的 位 置 
+  this.receiver.start('left', this.pos, 1000, 'strongEaseOut');
+  this.oldPos = this.receiver.dom.getBoundingClientRect()[this.receiver.propertyName]; // 记 录 小 球 开 始 移 动 前 的 位 置 
 }; 
 MoveCommand.prototype.undo = function(){ this.receiver.start( 'left', this.oldPos, 1000, 'strongEaseOut' ); // 回 到 小 球 移 动 前 记 录 的 位 置 
 }; 
@@ -175,7 +182,11 @@ cancelBtn.onclick = function(){
 
 在HTML5版《街头霸王》游戏中，命令模式可以用来实现播放录像功能。原理跟Canvas画图的例子一样，我们把用户在键盘的输入都封装成命令，执行过的命令将被存放到堆栈中。播放录像的时候只需要从头开始依次执行这些命令便可，代码如下：
 ```js
-var Ryu = { attack: function(){ console.log( '攻 击' ); }, defense: function(){ console.log( '防 御' ); }, jump: function(){ console.log( '跳 跃' ); }, crouch: function(){ console.log( '蹲 下' ); } 
+var Ryu = {
+  attack: function(){ console.log( '攻 击' ); }, 
+  defense: function(){ console.log( '防 御' ); }, 
+  jump: function(){ console.log( '跳 跃' ); }, 
+  crouch: function(){ console.log( '蹲 下' ); }
 }; 
 var makeCommand = function( receiver, state ){ // 创 建 命 令 
   return function(){ receiver[ state ](); } 
@@ -187,8 +198,11 @@ var commands = {
   "100": "attack" // D 
 };
 var commandStack = []; // 保 存 命 令 的 堆 栈 
+
 document.onkeypress = function( ev ){ 
-  var keyCode = ev.keyCode, command = makeCommand( Ryu, commands[ keyCode ] ); 
+  var keyCode = ev.keyCode, 
+      command = makeCommand( Ryu, commands[ keyCode ] );
+
   if ( command ){ 
     command(); // 执 行 命 令 
     commandStack.push( command ); // 将 刚 刚 执 行 过 的 命 令 保 存 进 堆 栈 
@@ -211,7 +225,7 @@ document.getElementById( 'replay' ).onclick = function(){ // 点 击 播 放 录
 
 所以我们可以把div的这些运动过程都封装成命令对象，再把它们压进一个队列堆栈，当动画执行完，也就是当前command对象的职责完成之后，会主动通知队列，此时取出正在队列中等待的第一个命令对象，并且执行它。
 
-我们比较关注的问题是，一个动画结束后该如何通知队列。通常可以使用回调函数来通知队列，除了回调函数之外，还可以选择发布-订阅模式。即在一个动画结束后发布一个消息，订阅者接收到这个消息之后，便开始执行队列里的下一个动画。读者可以尝试按照这个思路来自行实现一个队列动画。
+我们比较关注的问题是，一个动画结束后该如何通知队列。通常可以使用回调函数来通知队列，除了回调函数之外，还可以选择发布-订阅模式。即在一个动画结束后发布一个消息，订阅者接收到这个消息之后，便开始执行队列里的下一个动画。
 
 #### 宏命令
 宏命令是一组命令的集合，通过执行宏命令的方式，可以一次执行一批命令。想象一下，家里有一个万能遥控器，每天回家的时候，只要按一个特别的按钮，它就会帮我们关上房间门，顺便打开电脑并登录QQ。
@@ -242,10 +256,10 @@ macroCommand.add( openPcCommand );
 macroCommand.add( openQQCommand ); 
 macroCommand.execute();
 ```
-当然我们还可以为宏命令添加撤销功能，跟macroCommand.execute类似，当调用macroCommand.undo方法时，宏命令里包含的所有子命令对象要依次执行各自的undo操作。宏命令是命令模式与组合模式的联用产物，关于组合模式的知识，我们将在第10章详细介绍。
+当然我们还可以为宏命令添加撤销功能，跟macroCommand.execute类似，当调用macroCommand.undo方法时，宏命令里包含的所有子命令对象要依次执行各自的undo操作。宏命令是命令模式与组合模式的联用产物，关于组合模式，将在后面详细介绍。
 
 #### 智能命令与傻瓜命令
-再看一下我们在9.7节创建的命令：
+再看一下我们创建的关门命令：
 ```js
 var closeDoorCommand = { execute: function(){ console.log( '关 门' ); } };
 ```

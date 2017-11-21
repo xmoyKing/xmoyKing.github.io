@@ -13,7 +13,9 @@ updated:
 不论是在程序世界里还是现实生活中，发布—订阅模式的应用都非常之广泛。先看一个现实中的例子。
 
 小明最近看上了一套房子，到了售楼处之后才被告知，该楼盘的房子早已售罄。好在售楼MM告诉小明，不久后还有一些尾盘推出，开发商正在办理相关手续，手续办好后便可以购买。但到底是什么时候，目前还没有人能够知道。
+
 于是小明记下了售楼处的电话，以后每天都会打电话过去询问是不是已经到了购买时间。除了小明，还有小红、小强、小龙也会每天向售楼处咨询这个问题。一个星期过后，售楼MM决定辞职，因为厌倦了每天回答1000个相同内容的电话。
+
 当然现实中没有这么笨的销售公司，实际上故事是这样的：小明离开之前，把电话号码留在了售楼处。售楼MM答应他，新楼盘一推出就马上发信息通知小明。小红、小强和小龙也是一样，他们的电话号码都被记在售楼处的花名册上，新楼盘推出的时候，售楼MM会翻开花名册，遍历上面的电话号码，依次发送一条短信来通知他们。
 
 #### 发布－订阅模式的作用
@@ -39,15 +41,17 @@ document.body.click(); // 模 拟 用 户 点 击
 
 当然我们还可以随意增加或者删除订阅者，增加任何订阅者都不会影响发布者代码的编写：
 ```js
-document.body.addEventListener( 'click', function(){ alert( 2); }, false ); document.body.addEventListener( 'click', function(){ alert( 3); }, false ); document.body.addEventListener( 'click', function(){ alert( 4); }, false ); 
-document.body.click(); // 模 拟 用 户 点 击
+document.body.addEventListener( 'click', function(){ alert( 2); }, false );
+document.body.addEventListener( 'click', function(){ alert( 3); }, false );
+document.body.addEventListener( 'click', function(){ alert( 4); }, false ); 
+document.body.click();//模拟用户点击
 ```
-注 意， 手 动 触 发 事 件 更 好 的 做 法 是 IE 下 用 fireEvent， 标 准 浏 览 器 下 用 dispatchEvent 实 现。
+注意，手动触发事件更好的做法是IE下用fireEvent，标准浏览器下用dispatchEvent实现。
 
 #### 自定义事件
 除了DOM事件，我们还会经常实现一些自定义的事件，这种依靠自定义事件完成的发布—订阅模式可以用于任何JavaScript代码中。现在看看如何一步步实现发布—订阅模式。
 1. 首先要指定好谁充当发布者（比如售楼处）；
-2. 然后给发布者添加一个缓存列表，用于存放回调函数以便通知订阅者（售楼处的花名册）；
+2. 然后给发布者添加一个缓存列表（售楼处的花名册），用于存放回调函数以便通知订阅者；
 3. 最后发布消息的时候，发布者会遍历这个缓存列表，依次触发里面存放的订阅者回调函数（遍历花名册，挨个发短信）。
 
 另外，我们还可以往回调函数里填入一些参数，订阅者可以接收这些参数。这是很有必要的，比如售楼处可以在发给订阅者的短信里加上房子的单价、面积、容积率等信息，订阅者接收到这些信息之后可以进行各自的处理：
@@ -76,16 +80,18 @@ salesOffices.listen( function( price, squareMeter ){ // 小 红 订 阅 消 息
   console.log( 'squareMeter = ' + squareMeter ); 
 }); 
 
-salesOffices.trigger( 2000000, 88 ); // 输 出： 200 万， 88 平 方 米 
-salesOffices.trigger( 3000000, 110 ); // 输 出： 300 万， 110 平 方 米
+salesOffices.trigger( 2000000, 88 ); // 2次输 出： 200 万， 88 平 方 米 
+salesOffices.trigger( 3000000, 110 ); // 2次输 出： 300 万， 110 平 方 米
 ```
-这 里 还 存 在 一 些 问 题。 我 们 看 到 订 阅 者 接 收 到 了 发 布 者 发 布 的 每 个 消 息， 虽 然 小 明 只 想 买 88 平 方 米 的 房 子， 但 是 发 布 者 把 110 平 方 米 的 信 息 也 推 送 给 了 小 明， 这 对 小 明 来 说 是 不 必 要 的 困 扰。 所 以 我 们 有 必 要 增 加 一 个 标 示 key， 让 订 阅 者 只 订 阅 自 己 感 兴 趣 的 消 息。 改 写 后 的 代 码 如 下：
+这里还存在一些问题。我们看到订阅者接收到了发布者发布的每个消息（每个消息都输出了2次），虽然小明只想买88平方米的房子，但是发布者把110平方米的信息也推送给了小明，这对小明来说是不必要的困扰。所以我们有必要增加一个标示key，让订阅者只订阅自己感兴趣的消息。改写后的代码如下：
 ```js
 var salesOffices = {}; // 定 义 售 楼 处 
 salesOffices.clientList = {}; // 缓 存 列 表， 存 放 订 阅 者 的 回 调 函 数 
 salesOffices.listen = function( key, fn ){ 
   if ( !this.clientList[ key ] ){ // 如 果 还 没 有 订 阅 过 此 类 消 息， 给 该 类 消 息 创 建 一 个 缓 存 列 表 
-  this.clientList[ key ] = []; } this.clientList[ key ].push( fn ); // 订 阅 的 消 息 添 加 进 消 息 缓 存 列 表 
+    this.clientList[ key ] = []; 
+  } 
+  this.clientList[ key ].push( fn ); // 订 阅 的 消 息 添 加 进 消 息 缓 存 列 表 
 };
 
 salesOffices.trigger = function(){ // 发 布 消 息 
@@ -96,7 +102,7 @@ salesOffices.trigger = function(){ // 发 布 消 息
   } 
   
   for( var i = 0, fn; fn = fns[ i++ ]; ){ 
-    fn.apply( this, arguments ); // (2) // arguments 是 发 布 消 息 时 附 送 的 参 数 
+    fn.apply( this, arguments ); // arguments 是 发 布 消 息 时 附 送 的 参 数 
   } 
 }; 
 
@@ -163,7 +169,7 @@ salesOffices.trigger( 'squareMeter88', 2000000 ); // 输 出： 2000000
 salesOffices.trigger( 'squareMeter100', 3000000 ); // 输 出： 3000000
 ```
 
-####　取消订阅的事件
+#### 取消订阅的事件
 有时候，我们也许需要取消订阅事件的功能。比如小明突然不想买房子了，为了避免继续接收到售楼处推送过来的短信，小明需要取消之前订阅的事件。现在我们给event对象增加remove方法：
 ```js
 event.remove = function( key, fn ){
@@ -233,7 +239,7 @@ login.succ( function( data){
 
 用发布—订阅模式重写之后，对用户信息感兴趣的业务模块将自行订阅登录成功的消息事件。当登录成功时，登录模块只需要发布登录成功的消息，而业务方接受到消息之后，就会开始进行各自的业务处理，登录模块并不关心业务方究竟要做什么，也不想去了解它们的内部细节。改善后的代码如下：
 ```js
-$. ajax( 'http:// xxx.com? login', function( data){ // 登 录 成 功 
+$.ajax('http://xxx.com?login', function( data){ // 登 录 成 功 
   login.trigger( 'loginSucc', data); // 发 布 登 录 成 功 的 消 息 
 });
 ```
@@ -287,7 +293,7 @@ var Event = (function(){
     if ( !clientList[ key ] ){ 
       clientList[ key ] = []; 
     } 
-    clientList[ key ]. push( fn ); 
+    clientList[ key ].push( fn ); 
   }; 
 
   trigger = function(){ 
@@ -310,10 +316,8 @@ var Event = (function(){
     }else{ 
       for ( var l = fns.length - 1; l >= 0; l-- ){ 
         var _fn = fns[ l ]; 
-        if ( _fn === fn ){ 
-          fns.splice( l, 1 );
-        }
-      } 
+        if ( _fn === fn ){ fns.splice( l, 1 ); }
+      }
     }
   }; 
 
@@ -328,7 +332,7 @@ Event.trigger( 'squareMeter88', 2000000 ); // 售 楼 处 发 布 消 息
 ```
 
 #### 模块间通信
-上一节中实现的发布—订阅模式的实现，是基于一个全局的Event对象，我们利用它可以在两个封装良好的模块中进行通信，这两个模块可以完全不知道对方的存在。就如同有了中介公司之后，我们不再需要知道房子开售的消息来自哪个售楼处。
+基于一个全局的Event对象实现的发布—订阅模式中，我们利用它可以在两个封装良好的模块中进行通信，这两个模块可以完全不知道对方的存在。就如同有了中介公司之后，我们不再需要知道房子开售的消息来自哪个售楼处。
 
 比如现在有两个模块，a模块里面有一个按钮，每次点击按钮之后，b模块里的div中会显示按钮的总点击次数，我们用全局发布—订阅模式完成下面的代码，使得a模块和b模块可以在保持封装性的前提下进行通信。
 ```js
@@ -378,133 +382,7 @@ Event.create( 'namespace2' ).listen( 'click', function( a ){
 }); 
 Event.create( 'namespace2' ).trigger( 'click', 2 );
 ```
-具体实现代码如下：
-```js
-var Event = (function() {
-	var global = this,
-		Event, _default = 'default';
-
-	Event = function() {
-		var _listen, _trigger, _remove, _slice = Array.prototype.slice,
-			_shift = Array.prototype.shift,
-			_unshift = Array.prototype.unshift,
-			namespaceCache = {},
-			_create, find, each = function(ary, fn) {
-				var ret;
-				for (var i = 0, l = ary.length; i < l; i + +) {
-					var n = ary[i];
-					ret = fn.call(n, i, n);
-				}
-				return ret;
-			};
-
-		_listen = function(key, fn, cache) {
-			if (!cache[key]) {
-				cache[key] = [];
-			}
-			cache[key].push(fn);
-		};
-
-		_remove = function(key, cache, fn) {
-			if (cache[key]) {
-				if (fn) {
-					for (var i = cache[key].length; i > = 0; i--) {
-						if (cache[key][i] = = = fn) {
-							cache[key].splice(i, 1);
-						}
-					}
-				} else {
-					cache[key] = [];
-				}
-			}
-		};
-
-		_trigger = function() {
-			var cache = _shift.call(arguments),
-				key = _shift.call(arguments),
-				args = arguments,
-				_self = this,
-				ret, stack = cache[key];
-			if (!stack | | !stack.length) {
-				return;
-			}
-			return each(stack, function() {
-				return this.apply(_self, args);
-			});
-		};
-
-		_create = function(namespace) {
-			var namespace = namespace || _default;
-			var cache = {},
-				offlineStack = [],
-				ret = {
-					listen: function(key, fn, last) {
-						_listen(key, fn, cache);
-						if (offlineStack = = = null) {
-							return;
-						}
-						if (last = = = 'last') {
-							offlineStack.length && offlineStack.pop()();
-						} else {
-							each(offlineStack, function() {
-								this();
-							});
-						}
-						offlineStack = null;
-					},
-
-					one: function(key, fn, last) {
-						_remove(key, cache);
-						this.listen(key, fn, last);
-					},
-
-					remove: function(key, fn) {
-						_remove(key, cache, fn);
-					},
-
-					trigger: function() {
-						var fn, args, _self = this;
-						_unshift.call(arguments, cache);
-						args = arguments;
-						fn = function() {
-							return _trigger.apply(_self, args);
-						};
-						if (offlineStack) {
-							return offlineStack.push(fn);
-						}
-						return fn();
-					}
-				};
-
-			return namespace ? (namespaceCache[namespace] ? namespaceCache[namespace] : namespaceCache[namespace] = ret) : ret;
-		};
-
-		return {
-			create: _create,
-			one: function(key, fn, last) {
-				var event = this.create();
-				event.one(key, fn, last);
-			},
-			remove: function(key, fn) {
-				var event = this.create();
-				event.remove(key, fn);
-			},
-			listen: function(key, fn, last) {
-				var event = this.create();
-				event.listen(key, fn, last);
-			},
-			trigger: function() {
-				var event = this.create();
-				event.trigger.apply(this, arguments);
-			}
-
-		};
-
-	}();
-
-	return Event;
-})();
-```
+具体实现代码[Event.js](event.js)
 
 #### JavaScript实现发布－订阅模式的便利性
 这里要提出的是，我们一直讨论的发布—订阅模式，跟一些别的语言（比如Java）中的实现还是有区别的。在Java中实现一个自己的发布—订阅模式，通常会把订阅者对象自身当成引用传入发布者对象中，同时订阅者对象还需提供一个名为诸如update的方法，供发布者对象在适合的时候调用。而在JavaScript中，我们用注册回调函数的形式来代替传统的发布—订阅模式，显得更加优雅和简单。

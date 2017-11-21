@@ -123,7 +123,7 @@ $.each = function( obj, callback ) {
 迭代器可以像普通for循环中的break一样，提供一种跳出循环的方法。jQuery的each函数里有这样一句：`if(value === false){break;}`这句代码的意思是，约定如果回调函数的执行结果返回false，则提前终止循环。下面我们把之前的each函数改写一下：
 ```js
 var each = function( ary, callback ){ 
-  for ( var i = 0, l = ary.length; i < l; i ++ ){ 
+  for ( var i = 0, l = ary.length; i < l; i++ ){ 
     if ( callback( i, ary[ i ] ) === false ){ // callback 的 执 行 结 果 返 回 false， 提 前 终 止 迭 代 
       break; 
     } 

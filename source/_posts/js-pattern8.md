@@ -8,15 +8,15 @@ date: 2017-11-21 23:58:02
 updated:
 ---
 
-我们知道地球和一些其他行星围绕着太阳旋转，也知道在一个原子中，有许多电子围绕着原子核旋转。我曾经想象，我们的太阳系也许是一个更大世界里的一个原子，地球只是围绕着太阳原子的一个电子。而我身上的每个原子又是一个星系，原子核就是这个星系中的恒星，电子是围绕着恒星旋转的行星。一个电子中也许还包含了另一个宇宙，虽然这个宇宙还不能被显微镜看到，但我相信它的存在。也许这个想法有些异想天开，但在程序设计中，也有一些和“事物是由相似的子事物构成”类似的思想。组合模式就是用小的子对象来构建更大的对象，而这些小的子对象本身也许是由更小的“孙对象”构成的。
+我们知道地球和一些其他行星围绕着太阳旋转，也知道在一个原子中，有许多电子围绕着原子核旋转。在程序设计中，也有一些和“事物是由相似的子事物构成”类似的思想。组合模式就是用小的子对象来构建更大的对象，而这些小的子对象本身也许是由更小的“孙对象”构成的。
 
 #### 回顾宏命令
-我们在命令模式中讲解过宏命令的结构和作用。宏命令对象包含了一组具体的子命令对象，不管是宏命令对象，还是子命令对象，都有一个execute方法负责执行命令。现在回顾一下这段安装在万能遥控器上的宏命令代码：
+在命令模式中讲解过宏命令的结构和作用。宏命令对象包含了一组具体的子命令对象，不管是宏命令对象，还是子命令对象，都有一个execute方法负责执行命令。回顾万能遥控器上的宏命令代码：
 ```js
-var closeDoorCommand = { execute: function(){ console.log( '关 门' ); } }; 
-var openPcCommand = { execute: function(){ console.log( '开 电 脑' ); } }; 
-var openQQCommand = { execute: function(){ console.log( '登 录 QQ' ); } }; 
-var MacroCommand = function(){ 
+var closeDoorCommand = { execute: function()console.log( '关 门' ); } }; 
+var openPcCommand = { execute: function()nsole.log( '开 电 脑' ); } }; 
+var openQQCommand = { execute: functio)console.log( '登 录 QQ' ); } }; 
+var MacroCommand = function( 
   return { 
     commandsList: [], 
     add: function( command ){ this.commandsList.push( command ); }, 
@@ -34,7 +34,8 @@ macroCommand.add( openPcCommand );
 macroCommand.add( openQQCommand ); 
 macroCommand.execute();
 ```
-通过观察这段代码，我们很容易发现，宏命令中包含了一组子命令，它们组成了一个树形结构，这里是一棵结构非常简单的树.
+通过观察这段代码，我们很容易发现，宏命令中包含了一组子命令，它们组成了一个树形结构，这里是一棵结构非常简单的树。
+
 其中，marcoCommand被称为组合对象，closeDoorCommand、openPcCommand、openQQCommand都是叶对象。在macroCommand的execute方法里，并不执行真正的操作，而是遍历它所包含的叶对象，把真正的execute请求委托给这些叶对象。
 
 macroCommand表现得像一个命令，但它实际上只是一组真正命令的“代理”。并非真正的代理，虽然结构上相似，但macroCommand只负责传递请求给叶对象，它的目的不在于控制对叶对象的访问。
@@ -63,103 +64,94 @@ macroCommand表现得像一个命令，但它实际上只是一组真正命令�
 首先在节点中放置一个按钮button来表示这个超级万能遥控器，超级万能遥控器上安装了一个宏命令，当执行这个宏命令时，会依次遍历执行它所包含的子命令，代码如下：
 ```js
 var MacroCommand = function() {
-		return {
-			commandsList: [],
-			add: function(command) {
-				this.commandsList.push(command);
-			},
-			execute: function() {
-				for (var i = 0, command; command = this.commandsList[i + +];) {
-					command.execute();
-				}
-			}
-		}
-	};
+    return {
+      commandsList: [],
+      add: function(command) {
+        this.commandsList.push(command);
+      },
+      execute: function() {
+        for (var i = 0, command; command = this.commandsList[i++];) {
+          command.execute();
+        }
+      }
+    }
+  };
 var openAcCommand = {
-	execute: function() {
-		console.log('打 开 空 调');
-	}
-}; /********** 家 里 的 电 视 和 音 响 是 连 接 在 一 起 的， 所 以 可 以 用 一 个 宏 命 令 来 组 合 打 开 电 视 和 打 开 音 响 的 命 令*********/
+  execute: function() {console.log('打 开 空 调');}
+}; 
+/********** 家 里 的 电 视 和 音 响 是 连 接 在 一 起 的， 所 以 可 以 用 一 个 宏 命 令 来 组 合 打 开 电 视 和 打 开 音 响 的 命 令*********/
 var openTvCommand = {
-	execute: function() {
-		console.log('打 开 电 视');
-	}
+  execute: function() {console.log('打 开 电 视');}
 };
 var openSoundCommand = {
-	execute: function() {
-		console.log('打 开 音 响');
-	}
+  execute: function() {console.log('打 开 音 响');}
 };
 var macroCommand1 = MacroCommand();
 macroCommand1.add(openTvCommand);
-macroCommand1.add(openSoundCommand); /********* 关 门、 打 开 电 脑 和 打 登 录 QQ 的 命 令****************/
+macroCommand1.add(openSoundCommand); 
+
+/********* 关 门、 打 开 电 脑 和 打 登 录 QQ 的 命 令****************/
 var closeDoorCommand = {
-	execute: function() {
-		console.log('关 门');
-	}
+  execute: function() {console.log('关 门');}
 };
 var openPcCommand = {
-	execute: function() {
-		console.log('开 电 脑');
-	}
+  execute: function() {console.log('开 电 脑');}
 };
 var openQQCommand = {
-	execute: function() {
-		console.log('登 录 QQ');
-	}
+  execute: function() {console.log('登 录 QQ');}
 };
 var macroCommand2 = MacroCommand();
 macroCommand2.add(closeDoorCommand);
 macroCommand2.add(openPcCommand);
-macroCommand2.add(openQQCommand); /********* 现 在 把 所 有 的 命 令 组 合 成 一 个“ 超 级 命 令”**********/
+macroCommand2.add(openQQCommand); 
+
+/********* 现 在 把 所 有 的 命 令 组 合 成 一 个“ 超 级 命 令”**********/
 var macroCommand = MacroCommand();
 macroCommand.add(openAcCommand);
 macroCommand.add(macroCommand1);
-macroCommand.add(macroCommand2); /********* 最 后 给 遥 控 器 绑 定“ 超 级 命 令”**********/
+macroCommand.add(macroCommand2); 
+
+/********* 最 后 给 遥 控 器 绑 定“ 超 级 命 令”**********/
 var setCommand = (function(command) {
-	document.getElementById('button').onclick = function() {
-		command.execute();
-	}
+  document.getElementById('button').onclick = function() {
+    command.execute();
+  }
 })(macroCommand);
 ```
-当按下遥控器的按钮时，所有命令都将被依次执行
-
-从这个例子中可以看到，基本对象可以被组合成更复杂的组合对象，组合对象又可以被组合，这样不断递归下去，这棵树的结构可以支持任意多的复杂度。在树最终被构造完成之后，让整颗树最终运转起来的步骤非常简单，只需要调用最上层对象的execute方法。每当对最上层的对象进行一次请求时，实际上是在对整个树进行深度优先的搜索，而创建组合对象的程序员并不关心这些内在的细节，往这棵树里面添加一些新的节点对象是非常容易的事情。
+当按下遥控器的按钮时，所有命令都将被依次执行,从这个例子中可以看到，基本对象可以被组合成更复杂的组合对象，组合对象又可以被组合，这样不断递归下去，这棵树的结构可以支持任意多的复杂度。在树最终被构造完成之后，让整颗树最终运转起来的步骤非常简单，只需要调用最上层对象的execute方法。每当对最上层的对象进行一次请求时，实际上是在对整个树进行深度优先的搜索，而创建组合对象的程序员并不关心这些内在的细节，往这棵树里面添加一些新的节点对象是非常容易的事情。
 
 #### 抽象类在组合模式中的作用
 前面说到，组合模式最大的优点在于可以一致地对待组合对象和基本对象。客户不需要知道当前处理的是宏命令还是普通命令，只要它是一个命令，并且有execute方法，这个命令就可以被添加到树中。
 
 这种透明性带来的便利，在静态类型语言中体现得尤为明显。比如在Java中，实现组合模式的关键是Composite类和Leaf类都必须继承自一个Compenent抽象类。这个Compenent抽象类既代表组合对象，又代表叶对象，它也能够保证组合对象和叶对象拥有同样名字的方法，从而可以对同一消息都做出反馈。组合对象和叶对象的具体类型被隐藏在Compenent抽象类身后。
 
-针对Compenent抽象类来编写程序，客户操作的始终是Compenent对象，而不用去区分到底是组合对象还是叶对象。所以我们往同一个对象里的add方法里，既可以添加组合对象，也可以添加叶对象，代码如下：
+针对Compenent抽象类来编写程序，客户操作的始终是Compenent对象，而不用去区分到底是组合对象还是叶对象。所以我们往同一个对象里的add方法里，既可以添加组合对象，也可以添加叶对象。
 
 然而在JavaScript这种动态类型语言中，对象的多态性是与生俱来的，也没有编译器去检查变量的类型，所以我们通常不会去模拟一个“怪异”的抽象类，JavaScript中实现组合模式的难点在于要保证组合对象和叶对象对象拥有同样的方法，这通常需要用鸭子类型的思想对它们进行接口检查。在JavaScript中实现组合模式，看起来缺乏一些严谨性，我们的代码算不上安全，但能更快速和自由地开发，这既是JavaScript的缺点，也是它的优点。
 
 ####透明性带来的安全问题
 组合模式的透明性使得发起请求的客户不用去顾忌树中组合对象和叶对象的区别，但它们在本质上有是区别的。
 
-组合对象可以拥有子节点，叶对象下面就没有子节点，所以我们也许会发生一些误操作，比如试图往叶对象中添加子节点。解决方案通常是给叶对象也增加add方法，并且在调用这个方法时，抛出一个异常来及时提醒客户，
+组合对象可以拥有子节点，叶对象下面就没有子节点，所以我们也许会发生一些误操作，比如试图往叶对象中添加子节点。解决方案通常是给叶对象也增加add方法，并且在调用这个方法时，抛出一个异常来及时提醒客户：
 ```js
 var MacroCommand = function() {
-		return {
-			commandsList: [],
-			add: function(command) {
-				this.commandsList.push(command);
-			},
-			execute: function() {
-				for (var i = 0, command; command = this.commandsList[i + +];) {
-					command.execute();
-				}
-			}
-		}
-	};
+    return {
+      commandsList: [],
+      add: function(command) {
+        this.commandsList.push(command);
+      },
+      execute: function() {
+        for (var i = 0, command; command = this.commandsList[i++];) {
+          command.execute();
+        }
+      }
+    }
+  };
 var openTvCommand = {
-	execute: function() {
-		console.log('打 开 电 视');
-	},
-	add: function() {
-		throw new Error('叶 对 象 不 能 添 加 子 节 点');
-	}
+  execute: function() {console.log('打 开 电 视'); },
+  add: function() {
+    throw new Error('叶 对 象 不 能 添 加 子 节 点');
+  }
 };
 var macroCommand = MacroCommand();
 macroCommand.add(openTvCommand);
@@ -174,28 +166,25 @@ openTvCommand.add(macroCommand) // Uncaught Error: 叶 对 象 不 能 添 加 �
 ```js
 /******************************* Folder ******************************/
 var Folder = function(name) {
-		this.name = name;
-		this.files = [];
-	};
+    this.name = name;
+    this.files = [];
+  };
 Folder.prototype.add = function(file) {
-	this.files.push(file);
+  this.files.push(file);
 };
-Folder.prototype.scan = function() {
-	console.log('开 始 扫 描 文 件 夹: ' + this.name);
-	for (var i = 0, file, files = this.files; file = files[i + +];) {
-		file.scan();
-	}
+Folder.prototype.scan = function() {console.log('开 始 扫 描 文 件 夹: ' + this.name);
+  for (var i = 0, file, files = ts.files; file = files[i++];) {
+    file.scan();
+  }
 }; 
 /******************************* File ******************************/
 var File = function(name) {
-		this.name = name;
-	};
+    this.name = name;
+  };
 File.prototype.add = function() {
-	throw new Error('文 件 下 面 不 能 再 添 加 文 件');
+  throw new Error('文 件 下 面 不 能 再 添 加 文 件');
 };
-File.prototype.scan = function() {
-	console.log('开 始 扫 描 文 件: ' + this.name);
-};
+File.prototype.scan = function() {console.log('开 始 扫 描 文 件: ' + this.name);;
 ```
 接下来创建一些文件夹和文件对象，并且让它们组合成一棵树，这棵树就是我们F盘里的现有文件目录结构：
 ```js
@@ -205,6 +194,7 @@ var folder2 = new Folder('jQuery');
 var file1 = new File('JavaScript 设 计 模 式 与 开 发 实 践');
 var file2 = new File('精 通 jQuery');
 var file3 = new File('重 构 与 模 式') folder1.add(file1);
+
 folder2.add(file2);
 folder.add(folder1);
 folder.add(folder2);
