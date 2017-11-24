@@ -22,7 +22,7 @@ updated:
 var obj = { name: 'sven', address: '深 圳 市' }; 
 obj.address = obj.address + '福 田 区';
 ```
-传统面向对象语言中的装饰者模式在JavaScript中适用的场景并不多，如上面代码所示，通常我们并不太介意改动对象自身。尽管如此，本节我们还是稍微模拟一下传统面向对象语言中的装饰者模式实现。
+传统面向对象语言中的装饰者模式在JavaScript中适用的场景并不多，如上面代码所示，通常我们并不太介意改动对象自身。尽管如此，还是稍微模拟一下传统面向对象语言中的装饰者模式实现。
 
 假设我们在编写一个飞机大战的游戏，随着经验值的增加，我们操作的飞机对象可以升级成更厉害的飞机，一开始这些飞机只能发射普通的子弹，升到第二级时可以发射导弹，升到第三级时可以发射原子弹。
 
@@ -33,7 +33,8 @@ Plane.prototype.fire = function(){ console.log( '发 射 普 通 子 弹' ); }
 ```
 接下来增加两个装饰类，分别是导弹和原子弹：
 ```js
-var MissileDecorator = function( plane ){ this.plane = plane; } MissileDecorator.prototype.fire = function(){ 
+var MissileDecorator = function( plane ){ this.plane = plane; }
+MissileDecorator.prototype.fire = function(){ 
   this.plane.fire();
   console.log( '发 射 导 弹' ); 
 } 
@@ -51,7 +52,7 @@ AtomDecorator.prototype.fire = function(){
 因为装饰者对象和它所装饰的对象拥有一致的接口，所以它们对使用该对象的客户来说是透明的，被装饰的对象也并不需要了解它曾经被装饰过，这种透明性使得我们可以递归地嵌套任意多个装饰者对象.
 ![嵌套多个装饰者对象](1.png)
 
-测试结果：
+测试：
 ```js
 var plane = new Plane(); 
 plane = new MissileDecorator( plane ); 
@@ -59,6 +60,7 @@ plane = new AtomDecorator( plane );
 
 plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹、 发 射 原 子 弹
 ```
+![嵌套多个装饰者对象输出](2.png)
 
 #### 装饰者也是包装器
 在《设计模式》成书之前，GoF原想把装饰者（decorator）模式称为包装器（wrapper）模式。从功能上而言，decorator能很好地描述这个模式，但从结构上看，wrapper的说法更加贴切。装饰者模式将一个对象嵌入另一个对象之中，实际上相当于这个对象被另一个对象包装起来，形成一条包装链。请求随着这条链依次传递到所有的对象，每个对象都有处理这条请求的机会。
@@ -88,7 +90,7 @@ var a = function(){ alert (1); }
 // 改 成： 
 var a = function(){ alert (1); alert (2); }
 ```
-很多时候我们不想去碰原函数，也许原函数是由其他同事编写的，里面的实现非常杂乱。甚至在一个古老的项目中，这个函数的源代码被隐藏在一个我们不愿碰触的阴暗角落里。现在需要一个办法，在不改变函数源代码的情况下，能给函数增加功能，这正是开放-封闭原则给我们指出的光明道路。
+很多时候我们不想去碰原函数，也许原函数是由其他同事编写的，里面的实现非常杂乱。现在需要一个办法，在不改变函数源代码的情况下，能给函数增加功能，这正是开放-封闭原则。
 
 其实通过保存原引用的方式就可以改写某个函数：
 ```js
@@ -114,7 +116,10 @@ document.getElementById = function( id ){
 } 　 　 
 var button = document.getElementById( 'button' );
 ```
-执行这段代码，我们看到在弹出alert(1)之后，紧接着控制台抛出了异常.`//输出： Uncaught TypeError: Illegalinvocation`
+执行这段代码，我们看到在弹出alert(1)之后，紧接着控制台抛出了异常.
+```js
+Uncaught TypeError: Illegal invocation
+```
 
 异常发生在(1)处的_getElementById(id)这句代码上，此时_getElementById是一个全局函数，当调用一个全局函数时，this是指向window的，而document.getElementById方法的内部实现需要使用this引用，this在这个方法内预期是指向document，而不是window,这是错误发生的原因，所以使用现在的方式给函数增加功能并不保险。
 
@@ -215,8 +220,8 @@ var showLogin = function() {
   }
 var log = function(tag) {
     console.log('上 报 标 签 为: ' + tag);
-    // (new Image). src = 'http:// xxx.com/ report? tag =' + tag; 
-    // 真 正 的 上 报 代 码 略 
+    //(newImage).src='http://xxx.com/report?tag='+tag;
+    //真正的上报代码略
   }
 document.getElementById('button').onclick = showLogin;
 ```
@@ -268,7 +273,7 @@ var ajax = function( type, url, param ){
 
 ajax( 'get', 'http://xxx.com/userinfo', { name: 'sven' } );
 ```
-上面的伪代码表示向后台cgi发起一个请求来获取用户信息，传递给cgi的参数是{name:'sven'}。ajax函数在项目中一直运转良好，跟cgi的合作也很愉快。直到有一天，我们的网站遭受了CSRF攻击。解决CSRF攻击最简单的一个办法就是在HTTP请求中带上一个Token参数。
+上面的伪代码表示向后台cgi发起一个请求来获取用户信息，传递给cgi的参数是{name:'sven'}。ajax函数在项目中一直运转良好，跟cgi的合作也很愉快。直到有一天，网站遭受了CSRF攻击。解决CSRF攻击最简单的一个办法就是在HTTP请求中带上一个Token参数。
 
 假设我们已经有一个用于生成Token的函数：
 ```js
@@ -298,7 +303,7 @@ ajax = ajax.before(function(type, url, param) {
   param.Token = getToken();
 });
 
-ajax('get', 'http:// xxx.com/ userinfo', {
+ajax('get', 'http://xxx.com/userinfo', {
   name: 'sven'
 });
 ```
@@ -410,5 +415,5 @@ alert ( func.a ); // 输 出： undefined
 在虚拟代理实现图片预加载的例子中，本体负责设置img节点的src，代理则提供了预加载的功能，这看起来也是“加入行为”的一种方式，但这种加入行为的方式和装饰者模式的偏重点是不一样的。装饰者模式是实实在在的为对象增加新的职责和行为，而代理做的事情还是跟本体一样，最终都是设置src。但代理可以加入一些“聪明”的功能，比如在图片真正加载好之前，先使用一张占位的loading图片反馈给客户。
 
 #### 小结
-通过数据上报、统计函数的执行时间、动态改变函数参数以及插件式的表单验证这4个例子，我们了解了装饰函数，它是JavaScript中独特的装饰者模式。这种模式在实际开发中非常有用，除了上面提到的例子，它在框架开发中也十分有用。作为框架作者，我们希望框架里的函数提供的是一些稳定而方便移植的功能，那些个性化的功能可以在框架之外动态装饰上去，这可以避免为了让框架拥有更多的功能，而去使用一些if、else语句预测用户的实际需要。
+通过数据上报、统计函数的执行时间、动态改变函数参数以及插件式的表单验证这4个例子，了解了装饰函数，它是JavaScript中独特的装饰者模式。这种模式在实际开发中非常有用，除了上面提到的例子，它在框架开发中也十分有用。作为框架作者，希望框架里的函数提供的是一些稳定而方便移植的功能，那些个性化的功能可以在框架之外动态装饰上去，这可以避免为了让框架拥有更多的功能，而去使用一些if、else语句预测用户的实际需要。
 
