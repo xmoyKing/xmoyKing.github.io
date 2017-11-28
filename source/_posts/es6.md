@@ -112,6 +112,61 @@ let x;
 字符串也可以解构赋值。这是因为此时，字符串被转换成了一个类似数组的对象。
 
 
+### 字符串的扩展
+codePointAt方法是测试一个字符由两个字节还是由四个字节组成的最简单方法。
 
+#### 实例：模板编译
+通过模板字符串，生成正式模板的实例。若无法直接看懂程序，则可以通过单步调试查看变量值的变化。 
+```js
+function compile(template){
+  const evalExpr = /<%=(.+?)%>/g;
+  const expr = /<%([\s\S]+?)%>/g;
+
+  template = template
+    .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+    .replace(expr, '`); \n $1 \n  echo(`');
+
+  template = 'echo(`' + template + '`);';
+
+  let script =
+  `(function parse(data){
+    let output = "";
+
+    function echo(html){
+      output += html;
+    }
+
+    ${ template }
+
+    return output;
+  })`;
+
+  return script;
+}
+
+let template = `
+<ul>
+  <% for(let i=0; i < data.supplies.length; i++) { %>
+    <li><%= data.supplies[i] %></li>
+  <% } %>
+</ul>
+`;
+
+let parse = eval(compile(template));
+let innerHTML = parse({ supplies: [ "broom", "mop", "cleaner" ] });
+
+console.log(innerHTML);
+```
+template编译成一个字符串，即`compile(template)`。 然后会被eval解析为可执行函数，最后赋值给parse变量。
+
+### 正则的扩展
+主要是对Unicode的支持和加入新的标志`u`,`s`,`y`
+
+### 数值的扩展
+添加对八进制和二进制的新写法
+
+parseInt和parseFloat改为Number的静态方法。
+
+`Number.EPSILON`的实质是一个可以接受的最小误差范围。
 
 对象静态化的原因：因为若对象在运行过程中发生变化，则会在内存中进行重组，重组过程中需要遍历对象，查找各种属性，所以不建议破坏一个对象的原始结构。
