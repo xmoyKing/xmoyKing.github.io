@@ -290,14 +290,22 @@ Reflect对象与Proxy对象一样，也是 ES6 为了操作对象而提供的新
 （4）Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应的方法。这就让Proxy对象可以方便地调用对应的Reflect方法，完成默认行为，作为修改行为的基础。也就是说，不管Proxy怎么修改默认行为，你总可以在Reflect上获取默认行为。
 
 
+### Iterator 和 for...of 循环
+Iterator接口是for...of循环能否使用的关键，也可以使用while循环遍历。
 
+由于数组的遍历会调用遍历器接口，所以任何接受数组作为参数的场合，其实都调用了遍历器接口。
+- for...of
+- Array.from()
+- Map(), Set(), WeakMap(), WeakSet()（比如new Map([['a',1],['b',2]])）
+- Promise.all()
+- Promise.race()
 
+### Generator 函数的异步应用
+Promise 对象就是为了"回调函数地狱"（callback hell）这个问题而提出的。它不是新的语法功能，而是一种新的写法，允许将回调函数的嵌套，改成链式调用。
 
+Promise 的写法只是回调函数的改进，使用then方法以后，异步任务的两段执行看得更清楚了，除此以外，并无新意。
 
-
-
-
-
+Promise 的最大问题是代码冗余，原来的任务被 Promise 包装了一下，不管什么操作，一眼看去都是一堆then，原来的语义变得很不清楚。
 
 
 
