@@ -1,491 +1,277 @@
 ---
-title: JS设计模式-16-设计原则：单一职责原则/最少知识原则/开放-封闭原则
+title: JS设计模式-16-单例模式
 categories: js
 tags:
-- js
-- design pattern
-date: 2017-11-27 09:37:10
+  - js
+  - design pattern
+date: 2017-11-27 23:23:33
 updated:
 ---
-每种设计模式都是为了让代码迎合其中一个或多个原则而出现的，它们本身已经融入了设计模式之中，给面向对象编程指明了方向。设计原则通常指的是单一职责原则、里氏替换原则、依赖倒置原则、接口隔离原则、合成复用原则和最少知识原则。
 
-### 单一职责原则
-就一个类而言，应该仅有一个引起它变化的原因。在JavaScript中，需要用到类的场景并不太多，单一职责原则更多地是被运用在对象或者方法级别上。
+单例模式的定义是：保证一个类仅有一个实例，并提供一个访问它的全局访问点。
 
-单一职责原则（SRP）的职责被定义为“引起变化的原因”。如果我们有两个动机去改写一个方法，那么这个方法就具有两个职责。每个职责都是变化的一个轴线，如果一个方法承担了过多的职责，那么在需求的变迁过程中，需要改写这个方法的可能性就越大。
+单例模式是一种常用的模式，有一些对象我们往往只需要一个，比如线程池、全局缓存、浏览器中的window对象等。在JavaScript开发中，单例模式的用途同样非常广泛。试想一下，当我们单击登录按钮的时候，页面中会出现一个登录浮窗，而这个登录浮窗是唯一的，无论单击多少次登录按钮，这个浮窗都只会被创建一次，那么这个登录浮窗就适合用单例模式来创建。
 
-此时，这个方法通常是一个不稳定的方法，修改代码总是一件危险的事情，特别是当两个职责耦合在一起的时候，一个职责发生变化可能会影响到其他职责的实现，造成意想不到的破坏，这种耦合性得到的是低内聚和脆弱的设计。因此，SRP原则体现为：一个对象（方法）只做一件事情。
-
-#### 设计模式中的SRP原则
-SRP原则在很多设计模式中都有着广泛的运用，例如代理模式、迭代器模式、单例模式和装饰者模式。
-
-##### 代理模式
-图片预加载的例子,通过增加虚拟代理的方式，把预加载图片的职责放到代理对象中，而本体仅仅负责往页面中添加img标签，这也是它最原始的职责。
-
-myImage负责往页面中添加img标签：
+### 实现单例模式
+要实现一个标准的单例模式并不复杂，无非是用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类的实例时，直接返回之前创建的对象。
 ```js
-var myImage = (function() {
-  var imgNode = document.createElement('img');
-  document.body.appendChild(imgNode);
-  return {
-    setSrc: function(src) {
-      imgNode.src = src;
-    }
-  }
-})();
-```
-proxyImage负责预加载图片，并在预加载完成之后把请求交给本体myImage：
-```js
-var proxyImage = (function() {
-  var img = new Image;
-  img.onload = function() {
-    myImage.setSrc(this.src);
-  }
-  return {
-    setSrc: function(src) {
-      myImage.setSrc('loading.gif');
-      img.src = src;
-    }
-  }
-})();
-proxyImage.setSrc('photo.jpg');
-```
-把添加img标签的功能和预加载图片的职责分开放到两个对象中，这两个对象各自都只有一个被修改的动机。在它们各自发生改变的时候，也不会影响另外的对象。
-
-##### 迭代器模式
-假设一段代码，先遍历一个集合，然后往页面中添加一些div，这些div的innerHTML分别对应集合里的元素：
-```js
-var appendDiv = function(data) {
-    for (var i = 0, l = data.length; i < l; i++) {
-      var div = document.createElement('div');
-      div.innerHTML = data[i];
-      document.body.appendChild(div);
-    }
-  };
-appendDiv([1, 2, 3, 4, 5, 6]);
-```
-这其实是一段很常见的代码，经常用于ajax请求之后，在回调函数中遍历ajax请求返回的数据，然后在页面中渲染节点。
-
-appendDiv函数本来只是负责渲染数据，但是在这里它还承担了遍历聚合对象data的职责。如果返回的data数据格式从array变成了object，那我们遍历data的代码就会出现问题，必须改成`for(var i in data)`的方式，这时候必须去修改appendDiv里的代码，否则因为遍历方式的改变，导致不能顺利往页面中添加div节点。
-
-有必要把遍历data的职责提取出来，这正是迭代器模式的意义，迭代器模式提供了一种方法来访问聚合对象，而不用暴露这个对象的内部表示。
-
-当把迭代聚合对象的职责单独封装在each函数中后，即使以后还要增加新的迭代方式，我们只需要修改each函数即可，appendDiv函数不会受到牵连，代码如下：
-```js
-var each = function(obj, callback) {
-    var value, i = 0,
-      length = obj.length,
-      isArray = isArraylike(obj); // isArraylike 函 数 未 实 现， 可 以 翻 阅 jQuery 源 代 码 
-    if (isArray) { // 迭 代 类 数 组 
-      for (; i < length; i++) {
-        callback.call(obj[i], i, obj[i]);
-      }
-    } else {
-      for (i in obj) { // 迭 代 object 对 象
-        value = callback.call(obj[i], i, obj[i]);
-      }
-    }
-    return obj;
-  };
-var appendDiv = function(data) {
-    each(data, function(i, n) {
-      var div = document.createElement('div');
-      div.innerHTML = n;
-      document.body.appendChild(div);
-    });
-  };
-appendDiv([1, 2, 3, 4, 5, 6]);
-appendDiv({
-  a: 1,
-  b: 2,
-  c: 3,
-  d: 4
-});
-```
-
-##### 单例模式
-惰性单例例子中，最开始的代码是这样的：
-```js
-var createLoginLayer = (function() {
-  var div;
-  return function() {
-    if (!div) {
-      div = document.createElement('div');
-      div.innerHTML = '我 是 登 录 浮 窗';
-      div.style.display = 'none';
-      document.body.appendChild(div);
-    }
-    return div;
-  }
-})();
-```
-现在把管理单例的职责和创建登录浮窗的职责分别封装在两个方法里，这两个方法可以独立变化而互不影响，当它们连接在一起的时候，就完成了创建唯一登录浮窗的功能，下面的代码显然是更好的做法：
-```js
-var getSingle = function(fn) { // 获 取 单 例 
-    var result;
-    return function() {
-      return result || (result = fn.apply(this, arguments));
-    }
-  };
-var createLoginLayer = function() { // 创 建 登 录 浮 窗 
-    var div = document.createElement('div');
-    div.innerHTML = '我 是 登 录 浮 窗';
-    document.body.appendChild(div);
-    return div;
-  };
-var createSingleLoginLayer = getSingle(createLoginLayer);
-var loginLayer1 = createSingleLoginLayer();
-var loginLayer2 = createSingleLoginLayer();
-alert(loginLayer1 === loginLayer2); // 输 出： true
-```
-
-##### 装饰者模式
-使用装饰者模式的时候，通常让类或者对象一开始只具有一些基础的职责，更多的职责在代码运行时被动态装饰到对象上面。装饰者模式可以为对象动态增加职责，从另一个角度来看，这也是分离职责的一种方式。
-
-下面的例子把数据上报的功能单独放在一个函数里，然后把这个函数动态装饰到业务函数上面：
-```js
-Function.prototype.after = function(afterfn) {
-  var __self = this;
-  return function() {
-    var ret = __self.apply(this, arguments);
-    afterfn.apply(this, arguments);
-    return ret;
-  }
-};
-var showLogin = function() {
-    console.log('打 开 登 录 浮 层');
-  };
-var log = function() {
-    console.log('上 报 标 签 为: ' + this.getAttribute('tag'));
-  };
-document.getElementById('button').onclick = showLogin.after(log); // 打 开 登 录 浮 层 之 后 上 报 数 据
-```
-SRP原则的应用难点是如何去分离职责。
-
-#### 何时应该分离职责
-SRP原则是所有原则中最简单也是最难正确运用的原则之一。
-
-要明确的是，并不是所有的职责都应该一一分离。
-
-一方面，如果随着需求的变化，有两个职责总是同时变化，那就不必分离他们。比如在ajax请求的时候，创建xhr对象和发送xhr请求几乎总是在一起的，那么创建xhr对象的职责和发送xhr请求的职责就没有必要分开。
-
-另一方面，职责的变化轴线仅当它们确定会发生变化时才具有意义，即使两个职责已经被耦合在一起，但它们还没有发生改变的征兆，那么也许没有必要主动分离它们，在代码需要重构的时候再进行分离也不迟。
-
-#### 违反SRP原则
-在人的常规思维中，总是习惯性地把一组相关的行为放到一起，如何正确地分离职责不是一件容易的事情。
-
-我们也许从来没有考虑过如何分离职责，但这并不妨碍我们编写代码完成需求。对于SRP原则，许多专家委婉地表示“This is some times hard to see.”。
-
-一方面，我们受设计原则的指导，另一方面，我们未必要在任何时候都一成不变地遵守原则。在实际开发中，因为种种原因违反SRP的情况并不少见。比如jQuery的attr等方法，就是明显违反SRP原则的做法。jQuery的attr是个非常庞大的方法，既负责赋值，又负责取值，这对于jQuery的维护者来说，会带来一些困难，但对于jQuery的用户来说，却简化了用户的使用。
-
-在方便性与稳定性之间要有一些取舍。具体是选择方便性还是稳定性，并没有标准答案，而是要取决于具体的应用环境。比如如果一个电视机内置了DVD机，当电视机坏了的时候，DVD机也没法正常使用，那么一个DVD发烧友通常不会选择这样的电视机。但如果我们的客厅本来就小得夸张，或者更在意DVD在使用上的方便，那让电视机和DVD机耦合在一起就是更好的选择。
-
-#### SRP原则的优缺点
-SRP原则的优点是降低了单个类或者对象的复杂度，按照职责把对象分解成更小的粒度，这有助于代码的复用，也有利于进行单元测试。当一个职责需要变更的时候，不会影响到其他的职责。
-
-但SRP原则也有一些缺点，最明显的是会增加编写代码的复杂度。当我们按照职责把对象分解成更小的粒度之后，实际上也增大了这些对象之间相互联系的难度。
-
-
-### 最少知识原则
-最少知识原则（LKP）说的是一个软件实体应当尽可能少地与其他实体发生相互作用。这里的软件实体是一个广义的概念，不仅包括对象，还包括系统、类、模块、函数、变量等。主要针对对象来说明这个原则，下面引用《面向对象设计原理与模式》一书中的例子来解释最少知识原则：
-
-某军队中的将军需要挖掘一些散兵坑。下面是完成任务的一种方式：将军可以通知上校让他叫来少校，然后让少校找来上尉，并让上尉通知一个军士，最后军士唤来一个士兵，然后命令士兵挖掘一些散兵坑。
-
-这种方式十分荒谬，不是吗？不过，我们还是先来看一下这个过程的等价代码：
-```js
-gerneral.getColonel(c).getMajor(m).getCaptain(c).getSergeant(s).getPrivate(p).digFoxhole();
-```
-让代码通过这么长的消息链才能完成一个任务，这就像让将军通过那么多繁琐的步骤才能命令别人挖掘散兵坑一样荒谬！而且，这条链中任何一个对象的改动都会影响整条链的结果。
-
-最有可能的是，将军自己根本就不会考虑挖散兵坑这样的细节信息。但是如果将军真的考虑了这个问题的话，他一定会通知某个军官：“我不关心这个工作如何完成，但是你得命令人去挖散兵坑。”
-
-#### 减少对象之间的联系
-单一职责原则指导我们把对象划分成较小的粒度，这可以提高对象的可复用性。但越来越多的对象之间可能会产生错综复杂的联系，如果修改了其中一个对象，很可能会影响到跟它相互引用的其他对象。对象和对象耦合在一起，有可能会降低它们的可复用性。在程序中，对象的“朋友”太多并不是一件好事，“城门失火，殃及池鱼”和“一人犯法，株连九族”的故事时有发生。
-
-最少知识原则要求我们在设计程序时，应当尽量减少对象之间的交互。如果两个对象之间不必彼此直接通信，那么这两个对象就不要发生直接的相互联系。常见的做法是引入一个第三者对象，来承担这些对象之间的通信作用。如果一些对象需要向另一些对象发起请求，可以通过第三者对象来转发这些请求。
-
-#### 设计模式中的最少知识原则
-最少知识原则在设计模式中体现得最多的地方是中介者模式和外观模式。
-
-##### 中介者模式
-曾讲过一个博彩公司的例子。
-
-在世界杯期间购买足球彩票，如果没有博彩公司作为中介，上千万的人一起计算赔率和输赢绝对是不可能的事情。博彩公司作为中介，每个人都只和博彩公司发生关联，博彩公司会根据所有人的投注情况计算好赔率，彩民们赢了钱就从博彩公司拿，输了钱就赔给博彩公司。
-
-中介者模式很好地体现了最少知识原则。通过增加一个中介者对象，让所有的相关对象都通过中介者对象来通信，而不是互相引用。所以，当一个对象发生改变时，只需要通知中介者对象即可。
-
-##### 外观模式
-外观模式在JavaScript中的使用场景并不多。外观模式主要是为子系统中的一组接口提供一个一致的界面，外观模式定义了一个高层接口，这个接口使子系统更加容易使用，如图所示。
-![外观模式](1.png)
-外观模式的作用是对客户屏蔽一组子系统的复杂性。外观模式对客户提供一个简单易用的高层接口，高层接口会把客户的请求转发给子系统来完成具体的功能实现。大多数客户都可以通过请求外观接口来达到访问子系统的目的。但在一段使用了外观模式的程序中，请求外观并不是强制的。如果外观不能满足客户的个性化需求，那么客户也可以选择越过外观来直接访问子系统。
-
-拿全自动洗衣机的一键洗衣按钮举例，这个一键洗衣按钮就是一个外观。如果是老式洗衣机，客户要手动选择浸泡、洗衣、漂洗、脱水这4个步骤。如果这种洗衣机被淘汰了，新式洗衣机的漂洗方式发生了改变，那我们还得学习新的漂洗方式。而全自动洗衣机的好处很明显，不管洗衣机内部如何进化，客户要操作的，始终只是一个一键洗衣的按钮。这个按钮就是为一组子系统所创建的外观。但如果一键洗衣程序设定的默认漂洗时间是20分钟，而客户希望这个漂洗时间是30分钟，那么客户自然可以选择越过一键洗衣程序，自己手动来控制这些“子系统”运转。
-
-外观模式容易跟普通的封装实现混淆。这两者都封装了一些事物，但外观模式的关键是定义一个高层接口去封装一组“子系统”。子系统在C++或者Java中指的是一组类的集合，这些类相互协作可以组成系统中一个相对独立的部分。在JavaScript中我们通常不会过多地考虑“类”，如果将外观模式映射到JavaScript中，这个子系统至少应该指的是一组函数的集合。
-
-最简单的外观模式应该是类似下面的代码：
-```js
-var A = function(){ a1(); a2(); } 
-var B = function(){ b1(); b2(); } 
-var facade = function(){ A(); B(); } 
-
-facade();
-```
-许多JavaScript设计模式的图书或者文章喜欢把jQuery的$.ajax函数当作外观模式的实现，这是不合适的。如果$.ajax函数属于外观模式，那几乎所有的函数都可以被称为“外观模式”。问题是我们根本没有办法越过$.ajax“外观”去直接使用该函数中的某一段语句。
-
-现在再来看看外观模式和最少知识原则之间的关系。外观模式的作用主要有两点。
-- 为一组子系统提供一个简单便利的访问入口。
-- 隔离客户与复杂子系统之间的联系，客户不用去了解子系统的细节。
-
-从第二点来，外观模式是符合最少知识原则的。比如全自动洗衣机的一键洗衣按钮，隔开了客户和浸泡、洗衣、漂洗、脱水这些子系统的直接联系，客户不用去了解这些子系统的具体实现。
-
-假设我们在编写这个老式洗衣机的程序，客户至少要和浸泡、洗衣、漂洗、脱水这4个子系统打交道。如果其中的一个子系统发生了改变，那么客户的调用代码就得发生改变。而通过外观将客户和这些子系统隔开之后，如果修改子系统内部，只要外观不变，就不会影响客户的调用。同样，对外观的修改也不会影响到子系统，它们可以分别变化而互不影响。
-
-#### 封装在最少知识原则中的体现
-封装在很大程度上表达的是数据的隐藏。一个模块或者对象可以将内部的数据或者实现细节隐藏起来，只暴露必要的接口API供外界访问。对象之间难免产生联系，当一个对象必须引用另外一个对象的时候，我们可以让对象只暴露必要的接口，让对象之间的联系限制在最小的范围之内。
-
-同时，封装也用来限制变量的作用域。在JavaScript中对变量作用域的规定是：
-- 变量在全局声明，或者在代码的任何位置隐式申明（不用var），则该变量在全局可见；
-- 变量在函数内显式申明（使用var），则在函数内可见。
-
-把变量的可见性限制在一个尽可能小的范围内，这个变量对其他不相关模块的影响就越小，变量被改写和发生冲突的机会也越小。这也是广义的最少知识原则的一种体现。
-
-假设我们要编写一个具有缓存效果的计算乘积的函数`function mult(){}`，我们需要一个对象`var cache={}`来保存已经计算过的结果。cache对象显然只对mult有用，把cache对象放在mult形成的闭包中，显然比把它放在全局作用域更加合适，代码如下：
-```js
-var mult = (function() {
-  var cache = {};
-  return function() {
-    var args = Array.prototype.join.call(arguments, ',');
-    if (cache[args]) {
-      return cache[args];
-    }
-    var a = 1;
-    for (var i = 0, l = arguments.length; i < l; i++) {
-      a = a * arguments[i];
-    }
-    return cache[args] = a;
-  }
-})();
-mult(1, 2, 3); // 输 出： 6
-```
-其实，最少知识原则也叫迪米特法则（Law of Demeter，LoD），“迪米特”这个名字源自1987年美国东北大学一个名为“Demeter”的研究项目。
-
-许多人更倾向于使用迪米特法则这个名字，也许是因为显得更酷一点。但参考《Head First Design Patterns》的建议，称之为最少知识原则。一是因为这个名字更能体现其含义，另一个原因是“法则”给人的感觉是必须强制遵守，而原则只是一种指导，没有哪条原则是在实际开发中必须遵守的。比如，虽然遵守最小知识原则减少了对象之间的依赖，但也有可能增加一些庞大到难以维护的第三者对象。跟单一职责原则一样，在实际开发中，是否选择让代码符合最少知识原则，要根据具体的环境来定。
-
-### 开放-封闭原则
-在面向对象的程序设计中，开放-封闭原则（OCP）是最重要的一条原则。很多时候，一个程序具有良好的设计，往往说明它是符合开放-封闭原则的。
-
-开放-封闭原则最早由Eiffel语言的设计者Bertrand Meyer在其著作Object-Oriented Software Construction中提出。它的定义如下：
->软件实体（类、模块、函数）等应该是可以扩展的，但是不可修改。
-
-在明白开放-封闭原则的定义之前，先看一个示例，在window.onload函数中添加一些新的功能。
-
-#### 扩展window.onload函数
-假设我们是一个大型Web项目的维护人员，在接手这个项目时，发现它已经拥有10万行以上的JavaScript代码和数百个JS文件。
-
-不久后接到了一个新的需求，即在window.onload函数中打印出页面中的所有节点数量。于是搜索出window.onload函数在文件中的位置，在函数内部添加以下代码：
-```js
-window.onload = function(){ 
-  // 原 有 代 码 略 
-  console.log( document.getElementsByTagName('*').length ); 
-};
-```
-在项目需求变迁的过程中，经常会找到相关代码，然后改写它们。这似乎是理所当然的事情，不改动代码怎么满足新的需求呢？想要扩展一个模块，最常用的方式当然是修改它的源代码。如果一个模块不允许修改，那么它的行为常常是固定的。然而，改动代码是一种危险的行为，也许我们都遇到过bug越改越多的场景。刚刚改好了一个bug，但是又在不知不觉中引发了其他的bug。
-
-如果目前的window.onload函数是一个拥有500行代码的巨型函数，里面密布着各种变量和交叉的业务逻辑，而需求又不仅仅是打印一个log这么简单。那么“改好一个bug，引发其他bug”这样的事情就很可能会发生。我们永远不知道刚刚的改动会有什么副作用，很可能会引发一系列的连锁反应。
-
-那么，有没有办法在不修改代码的情况下，就能满足新需求呢？通过增加代码，而不是修改代码的方式，来给window.onload函数添加新的功能，代码如下：
-```js
-Function.prototype.after = function(afterfn) {
-  var __self = this;
-  return function() {
-    var ret = __self.apply(this, arguments);
-    afterfn.apply(this, arguments);
-    return ret;
-  }
-};
-
-window.onload = (window.onload || function() {}).after(function() {
-  console.log(document.getElementsByTagName('*').length);
-});
-```
-通过动态装饰函数的方式，我们完全不用理会从前window.onload函数的内部实现，无论它的实现优雅或是丑陋。就算我们作为维护者，拿到的是一份混淆压缩过的代码也没有关系。只要它从前是个稳定运行的函数，那么以后也不会因为我们的新增需求而产生错误。新增的代码和原有的代码可以井水不犯河水。
-
-#### 开放和封闭
-为window.onload函数扩展功能时，用到了两种方式。一种是修改原有的代码，另一种是增加一段新的代码。使用哪种方式效果更好，已经不言而喻。
-
-现在可以引出开放-封闭原则的思想：当需要改变一个程序的功能或者给这个程序增加新功能的时候，可以使用增加代码的方式，但是不允许改动程序的源代码。
-
-在现实生活中，我们也能找到一些跟开放-封闭原则相关的故事。
-
-有一家生产肥皂的大企业，从欧洲花巨资引入了一条生产线。这条生产线可以自动完成从原材料加工到包装成箱的整个流程，但美中不足的是，生产出来的肥皂有一定的空盒几率。于是老板又从欧洲找来一支专家团队，花费数百万元改造这一生产线，终于解决了生产出空盒肥皂的问题。
-
-另一家企业也引入了这条生产线，他们同样遇到了空盒肥皂的问题。但他们的解决办法很简单：用一个大风扇在生产线旁边吹，空盒肥皂就会被吹走。
-
-这个故事告诉我们，相比修改源程序，如果通过增加几行代码就能解决问题，那这显然更加简单和优雅，而且增加代码并不会影响原系统的稳定。讲述这个故事，目的不在于说明风扇的成本有多低，而是想说明，如果使用风扇这样简单的方式可以解决问题，根本没有必要去大动干戈地改造原有的生产线。
-
-#### 用对象的多态性消除条件分支
-过多的条件分支语句是造成程序违反开放-封闭原则的一个常见原因。每当需要增加一个新的if语句时，都要被迫改动原函数。把if换成switch-case是没有用的，这是一种换汤不换药的做法。实际上，每当我们看到一大片的if或者swtich-case语句时，第一时间就应该考虑，能否利用对象的多态性来重构它们。
-
-利用对象的多态性来让程序遵守开放-封闭原则，是一个常用的技巧。例如让动物发出叫声的例子。下面先提供一段不符合开放-封闭原则的代码。每当我们增加一种新的动物时，都需要改动makeSound函数的内部实现：
-```js
-var makeSound = function(animal) {
-    if (animal instanceof Duck) {
-      console.log('嘎 嘎 嘎');
-    } else if (animal instanceof Chicken) {
-      console.log('咯 咯 咯');
-    }
-  };
-var Duck = function() {};
-var Chicken = function() {};
-makeSound(new Duck()); // 输 出： 嘎 嘎 嘎
-makeSound(new Chicken()); // 输 出： 咯 咯 咯
-```
-利用多态的思想，我们把程序中不变的部分隔离出来（动物都会叫），然后把可变的部分封装起来（不同类型的动物发出不同的叫声），这样一来程序就具有了可扩展性。当我们想让一只狗发出叫声时，只需增加一段代码即可，而不用去改动原有的makeSound函数：
-```js
-var makeSound = function(animal) {
-    animal.sound();
-};
-var Duck = function() {};
-Duck.prototype.sound = function() {
-  console.log('嘎 嘎 嘎');
-};
-var Chicken = function() {};
-Chicken.prototype.sound = function() {
-  console.log('咯 咯 咯');
-};
-makeSound(new Duck()); // 嘎 嘎 嘎 
-makeSound(new Chicken()); // 咯 咯 咯 
-
-/********* 增 加 动 物 狗， 不 用 改 动 原 有 的 makeSound 函 数 ****************/
-var Dog = function() {};
-Dog.prototype.sound = function() {
-  console.log('汪 汪 汪');
-};
-makeSound(new Dog()); // 汪 汪 汪
-```
-
-#### 找出变化的地方
-开放-封闭原则是一个看起来比较虚幻的原则，并没有实际的模板教导我们怎样亦步亦趋地实现它。但我们还是能找到一些让程序尽量遵守开放-封闭原则的规律，最明显的就是找出程序中将要发生变化的地方，然后把变化封装起来。
-
-通过封装变化的方式，可以把系统中稳定不变的部分和容易变化的部分隔离开来。在系统的演变过程中，我们只需要替换那些容易变化的部分，如果这些部分是已经被封装好的，那么替换起来也相对容易。而变化部分之外的就是稳定的部分。在系统的演变过程中，稳定的部分是不需要改变的。
-
-在例子中，由于每种动物的叫声都不同，所以动物具体怎么叫是可变的，于是我们把动物具体怎么叫的逻辑从makeSound函数中分离出来。
-
-而动物都会叫这是不变的，makeSound函数里的实现逻辑只跟动物都会叫有关，这样一来，makeSound就成了一个稳定和封闭的函数。
-
-除了利用对象的多态性之外，还有其他方式可以帮助我们编写遵守开放-封闭原则的代码。
-
-##### 放置挂钩
-放置挂钩（hook）也是分离变化的一种方式。在程序有可能发生变化的地方放置一个挂钩，挂钩的返回结果决定了程序的下一步走向。这样一来，原本的代码执行路径上就出现了一个分叉路口，程序未来的执行方向被预埋下多种可能性。
-
-在jQuery源代码中，jQuery从1.4版本开始，陆续加入了fixHooks、keyHooks、mouseHooks、cssHooks等挂钩。
-
-Template Method模式中的父类是一个相当稳定的类，它封装了子类的算法骨架和执行步骤。
-
-由于子类的数量是无限制的，总会有一些“个性化”的子类迫使我们不得不去改变已经封装好的算法骨架。于是我们可以在父类中的某个容易变化的地方放置挂钩，挂钩的返回结果由具体子类决定。这样一来，程序就拥有了变化的可能。
-
-##### 使用回调函数
-在JavaScript中，函数可以作为参数传递给另外一个函数，这是高阶函数的意义之一。在这种情况下，通常会把这个函数称为回调函数。在JavaScript版本的设计模式中，策略模式和命令模式等都可以用回调函数轻松实现。
-
-回调函数是一种特殊的挂钩。我们可以把一部分易于变化的逻辑封装在回调函数里，然后把回调函数当作参数传入一个稳定和封闭的函数中。当回调函数被执行的时候，程序就可以因为回调函数的内部逻辑不同，而产生不同的结果。
-
-比如，通过ajax异步请求用户信息之后要做一些事情，请求用户信息的过程是不变的，而获取到用户信息之后要做什么事情，则是可能变化的：
-```js
-var getUserInfo = function(callback) {
-    $.ajax('getUserInfo', callback);
-};
-getUserInfo(function(data) {
-  console.log(data.userName);
-});
-getUserInfo(function(data) {
-  console.log(data.userId);
-});
-```
-另外一个例子是关于Array.prototype.map的。在不支持Array.prototype.map的浏览器中，可以简单地模拟实现一个map函数。
-
-arrayMap函数的作用是把一个数组“映射”为另外一个数组。映射的步骤是不变的，而映射的规则是可变的，于是把这部分规则放在回调函数中，传入arrayMap函数：
-```js
-var arrayMap = function(ary, callback) {
-  var i = 0,
-    length = ary.length,
-    value, ret = [];
-  for (; i < length; i++) {
-    value = callback(i, ary[i]);
-    ret.push(value);
-  }
-  return ret;
+var Singleton = function(name){
+  this.name = name;
+  this.instance = null;
 }
 
-var a = arrayMap([1, 2, 3], function(i, n) {
-  return n * 2;
-});
-var b = arrayMap([1, 2, 3], function(i, n) {
-  return n * 3;
-});
-console.log(a); // 输 出：[ 2, 4, 6 ] 
-console.log(b); // 输 出：[ 3, 6, 9 ]
+Singleton.prototype.getName = function(){
+  alert(this.name);
+}
+
+Singleton.getInstance = function(name){
+  if(!this.instance){
+    this.instance = new Singleton(name);
+  }
+  return this.instance;
+};
+
+var a = Singleton.getInstance('val');
+var b = Singleton.getInstance('va2');
+alert( a === b); // true
 ```
-
-#### 设计模式中的开放－封闭原则
-有一种说法是，设计模式就是给做的好的设计取个名字。几乎所有的设计模式都是遵守开放-封闭原则的，我们见到的好设计，通常都经得起开放-封闭原则的考验。不管是具体的各种设计模式，还是更抽象的面向对象设计原则，比如单一职责原则、最少知识原则、依赖倒置原则等，都是为了让程序遵守开放-封闭原则而出现的。可以这样说，开放-封闭原则是编写一个好程序的目标，其他设计原则都是达到这个目标的过程。
-
-例举几个模式，来更深一步地了解设计模式在遵守开放-封闭原则方面做出的努力。
-
-##### 发布-订阅模式
-发布-订阅模式用来降低多个对象之间的依赖关系，它可以取代对象之间硬编码的通知机制，一个对象不用再显式地调用另外一个对象的某个接口。当有新的订阅者出现时，发布者的代码不需要进行任何修改；同样当发布者需要改变时，也不会影响到之前的订阅者。
-
-##### 模板方法模式
-我们曾提到，模板方法模式是一种典型的通过封装变化来提高系统扩展性的设计模式。在一个运用了模板方法模式的程序中，子类的方法种类和执行顺序都是不变的，所以我们把这部分逻辑抽出来放到父类的模板方法里面；而子类的方法具体怎么实现则是可变的，于是把这部分变化的逻辑封装到子类中。通过增加新的子类，便能给系统增加新的功能，并不需要改动抽象父类以及其他的子类，这也是符合开放-封闭原则的。
-
-##### 策略模式
-策略模式和模板方法模式是一对竞争者。在大多数情况下，它们可以相互替换使用。模板方法模式基于继承的思想，而策略模式则偏重于组合和委托。
-
-策略模式将各种算法都封装成单独的策略类，这些策略类可以被交换使用。策略和使用策略的客户代码可以分别独立进行修改而互不影响。我们增加一个新的策略类也非常方便，完全不用修改之前的代码。
-
-##### 代理模式
-拿预加载图片举例，我们现在已有一个给图片设置src的函数myImage，当我们想为它增加图片预加载功能时，一种做法是改动myImage函数内部的代码，更好的做法是提供一个代理函数proxyMyImage，代理函数负责图片预加载，在图片预加载完成之后，再将请求转交给原来的myImage函数，myImage在这个过程中不需要任何改动。
-
-预加载图片的功能和给图片设置src的功能被隔离在两个函数里，它们可以单独改变而互不影响。myImage不知晓代理的存在，它可以继续专注于自己的职责——给图片设置src。
-
-##### 职责链模式
-例如把一个巨大的订单函数分别拆成了500元订单、200元订单以及普通订单的3个函数。这3个函数通过职责链连接在一起，客户的请求会在这条链条里面依次传递：
+第二种写法：
 ```js
-var order500yuan = new Chain( function( orderType, pay, stock ){ 
-  // 具 体 代 码 略 
-}); 
-var order200yuan = new Chain( function( orderType, pay, stock ){ 
-  // 具 体 代 码 略 
-}); 
-var orderNormal = new Chain( function( orderType, pay, stock ){ 
-  // 具 体 代 码 略 
-}); 
+var Singleton = function( name ){ this.name = name; }; 
 
-order500yuan.setNextSuccessor( order200yuan ).setNextSuccessor( orderNormal ); 
-order500yuan.passRequest( 1, true, 10 ); // 500 元 定 金 预 购， 得 到 100 优 惠 券 
+Singleton.prototype.getName = function(){ alert ( this.name ); }; 
+
+Singleton.getInstance = (function(){ 
+  var instance = null; 
+  return function( name ){ 
+    if ( !instance ){ 
+      instance = new Singleton( name ); 
+    } return instance;} 
+})();
 ```
-可以看到，当增加一个新类型的订单函数时，不需要改动原有的订单函数代码，只需要在链条中增加一个新的节点。
+我们通过Singleton.getInstance来获取Singleton类的唯一对象，这种方式相对简单，但有一个问题，就是增加了这个类的“不透明性”，Singleton类的使用者必须知道这是一个单例类，跟以往通过newXXX的方式来获取对象不同，这里偏要使用Singleton.getInstance来获取对象。
 
-#### 开放－封闭原则的相对性
-在职责链模式代码中，也许会产生疑问：开放-封闭原则要求我们只能通过增加源代码的方式扩展程序的功能，而不允许修改源代码。那当我们往职责链中增加一个新的100元订单函数节点时，不也必须改动设置链条的代码吗？代码如下：
+#### 透明的单例模式
+现在的目标是实现一个“透明”的单例类，用户从这个类中创建对象的时候，可以像使用其他任何普通类一样。在下面的例子中，使用CreateDiv单例类，它的作用是负责在页面中创建唯一的div节点，代码如下：
 ```js
-order500yuan.setNextSuccessor(order200yuan).setNextSuccessor(orderNormal);
+var CreateDiv = (function(){
+  var instance;
+  var CreateDiv = function(html){
+    if(instance){
+      return instance;
+    }
+    this.html = html;
+    this.init();
+    return instance = this;
+  };
+
+  CreateDiv.prototype.init = function(){
+    var div = document.createElement('div');
+    div.innerHTML = this.html;
+    document.body.appendChild(div);
+  }
+
+  return CreateDiv;
+})()
+
+var a = new CreateDiv('sev1');
+var b = new CreateDiv('sev2');
+alert(a === b); // true
 ```
-变为：
+虽然现在完成了一个透明的单例类的编写，但它同样有一些缺点。为了把instance封装起来，我们使用了自执行的匿名函数和闭包，并且让这个匿名函数返回真正的Singleton构造方法，这增加了一些程序的复杂度，阅读起来也不是很舒服。
+
+在这段代码中，CreateDiv的构造函数实际上负责了两件事情。第一是创建对象和执行初始化init方法，第二是保证只有一个对象。虽然我们目前还没有接触过“单一职责原则”的概念，但可以明确的是，这是一种不好的做法，至少这个构造函数看起来很奇怪。
+
+假设我们某天需要利用这个类，在页面中创建千千万万的div，即要让这个类从单例类变成一个普通的可产生多个实例的类，那我们必须得改写CreateDiv构造函数，把控制创建唯一对象的那一段去掉，这种修改会给我们带来不必要的烦恼。
+
+#### 用代理实现单例模式
+
+现在我们通过引入代理类的方式，来解决上面提到的问题。首先在CreateDiv构造函数中，把负责管理单例的代码移除出去，使它成为一个普通的创建div的类：
 ```js
-order500yuan.setNextSuccessor(order200yuan).setNextSuccessor(order100yuan).setNextSuccessor(orderNormal);
+var CreateDiv = function( html ){ 
+  this.html = html; 
+  this.init(); 
+}; 
+
+CreateDiv.prototype.init = function(){ 
+  var div = document.createElement( 'div' ); 
+  div.innerHTML = this.html; 
+  document.body.appendChild( div ); 
+};
 ```
-实际上，让程序保持完全封闭是不容易做到的。就算技术上做得到，也需要花费太多的时间和精力。而且让程序符合开放-封闭原则的代价是引入更多的抽象层次，更多的抽象有可能会增大代码的复杂度。
+接下来引入代理类proxySingletonCreateDiv：
+```js
+var ProxySingletonCreateDiv = (function(){ 
+  var instance; 
+  return function( html ){ 
+    if ( !instance ){ 
+      instance = new CreateDiv( html ); 
+    } 
+    return instance; 
+  } 
+})(); 
+var a = new ProxySingletonCreateDiv( 'sven1' ); 
+var b = new ProxySingletonCreateDiv( 'sven2' ); 
+alert ( a === b );
+```
 
-更何况，有一些代码是无论如何也不能完全封闭的，总会存在一些无法对其封闭的变化。作为程序员，可以做到的有下面两点。
-- 挑选出最容易发生变化的地方，然后构造抽象来封闭这些变化。
-- 在不可避免发生修改的时候，尽量修改那些相对容易修改的地方。拿一个开源库来说，修改它提供的配置文件，总比修改它的源代码来得简单。
+通过引入代理类的方式，我们同样完成了一个单例模式的编写，跟之前不同的是，现在我们把负责管理单例的逻辑移到了代理类proxySingletonCreateDiv中。这样一来，CreateDiv就变成了一个普通的类，它跟proxySingletonCreateDiv组合起来可以达到单例模式的效果。本例是缓存代理的应用之一.
 
-比如那个巨大的订单函数，它包含了各种订单的逻辑，有500元和200元的，也有普通订单的。这个函数是最有可能发生变化的，一旦增加新的订单，就必须修改这个巨大的函数。而用职责链模式重构之后，我们只需要新增一个节点，然后重新设置链条中节点的连接顺序。重构后的修改方式显然更加清晰简单。
+#### JavaScript中的单例模式
+前面提到的几种单例模式的实现，更多的是接近传统面向对象语言中的实现，单例对象从“类”中创建而来。在以类为中心的语言中，这是很自然的做法。比如在Java中，如果需要某个对象，就必须先定义一个类，对象总是从类中创建而来的。
 
-#### 接受第一次愚弄
-下面这段话引自Bob大叔的《敏捷软件开发原则、模式与实践》。
+但JavaScript其实是一门无类（class-free）语言，也正因为如此，生搬单例模式的概念并无意义。在JavaScript中创建对象的方法非常简单，既然我们只需要一个“唯一”的对象，为什么要为它先创建一个“类”呢？这无异于穿棉衣洗澡，传统的单例模式实现在JavaScript中并不适用。
 
-有句古老的谚语说：“愚弄我一次，应该羞愧的是你。再次愚弄我，应该羞愧的是我。”这也是一种有效的对待软件设计的态度。为了防止软件背着不必要的复杂性，我们会允许自己被愚弄一次。
+单例模式的核心是**确保只有一个实例，并提供全局访问**。
+全局变量不是单例模式，但在JavaScript开发中，我们经常会把全局变量当成单例来使用。例如：
+```js
+var a = {};
+```
+当用这种方式创建对象a时，对象a确实是独一无二的。如果a变量被声明在全局作用域下，则我们可以在代码中的任何位置使用这个变量，全局变量提供给全局访问是理所当然的。这样就满足了单例模式的两个条件。
+但是全局变量存在很多问题，它很容易造成命名空间污染。在大中型项目中，如果不加以限制和管理，程序中可能存在很多这样的变量。JavaScript中的变量也很容易被不小心覆盖.
 
-让程序一开始就尽量遵守开放-封闭原则，并不是一件很容易的事情。一方面，我们需要尽快知道程序在哪些地方会发生变化，这要求我们有一些“未卜先知”的能力。另一方面，留给程序员的需求排期并不是无限的，所以我们可以说服自己去接受不合理的代码带来的第一次愚弄。在最初编写代码的时候，先假设变化永远不会发生，这有利于我们迅速完成需求。当变化发生并且对我们接下来的工作造成影响的时候，可以再回过头来封装这些变化的地方。然后确保我们不会掉进同一个坑里，这有点像星矢说的：“圣斗士不会被同样的招数击倒第二次。”
+我们有必要尽量减少全局变量的使用，即使需要，也要把它的污染降到最低。以下几种方式可以相对降低全局变量带来的命名污染。
+1.使用命名空间
+适当地使用命名空间，并不会杜绝全局变量，但可以减少全局变量的数量。最简单的方法依然是用对象字面量的方式：
+```js
+var namespace1 = { 
+  a: function(){ alert (1); }, 
+  b: function(){ alert (2); } 
+};
+```
+把a和b都定义为namespace1的属性，这样可以减少变量和全局作用域打交道的机会。另外我们还可以动态地创建命名空间，代码如下：
+```js
+var MyApp = {}; 
+MyApp.namespace = function( name ){ 
+  var parts = name.split( '.' ); 
+  var current = MyApp; 
+  for ( var i in parts ){ 
+    if ( !current[ parts[ i ] ] ){ 
+      current[ parts[ i ] ] = {}; 
+    } 
+    current = current[ parts[ i ] ]; 
+  } 
+}; 
+MyApp.namespace( 'event' ); 
+MyApp.namespace( 'dom.style' ); 
+console.dir( MyApp ); 
+// 上 述 代 码 等 价 于： 
+var MyApp = { event: {}, dom: { style: {} } };
+```
+
+2.使用闭包封装私有变量
+这种方法把一些变量封装在闭包的内部，只暴露一些接口跟外界通信：
+```js
+var user = (function(){ 
+  var __name = 'sven', 
+  __age = 29; 
+  return { 
+    getUserInfo: function(){ 
+      return __name + '-' + __age; 
+    } 
+  } 
+})();
+```
+用下划线来约定私有变量`__name`和`__age`，它们被封装在闭包产生的作用域中，外部是访问不到这两个变量的，这就避免了对全局的命令污染。
+
+#### 惰性单例
+惰性单例指的是在需要的时候才创建对象实例。惰性单例是单例模式的重点，这种技术在实际开发中非常有用，有用的程度可能超出了我们的想象，实际上在开头就使用过这种技术，instance实例对象总是在我们调用Singleton.getInstance的时候才被创建，而不是在页面加载好的时候就创建，不过这是基于“类”的单例模式，前面说过，基于“类”的单例模式在JavaScript中并不适用，下面我们将以WebQQ的登录浮窗为例，介绍与全局变量结合实现惰性的单例。
+
+假设我们是WebQQ的开发人员（网址是web.qq.com），当点击左边导航里QQ头像时，会弹出一个登录浮窗，很明显这个浮窗在页面里总是唯一的，不可能出现同时存在两个登录窗口的情况。
+
+第一种解决方案是在页面加载完成的时候便创建好这个div浮窗，这个浮窗一开始肯定是隐藏状态的，当用户点击登录按钮的时候，它才开始显示：
+这种方式有一个问题，也许我们进入WebQQ只是玩玩游戏或者看看天气，根本不需要进行登录操作，因为登录浮窗总是一开始就被创建好，那么很有可能将白白浪费一些DOM节点。
+可以用一个变量来判断是否已经创建过登录浮窗，这也是本节第一段代码中的做法。
+```js
+var createLoginLayer = (function(){
+  var div; 
+  return function(){
+    if ( !div ){ 
+      div = document.createElement( 'div' ); 
+      div.innerHTML = '我 是 登 录 浮 窗'; 
+      div.style.display = 'none'; 
+      document.body.appendChild( div ); 
+    } 
+    return div; 
+  } 
+})(); 
+document.getElementById( 'loginBtn' ).onclick = function(){ 
+  var loginLayer = createLoginLayer(); 
+  loginLayer.style.display = 'block'; 
+};
+```
+一个可用的惰性单例，但是我们发现它还有如下一些问题。
+- 这段代码仍然是违反单一职责原则的，创建对象和管理单例的逻辑都放在createLoginLayer对象内部。
+- 如果我们下次需要创建页面中唯一的iframe，或者script标签，用来跨域请求数据，就必须得如法炮制，把createLoginLayer函数几乎照抄一遍：
+
+我们需要把不变的部分隔离出来，先不考虑创建一个div和创建一个iframe有多少差异，管理单例的逻辑其实是完全可以抽象出来的，这个逻辑始终是一样的：用一个变量来标志是否创建过对象，如果是，则在下次直接返回这个已经创建好的对象：
+```js
+var obj; if ( !obj ){ obj = xxx; }
+```
+现在我们就把如何管理单例的逻辑从原来的代码中抽离出来，这些逻辑被封装在getSingle函数内部，创建对象的方法fn被当成参数动态传入getSingle函数：
+```js
+var getSingle = function( fn ){ 
+  var result; 
+  return function(){ 
+    return result | | ( result = fn.apply( this, arguments ) ); 
+  }
+};
+```
+
+接下来将用于创建登录浮窗的方法用参数fn的形式传入getSingle，我们不仅可以传入createLoginLayer，还能传入createScript、createIframe、createXhr等。之后再让getSingle返回一个新的函数，并且用一个变量result来保存fn的计算结果。result变量因为身在闭包中，它永远不会被销毁。在将来的请求中，如果result已经被赋值，那么它将返回这个值。代码如下：
+```js
+var createLoginLayer = function(){ 
+  var div = document.createElement( 'div' ); 
+  div.innerHTML = '我 是 登 录 浮 窗'; 
+  div.style.display = 'none'; 
+  document.body.appendChild( div ); 
+  return div; 
+}; 
+
+var createSingleLoginLayer = getSingle( createLoginLayer ); 
+document.getElementById( 'loginBtn' ).onclick = function(){ 
+  var loginLayer = createSingleLoginLayer(); 
+  loginLayer.style.display = 'block'; 
+};
+```
+在这个例子中，我们把创建实例对象的职责和管理单例的职责分别放置在两个方法里，这两个方法可以独立变化而互不影响，当它们连接在一起的时候，就完成了创建唯一实例对象的功能，看起来是一件挺奇妙的事情。
+
+这种单例模式的用途远不止创建对象，比如我们通常渲染完页面中的一个列表之后，接下来要给这个列表绑定click事件，如果是通过ajax动态往列表里追加数据，在使用事件代理的前提下，click事件实际上只需要在第一次渲染列表的时候被绑定一次，但是我们不想去判断当前是否是第一次渲染列表，如果借助于jQuery，我们通常选择给节点绑定one事件：
+```js
+var bindEvent = function(){ 
+  $( 'div' ).one( 'click', function(){ 
+    alert ( 'click' );
+  });
+}; 
+var render = function(){ 
+  console.log( '开 始 渲 染 列 表' ); 
+  bindEvent(); 
+}; 
+
+render(); 
+render(); 
+render();
+```
+如果利用getSingle函数，也能达到一样的效果。代码如下：
+
+```js
+
+var bindEvent = getSingle( function(){
+  document.getElementById( 'div1' ).onclick = function(){ 
+    alert ( 'click' ); 
+  } 
+  return true; 
+}); 
+
+var render = function(){
+  console.log( '开 始 渲 染 列 表' ); 
+  bindEvent(); 
+}; 
+render(); 
+render(); 
+render();
+```
+render函数和bindEvent函数都分别执行了3次，但div实际上只被绑定了一个事件。
+
+#### 小结
+单例模式是我们学习的第一个模式，我们先学习了传统的单例模式实现，也了解到因为语言的差异性，有更适合的方法在JavaScript中创建单例。这一章还提到了代理模式和单一职责原则，后面的章节会对它们进行更详细的讲解。在getSinge函数中，实际上也提到了闭包和高阶函数的概念。单例模式是一种简单但非常实用的模式，特别是惰性单例技术，在合适的时候才创建对象，并且只创建唯一的一个。更奇妙的是，创建对象和管理单例的职责被分布在两个不同的方法中，这两个方法组合起来才具有单例模式的威力。

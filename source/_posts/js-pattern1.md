@@ -1,5 +1,5 @@
 ---
-title: JS设计模式-1-基础复习
+title: JS设计模式-1-基础复习-面向对象，this
 categories: js
 tags:
   - js
@@ -122,10 +122,10 @@ Object.create = Object.create | | function( obj ){
 原型模式提供了另外一种创建对象的方式，通过克隆对象，我们就不用再关心对象的具体类型名字。在JavaScript这种类型模糊的语言中，创建对象非常容易，也不存在类型耦合的问题。从设计模式的角度来讲，原型模式的意义并不算大。但JavaScript本身是一门基于原型的面向对象语言，它的对象系统就是使用原型模式来搭建的，在这里称之为原型编程范型也许更合适。
 
 原型编程范型至少包括以下基本规则:
--所有的数据都是对象。
--要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它。
--对象会记住它的原型。
--如果对象无法响应某个请求，它会把这个请求委托给它自己的原型。
+- 所有的数据都是对象。
+- 要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它。
+- 对象会记住它的原型。
+- 如果对象无法响应某个请求，它会把这个请求委托给它自己的原型。
 
 JavaScript在设计的时候，模仿Java引入了两套类型机制：基本类型和对象类型。基本类型包括undefined、number、boolean、string、function、object。按照JavaScript设计者的本意，除了undefined之外，一切都应是对象。为了实现这一目标，number、boolean、string这几种基本类型数据也可以通过“包装类”的方式变成对象类型数据来处理。
 
@@ -280,7 +280,7 @@ document.getElementById('div1').onclick = function() {
 	callback();
 };
 ```
-在 ECMAScript 5 的 strict 模 式 下， 这 种 情 况 下 的 this 已 经 被 规 定 为 不 会 指 向 全 局 对 象， 而 是 undefined：
+在ECMAScript5的strict模式下，这种情况下的this已经被规定为不会指向全局对象，而是undefined：
 ```js
 function func(){ 
   "use strict" 
