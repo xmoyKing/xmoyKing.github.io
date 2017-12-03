@@ -1,419 +1,460 @@
 ---
-title: JS设计模式-13-装饰器模式
+title: JS设计模式-13-中介者模式
 categories: js
 tags:
-  - js
-  - design pattern
-date: 2017-11-24 08:39:08
+- js
+- design pattern
+date: 2017-11-30 16:50:39
 updated:
 ---
 
-在程序开发中，许多时候都并不希望某个类天生就非常庞大，一次性包含许多职责。那么我们就可以使用装饰者模式。装饰者模式可以动态地给某个对象添加一些额外的职责，而不会影响从这个类中派生的其他对象。
+在我们生活的世界中，每个人每个物体之间都会产生一些错综复杂的联系。在应用程序里也是一样，程序由大大小小的单一对象组成，所有这些对象都按照某种关系和规则来通信。
 
-在传统的面向对象语言中，给对象添加功能常常使用继承的方式，但是继承的方式并不灵活，还会带来许多问题：一方面会导致超类和子类之间存在强耦合性，当超类改变时，子类也会随之改变；另一方面，继承这种功能复用方式通常被称为“白箱复用”，“白箱”是相对可见性而言的，在继承方式中，超类的内部细节是对子类可见的，继承常常被认为破坏了封装性。
+平时我们大概能记住10个朋友的电话、30家餐馆的位置。在程序里，也许一个对象会和其他10个对象打交道，所以它会保持10个对象的引用。当程序的规模增大，对象会越来越多，它们之间的关系也越来越复杂，难免会形成网状的交叉引用。当我们改变或删除其中一个对象的时候，很可能需要通知所有引用到它的对象。这样一来，就像在心脏旁边拆掉一根毛细血管一般，即使一点很小的修改也必须小心翼翼，
 
-使用继承还会带来另外一个问题，在完成一些功能复用的同时，有可能创建出大量的子类，使子类的数量呈爆炸性增长。比如现在有4种型号的自行车，我们为每种自行车都定义了一个单独的类。现在要给每种自行车都装上前灯、尾灯和铃铛这3种配件。如果使用继承的方式来给每种自行车创建子类，则需要4×3=12个子类。但是如果把前灯、尾灯、铃铛这些对象动态组合到自行车上面，则只需要额外增加3个类。
+面向对象设计鼓励将行为分布到各个对象中，把对象划分成更小的粒度，有助于增强对象的可复用性，但由于这些细粒度对象之间的联系激增，又有可能会反过来降低它们的可复用性。
 
-这种给对象动态地增加职责的方式称为装饰者（decorator）模式。装饰者模式能够在不改变对象自身的基础上，在程序运行期间给对象动态地添加职责。跟继承相比，装饰者是一种更轻便灵活的做法，这是一种“即用即付”的方式，比如天冷了就多穿一件外套，需要飞行时就在头上插一支竹蜻蜓，遇到一堆食尸鬼时就点开AOE（范围攻击）技能。
+中介者模式的作用就是解除对象与对象之间的紧耦合关系。增加一个中介者对象后，所有的相关对象都通过中介者对象来通信，而不是互相引用，所以当一个对象发生改变时，只需要通知中介者对象即可。中介者使各对象之间耦合松散，而且可以独立地改变它们之间的交互。中介者模式使网状的多对多关系变成了相对简单的一对多关系。
+![引用关系](0.png)
+图中，如果对象A发生了改变，则需要同时通知跟A发生引用关系的B、D、E、F这4个对象；而使用中介者模式改进之后，A发生改变时则只需要通知这个中介者对象即可。
+![中介者](1.png)
 
-#### 模拟传统面向对象语言的装饰者模式
-首先要提出来的是，作为一门解释执行的语言，给JavaScript中的对象动态添加或者改变职责是一件再简单不过的事情，虽然这种做法改动了对象自身，跟传统定义中的装饰者模式并不一样，但这无疑更符合JavaScript的语言特色。代码如下：
+#### 现实中的中介者
+在现实生活中也有很多中介者的例子，例如
+1. 机场指挥塔
+  中介者也被称为调停者，我们想象一下机场的指挥塔，如果没有指挥塔的存在，每一架飞机要和方圆100公里内的所有飞机通信，才能确定航线以及飞行状况，后果是不可想象的。现实中的情况是，每架飞机都只需要和指挥塔通信。指挥塔作为调停者，知道每一架飞机的飞行状况，所以它可以安排所有飞机的起降时间，及时做出航线调整。
+1. 博彩公司
+  打麻将的人经常遇到这样的问题，打了几局之后开始计算钱，A自摸了两把，B杠了三次，C点炮一次给D，谁应该给谁多少钱已经很难计算清楚，而这还是在只有4个人参与的情况下。在世界杯期间购买足球彩票，如果没有博彩公司作为中介，上千万的人一起计算赔率和输赢绝对是不可能实现的事情。有了博彩公司作为中介，每个人只需和博彩公司发生关联，博彩公司会根据所有人的投注情况计算好赔率，彩民们赢了钱就从博彩公司拿，输了钱就交给博彩公司。
+
+#### 中介者模式的例子——泡泡堂游戏
+大家可能都还记得泡泡堂游戏，作者曾经写过一个JS版的泡泡堂，现在我们来一起回顾这个游戏，在游戏之初只支持两个玩家同时进行对战。
+
+先定义一个玩家构造函数，它有3个简单的原型方法：Play.prototype.win、Play.prototype.lose以及表示玩家死亡的Play.prototype.die。
+
+因为玩家的数目是2，所以当其中一个玩家死亡的时候游戏便结束,同时通知它的对手胜利。这段代码看起来很简单：
 ```js
-var obj = { name: 'sven', address: '深 圳 市' }; 
-obj.address = obj.address + '福 田 区';
-```
-传统面向对象语言中的装饰者模式在JavaScript中适用的场景并不多，如上面代码所示，通常我们并不太介意改动对象自身。尽管如此，还是稍微模拟一下传统面向对象语言中的装饰者模式实现。
-
-假设我们在编写一个飞机大战的游戏，随着经验值的增加，我们操作的飞机对象可以升级成更厉害的飞机，一开始这些飞机只能发射普通的子弹，升到第二级时可以发射导弹，升到第三级时可以发射原子弹。
-
-下面来看代码实现，首先是原始的飞机类：
-```js
-var Plane = function(){} 
-Plane.prototype.fire = function(){ console.log( '发 射 普 通 子 弹' ); }
-```
-接下来增加两个装饰类，分别是导弹和原子弹：
-```js
-var MissileDecorator = function( plane ){ this.plane = plane; }
-MissileDecorator.prototype.fire = function(){ 
-  this.plane.fire();
-  console.log( '发 射 导 弹' ); 
-} 
-
-var AtomDecorator = function( plane ){ this.plane = plane; }
-AtomDecorator.prototype.fire = function(){ 
-  this.plane.fire(); 
-  console.log( '发 射 原 子 弹' ); 
-}
-```
-导弹类和原子弹类的构造函数都接受参数plane对象，并且保存好这个参数，在它们的fire方法中，除了执行自身的操作之外，还调用plane对象的fire方法。
-
-这种给对象动态增加职责的方式，并没有真正地改动对象自身，而是将对象放入另一个对象之中，这些对象以一条链的方式进行引用，形成一个聚合对象。这些对象都拥有相同的接口（fire方法），当请求达到链中的某个对象时，这个对象会执行自身的操作，随后把请求转发给链中的下一个对象。
-
-因为装饰者对象和它所装饰的对象拥有一致的接口，所以它们对使用该对象的客户来说是透明的，被装饰的对象也并不需要了解它曾经被装饰过，这种透明性使得我们可以递归地嵌套任意多个装饰者对象.
-![嵌套多个装饰者对象](1.png)
-
-测试：
-```js
-var plane = new Plane(); 
-plane = new MissileDecorator( plane ); 
-plane = new AtomDecorator( plane ); 
-
-plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹、 发 射 原 子 弹
-```
-![嵌套多个装饰者对象输出](2.png)
-
-#### 装饰者也是包装器
-在《设计模式》成书之前，GoF原想把装饰者（decorator）模式称为包装器（wrapper）模式。从功能上而言，decorator能很好地描述这个模式，但从结构上看，wrapper的说法更加贴切。装饰者模式将一个对象嵌入另一个对象之中，实际上相当于这个对象被另一个对象包装起来，形成一条包装链。请求随着这条链依次传递到所有的对象，每个对象都有处理这条请求的机会。
-
-#### 回到JavaScript的装饰者
-JavaScript语言动态改变对象相当容易，我们可以直接改写对象或者对象的某个方法，并不需要使用“类”来实现装饰者模式，代码如下：
-```js
-var plane = { fire: function(){ console.log( '发 射 普 通 子 弹' ); } } 
-var missileDecorator = function(){ console.log( '发 射 导 弹' ); } 
-var atomDecorator = function(){ console.log( '发 射 原 子 弹' ); } 
-
-var fire1 = plane.fire; 
-plane.fire = function(){ fire1(); missileDecorator(); } 
-
-var fire2 = plane.fire; 
-plane.fire = function(){ fire2(); atomDecorator(); } 
-
-plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹、 发 射 原 子 弹
-```
-
-#### 装饰函数
-在JavaScript中，几乎一切都是对象，其中函数又被称为一等对象。在平时的开发工作中，也许大部分时间都在和函数打交道。在JavaScript中可以很方便地给某个对象扩展属性和方法，但却很难在不改动某个函数源代码的情况下，给该函数添加一些额外的功能。在代码的运行期间，我们很难切入某个函数的执行环境。
-
-要想为函数添加一些功能，最简单粗暴的方式就是直接改写该函数，但这是最差的办法，直接违反了开放-封闭原则：
-```js
-var a = function(){ alert (1); } 
-// 改 成： 
-var a = function(){ alert (1); alert (2); }
-```
-很多时候我们不想去碰原函数，也许原函数是由其他同事编写的，里面的实现非常杂乱。现在需要一个办法，在不改变函数源代码的情况下，能给函数增加功能，这正是开放-封闭原则。
-
-其实通过保存原引用的方式就可以改写某个函数：
-```js
-var _a = a; 
-a = function(){ _a(); alert (2); } 
-a();
-```
-这是实际开发中很常见的一种做法，比如我们想给window绑定onload事件，但是又不确定这个事件是不是已经被其他人绑定过，为了避免覆盖掉之前的window.onload函数中的行为，我们一般都会先保存好原先的window.onload，把它放入新的window.onload里执行.
-```js
-window.onload = function(){ alert (1); } 
-
-var _onload = window.onload || function(){};
-window.onload = function(){ _onload(); alert (2); }
-```
-这样的代码当然是符合开放-封闭原则的，我们在增加新功能的时候，确实没有修改原来的window.onload代码，但是这种方式存在以下两个问题。
-- 必须维护_onload这个中间变量，虽然看起来并不起眼，但如果函数的装饰链较长，或者需要装饰的函数变多，这些中间变量的数量也会越来越多。
-- 其实还遇到了this被劫持的问题，在window.onload的例子中没有这个烦恼，是因为调用普通函数_onload时，this也指向window，跟调用window.onload时一样（函数作为对象的方法被调用时，this指向该对象，所以此处this也只指向window）。现在把window.onload换成document.getElementById，代码如下:
-```js
-var _getElementById = document.getElementById; 　 　 
-document.getElementById = function( id ){ 
-  alert (1); 
-  return _getElementById( id ); // (1) 
-} 　 　 
-var button = document.getElementById( 'button' );
-```
-执行这段代码，我们看到在弹出alert(1)之后，紧接着控制台抛出了异常.
-```js
-Uncaught TypeError: Illegal invocation
-```
-
-异常发生在(1)处的_getElementById(id)这句代码上，此时_getElementById是一个全局函数，当调用一个全局函数时，this是指向window的，而document.getElementById方法的内部实现需要使用this引用，this在这个方法内预期是指向document，而不是window,这是错误发生的原因，所以使用现在的方式给函数增加功能并不保险。
-
-改进后的代码可以满足需求，我们要手动把document当作上下文this传入_getElementById：
-```js
-document.getElementById = function(){ 
-  alert (1); 
-  return _getElementById.apply( document, arguments ); 
-} 
-```
-但这样做显然很不方便，引入AOP来提供一种完美的方法给函数动态增加功能。
-
-#### 用AOP装饰函数
-首先给出Function.prototype.before方法和Function.prototype.after方法：
-```js
-Function.prototype.before = function(beforefn) {
-  var __self = this; // 保 存 原 函 数 的 引 用 
-  return function() { // 返 回 包 含 了 原 函 数 和 新 函 数 的" 代 理" 函 数 
-    beforefn.apply(this, arguments); // 执 行 新 函 数， 且 保 证 this 不 被 劫 持， 新 函 数 接 受 的 参 数 
-    // 也 会 被 原 封 不 动 地 传 入 原 函 数， 新 函 数 在 原 函 数 之 前 执 行 
-    return __self.apply(this, arguments); // 执 行 原 函 数 并 返 回 原 函 数 的 执 行 结 果， 
-    // 并 且 保 证 this 不 被 劫 持 
-  }
-}
-Function.prototype.after = function(afterfn) {
-  var __self = this;
-  return function() {
-    var ret = __self.apply(this, arguments);
-    afterfn.apply(this, arguments);
-    return ret;
-  }
+function Player(name) {
+  this.name = name;
+  this.enemy = null; // 敌 人 
+};
+Player.prototype.win = function() {
+  console.log(this.name + ' won ');
+};
+Player.prototype.lose = function() {
+  console.log(this.name + ' lost');
+};
+Player.prototype.die = function() {
+  this.lose();
+  this.enemy.win();
 };
 ```
-Function.prototype.before接受一个函数当作参数，这个函数即为新添加的函数，它装载了新添加的功能代码。
-
-接下来把当前的this保存起来，这个this指向原函数，然后返回一个“代理”函数，这个“代理”函数只是结构上像代理而已，并不承担代理的职责（比如控制对象的访问等）。它的工作是把请求分别转发给新添加的函数和原函数，且负责保证它们的执行顺序，让新添加的函数在原函数之前执行（前置装饰），这样就实现了动态装饰的效果。
-
-我们注意到，通过Function.prototype.apply来动态传入正确的this，保证了函数在被装饰之后，this不会被劫持。
-
-Function.prototype.after的原理跟Function.prototype.before一模一样，唯一不同的地方在于让新添加的函数在原函数执行之后再执行。下面来试试用Function.prototype.before的威力：
+接下来创建2个玩家对象：
 ```js
-Function.prototype.before = function(beforefn) {
-  var __self = this;
-  return function() {
-    beforefn.apply(this, arguments);
-    return __self.apply(this, arguments);
-  }
-}
-document.getElementById = document.getElementById.before(function() {
-  alert(1);
-});
-var button = document.getElementById('button');
-console.log(button);
+var player1 = new Player( '皮 蛋' ); 
+var player2 = new Player( '小 乖' ); 
 ```
-回到window.onload的例子，看看用Function.prototype.after来增加新的window.onload事件是多么简单：
+给玩家相互设置敌人：
 ```js
-window.onload = function() {
-  alert(1);
-}
-window.onload = (window.onload || function() {}).after(function() {
-  alert(2);
-}).after(function() {
-  alert(3);
-}).after(function() {
-  alert(4);
-});
+player1.enemy = player2; 
+player2.enemy = player1; 
 ```
-值得提到的是，上面的AOP实现是在Function.prototype上添加before和after方法，但许多人不喜欢这种污染原型的方式，那么我们可以做一些变通，把原函数和新函数都作为参数传入before或者after方法：
+当玩家player1被泡泡炸死的时候，只需要调用这一句代码便完成了一局游戏：
 ```js
-var before = function(fn, beforefn) {
-    return function() {
-      beforefn.apply(this, arguments);
-      return fn.apply(this, arguments);
+player1.die();//输出：皮蛋lost、小乖won
+```
+只有2个玩家其实没什么意思，真正的泡泡堂游戏至多可以有8个玩家，并分成红蓝两队进行游戏。
+
+##### 为游戏增加队伍
+改进一下游戏。因为玩家数量变多，用下面的方式来设置队友和敌人无疑很低效：
+```js
+player1.partners = [player1, player2, player3, player4];
+player1.enemies = [player5, player6, player7, player8];
+Player5.partners = [player5, player6, player7, player8];
+Player5.enemies = [player1, player2, player3, player4];
+```
+所以我们定义一个数组players来保存所有的玩家，在创建玩家之后，循环players来给每个玩家设置队友和敌人,再改写构造函数Player，使每个玩家对象都增加一些属性，分别是队友列表、敌人列表、玩家当前状态、角色名字以及玩家所在的队伍颜色：
+```js
+var players = [];
+
+function Player(name, teamColor) {
+  this.partners = []; // 队 友 列 表 
+  this.enemies = []; // 敌 人 列 表
+  this.state = 'live'; // 玩 家 状 态 
+  this.name = name; // 角 色 名 字 
+  this.teamColor = teamColor; // 队 伍 颜 色 
+};
+```
+玩家胜利和失败之后的展现依然很简单，只是在每个玩家的屏幕上简单地弹出提示：
+```js
+Player.prototype.win = function(){  console.log( 'winner: ' + this.name ); };
+Player.prototype.lose = function(){  console.log( 'loser: ' + this.name ); };
+```
+玩家死亡的方法要变得稍微复杂一点，我们需要在每个玩家死亡的时候，都遍历其他队友的生存状况，如果队友全部死亡，则这局游戏失败，同时敌人队伍的所有玩家都取得胜利，代码如下：
+```js
+Player.prototype.die = function() { // 玩 家 死 亡 
+  var all_dead = true;
+  this.state = 'dead'; // 设 置 玩 家 状 态 为 死 亡 
+  for (var i = 0, partner; partner = this.partners[i++];) { // 遍 历 队 友 列 表 
+    if (partner.state !== 'dead') { // 如 果 还 有 一 个 队 友 没 有 死 亡， 则 游 戏 还 未 失 败 
+      all_dead = false;
+      break;
     }
   }
-var a = before(function() {
-  alert(3)
-}, function() {
-  alert(2)
-});
-a = before(a, function() {
-  alert(1);
-});
-a();
-```
-
-#### AOP的应用实例
-用AOP装饰函数的技巧在实际开发中非常有用。不论是业务代码的编写，还是在框架层面，我们都可以把行为依照职责分成粒度更细的函数，随后通过装饰把它们合并到一起，这有助于我们编写一个松耦合和高复用性的系统。
-
-##### 数据统计上报
-分离业务代码和数据统计代码，无论在什么语言中，都是AOP的经典应用之一。在项目开发的结尾阶段难免要加上很多统计数据的代码，这些过程可能让我们被迫改动早已封装好的函数。
-
-比如页面中有一个登录button，点击这个button会弹出登录浮层，与此同时要进行数据上报，来统计有多少用户点击了这个登录button：
-```js
-var showLogin = function() {
-    console.log('打 开 登 录 浮 层');
-    log(this.getAttribute('tag'));
-  }
-var log = function(tag) {
-    console.log('上 报 标 签 为: ' + tag);
-    //(newImage).src='http://xxx.com/report?tag='+tag;
-    //真正的上报代码略
-  }
-document.getElementById('button').onclick = showLogin;
-```
-在showLogin函数里，既要负责打开登录浮层，又要负责数据上报，这是两个层面的功能，在此处却被耦合在一个函数里。使用AOP分离之后，代码如下：
-```js
-Function.prototype.after = function(afterfn) {
-  var __self = this;
-  return function() {
-    var ret = __self.apply(this, arguments);
-    afterfn.apply(this, arguments);
-    return ret;
+  if (all_dead === true) { // 如 果 队 友 全 部 死 亡 this.lose(); // 通 知 自 己 游 戏 失 败 
+    for (var i = 0, partner; partner = this.partners[i++];) { // 通 知 所 有 队 友 玩 家 游 戏 失 败 
+      partner.lose();
+    }
+    for (var i = 0, enemy; enemy = this.enemies[i++];) { // 通 知 所 有 敌 人 游 戏 胜 利 
+      enemy.win();
+    }
   }
 };
-var showLogin = function() {
-    console.log('打 开 登 录 浮 层');
-  }
-var log = function() {
-    console.log('上 报 标 签 为: ' + this.getAttribute('tag'));
-  }
-showLogin = showLogin.after(log); // 打 开 登 录 浮 层 之 后 上 报 数 据 
-document.getElementById('button').onclick = showLogin;
+```
+最后定义一个工厂来创建玩家：
+```js
+var playerFactory = function(name, teamColor) {
+    var newPlayer = new Player(name, teamColor); // 创 建 新 玩 家 
+    for (var i = 0, player; player = players[i++];) { // 通 知 所 有 的 玩 家， 有 新 角 色 加 入 
+      if (player.teamColor === newPlayer.teamColor) { // 如 果 是 同 一 队 的 玩 家 
+        player.partners.push(newPlayer); // 相 互 添 加 到 队 友 列 表 
+        newPlayer.partners.push(player);
+      } else {
+        player.enemies.push(newPlayer); // 相 互 添 加 到 敌 人 列 表 
+        newPlayer.enemies.push(player);
+      }
+    }
+    players.push(newPlayer);
+    return newPlayer;
+  };
+```
+创建8个玩家，并让红队玩家全部死亡，查看输出结果。
+```js
+// 红 队： 
+var player1 = playerFactory('皮 蛋', 'red'),
+  player2 = playerFactory('小 乖', 'red'),
+  player3 = playerFactory('宝 宝', 'red'),
+  player4 = playerFactory('小 强', 'red');
+// 蓝 队：
+var player5 = playerFactory('黑 妞', 'blue'),
+  player6 = playerFactory('葱 头', 'blue'),
+  player7 = playerFactory('胖 墩', 'blue'),
+  player8 = playerFactory('海 盗', 'blue');
+
+player1.die(); 
+player2.die(); 
+player4.die(); 
+player3.die();
 ```
 
-##### 用AOP动态改变函数的参数
-观察Function.prototype.before方法：
-```js
-Function.prototype.before = function(beforefn) {
-  var __self = this;
-  return function() {
-    beforefn.apply(this, arguments); // (1) 
-    return __self.apply(this, arguments); // (2) 
-  }
-}
-```
-从这段代码的(1)处和(2)处可以看到，beforefn和原函数`__self`共用一组参数列表arguments，当我们在beforefn的函数体内改变arguments的时候，原函数`__self`接收的参数列表自然也会变化。下面的例子展示了如何通过Function.prototype.before方法给函数func的参数param动态地添加属性b：
-```js
-var func = function( param ){ 
-  console.log( param ); // 输 出： {a: "a", b: "b"} 
-  } 
+##### 玩家增多带来的困扰
+现在我们已经可以随意地为游戏增加玩家或者队伍，但问题是，每个玩家和其他玩家都是紧紧耦合在一起的。在此段代码中，每个玩家对象都有两个属性，this.partners和this.enemies，用来保存其他玩家对象的引用。当每个对象的状态发生改变，比如角色移动、吃到道具或者死亡时，都必须要显式地遍历通知其他对象。
 
-func = func.before( function( param ){ param.b = 'b'; }); 
-func( {a: 'a'} );
-```
-现在有一个用于发起ajax请求的函数，这个函数负责项目中所有的ajax异步请求：
+在这个例子中只创建了8个玩家，或许还没有对你产生足够多的困扰，而如果在一个大型网络游戏中，画面里有成百上千个玩家，几十支队伍在互相厮杀。如果有一个玩家掉线，必须从所有其他玩家的队友列表和敌人列表中都移除这个玩家。游戏也许还有解除队伍和添加到别的队伍的功能，红色玩家可以突然变成蓝色玩家，这就不再仅仅是循环能够解决的问题了。面对这样的需求，上面的代码可完全没有办法解决。
+
+##### 用中介者模式改造泡泡堂游戏
+现在我们开始用中介者模式来改造上面的泡泡堂游戏，首先仍然是定义Player构造函数和player对象的原型方法，在player对象的这些原型方法中，不再负责具体的执行逻辑，而是把操作转交给中介者对象，我们把中介者对象命名为playerDirector：
 ```js
-var ajax = function( type, url, param ){ 
-  console.dir( param); // 发 送 ajax 请 求 的 代 码 略 
+function Player(name, teamColor) {
+  this.name = name; // 角 色 名 字 
+  this.teamColor = teamColor; // 队 伍 颜 色 
+  this.state = 'alive'; // 玩 家 生 存 状 态 
+};
+Player.prototype.win = function() {
+  console.log(this.name + ' won ');
+};
+Player.prototype.lose = function() {
+  console.log(this.name + ' lost');
 }; 
-
-ajax( 'get', 'http://xxx.com/userinfo', { name: 'sven' } );
-```
-上面的伪代码表示向后台cgi发起一个请求来获取用户信息，传递给cgi的参数是{name:'sven'}。ajax函数在项目中一直运转良好，跟cgi的合作也很愉快。直到有一天，网站遭受了CSRF攻击。解决CSRF攻击最简单的一个办法就是在HTTP请求中带上一个Token参数。
-
-假设我们已经有一个用于生成Token的函数：
-```js
-var getToken = function(){ return 'Token'; }
-```
-现在的任务是给每个ajax请求都加上Token参数：
-```js
-var ajax = function( type, url, param ){ 
-  param = param || {}; 
-  Param.Token = getToken(); // 发 送 ajax 请 求 的 代 码 略... 
+/******************* 玩 家 死 亡*****************/
+Player.prototype.die = function() {
+  this.state = 'dead';
+  playerDirector.ReceiveMessage('playerDead', this); // 给 中 介 者 发 送 消 息， 玩 家 死 亡 
+}; 
+/******************* 移 除 玩 家*****************/
+Player.prototype.remove = function() {
+  playerDirector.ReceiveMessage('removePlayer', this); // 给 中 介 者 发 送 消 息， 移 除 一 个 玩 家 
+}; 
+/******************* 玩 家 换 队*****************/ 
+Player.prototype.changeTeam = function( color ){ 
+  playerDirector.ReceiveMessage( 'changeTeam', this, color ); // 给 中 介 者 发 送 消 息， 玩 家 换 队 
 };
 ```
-虽然已经解决了问题，但我们的ajax函数相对变得僵硬了，每个从ajax函数里发出的请求都自动带上了Token参数，虽然在现在的项目中没有什么问题，但如果将来把这个函数移植到其他项目上，或者把它放到一个开源库中供其他人使用，Token参数都将是多余的。
-
-也许另一个项目不需要验证Token，或者是Token的生成方式不同，无论是哪种情况，都必须重新修改ajax函数。
-
-为了解决这个问题，先把ajax函数还原成一个干净的函数,然后把Token参数通过Function.prototyte.before装饰到ajax函数的参数param对象中：
+再继续改写之前创建玩家对象的工厂函数，可以看到，因为工厂函数里不再需要给创建的玩家对象设置队友和敌人，这个工厂函数几乎失去了工厂的意义：
 ```js
-var ajax = function( type, url, param ){ 
-  console.dir( param); // 发 送 ajax 请 求 的 代 码 略 
-}; 
-
-var getToken = function() {
-    return 'Token';
-  }
-ajax = ajax.before(function(type, url, param) {
-  param.Token = getToken();
-});
-
-ajax('get', 'http://xxx.com/userinfo', {
-  name: 'sven'
-});
+var playerFactory = function(name, teamColor) {
+    var newPlayer = new Player(name, teamColor); // 创 造 一 个 新 的 玩 家 对 象
+    playerDirector.ReceiveMessage('addPlayer', newPlayer); // 给 中 介 者 发 送 消 息， 新 增 玩 家 
+    return newPlayer;
+  };
 ```
-明显可以看到，用AOP的方式给ajax函数动态装饰上Token参数，保证了ajax函数是一个相对纯净的函数，提高了ajax函数的可复用性，它在被迁往其他项目的时候，不需要做任何修改。
+最后，我们需要实现这个中介者playerDirector对象，一般有以下两种方式。
+- 利用发布—订阅模式。将playerDirector实现为订阅者，各player作为发布者，一旦player的状态发生改变，便推送消息给playerDirector，playerDirector处理消息后将反馈发送给其他player。
+- 在playerDirector中开放一些接收消息的接口，各player可以直接调用该接口来给playerDirector发送消息，player只需传递一个参数给playerDirector，这个参数的目的是使playerDirector可以识别发送者。同样，playerDirector接收到消息之后会将处理结果反馈给其他player。
 
-##### 插件式的表单验证
-我们很多人都写过许多表单验证的代码，在一个Web项目中，可能存在非常多的表单，如注册、登录、修改用户信息等。在表单数据提交给后台之前，常常要做一些校验，比如登录的时候需要验证用户名和密码是否为空，代码如下：
+这两种方式的实现没什么本质上的区别。在这里我们使用第二种方式，playerDirector开放一个对外暴露的接口ReceiveMessage，负责接收player对象发送的消息，而player对象发送消息的时候，总是把自身this作为参数发送给playerDirector，以便playerDirector识别消息来自于哪个玩家对象，代码如下：
 ```js
-var username = document.getElementById('username'),
-  password = document.getElementById('password'),
-  submitBtn = document.getElementById('submitBtn');
-var formSubmit = function() {
-    if (username.value === '') {
-      return alert('用 户 名 不 能 为 空');
-    }
-    if (password.value === '') {
-      return alert('密 码 不 能 为 空');
-    }
-    var param = {
-      username: username.value,
-      password: password.value
-    }
-    ajax('http:// xxx.com/ login', param); // ajax 具 体 实 现 略 
-  }
-submitBtn.onclick = function() {
-  formSubmit();
-}
-```
-formSubmit函数在此处承担了两个职责，除了提交ajax请求之外，还要验证用户输入的合法性。这种代码一来会造成函数臃肿，职责混乱，二来谈不上任何可复用性。
+var playerDirector = (function() {
+  var players = {}, // 保 存 所 有 玩 家 
+    operations = {}; // 中 介 者 可 以 执 行 的 操 作 
 
-目的是分离校验输入和提交ajax请求的代码，我们把校验输入的逻辑放到validata函数中，并且约定当validata函数返回false的时候，表示校验未通过，代码如下：
+  /**************** 新 增 一 个 玩 家***************************/
+  operations.addPlayer = function(player) {
+    var teamColor = player.teamColor; // 玩 家 的 队 伍 颜 色 
+    players[teamColor] = players[teamColor] || []; // 如 果 该 颜 色 的 玩 家 还 没 有 成 立 队 伍， 则 新 成 立 一 个 队 伍 
+    players[teamColor].push(player); // 添 加 玩 家 进 队 伍 
+  }; 
+
+  /**************** 移 除 一 个 玩 家***************************/
+  operations.removePlayer = function(player) {
+    var teamColor = player.teamColor,
+      // 玩 家 的 队 伍 颜 色 
+      teamPlayers = players[teamColor] || []; // 该 队 伍 所 有 成 员 
+    for (var i = teamPlayers.length - 1; i >= 0; i--) { // 遍 历 删 除 
+      if (teamPlayers[i] === player) {
+        teamPlayers.splice(i, 1);
+      }
+    }
+  }; 
+  
+  /**************** 玩 家 换 队***************************/
+  operations.changeTeam = function(player, newTeamColor) { // 玩 家 换 队 
+    operations.removePlayer(player); // 从 原 队 伍 中 删 除 
+    player.teamColor = newTeamColor; // 改 变 队 伍 颜 色 
+    operations.addPlayer(player); // 增 加 到 新 队 伍 中 
+  };
+
+  operations.playerDead = function(player) { // 玩 家 死 亡 
+    var teamColor = player.teamColor,
+      teamPlayers = players[teamColor]; // 玩 家 所 在 队 伍
+    var all_dead = true;
+    for (var i = 0, player; player = teamPlayers[i++];) {
+      if (player.state !== 'dead') {
+        all_dead = false;
+        break;
+      }
+    }
+    if (all_dead === true) { // 全 部 死 亡
+      for (var i = 0, player; player = teamPlayers[i++];) {
+        player.lose(); // 本 队 所 有 玩 家 lose 
+      }
+      for (var color in players) {
+        if (color !== teamColor) {
+          var teamPlayers = players[color]; // 其 他 队 伍 的 玩 家
+          for (var i = 0, player; player = teamPlayers[i++];) {
+            player.win(); // 其 他 队 伍 所 有 玩 家 win
+          }
+        }
+      }
+    }
+  };
+
+  var ReceiveMessage = function() {
+      var message = Array.prototype.shift.call(arguments); // arguments 的 第 一 个 参 数 为 消 息 名 称
+      operations[message].apply(this, arguments);
+    };
+  return {
+    ReceiveMessage: ReceiveMessage
+  }
+})();
+```
+可以看到，除了中介者本身，没有一个玩家知道其他任何玩家的存在，玩家与玩家之间的耦合关系已经完全解除，某个玩家的任何操作都不需要通知其他玩家，而只需要给中介者发送一个消息，中介者处理完消息之后会把处理结果反馈给其他的玩家对象。我们还可以继续给中介者扩展更多功能，以适应游戏需求的不断变化。
+
+#### 中介者模式的例子——购买商品
+假设我们正在编写一个手机购买的页面，在购买流程中，可以选择手机的颜色以及输入购买数量，同时页面中有两个展示区域，分别向用户展示刚刚选择好的颜色和数量。还有一个按钮动态显示下一步的操作，我们需要查询该颜色手机对应的库存，如果库存数量少于这次的购买数量，按钮将被禁用并且显示库存不足，反之按钮可以点击并且显示放入购物车。
+
+这个需求是非常容易实现的，假设我们已经提前从后台获取到了所有颜色手机的库存量：
 ```js
-var validata = function() {
-    if (username.value === '') {
-      alert('用 户 名 不 能 为 空');
-      return false;
-    }
-    if (password.value === '') {
-      alert('密 码 不 能 为 空');
-      return false;
-    }
-  }
-var formSubmit = function() {
-    if (validata() === false) { // 校 验 未 通 过
-      return;
-    }
-    var param = {
-      username: username.value,
-      password: password.value
-    }
-    ajax('http:// xxx.com/ login', param);
-  }
-submitBtn.onclick = function() {
-  formSubmit();
-}
+var goods = { // 手 机 库 存 
+  "red": 3,
+  "blue": 6
+};
 ```
-现在的代码已经有了一些改进，我们把校验的逻辑都放到了validata函数中，但formSubmit函数的内部还要计算validata函数的返回值，因为返回值的结果表明了是否通过校验。
+那么页面有可能显示为如下几种场景：
+- 选择红色手机，购买4个，库存不足。
+- 选择蓝色手机，购买5个，库存充足，可以加入购物车。
+- 或者是没有输入购买数量的时候，按钮将被禁用并显示相应提示。
 
-接下来进一步优化这段代码，使validata和formSubmit完全分离开来。首先要改写Function.prototype.before，如果beforefn的执行结果返回false，表示不再执行后面的原函数，代码如下：
+我们大概已经能够猜到，接下来将遇到至少5个节点，分别是：
+- 下拉选择框colorSelect
+- 文本输入框numberInput
+- 展示颜色信息colorInfo
+- 展示购买数量信息numberInfo
+- 决定下一步操作的按钮nextBtn
+
+接下来将分别监听colorSelect的onchange事件函数和numberInput的oninput事件函数，然后在这两个事件中作出相应处理。
 ```js
-Function.prototype.before = function(beforefn) {
-  var __self = this;
-  return function() {
-    if (beforefn.apply(this, arguments) === false) { // beforefn 返 回 false 的 情 况 直 接 return， 不 再 执 行 后 面 的 原 函 数
-      return;
-    }
-    return __self.apply(this, arguments);
+var colorSelect = document.getElementById('colorSelect'),
+  numberInput = document.getElementById('numberInput'),
+  colorInfo = document.getElementById('colorInfo'),
+  numberInfo = document.getElementById('numberInfo'),
+  nextBtn = document.getElementById('nextBtn');
+var goods = { // 手 机 库 存 
+  "red": 3,
+  "blue": 6
+};
+colorSelect.onchange = function() {
+  var color = this.value,// 颜 色 
+    number = numberInput.value, // 数 量 
+    stock = goods[color]; // 该 颜 色 手 机 对 应 的 当 前 库 存 
+  colorInfo.innerHTML = color;
+  if (!color) {
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = '请 选 择 手 机 颜 色';
+    return;
   }
-}
-var validata = function() {
-    if (username.value === '') {
-      alert('用 户 名 不 能 为 空');
-      return false;
-    }
-    if (password.value === '') {
-      alert('密 码 不 能 为 空');
-      return false;
-    }
+  if (((number - 0) | 0) !== number - 0) { // 用 户 输 入 的 购 买 数 量 是 否 为 正 整 数 
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
+    return;
   }
-var formSubmit = function() {
-    var param = {
-      username: username.value,
-      password: password.value
-    }
-    ajax('http:// xxx.com/ login', param);
+  if (number > stock) { // 当 前 选 择 数 量 超 过 库 存 量 
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = '库 存 不 足';
+    return;
   }
-formSubmit = formSubmit.before(validata);
-submitBtn.onclick = function() {
-  formSubmit();
-}
+  nextBtn.disabled = false;
+  nextBtn.innerHTML = '放 入 购 物 车';
+};
 ```
-在这段代码中，校验输入和提交表单的代码完全分离开来，它们不再有任何耦合关系，formSubmit=formSubmit.before(validata)这句代码，如同把校验规则动态接在formSubmit函数之前，validata成为一个即插即用的函数，它甚至可以被写成配置文件的形式，这有利于我们分开维护这两个函数。再利用策略模式稍加改造，我们就可以把这些校验规则都写成插件的形式，用在不同的项目当中。
 
-注意，因为函数通过Function.prototype.before或者Function.prototype.after被装饰之后，返回的实际上是一个新的函数，如果在原函数上保存了一些属性，那么这些属性会丢失。代码如下：
+##### 对象之间的联系
+来考虑一下，当触发了colorSelect的onchange之后，会发生什么事情。
+
+首先我们要让colorInfo中显示当前选中的颜色，然后获取用户当前输入的购买数量，对用户的输入值进行一些合法性判断。再根据库存数量来判断nextBtn的显示状态。numberInput的事件相关代码：
 ```js
-var func = function(){ alert( 1 ); } 
-func.a = 'a'; 
-func = func.after( function(){ alert( 2 ); }); 
-alert ( func.a ); // 输 出： undefined
+numberInput.oninput = function() {
+  var color = colorSelect.value,
+    // 颜 色 
+    number = this.value,
+    // 数 量 
+    stock = goods[color]; // 该 颜 色 手 机 对 应 的 当 前 库 存 
+  numberInfo.innerHTML = number;
+  if (!color) {
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = '请 选 择 手 机 颜 色';
+    return;
+  }
+  if (((number - 0) | 0) !== number - 0) { // 输 入 购 买 数 量 是 否 为 正 整 数 
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
+    return;
+  }
+  if (number > stock) { // 当 前 选 择 数 量 没 有 超 过 库 存 量 
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = '库 存 不 足';
+    return;
+  }
+  nextBtn.disabled = false;
+  nextBtn.innerHTML = '放 入 购 物 车';
+};
 ```
+虽然目前顺利完成了代码编写，但随之而来的需求改变有可能给我们带来麻烦。假设现在要求去掉colorInfo和numberInfo这两个展示区域，我们就要分别改动colorSelect.onchange和numberInput.oninput里面的代码，因为在先前的代码中，这些对象确实是耦合在一起的。
 
-另外，这种装饰方式也叠加了函数的作用域，如果装饰的链条过长，性能上也会受到一些影响。
+目前我们面临的对象还不算太多，当这个页面里的节点激增到10个或者15个时，它们之间的联系可能变得更加错综复杂，任何一次改动都将变得很棘手。
 
-#### 装饰者模式和代理模式
-装饰者模式和代理模式的结构看起来非常相像，这两种模式都描述了怎样为对象提供一定程度上的间接引用，它们的实现部分都保留了对另外一个对象的引用，并且向那个对象发送请求。代理模式和装饰者模式最重要的区别在于它们的意图和设计目的。
+假设页面中将新增另外一个下拉选择框，代表选择手机内存。现在我们需要计算颜色、内存和购买数量，来判断nextBtn是显示库存不足还是放入购物车。
 
-代理模式的目的是，当直接访问本体不方便或者不符合需要时，为这个本体提供一个替代者。本体定义了关键功能，而代理提供或拒绝对它的访问，或者在访问本体之前做一些额外的事情。装饰者模式的作用就是为对象动态加入行为。换句话说，代理模式强调一种关系（Proxy与它的实体之间的关系），这种关系可以静态的表达，也就是说，这种关系在一开始就可以被确定。而装饰者模式用于一开始不能确定对象的全部功能时。代理模式通常只有一层代理-本体的引用，而装饰者模式经常会形成一条长长的装饰链。
+而具体实现则需要先修改表示存库的JSON对象以及修改colorSelect的onchange事件函数，同样要改写numberInput的事件相关代码，具体代码的改变跟colorSelect大同小异，最后还要新增memorySelect的onchange事件函数。
 
-在虚拟代理实现图片预加载的例子中，本体负责设置img节点的src，代理则提供了预加载的功能，这看起来也是“加入行为”的一种方式，但这种加入行为的方式和装饰者模式的偏重点是不一样的。装饰者模式是实实在在的为对象增加新的职责和行为，而代理做的事情还是跟本体一样，最终都是设置src。但代理可以加入一些“聪明”的功能，比如在图片真正加载好之前，先使用一张占位的loading图片反馈给客户。
+仅仅是增加一个内存的选择条件，就要改变如此多的代码，这是因为在目前的实现中，每个节点对象都是耦合在一起的，改变或者增加任何一个节点对象，都要通知到与其相关的对象。
+
+##### 引入中介者
+现在我们来引入中介者对象，所有的节点对象只跟中介者通信。当下拉选择框colorSelect、memorySelect和文本输入框numberInput发生了事件行为时，它们仅仅通知中介者它们被改变了，同时把自身当作参数传入中介者，以便中介者辨别是谁发生了改变。剩下的所有事情都交给中介者对象来完成，这样一来，无论是修改还是新增节点，都只需要改动中介者对象里的代码。
+```js
+var goods = { // 手 机 库 存 
+  "red | 32G": 3,
+  "red | 16G": 0,
+  "blue | 32G": 1,
+  "blue | 16G": 6
+};
+var mediator = (function() {
+  var colorSelect = document.getElementById('colorSelect'),
+    memorySelect = document.getElementById('memorySelect'),
+    numberInput = document.getElementById('numberInput'),
+    colorInfo = document.getElementById('colorInfo'),
+    memoryInfo = document.getElementById('memoryInfo'),
+    numberInfo = document.getElementById('numberInfo'),
+    nextBtn = document.getElementById('nextBtn');
+  return {
+    changed: function(obj) {
+      var color = colorSelect.value, // 颜 色 
+        memory = memorySelect.value, // 内 存 
+        number = numberInput.value, // 数 量 
+        stock = goods[color + '|' + memory]; // 颜 色 和 内 存 对 应 的 手 机 库 存 数 量 
+
+      if (obj === colorSelect) { // 如 果 改 变 的 是 选 择 颜 色 下 拉 框 
+        colorInfo.innerHTML = color;
+      } else if (obj === memorySelect) {
+        memoryInfo.innerHTML = memory;
+      } else if (obj === numberInput) {
+        numberInfo.innerHTML = number;
+      }
+
+      if (!color) {
+        nextBtn.disabled = true;
+        nextBtn.innerHTML = '请 选 择 手 机 颜 色';
+        return;
+      }
+      if (!memory) {
+        nextBtn.disabled = true;
+        nextBtn.innerHTML = '请 选 择 内 存 大 小';
+        return;
+      }
+      if (((number - 0) | 0) !== number - 0) { // 输 入 购 买 数 量 是 否 为 正 整 数 
+        nextBtn.disabled = true;
+        nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
+        return;
+      }
+      nextBtn.disabled = false;
+      nextBtn.innerHTML = '放 入 购 物 车';
+    }
+  }
+})(); 
+// 事 件 函 数： 
+colorSelect.onchange = function() {
+  mediator.changed(this);
+};
+memorySelect.onchange = function() {
+  mediator.changed(this);
+};
+numberInput.oninput = function() {
+  mediator.changed(this);
+};
+```
+可以想象，某天我们又要新增一些跟需求相关的节点，比如CPU型号，那我们只需要稍稍改动mediator对象即可：
+```js
+var goods = { // 手 机 库 存 
+  "red | 32G | 800": 3,
+  // 颜 色 red， 内 存 32G， cpu800， 对 应 库 存 数 量 为 3 
+  "red | 16G | 801": 0,
+  "blue | 32G | 800": 1,
+  "blue | 16G | 801": 6
+};
+var mediator = (function() {
+  // 略 
+  var cpuSelect = document.getElementById('cpuSelect');
+  return {
+    change: function(obj) {
+      // 略 
+      var cpu = cpuSelect.value,
+        stock = goods[color + '|' + memory + '|' + cpu];
+        
+      if (obj === cpuSelect) {
+        cpuInfo.innerHTML = cpu;
+      }
+      // 略 
+    }
+  }
+})();
+```
 
 #### 小结
-通过数据上报、统计函数的执行时间、动态改变函数参数以及插件式的表单验证这4个例子，了解了装饰函数，它是JavaScript中独特的装饰者模式。这种模式在实际开发中非常有用，除了上面提到的例子，它在框架开发中也十分有用。作为框架作者，希望框架里的函数提供的是一些稳定而方便移植的功能，那些个性化的功能可以在框架之外动态装饰上去，这可以避免为了让框架拥有更多的功能，而去使用一些if、else语句预测用户的实际需要。
+中介者模式是迎合迪米特法则的一种实现。迪米特法则也叫最少知识原则，是指一个对象应该尽可能少地了解另外的对象（类似不和陌生人说话）。如果对象之间的耦合性太高，一个对象发生改变之后，难免会影响到其他的对象，跟“城门失火，殃及池鱼”的道理是一样的。而在中介者模式里，对象之间几乎不知道彼此的存在，它们只能通过中介者对象来互相影响对方。
 
+因此，中介者模式使各个对象之间得以解耦，以中介者和对象之间的一对多关系取代了对象之间的网状多对多关系。各个对象只需关注自身功能的实现，对象之间的交互关系交给了中介者对象来实现和维护。
+
+不过，中介者模式也存在一些缺点。其中，最大的缺点是系统中会新增一个中介者对象，因为对象之间交互的复杂性，转移成了中介者对象的复杂性，使得中介者对象经常是巨大的。中介者对象自身往往就是一个难以维护的对象。
+
+我们都知道，毒贩子虽然使吸毒者和制毒者之间的耦合度降低，但毒贩子也要抽走一部分利润。同样，在程序中，中介者对象要占去一部分内存。而且毒贩本身还要防止被警察抓住，因为它了解整个犯罪链条中的所有关系，这表明中介者对象自身往往是一个难以维护的对象。
+
+中介者模式可以非常方便地对模块或者对象进行解耦，但对象之间并非一定需要解耦。在实际项目中，模块或对象之间有一些依赖关系是很正常的。毕竟我们写程序是为了快速完成项目交付生产，而不是堆砌模式和过度设计。关键就在于如何去衡量对象之间的耦合程度。一般来说，如果对象之间的复杂耦合确实导致调用和维护出现了困难，而且这些耦合度随项目的变化呈指数增长曲线，那我们就可以考虑用中介者模式来重构代码。

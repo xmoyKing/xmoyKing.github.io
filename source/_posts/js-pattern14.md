@@ -1,694 +1,419 @@
 ---
-title: JS设计模式-14-状态模式
+title: JS设计模式-14-装饰器模式
 categories: js
 tags:
   - js
   - design pattern
-date: 2017-11-24 19:28:59
+date: 2017-12-02 08:39:08
 updated:
 ---
 
-状态模式是一种非同寻常的优秀模式，它也许是解决某些需求场景的最好方法。虽然状态模式并不是一种简单到一目了然的模式（它往往还会带来代码量的增加），但你一旦明白了状态模式的精髓，以后一定会感谢它带给你的无与伦比的好处。
+在程序开发中，许多时候都并不希望某个类天生就非常庞大，一次性包含许多职责。那么我们就可以使用装饰者模式。装饰者模式可以动态地给某个对象添加一些额外的职责，而不会影响从这个类中派生的其他对象。
 
-状态模式的关键是区分事物内部的状态，事物内部状态的改变往往会带来事物的行为改变。
+在传统的面向对象语言中，给对象添加功能常常使用继承的方式，但是继承的方式并不灵活，还会带来许多问题：一方面会导致超类和子类之间存在强耦合性，当超类改变时，子类也会随之改变；另一方面，继承这种功能复用方式通常被称为“白箱复用”，“白箱”是相对可见性而言的，在继承方式中，超类的内部细节是对子类可见的，继承常常被认为破坏了封装性。
 
-#### 初识状态模式
-我们来想象这样一个场景：有一个电灯，电灯上面只有一个开关。当电灯开着的时候，此时按下开关，电灯会切换到关闭状态；再按一次开关，电灯又将被打开。同一个开关按钮，在不同的状态下，表现出来的行为是不一样的。
+使用继承还会带来另外一个问题，在完成一些功能复用的同时，有可能创建出大量的子类，使子类的数量呈爆炸性增长。比如现在有4种型号的自行车，我们为每种自行车都定义了一个单独的类。现在要给每种自行车都装上前灯、尾灯和铃铛这3种配件。如果使用继承的方式来给每种自行车创建子类，则需要4×3=12个子类。但是如果把前灯、尾灯、铃铛这些对象动态组合到自行车上面，则只需要额外增加3个类。
 
-现在用代码来描述这个场景，首先定义一个Light类，可以预见，电灯对象light将从Light类创建而出，light对象将拥有两个属性，我们用state来记录电灯当前的状态，用button表示具体的开关按钮。下面来编写这个电灯程序的例子。
+这种给对象动态地增加职责的方式称为装饰者（decorator）模式。装饰者模式能够在不改变对象自身的基础上，在程序运行期间给对象动态地添加职责。跟继承相比，装饰者是一种更轻便灵活的做法，这是一种“即用即付”的方式，比如天冷了就多穿一件外套，需要飞行时就在头上插一支竹蜻蜓，遇到一堆食尸鬼时就点开AOE（范围攻击）技能。
 
-##### 第一个例子：电灯程序
-首先给出不用状态模式的电灯程序实现：
+#### 模拟传统面向对象语言的装饰者模式
+首先要提出来的是，作为一门解释执行的语言，给JavaScript中的对象动态添加或者改变职责是一件再简单不过的事情，虽然这种做法改动了对象自身，跟传统定义中的装饰者模式并不一样，但这无疑更符合JavaScript的语言特色。代码如下：
 ```js
-var Light = function(){ 
-  this.state = 'off'; // 给 电 灯 设 置 初 始 状 态 off 
-  this.button = null; // 电 灯 开 关 按 钮 
-};
+var obj = { name: 'sven', address: '深 圳 市' }; 
+obj.address = obj.address + '福 田 区';
 ```
-接下来定义Light.prototype.init方法，该方法负责在页面中创建一个真实的button节点，假设这个button就是电灯的开关按钮，当button的onclick事件被触发时，就是电灯开关被按下的时候，代码如下：
-```js
-Light.prototype.init = function() {
-  var button = document.createElement('button'),
-    self = this;
-  button.innerHTML = '开 关';
-  this.button = document.body.appendChild(button);
-  this.button.onclick = function() {
-    self.buttonWasPressed();
-  }
-};
-```
-当开关被按下时，程序会调用self.buttonWasPressed方法，开关按下之后的所有行为，都将被封装在这个方法里，代码如下：
-```js
-Light.prototype.buttonWasPressed = function() {
-  if (this.state === 'off') {
-    console.log('开 灯');
-    this.state = 'on';
-  } else if (this.state === 'on') {
-    console.log('关 灯');
-    this.state = 'off';
-  }
-};
-var light = new Light();
-light.init();
-```
-OK，现在可以看到，我们已经编写了一个强壮的状态机，这个状态机的逻辑既简单又缜密，看起来这段代码设计得无懈可击，这个程序没有任何bug。实际上这种代码我们已经编写过无数遍，比如要交替切换一个button的class，跟此例一样，往往先用一个变量state来记录按钮的当前状态，在事件发生时，再根据这个状态来决定下一步的行为。
+传统面向对象语言中的装饰者模式在JavaScript中适用的场景并不多，如上面代码所示，通常我们并不太介意改动对象自身。尽管如此，还是稍微模拟一下传统面向对象语言中的装饰者模式实现。
 
-令人遗憾的是，这个世界上的电灯并非只有一种。许多酒店里有另外一种电灯，这种电灯也只有一个开关，但它的表现是：第一次按下打开弱光，第二次按下打开强光，第三次才是关闭电灯。现在必须改造上面的代码来完成这种新型电灯的制造：
-```js
-Light.prototype.buttonWasPressed = function() {
-  if (this.state === 'off') {
-    console.log('弱 光');
-    this.state = 'weakLight';
-  } else if (this.state === 'weakLight') {
-    console.log('强 光');
-    this.state = 'strongLight';
-  } else if (this.state === 'strongLight') {
-    console.log('关 灯');
-    this.state = 'off';
-  }
-};
-```
-现在这个反例先告一段落，我们来考虑一下上述程序的缺点。
-- 很明显buttonWasPressed方法是违反开放-封闭原则的，每次新增或者修改light的状态，都需要改动buttonWasPressed方法中的代码，这使得buttonWasPressed成为了一个非常不稳定的方法。
-- 所有跟状态有关的行为，都被封装在buttonWasPressed方法里，如果以后这个电灯又增加了强强光、超强光和终极强光，那我们将无法预计这个方法将膨胀到什么地步。当然为了简化示例，此处在状态发生改变的时候，只是简单地打印一条log和改变button的innerHTML。在实际开发中，要处理的事情可能比这多得多，也就是说，buttonWasPressed方法要比现在庞大得多。
-- 状态的切换非常不明显，仅仅表现为对state变量赋值，比如this.state='weakLight'。在实际开发中，这样的操作很容易被程序员不小心漏掉。我们也没有办法一目了然地明白电灯一共有多少种状态，除非耐心地读完buttonWasPressed方法里的所有代码。当状态的种类多起来的时候，某一次切换的过程就好像被埋藏在一个巨大方法的某个阴暗角落里。
-- 状态之间的切换关系，不过是往buttonWasPressed方法里堆砌if、else语句，增加或者修改一个状态可能需要改变若干个操作，这使buttonWasPressed更加难以阅读和维护。
+假设我们在编写一个飞机大战的游戏，随着经验值的增加，我们操作的飞机对象可以升级成更厉害的飞机，一开始这些飞机只能发射普通的子弹，升到第二级时可以发射导弹，升到第三级时可以发射原子弹。
 
-##### 状态模式改进电灯程序
-使用状态模式改进电灯的程序。通常谈到封装，一般都会优先封装对象的行为，而不是对象的状态。但在状态模式中刚好相反，状态模式的关键是把事物的每种状态都封装成单独的类，跟此种状态有关的行为都被封装在这个类的内部，所以button被按下的的时候，只需要在上下文中，把这个请求委托给当前的状态对象即可，该状态对象会负责渲染它自身的行为，
-![状态行为](1.png)
-同时我们还可以把状态的切换规则事先分布在状态类中，这样就有效地消除了原本存在的大量条件分支语句:
-![状态转换](2.png)
+下面来看代码实现，首先是原始的飞机类：
+```js
+var Plane = function(){} 
+Plane.prototype.fire = function(){ console.log( '发 射 普 通 子 弹' ); }
+```
+接下来增加两个装饰类，分别是导弹和原子弹：
+```js
+var MissileDecorator = function( plane ){ this.plane = plane; }
+MissileDecorator.prototype.fire = function(){ 
+  this.plane.fire();
+  console.log( '发 射 导 弹' ); 
+} 
 
-下面进入状态模式的代码编写阶段，首先将定义3个状态类，分别是OffLightState、WeakLightState、StrongLightState。这3个类都有一个原型方法buttonWasPressed，代表在各自状态下，按钮被按下时将发生的行为，代码如下：
-```js
-// OffLightState： 
-var OffLightState = function(light) {
-  this.light = light;
-};
-OffLightState.prototype.buttonWasPressed = function() {
-  console.log('弱 光'); // offLightState 对 应 的 行 为 
-  this.light.setState(this.light.weakLightState); // 切 换 状 态 到 weakLightState 
-};
+var AtomDecorator = function( plane ){ this.plane = plane; }
+AtomDecorator.prototype.fire = function(){ 
+  this.plane.fire(); 
+  console.log( '发 射 原 子 弹' ); 
+}
+```
+导弹类和原子弹类的构造函数都接受参数plane对象，并且保存好这个参数，在它们的fire方法中，除了执行自身的操作之外，还调用plane对象的fire方法。
 
-// WeakLightState： 
-var WeakLightState = function(light) {
-  this.light = light;
-};
-WeakLightState.prototype.buttonWasPressed = function() {
-  console.log('强 光'); // weakLightState 对 应 的 行 为 
-  this.light.setState(this.light.strongLightState); // 切 换 状 态 到 strongLightState 
-};
-// StrongLightState： 
-var StrongLightState = function(light) {
-  this.light = light;
-};
-StrongLightState.prototype.buttonWasPressed = function() {
-  console.log('关 灯'); // strongLightState 对 应 的 行 为 
-  this.light.setState(this.light.offLightState); // 切 换 状 态 到 offLightState 
-};
-```
-接下来改写Light类，现在不再使用一个字符串来记录当前的状态，而是使用更加立体化的状态对象。我们在Light类的构造函数里为每个状态类都创建一个状态对象，这样一来我们可以很明显地看到电灯一共有多少种状态，代码如下：
-```js
-var Light = function() {
-  this.offLightState = new OffLightState(this);
-  this.weakLightState = new WeakLightState(this);
-  this.strongLightState = new StrongLightState(this);
-  this.button = null;
-};
-```
-在button按钮被按下的事件里，Context也不再直接进行任何实质性的操作，而是通过self.currState.buttonWasPressed()将请求委托给当前持有的状态对象去执行，代码如下：
-```js
-Light.prototype.init = function() {
-  var button = document.createElement('button'),
-    self = this;
-  this.button = document.body.appendChild(button);
-  this.button.innerHTML = '开 关';
-  this.currState = this.offLightState; // 设 置 当 前 状 态 
-  this.button.onclick = function() {
-    self.currState.buttonWasPressed();
-  }
-};
-```
-最后还要提供一个Light.prototype.setState方法，状态对象可以通过这个方法来切换light对象的状态。前面已经说过，状态的切换规律事先被完好定义在各个状态类中。在Context中再也找不到任何一个跟状态切换相关的条件分支语句：
-```js
-Light.prototype.setState = function( newState ){ this.currState = newState; };
-```
+这种给对象动态增加职责的方式，并没有真正地改动对象自身，而是将对象放入另一个对象之中，这些对象以一条链的方式进行引用，形成一个聚合对象。这些对象都拥有相同的接口（fire方法），当请求达到链中的某个对象时，这个对象会执行自身的操作，随后把请求转发给链中的下一个对象。
+
+因为装饰者对象和它所装饰的对象拥有一致的接口，所以它们对使用该对象的客户来说是透明的，被装饰的对象也并不需要了解它曾经被装饰过，这种透明性使得我们可以递归地嵌套任意多个装饰者对象.
+![嵌套多个装饰者对象](1.png)
+
 测试：
 ```js
-var light = new Light(); 
-light.init();
-```
-不出意外的话，执行结果跟之前的代码一致，但是使用状态模式的好处很明显，它可以使每一种状态和它对应的行为之间的关系局部化，这些行为被分散和封装在各自对应的状态类之中，便于阅读和管理代码。
+var plane = new Plane(); 
+plane = new MissileDecorator( plane ); 
+plane = new AtomDecorator( plane ); 
 
-另外，状态之间的切换都被分布在状态类内部，这使得我们无需编写过多的if、else条件分支语言来控制状态之间的转换。
+plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹、 发 射 原 子 弹
+```
+![嵌套多个装饰者对象输出](2.png)
 
-当我们需要为light对象增加一种新的状态时，只需要增加一个新的状态类，再稍稍改变一些现有的代码即可。假设现在light对象多了一种超强光的状态，那就先增加SuperStrongLightState类：
+#### 装饰者也是包装器
+在《设计模式》成书之前，GoF原想把装饰者（decorator）模式称为包装器（wrapper）模式。从功能上而言，decorator能很好地描述这个模式，但从结构上看，wrapper的说法更加贴切。装饰者模式将一个对象嵌入另一个对象之中，实际上相当于这个对象被另一个对象包装起来，形成一条包装链。请求随着这条链依次传递到所有的对象，每个对象都有处理这条请求的机会。
+
+#### 回到JavaScript的装饰者
+JavaScript语言动态改变对象相当容易，我们可以直接改写对象或者对象的某个方法，并不需要使用“类”来实现装饰者模式，代码如下：
 ```js
-var SuperStrongLightState = function(light) {
-    this.light = light;
-  };
-SuperStrongLightState.prototype.buttonWasPressed = function() {
-  console.log('关 灯');
-  this.light.setState(this.light.offLightState);
-};
-```
-然后在Light构造函数里新增一个superStrongLightState对象：
-```js
-var Light = function() {
-    this.offLightState = new OffLightState(this);
-    this.weakLightState = new WeakLightState(this);
-    this.strongLightState = new StrongLightState(this);
-    this.superStrongLightState = new SuperStrongLightState(this); // 新 增 superStrongLightState 对 象 
-    this.button = null;
-  };
-```
-最后改变状态类之间的切换规则，从StrongLightState---->OffLightState变为StrongLightState---->SuperStrongLightState---->OffLightState：
-```js
-StrongLightState.prototype.buttonWasPressed = function(){ 
-  console.log( '超 强 光' ); // strongLightState 对 应 的 行 为 
-  this.light.setState( this.light.superStrongLightState ); // 切 换 状 态 到 superStrongLightState 
-};
+var plane = { fire: function(){ console.log( '发 射 普 通 子 弹' ); } } 
+var missileDecorator = function(){ console.log( '发 射 导 弹' ); } 
+var atomDecorator = function(){ console.log( '发 射 原 子 弹' ); } 
+
+var fire1 = plane.fire; 
+plane.fire = function(){ fire1(); missileDecorator(); } 
+
+var fire2 = plane.fire; 
+plane.fire = function(){ fire2(); atomDecorator(); } 
+
+plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹、 发 射 原 子 弹
 ```
 
-#### 状态模式的定义
-通过电灯的例子，对于状态模式已经有了一定程度的了解。现在回头来看GoF中对状态模式的定义：
->允许一个对象在其内部状态改变时改变它的行为，对象看起来似乎修改了它的类。
+#### 装饰函数
+在JavaScript中，几乎一切都是对象，其中函数又被称为一等对象。在平时的开发工作中，也许大部分时间都在和函数打交道。在JavaScript中可以很方便地给某个对象扩展属性和方法，但却很难在不改动某个函数源代码的情况下，给该函数添加一些额外的功能。在代码的运行期间，我们很难切入某个函数的执行环境。
 
-以逗号分割，把这句话分为两部分来看。
-
-- 第一部分的意思是将状态封装成独立的类，并将请求委托给当前的状态对象，当对象的内部状态改变时，会带来不同的行为变化。电灯的例子足以说明这一点，在off和on这两种不同的状态下，点击同一个按钮，得到的行为反馈是截然不同的。
-- 第二部分是从客户的角度来看，使用的对象在不同的状态下具有截然不同的行为，这个对象看起来是从不同的类中实例化而来的，实际上这是使用了委托的效果。
-
-#### 状态模式的通用结构
-在前面的电灯例子中，完成了一个状态模式程序的编写。首先定义了Light类，Light类在这里也被称为上下文（Context）。随后在Light的构造函数中，要创建每一个状态类的实例对象，Context将持有这些状态对象的引用，以便把请求委托给状态对象。用户的请求，即点击button的动作也是实现在Context中的，代码如下：
+要想为函数添加一些功能，最简单粗暴的方式就是直接改写该函数，但这是最差的办法，直接违反了开放-封闭原则：
 ```js
-var Light = function() {
-    this.offLightState = new OffLightState(this); // 持 有 状 态 对 象 的 引 用 
-    this.weakLightState = new WeakLightState(this);
-    this.strongLightState = new StrongLightState(this);
-    this.superStrongLightState = new SuperStrongLightState(this);
-    this.button = null;
-  };
-Light.prototype.init = function() {
-  var button = document.createElement('button'),
-    self = this;
-  this.button = document.body.appendChild(button);
-  this.button.innerHTML = '开 关';
-  this.currState = this.offLightState; // 设 置 默 认 初 始 状 态 
-  this.button.onclick = function() { // 定 义 用 户 的 请 求 动 作 
-    self.currState.buttonWasPressed();
+var a = function(){ alert (1); } 
+// 改 成： 
+var a = function(){ alert (1); alert (2); }
+```
+很多时候我们不想去碰原函数，也许原函数是由其他同事编写的，里面的实现非常杂乱。现在需要一个办法，在不改变函数源代码的情况下，能给函数增加功能，这正是开放-封闭原则。
+
+其实通过保存原引用的方式就可以改写某个函数：
+```js
+var _a = a; 
+a = function(){ _a(); alert (2); } 
+a();
+```
+这是实际开发中很常见的一种做法，比如我们想给window绑定onload事件，但是又不确定这个事件是不是已经被其他人绑定过，为了避免覆盖掉之前的window.onload函数中的行为，我们一般都会先保存好原先的window.onload，把它放入新的window.onload里执行.
+```js
+window.onload = function(){ alert (1); } 
+
+var _onload = window.onload || function(){};
+window.onload = function(){ _onload(); alert (2); }
+```
+这样的代码当然是符合开放-封闭原则的，我们在增加新功能的时候，确实没有修改原来的window.onload代码，但是这种方式存在以下两个问题。
+- 必须维护_onload这个中间变量，虽然看起来并不起眼，但如果函数的装饰链较长，或者需要装饰的函数变多，这些中间变量的数量也会越来越多。
+- 其实还遇到了this被劫持的问题，在window.onload的例子中没有这个烦恼，是因为调用普通函数_onload时，this也指向window，跟调用window.onload时一样（函数作为对象的方法被调用时，this指向该对象，所以此处this也只指向window）。现在把window.onload换成document.getElementById，代码如下:
+```js
+var _getElementById = document.getElementById; 　 　 
+document.getElementById = function( id ){ 
+  alert (1); 
+  return _getElementById( id ); // (1) 
+} 　 　 
+var button = document.getElementById( 'button' );
+```
+执行这段代码，我们看到在弹出alert(1)之后，紧接着控制台抛出了异常.
+```js
+Uncaught TypeError: Illegal invocation
+```
+
+异常发生在(1)处的_getElementById(id)这句代码上，此时_getElementById是一个全局函数，当调用一个全局函数时，this是指向window的，而document.getElementById方法的内部实现需要使用this引用，this在这个方法内预期是指向document，而不是window,这是错误发生的原因，所以使用现在的方式给函数增加功能并不保险。
+
+改进后的代码可以满足需求，我们要手动把document当作上下文this传入_getElementById：
+```js
+document.getElementById = function(){ 
+  alert (1); 
+  return _getElementById.apply( document, arguments ); 
+} 
+```
+但这样做显然很不方便，引入AOP来提供一种完美的方法给函数动态增加功能。
+
+#### 用AOP装饰函数
+首先给出Function.prototype.before方法和Function.prototype.after方法：
+```js
+Function.prototype.before = function(beforefn) {
+  var __self = this; // 保 存 原 函 数 的 引 用 
+  return function() { // 返 回 包 含 了 原 函 数 和 新 函 数 的" 代 理" 函 数 
+    beforefn.apply(this, arguments); // 执 行 新 函 数， 且 保 证 this 不 被 劫 持， 新 函 数 接 受 的 参 数 
+    // 也 会 被 原 封 不 动 地 传 入 原 函 数， 新 函 数 在 原 函 数 之 前 执 行 
+    return __self.apply(this, arguments); // 执 行 原 函 数 并 返 回 原 函 数 的 执 行 结 果， 
+    // 并 且 保 证 this 不 被 劫 持 
   }
-};
-```
-接下来可能是个苦力活，要编写各种状态类，light对象被传入状态类的构造函数，状态对象也需要持有light对象的引用，以便调用light中的方法或者直接操作light对象：
-```js
-var OffLightState = function( light ){ this.light = light; }; 
-
-OffLightState.prototype.buttonWasPressed = function(){ 
-  console.log( '弱 光' ); 
-  this.light.setState( this.light.weakLightState ); 
-};
-```
-#### 缺少抽象类的变通方式
-在状态类中将定义一些共同的行为方法，Context最终会将请求委托给状态对象的这些方法，在这个例子里，这个方法就是buttonWasPressed。无论增加了多少种状态类，它们都必须实现buttonWasPressed方法。
-
-在Java中，所有的状态类必须继承自一个State抽象父类，当然如果没有共同的功能值得放入抽象父类中，也可以选择实现State接口。这样做的原因一方面是向上转型，另一方面是保证所有的状态子类都实现了buttonWasPressed方法。遗憾的是，JavaScript既不支持抽象类，也没有接口的概念。所以在使用状态模式的时候要格外小心，如果编写一个状态子类时，忘记了给这个状态子类实现buttonWasPressed方法，则会在状态切换的时候抛出异常。因为Context总是把请求委托给状态对象的buttonWasPressed方法。
-
-不论怎样严格要求程序员，也许都避免不了犯错的那一天，毕竟如果没有编译器的帮助，只依靠程序员的自觉以及一点好运气，是不靠谱的。这里建议的解决方案跟《模板方法模式》中一致，让抽象父类的抽象方法直接抛出一个异常，这个异常至少会在程序运行期间就被发现：
-```js
-var State = function() {};
-State.prototype.buttonWasPressed = function() {
-  throw new Error('父 类 的 buttonWasPressed 方 法 必 须 被 重 写');
-};
-var SuperStrongLightState = function(light) {
-    this.light = light;
-  };
-SuperStrongLightState.prototype = new State(); // 继 承 抽 象 父 类 
-SuperStrongLightState.prototype.buttonWasPressed = function() { // 重 写 buttonWasPressed 方 法 
-  console.log('关 灯');
-  this.light.setState(this.light.offLightState);
-};
-```
-
-#### 另一个状态模式示例——文件上传
-源自作者的一个项目，微云上传模块，实际上，不论是文件上传，还是音乐、视频播放器，都可以找到一些明显的状态区分。比如文件上传程序中有扫描、正在上传、暂停、上传成功、上传失败这几种状态，音乐播放器可以分为加载中、正在播放、暂停、播放完毕这几种状态。点击同一个按钮，在上传中和暂停状态下的行为表现是不一样的，同时它们的样式class也不同。
-
-以文件上传为例进行说明。上传中，点击按钮暂停,暂停中，点击按钮继续播放，看到这里，再联系一下电灯的例子和之前对状态模式的了解，已经找了使用状态模式的理由。
-
-##### 更复杂的切换条件
-相对于电灯的例子，文件上传不同的地方在于，条件切换关系更加复杂。在电灯的例子中，电灯的状态总是从关到开再到关，或者从关到弱光、弱光到强光、强光再到关。看起来总是循规蹈矩的A→B→C→A，所以即使不使用状态模式来编写电灯的程序，而是使用原始的if、else来控制状态切换，我们也不至于在逻辑编写中迷失自己，因为状态的切换总是遵循一些简单的规律，代码如下：
-```js
-if (this.state === 'off') {
-  console.log('开 弱 光');
-  this.button.innerHTML = '下 一 次 按 我 是 强 光';
-  this.state = 'weakLight';
-} else if (this.state === 'weakLight') {
-  console.log('开 强 光');
-  this.button.innerHTML = '下 一 次 按 我 是 关 灯';
-  this.state = 'strongLight';
-} else if (this.state === 'strongLight') {
-  console.log('关 灯');
-  this.button.innerHTML = '下 一 次 按 我 是 弱 光';
-  this.state = 'off';
 }
-```
-而文件上传的状态切换相比要复杂得多，控制文件上传的流程需要两个节点按钮，第一个用于暂停和继续上传，第二个用于删除文件，
-
-现在看看文件在不同的状态下，点击这两个按钮将分别发生什么行为。
-- 文件在扫描状态中，是不能进行任何操作的，既不能暂停也不能删除文件，只能等待扫描完成。扫描完成之后，根据文件的md5值判断，若确认该文件已经存在于服务器，则直接跳到上传完成状态。如果该文件的大小超过允许上传的最大值，或者该文件已经损坏，则跳往上传失败状态。剩下的情况下才进入上传中状态。
-- 上传过程中可以点击暂停按钮来暂停上传，暂停后点击同一个按钮会继续上传。
-- 扫描和上传过程中，点击删除按钮无效，只有在暂停、上传完成、上传失败之后，才能删除文件。
-
-##### 一些准备工作
-有一些浏览器插件帮助完成文件上传。插件类型根据浏览器的不同，有可能是ActiveObject，也有可能是WebkitPlugin。
-
-上传是一个异步的过程，所以控件会不停地调用JavaScript提供的一个全局函数window.external.upload，来通知JavaScript目前的上传进度，控件会把当前的文件状态作为参数state塞进window.external.upload。可以简单地用setTimeout来模拟文件的上传进度，window.external.upload函数在此例中也只负责打印一些log：
-```js
-window.external.upload = function(state) {
-  console.log(state); // 可 能 为 sign、 uploading、 done、 error
-};
-```
-另外我们需要在页面中放置一个用于上传的插件对象：
-```js
-var plugin = (function() {
-  var plugin = document.createElement('embed');
-  plugin.style.display = 'none';
-  plugin.type = 'application/txftn-webkit';
-  plugin.sign = function() {
-    console.log('开 始 文 件 扫 描');
-  }
-  plugin.pause = function() {
-    console.log('暂 停 文 件 上 传');
-  };
-  plugin.uploading = function() {
-    console.log('开 始 文 件 上 传');
-  };
-  plugin.del = function() {
-    console.log('删 除 文 件 上 传');
-  }
-  plugin.done = function() {
-    console.log('文 件 上 传 完 成');
-  }
-  document.body.appendChild(plugin);
-  return plugin;
-})();
-```
-##### 开始编写代码
-接下来开始完成其他代码，先定义Upload类，控制上传过程的对象将从Upload类中创建而来：
-```js
-var Upload = function(fileName) {
-    this.plugin = plugin;
-    this.fileName = fileName;
-    this.button1 = null;
-    this.button2 = null;
-    this.state = 'sign'; // 设 置 初 始 状 态 为 waiting 
-};
-```
-Upload.prototype.init方法会进行一些初始化工作，包括创建页面中的一些节点。在这些节点里，起主要作用的是两个用于控制上传流程的按钮，第一个按钮用于暂停和继续上传，第二个用于删除文件：
-```js
-Upload.prototype.init = function() {
-  var that = this;
-  this.dom = document.createElement('div');
-  this.dom.innerHTML = 
-  '<span> 文 件 名 称:' + this.fileName + ' </span>\ 
-  <button data-action="button1"> 扫 描 中 </button>\
-  <button data-action="button2"> 删 除 </button>';
-  document.body.appendChild(this.dom);
-  this.button1 = this.dom.querySelector('[data-action="button1"]'); // 第 一 个 按 钮 
-  this.button2 = this.dom.querySelector('[data-action="button2"]'); // 第 二 个 按 钮 
-  this.bindEvent();
-};
-```
-接下来需要给两个按钮分别绑定点击事件：
-```js
-Upload.prototype.bindEvent = function() {
-  var self = this;
-  this.button1.onclick = function() {
-    if (self.state === 'sign') { // 扫 描 状 态 下， 任 何 操 作 无 效 
-      console.log('扫 描 中， 点 击 无 效...');
-    } else if (self.state === 'uploading') { // 上 传 中， 点 击 切 换 到 暂 停 
-      self.changeState('pause');
-    } else if (self.state === 'pause') { // 暂 停 中， 点 击 切 换 到 上 传 中 
-      self.changeState('uploading');
-    } else if (self.state === 'done') {
-      console.log('文 件 已 完 成 上 传, 点 击 无 效');
-    } else if (self.state === 'error') {
-      console.log('文 件 上 传 失 败, 点 击 无 效');
-    }
-  };
-  this.button2.onclick = function() {
-    if (self.state === 'done' || self.state === 'error' || self.state === 'pause') { // 上 传 完 成、 上 传 失 败 和 暂 停 状 态 下 可 以 删 除 
-      self.changeState('del');
-    } else if (self.state === 'sign') {
-      console.log('文 件 正 在 扫 描 中， 不 能 删 除');
-    } else if (self.state === 'uploading') {
-      console.log('文 件 正 在 上 传 中， 不 能 删 除');
-    }
-  };
-};
-```
-再接下来是Upload.prototype.changeState方法，它负责切换状态之后的具体行为，包括改变按钮的innerHTML，以及调用插件开始一些“真正”的操作：
-```js
-Upload.prototype.changeState = function(state) {
-  switch (state) {
-  case 'sign':
-    this.plugin.sign();
-    this.button1.innerHTML = '扫 描 中， 任 何 操 作 无 效';
-    break;
-  case 'uploading':
-    this.plugin.uploading();
-    this.button1.innerHTML = '正 在 上 传， 点 击 暂 停';
-    break;
-  case 'pause':
-    this.plugin.pause();
-    this.button1.innerHTML = '已 暂 停， 点 击 继 续 上 传';
-    break;
-  case 'done':
-    this.plugin.done();
-    this.button1.innerHTML = '上 传 完 成';
-    break;
-  case 'error':
-    this.button1.innerHTML = '上 传 失 败';
-    break;
-  case 'del':
-    this.plugin.del();
-    this.dom.parentNode.removeChild(this.dom);
-    console.log('删 除 完 成');
-    break;
-  }
-  this.state = state;
-};
-```
-最后我们来进行一些测试工作：
-```js
-var uploadObj = new Upload('JavaScript 设 计 模 式 与 开 发 实 践');
-uploadObj.init();
-window.external.upload = function(state) { // 插 件 调 用 JavaScript 的 方 法 
-  uploadObj.changeState(state);
-};
-window.external.upload('sign'); // 文 件 开 始 扫 描 
-setTimeout(function() {
-  window.external.upload('uploading'); // 1 秒 后 开 始 上 传 
-}, 1000);
-setTimeout(function() {
-  window.external.upload('done'); // 5 秒 后 上 传 完 成
-}, 5000);
-```
-至此就完成了一个简单的文件上传程序的编写。当然这仍然是一个反例，这里的缺点跟电灯例子中的第一段代码一样，程序中充斥着if、else条件分支，状态和行为都被耦合在一个巨大的方法里，我们很难修改和扩展这个状态机。文件状态之间的联系如此复杂，这个问题显得更加严重了。
-
-##### 状态模式重构文件上传程序
-状态模式在文件上传的程序中，是最优雅的解决办法之一。
-
-通过电灯的例子，已经熟知状态模式的结构了，下面就开始一步步地重构它。
-
-第一步仍然是提供window.external.upload函数，在页面中模拟创建上传插件，这部分代码没有改变。
-
-第二步，改造Upload构造函数，在构造函数中为每种状态子类都创建一个实例对象：
-```js
-var Upload = function(fileName) {
-    this.plugin = plugin;
-    this.fileName = fileName;
-    this.button1 = null;
-    this.button2 = null;
-    this.signState = new SignState(this); // 设 置 初 始 状 态 为 waiting 
-    this.uploadingState = new UploadingState(this);
-    this.pauseState = new PauseState(this);
-    this.doneState = new DoneState(this);
-    this.errorState = new ErrorState(this);
-    this.currState = this.signState; // 设 置 当 前 状 态
-  };
-```
-第三步，Upload.prototype.init方法无需改变，仍然负责往页面中创建跟上传流程有关的DOM节点，并开始绑定按钮的事件：
-```js
-Upload.prototype.init = function() {
-  var that = this;
-  this.dom = document.createElement('div');
-  this.dom.innerHTML = 
-  '<span> 文 件 名 称:' + this.fileName + ' </span>\ 
-  <button data-action="button1"> 扫 描 中 </button>\ 
-  <button data-action="button2"> 删 除 </button>';
-  document.body.appendChild(this.dom);
-  this.button1 = this.dom.querySelector('[data-action="button1"]');
-  this.button2 = this.dom.querySelector('[data-action="button2"]');
-  this.bindEvent();
-};
-```
-第四步，负责具体的按钮事件实现，在点击了按钮之后，Context并不做任何具体的操作，而是把请求委托给当前的状态类来执行：
-```js
-Upload.prototype.bindEvent = function() {
-  var self = this;
-  this.button1.onclick = function() {
-    self.currState.clickHandler1();
-  }
-  this.button2.onclick = function() {
-    self.currState.clickHandler2();
+Function.prototype.after = function(afterfn) {
+  var __self = this;
+  return function() {
+    var ret = __self.apply(this, arguments);
+    afterfn.apply(this, arguments);
+    return ret;
   }
 };
 ```
-第四步中的代码有一些变化，把状态对应的逻辑行为放在Upload类中：
+Function.prototype.before接受一个函数当作参数，这个函数即为新添加的函数，它装载了新添加的功能代码。
+
+接下来把当前的this保存起来，这个this指向原函数，然后返回一个“代理”函数，这个“代理”函数只是结构上像代理而已，并不承担代理的职责（比如控制对象的访问等）。它的工作是把请求分别转发给新添加的函数和原函数，且负责保证它们的执行顺序，让新添加的函数在原函数之前执行（前置装饰），这样就实现了动态装饰的效果。
+
+我们注意到，通过Function.prototype.apply来动态传入正确的this，保证了函数在被装饰之后，this不会被劫持。
+
+Function.prototype.after的原理跟Function.prototype.before一模一样，唯一不同的地方在于让新添加的函数在原函数执行之后再执行。下面来试试用Function.prototype.before的威力：
 ```js
-Upload.prototype.sign = function() {
-  this.plugin.sign();
-  this.currState = this.signState;
-};
-Upload.prototype.uploading = function() {
-  this.button1.innerHTML = '正 在 上 传， 点 击 暂 停';
-  this.plugin.uploading();
-  this.currState = this.uploadingState;
-};
-Upload.prototype.pause = function() {
-  this.button1.innerHTML = '已 暂 停， 点 击 继 续 上 传';
-  this.plugin.pause();
-  this.currState = this.pauseState;
-};
-Upload.prototype.done = function() {
-  this.button1.innerHTML = '上 传 完 成';
-  this.plugin.done();
-  this.currState = this.doneState;
-};
-Upload.prototype.error = function() {
-  this.button1.innerHTML = '上 传 失 败';
-  this.currState = this.errorState;
-};
-Upload.prototype.del = function() {
-  this.plugin.del();
-  this.dom.parentNode.removeChild(this.dom);
-};
-```
-第五步，工作略显乏味，编写各个状态类的实现。值得注意的是，我们使用了StateFactory，从而避免因为JavaScript中没有抽象类所带来的问题。
-```js
-var StateFactory = (function() {
-  var State = function() {};
-  State.prototype.clickHandler1 = function() {
-    throw new Error('子 类 必 须 重 写 父 类 的 clickHandler1 方 法');
+Function.prototype.before = function(beforefn) {
+  var __self = this;
+  return function() {
+    beforefn.apply(this, arguments);
+    return __self.apply(this, arguments);
   }
-  State.prototype.clickHandler2 = function() {
-    throw new Error('子 类 必 须 重 写 父 类 的 clickHandler2 方 法');
-  }
-  return function(param) {
-    var F = function(uploadObj) {
-        this.uploadObj = uploadObj;
-      };
-    F.prototype = new State();
-    for (var i in param) {
-      F.prototype[i] = param[i];
-    }
-    return F;
-  }
-})();
-var SignState = StateFactory({
-  clickHandler1: function() {
-    console.log('扫 描 中， 点 击 无 效...');
-  },
-  clickHandler2: function() {
-    console.log('文 件 正 在 上 传 中， 不 能 删 除');
-  }
-});
-var UploadingState = StateFactory({
-  clickHandler1: function() {
-    this.uploadObj.pause();
-  },
-  clickHandler2: function() {
-    console.log('文 件 正 在 上 传 中， 不 能 删 除');
-  }
-});
-var PauseState = StateFactory({
-  clickHandler1: function() {
-    this.uploadObj.uploading();
-  },
-  clickHandler2: function() {
-    this.uploadObj.del();
-  }
-});
-var DoneState = StateFactory({
-  clickHandler1: function() {
-    console.log('文 件 已 完 成 上 传, 点 击 无 效');
-  },
-  clickHandler2: function() {
-    this.uploadObj.del();
-  }
-});
-var ErrorState = StateFactory({
-  clickHandler1: function() {
-    console.log('文 件 上 传 失 败, 点 击 无 效');
-  },
-  clickHandler2: function() {
-    this.uploadObj.del();
-  }
-});
-```
-
-
-#### 状态模式的优缺点
-通过两个状态模式的例子，总结状态模式的优缺点。状态模式的优点如下
-- 状态模式定义了状态与行为之间的关系，并将它们封装在一个类里。通过增加新的状态类，很容易增加新的状态和转换。
-- 避免Context无限膨胀，状态切换的逻辑被分布在状态类中，也去掉了Context中原本过多的条件分支。
-- 用对象代替字符串来记录当前状态，使得状态的切换更加一目了然。
-- Context中的请求动作和状态类中封装的行为可以非常容易地独立变化而互不影响。
-
-状态模式的缺点是会在系统中定义许多状态类，编写20个状态类是一项枯燥乏味的工作，而且系统中会因此而增加不少对象。另外，由于逻辑分散在状态类中，虽然避开了不受欢迎的条件分支语句，但也造成了逻辑分散的问题，我们无法在一个地方就看出整个状态机的逻辑。
-
-#### 状态模式中的性能优化点
-在这两个例子中，我们并没有太多地从性能方面考虑问题，实际上，这里有一些比较大的优化点。
-- 有两种选择来管理state对象的创建和销毁。第一种是仅当state对象被需要时才创建并随后销毁，另一种是一开始就创建好所有的状态对象，并且始终不销毁它们。如果state对象比较庞大，可以用第一种方式来节省内存，这样可以避免创建一些不会用到的对象并及时地回收它们。但如果状态的改变很频繁，最好一开始就把这些state对象都创建出来，也没有必要销毁它们，因为可能很快将再次用到它们。
-- 在例子中为每个Context对象都创建了一组state对象，实际上这些state对象之间是可以共享的，各Context对象可以共享一个state对象，这也是享元模式的应用场景之一。
-
-#### 状态模式和策略模式的关系
-状态模式和策略模式像一对双胞胎，它们都封装了一系列的算法或者行为，它们的类图看起来几乎一模一样，但在意图上有很大不同，因此它们是两种迥然不同的模式。
-
-策略模式和状态模式的相同点是，它们都有一个上下文、一些策略或者状态类，上下文把请求委托给这些类来执行。
-
-它们之间的区别是策略模式中的各个策略类之间是平等又平行的，它们之间没有任何联系，所以客户必须熟知这些策略类的作用，以便客户可以随时主动切换算法；而在状态模式中，状态和状态对应的行为是早已被封装好的，状态之间的切换也早被规定完成，“改变行为”这件事情发生在状态模式内部。对客户来说，并不需要了解这些细节。这正是状态模式的作用所在。
-
-#### JavaScript版本的状态机
-前面两个示例都是模拟传统面向对象语言的状态模式实现，我们为每种状态都定义一个状态子类，然后在Context中持有这些状态对象的引用，以便把currState设置为当前的状态对象。
-
-状态模式是状态机的实现之一，但在JavaScript这种“无类”语言中，没有规定让状态对象一定要从类中创建而来。另外一点，JavaScript可以非常方便地使用委托技术，并不需要事先让一个对象持有另一个对象。下面的状态机选择了通过Function.prototype.call方法直接把请求委托给某个字面量对象来执行。
-
-改写电灯的例子：
-```js
-var FSM = {
-  off: {
-    buttonWasPressed: function() {
-      console.log('关 灯');
-      this.button.innerHTML = '下 一 次 按 我 是 开 灯';
-      this.currState = FSM.on;
-    }
-  },
-  on: {
-    buttonWasPressed: function() {
-      console.log('开 灯');
-      this.button.innerHTML = '下 一 次 按 我 是 关 灯';
-      this.currState = FSM.off;
-    }
-  }
-};
-
-var Light = function() {
-  this.currState = FSM.off; // 设 置 当 前 状 态
-  this.button = null;
-};
-Light.prototype.init = function() {
-  var button = document.createElement('button'),
-    self = this;
-  button.innerHTML = '已 关 灯';
-  this.button = document.body.appendChild(button);
-  this.button.onclick = function() {
-    self.currState.buttonWasPressed.call(self); // 把 请 求 委 托 给 FSM 状 态 机 
-  }
-};
-
-var light = new Light();
-light.init();
-```
-接下来尝试另外一种方法，利用下面的delegate函数完成状态机。这是面向对象设计和闭包互换的一个例子，前者把变量保存为对象的属性，而后者把变量封闭在闭包形成的环境中：
-```js
-var delegate = function(client, delegation) {
-  return {
-    buttonWasPressed: function() { // 将 客 户 的 操 作 委 托 给 delegation 对 象 
-      return delegation.buttonWasPressed.apply(client, arguments);
-    }
-  }
-};
-
-var Light = function() {
-    this.offState = delegate(this, FSM.off);
-    this.onState = delegate(this, FSM.on);
-    this.currState = this.offState; // 设 置 初 始 状 态 为 关 闭 状 态 
-    this.button = null;
-  };
-Light.prototype.init = function() {
-  var button = document.createElement('button'),
-    self = this;
-  button.innerHTML = '已 关 灯';
-  this.button = document.body.appendChild(button);
-  this.button.onclick = function() {
-    self.currState.buttonWasPressed();
-  }
-};
-```
-
-
-#### 表驱动的有限状态机
-其实还有另外一种实现状态机的方法，这种方法的核心是基于表驱动的。我们可以在表中很清楚地看到下一个状态是由当前状态和行为共同决定的。这样一来，我们就可以在表中查找状态，而不必定义很多条件分支，刚好GitHub上有一个对应的库实现，通过这个库，可以很方便地创建出FSM：
-```js
-var fsm = StateMachine.create({
-  initial: 'off',
-  events: [{
-    name: 'buttonWasPressed',
-    from: 'off',
-    to: 'on'
-  }, {
-    name: 'buttonWasPressed',
-    from: 'on',
-    to: 'off'
-  }],
-  callbacks: {
-    onbuttonWasPressed: function(event, from, to) {
-      console.log(arguments);
-    }
-  },
-  error: function(eventName, from, to, args, errorCode, errorMessage) {
-    console.log(arguments); // 从 一 种 状 态 试 图 切 换 到 一 种 不 可 能 到 达 的 状 态 的 时 候
-  }
-});
-button.onclick = function() {
-  fsm.buttonWasPressed();
 }
+document.getElementById = document.getElementById.before(function() {
+  alert(1);
+});
+var button = document.getElementById('button');
+console.log(button);
 ```
-关于这个库：[javascript-state-machine](https://github.com/jakesgordon/javascript-state-machine)
-
-#### 实际项目中的其他状态机
-在实际开发中，很多场景都可以用状态机来模拟，比如一个下拉菜单在hover动作下有显示、悬浮、隐藏等状态；一次TCP请求有建立连接、监听、关闭等状态；一个格斗游戏中人物有攻击、防御、跳跃、跌倒等状态。
-
-状态机在游戏开发中也有着广泛的用途，特别是游戏AI的逻辑编写。在作者曾经开发的HTML5版街头霸王游戏里，游戏主角Ryu有走动、攻击、防御、跌倒、跳跃等多种状态。这些状态之间既互相联系又互相约束。比如Ryu在走动的过程中如果被攻击，就会由走动状态切换为跌倒状态。在跌倒状态下，Ryu既不能攻击也不能防御。同样，Ryu也不能在跳跃的过程中切换到防御状态，但是可以进行攻击。这种场景就很适合用状态机来描述。代码如下：
+回到window.onload的例子，看看用Function.prototype.after来增加新的window.onload事件是多么简单：
 ```js
-var FSM = {
-  walk: {
-    attack: function() {
-      console.log('攻 击');
-    },
-    defense: function() {
-      console.log('防 御');
-    },
-    jump: function() {
-      console.log('跳 跃');
+window.onload = function() {
+  alert(1);
+}
+window.onload = (window.onload || function() {}).after(function() {
+  alert(2);
+}).after(function() {
+  alert(3);
+}).after(function() {
+  alert(4);
+});
+```
+值得提到的是，上面的AOP实现是在Function.prototype上添加before和after方法，但许多人不喜欢这种污染原型的方式，那么我们可以做一些变通，把原函数和新函数都作为参数传入before或者after方法：
+```js
+var before = function(fn, beforefn) {
+    return function() {
+      beforefn.apply(this, arguments);
+      return fn.apply(this, arguments);
     }
-  },
-  attack: {
-    walk: function() {
-      console.log('攻 击 的 时 候 不 能 行 走');
-    },
-    defense: function() {
-      console.log('攻 击 的 时 候 不 能 防 御');
-    },
-    jump: function() {
-      console.log('攻 击 的 时 候 不 能 跳 跃');
-    }
+  }
+var a = before(function() {
+  alert(3)
+}, function() {
+  alert(2)
+});
+a = before(a, function() {
+  alert(1);
+});
+a();
+```
+
+#### AOP的应用实例
+用AOP装饰函数的技巧在实际开发中非常有用。不论是业务代码的编写，还是在框架层面，我们都可以把行为依照职责分成粒度更细的函数，随后通过装饰把它们合并到一起，这有助于我们编写一个松耦合和高复用性的系统。
+
+##### 数据统计上报
+分离业务代码和数据统计代码，无论在什么语言中，都是AOP的经典应用之一。在项目开发的结尾阶段难免要加上很多统计数据的代码，这些过程可能让我们被迫改动早已封装好的函数。
+
+比如页面中有一个登录button，点击这个button会弹出登录浮层，与此同时要进行数据上报，来统计有多少用户点击了这个登录button：
+```js
+var showLogin = function() {
+    console.log('打 开 登 录 浮 层');
+    log(this.getAttribute('tag'));
+  }
+var log = function(tag) {
+    console.log('上 报 标 签 为: ' + tag);
+    //(newImage).src='http://xxx.com/report?tag='+tag;
+    //真正的上报代码略
+  }
+document.getElementById('button').onclick = showLogin;
+```
+在showLogin函数里，既要负责打开登录浮层，又要负责数据上报，这是两个层面的功能，在此处却被耦合在一个函数里。使用AOP分离之后，代码如下：
+```js
+Function.prototype.after = function(afterfn) {
+  var __self = this;
+  return function() {
+    var ret = __self.apply(this, arguments);
+    afterfn.apply(this, arguments);
+    return ret;
+  }
+};
+var showLogin = function() {
+    console.log('打 开 登 录 浮 层');
+  }
+var log = function() {
+    console.log('上 报 标 签 为: ' + this.getAttribute('tag'));
+  }
+showLogin = showLogin.after(log); // 打 开 登 录 浮 层 之 后 上 报 数 据 
+document.getElementById('button').onclick = showLogin;
+```
+
+##### 用AOP动态改变函数的参数
+观察Function.prototype.before方法：
+```js
+Function.prototype.before = function(beforefn) {
+  var __self = this;
+  return function() {
+    beforefn.apply(this, arguments); // (1) 
+    return __self.apply(this, arguments); // (2) 
   }
 }
 ```
+从这段代码的(1)处和(2)处可以看到，beforefn和原函数`__self`共用一组参数列表arguments，当我们在beforefn的函数体内改变arguments的时候，原函数`__self`接收的参数列表自然也会变化。下面的例子展示了如何通过Function.prototype.before方法给函数func的参数param动态地添加属性b：
+```js
+var func = function( param ){ 
+  console.log( param ); // 输 出： {a: "a", b: "b"} 
+  } 
+
+func = func.before( function( param ){ param.b = 'b'; }); 
+func( {a: 'a'} );
+```
+现在有一个用于发起ajax请求的函数，这个函数负责项目中所有的ajax异步请求：
+```js
+var ajax = function( type, url, param ){ 
+  console.dir( param); // 发 送 ajax 请 求 的 代 码 略 
+}; 
+
+ajax( 'get', 'http://xxx.com/userinfo', { name: 'sven' } );
+```
+上面的伪代码表示向后台cgi发起一个请求来获取用户信息，传递给cgi的参数是{name:'sven'}。ajax函数在项目中一直运转良好，跟cgi的合作也很愉快。直到有一天，网站遭受了CSRF攻击。解决CSRF攻击最简单的一个办法就是在HTTP请求中带上一个Token参数。
+
+假设我们已经有一个用于生成Token的函数：
+```js
+var getToken = function(){ return 'Token'; }
+```
+现在的任务是给每个ajax请求都加上Token参数：
+```js
+var ajax = function( type, url, param ){ 
+  param = param || {}; 
+  Param.Token = getToken(); // 发 送 ajax 请 求 的 代 码 略... 
+};
+```
+虽然已经解决了问题，但我们的ajax函数相对变得僵硬了，每个从ajax函数里发出的请求都自动带上了Token参数，虽然在现在的项目中没有什么问题，但如果将来把这个函数移植到其他项目上，或者把它放到一个开源库中供其他人使用，Token参数都将是多余的。
+
+也许另一个项目不需要验证Token，或者是Token的生成方式不同，无论是哪种情况，都必须重新修改ajax函数。
+
+为了解决这个问题，先把ajax函数还原成一个干净的函数,然后把Token参数通过Function.prototyte.before装饰到ajax函数的参数param对象中：
+```js
+var ajax = function( type, url, param ){ 
+  console.dir( param); // 发 送 ajax 请 求 的 代 码 略 
+}; 
+
+var getToken = function() {
+    return 'Token';
+  }
+ajax = ajax.before(function(type, url, param) {
+  param.Token = getToken();
+});
+
+ajax('get', 'http://xxx.com/userinfo', {
+  name: 'sven'
+});
+```
+明显可以看到，用AOP的方式给ajax函数动态装饰上Token参数，保证了ajax函数是一个相对纯净的函数，提高了ajax函数的可复用性，它在被迁往其他项目的时候，不需要做任何修改。
+
+##### 插件式的表单验证
+我们很多人都写过许多表单验证的代码，在一个Web项目中，可能存在非常多的表单，如注册、登录、修改用户信息等。在表单数据提交给后台之前，常常要做一些校验，比如登录的时候需要验证用户名和密码是否为空，代码如下：
+```js
+var username = document.getElementById('username'),
+  password = document.getElementById('password'),
+  submitBtn = document.getElementById('submitBtn');
+var formSubmit = function() {
+    if (username.value === '') {
+      return alert('用 户 名 不 能 为 空');
+    }
+    if (password.value === '') {
+      return alert('密 码 不 能 为 空');
+    }
+    var param = {
+      username: username.value,
+      password: password.value
+    }
+    ajax('http:// xxx.com/ login', param); // ajax 具 体 实 现 略 
+  }
+submitBtn.onclick = function() {
+  formSubmit();
+}
+```
+formSubmit函数在此处承担了两个职责，除了提交ajax请求之外，还要验证用户输入的合法性。这种代码一来会造成函数臃肿，职责混乱，二来谈不上任何可复用性。
+
+目的是分离校验输入和提交ajax请求的代码，我们把校验输入的逻辑放到validata函数中，并且约定当validata函数返回false的时候，表示校验未通过，代码如下：
+```js
+var validata = function() {
+    if (username.value === '') {
+      alert('用 户 名 不 能 为 空');
+      return false;
+    }
+    if (password.value === '') {
+      alert('密 码 不 能 为 空');
+      return false;
+    }
+  }
+var formSubmit = function() {
+    if (validata() === false) { // 校 验 未 通 过
+      return;
+    }
+    var param = {
+      username: username.value,
+      password: password.value
+    }
+    ajax('http:// xxx.com/ login', param);
+  }
+submitBtn.onclick = function() {
+  formSubmit();
+}
+```
+现在的代码已经有了一些改进，我们把校验的逻辑都放到了validata函数中，但formSubmit函数的内部还要计算validata函数的返回值，因为返回值的结果表明了是否通过校验。
+
+接下来进一步优化这段代码，使validata和formSubmit完全分离开来。首先要改写Function.prototype.before，如果beforefn的执行结果返回false，表示不再执行后面的原函数，代码如下：
+```js
+Function.prototype.before = function(beforefn) {
+  var __self = this;
+  return function() {
+    if (beforefn.apply(this, arguments) === false) { // beforefn 返 回 false 的 情 况 直 接 return， 不 再 执 行 后 面 的 原 函 数
+      return;
+    }
+    return __self.apply(this, arguments);
+  }
+}
+var validata = function() {
+    if (username.value === '') {
+      alert('用 户 名 不 能 为 空');
+      return false;
+    }
+    if (password.value === '') {
+      alert('密 码 不 能 为 空');
+      return false;
+    }
+  }
+var formSubmit = function() {
+    var param = {
+      username: username.value,
+      password: password.value
+    }
+    ajax('http:// xxx.com/ login', param);
+  }
+formSubmit = formSubmit.before(validata);
+submitBtn.onclick = function() {
+  formSubmit();
+}
+```
+在这段代码中，校验输入和提交表单的代码完全分离开来，它们不再有任何耦合关系，formSubmit=formSubmit.before(validata)这句代码，如同把校验规则动态接在formSubmit函数之前，validata成为一个即插即用的函数，它甚至可以被写成配置文件的形式，这有利于我们分开维护这两个函数。再利用策略模式稍加改造，我们就可以把这些校验规则都写成插件的形式，用在不同的项目当中。
+
+注意，因为函数通过Function.prototype.before或者Function.prototype.after被装饰之后，返回的实际上是一个新的函数，如果在原函数上保存了一些属性，那么这些属性会丢失。代码如下：
+```js
+var func = function(){ alert( 1 ); } 
+func.a = 'a'; 
+func = func.after( function(){ alert( 2 ); }); 
+alert ( func.a ); // 输 出： undefined
+```
+
+另外，这种装饰方式也叠加了函数的作用域，如果装饰的链条过长，性能上也会受到一些影响。
+
+#### 装饰者模式和代理模式
+装饰者模式和代理模式的结构看起来非常相像，这两种模式都描述了怎样为对象提供一定程度上的间接引用，它们的实现部分都保留了对另外一个对象的引用，并且向那个对象发送请求。代理模式和装饰者模式最重要的区别在于它们的意图和设计目的。
+
+代理模式的目的是，当直接访问本体不方便或者不符合需要时，为这个本体提供一个替代者。本体定义了关键功能，而代理提供或拒绝对它的访问，或者在访问本体之前做一些额外的事情。装饰者模式的作用就是为对象动态加入行为。换句话说，代理模式强调一种关系（Proxy与它的实体之间的关系），这种关系可以静态的表达，也就是说，这种关系在一开始就可以被确定。而装饰者模式用于一开始不能确定对象的全部功能时。代理模式通常只有一层代理-本体的引用，而装饰者模式经常会形成一条长长的装饰链。
+
+在虚拟代理实现图片预加载的例子中，本体负责设置img节点的src，代理则提供了预加载的功能，这看起来也是“加入行为”的一种方式，但这种加入行为的方式和装饰者模式的偏重点是不一样的。装饰者模式是实实在在的为对象增加新的职责和行为，而代理做的事情还是跟本体一样，最终都是设置src。但代理可以加入一些“聪明”的功能，比如在图片真正加载好之前，先使用一张占位的loading图片反馈给客户。
 
 #### 小结
-通过几个例子，讲解了状态模式在实际开发中的应用。状态模式也许是被大家低估的模式之一。实际上，通过状态模式重构代码之后，很多杂乱无章的代码会变得清晰。虽然状态模式一开始并不是非常容易理解，但我们有必须去好好掌握这种设计模式。
+通过数据上报、统计函数的执行时间、动态改变函数参数以及插件式的表单验证这4个例子，了解了装饰函数，它是JavaScript中独特的装饰者模式。这种模式在实际开发中非常有用，除了上面提到的例子，它在框架开发中也十分有用。作为框架作者，希望框架里的函数提供的是一些稳定而方便移植的功能，那些个性化的功能可以在框架之外动态装饰上去，这可以避免为了让框架拥有更多的功能，而去使用一些if、else语句预测用户的实际需要。
+

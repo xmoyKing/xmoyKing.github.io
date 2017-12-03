@@ -1,22 +1,244 @@
 ---
-title: JS设计模式-8-组合模式
+title: JS设计模式-8-命令模式
 categories: js
 tags:
   - js
   - design pattern
-date: 2017-11-21 23:58:02
+date: 2017-11-19 23:51:14
 updated:
 ---
 
-我们知道地球和一些其他行星围绕着太阳旋转，也知道在一个原子中，有许多电子围绕着原子核旋转。在程序设计中，也有一些和“事物是由相似的子事物构成”类似的思想。组合模式就是用小的子对象来构建更大的对象，而这些小的子对象本身也许是由更小的“孙对象”构成的。
+假设有一个快餐店，而我是该餐厅的点餐服务员，那么我一天的工作应该是这样的：
 
-#### 回顾宏命令
-在命令模式中讲解过宏命令的结构和作用。宏命令对象包含了一组具体的子命令对象，不管是宏命令对象，还是子命令对象，都有一个execute方法负责执行命令。回顾万能遥控器上的宏命令代码：
+当某位客人点餐或者打来订餐电话后，我会把他的需求都写在清单上，然后交给厨房，客人不用关心是哪些厨师帮他炒菜。我们餐厅还可以满足客人需要的定时服务，比如客人可能当前正在回家的路上，要求1个小时后才开始炒他的菜，只要订单还在，厨师就不会忘记。
+
+客人也可以很方便地打电话来撤销订单。另外如果有太多的客人点餐，厨房可以按照订单的顺序排队炒菜。这些记录着订餐信息的清单，便是命令模式中的命令对象。
+
+#### 命令模式的用途
+命令模式是最简单和优雅的模式之一，命令模式中的命令（command）指的是一个执行某些特定事情的指令。
+
+命令模式最常见的应用场景是：有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁，也不知道被请求的操作是什么。此时希望用一种松耦合的方式来设计程序，使得请求发送者和请求接收者能够消除彼此之间的耦合关系。
+
+拿订餐来说，客人需要向厨师发送请求，但是完全不知道这些厨师的名字和联系方式，也不知道厨师炒菜的方式和步骤。命令模式把客人订餐的请求封装成command对象，也就是订餐中的订单对象。这个对象可以在程序中被四处传递，就像订单可以从服务员手中传到厨师的手中。这样一来，客人不需要知道厨师的名字，从而解开了请求调用者和请求接收者之间的耦合关系。
+
+另外，相对于过程化的请求调用，command对象拥有更长的生命周期。对象的生命周期是跟初始请求无关的，因为这个请求已经被封装在了command对象的方法中，成为了这个对象的行为。我们可以在程序运行的任意时刻去调用这个方法，就像厨师可以在客人预定1个小时之后才帮他炒菜，相当于程序在1个小时之后才开始执行command对象的方法。
+
+除了这两点之外，命令模式还支持撤销、排队等操作.
+
+#### 命令模式的例子——菜单程序
+假设我们正在编写一个用户界面程序，该用户界面上至少有数十个Button按钮。因为项目比较复杂，所以我们决定让某个程序员负责绘制这些按钮，而另外一些程序员则负责编写点击按钮后的具体行为，这些行为都将被封装在对象里。
+
+在大型项目开发中，这是很正常的分工。对于绘制按钮的程序员来说，他完全不知道某个按钮未来将用来做什么，可能用来刷新菜单界面，也可能用来增加一些子菜单，他只知道点击这个按钮会发生某些事情。那么当完成这个按钮的绘制之后，应该如何给它绑定onclick事件呢？
+
+回想一下命令模式的应用场景：
+
+有时候需要向某些对象发送请求，但是并不知道请求的接收者是谁，也不知道被请求的操作是什么，此时希望用一种松耦合的方式来设计软件，使得请求发送者和请求接收者能够消除彼此之间的耦合关系。
+
+我们很快可以找到在这里运用命令模式的理由：点击了按钮之后，必须向某些负责具体行为的对象发送请求，这些对象就是请求的接收者。但是目前并不知道接收者是什么对象，也不知道接收者究竟会做什么。此时我们需要借助命令对象的帮助，以便解开按钮和负责具体行为对象之间的耦合。
+
+设计模式的主题总是把不变的事物和变化的事物分离开来，命令模式也不例外。按下按钮之后会发生一些事情是不变的，而具体会发生什么事情是可变的。通过command对象的帮助，将来我们可以轻易地改变这种关联，因此也可以在将来再次改变按钮的行为。
+
+首先在页面中完成3个button按钮的“绘制”，接下来定义setCommand函数，setCommand函数负责往按钮上面安装命令。可以肯定的是，点击按钮会执行某个command命令，执行命令的动作被约定为调用command对象的execute()方法。虽然还不知道这些命令究竟代表什么操作，但负责绘制按钮的程序员不关心这些事情，他只需要预留好安装命令的接口，command对象自然知道如何和正确的对象沟通：
 ```js
-var closeDoorCommand = { execute: function()console.log( '关 门' ); } }; 
-var openPcCommand = { execute: function()nsole.log( '开 电 脑' ); } }; 
-var openQQCommand = { execute: functio)console.log( '登 录 QQ' ); } }; 
-var MacroCommand = function( 
+var setCommand = function( button, command ){ button.onclick = function(){ command.execute(); } };
+```
+最后，负责编写点击按钮之后的具体行为的程序员总算交上了他们的成果，他们完成了刷新菜单界面、增加子菜单和删除子菜单这几个功能，这几个功能被分布在MenuBar和SubMenu这两个对象中：
+```js
+var MenuBar = { 
+  refresh: function(){ console.log( '刷 新 菜 单 目 录' ); } 
+}; 
+
+var SubMenu = { 
+  add: function(){ console.log( '增 加 子 菜 单' ); }, 
+  del: function(){ console.log( '删 除 子 菜 单' ); }
+};
+```
+在让button变得有用起来之前，我们要先把这些行为都封装在命令类中：
+```js
+var RefreshMenuBarCommand = function( receiver ){ this.receiver = receiver; }; 
+RefreshMenuBarCommand.prototype.execute = function(){ this.receiver.refresh(); }; 
+
+var AddSubMenuCommand = function( receiver ){ this.receiver = receiver; }; 
+AddSubMenuCommand.prototype.execute = function(){ this.receiver.add();}; 
+
+var DelSubMenuCommand = function( receiver ){ this.receiver = receiver; }; 
+DelSubMenuCommand.prototype.execute = function(){ console.log( '删 除 子 菜 单' ); };
+```
+最后就是把命令接收者传入到command对象中，并且把command对象安装到button上面：
+```js
+var refreshMenuBarCommand = new RefreshMenuBarCommand( MenuBar ); 
+var addSubMenuCommand = new AddSubMenuCommand( SubMenu ); 
+var delSubMenuCommand = new DelSubMenuCommand( SubMenu ); 
+
+setCommand( button1, refreshMenuBarCommand );
+setCommand( button2, addSubMenuCommand ); 
+setCommand( button3, delSubMenuCommand );
+```
+以上只是一个很简单的命令模式示例，但从中可以看到我们是如何把请求发送者和请求接收者解耦开的。
+
+#### JavaScript中的命令模式
+也许我们会感到很奇怪，所谓的命令模式，看起来就是给对象的某个方法取了execute的名字。引入command对象和receiver这两个无中生有的角色无非是把简单的事情复杂化了，即使不用什么模式，用下面寥寥几行代码就可以实现相同的功能：
+```js
+var bindClick = function( button, func ){ button.onclick = func; }; 
+var MenuBar = { 
+  refresh: function(){ console.log( '刷 新 菜 单 界 面' ); } 
+}; 
+var SubMenu = { 
+  add: function(){ console.log( '增 加 子 菜 单' ); }, 
+  del: function(){ console.log( '删 除 子 菜 单' ); } 
+}; 
+
+bindClick( button1, MenuBar.refresh ); 
+bindClick( button2, SubMenu.add );
+bindClick( button3, SubMenu.del );
+```
+这种说法是正确的，上面的示例代码是模拟传统面向对象语言的命令模式实现。命令模式将过程式的请求调用封装在command对象的execute方法里，通过封装方法调用，我们可以把运算块包装成形。command对象可以被四处传递，所以在调用命令的时候，客户（Client）不需要关心事情是如何进行的。
+
+命令模式的由来，其实是回调（callback）函数的一个面向对象的替代品。
+
+JavaScript作为将函数作为一等对象的语言，跟策略模式一样，命令模式也早已融入到了JavaScript语言之中。运算块不一定要封装在command.execute方法中，也可以封装在普通函数中。函数作为一等对象，本身就可以被四处传递。即使我们依然需要请求“接收者”，那也未必使用面向对象的方式，闭包可以完成同样的功能。
+
+在面向对象设计中，命令模式的接收者被当成command对象的属性保存起来，同时约定执行命令的操作调用command.execute方法。在使用闭包的命令模式实现中，接收者被封闭在闭包产生的环境中，执行命令的操作可以更加简单，仅仅执行回调函数即可。无论接收者被保存为对象的属性，还是被封闭在闭包产生的环境中，在将来执行命令的时候，接收者都能被顺利访问。用闭包实现的命令模式如下代码所示：
+```js
+var setCommand = function( button, func ){ button.onclick = function(){ func(); } }; 
+var MenuBar = { refresh: function(){ console.log( '刷 新 菜 单 界 面' ); } }; 
+
+var RefreshMenuBarCommand = function( receiver ){ return function(){ receiver.refresh(); } }; 
+var refreshMenuBarCommand = RefreshMenuBarCommand( MenuBar ); 
+
+setCommand( button1, refreshMenuBarCommand );
+```
+当然，如果想更明确地表达当前正在使用命令模式，或者除了执行命令之外，将来有可能还要提供撤销命令等操作。那我们最好还是把执行函数改为调用execute方法：
+```js
+var RefreshMenuBarCommand = function( receiver ){ return { execute: function(){ receiver.refresh(); } } }; 
+var setCommand = function( button, command ){ button.onclick = function(){ command.execute(); } }; 
+var refreshMenuBarCommand = RefreshMenuBarCommand( MenuBar ); 
+
+setCommand( button1, refreshMenuBarCommand );
+```
+
+#### 撤销命令
+命令模式的作用不仅是封装运算块，而且可以很方便地给命令对象增加撤销操作。就像订餐时客人可以通过电话来取消订单一样。下面来看撤销命令的例子。本节的目标是利用Animate类来编写一个动画，这个动画的表现是让页面上的小球移动到水平方向的某个位置。现在页面中有一个input文本框和一个button按钮，文本框中可以输入一些数字，表示小球移动后的水平位置，小球在用户点击按钮后立刻开始移动，代码如下：
+```js
+var ball = document.getElementById( 'ball' ); 
+var pos = document.getElementById( 'pos' ); 
+var moveBtn = document.getElementById( 'moveBtn' ); 
+
+moveBtn.onclick = function(){
+  var animate = new Animate( ball ); 
+  animate.start( 'left', pos.value, 1000, 'strongEaseOut' ); 
+};
+```
+如果文本框输入200，然后点击moveBtn按钮，可以看到小球顺利地移动到水平方向200px的位置。现在我们需要一个方法让小球还原到开始移动之前的位置。当然也可以在文本框中再次输入-200，并且点击moveBtn按钮，这也是一个办法，不过显得很笨拙。页面上最好有一个撤销按钮，点击撤销按钮之后，小球便能回到上一次的位置。在给页面中增加撤销按钮之前，先把目前的代码改为用命令模式实现：
+```js
+var ball = document.getElementById( 'ball' );
+var pos = document.getElementById( 'pos' ); 
+var moveBtn = document.getElementById( 'moveBtn' ); 
+var MoveCommand = function( receiver, pos ){ this.receiver = receiver; this.pos = pos; }; 
+
+MoveCommand.prototype.execute = function(){ this.receiver.start( 'left', this.pos, 1000, 'strongEaseOut' ); }; 
+
+var moveCommand; 
+moveBtn.onclick = function(){ 
+  var animate = new Animate( ball ); 
+  moveCommand = new MoveCommand( animate, pos.value ); 
+  moveCommand.execute(); 
+};
+```
+接下来增加撤销按钮,撤销操作的实现一般是给命令对象增加一个名为unexecude或者undo的方法，在该方法里执行execute的反向操作。在command.execute方法让小球开始真正运动之前，我们需要先记录小球的当前位置，在unexecude或者undo操作中，再让小球回到刚刚记录下的位置，代码如下：
+```js
+var ball = document.getElementById('ball');
+var pos = document.getElementById('pos');
+var moveBtn = document.getElementById('moveBtn');
+var cancelBtn = document.getElementById('cancelBtn');
+var MoveCommand = function(receiver, pos) {
+    this.receiver = receiver;
+    this.pos = pos;
+    this.oldPos = null;
+};
+MoveCommand.prototype.execute = function() {
+  this.receiver.start('left', this.pos, 1000, 'strongEaseOut');
+  this.oldPos = this.receiver.dom.getBoundingClientRect()[this.receiver.propertyName]; // 记 录 小 球 开 始 移 动 前 的 位 置 
+}; 
+MoveCommand.prototype.undo = function(){ this.receiver.start( 'left', this.oldPos, 1000, 'strongEaseOut' ); // 回 到 小 球 移 动 前 记 录 的 位 置 
+}; 
+var moveCommand; moveBtn.onclick = function(){ 
+  var animate = new Animate( ball ); 
+  moveCommand = new MoveCommand( animate, pos.value ); 
+  moveCommand.execute(); 
+}; 
+cancelBtn.onclick = function(){ 
+  moveCommand.undo(); // 撤 销 命 令 
+};
+```
+现在通过命令模式轻松地实现了撤销功能。如果用普通的方法调用来实现，也许需要每次都手工记录小球的运动轨迹，才能让它还原到之前的位置。而命令模式中小球的原始位置在小球开始移动前已经作为command对象的属性被保存起来，所以只需要再提供一个undo方法，并且在undo方法中让小球回到刚刚记录的原始位置就可以了。撤销是命令模式里一个非常有用的功能，试想一下开发一个围棋程序的时候，我们把每一步棋子的变化都封装成命令，则可以轻而易举地实现悔棋功能。同样，撤销命令还可以用于实现文本编辑器的Ctrl+Z功能。
+
+#### 撤消和重做
+上一节我们讨论了如何撤销一个命令。很多时候，我们需要撤销一系列的命令。比如在一个围棋程序中，现在已经下了10步棋，我们需要一次性悔棋到第5步。在这之前，我们可以把所有执行过的下棋命令都储存在一个历史列表中，然后倒序循环来依次执行这些命令的undo操作，直到循环执行到第5个命令为止。
+
+然而，在某些情况下无法顺利地利用undo操作让对象回到execute之前的状态。比如在一个Canvas画图的程序中，画布上有一些点，我们在这些点之间画了N条曲线把这些点相互连接起来，当然这是用命令模式来实现的。但是我们却很难为这里的命令对象定义一个擦除某条曲线的undo操作，因为在Canvas画图中，擦除一条线相对不容易实现。
+
+这时候最好的办法是先清除画布，然后把刚才执行过的命令全部重新执行一遍，这一点同样可以利用一个历史列表堆栈办到。记录命令日志，然后重复执行它们，这是逆转不可逆命令的一个好办法。
+
+在HTML5版《街头霸王》游戏中，命令模式可以用来实现播放录像功能。原理跟Canvas画图的例子一样，我们把用户在键盘的输入都封装成命令，执行过的命令将被存放到堆栈中。播放录像的时候只需要从头开始依次执行这些命令便可，代码如下：
+```js
+var Ryu = {
+  attack: function(){ console.log( '攻 击' ); }, 
+  defense: function(){ console.log( '防 御' ); }, 
+  jump: function(){ console.log( '跳 跃' ); }, 
+  crouch: function(){ console.log( '蹲 下' ); }
+}; 
+var makeCommand = function( receiver, state ){ // 创 建 命 令 
+  return function(){ receiver[ state ](); } 
+}; 
+var commands = { 
+  "119": "jump", // W 
+  "115": "crouch", // S 
+  "97": "defense", // A 
+  "100": "attack" // D 
+};
+var commandStack = []; // 保 存 命 令 的 堆 栈 
+
+document.onkeypress = function( ev ){ 
+  var keyCode = ev.keyCode, 
+      command = makeCommand( Ryu, commands[ keyCode ] );
+
+  if ( command ){ 
+    command(); // 执 行 命 令 
+    commandStack.push( command ); // 将 刚 刚 执 行 过 的 命 令 保 存 进 堆 栈 
+  } 
+}; 
+document.getElementById( 'replay' ).onclick = function(){ // 点 击 播 放 录 像 
+  var command; 
+  while( command = commandStack.shift() ){ // 从 堆 栈 里 依 次 取 出 命 令 并 执 行 
+    command(); 
+  } 
+};
+```
+
+#### 命令队列
+在订餐的故事中，如果订单的数量过多而厨师的人手不够，则可以让这些订单进行排队处理。第一个订单完成之后，再开始执行跟第二个订单有关的操作。
+
+队列在动画中的运用场景也非常多，比如之前的小球运动程序有可能遇到另外一个问题：有些用户反馈，这个程序只适合于APM小于20的人群，大部分用户都有快速连续点击按钮的习惯，当用户第二次点击button的时候，此时小球的前一个动画可能尚未结束，于是前一个动画会骤然停止，小球转而开始第二个动画的运动过程。但这并不是用户的期望，用户希望这两个动画会排队进行。
+
+把请求封装成命令对象的优点在这里再次体现了出来，对象的生命周期几乎是永久的，除非我们主动去回收它。也就是说，命令对象的生命周期跟初始请求发生的时间无关，command对象的execute方法可以在程序运行的任何时刻执行，即使点击按钮的请求早已发生，但我们的命令对象仍然是有生命的。
+
+所以我们可以把div的这些运动过程都封装成命令对象，再把它们压进一个队列堆栈，当动画执行完，也就是当前command对象的职责完成之后，会主动通知队列，此时取出正在队列中等待的第一个命令对象，并且执行它。
+
+我们比较关注的问题是，一个动画结束后该如何通知队列。通常可以使用回调函数来通知队列，除了回调函数之外，还可以选择发布-订阅模式。即在一个动画结束后发布一个消息，订阅者接收到这个消息之后，便开始执行队列里的下一个动画。
+
+#### 宏命令
+宏命令是一组命令的集合，通过执行宏命令的方式，可以一次执行一批命令。想象一下，家里有一个万能遥控器，每天回家的时候，只要按一个特别的按钮，它就会帮我们关上房间门，顺便打开电脑并登录QQ。
+
+下面我们看看如何逐步创建一个宏命令。首先，我们依然要创建好各种Command：
+```js
+var closeDoorCommand = { execute: function(){ console.log( '关 门' ); } }; 
+var openPcCommand = { execute: function(){ console.log( '开 电 脑' ); } }; 
+var openQQCommand = { execute: function(){ console.log( '登 录 QQ' ); } };
+```
+接下来定义宏命令MacroCommand，它的结构也很简单。macroCommand.add方法表示把子命令添加进宏命令对象，当调用宏命令对象的execute方法时，会迭代这一组子命令对象，并且依次执行它们的execute方法：
+```js
+var MacroCommand = function(){ 
   return { 
     commandsList: [], 
     add: function( command ){ this.commandsList.push( command ); }, 
@@ -34,258 +256,18 @@ macroCommand.add( openPcCommand );
 macroCommand.add( openQQCommand ); 
 macroCommand.execute();
 ```
-通过观察这段代码，我们很容易发现，宏命令中包含了一组子命令，它们组成了一个树形结构，这里是一棵结构非常简单的树。
+当然我们还可以为宏命令添加撤销功能，跟macroCommand.execute类似，当调用macroCommand.undo方法时，宏命令里包含的所有子命令对象要依次执行各自的undo操作。宏命令是命令模式与组合模式的联用产物，关于组合模式，将在后面详细介绍。
 
-其中，marcoCommand被称为组合对象，closeDoorCommand、openPcCommand、openQQCommand都是叶对象。在macroCommand的execute方法里，并不执行真正的操作，而是遍历它所包含的叶对象，把真正的execute请求委托给这些叶对象。
-
-macroCommand表现得像一个命令，但它实际上只是一组真正命令的“代理”。并非真正的代理，虽然结构上相似，但macroCommand只负责传递请求给叶对象，它的目的不在于控制对叶对象的访问。
-
-#### 组合模式的用途
-组合模式将对象组合成树形结构，以表示“部分-整体”的层次结构。除了用来表示树形结构之外，组合模式的另一个好处是通过对象的多态性表现，使得用户对单个对象和组合对象的使用具有一致性，下面分别说明。
-- 表示树形结构。通过回顾上面的例子，我们很容易找到组合模式的一个优点：提供了一种遍历树形结构的方案，通过调用组合对象的execute方法，程序会递归调用组合对象下面的叶对象的execute方法，所以我们的万能遥控器只需要一次操作，便能依次完成关门、打开电脑、登录QQ这几件事情。组合模式可以非常方便地描述对象部分-整体层次结构。
-- 利用对象多态性统一对待组合对象和单个对象。利用对象的多态性表现，可以使客户端忽略组合对象和单个对象的不同。在组合模式中，客户将统一地使用组合结构中的所有对象，而不需要关心它究竟是组合对象还是单个对象。
-
-这在实际开发中会给客户带来相当大的便利性，当我们往万能遥控器里面添加一个命令的时候，并不关心这个命令是宏命令还是普通子命令。这点对于我们不重要，我们只需要确定它是一个命令，并且这个命令拥有可执行的execute方法，那么这个命令就可以被添加进万能遥控器。当宏命令和普通子命令接收到执行execute方法的请求时，宏命令和普通子命令都会做它们各自认为正确的事情。这些差异是隐藏在客户背后的，在客户看来，这种透明性可以让我们非常自由地扩展这个万能遥控器。
-
-#### 请求在树中传递的过程
-在组合模式中，请求在树中传递的过程总是遵循一种逻辑。以宏命令为例，请求从树最顶端的对象往下传递，如果当前处理请求的对象是叶对象（普通子命令），叶对象自身会对请求作出相应的处理；如果当前处理请求的对象是组合对象（宏命令），组合对象则会遍历它属下的子节点，将请求继续传递给这些子节点。
-
-总而言之，如果子节点是叶对象，叶对象自身会处理这个请求，而如果子节点还是组合对象，请求会继续往下传递。叶对象下面不会再有其他子节点，一个叶对象就是树的这条枝叶的尽头，组合对象下面可能还会有子节点.
-
-请求从上到下沿着树进行传递，直到树的尽头。作为客户，只需要关心树最顶层的组合对象，客户只需要请求这个组合对象，请求便会沿着树往下传递，依次到达所有的叶对象。
-
-在刚刚的例子中，由于宏命令和子命令组成的树太过简单，我们还不能清楚地看到组合模式带来的好处，如果只是简单地遍历一组子节点，迭代器便能解决所有的问题。接下来我们将创造一个更强大的宏命令，这个宏命令中又包含了另外一些宏命令和普通子命令，看起来是一棵相对较复杂的树。
-
-#### 更强大的宏命令
-目前的万能遥控器，包含了关门、开电脑、登录QQ这3个命令。现在我们需要一个“超级万能遥控器”，可以控制家里所有的电器，这个遥控器拥有以下功能：
-- 打开空调
-- 打开电视和音响
-- 关门、开电脑、登录QQ
-首先在节点中放置一个按钮button来表示这个超级万能遥控器，超级万能遥控器上安装了一个宏命令，当执行这个宏命令时，会依次遍历执行它所包含的子命令，代码如下：
+#### 智能命令与傻瓜命令
+再看一下我们创建的关门命令：
 ```js
-var MacroCommand = function() {
-    return {
-      commandsList: [],
-      add: function(command) {
-        this.commandsList.push(command);
-      },
-      execute: function() {
-        for (var i = 0, command; command = this.commandsList[i++];) {
-          command.execute();
-        }
-      }
-    }
-  };
-var openAcCommand = {
-  execute: function() {console.log('打 开 空 调');}
-}; 
-/********** 家 里 的 电 视 和 音 响 是 连 接 在 一 起 的， 所 以 可 以 用 一 个 宏 命 令 来 组 合 打 开 电 视 和 打 开 音 响 的 命 令*********/
-var openTvCommand = {
-  execute: function() {console.log('打 开 电 视');}
-};
-var openSoundCommand = {
-  execute: function() {console.log('打 开 音 响');}
-};
-var macroCommand1 = MacroCommand();
-macroCommand1.add(openTvCommand);
-macroCommand1.add(openSoundCommand); 
-
-/********* 关 门、 打 开 电 脑 和 打 登 录 QQ 的 命 令****************/
-var closeDoorCommand = {
-  execute: function() {console.log('关 门');}
-};
-var openPcCommand = {
-  execute: function() {console.log('开 电 脑');}
-};
-var openQQCommand = {
-  execute: function() {console.log('登 录 QQ');}
-};
-var macroCommand2 = MacroCommand();
-macroCommand2.add(closeDoorCommand);
-macroCommand2.add(openPcCommand);
-macroCommand2.add(openQQCommand); 
-
-/********* 现 在 把 所 有 的 命 令 组 合 成 一 个“ 超 级 命 令”**********/
-var macroCommand = MacroCommand();
-macroCommand.add(openAcCommand);
-macroCommand.add(macroCommand1);
-macroCommand.add(macroCommand2); 
-
-/********* 最 后 给 遥 控 器 绑 定“ 超 级 命 令”**********/
-var setCommand = (function(command) {
-  document.getElementById('button').onclick = function() {
-    command.execute();
-  }
-})(macroCommand);
+var closeDoorCommand = { execute: function(){ console.log( '关 门' ); } };
 ```
-当按下遥控器的按钮时，所有命令都将被依次执行,从这个例子中可以看到，基本对象可以被组合成更复杂的组合对象，组合对象又可以被组合，这样不断递归下去，这棵树的结构可以支持任意多的复杂度。在树最终被构造完成之后，让整颗树最终运转起来的步骤非常简单，只需要调用最上层对象的execute方法。每当对最上层的对象进行一次请求时，实际上是在对整个树进行深度优先的搜索，而创建组合对象的程序员并不关心这些内在的细节，往这棵树里面添加一些新的节点对象是非常容易的事情。
+很奇怪，closeDoorCommand中没有包含任何receiver的信息，它本身就包揽了执行请求的行为，这跟我们之前看到的命令对象都包含了一个receiver是矛盾的。
 
-#### 抽象类在组合模式中的作用
-前面说到，组合模式最大的优点在于可以一致地对待组合对象和基本对象。客户不需要知道当前处理的是宏命令还是普通命令，只要它是一个命令，并且有execute方法，这个命令就可以被添加到树中。
+一般来说，命令模式都会在command对象中保存一个接收者来负责真正执行客户的请求，这种情况下命令对象是“傻瓜式”的，它只负责把客户的请求转交给接收者来执行，这种模式的好处是请求发起者和请求接收者之间尽可能地得到了解耦。
 
-这种透明性带来的便利，在静态类型语言中体现得尤为明显。比如在Java中，实现组合模式的关键是Composite类和Leaf类都必须继承自一个Compenent抽象类。这个Compenent抽象类既代表组合对象，又代表叶对象，它也能够保证组合对象和叶对象拥有同样名字的方法，从而可以对同一消息都做出反馈。组合对象和叶对象的具体类型被隐藏在Compenent抽象类身后。
+但是我们也可以定义一些更“聪明”的命令对象，“聪明”的命令对象可以直接实现请求，这样一来就不再需要接收者的存在，这种“聪明”的命令对象也叫作智能命令。没有接收者的智能命令，退化到和策略模式非常相近，从代码结构上已经无法分辨它们，能分辨的只有它们意图的不同。策略模式指向的问题域更小，所有策略对象的目标总是一致的，它们只是达到这个目标的不同手段，它们的内部实现是针对“算法”而言的。而智能命令模式指向的问题域更广，command对象解决的目标更具发散性。命令模式还可以完成撤销、排队等功能。
 
-针对Compenent抽象类来编写程序，客户操作的始终是Compenent对象，而不用去区分到底是组合对象还是叶对象。所以我们往同一个对象里的add方法里，既可以添加组合对象，也可以添加叶对象。
-
-然而在JavaScript这种动态类型语言中，对象的多态性是与生俱来的，也没有编译器去检查变量的类型，所以我们通常不会去模拟一个“怪异”的抽象类，JavaScript中实现组合模式的难点在于要保证组合对象和叶对象对象拥有同样的方法，这通常需要用鸭子类型的思想对它们进行接口检查。在JavaScript中实现组合模式，看起来缺乏一些严谨性，我们的代码算不上安全，但能更快速和自由地开发，这既是JavaScript的缺点，也是它的优点。
-
-####透明性带来的安全问题
-组合模式的透明性使得发起请求的客户不用去顾忌树中组合对象和叶对象的区别，但它们在本质上有是区别的。
-
-组合对象可以拥有子节点，叶对象下面就没有子节点，所以我们也许会发生一些误操作，比如试图往叶对象中添加子节点。解决方案通常是给叶对象也增加add方法，并且在调用这个方法时，抛出一个异常来及时提醒客户：
-```js
-var MacroCommand = function() {
-    return {
-      commandsList: [],
-      add: function(command) {
-        this.commandsList.push(command);
-      },
-      execute: function() {
-        for (var i = 0, command; command = this.commandsList[i++];) {
-          command.execute();
-        }
-      }
-    }
-  };
-var openTvCommand = {
-  execute: function() {console.log('打 开 电 视'); },
-  add: function() {
-    throw new Error('叶 对 象 不 能 添 加 子 节 点');
-  }
-};
-var macroCommand = MacroCommand();
-macroCommand.add(openTvCommand);
-openTvCommand.add(macroCommand) // Uncaught Error: 叶 对 象 不 能 添 加 子 节 点
-```
-
-#### 组合模式的例子——扫描文件夹
-文件夹和文件之间的关系，非常适合用组合模式来描述。文件夹里既可以包含文件，又可以包含其他文件夹，最终可能组合成一棵树，组合模式在文件夹的应用中有以下两层好处。
-- 例如，我在同事的移动硬盘里找到了一些电子书，想把它们复制到F盘中的学习资料文件夹。在复制这些电子书的时候，我并不需要考虑这批文件的类型，不管它们是单独的电子书还是被放在了文件夹中。组合模式让Ctrl+V、Ctrl+C成为了一个统一的操作。
-- 当我用杀毒软件扫描该文件夹时，往往不会关心里面有多少文件和子文件夹，组合模式使得我们只需要操作最外层的文件夹进行扫描。
-现在我们来编写代码，首先分别定义好文件夹Folder和文件File这两个类。见如下代码：
-```js
-/******************************* Folder ******************************/
-var Folder = function(name) {
-    this.name = name;
-    this.files = [];
-  };
-Folder.prototype.add = function(file) {
-  this.files.push(file);
-};
-Folder.prototype.scan = function() {console.log('开 始 扫 描 文 件 夹: ' + this.name);
-  for (var i = 0, file, files = ts.files; file = files[i++];) {
-    file.scan();
-  }
-}; 
-/******************************* File ******************************/
-var File = function(name) {
-    this.name = name;
-  };
-File.prototype.add = function() {
-  throw new Error('文 件 下 面 不 能 再 添 加 文 件');
-};
-File.prototype.scan = function() {console.log('开 始 扫 描 文 件: ' + this.name);;
-```
-接下来创建一些文件夹和文件对象，并且让它们组合成一棵树，这棵树就是我们F盘里的现有文件目录结构：
-```js
-var folder = new Folder('学 习 资 料');
-var folder1 = new Folder('JavaScript');
-var folder2 = new Folder('jQuery');
-var file1 = new File('JavaScript 设 计 模 式 与 开 发 实 践');
-var file2 = new File('精 通 jQuery');
-var file3 = new File('重 构 与 模 式') folder1.add(file1);
-
-folder2.add(file2);
-folder.add(folder1);
-folder.add(folder2);
-folder.add(file3);
-```
-现在的需求是把移动硬盘里的文件和文件夹都复制到这棵树中，假设我们已经得到了这些文件对象：
-```js
-var folder3 = new Folder('Nodejs');
-var file4 = new File('深 入 浅 出 Node.js');
-folder3.add(file4);
-var file5 = new File('JavaScript 语 言 精 髓 与 编 程 实 践');
-```
-接下来就是把这些文件都添加到原有的树中：
-```js
-folder.add( folder3 ); 
-folder.add( file5 );
-```
-通过这个例子，我们再次看到客户是如何同等对待组合对象和叶对象。在添加一批文件的操作过程中，客户不用分辨它们到底是文件还是文件夹。新增加的文件和文件夹能够很容易地添加到原来的树结构中，和树里已有的对象一起工作。我们改变了树的结构，增加了新的数据，却不用修改任何一句原有的代码，这是符合开放-封闭原则的。运用了组合模式之后，扫描整个文件夹的操作也是轻而易举的，我们只需要操作树的最顶端对象：`folder.scan();`
-
-#### 一些值得注意的地方
-在使用组合模式的时候，还有以下几个值得我们注意的地方。
-
-##### 组合模式不是父子关系
-组合模式的树型结构容易让人误以为组合对象和叶对象是父子关系，这是不正确的。组合模式是一种HAS-A（聚合）的关系，而不是IS-A。组合对象包含一组叶对象，但Leaf并不是Composite的子类。组合对象把请求委托给它所包含的所有叶对象，它们能够合作的关键是拥有相同的接口。为了方便描述，有时候把上下级对象称为父子节点，但它们并非真正意义上的父子关系。
-
-##### 对叶对象操作的一致性
-组合模式除了要求组合对象和叶对象拥有相同的接口之外，还有一个必要条件，就是对一组叶对象的操作必须具有一致性。比如公司要给全体员工发放元旦的过节费1000块，这个场景可以运用组合模式，但如果公司给今天过生日的员工发送一封生日祝福的邮件，组合模式在这里就没有用武之地了，除非先把今天过生日的员工挑选出来。只有用一致的方式对待列表中的每个叶对象的时候，才适合使用组合模式。
-
-##### 双向映射关系
-发放过节费的通知步骤是从公司到各个部门，再到各个小组，最后到每个员工的邮箱里。这本身是一个组合模式的好例子，但要考虑的一种情况是，也许某些员工属于多个组织架构。比如某位架构师既隶属于开发组，又隶属于架构组，对象之间的关系并不是严格意义上的层次结构，在这种情况下，是不适合使用组合模式的，该架构师很可能会收到两份过节费。这种复合情况下我们必须给父节点和子节点建立双向映射关系，一个简单的方法是给小组和员工对象都增加集合来保存对方的引用。但是这种相互间的引用相当复杂，而且对象之间产生了过多的耦合性，修改或者删除一个对象都变得困难，此时我们可以引入中介者模式来管理这些对象。
-
-##### 用职责链模式提高组合模式性能
-在组合模式中，如果树的结构比较复杂，节点数量很多，在遍历树的过程中，性能方面也许表现得不够理想。有时候我们确实可以借助一些技巧，在实际操作中避免遍历整棵树，有一种现成的方案是借助职责链模式。职责链模式一般需要我们手动去设置链条，但在组合模式中，父对象和子对象之间实际上形成了天然的职责链。让请求顺着链条从父对象往子对象传递，或者是反过来从子对象往父对象传递，直到遇到可以处理该请求的对象为止，这也是职责链模式的经典运用场景之一。
-
-#### 引用父对象
-在前面的例子中，组合对象保存了它下面的子节点的引用，这是组合模式的特点，此时树结构是从上至下的。但有时候我们需要在子节点上保持对父节点的引用，比如在组合模式中使用职责链时，有可能需要让请求从子节点往父节点上冒泡传递。还有当我们删除某个文件的时候，实际上是从这个文件所在的上层文件夹中删除该文件的。
-
-现在来改写扫描文件夹的代码，使得在扫描整个文件夹之前，我们可以先移除某一个具体的文件。首先改写Folder类和File类，在这两个类的构造函数中，增加this.parent属性，并且在调用add方法的时候，正确设置文件或者文件夹的父节点：
-```js
-var Folder = function( name ){ 
-  this.name = name; 
-  this.parent = null; // 增 加 this.parent 属 性 
-  this.files = []; 
-}; 
-Folder.prototype.add = function( file ){ 
-  file.parent = this; // 设 置 父 对 象 
-  this.files.push( file ); 
-}; 
-Folder.prototype.scan = function(){ 
-  console.log( '开 始 扫 描 文 件 夹: ' + this.name ); 
-  for ( var i = 0, file, files = this.files; file = files[ i++ ]; ){ 
-    file.scan(); 
-  } 
-};
-```
-接下来增加Folder.prototype.remove方法，表示移除该文件夹：
-```js
-Folder.prototype.remove = function(){ 
-  if ( !this.parent ){ // 根 节 点 或 者 树 外 的 游 离 节 点 
-    return; 
-  } 
-  for ( var files = this.parent.files, l = files.length - 1; l >= 0; l-- ){
-    var file = files[ l ]; 
-    if ( file === this ){ files.splice( l, 1 ); } 
-  } 
-};
-```
-在File.prototype.remove方法里，首先会判断this.parent，如果this.parent为null，那么这个文件夹要么是树的根节点，要么是还没有添加到树的游离节点，这时候没有节点需要从树中移除，我们暂且让remove方法直接return，表示不做任何操作。如果this.parent不为null，则说明该文件夹有父节点存在，此时遍历父节点中保存的子节点列表，删除想要删除的子节点。
-
-File类的实现基本一致：
-```js
-var File = function( name ){ this.name = name; this.parent = null; }; 
-
-File.prototype.add = function(){ throw new Error( '不 能 添 加 在 文 件 下 面' ); }; 
-File.prototype.scan = function(){ console.log( '开 始 扫 描 文 件: ' + this.name ); }; 
-File.prototype.remove = function(){ 
-  if ( !this.parent ){ return; } 
-
-  for ( var files = this.parent.files, l = files.length - 1; l >= 0; l-- ){ 
-    var file = files[ l ]; 
-    if ( file === this ){ files.splice( l, 1 ); } 
-  }
-
-};
-```
-
-#### 何时使用组合模式
-组合模式如果运用得当，可以大大简化客户的代码。一般来说，组合模式适用于以下这两种情况。
-- 表示对象的部分-整体层次结构。组合模式可以方便地构造一棵树来表示对象的部分-整体结构。特别是我们在开发期间不确定这棵树到底存在多少层次的时候。在树的构造最终完成之后，只需要通过请求树的最顶层对象，便能对整棵树做统一的操作。在组合模式中增加和删除树的节点非常方便，并且符合开放-封闭原则。
-- 客户希望统一对待树中的所有对象。组合模式使客户可以忽略组合对象和叶对象的区别，客户在面对这棵树的时候，不用关心当前正在处理的对象是组合对象还是叶对象，也就不用写一堆if、else语句来分别处理它们。组合对象和叶对象会各自做自己正确的事情，这是组合模式最重要的能力。
-
-组合模式可以让我们使用树形方式创建对象的结构。我们可以把相同的操作应用在组合对象和单个对象上。在大多数情况下，我们都可以忽略掉组合对象和单个对象之间的差别，从而用一致的方式来处理它们。
-
-然而，组合模式并不是完美的，它可能会产生一个这样的系统：系统中的每个对象看起来都与其他对象差不多。它们的区别只有在运行的时候会才会显现出来，这会使代码难以理解。此外，如果通过组合模式创建了太多的对象，那么这些对象可能会让系统负担不起。
+### 小结
+JavaScript可以用高阶函数非常方便地实现命令模式。命令模式在JavaScript语言中是一种隐形的模式。

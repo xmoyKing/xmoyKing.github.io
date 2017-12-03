@@ -1,395 +1,347 @@
 ---
-title: JS设计模式-18-代码重构
+title: JS设计模式-18-接口和面向接口编程
 categories: js
 tags:
 - js
 - design pattern
-date: 2017-11-27 14:52:14
+date: 2017-12-07 09:59:31
 updated:
 ---
 
-到目前为止，实际上一直在不停地进行代码级别上的优化。在讲设计模式的章节中，我们总是先写一段反例代码，而后再介绍一段通过设计模式重构之后的更好的代码。这种强烈的对比会加深我们对该模式的理解。
+当谈到接口的时候，通常会涉及以下几种含义。
 
-模式和重构之间有着一种与生俱来的关系。从某种角度来看，设计模式的目的就是为许多重构行为提供目标。
+我们经常说一个库或者模块对外提供了某某API接口。通过主动暴露的接口来通信，可以隐藏软件系统内部的工作细节。这也是我们最熟悉的第一种接口含义。
 
-在实际的项目开发中，除了使用设计模式进行重构之外，还有一些常见而容易忽略的细节，这些细节也是帮助我们达到重构目标的重要手段。一部分思想来自MartinFowler的名著《重构：改善既有代码的设计》，虽然该书是使用Java语言写成的，但这些重构的技巧，有很大一部分可以为JavaScript语言所借鉴。
+第二种接口是一些语言提供的关键字，比如Java的interface。interface关键字可以产生一个完全抽象的类。这个完全抽象的类用来表示一种契约，专门负责建立类与类之间的联系。
 
-虽然会提出一些重构的目标和手段，但它们都是建议，没有哪些是必须严格遵守的标准。具体是否需要重构，以及如何进行重构，这需要我们根据系统的类型、项目工期、人力等外界因素一起决定。
+第三种接口即是我们谈论的“面向接口编程”中的接口，接口的含义在这里体现得更为抽象。用《设计模式》中的话说就是：接口是对象能响应的请求的集合。
 
-#### 提炼函数
-在JavaScript开发中，我们大部分时间都在与函数打交道，所以我们希望这些函数有着良好的命名，函数体内包含的逻辑清晰明了。如果一个函数过长，不得不加上若干注释才能让这个函数显得易读一些，那这些函数就很有必要进行重构。如果在函数中有一段代码可以被独立出来，那我们最好把这些代码放进另外一个独立的函数中。这是一种很常见的优化工作，这样做的好处主要有以下几点。
-- 避免出现超大函数。
-- 独立出来的函数有助于代码复用。
-- 独立出来的函数更容易被覆写。
-- 独立出来的函数如果拥有一个良好的命名，它本身就起到了注释的作用。
+主要讨论的是第二种和第三种接口。首先,本章的前半部分都是针对Java语言的讲解，这是因为JavaScript并没有从语言层面提供对抽象类（Abstractclass）或者接口（interface）的支持，我们有必要从一门提供了抽象类和接口的语言开始，逐步了解“面向接口编程”在面向对象程序设计中的作用。
 
-比如在一个负责取得用户信息的函数里面，我们还需要打印跟用户信息有关的log，那么打印log的语句就可以被封装在一个独立的函数里：
-```js
-var getUserInfo = function() {
-  ajax('userInfo', function(data) {
-    console.log('userId: ' + data.userId);
-    console.log('userName: ' + data.userName);
-    console.log('nickName: ' + data.nickName);
-  });
-};
-```
-改为：
-```js
-var getUserInfo = function() {
-  ajax('userInfo', function(data) {
-    printDetails(data);
-  });
-};
-var printDetails = function(data) {
-  console.log('userId: ' + data.userId);
-  console.log('userName: ' + data.userName);
-  console.log('nickName: ' + data.nickName);
-};
-```
-
-#### 合并重复的条件片段
-如果一个函数体内有一些条件分支语句，而这些条件分支语句内部散布了一些重复的代码，那么就有必要进行合并去重工作。假如我们有一个分页函数paging，该函数接收一个参数currPage，currPage表示即将跳转的页码。在跳转之前，为防止currPage传入过小或者过大的数字，我们要手动对它的值进行修正，详见如下伪代码：
-```js
-var paging = function(currPage) {
-  if (currPage <= 0) {
-    currPage = 0;
-    jump(currPage); // 跳 转 
-  } else if (currPage >= totalPage) {
-    currPage = totalPage;
-    jump(currPage); // 跳 转 
-  } else {
-    jump(currPage); // 跳 转 
+#### 回到Java的抽象类
+首先让回顾一下动物世界。目前我们有一个鸭子类Duck，还有一个让鸭子发出叫声的AnimalSound类，该类有一个makeSound方法，接收Duck类型的对象作为参数，这几个类一直合作得很愉快，代码如下：
+```java
+public class Duck { // 鸭 子 类 
+  public void makeSound() {
+    System.out.println("嘎 嘎 嘎");
   }
-};
-```
-可以看到，负责跳转的代码jump(currPage)在每个条件分支内都出现了，所以完全可以把这句代码独立出来：
-```js
-var paging = function(currPage) {
-  if (currPage <= 0) {
-    currPage = 0;
-  } else if (currPage >= totalPage) {
-    currPage = totalPage;
+}
+public class AnimalSound {
+  public void makeSound(Duck duck) { // (1) 只 接 受 Duck 类 型 的 参 数 
+    duck.makeSound();
   }
-  jump(currPage); // 把 jump 函 数 独 立 出 来 
-};
-```
-
-#### 把条件分支语句提炼成函数
-在程序设计中，复杂的条件分支语句是导致程序难以阅读和理解的重要原因，而且容易导致一个庞大的函数。假设现在有一个需求是编写一个计算商品价格的getPrice函数，商品的计算只有一个规则：如果当前正处于夏季，那么全部商品将以8折出售。代码如下：
-```js
-var getPrice = function(price) {
-  var date = new Date();
-  if (date.getMonth() >= 6 && date.getMonth() <= 9) { // 夏 天 
-    return price * 0.8;
+}
+public class Test {
+  public static void main(String args[]) {
+    AnimalSound animalSound = new AnimalSound();
+    Duck duck = new Duck();
+    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎 
   }
-  return price;
-};
+}
 ```
-
-`if ( date.getMonth() >= 6 && date.getMonth() <= 9 ){ // ... }`
-这句代码要表达的意思很简单，就是判断当前是否正处于夏天（7~10月）。尽管这句代码很短小，但代码表达的意图和代码自身还存在一些距离，阅读代码的人必须要多花一些精力才能明白它传达的意图。其实可以把这句代码提炼成一个单独的函数，既能更准确地表达代码的意思，函数名本身又能起到注释的作用。代码如下：
-```js
-var isSummer = function() {
-  var date = new Date();
-  return date.getMonth() >= 6 && date.getMonth() <= 9;
-};
-var getPrice = function(price) {
-  if (isSummer()) { // 夏 天 
-    return price * 0.8;
+目前已经可以顺利地让鸭子发出叫声。后来动物世界里又增加了一些鸡，现在我们想让鸡也叫唤起来，但发现这是一件不可能完成的事情，因为在上面这段代码的(1)处，即AnimalSound类的sound方法里，被规定只能接受Duck类型的对象作为参数：
+```java
+public class Chicken { // 鸡 类
+  public void makeSound() {
+    System.out.println("咯 咯 咯");
   }
-  return price;
-};
-```
-
-#### 合理使用循环
-在函数体内，如果有些代码实际上负责的是一些重复性的工作，那么合理利用循环不仅可以完成同样的功能，还可以使代码量更少。下面有一段创建XHR对象的代码，为了简化示例，只考虑版本9以下的IE浏览器，代码如下：
-```js
-var createXHR = function() {
-  var xhr;
-  try {
-    xhr = new ActiveXObject('MSXML2. XMLHttp. 6.0');
-  } catch (e) {
-    try {
-      xhr = new ActiveXObject('MSXML2. XMLHttp. 3.0');
-    } catch (e) {
-      xhr = new ActiveXObject('MSXML2. XMLHttp');
-    }
+}
+public class Test {
+  public static void main(String args[]) {
+    AnimalSound animalSound = new AnimalSound();
+    Chicken chicken = new Chicken();
+    animalSound.makeSound(chicken); // 报 错， animalSound.makeSound 只 能 接 受 Duck 类 型 的 参 数
   }
-  return xhr;
-};
-var xhr = createXHR();
+}
 ```
-下面我们灵活地运用循环，可以得到跟上面代码一样的效果：
-```js
-var createXHR = function() {
-  var versions = ['MSXML2. XMLHttp. 6.0ddd', 'MSXML2. XMLHttp. 3.0', 'MSXML2. XMLHttp'];
-  for (var i = 0, version; version = versions[i++];) {
-    try {
-      return new ActiveXObject(version);
-    } catch (e) {}
+在享受静态语言类型检查带来的安全性的同时，也失去了一些编写代码的自由。
+
+静态类型语言通常设计为可以“向上转型”。当给一个类变量赋值时，这个变量的类型既可以使用这个类本身，也可以使用这个类的超类。就像看到天上有只麻雀，我们既可以说“一只麻雀在飞”，也可以说“一只鸟在飞”，甚至可以说成“一只动物在飞”。通过向上转型，对象的具体类型被隐藏在“超类型”身后。当对象类型之间的耦合关系被解除之后，这些对象才能在类型检查系统的监视下相互替换使用，这样才能看到对象的多态性。
+
+所以如果想让鸡也叫唤起来，必须先把duck对象和chicken对象都向上转型为它们的超类型Animal类，进行向上转型的工具就是抽象类或者interface。
+
+先创建一个Animal抽象类,然后让Duck类和Chicken类都继承自抽象类Animal：
+```java
+public abstract class Animal {
+  abstract void makeSound(); // 抽 象 方 法 
+}
+public class Chicken extends Animal {
+  public void makeSound() {
+    System.out.println("咯 咯 咯");
   }
-};
-var xhr = createXHR();
-```
-
-#### 提前让函数退出代替嵌套条件分支
-许多程序员都有这样一种观念：“每个函数只能有一个入口和一个出口。”现代编程语言都会限制函数只有一个入口。但关于“函数只有一个出口”，往往会有一些不同的看法。下面这段伪代码是遵守“函数只有一个出口的”的典型代码：
-```js
-var del = function(obj) {
-  var ret;
-  if (!obj.isReadOnly) { // 不 为 只 读 的 才 能 被 删 除 
-    if (obj.isFolder) { // 如 果 是 文 件 夹
-      ret = deleteFolder(obj);
-    } else if (obj.isFile) { // 如 果 是 文 件 
-      ret = deleteFile(obj);
-    }
+}
+public class Duck extends Animal {
+  public void makeSound() {
+    System.out.println("嘎 嘎 嘎");
   }
-  return ret;
-};
+}
 ```
-嵌套的条件分支语句绝对是代码维护者的噩梦，对于阅读代码的人来说，嵌套的if、else语句相比平铺的if、else，在阅读和理解上更加困难，有时候一个外层if分支的左括号和右括号之间相隔500米之远。用《重构》里的话说，嵌套的条件分支往往是由一些深信“每个函数只能有一个出口的”程序员写出的。但实际上，如果对函数的剩余部分不感兴趣，那就应该立即退出。引导阅读者去看一些没有用的else片段，只会妨碍他们对程序的理解。
-
-于是我们可以挑选一些条件分支，在进入这些条件分支之后，就立即让这个函数退出。要做到这一点，有一个常见的技巧，即在面对一个嵌套的if分支时，我们可以把外层if表达式进行反转。重构后的del函数如下：
-```js
-var del = function(obj) {
-  if (obj.isReadOnly) { // 反 转 if 表 达 式 
-    return;
+也可以把Animal定义为一个具体类而不是抽象类，但一般不这么做。Scott Meyers曾指出，只要有可能，不要从具体类继承。现在剩下的就是让AnimalSound类的makeSound方法接收Animal类型的参数，而不是具体的Duck类型或者Chicken类型：
+```java
+public class AnimalSound {
+  public void makeSound(Animal animal) { // 接 收 Animal 类 型 的 参 数， 而 非 Duck 类 型 或 Chicken 类 型 
+    animal.makeSound();
   }
-  if (obj.isFolder) {
-    return deleteFolder(obj);
+}
+public class Test {
+  public static void main(String args[]) {
+    AnimalSound animalSound = new AnimalSound();
+    Animal duck = new Duck(); // 向 上 转 型 Animal 
+    Chicken chicken = new Chicken(); // 向 上 转 型 
+    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎 
+    animalSound.makeSound(chicken); // 输 出： 咯 咯 咯 
   }
-  if (obj.isFile) {
-    return deleteFile(obj);
+}
+```
+通过抽象类完成了一个体现对象多态性的例子。但重点并非讲解多态，而是在于说明抽象类。抽象类在这里主要有以下两个作用。
+- 向上转型。让Duck对象和Chicken对象的类型都隐藏在Animal类型身后，隐藏对象的具体类型之后，duck对象和chicken对象才能被交换使用，这是让对象表现出多态性的必经之路。
+- 建立一些契约。继承自抽象类的具体类都会继承抽象类里的abstract方法，并且要求覆写它们。这些契约在实际编程中非常重要，可以帮助我们编写可靠性更高的代码。比如在命令模式中，各个子命令类都必须实现execute方法，才能保证在调用command.execute的时候不会抛出异常。如果让子命令类OpenTvCommand继承自抽象类Command：
+
+```java
+abstract class Command {
+  public abstract void execute();
+}　
+public class OpenTvCommand extends Command {
+  public OpenTvCommand() {};
+  public void execute() {
+    System.out.println("打 开 电 视 机");
   }
-};
+}
 ```
-#### 传递对象参数代替过长的参数列表
-有时候一个函数有可能接收多个参数，而参数的数量越多，函数就越难理解和使用。使用该函数的人首先得搞明白全部参数的含义，在使用的时候，还要小心翼翼，以免少传了某个参数或者把两个参数搞反了位置。如果我们想在第3个参数和第4个参数之中增加一个新的参数，就会涉及许多代码的修改，代码如下：
-```js
-var setUserInfo = function(id, name, address, sex, mobile, qq) {
-  console.log('id = ' + id);
-  console.log('name = ' + name);
-  console.log('address = ' + address);
-  console.log('sex = ' + sex);
-  console.log('mobile = ' + mobile);
-  console.log('qq = ' + qq);
-};
-setUserInfo(1314, 'sven', 'shenzhen', 'male', '137********', 377876679);
-```
-这时我们可以把参数都放入一个对象内，然后把该对象传入setUserInfo函数，setUserInfo函数需要的数据可以自行从该对象里获取。现在不用再关心参数的数量和顺序，只要保证参数对应的key值不变就可以了：
-```js
-var setUserInfo = function(obj) {
-  console.log('id = ' + obj.id);
-  console.log('name = ' + obj.name);
-  console.log('address = ' + obj.address);
-  console.log('sex = ' + obj.sex);
-  console.log('mobile = ' + obj.mobile);
-  console.log('qq = ' + obj.qq);
-};
-setUserInfo({
-  id: 1314,
-  name: 'sven',
-  address: 'shenzhen',
-  sex: 'male',
-  mobile: '137********',
-  qq: 377876679
-});
-```
+那么自然有编译器帮助我们检查和保证子命令类OpenTvCommand覆写了抽象类Command中的execute抽象方法。如果没有这样做，编译器会尽可能早地抛出错误来提醒正在编写这段代码的程序员。
 
-#### 尽量减少参数数量
-如果调用一个函数时需要传入多个参数，那这个函数是让人望而生畏的，我们必须搞清楚这些参数代表的含义，必须小心翼翼地把它们按照顺序传入该函数。而如果一个函数不需要传入任何参数就可以使用，这种函数是深受人们喜爱的。在实际开发中，向函数传递参数不可避免，但我们应该尽量减少函数接收的参数数量。下面举个非常简单的示例。有一个画图函数draw，它现在只能绘制正方形，接收了3个参数，分别是图形的width、heigth以及square：
-```js
-var draw = function( width, height, square ){}; 
-```
-但实际上正方形的面积是可以通过width和height计算出来的，于是我们可以把参数square从draw函数中去掉：
-```js
-var draw = function( width, height ){ var square = width * height; }; 
-```
-假设以后这个draw函数开始支持绘制圆形，我们需要把参数width和height换成半径radius，但图形的面积square始终不应该由客户传入，而是应该在draw函数内部，由传入的参数加上一定的规则计算得来。此时，我们可以使用策略模式，让draw函数成为一个支持绘制多种图形的函数。
+总而言之，不关注对象的具体类型，而仅仅针对超类型中的“契约方法”来编写程序，可以产生可靠性高的程序，也可以极大地减少子系统实现之间的相互依赖关系，即：面向接口编程，而不是面向实现编程。
 
-#### 少用三目运算符
-有一些程序员喜欢大规模地使用三目运算符，来代替传统的if、else。理由是三目运算符性能高，代码量少。不过，这两个理由其实都很难站得住脚。
+奇怪的是，抽象类跟接口又有什么关系呢？实际上这里的接口并不是指interface，而是一个抽象的概念。
 
-即使我们假设三目运算符的效率真的比if、else高，这点差距也是完全可以忽略不计的。在实际的开发中，即使把一段代码循环一百万次，使用三目运算符和使用if、else的时间开销处在同一个级别里。
+从过程上来看，“面向接口编程”其实是“面向超类型编程”。当对象的具体类型被隐藏在超类型身后时，这些对象就可以相互替换使用，我们的关注点才能从对象的类型上转移到对象的行为上。“面向接口编程”也可以看成面向抽象编程，即针对超类型中的abstract方法编程，接口在这里被当成abstract方法中约定的契约行为。这些契约行为暴露了一个类或者对象能够做什么，但是不关心具体如何去做。
 
-同样，相比损失的代码可读性和可维护性，三目运算符节省的代码量也可以忽略不计。让JS文件加载更快的办法有很多种，如压缩、缓存、使用CDN和分域名等。把注意力只放在使用三目运算符节省的字符数量上，无异于一个300斤重的人把超重的原因归罪于头皮屑。
+#### interface
+除了用抽象类来完成面向接口编程之外，使用interface也可以达到同样的效果。虽然很多人在实际使用中刻意区分抽象类和interface，但使用interface实际上也是继承的一种方式，叫作接口继承。
 
-如果条件分支逻辑简单且清晰，这无碍我们使用三目运算符：
-```js
-var global = typeof window !== "undefined" ? window : this; 
-```
-但如果条件分支逻辑非常复杂，如下段代码所示，那我们最好的选择还是按部就班地编写if、else。if、else语句的好处很多，一是阅读相对容易，二是修改的时候比修改三目运算符周围的代码更加方便：
-```js
-if (!aup || !bup) {
-  return a === doc ? -1 : 
-          b === doc ? 1 : 
-          aup ? -1 : 
-          bup ? 1 : 
-          sortInput ? (indexOf.call(sortInput, a) - indexOf.call(sortInput, b)) : 
-          0;
+相对于单继承的抽象类，一个类可以实现多个interface。抽象类中除了abstract方法之外，还可以有一些供子类公用的具体方法。interface使抽象的概念更进一步，它产生一个完全抽象的类，不提供任何具体实现和方法体（Java8提供实现方法的interface），但允许该interface的创建者确定方法名、参数列表和返回类型，这相当于提供一些行为上的约定，但不关心该行为的具体实现过程。
+
+interface同样可以用于向上转型，这也是让对象表现出多态性的一条途径，实现了同一个接口的两个类就可以被相互替换使用。
+
+再回到用抽象类实现让鸭子和鸡发出叫声的故事。这个故事得以完美收场的关键是让抽象类Animal给duck和chicken进行向上转型。但此时也引入了一个限制，抽象类是基于单继承的，也就是说我们不可能让Duck和Chicken再继承自另一个家禽类。如果使用interface，可以仅仅针对发出叫声这个行为来编写程序，同时一个类也可以实现多个interface。
+
+下面用interface来改写基于抽象类的代码。我们先定义Animal接口，所有实现了Animal接口的动物类都将拥有Animal接口中约定的行为：
+```java
+public interface Animal {
+  abstract void makeSound();
+}
+public class Duck implements Animal {
+  public void makeSound() { // 重 写 Animal 接 口 的 makeSound 抽 象 方 法 
+    System.out.println("嘎 嘎 嘎");
+  }
+}
+public class Chicken implements Animal {
+  public void makeSound() { // 重 写 Animal 接 口 的 makeSound 抽 象 方 法 
+    System.out.println("咯 咯 咯");
+  }
+}
+public class AnimalSound {
+  public void makeSound(Animal animal) {
+    animal.makeSound();
+  }
+}
+public class Test {
+  public static void main(String args[]) {
+    Animal duck = new Duck();
+    Animal chicken = new Chicken();
+    AnimalSound animalSound = new AnimalSound();
+    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎 
+    animalSound.makeSound(chicken); // 输 出： 咯 咯 咯 
+  }
 }
 ```
 
-#### 合理使用链式调用
-经常使用jQuery的程序员相当习惯链式调用方法，在JavaScript中，可以很容易地实现方法的链式调用，即让方法调用结束后返回对象自身，如下代码所示：
+#### JavaScript语言是否需要抽象类和interface
+抽象类和interface的作用主要都是以下两点。
+- 通过向上转型来隐藏对象的真正类型，以表现对象的多态性。
+- 约定类与类之间的一些契约行为。
+
+对于JavaScript而言，因为JavaScript是一门动态类型语言，类型本身在JavaScript中是一个相对模糊的概念。也就是说，不需要利用抽象类或者interface给对象进行“向上转型”。除了number、string、boolean等基本数据类型之外，其他的对象都可以被看成“天生”被“向上转型”成了Object类型：
 ```js
-var User = function() {
-  this.id = null;
-  this.name = null;
-};
+var ary = new Array(); 
+var date = new Date();
+```
+如果JavaScript是一门静态类型语言，上面的代码也许可以理解为：
+```js
+Array ary = new Array(); 
+Date date = new Date();
+// 或
+Object ary = new Array(); 
+Object date = new Date();
+```
+很少有人在JavaScript开发中去关心对象的真正类型。在动态类型语言中，对象的多态性是与生俱来的，但在另外一些静态类型语言中，对象类型之间的解耦非常重要，甚至有一些设计模式的主要目的就是专门隐藏对象的真正类型。
 
-User.prototype.setId = function(id) {
-  this.id = id;
-  return this;
-};
-User.prototype.setName = function(name) {
-  this.name = name;
-  return this;
-};
-
-console.log(new User().setId(1314).setName('sven'));
+因为不需要进行向上转型，接口在JavaScript中的最大作用就退化到了检查代码的规范性。比如检查某个对象是否实现了某个方法，或者检查是否给函数传入了预期类型的参数。如果忽略了这两点，有可能会在代码中留下一些隐藏的bug。比如我们尝试执行obj对象的show方法，但是obj对象本身却没有实现这个方法，代码如下：
+```js
+function show(obj) {
+  obj.show(); // Uncaught TypeError: undefined is not a function 
+}
+var myObject = {}; // myObject 对 象 没 有 show 方 法 
+show(myObject);
 
 // 或
-var User = {
-  id: null,
-  name: null,
-  setId: function(id) {
-    this.id = id;
-    return this;
-  },
-  setName: function(name) {
-    this.name = name;
-    return this;
+function show(obj) {
+  obj.show(); // TypeError: number is not a function 
+}
+var myObject = { // myObject.show 不 是 Function 类 型 
+  show: 1
+};
+show(myObject);
+```
+此时，我们不得不加上一些防御性代码：
+```js
+function show(obj) {
+  if (obj && typeof obj.show === 'function') {
+    obj.show();
   }
-};
-console.log(User.setId(1314).setName('sven'));
-```
-使用链式调用的方式并不会造成太多阅读上的困难，也确实能省下一些字符和中间变量，但节省下来的字符数量同样是微不足道的。链式调用带来的坏处就是在调试的时候非常不方便，如果我们知道一条链中有错误出现，必须得先把这条链拆开才能加上一些调试log或者增加断点，这样才能定位错误出现的地方。
+}
 
-如果该链条的结构相对稳定，后期不易发生修改，那么使用链式调用无可厚非。但如果该链条很容易发生变化，导致调试和维护困难，那么还是建议使用普通调用的形式：
-```js
-var user = new User(); 
+// 或
+function show(obj) {
+  try {
+    obj.show();
+  } catch (e) {}
+}
+var myObject = {}; // myObject 对 象 没 有 show 方 法 
+// var myObject = { // myObject.show 不 是 Function 类 型 
+// show: 1 
+// }; 
+show(myObject);
+```
+如果JavaScript有编译器帮我们检查代码的规范性，那事情要比现在美好得多，不用在业务代码中到处插入一些跟业务逻辑无关的防御性代码。作为一门解释执行的动态类型语言，把希望寄托在编译器上是不可能了。如果要处理这类异常情况，只有手动编写一些接口检查的代码。
 
-user.setId( 1314 ); 
-user.setName( 'sven' );
-```
+#### 用鸭子类型进行接口检查
+鸭子类型的概念：“如果它走起路来像鸭子，叫起来也是鸭子，那么它就是鸭子。”
 
-#### 分解大型类
-在作者编写的HTML5版“街头霸王”的第一版代码中，负责创建游戏人物的Spirit类非常庞大，不仅要负责创建人物精灵，还包括了人物的攻击、防御等动作方法，代码如下：
-```js
-var Spirit = function(name) {
-  this.name = name;
-};
-Spirit.prototype.attack = function(type) { // 攻 击 
-  if (type === 'waveBoxing') {
-    console.log(this.name + ': 使 用 波 动 拳');
-  } else if (type === 'whirlKick') {
-    console.log(this.name + ': 使 用 旋 风 腿');
-  }
-};
-var spirit = new Spirit('RYU');
-spirit.attack('waveBoxing'); // 输 出： RYU: 使 用 波 动 拳 
-spirit.attack('whirlKick'); // 输 出： RYU: 使 用 旋 风 腿
-```
-后来发现，Spirit.prototype.attack这个方法实现是太庞大了，实际上它完全有必要作为一个单独的类存在。面向对象设计鼓励将行为分布在合理数量的更小对象之中：
-```js
-var Attack = function(spirit) {
-    this.spirit = spirit;
-  };
-Attack.prototype.start = function(type) {
-  return this.list[type].call(this);
-};
-Attack.prototype.list = {
-  waveBoxing: function() {
-    console.log(this.spirit.name + ': 使 用 波 动 拳');
-  },
-  whirlKick: function() {
-    console.log(this.spirit.name + ': 使 用 旋 风 腿');
-  }
-};
-```
-现在的Spirit类变得精简了很多，不再包括各种各样的攻击方法，而是把攻击动作委托给Attack类的对象来执行，这段代码也是策略模式的运用之一：
-```js
-var Spirit = function(name) {
-    this.name = name;
-    this.attackObj = new Attack(this);
-  };
-Spirit.prototype.attack = function(type) { // 攻 击 
-  this.attackObj.start(type);
-};
-var spirit = new Spirit('RYU');
-spirit.attack('waveBoxing'); // 输 出： RYU: 使 用 波 动 拳 
-spirit.attack('whirlKick'); // 输 出： RYU: 使 用 旋 风 腿
-```
+鸭子类型是动态类型语言面向对象设计中的一个重要概念。利用鸭子类型的思想，不必借助超类型的帮助，就能在动态类型语言中轻松地实现本章提到的设计原则：面向接口编程，而不是面向实现编程。比如，一个对象如果有push和pop方法，并且提供了正确的实现，它就能被当作栈来使用；一个对象如果有length属性，也可以依照下标来存取属性，这个对象就可以被当作数组来使用。如果两个对象拥有相同的方法，则有很大的可能性它们可以被相互替换使用。
 
-#### 用return退出多重循环
-假设在函数体内有一个两重循环语句，我们需要在内层循环中判断，当达到某个临界条件时退出外层的循环。我们大多数时候会引入一个控制标记变量：
+在`Object.prototype.toString.call([])==='[object Array]'`被发现之前，经常用鸭子类型的思想来判断一个对象是否是一个数组，代码如下：
 ```js
-var func = function() {
-    var flag = false;
-    for (var i = 0; i < 10; i++) {
-      for (var j = 0; j < 10; j++) {
-        if (i * j > 30) {
-          flag = true;
-          break;
-        }
-      }
-      if (flag === true) {
-        break;
-      }
-    }
+var isArray = function(obj) {
+    return obj && typeof obj === 'object' && typeof obj.length === 'number' && typeof obj.splice === 'function'
   };
 ```
-第二种做法是设置循环标记：
+当然在JavaScript开发中，总是进行接口检查是不明智的，也是没有必要的，毕竟现在还找不到一种好用并且通用的方式来模拟接口检查，跟业务逻辑无关的接口检查也会让很多JavaScript程序员觉得不值得和不习惯。在Ross Harmes和Dustin Diaz合著的Pro JavaScript Design Pattrns一书中，提供了一种根据鸭子类型思想模拟接口检查的方法，但这种基于双重循环的检查方法并不是很实用，而且只能检查对象的某个属性是否属于Function类型。
+
+#### 用TypeScript编写基于interface的命令模式
+虽然在大多数时候interface给JavaScript开发带来的价值并不像在静态类型语言中那么大，但如果正在编写一个复杂的应用，还是会经常怀念接口的帮助。
+
+下面以基于命令模式的示例来说明interface如何规范程序员的代码编写，这段代码本身并没有什么实用价值，在JavaScript中，一般用闭包和高阶函数来实现命令模式。
+
+假设正在编写一个用户界面程序，页面中有成百上千个子菜单。因为项目很复杂，决定让整个程序都基于命令模式来编写，即编写菜单集合界面的是某个程序员，而负责实现每个子菜单具体功能的工作交给了另外一些程序员。
+
+那些负责实现子菜单功能的程序员，在完成自己的工作之后，会把子菜单封装成一个命令对象，然后把这个命令对象交给编写菜单集合界面的程序员。已经约定好，当调用子菜单对象的execute方法时，会执行对应的子菜单命令。
+
+虽然在开发文档中详细注明了每个子菜单对象都必须有自己的execute方法，但还是有一个粗心的JavaScript程序员忘记给他负责的子菜单对象实现execute方法，于是当执行这个命令的时候，便会报出错误，代码如下：
 ```js
-var func = function() {
-  outerloop: for (var i = 0; i < 10; i++) {
-    innerloop: for (var j = 0; j < 10; j++) {
-      if (i * j > 30) {
-        break outerloop;
-      }
+var RefreshMenuBarCommand = function() {};
+RefreshMenuBarCommand.prototype.execute = function() {
+  console.log('刷 新 菜 单 界 面');
+};
+
+var AddSubMenuCommand = function() {};
+AddSubMenuCommand.prototype.execute = function() {
+  console.log('增 加 子 菜 单');
+};
+
+var DelSubMenuCommand = function() {}; 
+/***** 没 有 实 现 DelSubMenuCommand.prototype.execute *****/
+// DelSubMenuCommand.prototype.execute = function(){
+// }; 
+
+var refreshMenuBarCommand = new RefreshMenuBarCommand(),
+  addSubMenuCommand = new AddSubMenuCommand(),
+  delSubMenuCommand = new DelSubMenuCommand();
+
+var setCommand = function(command) {
+    document.getElementById('exeCommand').onclick = function() {
+      command.execute();
     }
+  };
+
+setCommand(refreshMenuBarCommand); // 点 击 按 钮 后 输 出：" 刷 新 菜 单 界 面"
+setCommand(addSubMenuCommand); // 点 击 按 钮 后 输 出：" 增 加 子 菜 单" 
+setCommand(delSubMenuCommand); // 点 击 按 钮 后 报 错。 Uncaught TypeError: undefined is not a function
+```
+为了防止粗心的程序员忘记给某个子命令对象实现execute方法，我们只能在高层函数里添加一些防御性的代码，这样当程序在最终被执行的时候，有可能抛出异常来提醒我们，代码如下：
+```js
+var setCommand = function(command) {
+  document.getElementById('exeCommand').onclick = function() {
+    if (typeof command.execute !== 'function') {
+      throw new Error("command 对 象 必 须 实 现 execute 方 法");
+    }
+    command.execute();
   }
 };
 ```
-这两种做法无疑都让人头晕目眩，更简单的做法是在需要中止循环的时候直接退出整个方法：
-```js
-var func = function() {
-  for (var i = 0; i < 10; i++) {
-    for (var j = 0; j < 10; j++) {
-      if (i * j > 30) {
-        return;
-      }
-    }
+如果确实不喜欢重复编写这些防御性代码，还可以尝试使用TypeScript来编写这个程序。
+
+TypeScript是微软开发的一种编程语言，是JavaScript的一个超集。跟CoffeeScript类似，TypeScript代码最终会被编译成原生的JavaScript代码执行。通过TypeScript，可以使用静态语言的方式来编写JavaScript程序。用TypeScript来实现一些设计模式，显得更加原汁原味。
+
+TypeScript提供了interface,下面编写一个TypeScript版本的命令模式。首先定义Command接口,接下来定义RefreshMenuBarCommand、AddSubMenuCommand和DelSubMenuCommand这3个类，它们分别都实现了Command接口，这可以保证它们都拥有execute方法：
+```ts
+interface Command {
+  execute: Function;
+}
+class RefreshMenuBarCommand implements Command {
+  constructor() {}
+  execute() {
+    console.log('刷 新 菜 单 界 面');
   }
-};
+}
+class AddSubMenuCommand implements Command {
+  constructor() {}
+  execute() {
+    console.log('增 加 子 菜 单');
+  }
+}
+class DelSubMenuCommand implements Command {
+  constructor() {} // 忘 记 重 写 execute 方 法 
+}
+
+var refreshMenuBarCommand = new RefreshMenuBarCommand(),
+  addSubMenuCommand = new AddSubMenuCommand(),
+  delSubMenuCommand = new DelSubMenuCommand();
+
+refreshMenuBarCommand.execute(); // 输 出： 刷 新 菜 单 界 面 
+addSubMenuCommand.execute(); // 输 出： 增 加 子 菜 单 
+delSubMenuCommand.execute(); // 输 出： Uncaught TypeError: undefined is not a function
 ```
-当然用return直接退出方法会带来一个问题，如果在循环之后还有一些将被执行的代码呢？如果我们提前退出了整个方法，这些代码就得不到被执行的机会：
+当我们忘记在DelSubMenuCommand类中重写execute方法时，TypeScript提供的编译器及时给出了错误提示。
+
+TypeScript代码翻译过来的JavaScript代码如下：
 ```js
-var func = function() {
-  for (var i = 0; i < 10; i++) {
-    for (var j = 0; j < 10; j++) {
-      if (i * j > 30) {
-        return;
-      }
-    }
-  }
-  console.log( i ); // 这 句 代 码 没 有 机 会 被 执 行
-};
-```
-为了解决这个问题，我们可以把循环后面的代码放到return后面，如果代码比较多，就应该把它们提炼成一个单独的函数：
-```js
-var print = function(i) {
-  console.log(i);
-};
-var func = function() {
-  for (var i = 0; i < 10; i++) {
-    for (var j = 0; j < 10; j++) {
-      if (i * j > 30) {
-        return print(i);
-      }
-    }
-  }
-};
-func();
+var RefreshMenuBarCommand = (function() {
+  function RefreshMenuBarCommand() {}
+  RefreshMenuBarCommand.prototype.execute = function() {
+    console.log(' 刷 新 菜 单 界 面');
+  };
+  return RefreshMenuBarCommand;
+})();
+
+var AddSubMenuCommand = (function() {
+  function AddSubMenuCommand() {}
+  AddSubMenuCommand.prototype.execute = function() {
+    console.log(' 增 加 子 菜 单');
+  };
+  return AddSubMenuCommand;
+})();
+
+var DelSubMenuCommand = (function() {
+  function DelSubMenuCommand() {}
+  return DelSubMenuCommand;
+})();
+
+var refreshMenuBarCommand = new RefreshMenuBarCommand(),
+  addSubMenuCommand = new AddSubMenuCommand(),
+  delSubMenuCommand = new DelSubMenuCommand();
+
+refreshMenuBarCommand.execute();
+addSubMenuCommand.execute();
+delSubMenuCommand.execute();
 ```

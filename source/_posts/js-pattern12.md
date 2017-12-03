@@ -1,460 +1,291 @@
 ---
-title: JS设计模式-12-中介者模式
+title: JS设计模式-12-职责链模式
 categories: js
 tags:
 - js
 - design pattern
-date: 2017-11-23 16:50:39
+date: 2017-11-28 15:58:27
 updated:
 ---
 
-在我们生活的世界中，每个人每个物体之间都会产生一些错综复杂的联系。在应用程序里也是一样，程序由大大小小的单一对象组成，所有这些对象都按照某种关系和规则来通信。
+职责链模式的定义是：使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系，将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。
 
-平时我们大概能记住10个朋友的电话、30家餐馆的位置。在程序里，也许一个对象会和其他10个对象打交道，所以它会保持10个对象的引用。当程序的规模增大，对象会越来越多，它们之间的关系也越来越复杂，难免会形成网状的交叉引用。当我们改变或删除其中一个对象的时候，很可能需要通知所有引用到它的对象。这样一来，就像在心脏旁边拆掉一根毛细血管一般，即使一点很小的修改也必须小心翼翼，
+职责链模式的名字非常形象，一系列可能会处理请求的对象被连接成一条链，请求在这些对象之间依次传递，直到遇到一个可以处理它的对象，我们把这些对象称为链中的节点。
 
-面向对象设计鼓励将行为分布到各个对象中，把对象划分成更小的粒度，有助于增强对象的可复用性，但由于这些细粒度对象之间的联系激增，又有可能会反过来降低它们的可复用性。
 
-中介者模式的作用就是解除对象与对象之间的紧耦合关系。增加一个中介者对象后，所有的相关对象都通过中介者对象来通信，而不是互相引用，所以当一个对象发生改变时，只需要通知中介者对象即可。中介者使各对象之间耦合松散，而且可以独立地改变它们之间的交互。中介者模式使网状的多对多关系变成了相对简单的一对多关系。
-![引用关系](0.png)
-图中，如果对象A发生了改变，则需要同时通知跟A发生引用关系的B、D、E、F这4个对象；而使用中介者模式改进之后，A发生改变时则只需要通知这个中介者对象即可。
-![中介者](1.png)
+#### 现实中的职责链模式
+职责链模式的例子在现实中并不难找到，以下就是两个常见的跟职责链模式有关的场景。
+- 如果早高峰能顺利挤上公交车的话，那么估计这一天都会过得很开心。因为公交车上人实在太多了，经常上车后却找不到售票员在哪，所以只好把两块钱硬币往前面递。除非你运气够好，站在你前面的第一个人就是售票员，否则，你的硬币通常要在N个人手上传递，才能最终到达售票员的手里。
+- 中学时代的期末考试，如果你平时不太老实，考试时就会被安排在第一个位置。遇到不会答的题目，就把题目编号写在小纸条上往后传递，坐在后面的同学如果也不会答，他就会把这张小纸条继续递给他后面的人。
 
-#### 现实中的中介者
-在现实生活中也有很多中介者的例子，例如
-1. 机场指挥塔
-  中介者也被称为调停者，我们想象一下机场的指挥塔，如果没有指挥塔的存在，每一架飞机要和方圆100公里内的所有飞机通信，才能确定航线以及飞行状况，后果是不可想象的。现实中的情况是，每架飞机都只需要和指挥塔通信。指挥塔作为调停者，知道每一架飞机的飞行状况，所以它可以安排所有飞机的起降时间，及时做出航线调整。
-1. 博彩公司
-  打麻将的人经常遇到这样的问题，打了几局之后开始计算钱，A自摸了两把，B杠了三次，C点炮一次给D，谁应该给谁多少钱已经很难计算清楚，而这还是在只有4个人参与的情况下。在世界杯期间购买足球彩票，如果没有博彩公司作为中介，上千万的人一起计算赔率和输赢绝对是不可能实现的事情。有了博彩公司作为中介，每个人只需和博彩公司发生关联，博彩公司会根据所有人的投注情况计算好赔率，彩民们赢了钱就从博彩公司拿，输了钱就交给博彩公司。
+从这两个例子中，我们很容易找到职责链模式的最大优点：请求发送者只需要知道链中的第一个节点，从而弱化了发送者和一组接收者之间的强联系。如果不使用职责链模式，那么在公交车上，我就得先搞清楚谁是售票员，才能把硬币递给他。同样，在期末考试中，也许我就要先了解同学中有哪些可以解答这道题。
 
-#### 中介者模式的例子——泡泡堂游戏
-大家可能都还记得泡泡堂游戏，作者曾经写过一个JS版的泡泡堂，现在我们来一起回顾这个游戏，在游戏之初只支持两个玩家同时进行对战。
+#### 实际开发中的职责链模式
+假设我们负责一个售卖手机的电商网站，经过分别交纳500元定金和200元定金的两轮预定后（订单已在此时生成），现在已经到了正式购买的阶段。
 
-先定义一个玩家构造函数，它有3个简单的原型方法：Play.prototype.win、Play.prototype.lose以及表示玩家死亡的Play.prototype.die。
+公司针对支付过定金的用户有一定的优惠政策。在正式购买后，已经支付过500元定金的用户会收到100元的商城优惠券，200元定金的用户可以收到50元的优惠券，而之前没有支付定金的用户只能进入普通购买模式，也就是没有优惠券，且在库存有限的情况下不一定保证能买到。
 
-因为玩家的数目是2，所以当其中一个玩家死亡的时候游戏便结束,同时通知它的对手胜利。这段代码看起来很简单：
-```js
-function Player(name) {
-  this.name = name;
-  this.enemy = null; // 敌 人 
-};
-Player.prototype.win = function() {
-  console.log(this.name + ' won ');
-};
-Player.prototype.lose = function() {
-  console.log(this.name + ' lost');
-};
-Player.prototype.die = function() {
-  this.lose();
-  this.enemy.win();
-};
-```
-接下来创建2个玩家对象：
-```js
-var player1 = new Player( '皮 蛋' ); 
-var player2 = new Player( '小 乖' ); 
-```
-给玩家相互设置敌人：
-```js
-player1.enemy = player2; 
-player2.enemy = player1; 
-```
-当玩家player1被泡泡炸死的时候，只需要调用这一句代码便完成了一局游戏：
-```js
-player1.die();//输出：皮蛋lost、小乖won
-```
-只有2个玩家其实没什么意思，真正的泡泡堂游戏至多可以有8个玩家，并分成红蓝两队进行游戏。
+我们的订单页面是PHP吐出的模板，在页面加载之初，PHP会传递给页面几个字段。
 
-##### 为游戏增加队伍
-改进一下游戏。因为玩家数量变多，用下面的方式来设置队友和敌人无疑很低效：
-```js
-player1.partners = [player1, player2, player3, player4];
-player1.enemies = [player5, player6, player7, player8];
-Player5.partners = [player5, player6, player7, player8];
-Player5.enemies = [player1, player2, player3, player4];
-```
-所以我们定义一个数组players来保存所有的玩家，在创建玩家之后，循环players来给每个玩家设置队友和敌人,再改写构造函数Player，使每个玩家对象都增加一些属性，分别是队友列表、敌人列表、玩家当前状态、角色名字以及玩家所在的队伍颜色：
-```js
-var players = [];
+-orderType：表示订单类型（定金用户或者普通购买用户），code的值为1的时候是500元定金用户，为2的时候是200元定金用户，为3的时候是普通购买用户。
+-pay：表示用户是否已经支付定金，值为true或者false，虽然用户已经下过500元定金的订单，但如果他一直没有支付定金，现在只能降级进入普通购买模式。
+-stock：表示当前用于普通购买的手机库存数量，已经支付过500元或者200元定金的用户不受此限制。
 
-function Player(name, teamColor) {
-  this.partners = []; // 队 友 列 表 
-  this.enemies = []; // 敌 人 列 表
-  this.state = 'live'; // 玩 家 状 态 
-  this.name = name; // 角 色 名 字 
-  this.teamColor = teamColor; // 队 伍 颜 色 
-};
-```
-玩家胜利和失败之后的展现依然很简单，只是在每个玩家的屏幕上简单地弹出提示：
+下面我们把这个流程写成代码：
 ```js
-Player.prototype.win = function(){  console.log( 'winner: ' + this.name ); };
-Player.prototype.lose = function(){  console.log( 'loser: ' + this.name ); };
-```
-玩家死亡的方法要变得稍微复杂一点，我们需要在每个玩家死亡的时候，都遍历其他队友的生存状况，如果队友全部死亡，则这局游戏失败，同时敌人队伍的所有玩家都取得胜利，代码如下：
-```js
-Player.prototype.die = function() { // 玩 家 死 亡 
-  var all_dead = true;
-  this.state = 'dead'; // 设 置 玩 家 状 态 为 死 亡 
-  for (var i = 0, partner; partner = this.partners[i++];) { // 遍 历 队 友 列 表 
-    if (partner.state !== 'dead') { // 如 果 还 有 一 个 队 友 没 有 死 亡， 则 游 戏 还 未 失 败 
-      all_dead = false;
-      break;
-    }
-  }
-  if (all_dead === true) { // 如 果 队 友 全 部 死 亡 this.lose(); // 通 知 自 己 游 戏 失 败 
-    for (var i = 0, partner; partner = this.partners[i++];) { // 通 知 所 有 队 友 玩 家 游 戏 失 败 
-      partner.lose();
-    }
-    for (var i = 0, enemy; enemy = this.enemies[i++];) { // 通 知 所 有 敌 人 游 戏 胜 利 
-      enemy.win();
-    }
-  }
-};
-```
-最后定义一个工厂来创建玩家：
-```js
-var playerFactory = function(name, teamColor) {
-    var newPlayer = new Player(name, teamColor); // 创 建 新 玩 家 
-    for (var i = 0, player; player = players[i++];) { // 通 知 所 有 的 玩 家， 有 新 角 色 加 入 
-      if (player.teamColor === newPlayer.teamColor) { // 如 果 是 同 一 队 的 玩 家 
-        player.partners.push(newPlayer); // 相 互 添 加 到 队 友 列 表 
-        newPlayer.partners.push(player);
+var order = function(orderType, pay, stock) {
+  if (orderType === 1) { // 500 元 定 金 购 买 模 式 
+    if (pay === true) { // 已 支 付 定 金 
+      console.log('500 元 定 金 预 购, 得 到 100 优 惠 券');
+    } else { // 未 支 付 定 金， 降 级 到 普 通 购 买 模 式 
+      if (stock > 0) { // 用 于 普 通 购 买 的 手 机 还 有 库 存 
+        console.log('普 通 购 买, 无 优 惠 券');
       } else {
-        player.enemies.push(newPlayer); // 相 互 添 加 到 敌 人 列 表 
-        newPlayer.enemies.push(player);
+        console.log('手 机 库 存 不 足');
       }
     }
-    players.push(newPlayer);
-    return newPlayer;
+  } else if (orderType === 2) { // 200 元 定 金 购 买 模 式 
+    if (pay === true) {
+      console.log('200 元 定 金 预 购, 得 到 50 优 惠 券');
+    } else {
+      if (stock > 0) {
+        console.log('普 通 购 买, 无 优 惠 券');
+      } else {
+        console.log('手 机 库 存 不 足');
+      }
+    }
+  } else if (orderType === 3) {
+    if (stock > 0) {
+      console.log('普 通 购 买, 无 优 惠 券');
+    } else {
+      console.log('手 机 库 存 不 足');
+    }
+  }
+};
+order(1,true,500);//输出：500元定金预购,得到100优惠券
+```
+虽然我们得到了意料中的运行结果，但这远远算不上一段值得夸奖的代码。order函数不仅巨大到难以阅读，而且需要经常进行修改。虽然目前项目能正常运行，但接下来的维护工作无疑是个梦魇。恐怕只有最“新手”的程序员才会写出这样的代码。
+
+#### 用职责链模式重构代码
+现在我们采用职责链模式重构这段代码，先把500元订单、200元订单以及普通购买分成3个函数。
+
+接下来把orderType、pay、stock这3个字段当作参数传递给500元订单函数，如果该函数不符合处理条件，则把这个请求传递给后面的200元订单函数，如果200元订单函数依然不能处理该请求，则继续传递请求给普通购买函数，代码如下：
+```js
+//500元订单
+var order500 = function(orderType, pay, stock) {
+    if (orderType === 1 && pay === true) {
+      console.log('500 元 定 金 预 购, 得 到 100 优 惠 券');
+    } else {
+      order200(orderType, pay, stock); // 将 请 求 传 递 给 200 元 订 单 
+    }
+  };
+// 200 元 订 单 
+var order200 = function(orderType, pay, stock) {
+    if (orderType === 2 && pay === true) {
+      console.log('200 元 定 金 预 购, 得 到 50 优 惠 券');
+    } else {
+      orderNormal(orderType, pay, stock); // 将 请 求 传 递 给 普 通 订 单 
+    }
+  };
+// 普 通 购 买 订 单 
+var orderNormal = function(orderType, pay, stock) {
+    if (stock > 0) {
+      console.log('普 通 购 买, 无 优 惠 券');
+    } else {
+      console.log('手 机 库 存 不 足');
+    }
+  };
+// 测 试 结 果： 
+order500(1, true, 500); // 输 出： 500 元 定 金 预 购, 得 到 100 优 惠 券 
+order500(1, false, 500); // 输 出： 普 通 购 买, 无 优 惠 券 
+order500(2, true, 500); // 输 出： 200 元 定 金 预 购, 得 到 50 优 惠 券 
+order500(3, false, 500); // 输 出： 普 通 购 买, 无 优 惠 券 
+order500(3, false, 0); // 输 出： 手 机 库 存 不 足
+```
+可以看到，执行结果和前面那个巨大的order函数完全一样，但是代码的结构已经清晰了很多，我们把一个大函数拆分了3个小函数，去掉了许多嵌套的条件分支语句。
+
+目前已经有了不小的进步，但我们不会满足于此，虽然已经把大函数拆分成了互不影响的3个小函数，但可以看到，请求在链条传递中的顺序非常僵硬，传递请求的代码被耦合在了业务函数之中：
+```js
+//500元订单
+var order500 = function(orderType, pay, stock) {
+    if (orderType === 1 && pay === true) {
+      console.log('500 元 定 金 预 购, 得 到 100 优 惠 券');
+    } else {
+      order200(orderType, pay, stock); // order200 和 order500 耦 合 在 一 起
+    }
   };
 ```
-创建8个玩家，并让红队玩家全部死亡，查看输出结果。
-```js
-// 红 队： 
-var player1 = playerFactory('皮 蛋', 'red'),
-  player2 = playerFactory('小 乖', 'red'),
-  player3 = playerFactory('宝 宝', 'red'),
-  player4 = playerFactory('小 强', 'red');
-// 蓝 队：
-var player5 = playerFactory('黑 妞', 'blue'),
-  player6 = playerFactory('葱 头', 'blue'),
-  player7 = playerFactory('胖 墩', 'blue'),
-  player8 = playerFactory('海 盗', 'blue');
+这依然是违反开放-封闭原则的，如果有天我们要增加300元预订或者去掉200元预订，意味着就必须改动这些业务函数内部。就像一根环环相扣打了死结的链条，如果要增加、拆除或者移动一个节点，就必须得先砸烂这根链条。
 
-player1.die(); 
-player2.die(); 
-player4.die(); 
-player3.die();
+#### 灵活可拆分的职责链节点
+采用一种更灵活的方式，来改进上面的职责链模式，目标是让链中的各个节点可以灵活拆分和重组。
+
+首先需要改写一下分别表示3种购买模式的节点函数，我们约定，如果某个节点不能处理请求，则返回一个特定的字符串'nextSuccessor'来表示该请求需要继续往后面传递：
+```js
+var order500 = function(orderType, pay, stock) {
+    if (orderType === 1 && pay === true) {
+      console.log('500 元 定 金 预 购， 得 到 100 优 惠 券');
+    } else {
+      return 'nextSuccessor'; // 我 不 知 道 下 一 个 节 点 是 谁， 反 正 把 请 求 往 后 面 传 递 
+    }
+  };
+var order200 = function(orderType, pay, stock) {
+    if (orderType === 2 && pay === true) {
+      console.log('200 元 定 金 预 购， 得 到 50 优 惠 券');
+    } else {
+      return 'nextSuccessor';
+    }
+  };
+var orderNormal = function(orderType, pay, stock) {
+    if (stock > 0) {
+      console.log('普 通 购 买， 无 优 惠 券');
+    } else {
+      console.log('手 机 库 存 不 足');
+    }
+  };
 ```
-
-##### 玩家增多带来的困扰
-现在我们已经可以随意地为游戏增加玩家或者队伍，但问题是，每个玩家和其他玩家都是紧紧耦合在一起的。在此段代码中，每个玩家对象都有两个属性，this.partners和this.enemies，用来保存其他玩家对象的引用。当每个对象的状态发生改变，比如角色移动、吃到道具或者死亡时，都必须要显式地遍历通知其他对象。
-
-在这个例子中只创建了8个玩家，或许还没有对你产生足够多的困扰，而如果在一个大型网络游戏中，画面里有成百上千个玩家，几十支队伍在互相厮杀。如果有一个玩家掉线，必须从所有其他玩家的队友列表和敌人列表中都移除这个玩家。游戏也许还有解除队伍和添加到别的队伍的功能，红色玩家可以突然变成蓝色玩家，这就不再仅仅是循环能够解决的问题了。面对这样的需求，上面的代码可完全没有办法解决。
-
-##### 用中介者模式改造泡泡堂游戏
-现在我们开始用中介者模式来改造上面的泡泡堂游戏，首先仍然是定义Player构造函数和player对象的原型方法，在player对象的这些原型方法中，不再负责具体的执行逻辑，而是把操作转交给中介者对象，我们把中介者对象命名为playerDirector：
+接下来需要把函数包装进职责链节点，我们定义一个构造函数Chain，在`new Chain`的时候传递的参数即为需要被包装的函数，同时它还拥有一个实例属性this.successor，表示在链中的下一个节点。此外Chain的prototype中还有两个函数，它们的作用如下所示：
 ```js
-function Player(name, teamColor) {
-  this.name = name; // 角 色 名 字 
-  this.teamColor = teamColor; // 队 伍 颜 色 
-  this.state = 'alive'; // 玩 家 生 存 状 态 
+// Chain.prototype.setNextSuccessor 指 定 在 链 中 的 下 一 个 节 点 
+// Chain.prototype.passRequest 传 递 请 求 给 某 个 节 点 
+var Chain = function(fn) {
+    this.fn = fn;
+    this.successor = null;
+  };
+Chain.prototype.setNextSuccessor = function(successor) {
+  return this.successor = successor;
 };
-Player.prototype.win = function() {
-  console.log(this.name + ' won ');
+Chain.prototype.passRequest = function() {
+  var ret = this.fn.apply(this, arguments);
+  if (ret === 'nextSuccessor') {
+    return this.successor && this.successor.passRequest.apply(this.successor, arguments);
+  }
+  return ret;
 };
-Player.prototype.lose = function() {
-  console.log(this.name + ' lost');
+```
+现在我们把3个订单函数分别包装成职责链的节点：
+```js
+var chainOrder500 = new Chain( order500 ); 
+var chainOrder200 = new Chain( order200 ); 
+var chainOrderNormal = new Chain( orderNormal );
+```
+然后指定节点在职责链中的顺序：
+```js
+chainOrder500.setNextSuccessor( chainOrder200 ); 
+chainOrder200.setNextSuccessor( chainOrderNormal );
+```
+最后把请求传递给第一个节点：
+```js
+chainOrder500.passRequest( 1, true, 500 ); // 输 出： 500 元 定 金 预 购， 得 到 100 优 惠 券 
+chainOrder500.passRequest( 2, true, 500 ); // 输 出： 200 元 定 金 预 购， 得 到 50 优 惠 券 
+chainOrder500.passRequest( 3, true, 500 ); // 输 出： 普 通 购 买， 无 优 惠 券 
+chainOrder500.passRequest( 1, false, 0 ); // 输 出： 手 机
+```
+通过改进，我们可以自由灵活地增加、移除和修改链中的节点顺序，假如某天网站运营人员又想出了支持300元定金购买，那我们就在该链中增加一个节点即可：
+```js
+var order300 = function(){ 
+  // 具 体 实 现 略 
 }; 
-/******************* 玩 家 死 亡*****************/
-Player.prototype.die = function() {
-  this.state = 'dead';
-  playerDirector.ReceiveMessage('playerDead', this); // 给 中 介 者 发 送 消 息， 玩 家 死 亡 
-}; 
-/******************* 移 除 玩 家*****************/
-Player.prototype.remove = function() {
-  playerDirector.ReceiveMessage('removePlayer', this); // 给 中 介 者 发 送 消 息， 移 除 一 个 玩 家 
-}; 
-/******************* 玩 家 换 队*****************/ 
-Player.prototype.changeTeam = function( color ){ 
-  playerDirector.ReceiveMessage( 'changeTeam', this, color ); // 给 中 介 者 发 送 消 息， 玩 家 换 队 
+chainOrder300 = new Chain( order300 ); 
+chainOrder500.setNextSuccessor( chainOrder300); 
+chainOrder300.setNextSuccessor( chainOrder200);
+```
+对于程序员来说，我们总是喜欢去改动那些相对容易改动的地方，就像改动框架的配置文件远比改动框架的源代码简单得多。在这里完全不用理会原来的订单函数代码，我们要做的只是增加一个节点，然后重新设置链中相关节点的顺序。
+
+#### 异步的职责链
+在上面的职责链模式中，我们让每个节点函数同步返回一个特定的值"nextSuccessor"，来表示是否把请求传递给下一个节点。而在现实开发中，我们经常会遇到一些异步的问题，比如我们要在节点函数中发起一个ajax异步请求，异步请求返回的结果才能决定是否继续在职责链中passRequest。
+
+这时候让节点函数同步返回"nextSuccessor"已经没有意义了，所以要给Chain类再增加一个原型方法Chain.prototype.next，表示手动传递请求给职责链中的下一个节点：
+```js
+Chain.prototype.next = function(){ 
+  return this.successor && this.successor.passRequest.apply( this.successor, arguments ); 
 };
 ```
-再继续改写之前创建玩家对象的工厂函数，可以看到，因为工厂函数里不再需要给创建的玩家对象设置队友和敌人，这个工厂函数几乎失去了工厂的意义：
+来看一个异步职责链的例子：
 ```js
-var playerFactory = function(name, teamColor) {
-    var newPlayer = new Player(name, teamColor); // 创 造 一 个 新 的 玩 家 对 象
-    playerDirector.ReceiveMessage('addPlayer', newPlayer); // 给 中 介 者 发 送 消 息， 新 增 玩 家 
-    return newPlayer;
+var fn1 = new Chain(function() {
+  console.log(1);
+  return 'nextSuccessor';
+});
+var fn2 = new Chain(function() {
+  console.log(2);
+  var self = this;
+  setTimeout(function() {
+    self.next();
+  }, 1000);
+});
+var fn3 = new Chain(function() {
+  console.log(3);
+});
+fn1.setNextSuccessor(fn2).setNextSuccessor(fn3);
+fn1.passRequest();
+```
+现在我们得到了一个特殊的链条，请求在链中的节点里传递，但节点有权利决定什么时候把请求交给下一个节点。可以想象，异步的职责链加上命令模式（把ajax请求封装成命令对象），我们可以很方便地创建一个异步ajax队列库。
+
+#### 职责链模式的优缺点
+前面已经说过，职责链模式的最大优点就是解耦了请求发送者和N个接收者之间的复杂关系，由于不知道链中的哪个节点可以处理你发出的请求，所以你只需把请求传递给第一个节点即可.
+
+在手机商城的例子中，本来我们要被迫维护一个充斥着条件分支语句的巨大的函数，在例子里的购买过程中只打印了一条log语句。其实在现实开发中，这里要做更多事情，比如根据订单种类弹出不同的浮层提示、渲染不同的UI节点、组合不同的参数发送给不同的cgi等。用了职责链模式之后，每种订单都有各自的处理函数而互不影响。
+
+其次，使用了职责链模式之后，链中的节点对象可以灵活地拆分重组。增加或者删除一个节点，或者改变节点在链中的位置都是轻而易举的事情。这一点我们也已经看到，在上面的例子中，增加一种订单完全不需要改动其他订单函数中的代码。
+
+职责链模式还有一个优点，那就是可以手动指定起始节点，请求并不是非得从链中的第一个节点开始传递。比如在公交车的例子中，如果我明确在我前面的第一个人不是售票员，那我当然可以越过他把公交卡递给他前面的人，这样可以减少请求在链中的传递次数，更快地找到合适的请求接受者。这在普通的条件分支语句下是做不到的，我们没有办法让请求越过某一个if判断。
+
+拿代码来证明这一点，假设某一天网站中支付过定金的订单已经全部结束购买流程，我们在接下来的时间里只需要处理普通购买订单，所以我们可以直接把请求交给普通购买订单节点：
+```js
+orderNormal.passRequest( 1, false, 500 ); // 普 通 购 买, 无 优 惠 券
+```
+如果运用得当，职责链模式可以很好地帮助我们组织代码，但这种模式也并非没有弊端，首先我们不能保证某个请求一定会被链中的节点处理。比如在期末考试的例子中，小纸条上的题目也许没有任何一个同学知道如何解答，此时的请求就得不到答复，而是径直从链尾离开，或者抛出一个错误异常。在这种情况下，我们可以在链尾增加一个保底的接受者节点来处理这种即将离开链尾的请求。
+
+另外，职责链模式使得程序中多了一些节点对象，可能在某一次的请求传递过程中，大部分节点并没有起到实质性的作用，它们的作用仅仅是让请求传递下去，从性能方面考虑，我们要避免过长的职责链带来的性能损耗。
+
+#### 用AOP实现职责链
+在之前的职责链实现中，我们利用了一个Chain类来把普通函数包装成职责链的节点。其实利用JavaScript的函数式特性，有一种更加方便的方法来创建职责链。
+
+改写Function.prototype.after函数，使得第一个函数返回'nextSuccessor'时，将请求继续传递给下一个函数，无论是返回字符串'nextSuccessor'或者false都只是一个约定，当然在这里我们也可以让函数返回false表示传递请求，选择'nextSuccessor'字符串是因为它看起来更能表达我们的目的，代码如下：
+```js
+Function.prototype.after = function(fn) {
+  var self = this;
+  return function() {
+    var ret = self.apply(this, arguments);
+    if (ret === 'nextSuccessor') {
+      return fn.apply(this, arguments);
+    }
+    return ret;
+  }
+};
+var order = order500yuan.after(order200yuan).after(orderNormal);
+order(1, true, 500); // 输 出： 500 元 定 金 预 购， 得 到 100 优 惠 券 
+order(2, true, 500); // 输 出： 200 元 定 金 预 购， 得 到 50 优 惠 券 
+order(1, false, 500); // 输 出： 普 通 购 买， 无 优 惠 券
+```
+用AOP来实现职责链既简单又巧妙，但这种把函数叠在一起的方式，同时也叠加了函数的作用域，如果链条太长的话，也会对性能有较大的影响。
+
+#### 用职责链模式获取文件上传对象
+前面有一个用迭代器获取文件上传对象的例子：当时我们创建了一个迭代器来迭代获取合适的文件上传对象，其实用职责链模式可以更简单，我们完全不用创建这个多余的迭代器，完整代码如下：
+```js
+var getActiveUploadObj = function() {
+    try {
+      return new ActiveXObject("TXFTNActiveX.FTNUpload"); // IE 上 传 控 件 
+    } catch (e) {
+      return 'nextSuccessor';
+    }
   };
-```
-最后，我们需要实现这个中介者playerDirector对象，一般有以下两种方式。
-- 利用发布—订阅模式。将playerDirector实现为订阅者，各player作为发布者，一旦player的状态发生改变，便推送消息给playerDirector，playerDirector处理消息后将反馈发送给其他player。
-- 在playerDirector中开放一些接收消息的接口，各player可以直接调用该接口来给playerDirector发送消息，player只需传递一个参数给playerDirector，这个参数的目的是使playerDirector可以识别发送者。同样，playerDirector接收到消息之后会将处理结果反馈给其他player。
-
-这两种方式的实现没什么本质上的区别。在这里我们使用第二种方式，playerDirector开放一个对外暴露的接口ReceiveMessage，负责接收player对象发送的消息，而player对象发送消息的时候，总是把自身this作为参数发送给playerDirector，以便playerDirector识别消息来自于哪个玩家对象，代码如下：
-```js
-var playerDirector = (function() {
-  var players = {}, // 保 存 所 有 玩 家 
-    operations = {}; // 中 介 者 可 以 执 行 的 操 作 
-
-  /**************** 新 增 一 个 玩 家***************************/
-  operations.addPlayer = function(player) {
-    var teamColor = player.teamColor; // 玩 家 的 队 伍 颜 色 
-    players[teamColor] = players[teamColor] || []; // 如 果 该 颜 色 的 玩 家 还 没 有 成 立 队 伍， 则 新 成 立 一 个 队 伍 
-    players[teamColor].push(player); // 添 加 玩 家 进 队 伍 
-  }; 
-
-  /**************** 移 除 一 个 玩 家***************************/
-  operations.removePlayer = function(player) {
-    var teamColor = player.teamColor,
-      // 玩 家 的 队 伍 颜 色 
-      teamPlayers = players[teamColor] || []; // 该 队 伍 所 有 成 员 
-    for (var i = teamPlayers.length - 1; i >= 0; i--) { // 遍 历 删 除 
-      if (teamPlayers[i] === player) {
-        teamPlayers.splice(i, 1);
-      }
+var getFlashUploadObj = function() {
+    if (supportFlash()) {
+      var str = '<object type="application/x-shockwave-flash" > </object >';
+      return $(str).appendTo($(' body'));
     }
-  }; 
-  
-  /**************** 玩 家 换 队***************************/
-  operations.changeTeam = function(player, newTeamColor) { // 玩 家 换 队 
-    operations.removePlayer(player); // 从 原 队 伍 中 删 除 
-    player.teamColor = newTeamColor; // 改 变 队 伍 颜 色 
-    operations.addPlayer(player); // 增 加 到 新 队 伍 中 
+    return 'nextSuccessor';
   };
-
-  operations.playerDead = function(player) { // 玩 家 死 亡 
-    var teamColor = player.teamColor,
-      teamPlayers = players[teamColor]; // 玩 家 所 在 队 伍
-    var all_dead = true;
-    for (var i = 0, player; player = teamPlayers[i++];) {
-      if (player.state !== 'dead') {
-        all_dead = false;
-        break;
-      }
-    }
-    if (all_dead === true) { // 全 部 死 亡
-      for (var i = 0, player; player = teamPlayers[i++];) {
-        player.lose(); // 本 队 所 有 玩 家 lose 
-      }
-      for (var color in players) {
-        if (color !== teamColor) {
-          var teamPlayers = players[color]; // 其 他 队 伍 的 玩 家
-          for (var i = 0, player; player = teamPlayers[i++];) {
-            player.win(); // 其 他 队 伍 所 有 玩 家 win
-          }
-        }
-      }
-    }
+var getFormUpladObj = function() {
+    return $('<form><input name="file" type="file"/></form>').appendTo($('body'));
   };
-
-  var ReceiveMessage = function() {
-      var message = Array.prototype.shift.call(arguments); // arguments 的 第 一 个 参 数 为 消 息 名 称
-      operations[message].apply(this, arguments);
-    };
-  return {
-    ReceiveMessage: ReceiveMessage
-  }
-})();
-```
-可以看到，除了中介者本身，没有一个玩家知道其他任何玩家的存在，玩家与玩家之间的耦合关系已经完全解除，某个玩家的任何操作都不需要通知其他玩家，而只需要给中介者发送一个消息，中介者处理完消息之后会把处理结果反馈给其他的玩家对象。我们还可以继续给中介者扩展更多功能，以适应游戏需求的不断变化。
-
-#### 中介者模式的例子——购买商品
-假设我们正在编写一个手机购买的页面，在购买流程中，可以选择手机的颜色以及输入购买数量，同时页面中有两个展示区域，分别向用户展示刚刚选择好的颜色和数量。还有一个按钮动态显示下一步的操作，我们需要查询该颜色手机对应的库存，如果库存数量少于这次的购买数量，按钮将被禁用并且显示库存不足，反之按钮可以点击并且显示放入购物车。
-
-这个需求是非常容易实现的，假设我们已经提前从后台获取到了所有颜色手机的库存量：
-```js
-var goods = { // 手 机 库 存 
-  "red": 3,
-  "blue": 6
-};
-```
-那么页面有可能显示为如下几种场景：
-- 选择红色手机，购买4个，库存不足。
-- 选择蓝色手机，购买5个，库存充足，可以加入购物车。
-- 或者是没有输入购买数量的时候，按钮将被禁用并显示相应提示。
-
-我们大概已经能够猜到，接下来将遇到至少5个节点，分别是：
-- 下拉选择框colorSelect
-- 文本输入框numberInput
-- 展示颜色信息colorInfo
-- 展示购买数量信息numberInfo
-- 决定下一步操作的按钮nextBtn
-
-接下来将分别监听colorSelect的onchange事件函数和numberInput的oninput事件函数，然后在这两个事件中作出相应处理。
-```js
-var colorSelect = document.getElementById('colorSelect'),
-  numberInput = document.getElementById('numberInput'),
-  colorInfo = document.getElementById('colorInfo'),
-  numberInfo = document.getElementById('numberInfo'),
-  nextBtn = document.getElementById('nextBtn');
-var goods = { // 手 机 库 存 
-  "red": 3,
-  "blue": 6
-};
-colorSelect.onchange = function() {
-  var color = this.value,// 颜 色 
-    number = numberInput.value, // 数 量 
-    stock = goods[color]; // 该 颜 色 手 机 对 应 的 当 前 库 存 
-  colorInfo.innerHTML = color;
-  if (!color) {
-    nextBtn.disabled = true;
-    nextBtn.innerHTML = '请 选 择 手 机 颜 色';
-    return;
-  }
-  if (((number - 0) | 0) !== number - 0) { // 用 户 输 入 的 购 买 数 量 是 否 为 正 整 数 
-    nextBtn.disabled = true;
-    nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
-    return;
-  }
-  if (number > stock) { // 当 前 选 择 数 量 超 过 库 存 量 
-    nextBtn.disabled = true;
-    nextBtn.innerHTML = '库 存 不 足';
-    return;
-  }
-  nextBtn.disabled = false;
-  nextBtn.innerHTML = '放 入 购 物 车';
-};
-```
-
-##### 对象之间的联系
-来考虑一下，当触发了colorSelect的onchange之后，会发生什么事情。
-
-首先我们要让colorInfo中显示当前选中的颜色，然后获取用户当前输入的购买数量，对用户的输入值进行一些合法性判断。再根据库存数量来判断nextBtn的显示状态。numberInput的事件相关代码：
-```js
-numberInput.oninput = function() {
-  var color = colorSelect.value,
-    // 颜 色 
-    number = this.value,
-    // 数 量 
-    stock = goods[color]; // 该 颜 色 手 机 对 应 的 当 前 库 存 
-  numberInfo.innerHTML = number;
-  if (!color) {
-    nextBtn.disabled = true;
-    nextBtn.innerHTML = '请 选 择 手 机 颜 色';
-    return;
-  }
-  if (((number - 0) | 0) !== number - 0) { // 输 入 购 买 数 量 是 否 为 正 整 数 
-    nextBtn.disabled = true;
-    nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
-    return;
-  }
-  if (number > stock) { // 当 前 选 择 数 量 没 有 超 过 库 存 量 
-    nextBtn.disabled = true;
-    nextBtn.innerHTML = '库 存 不 足';
-    return;
-  }
-  nextBtn.disabled = false;
-  nextBtn.innerHTML = '放 入 购 物 车';
-};
-```
-虽然目前顺利完成了代码编写，但随之而来的需求改变有可能给我们带来麻烦。假设现在要求去掉colorInfo和numberInfo这两个展示区域，我们就要分别改动colorSelect.onchange和numberInput.oninput里面的代码，因为在先前的代码中，这些对象确实是耦合在一起的。
-
-目前我们面临的对象还不算太多，当这个页面里的节点激增到10个或者15个时，它们之间的联系可能变得更加错综复杂，任何一次改动都将变得很棘手。
-
-假设页面中将新增另外一个下拉选择框，代表选择手机内存。现在我们需要计算颜色、内存和购买数量，来判断nextBtn是显示库存不足还是放入购物车。
-
-而具体实现则需要先修改表示存库的JSON对象以及修改colorSelect的onchange事件函数，同样要改写numberInput的事件相关代码，具体代码的改变跟colorSelect大同小异，最后还要新增memorySelect的onchange事件函数。
-
-仅仅是增加一个内存的选择条件，就要改变如此多的代码，这是因为在目前的实现中，每个节点对象都是耦合在一起的，改变或者增加任何一个节点对象，都要通知到与其相关的对象。
-
-##### 引入中介者
-现在我们来引入中介者对象，所有的节点对象只跟中介者通信。当下拉选择框colorSelect、memorySelect和文本输入框numberInput发生了事件行为时，它们仅仅通知中介者它们被改变了，同时把自身当作参数传入中介者，以便中介者辨别是谁发生了改变。剩下的所有事情都交给中介者对象来完成，这样一来，无论是修改还是新增节点，都只需要改动中介者对象里的代码。
-```js
-var goods = { // 手 机 库 存 
-  "red | 32G": 3,
-  "red | 16G": 0,
-  "blue | 32G": 1,
-  "blue | 16G": 6
-};
-var mediator = (function() {
-  var colorSelect = document.getElementById('colorSelect'),
-    memorySelect = document.getElementById('memorySelect'),
-    numberInput = document.getElementById('numberInput'),
-    colorInfo = document.getElementById('colorInfo'),
-    memoryInfo = document.getElementById('memoryInfo'),
-    numberInfo = document.getElementById('numberInfo'),
-    nextBtn = document.getElementById('nextBtn');
-  return {
-    changed: function(obj) {
-      var color = colorSelect.value, // 颜 色 
-        memory = memorySelect.value, // 内 存 
-        number = numberInput.value, // 数 量 
-        stock = goods[color + '|' + memory]; // 颜 色 和 内 存 对 应 的 手 机 库 存 数 量 
-
-      if (obj === colorSelect) { // 如 果 改 变 的 是 选 择 颜 色 下 拉 框 
-        colorInfo.innerHTML = color;
-      } else if (obj === memorySelect) {
-        memoryInfo.innerHTML = memory;
-      } else if (obj === numberInput) {
-        numberInfo.innerHTML = number;
-      }
-
-      if (!color) {
-        nextBtn.disabled = true;
-        nextBtn.innerHTML = '请 选 择 手 机 颜 色';
-        return;
-      }
-      if (!memory) {
-        nextBtn.disabled = true;
-        nextBtn.innerHTML = '请 选 择 内 存 大 小';
-        return;
-      }
-      if (((number - 0) | 0) !== number - 0) { // 输 入 购 买 数 量 是 否 为 正 整 数 
-        nextBtn.disabled = true;
-        nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
-        return;
-      }
-      nextBtn.disabled = false;
-      nextBtn.innerHTML = '放 入 购 物 车';
-    }
-  }
-})(); 
-// 事 件 函 数： 
-colorSelect.onchange = function() {
-  mediator.changed(this);
-};
-memorySelect.onchange = function() {
-  mediator.changed(this);
-};
-numberInput.oninput = function() {
-  mediator.changed(this);
-};
-```
-可以想象，某天我们又要新增一些跟需求相关的节点，比如CPU型号，那我们只需要稍稍改动mediator对象即可：
-```js
-var goods = { // 手 机 库 存 
-  "red | 32G | 800": 3,
-  // 颜 色 red， 内 存 32G， cpu800， 对 应 库 存 数 量 为 3 
-  "red | 16G | 801": 0,
-  "blue | 32G | 800": 1,
-  "blue | 16G | 801": 6
-};
-var mediator = (function() {
-  // 略 
-  var cpuSelect = document.getElementById('cpuSelect');
-  return {
-    change: function(obj) {
-      // 略 
-      var cpu = cpuSelect.value,
-        stock = goods[color + '|' + memory + '|' + cpu];
-        
-      if (obj === cpuSelect) {
-        cpuInfo.innerHTML = cpu;
-      }
-      // 略 
-    }
-  }
-})();
+var getUploadObj = getActiveUploadObj.after(getFlashUploadObj).after(getFormUpladObj);
+console.log(getUploadObj());
 ```
 
 #### 小结
-中介者模式是迎合迪米特法则的一种实现。迪米特法则也叫最少知识原则，是指一个对象应该尽可能少地了解另外的对象（类似不和陌生人说话）。如果对象之间的耦合性太高，一个对象发生改变之后，难免会影响到其他的对象，跟“城门失火，殃及池鱼”的道理是一样的。而在中介者模式里，对象之间几乎不知道彼此的存在，它们只能通过中介者对象来互相影响对方。
+在JavaScript开发中，职责链模式是最容易被忽视的模式之一。实际上只要运用得当，职责链模式可以很好地帮助我们管理代码，降低发起请求的对象和处理请求的对象之间的耦合性。职责链中的节点数量和顺序是可以自由变化的，我们可以在运行时决定链中包含哪些节点。
 
-因此，中介者模式使各个对象之间得以解耦，以中介者和对象之间的一对多关系取代了对象之间的网状多对多关系。各个对象只需关注自身功能的实现，对象之间的交互关系交给了中介者对象来实现和维护。
-
-不过，中介者模式也存在一些缺点。其中，最大的缺点是系统中会新增一个中介者对象，因为对象之间交互的复杂性，转移成了中介者对象的复杂性，使得中介者对象经常是巨大的。中介者对象自身往往就是一个难以维护的对象。
-
-我们都知道，毒贩子虽然使吸毒者和制毒者之间的耦合度降低，但毒贩子也要抽走一部分利润。同样，在程序中，中介者对象要占去一部分内存。而且毒贩本身还要防止被警察抓住，因为它了解整个犯罪链条中的所有关系，这表明中介者对象自身往往是一个难以维护的对象。
-
-中介者模式可以非常方便地对模块或者对象进行解耦，但对象之间并非一定需要解耦。在实际项目中，模块或对象之间有一些依赖关系是很正常的。毕竟我们写程序是为了快速完成项目交付生产，而不是堆砌模式和过度设计。关键就在于如何去衡量对象之间的耦合程度。一般来说，如果对象之间的复杂耦合确实导致调用和维护出现了困难，而且这些耦合度随项目的变化呈指数增长曲线，那我们就可以考虑用中介者模式来重构代码。
+无论是作用域链、原型链，还是DOM节点中的事件冒泡，我们都能从中找到职责链模式的影子。职责链模式还可以和组合模式结合在一起，用来连接部件和父部件，或是提高组合对象的效率。
