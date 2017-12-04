@@ -87,7 +87,7 @@ commonName = MyOwn Root Certificate Authority
 stateOrProvinceName = NC
 countryName = US
 emailAddress = root@ca.com
-organizationName = Trade Show Hell
+organizationName = Trade Show Hell # 在浏览器里面找证书的时候，是在此机构下找的，证书名为 MyOwn Root Certificate Authority
 organizationalUnitName = IT Department
 [ root_ca_extensions ]
 basicConstraints = CA:true
