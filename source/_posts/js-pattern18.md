@@ -5,7 +5,7 @@ tags:
 - js
 - design pattern
 date: 2017-12-07 09:59:31
-updated:
+updated: 2017-12-07 09:59:31
 ---
 
 当谈到接口的时候，通常会涉及以下几种含义。
