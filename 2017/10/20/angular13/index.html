@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Angular2入门-路由-2 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,typescript,angular">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Angular2入门-路由-2 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="typescript"> <meta property="og:article:tag" content="angular"> 
+
+    
+        <meta property="article:published_time" content="Fri Oct 20 2017 19:05:01 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:08 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Angular2入门-路由-2 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/10/20/angular13/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/10/20/angular13/index.html",
+    "headline": "Angular2入门-路由-2",
+    "datePublished": "Fri Oct 20 2017 19:05:01 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:08 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,typescript,angularnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#子路由和附属Outlet"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x5B50;&#x8DEF;&#x7531;&#x548C;&#x9644;&#x5C5E;Outlet" class="headerlink" title="&#x5B50;&#x8DEF;&#x7531;&#x548C;&#x9644;&#x5C5E;Outlet"></a>&#x5B50;&#x8DEF;&#x7531;&#x548C;&#x9644;&#x5C5E;Outlet</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#子路由"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#&#x5B50;&#x8DEF;&#x7531;" class="headerlink" title="&#x5B50;&#x8DEF;&#x7531;"></a>&#x5B50;&#x8DEF;&#x7531;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Matrix参数"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text"><a href="#Matrix&#x53C2;&#x6570;" class="headerlink" title="Matrix&#x53C2;&#x6570;"></a>Matrix&#x53C2;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#附属Outlet"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text"><a href="#&#x9644;&#x5C5E;Outlet" class="headerlink" title="&#x9644;&#x5C5E;Outlet"></a>&#x9644;&#x5C5E;Outlet</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由拦截"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x8DEF;&#x7531;&#x62E6;&#x622A;" class="headerlink" title="&#x8DEF;&#x7531;&#x62E6;&#x622A;"></a>&#x8DEF;&#x7531;&#x62E6;&#x622A;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#激活拦截与反激活拦截"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x6FC0;&#x6D3B;&#x62E6;&#x622A;&#x4E0E;&#x53CD;&#x6FC0;&#x6D3B;&#x62E6;&#x622A;" class="headerlink" title="&#x6FC0;&#x6D3B;&#x62E6;&#x622A;&#x4E0E;&#x53CD;&#x6FC0;&#x6D3B;&#x62E6;&#x622A;"></a>&#x6FC0;&#x6D3B;&#x62E6;&#x622A;&#x4E0E;&#x53CD;&#x6FC0;&#x6D3B;&#x62E6;&#x622A;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#CanActivate"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text"><a href="#CanActivate" class="headerlink" title="CanActivate"></a>CanActivate</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#CanActivateChild"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text"><a href="#CanActivateChild" class="headerlink" title="CanActivateChild"></a>CanActivateChild</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#CanDeactivate"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text"><a href="#CanDeactivate" class="headerlink" title="CanDeactivate"></a>CanDeactivate</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数据预加载拦截"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x6570;&#x636E;&#x9884;&#x52A0;&#x8F7D;&#x62E6;&#x622A;" class="headerlink" title="&#x6570;&#x636E;&#x9884;&#x52A0;&#x8F7D;&#x62E6;&#x622A;"></a>&#x6570;&#x636E;&#x9884;&#x52A0;&#x8F7D;&#x62E6;&#x622A;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模块的延迟加载"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x5757;&#x7684;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;" class="headerlink" title="&#x6A21;&#x5757;&#x7684;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;"></a>&#x6A21;&#x5757;&#x7684;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#延迟加载实现"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#x5B9E;&#x73B0;" class="headerlink" title="&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#x5B9E;&#x73B0;"></a>&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#x5B9E;&#x73B0;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模块加载拦截"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x5757;&#x52A0;&#x8F7D;&#x62E6;&#x622A;" class="headerlink" title="&#x6A21;&#x5757;&#x52A0;&#x8F7D;&#x62E6;&#x622A;"></a>&#x6A21;&#x5757;&#x52A0;&#x8F7D;&#x62E6;&#x622A;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Angular2入门-路由-2
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Oct 20, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/angular/">angular</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/typescript/">typescript</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Angular2入门-路由-2&url=https://github.com/xmoyKING/2017/10/20/angular13/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Angular2入门-路由-2&url=https://github.com/xmoyKING/2017/10/20/angular13/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/10/20/angular13/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/10/20/angular13/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h3 id="子路由和附属Outlet"><a href="#子路由和附属Outlet" class="headerlink" title="子路由和附属Outlet"></a>子路由和附属Outlet</h3><h4 id="子路由"><a href="#子路由" class="headerlink" title="子路由"></a>子路由</h4><p>一个组件可以被嵌入到另一个组件中，从而建立组件之前的多级嵌套关系。与此类似，Angular也允许一个路由组件被嵌入到另一个路由组件中，从而建立路由的多级嵌套关系。</p>
+<p>比如通讯录例子中的DetailComponent组件本身是一个路由组件，在其中可以显示关于个人信息的AnnotationComponent组件和相册AlbumComponent组件，同时也作为一个子路由组件被嵌入到根路由组件ContactApp之中。</p>
+<p>这种嵌套关系通过路由配置来建立，其中children是专门服务于子路由组件DetailComponent的路由配置，其所包含的每一个配置项的path值都相对于该子路由组件的path值：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rooRouterConfig: Routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'detail/:id'</span>, </span><br><span class="line">    component: DetailComponent,</span><br><span class="line">    children: [</span><br><span class="line">      &#123; path: <span class="string">''</span>, component: AnnotationComponent&#125;, <span class="comment">// `http://localhost:3000/detail/:id`</span></span><br><span class="line">      &#123; path: <span class="string">'album'</span>, component: AlbumComponent&#125; <span class="comment">// `http://localhost:3000/detail/:id/album`</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+<p>浏览器中输入<code>http://localhost:3000/detail/1/album</code>，可以看到DetailComponent组件和AlbumComponent组件的内容都在联系人详情也上显示。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- detail.component.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">detail</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- .... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span> <span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">album</span>&gt;</span> </span><br><span class="line">    <span class="comment">&lt;!-- .... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">album</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">detail</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="Matrix参数"><a href="#Matrix参数" class="headerlink" title="Matrix参数"></a>Matrix参数</h5><p>假设需要实现一个功能，要求AlbumComponent组件能根据搜索条件来显示照片，这就需要将搜索条件作为参数传递给AlbumComponent组件。Path参数无法满足这个功能，因为Path参数是确定的且必须为每一个参数赋值才能匹配到配置项，而搜索条件是不确定。虽然Query参数可以用来传递不确定的参数，但缺点在于Query参数是一个公共区域，页面上所有组件都可以访问。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:3000/detail/1/album?after=2015-01-01&amp;before=2015-12-31</span><br></pre></td></tr></table></figure>
+<p>比如同一个URL，DetailComponent组件和AlbumComponent组件都可以获取到相同的参数值。而DetailComponent组件并不关心AlbumComponent组件的搜索条件，同时假如DetailComponent组件也希望接收一个同名的参数，但参数数值与传递给AlbumComponent组件的不一样，此时使用Query参数就无法满足需求了。所以更为理想的方式是能够将参数精准的传递给所需的组件，为了实现参数的精准传递，Angular提供了Matrix参数，它通过在链接参数数组中插入一个对象来进行赋值：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/detail', this.contact_id, &#123;after:'2015-01-01', before:'2015-12-31'&#125;, 'album', &#123;after:'2016-01-01', before:'2016-12-31'&#125;]"</span>&gt;</span>Link<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Angular会将该对象的属性转换为以<code>;</code>为分隔符的键值对，拼接到与该对象左边最近的URL分段上，依据上述链接参数数组生成的URL如下，DetailComponent组件和AlbumComponent组件都将获得不同的参数值：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:3000/detail/6;after=2015-01-01;before=2015-12-31/album;after=2016-01-01;before=2016-12-31</span><br></pre></td></tr></table></figure></p>
+<p>这种在一个URL分段内使用<code>;</code>分隔键值对的方式称为Matrix URI，其定义每一个URL分段都可以拥有任意多个键值对，每个键值对只为其所在分段服务，虽然Matrix URI一致没有被HTML标准，但它能够清晰地表示每一个URL分段所具有的键值对。<br>Angular利用这个特性，将Matrix参数精确地传递给分段所对应的组件，Matrix参数的获取方式和Path参数一样，可以通过ActivatedRoute服务提供的snapshot和Observable对象两种方式来获取。</p>
+<h5 id="附属Outlet"><a href="#附属Outlet" class="headerlink" title="附属Outlet"></a>附属Outlet</h5><p>Angular运行一个路由组件包含多个Outlet，从而可以在一个路由组件中同时显示多个组件，其中，主Outlet（Primary Outlet）有且仅有一个，附属Outlet（Auxiliary Outlet）可以有任意多个，各个附属Outlet通过不同的命名加以区分。每一个Outlet均可以通过路由配置来指定其可以显示的组件，这使得Angular可以灵活地对各个组件进行组合，从而满足不同场景的需求。</p>
+<p>在通讯录例子中，假设想灵活地在DetailComponent组件中控制AnnotationComponent组件和相册AlbumComponent组件的显示，那么首先可以在DetailComponent组件的模板中添加一个名为aux的附属Outlet：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- detail.component.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"detail-contain"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outelt</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-outlet</span> <span class="attr">name</span>=<span class="string">"aux"</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outelt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来来路由配置中定义主要Outlet和附属Outlet上均可以显示AnnotationComponent组件和相册AlbumComponent组件。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rootRouterConfig: Routes = [</span><br><span class="line">  &#123;path: <span class="string">'detail/:id'</span>, component: DetailComponent&#125;,</span><br><span class="line">  children: [</span><br><span class="line">    <span class="comment">// 主要Outlet</span></span><br><span class="line">    &#123; path: <span class="string">''</span>, component: AnnotationComponent&#125;,</span><br><span class="line">    &#123; path: <span class="string">'album'</span>, component: AlbumComponent&#125;,</span><br><span class="line">    <span class="comment">// 附属Outlet</span></span><br><span class="line">    &#123; path: <span class="string">'annotation'</span>, component: AnnotationComponent, outlet:<span class="string">'aux'</span>&#125;,</span><br><span class="line">    &#123; path: <span class="string">'album'</span>, component: AlbumComponent, outlet:<span class="string">'aux'</span>&#125;</span><br><span class="line">  ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h3 id="路由拦截"><a href="#路由拦截" class="headerlink" title="路由拦截"></a>路由拦截</h3><p>Angular的路由拦截，允许从一个配置项跳转到另一个配置项之前执行指定的逻辑，并根据执行的结果来决定是否进行跳转，Angular提供了5类路由拦截：</p>
+<ul>
+<li>CanActivate，激活拦截</li>
+<li>CanActivateChild，与CanActivate类似，用于控制是否允许计划子路由配置项</li>
+<li>CanDeactivate，反激活拦截</li>
+<li>Resolve，数据预加载拦截</li>
+<li>CanLoad，模块加载拦截</li>
+</ul>
+<h4 id="激活拦截与反激活拦截"><a href="#激活拦截与反激活拦截" class="headerlink" title="激活拦截与反激活拦截"></a>激活拦截与反激活拦截</h4><p>激活拦截与反激活拦截用于控制是否可以激活或反激活目标配置项，其工作流程如下：<br><img src="1.png" alt="激活拦截与反激活拦截"></p>
+<h5 id="CanActivate"><a href="#CanActivate" class="headerlink" title="CanActivate"></a>CanActivate</h5><p>在通讯录例子中，假设需要根据用户的登录状态来决定能否访问联系人编辑页，要实现这个功能，可以通过为联系人编辑页添加一个判断登录状态的CanActivate拦截实现。</p>
+<p>首先，通过实现CanActivate接口创建拦截服务，该接口只包含了一个canActivate()方法，最简单的情况：当该方法返回true时，表示运行通过CanActivate拦截，否则不允许通过，对目标配置项不予激活。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// can-activate-guard.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CanActivate &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> CanActivateGuard <span class="keyword">implements</span> CanActivate &#123;</span><br><span class="line">  canActivate()&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="comment">/*已登录*/</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在目标配置项中指定上述创建的服务作为其CanActivate拦截服务。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="keyword">export</span> &#123; CanActivateGuard &#125; <span class="keyword">from</span> <span class="string">'../service/can-activate-guard'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rootRouterConfig: Routes = [&#123;</span><br><span class="line">    path: <span class="string">'operate/id/:id'</span>,</span><br><span class="line">    component: OperateComponent,</span><br><span class="line">    canActivate: [CanActivateGuard]</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<p>最后将该服务注入到应用中：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.module.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; CanActivateGuard &#125; <span class="keyword">from</span> <span class="string">'../service/can-activate-guard'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  providers: [CanActivateGuard]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>除了返回布尔值，canActivate()方法还可以返回一个Observable对象，当该对象触发（emits）true时，表示运行通过拦截，触发false时则表示不允许通过，这个特性使得CanActivate拦截可以根据异步处理结果来判断：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// can-activate-guard.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CanActivate &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> CanActivateGuard <span class="keyword">implements</span> CanActivate &#123;</span><br><span class="line">  canActivate()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Observable&lt;<span class="built_in">boolean</span>&gt;(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">      observer.next(<span class="literal">true</span>);</span><br><span class="line">      observer.complete();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此外，Angular还会给canActivate方法传递两个参数：</p>
+<ul>
+<li>ActivatedRouteSnapshot，表示所要激活的目标配置项，可以通过它访问配置项的相关信息</li>
+<li>RouterStateSnapshot，表示应用当前所处的路由状态，其包含了当前所需的所有配置项<br>用法如下：<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// can-activate-guard.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> CanActivateGuard <span class="keyword">implements</span> CanActivate &#123;</span><br><span class="line">  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)&#123;</span><br><span class="line">    <span class="comment">//获取配置信息</span></span><br><span class="line">    <span class="built_in">console</span>.log(route.routeConfig);</span><br><span class="line">    <span class="comment">// RouterStateSnapshot按照路由配置中的定义，将所需的配置项以树形结构方式组织起来</span></span><br><span class="line">    <span class="built_in">console</span>.log(state.root);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="CanActivateChild"><a href="#CanActivateChild" class="headerlink" title="CanActivateChild"></a>CanActivateChild</h5><p>用法与CanActivate类似。</p>
+<h5 id="CanDeactivate"><a href="#CanDeactivate" class="headerlink" title="CanDeactivate"></a>CanDeactivate</h5><p>在通讯录例子的编辑页面，当用户单击取消按钮时，可以通过在CanDeactivate拦截中判断联系人信息是否被修改且未保存来决定是否运行离开编辑页，使用CanDeactive拦截的用法可分为以下3步：</p>
+<p>首先，通过实现CanDeactivate接口创建拦截服务，该接口只包含了一个canDeactivate()方法，该方法除了第一个参数为目标配置项对应组件的实例外，其他使用方法与canActivate()方法类似。</p>
+<p>以同时调用组件实例的isModified()方法来判断组件内容是否发送修改且未保存：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// can-activate-guard.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> CanDeactivateGuard <span class="keyword">implements</span> CanDeactivate &#123;</span><br><span class="line">  canActivate(component: <span class="built_in">any</span>, route: ActivatedRouteSnapshot, state: RouterStateSnapshot)&#123;</span><br><span class="line">    <span class="keyword">if</span>(component.isModified())&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在目标配置项中指定该服务作为其CanDeactivate拦截服务：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="keyword">export</span> &#123; CanDeactivateGuard &#125; <span class="keyword">from</span> <span class="string">'../service/can-activate-guard'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rootRouterConfig: Routes = [&#123;</span><br><span class="line">    path: <span class="string">'operate/id/:id'</span>,</span><br><span class="line">    component: OperateComponent,</span><br><span class="line">    canActivate: [CanActivateGuard],</span><br><span class="line">    canDeactivate: [CanDeactivateGuard],</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<p>最后将服务注入到应用根模块中即可。</p>
+<h4 id="数据预加载拦截"><a href="#数据预加载拦截" class="headerlink" title="数据预加载拦截"></a>数据预加载拦截</h4><p>数据预加载拦截（Resolve拦截）适用于对数据进行预加载，当确定数据加载成功后，再激活目标配置项，其流程如下：<br><img src="2.png" alt="数据预加载拦截"></p>
+<p>以如何在通讯录例子中联系人编辑页显示前对联系人信息进行预加载为例，过程分为4步。</p>
+<p>首先，通过对Resolve<t>泛型接口创建拦截服务，该服务只有一个resolve()方法，用于执行数据预加载逻辑。该方法可以直接将数据返回，在异步情况下也可以通过Observable对象触发。注意：所返回的任何数据（包括false）都将存放于配置项的data参数部分，如没有预加载到预期的数据，只能通过代码跳转的方式来达到不激活目标配置项的目的：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// resolve-guard.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Router, Resolve, ActivateRouteSnapshot, RouterStateSnapshot &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ContactService &#125; <span class="keyword">from</span> <span class="string">'../service/contact.service'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> ResolveGuard <span class="keyword">implements</span> Resolve&lt;<span class="built_in">any</span>&gt; &#123;</span><br><span class="line">  contacts: &#123;&#125;;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> _router: Router, <span class="keyword">private</span> _contactService: ContactService</span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line">  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)&#123;</span><br><span class="line">    <span class="comment">// 返回Observable对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._contactService.getContactById(route.params[<span class="string">'id'</span>])</span><br><span class="line">              .map(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(res)&#123;</span><br><span class="line">                  <span class="keyword">return</span> res;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                  <span class="comment">// 预加载失败，代码跳转至其他配置项</span></span><br><span class="line">                  <span class="keyword">this</span>._router.navigate([<span class="string">'/list'</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></t></p>
+<p>其次，在目标配置项中指定该服务作为其Resolve拦截服务，以下例配置表示通过ResolveGuard服务预加载的数据将存在data参数的contact属性下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; ResolveGuard &#125; <span class="keyword">from</span> <span class="string">'../service/resolve-guard'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rootRouterConfig: Routes = [&#123;</span><br><span class="line">    path: <span class="string">'operate/id/:id'</span>,</span><br><span class="line">    component: OperateComponent,</span><br><span class="line">    canActivate: [CanActivateGuard],</span><br><span class="line">    canDeactivate: [CanDeactivateGuard],</span><br><span class="line">    resolve: &#123;</span><br><span class="line">      contact: ResolveGuard</span><br><span class="line">    &#125;</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<p>然后，将该服务注入到应用模块中。</p>
+<p>最后，在目标配置项所指定的组件中访问预加载的数据。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// operate.component.ts</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> OperateComponent <span class="keyword">implements</span> OnInit &#123;</span><br><span class="line">  ngOnInit()&#123;</span><br><span class="line">    <span class="keyword">this</span>._activateRoute.data.subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(data.contact);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="模块的延迟加载"><a href="#模块的延迟加载" class="headerlink" title="模块的延迟加载"></a>模块的延迟加载</h3><p>Angular应用由一个根模块和任意多个特性模块组成，一个大型的应用通常包含很多特性模块，若在首屏加载时便将所有的特性模块加载进来，对于用户体验和服务器负载均会不利，为此，Angular路由提供了对特性模块进行延迟加载的支持，使得只有在真正需要某一个模块的时候，才将其加载进来。</p>
+<h4 id="延迟加载实现"><a href="#延迟加载实现" class="headerlink" title="延迟加载实现"></a>延迟加载实现</h4><p>通讯录只有一个根模块，为了演示如何进行特性模块的延迟加载，将OperateComponent组件从根模块中抽取出来，单独为其创建一个OperateModule模块，与根模块需要初始化各项路由服务不同，特性模块仅需要对其路由进行解析，因此子路由模块通过调用RouterModule.forChild()方法来创建。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// operate.module.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; NgModule &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; FormsModule &#125; <span class="keyword">from</span> <span class="string">'@angular/forms'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; <span class="keyword">from</span> <span class="string">'@angular/platform-browser'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Routes, RouterModule &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; OperateComponent &#125; <span class="keyword">from</span> <span class="string">'../widget/operate.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; ContactService &#125; <span class="keyword">from</span> <span class="string">'../service/contact.service'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> operateRoutes: Routes = [</span><br><span class="line">  &#123;path: <span class="string">'id/:id'</span>, component: OperateComponent &#125;,</span><br><span class="line">  &#123;path: <span class="string">'isAdd/:isAdd'</span>, component: OperateComponent &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [BrowserModule, FormsModule, RouterModule.forChild(operateRoutes)],</span><br><span class="line">  declarations: [OperateComponent],</span><br><span class="line">  providers: [ContactService]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> OperateModule &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此后OperateComponent组件便不再需要在根模块AppModule中导入。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.module.ts</span></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  declarations: [</span><br><span class="line">    <span class="comment">// OperateComponent,</span></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后需要对根模块的路由配置进行修改，通过配置项的loadChildren属性来指定需要进行延迟加载的模块：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rootRouterConfig: Routes = [</span><br><span class="line">  <span class="comment">// OperateComponent组件的配置项已在OperateModule模块定义，故不需要下面的配置了</span></span><br><span class="line">  <span class="comment">// &#123;path: 'operate/id/:id', component: OperateComponent &#125;,</span></span><br><span class="line">  <span class="comment">// &#123;path: 'operate/isAdd/:isAdd', component: OperateComponent &#125;</span></span><br><span class="line">  &#123; path: <span class="string">'operate'</span>, loadChildren: <span class="string">'app/router/operate.module.ts#OperateModule'</span>&#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+<h4 id="模块加载拦截"><a href="#模块加载拦截" class="headerlink" title="模块加载拦截"></a>模块加载拦截</h4><p>默认情况下，若URL匹配到延迟加载的配置项，相应的特性模块便会被加载进来，若想动态判断是否对该模块进行加载，可以使用CanLoad拦截。</p>
+<p>CanLoad拦截的用法和CanActivate等其他拦截类似，首先实现CanLoad接口来创建拦截服务，由于在触发CanLoad拦截时，相应的特性模块还未被加载，因此能传递给canLoad()方法的只有延迟加载配置项的信息：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// can-load-guard.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CanLoad, Route &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injetable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> CanLoadGuard <span class="keyword">implements</span> CanLoad &#123;</span><br><span class="line">  canLoad(route: Route)&#123;</span><br><span class="line">    <span class="comment">// route参数为延迟加载配置项</span></span><br><span class="line">    <span class="built_in">console</span>.log(route.path); <span class="comment">// 输出 operate</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="comment">/* 运行加载 */</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着，在延迟加载配置项中指定CanLoad拦截服务：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; CanLoadGuard &#125; <span class="keyword">from</span> <span class="string">'../service/can-load-guard'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rootRouterConfig: Routes = [&#123;</span><br><span class="line">  path: <span class="string">'operate'</span>,</span><br><span class="line">  loadChildren: <span class="string">'app/router/operate.module.ts#OperateModule'</span>,</span><br><span class="line">  canLoad: [CanLoadGuard]</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure></p>
+<p>最后，将CanLoad拦截服务注入根模块：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.module.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; CanLoadGuard &#125; <span class="keyword">from</span> <span class="string">'../service/can-load-guard'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  providers: [CanLoadGuard]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/11/01/js-pattern1/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/10/20/angular12/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

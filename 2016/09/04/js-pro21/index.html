@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JavaScript高级程序设计-21-表单 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,js-pro,form">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JavaScript高级程序设计-21-表单 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="js-pro"> <meta property="og:article:tag" content="form"> 
+
+    
+        <meta property="article:published_time" content="Sun Sep 04 2016 16:57:13 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:09 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JavaScript高级程序设计-21-表单 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2016/09/04/js-pro21/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2016/09/04/js-pro21/index.html",
+    "headline": "JavaScript高级程序设计-21-表单",
+    "datePublished": "Sun Sep 04 2016 16:57:13 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,js-pro,formnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#表单基础知识"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x8868;&#x5355;&#x57FA;&#x7840;&#x77E5;&#x8BC6;" class="headerlink" title="&#x8868;&#x5355;&#x57FA;&#x7840;&#x77E5;&#x8BC6;"></a>&#x8868;&#x5355;&#x57FA;&#x7840;&#x77E5;&#x8BC6;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#提交表单"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#&#x63D0;&#x4EA4;&#x8868;&#x5355;" class="headerlink" title="&#x63D0;&#x4EA4;&#x8868;&#x5355;"></a>&#x63D0;&#x4EA4;&#x8868;&#x5355;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#重置表单"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#&#x91CD;&#x7F6E;&#x8868;&#x5355;" class="headerlink" title="&#x91CD;&#x7F6E;&#x8868;&#x5355;"></a>&#x91CD;&#x7F6E;&#x8868;&#x5355;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#表单字段"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#&#x8868;&#x5355;&#x5B57;&#x6BB5;" class="headerlink" title="&#x8868;&#x5355;&#x5B57;&#x6BB5;"></a>&#x8868;&#x5355;&#x5B57;&#x6BB5;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#共有的表单字段属性"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text"><a href="#&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x5C5E;&#x6027;" class="headerlink" title="&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x5C5E;&#x6027;"></a>&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x5C5E;&#x6027;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#共有的表单字段方法"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text"><a href="#&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x65B9;&#x6CD5;" class="headerlink" title="&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x65B9;&#x6CD5;"></a>&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x65B9;&#x6CD5;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#共有的表单字段事件"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text"><a href="#&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x4E8B;&#x4EF6;" class="headerlink" title="&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x4E8B;&#x4EF6;"></a>&#x5171;&#x6709;&#x7684;&#x8868;&#x5355;&#x5B57;&#x6BB5;&#x4E8B;&#x4EF6;</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文本框脚本"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x6587;&#x672C;&#x6846;&#x811A;&#x672C;" class="headerlink" title="&#x6587;&#x672C;&#x6846;&#x811A;&#x672C;"></a>&#x6587;&#x672C;&#x6846;&#x811A;&#x672C;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选择文本"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x9009;&#x62E9;&#x6587;&#x672C;" class="headerlink" title="&#x9009;&#x62E9;&#x6587;&#x672C;"></a>&#x9009;&#x62E9;&#x6587;&#x672C;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#过滤输入"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x8FC7;&#x6EE4;&#x8F93;&#x5165;" class="headerlink" title="&#x8FC7;&#x6EE4;&#x8F93;&#x5165;"></a>&#x8FC7;&#x6EE4;&#x8F93;&#x5165;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#屏蔽字符"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text"><a href="#&#x5C4F;&#x853D;&#x5B57;&#x7B26;" class="headerlink" title="&#x5C4F;&#x853D;&#x5B57;&#x7B26;"></a>&#x5C4F;&#x853D;&#x5B57;&#x7B26;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#操作剪贴板"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text"><a href="#&#x64CD;&#x4F5C;&#x526A;&#x8D34;&#x677F;" class="headerlink" title="&#x64CD;&#x4F5C;&#x526A;&#x8D34;&#x677F;"></a>&#x64CD;&#x4F5C;&#x526A;&#x8D34;&#x677F;</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#自动切换焦点"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"><a href="#&#x81EA;&#x52A8;&#x5207;&#x6362;&#x7126;&#x70B9;" class="headerlink" title="&#x81EA;&#x52A8;&#x5207;&#x6362;&#x7126;&#x70B9;"></a>&#x81EA;&#x52A8;&#x5207;&#x6362;&#x7126;&#x70B9;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#H5约束验证API"><span class="post-toc-number">2.4.</span> <span class="post-toc-text"><a href="#H5&#x7EA6;&#x675F;&#x9A8C;&#x8BC1;API" class="headerlink" title="H5&#x7EA6;&#x675F;&#x9A8C;&#x8BC1;API"></a>H5&#x7EA6;&#x675F;&#x9A8C;&#x8BC1;API</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#选择框脚本"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x9009;&#x62E9;&#x6846;&#x811A;&#x672C;" class="headerlink" title="&#x9009;&#x62E9;&#x6846;&#x811A;&#x672C;"></a>&#x9009;&#x62E9;&#x6846;&#x811A;&#x672C;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#富文本编辑"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x5BCC;&#x6587;&#x672C;&#x7F16;&#x8F91;" class="headerlink" title="&#x5BCC;&#x6587;&#x672C;&#x7F16;&#x8F91;"></a>&#x5BCC;&#x6587;&#x672C;&#x7F16;&#x8F91;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用contenteditable属性"><span class="post-toc-number">4.1.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;contenteditable&#x5C5E;&#x6027;" class="headerlink" title="&#x4F7F;&#x7528;contenteditable&#x5C5E;&#x6027;"></a>&#x4F7F;&#x7528;contenteditable&#x5C5E;&#x6027;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#操作富文本"><span class="post-toc-number">4.2.</span> <span class="post-toc-text"><a href="#&#x64CD;&#x4F5C;&#x5BCC;&#x6587;&#x672C;" class="headerlink" title="&#x64CD;&#x4F5C;&#x5BCC;&#x6587;&#x672C;"></a>&#x64CD;&#x4F5C;&#x5BCC;&#x6587;&#x672C;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JavaScript高级程序设计-21-表单
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Sep 04, 2016</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/form/">form</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js-pro/">js-pro</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript高级程序设计-21-表单&url=https://github.com/xmoyKING/2016/09/04/js-pro21/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript高级程序设计-21-表单&url=https://github.com/xmoyKING/2016/09/04/js-pro21/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2016/09/04/js-pro21/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2016/09/04/js-pro21/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>js最初的应用就是分担服务器处理表单的责任，打破处处依赖服务器的局面。we表单没有为许多常见任务提供解决手段，所以一般需要在前端通过js增强表单功能，比如验证表单。</p>
+<h3 id="表单基础知识"><a href="#表单基础知识" class="headerlink" title="表单基础知识"></a>表单基础知识</h3><p>在HTML中，表单是由form元素表示的，js中对应的则是HTMLFormElement类型，HTMLFormElement类型继承自HTMLElement，与其他HTML有相同的默认属性，但其也有特殊的属性和方法：</p>
+<ul>
+<li>acceptCharset，服务器能够处理的字符集，等价于HTML中的accept-charset属性</li>
+<li>action，请求的URL，等价于HTML中的action属性</li>
+<li>elements，表单中所有控件的集合（HTMLCollection）</li>
+<li>enctype，请求的编码类型，等价于HTML中的enctype属性</li>
+<li>length，表单中控件数量</li>
+<li>method，要发生的HTTP请求类型，通常为GET/POST,等价于HTML的method属性</li>
+<li>name，表单的名称，等价于HTML的name属性</li>
+<li>reset(), 将所有表单域重置为默认值</li>
+<li>submit(), 提交表单</li>
+<li>target，用于发生请求和接收响应的窗口名，等价于HTML的target属性<br>除了getElementById取得表单，可以先通过document.forms取得所有表单，然后再通过索引或name值来取得特定表单。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.forms[<span class="number">0</span>]; <span class="comment">// 页面中第一个表单</span></span><br><span class="line"><span class="built_in">document</span>.forms[<span class="string">'formName'</span>];  <span class="comment">// 页面中name为formName的表单</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="提交表单"><a href="#提交表单" class="headerlink" title="提交表单"></a>提交表单</h4><p>用户单击提交按钮或图像按钮时，就能提交表单，使用input/button元素都可以定义提交按钮，只要将type属性设置为submit即可，而图片按钮则可将type属性设置为image。</p>
+<p>只要表单中存在任何上述的一种按钮，那么在相应表单空间拥有焦点的情况下，回车即可提交表单（textarea中回车会换行），若表单内没有提交按钮，则回车不会提交。</p>
+<p>以此种方式提交表单时，浏览器在请求发生到服务器之前会触发submit事件，如此就能验证表单数据了，阻止submit事件可以取消表单提交。</p>
+<p>通过js获取到表单对象后可以调用<code>form.submit()</code>方法，也能提交表单。此种方式无需表单包含提交按钮，在任何时候都能提交。但这种方式不会触发shubmit事件，所以，需要验证表单数据。</p>
+<p>提交表单时很可能出现重复提交问题，解决此问题的办法：第一次提交后就禁用提交按钮，或，利用onsubmit事件处理程序取消后续的表单提交操作。</p>
+<h4 id="重置表单"><a href="#重置表单" class="headerlink" title="重置表单"></a>重置表单</h4><p>与submit一样，表单的重置也有好几种方式。</p>
+<h4 id="表单字段"><a href="#表单字段" class="headerlink" title="表单字段"></a>表单字段</h4><p>可以像访问页面中其他元素一样，使用原生DOM方法访问表单元素，此外，每个表单都有elements属性，该属性是表单所有元素的集合，这个elements集合是一个有序列表，其中包含着表单中所有字段（表单控件），每个表单字段在elements集合中的顺序与它们出现在HTML代码中的顺序相同，可以依索引和name属性来访问。</p>
+<p>若多个表单空间都使用同一个name（如radio按钮），那么就会返回以该name命名的一个NodeList。</p>
+<p>其实也可以通过表单控件的name属性来访问控件，但此种方式是为了与旧浏览器兼容，尽量使用elements的方式。</p>
+<h5 id="共有的表单字段属性"><a href="#共有的表单字段属性" class="headerlink" title="共有的表单字段属性"></a>共有的表单字段属性</h5><p>除了fieldset元素外，所有表单字段都有相同的一组属性和方法：（input类型可以表示多种表单字段，有些属性仅适用于某些字段）</p>
+<ul>
+<li>disabled，布尔值，表示当前字段是否被禁用</li>
+<li>form，指向当前字段所属表单的指针，只读</li>
+<li>name，当前字段的名称</li>
+<li>readOnly，布尔值，表示当前字段是否只读</li>
+<li>tabIndex，表示当前字段的切换序号（tab的顺序）</li>
+<li>type，当前字段的类型，如radio、text等</li>
+<li>value，当前字段提交给服务器的值，（对file类型来说是只读的，表示文件路径）<br>除了form属性之外，可以通过js动态修改属性。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> field = form.elements[<span class="number">0</span>];</span><br><span class="line">field.value = <span class="string">'king'</span>;</span><br><span class="line">field.focus(); <span class="comment">// 聚焦到field字段上</span></span><br><span class="line">field.disabled = <span class="literal">true</span>; <span class="comment">// 禁用当前字段</span></span><br><span class="line">field.type = <span class="string">'checkbox'</span>; <span class="comment">// 对input元素可用，改变类型，</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>禁止重复提交可以在第一次提交表单后将按钮禁用掉，但需要注意，这种方式只能在submit事件内禁用，而不能在click事件内禁用，因为不同浏览器之间onclick和submit事件之间存在时差。</p>
+<p>关于type属性，不同元素具有的type属性值不同，有些能动态修改有些无法修改</p>
+<table>
+<thead>
+<tr>
+<th>说明</th>
+<th>HTML代码</th>
+<th>type值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单选列表</td>
+<td><code>&lt;select&gt; &lt;/select&gt;</code></td>
+<td>select-one, 只读</td>
+</tr>
+<tr>
+<td>多选列表</td>
+<td><code>&lt;select multiple&gt; &lt;/select&gt;</code></td>
+<td>select-multiple, 只读</td>
+</tr>
+<tr>
+<td>按钮</td>
+<td><code>&lt;button&gt; &lt;/button&gt;</code></td>
+<td>默认submit,也可以显示设置</td>
+</tr>
+<tr>
+<td>普通按钮</td>
+<td><code>&lt;button type=&quot;button&quot;&gt; &lt;/button&gt;</code></td>
+<td>button</td>
+</tr>
+<tr>
+<td>重置按钮</td>
+<td><code>&lt;button type=&quot;reset&quot;&gt; &lt;/button&gt;</code></td>
+<td>reset</td>
+</tr>
+</tbody>
+</table>
+<h5 id="共有的表单字段方法"><a href="#共有的表单字段方法" class="headerlink" title="共有的表单字段方法"></a>共有的表单字段方法</h5><p>每个表单字段都有两个方法，focus/blur,focus方法用于将浏览器的焦点设置到表单字段，即激活表单字段，使其可以响应键盘事件。</p>
+<p>H5为表单字段新增了一个autofocus属性，在支持的浏览器中，不用js就能自动把焦点移动到相应字段。</p>
+<p>与focus对应的blur方法是从元素上移走焦点，仅仅只是移走焦点，不会将焦点转移到其他控件上。</p>
+<h5 id="共有的表单字段事件"><a href="#共有的表单字段事件" class="headerlink" title="共有的表单字段事件"></a>共有的表单字段事件</h5><p>所有表单字段都支持如下3个事件：</p>
+<ul>
+<li>blur， 当前字段失去焦点时触发</li>
+<li>focus，当前字段获得焦点时触发</li>
+<li>change，对input和textarea元素，在它们失去焦点且value值改变时触发，对于select元素，在其选项改变时触发。</li>
+</ul>
+<h3 id="文本框脚本"><a href="#文本框脚本" class="headerlink" title="文本框脚本"></a>文本框脚本</h3><p>在HTML中，有2种方式表现文本框，一种是使用input元素的单行文本框，另一种是使用textarea的多行文本框。<br>单行文本框通过size属性可以指定文本框中能够显示的字符数，maxlength属性能指定文本框的最大字符数，value元素属性能设置初始值。<br>多行文本框设置rows指定行数，cols指定列数，其初始值在元素之间。</p>
+<p>两种文本框都可以通过value对象属性读取或设置，不建议用DOM的方法，即不要修改文本框的DOM值，因为对value属性的修改不一定反映到DOM中。</p>
+<h4 id="选择文本"><a href="#选择文本" class="headerlink" title="选择文本"></a>选择文本</h4><p>文本框都支持selet方法，用于选择文本框中的所有文本，调用此方法时浏览器（Opera除外）会将焦点设置到文本框上。</p>
+<p>在选择了文本框中的文本时就会触发select事件，H5添加了两个属性selectionStart/selectionEnd，表示所选文本的范围（即开头和结尾的偏移量）。</p>
+<p>IE8-提供另外一个版本document.selection对象，该对象保存整个文档范围内选择的文本信息，配合select事件即可获取用户选择的文本。</p>
+<p>H5为选择文本框内的部分文本提供了setSelectionRange方法，该方法接收2个参数，要选择的第一个字符的索引，要选择的最后一个字符之后的字符索引，（类似substring的2个参数）。</p>
+<p>IE8-则可使用createTextRange方法创建一个范围，然后使用collase方法将范围折叠，最后调用moveStart、moveEnd方法并传入字符索引。</p>
+<h4 id="过滤输入"><a href="#过滤输入" class="headerlink" title="过滤输入"></a>过滤输入</h4><p>一个常见的场景就是过滤用户的输入，比如输入特定格式的数据。</p>
+<h5 id="屏蔽字符"><a href="#屏蔽字符" class="headerlink" title="屏蔽字符"></a>屏蔽字符</h5><p>当需要输入的文本中包含或不包含某些字符时，可以通过监听keypress事件，阻止特定的字符编码,比如只允许输入数值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">EventUtil.addHandler(textbox, <span class="string">'keypress'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  event = EventUtil.getEvent(event);</span><br><span class="line">  <span class="keyword">var</span> target = EventUtil.getTarget(event);</span><br><span class="line">  <span class="keyword">var</span> charCode = EventUtil.getcharCode(event);</span><br><span class="line">  <span class="comment">// 所有非数字的字符，以及Ctrl符合键</span></span><br><span class="line">  <span class="keyword">if</span>( !<span class="regexp">/\d/</span>.test(<span class="built_in">String</span>.fromCharCode(charCode)) &amp;&amp; charCode &gt; <span class="number">9</span> &amp;&amp; !event.ctrlKey)&#123;</span><br><span class="line">    EventUtil.preventDefault(event);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h5 id="操作剪贴板"><a href="#操作剪贴板" class="headerlink" title="操作剪贴板"></a>操作剪贴板</h5><p>H5规范中有6个剪贴板事件：</p>
+<ul>
+<li>beforecopy, 在发生复制操作前触发</li>
+<li>copy</li>
+<li>beforecut，在发生剪切操作前触发</li>
+<li>cut</li>
+<li>beforepaste，在发生粘贴操作前触发</li>
+<li>paste<br>可以通过clipboardData对象访问剪贴板中的数据，在IE中该对象是window对象的属性，其他浏览器中该对象是event对象的属性。clipboardData对象有3个方法，getData、setData、clearData。</li>
+</ul>
+<p>getData接收一个参数表示要取得的数据的格式，IE中可填’text’或’URL’,其他浏览器填写MIME类型，用’text/plain’。</p>
+<p>setData接收2个参数，一个数据类型，一个是文本内容。</p>
+<h4 id="自动切换焦点"><a href="#自动切换焦点" class="headerlink" title="自动切换焦点"></a>自动切换焦点</h4><p>配合文本框的maxlength属性，监听keyup事件，每当文本框内容达到最大字符数后就自动聚焦到下一个文本框。</p>
+<h4 id="H5约束验证API"><a href="#H5约束验证API" class="headerlink" title="H5约束验证API"></a>H5约束验证API</h4><p>H5新增了一些功能为了在表单提交前验证数据，但目前此功能由各浏览器自行实现，所以差异很大。</p>
+<ol>
+<li>required属性，必填</li>
+<li>type=”email”，type=”url”， type=”number”</li>
+<li>其他如range、datetime、date、month、week、time等支持程度不一</li>
+<li>pattern属性，用正则匹配文本</li>
+<li>使用checkValidity方法检测表单某字段是否有效，该方法返回布尔值</li>
+<li>控件的validity属性则返回一个对象，对象中每个属性都表示了对应字段为何有效/无效</li>
+<li>novalidate属性，表示禁用验证，可以通过表单对象上对应的属性<code>form.noValidate = true/false</code>设置。</li>
+</ol>
+<h3 id="选择框脚本"><a href="#选择框脚本" class="headerlink" title="选择框脚本"></a>选择框脚本</h3><p>选择框是通过selcet和option元素创建的。在获取选择框的信息时，推荐通过原生DOM访问获取，而不通过getAttribute、nodeValue等方法。<br><a href="http://www.w3school.com.cn/jsref/dom_obj_select.asp" target="_blank" rel="noopener">HTML DOM Select 对象</a>、<a href="http://www.w3school.com.cn/jsref/dom_obj_option.asp" target="_blank" rel="noopener">HTML DOM Option 对象</a></p>
+<p><strong>但在实际使用中，由于选择框无法设置样式，所以多采用自定义的选择框，原生选择框使用较少。</strong></p>
+<h3 id="富文本编辑"><a href="#富文本编辑" class="headerlink" title="富文本编辑"></a>富文本编辑</h3><p>富文本编辑（WYSIWYG），在网页中编辑富文本内容，由IE最先引入而且成为事实标准。</p>
+<p>本质就是在页面中嵌入一个包含空HTML的iframe，通过设置iframe的document.designMode属性，这个空白的HTML页面可以被编辑，而编辑对象则是该页面body元素的HTML代码，designMode属性有2个可能的值：’off’默认值，’on’，设置为off时，整个文档都可以编辑，然后就可以像文字处理软件一样编辑了。</p>
+<p>而且可以为空白页面应用CSS样式，修改可编辑区字段的外观。</p>
+<h4 id="使用contenteditable属性"><a href="#使用contenteditable属性" class="headerlink" title="使用contenteditable属性"></a>使用contenteditable属性</h4><p>另一种编辑富文本内容的方式是使用名为contenteditable的特殊属性，也由IE最先引入，它比iframe方法更好是因为其可以应用给页面中的任意元素，而且不需要iframe和js的配合。<br><code>&lt;div id=&quot;richedit&quot; contentEditable&gt;</code><br>可以通过元素的contentEditable属性打开/关闭编辑模式，值为字符串，’true’表示打开，’false’表示关闭，’inherit’表示从父元素继承（在contentEditable元素内可创建元素或删除元素）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">richedit.contentEditable = <span class="string">'true'</span>;</span><br></pre></td></tr></table></figure></p>
+<h4 id="操作富文本"><a href="#操作富文本" class="headerlink" title="操作富文本"></a>操作富文本</h4><p>与iframe富文本编辑器交互的主要方式，就是使用document.execCommand方法，该方法可以对文档执行预定义的命令，而且可以应用大多数格式，接收3个参数：字符串（要执行命令名）、布尔值（表示浏览器是否应该为当前命令提供一个用户界面）、值（表示执行命令需要的值，若不必则为null，若需要则为特定类型即可）。</p>
+<p>详细查看：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/execCommand" target="_blank" rel="noopener">document.execCommand</a></p>
+<p>在富文本编辑器中，使用iframe的getSelection方法可以确定实际选择的文本，该方法是window对象的document对象，调用会返回当前选择文本的Selection对象。<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Selection" target="_blank" rel="noopener">Selection对象</a></p>
+<p>注：由于富文本编辑器其实并不是一个表单控件，所以需要显式获取所有HTML内容。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/09/09/js-pro22/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/09/01/es6/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

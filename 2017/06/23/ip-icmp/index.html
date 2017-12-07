@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            IP/ICMP Security | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,network,security,ip,icmp,ip/icmp">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="IP/ICMP Security | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="network"> <meta property="og:article:tag" content="security"> <meta property="og:article:tag" content="ip"> <meta property="og:article:tag" content="icmp"> <meta property="og:article:tag" content="ip/icmp"> 
+
+    
+        <meta property="article:published_time" content="Fri Jun 23 2017 14:08:49 GMT+0800" />
+        <meta property="article:modified_time" content="Fri Jun 23 2017 14:08:49 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="IP/ICMP Security | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/06/23/ip-icmp/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/06/23/ip-icmp/index.html",
+    "headline": "IP/ICMP Security",
+    "datePublished": "Fri Jun 23 2017 14:08:49 GMT+0800",
+    "dateModified": "Fri Jun 23 2017 14:08:49 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",network,security,ip,icmp,ip/icmpnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP-Protocol"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#IP-Protocol" class="headerlink" title="IP Protocol"></a>IP Protocol</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Purpose-of-IP"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#Purpose-of-IP" class="headerlink" title="Purpose of  IP"></a>Purpose of  IP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP-Header"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#IP-Header" class="headerlink" title="IP Header"></a>IP Header</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#IP-OPTIONS"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text"><a href="#IP-OPTIONS" class="headerlink" title="IP OPTIONS"></a>IP OPTIONS</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#IP-Fragmentation"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text"><a href="#IP-Fragmentation" class="headerlink" title="IP Fragmentation"></a>IP Fragmentation</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Attacks-against-IP"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#Attacks-against-IP" class="headerlink" title="Attacks against IP"></a>Attacks against IP</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Tiny-Fragment-Attack"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text"><a href="#Tiny-Fragment-Attack" class="headerlink" title="Tiny Fragment Attack"></a>Tiny Fragment Attack</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Overlapping-Fragment-Attack"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text"><a href="#Overlapping-Fragment-Attack" class="headerlink" title="Overlapping Fragment Attack"></a>Overlapping Fragment Attack</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ICMP-Protocol-and-Its-Security"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#ICMP-Protocol-and-Its-Security" class="headerlink" title="ICMP Protocol and Its Security"></a>ICMP Protocol and Its Security</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ICMP-Packets"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#ICMP-Packets" class="headerlink" title="ICMP Packets"></a>ICMP Packets</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Echo-request-and-reply-message-TYPE-8-and-TYPE-0"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text"><a href="#Echo-request-and-reply-message-TYPE-8-and-TYPE-0" class="headerlink" title="Echo request and reply message (TYPE=8 and TYPE=0)"></a>Echo request and reply message (TYPE=8 and TYPE=0)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ICMP-Route-Redirect"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text"><a href="#ICMP-Route-Redirect" class="headerlink" title="ICMP Route Redirect"></a>ICMP Route Redirect</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Attacks-Using-ICMP-Messages"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#Attacks-Using-ICMP-Messages" class="headerlink" title="Attacks Using ICMP Messages"></a>Attacks Using ICMP Messages</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Smurf-Attacks"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text"><a href="#Smurf-Attacks" class="headerlink" title="Smurf Attacks"></a>Smurf Attacks</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Ping-of-Death"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text"><a href="#Ping-of-Death" class="headerlink" title="Ping of Death"></a>Ping of Death</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ICMP-Redirect-Attack"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text"><a href="#ICMP-Redirect-Attack" class="headerlink" title="ICMP Redirect Attack"></a>ICMP Redirect Attack</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A-SMALL-SNIFFER"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#A-SMALL-SNIFFER" class="headerlink" title="A SMALL SNIFFER"></a>A SMALL SNIFFER</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                IP/ICMP Security
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Jun 23, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Jun 23, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/icmp/">icmp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/ip/">ip</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/ip-icmp/">ip/icmp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/network/">network</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/security/">security</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=IP/ICMP Security&url=https://github.com/xmoyKING/2017/06/23/ip-icmp/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=IP/ICMP Security&url=https://github.com/xmoyKING/2017/06/23/ip-icmp/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/06/23/ip-icmp/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/06/23/ip-icmp/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Overview：</p>
+<ul>
+<li>Introduction of IP and ICMP</li>
+<li>Potential Attacks due to vulnerabilities in IP and ICMP</li>
+<li>Introduction to a sniffer program</li>
+</ul>
+<h2 id="IP-Protocol"><a href="#IP-Protocol" class="headerlink" title="IP Protocol"></a>IP Protocol</h2><p>Connectionless Delivery System</p>
+<ul>
+<li>Unreliable: packets  may be lost, duplicated, delayed or out of order</li>
+<li>Connectionless: each packet is treated independently from all others</li>
+<li>Best effort: tries its best</li>
+</ul>
+<h3 id="Purpose-of-IP"><a href="#Purpose-of-IP" class="headerlink" title="Purpose of  IP"></a>Purpose of  IP</h3><p>Define the basic unit of data transfer<br>Performs routing function<br>Include rules about unreliable packet delivery:</p>
+<ul>
+<li>How hosts and routers should process packets;</li>
+<li>How and when error messages should be generated;</li>
+<li>The conditions under which packets can be discarded</li>
+</ul>
+<h3 id="IP-Header"><a href="#IP-Header" class="headerlink" title="IP Header"></a>IP Header</h3><p>In Chinese:<a href="http://blog.csdn.net/babyfans/article/details/8248181" target="_blank" rel="noopener">ip包格式说明</a></p>
+<p><img src="./ip_header.png" alt="IP Header"></p>
+<ul>
+<li>Vers:<br>Current IP version, IPv4<br>IPv6 will have a different header</li>
+<li>HLEN: header length in  32-bit words<br>normally 5, i.e. 20 bytes<br>Max 60 bytes<br>Header can be variable length (IP option)</li>
+<li>TOS (3 bit unused, 4 TOS bits, 1 unused)<br>1,  min delay, 0x10; 2, max throughput, 0x08; 3, max reliability, 0x40; 4, min cost, 0x20;<br>Only one bit can be set</li>
+<li>Total Length: of datagram, in bytes<br>Max size is 65535</li>
+<li>IDENT, FLAGS, FRAGMENT OFFSET:<br>Used for fragmentation and reassembly, will talk about this later </li>
+<li>TTL (Time To Live): upper limit on # routers that a datagram may pass through<br>Initialized by sender, and decremented by each router.  When zero, discard datagram. This can stop routing loops<br>Example: ping –t TTL IP allows us to specify the TTL field<br>Question: non-root users are not supposed to be able to modify the TTL field, how does ping do that?  </li>
+<li>TYPE: IP needs to know to what protocol it should hand the received IP datagram<br>1, ICMP; 2 IGMP; 6 TCP; 17 UDP; </li>
+<li>HEADER CHECKSUM    16-bit 1’s complement checksum<br>Calculated only over header , Recomputed at each hop </li>
+</ul>
+<p>An example of IP datagram<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">Header</span> <span class="selector-tag">length</span>: 20 <span class="selector-tag">octet</span>    </span><br><span class="line"><span class="selector-tag">TYPE</span>: 01 (<span class="selector-tag">ICMP</span>)    </span><br><span class="line"><span class="selector-tag">Source</span> <span class="selector-tag">IP</span>: 128<span class="selector-class">.10</span><span class="selector-class">.2</span><span class="selector-class">.3</span>    </span><br><span class="line"><span class="selector-tag">Destination</span> <span class="selector-tag">IP</span>: 128<span class="selector-class">.10</span><span class="selector-class">.2</span><span class="selector-class">.8</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="./ip_header_example.png" alt="IP Header Example"></p>
+<h4 id="IP-OPTIONS"><a href="#IP-OPTIONS" class="headerlink" title="IP OPTIONS"></a>IP OPTIONS</h4><ul>
+<li>IP OPTIONS field is not required in every datagram    Options are included primarily for network testing or debugging.  The length of IP OPTIONS field varies depending on which options are selected. </li>
+<li>Record Route Option   The sender allocates space in the option to hold IP addresses of the routers (i.e., an empty list is included in the option field)    Each router records its IP address to the record route list;  If the list is full, router will stop adding to the list</li>
+<li>Timestamp option; Source route option;</li>
+</ul>
+<h4 id="IP-Fragmentation"><a href="#IP-Fragmentation" class="headerlink" title="IP Fragmentation"></a>IP Fragmentation</h4><ol>
+<li>Why do we need fragmentation?   <ul>
+<li>MTU:  Maximum Transmission Unit    </li>
+<li>An IP datagram can contain up to 65535 total octets (including header)</li>
+<li>Network hardware limits maximum size of frame (e.g., Ethernet limited to 1500 octets, i.e.,MTU=1500; FDDI limited to approximately 4470 octets/frame)</li>
+</ul>
+</li>
+<li>IP fragmentation    <ul>
+<li>IP layers divide an IP datagram into several smaller fragments based on MTU    </li>
+<li>Fragment uses same header format as datagram </li>
+<li>Each fragment is routed independently </li>
+</ul>
+</li>
+<li>How is an IP datagram fragmented?   </li>
+<li>How to fragment an IP datagram?<ul>
+<li>IDENT: unique number to identify an IP datagram; fragments with the same identifier belong to the same IP datagram    </li>
+<li>FRAGMENT OFFSET:  Specifies where data belongs in the original datagram  (dividable by 8 octets   )</li>
+<li>FLAGS:<br>bit 0: reserved<br>bit 1: do not fragment<br>bit 2: more fragments. This bit is turned off in the last fragment (Q: why do we need this bit?)</li>
+</ul>
+</li>
+<li>How are IP fragments reassembled?    <ul>
+<li>All the IP fragments of a datagram will be assembled before the datagram is delivered to the layers above.    </li>
+<li>Where should they be assembled? At routers or the destination?<br>They are assembled at the destination.<br>IP reassembly uses a timer. If timer expires and there are still missing fragments, all the fragments will be discarded. </li>
+</ul>
+</li>
+</ol>
+<h3 id="Attacks-against-IP"><a href="#Attacks-against-IP" class="headerlink" title="Attacks against IP"></a>Attacks against IP</h3><ol>
+<li>Attack 1: Denial of Service Attack    <ul>
+<li>1st fragment: offset = 0   </li>
+<li>2nd fragment: offset = 64800   </li>
+<li>Result: The target machine will allocate 64 kilobytes of memory, which is typically held for 15 to 255 seconds. Windows 2000, XP, and almost all versions of Unix are vulnerable. </li>
+</ul>
+</li>
+<li>Attack 2: TearDrop    <ul>
+<li>First packet :    offset = 0    payload size N    More Fragments bit on    </li>
+<li>Second packet:    More Fragments bit off    offset + payload size  &lt; N </li>
+<li>i.e., the 2 fragment fits entirely inside the first one.</li>
+<li>When OS tries to put these two fragments together, it crashes. </li>
+</ul>
+</li>
+<li>Attack 3: Overlapping attacks against firewalls  <ul>
+<li>Many firewalls inspect each packet (fragment) separately. </li>
+<li>FO==0, filter; otherwise, pass without filter</li>
+<li>When filtering rule based on TCP header, but the TCP header is fragmented, the rule will fail    </li>
+<li>TCP header is at the beginning of the data area of an IP packet.    </li>
+<li>Firewalls often check TCP header: for example, SYN packet for connection request.<br>Tiny Fragment Attack: Assumption: firewalls only check the packets with offset=0.<br>Overlapping attacks: Assumption: firewalls only check the packets with offset=0. </li>
+</ul>
+</li>
+</ol>
+<h4 id="Tiny-Fragment-Attack"><a href="#Tiny-Fragment-Attack" class="headerlink" title="Tiny Fragment Attack"></a>Tiny Fragment Attack</h4><ul>
+<li>RFC 791 : datagram with length 68 should not fragment anymore; IP header would be 60; and a minimum fragment is 8 bytes</li>
+<li>However, 8 bytes only include TCP Sport and DPort</li>
+<li>Prevention Methods<br>If FO == 0 and Protocol = TCP and TRANSPORTLEN &lt; tmin,   then drop packet<br>If FO ==1, then drop packet</li>
+</ul>
+<h4 id="Overlapping-Fragment-Attack"><a href="#Overlapping-Fragment-Attack" class="headerlink" title="Overlapping Fragment Attack"></a>Overlapping Fragment Attack</h4><ul>
+<li>A filter is to drop TCP connection request packets<br>First fragment comes with SYN=1, ACK=1;<br>Second fragment’s FO == 1, and with SYN=1, ACK = 0;</li>
+<li>Prevention method<br>If FO == 1 and Protocol == TCP then Drop packet;</li>
+</ul>
+<h2 id="ICMP-Protocol-and-Its-Security"><a href="#ICMP-Protocol-and-Its-Security" class="headerlink" title="ICMP Protocol and Its Security"></a>ICMP Protocol and Its Security</h2><ul>
+<li>Motivation<br>IP may fail to deliver datagrams because<ul>
+<li>the destination is not available</li>
+<li>the time-to-live counter expires</li>
+<li>routers become congested<br>We need to let the sender know what has happened</li>
+</ul>
+</li>
+<li>Purpose<br>ICMP allows routers (and hosts) to send error or control messages to other routers or hosts<br>ICMP provides communication between the Internet Protocol software on one machine and the Internet Protocol software on another</li>
+<li>ICMP messages are not generated for errors that result from datagrams carrying ICMP error messages. Why?</li>
+<li>ICMP is only sent to the original source. Why?</li>
+<li>The Common ICMP header<ul>
+<li>Each ICMP message has its own format, they all begin with the same three fields</li>
+<li>TYPE(8-bit): identifies the message</li>
+<li>CODE(8-bit): provides further information about the message type</li>
+<li>CHECKSUM(16-bit)</li>
+<li>In addition, ICMP messages that report errors always include the header and the first 64 data bits of the datagram causing the problem.</li>
+</ul>
+</li>
+<li>ICMP Message TYPE<br>0:Echo Reply<br>3:Destination Unreachable<br>4:Source Quency<br>5:Redirect (chagearoute)<br>8:Echo Request<br>9:Router Advertisement<br>10:Router Solicitation<br>11:time Exceeded for a Datagram<br>12:Parameter Problem on aDatagram<br>13:timestamp Request<br>14:Timestamp Reply<br>17:Address Mask Request<br>18:Address Mask Reply</li>
+</ul>
+<h3 id="ICMP-Packets"><a href="#ICMP-Packets" class="headerlink" title="ICMP Packets"></a>ICMP Packets</h3><h4 id="Echo-request-and-reply-message-TYPE-8-and-TYPE-0"><a href="#Echo-request-and-reply-message-TYPE-8-and-TYPE-0" class="headerlink" title="Echo request and reply message (TYPE=8 and TYPE=0)"></a>Echo request and reply message (TYPE=8 and TYPE=0)</h4><ul>
+<li>Used to test reachability</li>
+<li>The format of echo request/reply packets is the following:<br><img src="./format_of_echo_request_reply_packets.png" alt="echo request/reply packets"></li>
+</ul>
+<h4 id="ICMP-Route-Redirect"><a href="#ICMP-Route-Redirect" class="headerlink" title="ICMP Route Redirect"></a>ICMP Route Redirect</h4><ul>
+<li>Format of ICMP route redirect message:</li>
+</ul>
+<p><img src="./format_of_route_redirect_packets.png" alt="Format of ICMP route redirect"></p>
+<ul>
+<li>Routers exchange routing information  periodically to accommodate network changes and keep their routes up-to-date; but hosts don’t do this.</li>
+<li>A general rule:<br>Routers are assumed to know correct routes; hosts begin with minimal routing information and learn new routes from routers</li>
+<li>IP hosts typically only configured with an IP address of a default router; any traffic is forwarded to the default IP router</li>
+<li>When a router detects a host using a nonoptimal route, it sends the host ICMP redirect message; requesting host change its route</li>
+<li>An example:<br>Gateway G1, receives an Internet  datagram from a host ;<br>G1 checks its routing table and obtains the address of the next gateway, G2, the next hop on the route of the packet;<br>However, if G2  and the host are on the same network, a redirect message is sent to the host</li>
+</ul>
+<h3 id="Attacks-Using-ICMP-Messages"><a href="#Attacks-Using-ICMP-Messages" class="headerlink" title="Attacks Using ICMP Messages"></a>Attacks Using ICMP Messages</h3><p>Mapping Network Topology</p>
+<ul>
+<li>For an attack on a network, mapping is the first step</li>
+<li>Sending individual ICMP echo: this is ping command</li>
+<li>Sending ICMP echo request to the network and broadcast address of a network</li>
+</ul>
+<h4 id="Smurf-Attacks"><a href="#Smurf-Attacks" class="headerlink" title="Smurf Attacks"></a>Smurf Attacks</h4><ul>
+<li>Ping an IP-directed broadcast address, with the (spoofed) IP of a victim as the source address.</li>
+<li>Until 1999,standad required routers to forward such packets.</li>
+<li>Impact: All hosts on the network will respond to the victim, and thus overwhelm the victim.</li>
+<li>This is a denial-of-service attack.</li>
+<li>The key idea of this attack: Amplification and IP spoofing</li>
+<li>This is a protocol vulnerability. To solve this problem, we can do the following:*<br>Disable IP-directed broadcasts at the router.<br>Configure the operating system to prevent the machine from responding to ICMP packets sent to IP broadcast addresses.</li>
+</ul>
+<h4 id="Ping-of-Death"><a href="#Ping-of-Death" class="headerlink" title="Ping of Death"></a>Ping of Death</h4><ul>
+<li>ICMP echo request with fragmented packets</li>
+<li>Maximum legal size of an ICMP echo request packet:<br>65536 - 20- 8 = 65507</li>
+<li>Fragmentation allows the bypass of the maximum size. For the last piece of the fragment, the following is possible: (offset + size) &gt;65535</li>
+<li>Impact: some operating systems will crash</li>
+<li>Same attack with different IP protocol</li>
+</ul>
+<h4 id="ICMP-Redirect-Attack"><a href="#ICMP-Redirect-Attack" class="headerlink" title="ICMP Redirect Attack"></a>ICMP Redirect Attack</h4><ul>
+<li>Send an ICMP redirect packet to the victim, asking it to send its packet to another “router”</li>
+<li>Impact: man-in-the-middle attacks or DOS attacks</li>
+<li>RFC states that system must follow redirect unless it is a router</li>
+<li>Winfreez(e):  in windows,<br>ICMP Redirect: Yourself is the quickest link to Z<br>The victim changes its routing table<br>Host sends packets to itself in an infinite loop</li>
+</ul>
+<h2 id="A-SMALL-SNIFFER"><a href="#A-SMALL-SNIFFER" class="headerlink" title="A SMALL SNIFFER"></a>A SMALL SNIFFER</h2><p>Programming with Pcap</p>
+<ul>
+<li>To capture packets using Pcap:<br>To specify the interface to sniff on;<br>Initialize pcap<br>To specify a filter and compile it<br>Tell pcap to enter a loop;<br>Close pcap;</li>
+</ul>
+<ol>
+<li>Pcap: get default interface</li>
+<li>Initialize a Pcap</li>
+<li>Create a filter</li>
+<li>Enter a Loop</li>
+<li>Close a pcap</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;pcap.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;netinet/ip.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;netinet/ip_icmp.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;netinet/tcp.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;netinet/udp.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;netinet/ether.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;arpa/inet.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* #include&lt;pcap/bpf.h&gt; */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ETHER_SIZE 14</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_packet</span><span class="params">(u_char*args, <span class="keyword">const</span> struct pcap_pkthdr *header,<span class="keyword">const</span> u_char *packet)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span> * payload;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"packet number: %d\n"</span>,count++);</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">ip</span> * <span class="title">ip</span> = (<span class="title">struct</span> <span class="title">ip</span> *)(<span class="title">packet</span> + <span class="title">ETHER_SIZE</span>);</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"IP header length: %d\n"</span>,ip-&gt;ip_hl&lt;&lt;<span class="number">2</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"From %s\n"</span>,inet_ntoa(ip-&gt;ip_src));</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"To %s\n"</span>,inet_ntoa(ip-&gt;ip_dst));</span><br><span class="line">	<span class="keyword">int</span> ip_hl = ip-&gt;ip_hl&lt;&lt;<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">switch</span>(ip-&gt;ip_p)&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">case</span> IPPROTO_TCP:</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"Protocol TCP\n"</span>);</span><br><span class="line">			<span class="class"><span class="keyword">struct</span> <span class="title">tcphdr</span> *<span class="title">tcp</span> = (<span class="title">struct</span> <span class="title">tcphdr</span> *)(<span class="title">packet</span> + 14 + <span class="title">ip_hl</span>);</span></span><br><span class="line">			<span class="keyword">int</span> h_size = tcp-&gt;doff*<span class="number">4</span>;</span><br><span class="line">			<span class="keyword">int</span> payload_size = ntohs(ip-&gt;ip_len)-ip_hl-h_size;</span><br><span class="line">			<span class="keyword">if</span>(payload_size&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			payload = (u_char *)(tcp+<span class="number">1</span>);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"payload is: %s\n"</span>,payload);&#125;			</span><br><span class="line">		<span class="keyword">break</span>;&#125;</span><br><span class="line">		<span class="keyword">case</span> IPPROTO_UDP:<span class="built_in">printf</span>(<span class="string">"Protocol UDP\n"</span>);<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> IPPROTO_ICMP:<span class="built_in">printf</span>(<span class="string">"Protocol ICMP\n"</span>);<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> IPPROTO_IP:<span class="built_in">printf</span>(<span class="string">"Protocol IP\n"</span>);<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>:<span class="built_in">printf</span>(<span class="string">"Protocol unknown\n"</span>);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>*argv[])</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> *dev, errbuf[PCAP_ERRBUF_SIZE];</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">bpf_program</span> <span class="title">fp</span>;</span></span><br><span class="line">	<span class="keyword">char</span> filter_exp[] = <span class="string">"port 23"</span>;</span><br><span class="line">	bpf_u_int32 mask;</span><br><span class="line">	bpf_u_int32 net;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">pcap_pkthdr</span> <span class="title">header</span>;</span></span><br><span class="line">	<span class="keyword">const</span> u_char *packet;	</span><br><span class="line">	<span class="keyword">int</span> num_packets = <span class="number">10</span>;</span><br><span class="line">	</span><br><span class="line">	dev = pcap_lookupdev(errbuf);</span><br><span class="line">	<span class="keyword">if</span>(dev==<span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"ERROR:%s\n"</span>,errbuf);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"The sniff interface is:%s\n"</span>,dev);</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(pcap_lookupnet(dev,&amp;net,&amp;mask,errbuf)==<span class="number">-1</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"ERROR:%s\n"</span>,errbuf);</span><br><span class="line">		net = <span class="number">0</span>;</span><br><span class="line">		mask = <span class="number">0</span>;</span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">pcap_t</span> * handle = pcap_open_live(dev,BUFSIZ,<span class="number">1</span>,<span class="number">0</span>,errbuf);</span><br><span class="line">	<span class="keyword">if</span>(handle == <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"ERROR:%s\n"</span>,errbuf);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(pcap_compile(handle,&amp;fp,filter_exp,<span class="number">0</span>,net)==<span class="number">-1</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Can't parse filter %s:%s\n"</span>,filter_exp,pcap_geterr(handle));</span><br><span class="line">		<span class="keyword">return</span>(<span class="number">2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">if</span>(pcap_setfilter(handle,&amp;fp)==<span class="number">-1</span>)&#123;	</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"cant' install filter %s:%s\n"</span>,filter_exp,pcap_geterr(handle));		      <span class="keyword">return</span>(<span class="number">2</span>);	</span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Hello\n"</span>);	</span><br><span class="line"></span><br><span class="line"><span class="comment">//	packet = pcap_next(handle,&amp;header);</span></span><br><span class="line"><span class="comment">//	printf("Get a packet with length %d.\n",header.len);</span></span><br><span class="line"></span><br><span class="line">	pcap_loop(handle,num_packets,get_packet,<span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	pcap_freecode(&amp;fp);</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	pcap_close(handle);</span><br><span class="line">	<span class="keyword">return</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/06/25/linux-rootkit/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/21/web-type-guidlines/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

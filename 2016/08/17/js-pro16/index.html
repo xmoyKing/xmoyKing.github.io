@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JavaScript高级程序设计-16-客户端检测 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,js-pro">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JavaScript高级程序设计-16-客户端检测 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="js-pro"> 
+
+    
+        <meta property="article:published_time" content="Wed Aug 17 2016 09:14:05 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:09 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JavaScript高级程序设计-16-客户端检测 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2016/08/17/js-pro16/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2016/08/17/js-pro16/index.html",
+    "headline": "JavaScript高级程序设计-16-客户端检测",
+    "datePublished": "Wed Aug 17 2016 09:14:05 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,js-pronull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#能力检测"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x80FD;&#x529B;&#x68C0;&#x6D4B;" class="headerlink" title="&#x80FD;&#x529B;&#x68C0;&#x6D4B;"></a>&#x80FD;&#x529B;&#x68C0;&#x6D4B;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#更可靠的能力检测"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#&#x66F4;&#x53EF;&#x9760;&#x7684;&#x80FD;&#x529B;&#x68C0;&#x6D4B;" class="headerlink" title="&#x66F4;&#x53EF;&#x9760;&#x7684;&#x80FD;&#x529B;&#x68C0;&#x6D4B;"></a>&#x66F4;&#x53EF;&#x9760;&#x7684;&#x80FD;&#x529B;&#x68C0;&#x6D4B;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#能力检测不是浏览器检测"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#&#x80FD;&#x529B;&#x68C0;&#x6D4B;&#x4E0D;&#x662F;&#x6D4F;&#x89C8;&#x5668;&#x68C0;&#x6D4B;" class="headerlink" title="&#x80FD;&#x529B;&#x68C0;&#x6D4B;&#x4E0D;&#x662F;&#x6D4F;&#x89C8;&#x5668;&#x68C0;&#x6D4B;"></a>&#x80FD;&#x529B;&#x68C0;&#x6D4B;&#x4E0D;&#x662F;&#x6D4F;&#x89C8;&#x5668;&#x68C0;&#x6D4B;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#怪癖检测"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x602A;&#x7656;&#x68C0;&#x6D4B;" class="headerlink" title="&#x602A;&#x7656;&#x68C0;&#x6D4B;"></a>&#x602A;&#x7656;&#x68C0;&#x6D4B;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户代理检测"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x7528;&#x6237;&#x4EE3;&#x7406;&#x68C0;&#x6D4B;" class="headerlink" title="&#x7528;&#x6237;&#x4EE3;&#x7406;&#x68C0;&#x6D4B;"></a>&#x7528;&#x6237;&#x4EE3;&#x7406;&#x68C0;&#x6D4B;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户代理字符串检测技术"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#&#x7528;&#x6237;&#x4EE3;&#x7406;&#x5B57;&#x7B26;&#x4E32;&#x68C0;&#x6D4B;&#x6280;&#x672F;" class="headerlink" title="&#x7528;&#x6237;&#x4EE3;&#x7406;&#x5B57;&#x7B26;&#x4E32;&#x68C0;&#x6D4B;&#x6280;&#x672F;"></a>&#x7528;&#x6237;&#x4EE3;&#x7406;&#x5B57;&#x7B26;&#x4E32;&#x68C0;&#x6D4B;&#x6280;&#x672F;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#识别呈现引擎"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text"><a href="#&#x8BC6;&#x522B;&#x5448;&#x73B0;&#x5F15;&#x64CE;" class="headerlink" title="&#x8BC6;&#x522B;&#x5448;&#x73B0;&#x5F15;&#x64CE;"></a>&#x8BC6;&#x522B;&#x5448;&#x73B0;&#x5F15;&#x64CE;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#识别浏览器"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text"><a href="#&#x8BC6;&#x522B;&#x6D4F;&#x89C8;&#x5668;" class="headerlink" title="&#x8BC6;&#x522B;&#x6D4F;&#x89C8;&#x5668;"></a>&#x8BC6;&#x522B;&#x6D4F;&#x89C8;&#x5668;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#识别平台"><span class="post-toc-number">3.1.3.</span> <span class="post-toc-text"><a href="#&#x8BC6;&#x522B;&#x5E73;&#x53F0;" class="headerlink" title="&#x8BC6;&#x522B;&#x5E73;&#x53F0;"></a>&#x8BC6;&#x522B;&#x5E73;&#x53F0;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#识别Windows操作系统"><span class="post-toc-number">3.1.4.</span> <span class="post-toc-text"><a href="#&#x8BC6;&#x522B;Windows&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;" class="headerlink" title="&#x8BC6;&#x522B;Windows&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;"></a>&#x8BC6;&#x522B;Windows&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#识别移动设备"><span class="post-toc-number">3.1.5.</span> <span class="post-toc-text"><a href="#&#x8BC6;&#x522B;&#x79FB;&#x52A8;&#x8BBE;&#x5907;" class="headerlink" title="&#x8BC6;&#x522B;&#x79FB;&#x52A8;&#x8BBE;&#x5907;"></a>&#x8BC6;&#x522B;&#x79FB;&#x52A8;&#x8BBE;&#x5907;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#识别游戏系统"><span class="post-toc-number">3.1.6.</span> <span class="post-toc-text"><a href="#&#x8BC6;&#x522B;&#x6E38;&#x620F;&#x7CFB;&#x7EDF;" class="headerlink" title="&#x8BC6;&#x522B;&#x6E38;&#x620F;&#x7CFB;&#x7EDF;"></a>&#x8BC6;&#x522B;&#x6E38;&#x620F;&#x7CFB;&#x7EDF;</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用方法"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x4F7F;&#x7528;&#x65B9;&#x6CD5;"></a>&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小结"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x5C0F;&#x7ED3;" class="headerlink" title="&#x5C0F;&#x7ED3;"></a>&#x5C0F;&#x7ED3;</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JavaScript高级程序设计-16-客户端检测
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Aug 17, 2016</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js-pro/">js-pro</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript高级程序设计-16-客户端检测&url=https://github.com/xmoyKING/2016/08/17/js-pro16/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript高级程序设计-16-客户端检测&url=https://github.com/xmoyKING/2016/08/17/js-pro16/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2016/08/17/js-pro16/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2016/08/17/js-pro16/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>浏览器很多，除了都实现公共接口，每种浏览器都有各自的长处与缺点。即使是跨平台的浏览器，虽然版本相同，但也存在不一致的问题。面对普遍存在的不一致问题，要么迁就各方采用“最小公分母”的策略，要么利用各自客户端检测方法，突破或规避缺陷。</p>
+<p>实际上，浏览器之间的差异以及不同浏览器的“怪癖”（quirks）非常多，因此，客户端检测除了是一种补救措施之外，更是一种有效的开发策略。</p>
+<p>一般来说，检测Web客户端的手段很多，且各有利弊，但不到万不得已，不使用客户端检测。只要能找到更通用的方法，就应该优先采用更通用的方法，即，先设计最通用的方案，然后再使用特定于浏览器的技术增强方法。</p>
+<h3 id="能力检测"><a href="#能力检测" class="headerlink" title="能力检测"></a>能力检测</h3><p>最常用的是<strong>能力检测（特性检测）</strong>，目的不是识别特定的浏览器，而是识别浏览器的能力，采用这种方式不必顾及特定的浏览器，只要确定该浏览器支持特定的能力，就能使用。基本模式是：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(object.propertyInQuestion)&#123;</span><br><span class="line">  <span class="comment">// 使用 object.propertyInQuestion</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>理解能力检测，需要先理解两个重要概念：</p>
+<ol>
+<li>第一个概念是先检测达成目的的最常用特性，比如先检测document.getElementById后检测document.all，先检测最常用的特性可以保证代码最优化，因为多数情况下都可以避免测试多个条件。</li>
+<li>第二个概念是必须测试实际要用到的特性，一个特性存在，不一定意味着另一个特性也存在。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getWindowWidth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">document</span>.all)&#123; <span class="comment">// 假设IE</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">document</span>.documentElement.clientWidth; <span class="comment">// 错误用法</span></span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">window</span>.innerWidth;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="更可靠的能力检测"><a href="#更可靠的能力检测" class="headerlink" title="更可靠的能力检测"></a>更可靠的能力检测</h4><p>能力检测对于想知道某个特性是否会按照适当方式行事（而不仅仅是某个特性存在）非常有用。</p>
+<p>比如下例的函数用来确定对象是否支持排序：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不要这样，这不是能力检测，而是检测是否存在相应方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSortable</span>(<span class="params">object</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> !!object.sort;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个函数通过检测对象是否存在sort方法，来确定对象是否支持排序，但问题是，任何包含sort属性的对象也会返回true。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = isSortable(&#123;<span class="attr">sort</span>: <span class="literal">true</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>因此，更好的方式是检测sort是否是一个函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSortable</span>(<span class="params">object</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> object.sort == <span class="string">'function'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所以，尽可能使用typeof进行能力检测，虽然宿主对象没有义务让typeof返回合理的值，比如ie下，某些方法返回的就不是function，而是object。但比其他方式更好。</p>
+<h4 id="能力检测不是浏览器检测"><a href="#能力检测不是浏览器检测" class="headerlink" title="能力检测不是浏览器检测"></a>能力检测不是浏览器检测</h4><p>检测某个或某几个特性并不能确定浏览器类型，比如如下的“浏览器检测”代码就是错误的依赖能力检测的典型示例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isFirefox = !!(navigator.vendor &amp;&amp; navigator.vendorSub); <span class="comment">// 不够具体</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> isIE = !!(<span class="built_in">document</span>.all &amp;&amp; <span class="built_in">document</span>.uniqueID); <span class="comment">// 假设过度</span></span><br></pre></td></tr></table></figure></p>
+<p>上述代码代表了对能力检测的典型误用。以前确实可以通过检测navigator.vendor和vendorSub来确定firefox浏览器，但后来safari也实现了相同的属性，于是就得到不清晰的结果了。<br>为了检测IE，使用了document.all和document.uniqueID，这假设IE将来的版本依然继续存在这些属性，同时还假设其他浏览器都不会实现这两个属性。<br>最后，使用双逻辑非操作符来得到布尔值比先存储再访问的效果更好。</p>
+<p>实际上，根据浏览器不同将能力组合起来更可取，比如需要使用某些特定的浏览器特性，那么最好依次检测所有相关的特性，而不要分别检测：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 确定浏览器是否支持netscape风格的插件</span></span><br><span class="line"><span class="keyword">var</span> hasNSPlugins = !!(navigator.plugins &amp;&amp; navigator.plugins.length);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 确定浏览器是否具有DOM1级的能力</span></span><br><span class="line"><span class="keyword">var</span> hasDOM1 = !!(<span class="built_in">document</span>.getElementById &amp;&amp; <span class="built_in">document</span>.createElement &amp;&amp; <span class="built_in">document</span>.getElementByTagName);</span><br></pre></td></tr></table></figure></p>
+<p>应该将能力检测作为确定下一步解决方案的依据，而不是用它来判断用户使用的是什么浏览器。</p>
+<h3 id="怪癖检测"><a href="#怪癖检测" class="headerlink" title="怪癖检测"></a>怪癖检测</h3><p>与能力检测类似，<strong>怪癖检测（quirks detection）</strong>的目标是识别浏览器的特殊行为。但与能力检测确认浏览器支持什么能力不同，怪癖检测是想要知道浏览器存在什么缺陷（“怪癖”其实就是bug的意思）。通常需要运行一小段代码以确定浏览器的某一特性是否能正常工作。</p>
+<p>比如IE8存在的一个bug：若某个实例属性与标记为<code>[[DOntEnum]]</code>的某个原型属性同名，那么该实例属性就不会出现在for-in循环中,通过下面的代码检测这个怪癖：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasDontEnumQuirk = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> o = &#123;<span class="attr">toString</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;&#125;;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> prop <span class="keyword">in</span> o)&#123;</span><br><span class="line">    <span class="keyword">if</span>(prop == <span class="string">'toString'</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure></p>
+<p>通过一个匿名函数来检测该怪癖，函数中创建了一个带有toString方法的对象，在正常的ES中，toString应该在for-in循环中作为属性返回。</p>
+<p>一般来说，怪癖都是个别浏览器所独有的，而且通常被归为bug，在相关浏览器的新版本中，可能不会被修复。由于检测怪癖设计运行代码，因此建议仅检测那些有直接影响的怪癖，而且最好是一开始就执行检测，以便尽早解决问题。</p>
+<h3 id="用户代理检测"><a href="#用户代理检测" class="headerlink" title="用户代理检测"></a>用户代理检测</h3><p>争议最大的一种客户端检测技术是<strong>用户代理检测</strong>。用户代理检测通过检测用户代理字符串来确定实际使用的浏览器，在每一次HTTP请求过程中，用户代理字符串是作为响应首部发送的，而且该字符串可以通过js的navigator.userAgent属性访问。在服务端，通过检测用户代理字符串来确定用户使用的浏览器是一种常用的做法吗，而在客户端，用户代理检测一般被当做万不得已的手段，其优先级排在能力检测和怪癖检测之后。</p>
+<p>提到用户代理字符串就必须提到<strong>电子欺骗（spoofing）</strong>，值得是浏览器通过在自己的用户代理字符串中加入一些错误或误导性信息，来达到欺骗服务器的目的。</p>
+<p>而所谓的用户代理字符串其实指的就是HTTP规范中用于指明浏览器的名称和版本号的标识符。后随着不断的发展，已经不仅仅只有名称和版本号了。具体请看<a href="http://www.cnblogs.com/egger/archive/2013/04/20/3032070.html" target="_blank" rel="noopener">用户代理字符串简史</a></p>
+<h4 id="用户代理字符串检测技术"><a href="#用户代理字符串检测技术" class="headerlink" title="用户代理字符串检测技术"></a>用户代理字符串检测技术</h4><p>考虑到历史原因以及现代浏览器中用户代理字符串的使用方式，通过用户代理字符串来检测特定的浏览器并不是一件简单的事。因此，首先要确定的往往是需要多么具体的浏览器信息。一般情况下知道呈现引擎和最低限度的版本就足以确定正确的操作方法了。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(isIE6 || isIE7 )&#123; <span class="comment">//不推荐</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码基于特定的浏览器和版本执行的代码非常脆弱，因为这样必须根据浏览器的版本更新代码，使用相对版本号更合理<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>( IEvers &gt; <span class="number">6</span>)&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="识别呈现引擎"><a href="#识别呈现引擎" class="headerlink" title="识别呈现引擎"></a>识别呈现引擎</h5><p>确切知道浏览器的名字和版本好不如确定知道它是什么呈现引擎，使用相同版本的呈现引擎一定也支持相同的特性。所以主要检测5大呈现引擎：IE、Gecko、Webkit、KHTML、Opera。</p>
+<p>为了不在全局作用域中添加多余的变量，将使用模块增强模式来封装检测脚本，检测脚本的基本代码结构如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> client = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> engine = &#123;</span><br><span class="line">    ie: <span class="number">0</span>,</span><br><span class="line">    gecko: <span class="number">0</span>,</span><br><span class="line">    webkit: <span class="number">0</span>,</span><br><span class="line">    khtml: <span class="number">0</span>,</span><br><span class="line">    opera: <span class="number">0</span>,</span><br><span class="line">    ver: <span class="literal">null</span>, <span class="comment">// 具体版本号</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">engine</span>: engine&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>引擎的版本号以浮点数写入对应的属性，其他的非使用引擎则保持默认的0，完整的版本信息则以字符串形式写入ver属性。使用如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(client.engine.ie)&#123;</span><br><span class="line">  <span class="comment">// 针对ie</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(client.engine.gecko &gt; <span class="number">1.5</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(client.engine.ver == <span class="string">'1.8.1'</span>)&#123;</span><br><span class="line">    <span class="comment">// 针对此版本执行特定操作</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为有些时候浮点数可能丢失某些版本信息，所以需要一个具体版本号的字符串属性，在必要的时候可以检测ver属性。</p>
+<p>要正确识别呈现引擎，关键是检测顺序要正确，由于用户代理字符串存在很多不一致的地方，若检测顺序不对，很可能到会导致检测结果不正确。</p>
+<ol>
+<li>第一步是识别Opera，因为它的用户代理字符串有可能完全模仿其他浏览器，而且不会将自己标识为Opera，要检测Opera，必须通过window.opera对象。</li>
+<li>第二个是识别Webkit，因为Webkit的用户代理字符串中的AppleWebkit是独一无二，而其包含Gecko和KHTML字符串，所以若先检测这两个字符串可能会错误。</li>
+<li>第三个是识别KHTML,由于KHTML中的用户代理字符串也包含Gecko，所以在排除KHTML之前，无法准确检测基于Gecko。Kongqueror3.1及更早的版本不包含KTHML字符串，所以需要用Kongqueror代替，最后KHTML与Webkit的版本号的格式差不多。</li>
+<li>排除了Webkit和KHTML后就可以识别Gecko了，但Gecko的版本号是跟在<code>rv:</code>字符串后的。</li>
+<li>最后检测的就是IE了，IE的版本号位于字符串<code>MSIE</code>后<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ua = navigator.userAgent;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.opera)&#123;</span><br><span class="line">  engine.ver = <span class="built_in">window</span>.opera.version();</span><br><span class="line">  engine.opera = <span class="built_in">parseFloat</span>(engine.ver);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="regexp">/AppleWebkit\/(\S+)/</span>.test(ua))&#123;</span><br><span class="line">  engine.ver = <span class="built_in">RegExp</span>[<span class="string">'$1'</span>];</span><br><span class="line">  engine.webkit = <span class="built_in">parseFloat</span>(engine.ver);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="regexp">/KHTML\/(\S+)/</span>.test(ua) || <span class="regexp">/Kongqueror\/([^;]+)/</span>.test(ua))&#123;</span><br><span class="line">  engine.ver = <span class="built_in">RegExp</span>[<span class="string">'$1'</span>];</span><br><span class="line">  engine.khtml = <span class="built_in">parseFloat</span>(engine.ver);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="regexp">/rv:([^\)]+)\) Gecko \/\d&#123;8&#125;/</span>.test(ua))&#123;</span><br><span class="line">  engine.ver = <span class="built_in">RegExp</span>[<span class="string">'$1'</span>];</span><br><span class="line">  engine.gecko = <span class="built_in">parseFloat</span>(engine.ver);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="regexp">/MSIE ([^;]+)/</span>.test(ua))&#123;</span><br><span class="line">  engine.ver = <span class="built_in">RegExp</span>[<span class="string">'$1'</span>];</span><br><span class="line">  engine.ie = <span class="built_in">parseFloat</span>(engine.ver);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>由于实际的版本号中可能包含数字、小数点、字母，而版本号与下一部分的分隔符是空格，所以捕获组中使用了表示非空格的特殊字符<code>\S</code>。<br>取反字符类<code>[^;]+</code>可以确保取得除指定字符外的所有字符。</p>
+<h5 id="识别浏览器"><a href="#识别浏览器" class="headerlink" title="识别浏览器"></a>识别浏览器</h5><p>大多数情况下，识别了呈现引擎就足够了，但由于Chrome和Safari都是Webkit作为呈现引擎的浏览器，而js引擎却不一样。因此有必要为client对象添加新的属性。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> client = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> engine = &#123;<span class="comment">/**/</span>&#125;</span><br><span class="line">  <span class="keyword">var</span> broswer = &#123; <span class="comment">// 浏览器</span></span><br><span class="line">    ie: <span class="number">0</span>,</span><br><span class="line">    firefox: <span class="number">0</span>,</span><br><span class="line">    safari: <span class="number">0</span>,</span><br><span class="line">    konq: <span class="number">0</span>,</span><br><span class="line">    opera: <span class="number">0</span>,</span><br><span class="line">    chrome: <span class="number">0</span>,</span><br><span class="line">    ver: <span class="literal">null</span>,</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    engine: engine,</span><br><span class="line">    broswer: broswer,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="识别平台"><a href="#识别平台" class="headerlink" title="识别平台"></a>识别平台</h5><p>三大主流平台Windows、Mac、Unix(包括Linux)。为了检测平台，client对象需要再添加一个system对象。在检测平台时，通过navigator.platform比通过用户代理字符串检测更简单。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> system = &#123;</span><br><span class="line">  win: <span class="literal">false</span>,</span><br><span class="line">  max: <span class="literal">false</span>,</span><br><span class="line">  x11: <span class="literal">false</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="识别Windows操作系统"><a href="#识别Windows操作系统" class="headerlink" title="识别Windows操作系统"></a>识别Windows操作系统</h5><p>在识别了平台的基础上，由于windows下系统的浏览器版本较多，彼此差异较大，因此需要识别具体的操作系统版本</p>
+<h5 id="识别移动设备"><a href="#识别移动设备" class="headerlink" title="识别移动设备"></a>识别移动设备</h5><p>各大浏览器厂商也推出了对应的移动版浏览器。</p>
+<h5 id="识别游戏系统"><a href="#识别游戏系统" class="headerlink" title="识别游戏系统"></a>识别游戏系统</h5><p>如Wii和Playstation3等视频游戏系统的Web浏览器。</p>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><p>用户代理检测是客户端检测的最后一个选择，只要可能，应该优先采用能力检测和怪癖检测，用户代理检测一般适用于如下情况：</p>
+<ul>
+<li>不能直接准备的使用能力检测和怪癖检测，例如，某些浏览器实现了为将来功能预留的存根函数（stub）。在这种情况下，仅测试相应函数是否存在还得不到足够的信息</li>
+<li>同一款浏览器在不同平台下具有不同的能力，此时，可能就有必要去点浏览器位于那个平台下</li>
+<li>为了跟踪分析等目的需要知道确切的浏览器</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>客户端检测是js开发中非具有争议的话题，由于浏览器间存在差异，通常需要根据不同浏览器的能力分别编写不同的代码，有不少客户端检测方法，但最常用的是3种：</p>
+<ul>
+<li>能力检测：在编写代码之前先检测特定浏览器的能力。例如，脚本在调用某个函数之前，可能要先检测该函数是否存在，这种检测方法将开发人员从考虑具体的浏览器类型和版本中解放出来，将注意力集中到相应的能力是否存在上，能力检测无法精确地检测特定的浏览器和版本。</li>
+<li>怪癖检测：怪癖实际上是浏览器中的bug，怪癖检测通常涉及到运行一小段代码，然后确定浏览器是否存在某个怪癖，由于怪癖检测与能力检测相比效率更低，因此应该只在某个怪癖会干扰脚本运行时才使用，怪癖检测无法精确地检测特定的浏览器和版本。</li>
+<li>用户代理检测：通过检测用户代理字符串来识别浏览器。用户代理字符串包含大量与浏览器有关的信息，包括浏览器、浏览器版本、平台、操作系统等。用户代理字符串有很长的发展历史，在此期间，浏览器厂商试图通过在用户代理字符串中添加一些欺骗性信息，欺骗网站相信浏览器的身份。即使如此，通过用户代理字符串仍然能够检测出浏览器所用的呈现引擎以及所在的平台，包括移动设备和游戏设备。</li>
+</ul>
+<p>在决定使用那种客户端检测方法时，一般优先考虑使用能力检测，怪癖检测是确定应该如何处理代码的第二选择，而用户代理检测是客户端检测的最后一种方案，因为这种方法对用户代理字符串具有很强的依赖性。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/08/20/js-pro17/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/08/15/js-pro15/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JavaScript高级程序设计-15-BOM | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,js-pro">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JavaScript高级程序设计-15-BOM | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="js-pro"> 
+
+    
+        <meta property="article:published_time" content="Mon Aug 15 2016 14:57:49 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:09 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JavaScript高级程序设计-15-BOM | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2016/08/15/js-pro15/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2016/08/15/js-pro15/index.html",
+    "headline": "JavaScript高级程序设计-15-BOM",
+    "datePublished": "Mon Aug 15 2016 14:57:49 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,js-pronull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#window对象"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#window&#x5BF9;&#x8C61;" class="headerlink" title="window&#x5BF9;&#x8C61;"></a>window&#x5BF9;&#x8C61;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全局作用域"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;" class="headerlink" title="&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;"></a>&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#窗口关系及框架（frameset）"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#&#x7A97;&#x53E3;&#x5173;&#x7CFB;&#x53CA;&#x6846;&#x67B6;&#xFF08;frameset&#xFF09;" class="headerlink" title="&#x7A97;&#x53E3;&#x5173;&#x7CFB;&#x53CA;&#x6846;&#x67B6;&#xFF08;frameset&#xFF09;"></a>&#x7A97;&#x53E3;&#x5173;&#x7CFB;&#x53CA;&#x6846;&#x67B6;&#xFF08;frameset&#xFF09;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#窗口位置"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#&#x7A97;&#x53E3;&#x4F4D;&#x7F6E;" class="headerlink" title="&#x7A97;&#x53E3;&#x4F4D;&#x7F6E;"></a>&#x7A97;&#x53E3;&#x4F4D;&#x7F6E;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#窗口大小"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"><a href="#&#x7A97;&#x53E3;&#x5927;&#x5C0F;" class="headerlink" title="&#x7A97;&#x53E3;&#x5927;&#x5C0F;"></a>&#x7A97;&#x53E3;&#x5927;&#x5C0F;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导航和打开窗口"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"><a href="#&#x5BFC;&#x822A;&#x548C;&#x6253;&#x5F00;&#x7A97;&#x53E3;" class="headerlink" title="&#x5BFC;&#x822A;&#x548C;&#x6253;&#x5F00;&#x7A97;&#x53E3;"></a>&#x5BFC;&#x822A;&#x548C;&#x6253;&#x5F00;&#x7A97;&#x53E3;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#弹出窗口"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text"><a href="#&#x5F39;&#x51FA;&#x7A97;&#x53E3;" class="headerlink" title="&#x5F39;&#x51FA;&#x7A97;&#x53E3;"></a>&#x5F39;&#x51FA;&#x7A97;&#x53E3;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#安全限制"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text"><a href="#&#x5B89;&#x5168;&#x9650;&#x5236;" class="headerlink" title="&#x5B89;&#x5168;&#x9650;&#x5236;"></a>&#x5B89;&#x5168;&#x9650;&#x5236;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#弹出窗口屏蔽程序"><span class="post-toc-number">1.5.3.</span> <span class="post-toc-text"><a href="#&#x5F39;&#x51FA;&#x7A97;&#x53E3;&#x5C4F;&#x853D;&#x7A0B;&#x5E8F;" class="headerlink" title="&#x5F39;&#x51FA;&#x7A97;&#x53E3;&#x5C4F;&#x853D;&#x7A0B;&#x5E8F;"></a>&#x5F39;&#x51FA;&#x7A97;&#x53E3;&#x5C4F;&#x853D;&#x7A0B;&#x5E8F;</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#定时器：setTimeout超时和setInterval间歇"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"><a href="#&#x5B9A;&#x65F6;&#x5668;&#xFF1A;setTimeout&#x8D85;&#x65F6;&#x548C;setInterval&#x95F4;&#x6B47;" class="headerlink" title="&#x5B9A;&#x65F6;&#x5668;&#xFF1A;setTimeout&#x8D85;&#x65F6;&#x548C;setInterval&#x95F4;&#x6B47;"></a>&#x5B9A;&#x65F6;&#x5668;&#xFF1A;setTimeout&#x8D85;&#x65F6;&#x548C;setInterval&#x95F4;&#x6B47;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#系统对话框"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"><a href="#&#x7CFB;&#x7EDF;&#x5BF9;&#x8BDD;&#x6846;" class="headerlink" title="&#x7CFB;&#x7EDF;&#x5BF9;&#x8BDD;&#x6846;"></a>&#x7CFB;&#x7EDF;&#x5BF9;&#x8BDD;&#x6846;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#location对象"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#location&#x5BF9;&#x8C61;" class="headerlink" title="location&#x5BF9;&#x8C61;"></a>location&#x5BF9;&#x8C61;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查询字符串参数"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x53C2;&#x6570;" class="headerlink" title="&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x53C2;&#x6570;"></a>&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x53C2;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#位置操作"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x4F4D;&#x7F6E;&#x64CD;&#x4F5C;" class="headerlink" title="&#x4F4D;&#x7F6E;&#x64CD;&#x4F5C;"></a>&#x4F4D;&#x7F6E;&#x64CD;&#x4F5C;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#navigator对象"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#navigator&#x5BF9;&#x8C61;" class="headerlink" title="navigator&#x5BF9;&#x8C61;"></a>navigator&#x5BF9;&#x8C61;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#检测插件"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#&#x68C0;&#x6D4B;&#x63D2;&#x4EF6;" class="headerlink" title="&#x68C0;&#x6D4B;&#x63D2;&#x4EF6;"></a>&#x68C0;&#x6D4B;&#x63D2;&#x4EF6;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注册处理程序"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#&#x6CE8;&#x518C;&#x5904;&#x7406;&#x7A0B;&#x5E8F;" class="headerlink" title="&#x6CE8;&#x518C;&#x5904;&#x7406;&#x7A0B;&#x5E8F;"></a>&#x6CE8;&#x518C;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#screen对象"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#screen&#x5BF9;&#x8C61;" class="headerlink" title="screen&#x5BF9;&#x8C61;"></a>screen&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#history对象"><span class="post-toc-number">5.</span> <span class="post-toc-text"><a href="#history&#x5BF9;&#x8C61;" class="headerlink" title="history&#x5BF9;&#x8C61;"></a>history&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小结"><span class="post-toc-number">6.</span> <span class="post-toc-text"><a href="#&#x5C0F;&#x7ED3;" class="headerlink" title="&#x5C0F;&#x7ED3;"></a>&#x5C0F;&#x7ED3;</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JavaScript高级程序设计-15-BOM
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Aug 15, 2016</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js-pro/">js-pro</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript高级程序设计-15-BOM&url=https://github.com/xmoyKING/2016/08/15/js-pro15/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript高级程序设计-15-BOM&url=https://github.com/xmoyKING/2016/08/15/js-pro15/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2016/08/15/js-pro15/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2016/08/15/js-pro15/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>ES是js的核心，但但web中使用js，那么BOM（Broswer Object Model 浏览器对象模型）是真正的核心。BOM提供了很多对象，用于访问浏览器的功能，一般这些功能和具体的网页内容无关。W3C将BOM纳入H5规范中将浏览器中的js最基本的部分标准化了。</p>
+<h3 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h3><p>BOM的核心对象是window，它表示浏览器的一个实例，在浏览器中window对象既是通过js访问浏览器窗口的一个接口，也是ES规定的Global对象，即，在网页定义的任何一个对象、变量、函数，都是以window作为其Global对象的，因此有权访问全局函数，如parseInt等。</p>
+<h4 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h4><p>抛开全局变量会成为window对象的属性不谈，定义全局变量与在window对象上直接定义属性还是有区别的：全局变量不能通过delete操作符删除，而直接在window对象上定义的属性可以。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">11</span>;</span><br><span class="line"><span class="built_in">window</span>.color = <span class="string">'red'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> age; <span class="comment">//false 或 报错</span></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">window</span>.color; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(age); <span class="comment">// 11;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.color); <span class="comment">// undefined;</span></span><br></pre></td></tr></table></figure></p>
+<p>使用var语句添加的window属性有一个名为<code>[[Configurable]]</code>的特性，这个特性的值被设置为false，因此这样定义的属性不可以通过delete操作符删除。</p>
+<p>同时，尝试访问未声明的变量会抛出错误，但通过查询window对象，可以知道某个变量是否未声明。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newValue = oldValue; <span class="comment">// oldValue未定义，报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newValue = <span class="built_in">window</span>.oldValue; <span class="comment">// 不会报错，因为是查询属性</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="窗口关系及框架（frameset）"><a href="#窗口关系及框架（frameset）" class="headerlink" title="窗口关系及框架（frameset）"></a>窗口关系及框架（frameset）</h4><p>若页面中包含框架，则每个框架都拥有自己的window对象，并且保存在frames集合中，在frames集合中，可通过索引（从0开始，将页面中的frame从左至右，从上至下依次定义索引值）或框架名称来访问相应的window对象，每个window对象都有一个name属性，其中包含框架的名称。<br><em>注：除非最高层窗口是通过window.open打开的，否则其window对象的name属性不包含任何值</em></p>
+<p>top对象始终指向最高（最外层）的框架，也就是浏览器窗口。使用它可以确保一个框架中正确的访问另一个框架，因为对应一个框架中编写的任何代码来说，其中window对象指向的都是那个特定实例，而非最高层框架。</p>
+<p>与top相对的另一个window对象是parent，其始终指向当前框架的直接上层框架，parent有可能等于top，但没有框架的情况下，parent一定等于top（此时都等于window）。</p>
+<p>与框架有关的最后一个对象是self，始终指向window，实际上self和window对象可互相换用，引入self对象的目的只是为了与top和parent对应起来。因此它不格外包含其他值。</p>
+<p>所有这些对象都是window对象的属性，可以通过window.parent，window.top等形式访问。同时，可以将不同层次的window对象连缀起来，例如<code>window.parent.parent.frames[0]</code>;</p>
+<p>同时，在使用框架的情况下，浏览器中会存在多个Global对象，在每个框架中定义的全局变量会自动成为框架中window对象的属性。由于每个window都包含原生类型的构造函数，因此每个框架都有一套自己的构造函数，这些构造函数一一对应，但并不相等。例如top.Object并不等于top.frames[0].Object，这个问题会影响到对跨框架传递的对象使用instanceof操作符。</p>
+<h4 id="窗口位置"><a href="#窗口位置" class="headerlink" title="窗口位置"></a>窗口位置</h4><p>用来确定和修改window对象位置的属性和方法有很多，且各浏览器API有区别。</p>
+<p>比如：screenLeft/screenTop属性（IE、Safari、Opear、Chrome）及对应的screenX/screenY属性（Firefox、Chrome），分别用于表示窗口相对于屏幕左侧和上边的位置。但这两组其实数值并不相等。因为在IE、Opera、Chrome中，screenLeft/screenX属性的窗口指的是页面可视区（不包括浏览器头部等），而在Firefox和Safari中，指的是整个浏览器。</p>
+<p>甚至Firefox、Safari、Chrome浏览器返回的是top的值，同时会忽略外边距设置的偏移。而IE和Opera则给出框架相对屏幕边界的精确坐标。</p>
+<p>moveTo和moveBy可以将窗口移动到新位置，moveTo接收的是新位置的x和y坐标，而moveBy接收的是水平和锤子方向上移动的像素值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.moveTo(<span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 将窗口移动到屏幕左上角</span></span><br><span class="line"><span class="built_in">window</span>.moveTo(<span class="number">10</span>, <span class="number">30</span>); <span class="comment">// 将窗口移动到屏幕(10, 30)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.moveBy(<span class="number">0</span>, <span class="number">100</span>); <span class="comment">// 将窗口向下移动100像素</span></span><br><span class="line"><span class="built_in">window</span>.moveBy(<span class="number">-50</span>, <span class="number">0</span>); <span class="comment">// 将窗口向左移动50像素</span></span><br></pre></td></tr></table></figure></p>
+<p>同时，这两个方法可能会被浏览器禁用，且不适用于框架，只能对最外层window对象使用。</p>
+<h4 id="窗口大小"><a href="#窗口大小" class="headerlink" title="窗口大小"></a>窗口大小</h4><p>跨浏览器确定一个窗口大小不是简单的事儿，每个浏览器都定义了一些属性，IE9+、Firefox、Safari、Opera、Chrome提供了innerWidth、innerHeight、outerWidth、outerHeight。</p>
+<p>而outer系列属性，IE9+、Firefox、Safari返回浏览器窗口本身的大小，Opera表示页面单个标签对应的浏览器窗口大小，Chrome中返回视口大小而非浏览器窗口大小，同时inner和outer系列值相同。</p>
+<p>在IE、Firefox、Opera、Safari、Chrome中，document.documentElement.clientWidth和clientHeight保存页面视口的信息，在IE6的混杂模式中需通过body.clientWidth取得相同信息。</p>
+<p>对于移动设备，window.innerWidth指的是可视区，document.documentElement是布局视口，即渲染后页面的实际大小（可视区是整个页面的一部分）。</p>
+<p>另外resizeTo和resizeBy可以调整浏览器窗口大小，resizeTo接收浏览器窗口的新宽度和新高度，而resizeBy接收新窗口与原窗口的宽度和高度只差。</p>
+<p>这两个方法与移动窗口位置的方法类型，可能会被浏览器禁用，且不适用于框架，只能对最外层window对象使用。</p>
+<h4 id="导航和打开窗口"><a href="#导航和打开窗口" class="headerlink" title="导航和打开窗口"></a>导航和打开窗口</h4><p>使用window.open方法既可以导航到一个特定的URL，也可以打开一个新的浏览器窗口，接收4个参数：要加载的URL、窗口目标、一个特性字符串以及一个表示新页面是否取代浏览器历史记录中当前加载页面的布尔值。通常只传递第一个参数，最后一个参数在不打开新窗口的情况下使用。</p>
+<p>当传递了第二个参数，且该参数为已有窗口或框架名时，那么会在具有该名称的窗口或框架中加载指定的url，若没有存在，则新创建一个窗口并命名为第二个参数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.open(<span class="string">'http://www.king.com'</span>, <span class="string">'topFrame'</span>);</span><br><span class="line"><span class="comment">// 等同 &lt;a href="http://www.king.com" target="topFrame"&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>第二个参数可以是一些特殊的名称:<code>_self、_parent、_top、_blank</code>。</p>
+<h5 id="弹出窗口"><a href="#弹出窗口" class="headerlink" title="弹出窗口"></a>弹出窗口</h5><p>若open的第二个参数是一个不存在的窗口或框架时，会根据第三个参数来创建新窗口或新标签，若第三个参数不存在，则默认设置新窗口或新标签，而若不打开新窗口的话，则会忽略第三个参数。</p>
+<p>第三个参数其实是一个逗号分隔的字符串，用于表示新窗口中显示那些特性：</p>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>height</td>
+<td>数值</td>
+<td>表示窗口的高度，不能小于100</td>
+</tr>
+<tr>
+<td>width</td>
+<td>数值</td>
+<td>表示窗口的宽度，不能小于100</td>
+</tr>
+<tr>
+<td>left</td>
+<td>数值</td>
+<td>表示窗口的左坐标，不能是负值</td>
+</tr>
+<tr>
+<td>top</td>
+<td>数值</td>
+<td>表示窗口的上坐标，不能是负值</td>
+</tr>
+<tr>
+<td>fullscreen</td>
+<td>yes/no</td>
+<td>表示窗口是否最大化，仅限IE</td>
+</tr>
+<tr>
+<td>location</td>
+<td>yes/no</td>
+<td>表示窗口是否显示地址栏，<strong>无论任何浏览器，都无效</strong></td>
+</tr>
+<tr>
+<td>menubar</td>
+<td>yes/no</td>
+<td>表示窗口是否显示菜单栏，默认no</td>
+</tr>
+<tr>
+<td>resizable</td>
+<td>yes/no</td>
+<td>表示窗口是否可被拖动边框改变大小，默认no</td>
+</tr>
+<tr>
+<td>scrollbars</td>
+<td>yes/no</td>
+<td>表示窗口是否可滚动，默认no</td>
+</tr>
+<tr>
+<td>toolbar</td>
+<td>yes/no</td>
+<td>表示窗口是否显示工具栏，默认no</td>
+</tr>
+<tr>
+<td>status</td>
+<td>yes/no</td>
+<td>表示窗口是否显示状态栏，默认no</td>
+</tr>
+</tbody>
+</table>
+<p>window.open会返回指向新窗口的引用，引用的对象与其他window对象大致相似，但可对其进行更多控制，而window对象可能会禁止一些功能。比如open创建的新窗口可调整大小或移动位置。</p>
+<p>同时用close方法可以关闭打开的新窗口。关闭后，新窗口的引用依然存在，但已经没有用了，通过closed属性可检测其是否已经被关闭。</p>
+<p>新窗口的window对象有一个opener属性，其为打开它的原始窗口对象，这个属性只在弹出窗口的最外层window对象（top）有定义，而且指向调用window.open的窗口或框架。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newwin = <span class="built_in">window</span>.open(<span class="string">'url'</span>, <span class="string">'newwin'</span>, <span class="string">'height=400,width=400'</span>);</span><br><span class="line">newwin.resizeTo(<span class="number">100</span>, <span class="number">100</span>); <span class="comment">// 大小</span></span><br><span class="line">newwin.moveTo(<span class="number">100</span>, <span class="number">100</span>); <span class="comment">// 位置</span></span><br><span class="line"></span><br><span class="line">newwin.opener == <span class="built_in">window</span>; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">newwin.close(); <span class="comment">//关闭,在newwin内部，通过top.close()也可以关闭自己</span></span><br><span class="line">newwin.closed; <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>有些浏览器会在独立的进程中运行每个标签页，当一个标签页打开另一个标签页时，若两个window对象之间需彼此通信，那么新标签就不能运行在独立的进程中。在chrome下，若将opener设置为null，则表示在单独的进程中运行新标签页，同时一旦切断标签页之间的联系则无法恢复。</p>
+<h5 id="安全限制"><a href="#安全限制" class="headerlink" title="安全限制"></a>安全限制</h5><p>在某些浏览器中，对弹出窗口做了限制，比如始终显示地址栏，同时不能将弹出窗口移动到屏幕以外、不允许关闭状态栏等。</p>
+<h5 id="弹出窗口屏蔽程序"><a href="#弹出窗口屏蔽程序" class="headerlink" title="弹出窗口屏蔽程序"></a>弹出窗口屏蔽程序</h5><p>大多数浏览器都内置了弹出窗口屏蔽程序，或者可安装第三方的屏蔽插件。所以当弹窗窗口被屏蔽时，有可能是被浏览器限制的，也有可能是被插件限制的。</p>
+<p>若是浏览器限制的，那么window.open会返回null。若是插件限制的，则可能会报错。</p>
+<h4 id="定时器：setTimeout超时和setInterval间歇"><a href="#定时器：setTimeout超时和setInterval间歇" class="headerlink" title="定时器：setTimeout超时和setInterval间歇"></a>定时器：setTimeout超时和setInterval间歇</h4><p>js能设置超时值和间歇值来调度代码在特定时刻指向，但由于js是单线程语言，所以，其实是伪定时器。</p>
+<p>js在一定时间内只能执行一段代码，为了控制要执行的代码，js有一个任务队列，任务会依次被js执行。timeout表示指定时候后将当前的任务添加到队列中，若队列是空，则添加的代码会被立即执行，若不为空，则需要等待前面的代码执行完成后再执行，所以代码并不一定精确的经过指定时间后执行。</p>
+<p>两个方法都接收两个参数，第一个表示要执行的代码（可以为字符串，也可以是一个函数对象），第二个是一个数值（单位是毫秒）。<br>其中第一个参数为字符串时会像eval一样去解析，但会导致性能损失。</p>
+<p>调用setTimeout后，会返回一个数值ID，表示超时调用，这个ID是计划执行代码的唯一标识符，通过<code>clearTimeout(ID);</code>可以取消超时调用。当然，若调用已经发生，则在取消已经无效了。</p>
+<p>同时，由于定时器调用的代码都是在全局作用域中执行的，因此函数中的this的值在非严格模式下指向window对象，在严格模式下是undefined。</p>
+<p>而间歇调用与超时类似，不同的是，间歇调用会一直执行到页面卸载。一般使用超时调用模拟间歇调用，因为使用超时调用时不用跟踪ID，同时由于单线程执行问题，后一个间歇调用可能会在前一个间歇调用结束之前启动，而超时调用则完全避免了这一点。</p>
+<h4 id="系统对话框"><a href="#系统对话框" class="headerlink" title="系统对话框"></a>系统对话框</h4><p>alert、confirm、prompt方法可以调用系统对话框向用户显示消息，系统对话框与浏览器中显示的网页没有关系，也不包含HTML。外观不由CSS控制，而是由浏览器决定，同时这几个方法打开的对话框是同步的、模态的，即这些对话框显示时代码会停止执行，关掉对话框后代码恢复执行。</p>
+<p>alert是警告，向用户显示一些他们无法控制的消息，例如错误信息，而用户只能在看完消息后关闭对话框。<br>confirm是确认，confirm方法返回布尔值，true表示确认，false表示取消。<br>prompt是提示，用于提示用户输入文本，接收2个参数，第一个是提示文本，第二个是文本输入框的默认值。点击确定返回文本框内的值，点击取消或其他方式关闭对话则返回null。</p>
+<p>其中若同一个脚本在执行过程中打开多个对话框，则会显示一个复选框用于提示用户是否要阻止后续的对话框显示。但独立的用户操作则不会有阻止复选框。</p>
+<p>window对象的find和print方法可以显示“查找”，“打印”对话框，一些浏览器下find命令无效，同时这两个对话框是异步的，不影响页面js执行。</p>
+<h3 id="location对象"><a href="#location对象" class="headerlink" title="location对象"></a>location对象</h3><p>location对象提供了当前窗口加载的文档的信息，以及导航功能。而且它非常特别，既是window的属性，也是document的属性。</p>
+<p>location将URL解析为独立的片段，如href、hash、host、hostname、pathname、port、protocol、search等，非常有用。</p>
+<h4 id="查询字符串参数"><a href="#查询字符串参数" class="headerlink" title="查询字符串参数"></a>查询字符串参数</h4><p>虽然location.search能返回查询字符串，但并不方便，它返回的只是字符串，还需要解析。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getQueryStringArgs</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> qs = (location.search.length &gt; <span class="number">0</span> ? location.search.substring(<span class="number">1</span>) : <span class="string">''</span>), <span class="comment">// 取得查询字符串并去掉开头问号</span></span><br><span class="line">      args = &#123;&#125;, <span class="comment">// 存储对象</span></span><br><span class="line">      items = qs.length ? qs.split(<span class="string">'&amp;'</span>) : [], <span class="comment">// 取得每一项</span></span><br><span class="line">      item = <span class="literal">null</span>,</span><br><span class="line">      name = <span class="literal">null</span>,</span><br><span class="line">      value = <span class="literal">null</span>,</span><br><span class="line">      i = <span class="number">0</span>,</span><br><span class="line">      len = items.length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 逐一添加到args对象中</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">      item = items[i].split(<span class="string">'='</span>);</span><br><span class="line">      name = <span class="built_in">decodeURIComponent</span>(item[<span class="number">0</span>]);</span><br><span class="line">      value = <span class="built_in">decodeURIComponent</span>(item[<span class="number">1</span>]);</span><br><span class="line">      <span class="keyword">if</span>(name.length)&#123;</span><br><span class="line">        args[name] = value;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> args;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="位置操作"><a href="#位置操作" class="headerlink" title="位置操作"></a>位置操作</h4><p>location对象可以通过很多方式改变浏览器的位置，比如最常用的location.href</p>
+<p>assign方法接收一个URL.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.assign(<span class="string">'http://www.king.com'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>这个方法会立即打开URL并在浏览器的历史记录中生成一条记录，而若设置location.href和window.location的值则会在内部调用assign方法，</p>
+<p>修改location对象的其他属性也可以改变当前加载的页面，如hash、search、hostname、pathname、port，同时会在历史记录中生成新记录，而除了hash，其他的属性被修改后，页面会以新URL重新加载。</p>
+<p>若不想生成新记录，则使用replace方法，该方法接收一个url字符串，同时会刷新页面到新url。</p>
+<p>reload方法的作业则是重新加载当前页面，同时接收一个布尔参数，表示是否要强制重新加载，若不传参数则浏览器自动选择最合适的方法刷新(比如从缓存中获取)。</p>
+<h3 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h3><p>该对象是识别客户端浏览器的重要“事实”标准，与BOM其他对象一样，每个浏览器的navigator对象有自己的属性：<a href="http://www.w3school.com.cn/jsref/dom_obj_navigator.asp" target="_blank" rel="noopener">navigator对象</a></p>
+<h4 id="检测插件"><a href="#检测插件" class="headerlink" title="检测插件"></a>检测插件</h4><p>对于非IE浏览器，navigator对象的plugins属性是一个数组，用于保存浏览器中安装的插件信息的数组，数组中的每一项包含下列属性：</p>
+<ul>
+<li>name 插件名字</li>
+<li>description 插件描述</li>
+<li>filename 插件文件名</li>
+<li>length 插件处理MIME的类型数量<br>一般通过名字检测插件是否安装</li>
+</ul>
+<h4 id="注册处理程序"><a href="#注册处理程序" class="headerlink" title="注册处理程序"></a>注册处理程序</h4><p>H5新定义的registerContentHandler和registerProtocolHandler方法可以让一个站点知名它处理特定类型的信息，随着RSS阅读器和在线电子邮件的发展，注册处理程序为像使用桌面应用程序一样模式使用这些在线程序提供了一种方式。</p>
+<p>其中registerContentHandler方法接收三个参数，分别表示要处理的MIME类型，可以处理该MIME类型的页面的url以及应用的名称。比如将站点注册为处理RSS源的处理程序：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.registerContentHandler(<span class="string">'application/rss+xml'</span>, <span class="string">'http://www.king.com?feed=%s'</span>,<span class="string">'Some Reader'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>第一个是RSS源的MIME类型，第二个参数是应该接收RSS源的URL,其中<code>%s</code>表示rss源url，由浏览器自动插入，当下一次请求rss源时，浏览器会打开指定的url，而相应的web应用程序将会处理该请求。</p>
+<p>而registerProtocolHandler类似，但第一个参数指定的是处理的协议（如mailto或ftp）,比如将一个程序注册为默认的邮件客户端：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">navigator.registerProtocolHandler(<span class="string">'mailto'</span>, <span class="string">'http://www.king.com?cmd=%s'</span>,<span class="string">'Some Mail Client'</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="screen对象"><a href="#screen对象" class="headerlink" title="screen对象"></a>screen对象</h3><p>js中的screen对象在编程时用处不大，用于表明客户端的能力，如显示器的信息，同时该对象所包含的属性也视浏览器而异。<a href="http://www.w3school.com.cn/jsref/dom_obj_screen.asp" target="_blank" rel="noopener">screen对象</a></p>
+<h3 id="history对象"><a href="#history对象" class="headerlink" title="history对象"></a>history对象</h3><p>history对象保存着用户上网的历史记录，从窗口被打开时算起，因为history是window对象的属性，因此每个浏览器窗口、每个标签页、甚至每个frame都有自己的history对象与特定的window对象关联。</p>
+<p>出于安全考虑，开发者无法得之用户浏览过的url，但使用go方法可以实现后退和前进。</p>
+<p>go方法可以在用户的历史记录中任意跳转，接收一个参数。</p>
+<p>参数可以是整数，表示向前/后跳转的页面数，负数为向后（类似后退按钮），正数为向前（类型前进按钮）。简化的back和forward方法可以替代go方法。</p>
+<p>参数也可以是字符串，浏览器会调整到历史记录中包含该字符串的第一个位置，可以是后退，也可能是前进，具体要看那个位置最近。若历史记录不包含该字符串，则什么也不做。</p>
+<p>history还有一个length属性，保存历史记录的数量，这个数量包括所有的历史记录（包括向前和向后的），通过检测length是否等于0可以知道用户是否一开始就打开了当前页面。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>浏览器对象模型，即BOM，以window对象为依托，表示浏览器窗口以及页面可见区域，同时，window对象还是ES中的Global对象，因而所有的全局变量和函数都是它的属性，且所有原生的构造函数及其他函数也都存在于它的命名空间下。</p>
+<ul>
+<li>在使用框架时，每个框架都有自己的window对象以及所有元素构造函数及其他函数的副本，每个框架都保存在frames集合胡总，可以通过位置或通过名称来访问</li>
+<li>有一些窗口指针，可以用来引用其他框架，包括父框架</li>
+<li>top对象始终指向最外围的框架，包括整个浏览器窗口</li>
+<li>parent对象表示包含当前框架的框架，而self对象则回指window</li>
+<li>使用location对象可以通过编程方式来访问浏览器的导航系统，设置相应的属性，可以逐段或整体修改浏览器的url</li>
+<li>调用replace方法可以导航到一个新rul，同时该url会替换浏览器历史记录中当前显示的页面</li>
+<li>navigator对象提供了与浏览器有关的信息，除了公用的一些，具体取决于浏览器<br>BOM中的screen和history对象功能优先，screen对象保存着与客户端显示器有关的信息，这些信息一般只用于站点分析。history堆栈为访问浏览器历史记录开了口，可据此判断历史几率的数量，也可以在历史记录中任意导航。</li>
+</ul>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/08/17/js-pro16/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/08/12/js-pro14/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

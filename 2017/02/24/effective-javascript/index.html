@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            effective javascript笔记-1 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,effective-javascript,note">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="effective javascript笔记-1 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="effective-javascript"> <meta property="og:article:tag" content="note"> 
+
+    
+        <meta property="article:published_time" content="Fri Feb 24 2017 11:43:18 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:08 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="effective javascript笔记-1 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/02/24/effective-javascript/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/02/24/effective-javascript/index.html",
+    "headline": "effective javascript笔记-1",
+    "datePublished": "Fri Feb 24 2017 11:43:18 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:08 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,effective-javascript,notenull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#让自己习惯JavaScript"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x8BA9;&#x81EA;&#x5DF1;&#x4E60;&#x60EF;JavaScript" class="headerlink" title="&#x8BA9;&#x81EA;&#x5DF1;&#x4E60;&#x60EF;JavaScript"></a>&#x8BA9;&#x81EA;&#x5DF1;&#x4E60;&#x60EF;JavaScript</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-了解JavaScript版本"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#1-&#x4E86;&#x89E3;JavaScript&#x7248;&#x672C;" class="headerlink" title="1. &#x4E86;&#x89E3;JavaScript&#x7248;&#x672C;"></a>1. &#x4E86;&#x89E3;JavaScript&#x7248;&#x672C;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-理解JS的浮点数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#2-&#x7406;&#x89E3;JS&#x7684;&#x6D6E;&#x70B9;&#x6570;" class="headerlink" title="2. &#x7406;&#x89E3;JS&#x7684;&#x6D6E;&#x70B9;&#x6570;"></a>2. &#x7406;&#x89E3;JS&#x7684;&#x6D6E;&#x70B9;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-JS中的隐式的强制转换"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#3-JS&#x4E2D;&#x7684;&#x9690;&#x5F0F;&#x7684;&#x5F3A;&#x5236;&#x8F6C;&#x6362;" class="headerlink" title="3. JS&#x4E2D;&#x7684;&#x9690;&#x5F0F;&#x7684;&#x5F3A;&#x5236;&#x8F6C;&#x6362;"></a>3. JS&#x4E2D;&#x7684;&#x9690;&#x5F0F;&#x7684;&#x5F3A;&#x5236;&#x8F6C;&#x6362;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-原始类型优于封装对象"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"><a href="#4-&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x4F18;&#x4E8E;&#x5C01;&#x88C5;&#x5BF9;&#x8C61;" class="headerlink" title="4.&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x4F18;&#x4E8E;&#x5C01;&#x88C5;&#x5BF9;&#x8C61;"></a>4.&#x539F;&#x59CB;&#x7C7B;&#x578B;&#x4F18;&#x4E8E;&#x5C01;&#x88C5;&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-避免对混合类型使用-运算符"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"><a href="#5-&#x907F;&#x514D;&#x5BF9;&#x6DF7;&#x5408;&#x7C7B;&#x578B;&#x4F7F;&#x7528;-&#x8FD0;&#x7B97;&#x7B26;" class="headerlink" title="5. &#x907F;&#x514D;&#x5BF9;&#x6DF7;&#x5408;&#x7C7B;&#x578B;&#x4F7F;&#x7528; == &#x8FD0;&#x7B97;&#x7B26;"></a>5. &#x907F;&#x514D;&#x5BF9;&#x6DF7;&#x5408;&#x7C7B;&#x578B;&#x4F7F;&#x7528; <code>==</code> &#x8FD0;&#x7B97;&#x7B26;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-了解分号插入的局限"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"><a href="#6-&#x4E86;&#x89E3;&#x5206;&#x53F7;&#x63D2;&#x5165;&#x7684;&#x5C40;&#x9650;" class="headerlink" title="6. &#x4E86;&#x89E3;&#x5206;&#x53F7;&#x63D2;&#x5165;&#x7684;&#x5C40;&#x9650;"></a>6. &#x4E86;&#x89E3;&#x5206;&#x53F7;&#x63D2;&#x5165;&#x7684;&#x5C40;&#x9650;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-视字符串为16位代码单元序列"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"><a href="#7-&#x89C6;&#x5B57;&#x7B26;&#x4E32;&#x4E3A;16&#x4F4D;&#x4EE3;&#x7801;&#x5355;&#x5143;&#x5E8F;&#x5217;" class="headerlink" title="7. &#x89C6;&#x5B57;&#x7B26;&#x4E32;&#x4E3A;16&#x4F4D;&#x4EE3;&#x7801;&#x5355;&#x5143;&#x5E8F;&#x5217;"></a>7. &#x89C6;&#x5B57;&#x7B26;&#x4E32;&#x4E3A;16&#x4F4D;&#x4EE3;&#x7801;&#x5355;&#x5143;&#x5E8F;&#x5217;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                effective javascript笔记-1
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Feb 24, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/effective-javascript/">effective-javascript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/note/">note</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=effective javascript笔记-1&url=https://github.com/xmoyKING/2017/02/24/effective-javascript/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=effective javascript笔记-1&url=https://github.com/xmoyKING/2017/02/24/effective-javascript/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/02/24/effective-javascript/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/02/24/effective-javascript/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="让自己习惯JavaScript"><a href="#让自己习惯JavaScript" class="headerlink" title="让自己习惯JavaScript"></a>让自己习惯JavaScript</h2><h3 id="1-了解JavaScript版本"><a href="#1-了解JavaScript版本" class="headerlink" title="1. 了解JavaScript版本"></a>1. 了解JavaScript版本</h3><p>主要了解ES5中引入的版本控制考量——严格模式（strict mode），此特性允许选择在受限制的JavaScript版本中禁止使用一些JS语言中问题较多或易于出错的特性。<br>考虑到向后兼容，即使在没有实现严格模式检查的环境中依然可以执行严格代码（strict code）。  </p>
+<p>启动方式：<br>可以在程序的最开始添加一个特定的字符串字面量（literal）  <code>&quot;use strict&quot;</code>;<br>也可以在函数体最顶部开始处加入这个指令启动该函数内的严格模式。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="meta">    "use strict"</span>;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>解释执行字符串字面量没有任何副作用，所以ES3引擎执行该指令后立即丢弃执行结果，对程序并没有影响。<br>但是，由于旧版本的ES引擎不会进行任何的严格模式检查，若代码没有在ES5环境中测试过，则ES3中的代码在ES5中很有可能会出错<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="meta">    "use strict"</span>;</span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">arguments</span> = []; <span class="comment">//error： redefinition of arguments</span></span><br><span class="line">    <span class="comment">//在严格模式下，不能重定义arguments变量，但是若在非严格模式下则可以执行</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于<code>&quot;use strict&quot;;</code>只在脚本或函数的顶部生效，所以若连接两个js脚本文件，则有可能会出错，<br>这种情况下应使用立即调用的函数表达式（Immediately Invoked Function Expression，IIFE），并在每一个IIFE函数顶部添加严格模式指令<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="meta">    "use strict"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="meta">    "use strict"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<p>IIFE这种方式多用于库或模块系统的设计中。</p>
+<p><strong>1. 需要确保所使用的JS的特性在程序将要运行的环境中都是可用的</strong><br><strong>2. 总是在严格模式检查环境下测试代码</strong><br><strong>3. 当心连接不同严格模式下的不同的脚本</strong></p>
+<h3 id="2-理解JS的浮点数"><a href="#2-理解JS的浮点数" class="headerlink" title="2. 理解JS的浮点数"></a>2. 理解JS的浮点数</h3><p>JS和其他语言不同，JS只有一种数值数据类型，那就是<code>number</code>,不管是整数还是浮点数，JS都将其归为数字。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="number">16</span>; <span class="comment">//"number"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="number">98.5</span>; <span class="comment">//"number"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="number">-2.1</span>; <span class="comment">//"number"</span></span><br></pre></td></tr></table></figure></p>
+<p>JS中所有的数字都是双精度浮点数,IEEE754标准64位<code>double</code>类型,一般的+,-,*,%都是没有问题的,但是位算术运算符比较特殊.<br>JS不会直接将操作数作为浮点数运算,而是会将其隐式的转换为32位整数后进行运算(32位大端Big-endian的2的补码表示的整数),<br>实例如:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span>|<span class="number">1</span>; <span class="comment">//9</span></span><br></pre></td></tr></table></figure></p>
+<p>其实是将数字8转化为二进制<code>1000</code>,数组1转化为二进制<code>1</code>(多余的前导0省略了),然后进行位运算</p>
+<p>可以查看数字类型的二进制,toString方法的参数表示进制<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">8</span>).toString(<span class="number">2</span>); <span class="comment">// "1000"</span></span><br></pre></td></tr></table></figure></p>
+<p>可以将字符串转按照对应进制转化为十进制的数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">'1001'</span>,<span class="number">2</span>); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>使用浮点数的时候需要注意:</strong><br>由于精度有限,即使是64位,但还是存在误差,所以对小数的浮点数进行操作的时候最好将其先转化为整数(银行内就是这样做的,按照最小的货币单位进行计算,比如分)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">0.1</span>+<span class="number">0.2</span>)+<span class="number">0.3</span>; <span class="comment">// 0.600000000000000000001</span></span><br><span class="line"><span class="number">0.1</span>+(<span class="number">0.2</span>+<span class="number">0.3</span>); <span class="comment">// 0.6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//双精度double的整数范围在 -2^53 -- 2^53 之内</span></span><br><span class="line">(<span class="number">1</span>+<span class="number">2</span>)+<span class="number">3</span>; <span class="comment">// 6</span></span><br><span class="line"><span class="number">1</span>+(<span class="number">2</span>+<span class="number">3</span>); <span class="comment">//6</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="3-JS中的隐式的强制转换"><a href="#3-JS中的隐式的强制转换" class="headerlink" title="3. JS中的隐式的强制转换"></a>3. JS中的隐式的强制转换</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> + <span class="literal">true</span>; <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<p>上式就是由于JS对类型的隐式转换导致的,在大多数情况下,JS不会抛出错误,而是按照多种多样的自动转换方式将值强制转换为期望的类型,例如:<br>算术运算符 - , * , / 和 % 在计算之前都会尝试将参数转换为数字,<br>而对运算符 + , 具体是数字相加还是字符串连接,取决于参数的类型.  </p>
+<p>一般而言,只要有字符串则优先使用字符串连接的方式<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> + <span class="number">3</span>; <span class="comment">// 5</span></span><br><span class="line"><span class="string">"hello"</span> + <span class="string">" world"</span>; <span class="comment">// "hello world"</span></span><br><span class="line"><span class="string">"2"</span> + <span class="number">3</span>; <span class="comment">// "23"</span></span><br><span class="line"><span class="number">2</span> + <span class="string">"3"</span>; <span class="comment">// "23"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// JS对操作顺序敏感,即符合左结合,</span></span><br><span class="line"><span class="number">1</span> + <span class="number">2</span> + <span class="string">"3"</span>; <span class="comment">// "33" 相当 (1 + 2) + "3";</span></span><br><span class="line"><span class="number">1</span> + <span class="string">"2"</span> + <span class="number">3</span>; <span class="comment">// "123" 相当 (1 + "2") + 3;</span></span><br></pre></td></tr></table></figure></p>
+<p>位运算不仅会将操作数转换为数字,二期还会将操作数转换为32位整数, 位运算符包括:<br>位算术运算符(<code>~ , &amp; , ^ , |</code>) 和 移位运算符(<code>&lt;&lt; , &gt;&gt; , &gt;&gt;&gt;</code>)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"17"</span> * <span class="number">3</span>; <span class="comment">// 51</span></span><br><span class="line"><span class="string">"8"</span> | <span class="string">"1"</span>; <span class="comment">// 9</span></span><br></pre></td></tr></table></figure></p>
+<p>但强制转换也隐藏了错误,结果为<code>null</code>的变量在算术运算符中不会导致失败,而是被隐式转换为0,<br>一个未定义的变量将被转换为特殊的浮点数值<code>NaN</code>(not a number), NaN是唯一一个不等于自身的值,<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="literal">NaN</span>; x === <span class="literal">NaN</span>; <span class="comment">// false </span></span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string">同时,标准库函数`</span><span class="built_in">isNaN</span>()<span class="string">`也不靠谱,因为它自身带有隐式强制转换,在测试其他参数之前,会将参数转换为数字,  </span></span><br><span class="line"><span class="string">所以,除非你知道值是数字,你可以使用`</span><span class="built_in">isNaN</span>()<span class="string">`测试它是否是`</span><span class="literal">NaN</span><span class="string">`  </span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line"><span class="built_in">isNaN</span>(<span class="literal">NaN</span>); <span class="comment">// true</span></span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string">但对于其他绝对不是NaN,但会被强制转换为NaN的值,使用isNaN方法无法区分</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>js</span><br><span class="line"><span class="built_in">isNaN</span>(<span class="string">'foo'</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isNaN</span>(<span class="literal">undefined</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isNaN</span>(&#123;&#125;); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isNaN</span>(&#123;<span class="attr">valueOf</span>:<span class="string">"foo"</span>&#125;); <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>所以,使用简单但可靠的比较自身来检查一个值是否为NaN<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = NanN;</span><br><span class="line">a !== a; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="string">"foo"</span>;</span><br><span class="line">b !== b; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="literal">undefined</span>;</span><br><span class="line">c !== c; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> d = &#123;&#125;;</span><br><span class="line">d !== d; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span>  e = &#123;<span class="attr">valueOf</span>: <span class="string">"foo"</span>&#125;; <span class="comment">// false</span></span><br><span class="line">e !== e; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//将其抽象为一个实用工具函数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isReallyNaN</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x !== x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对象也可以被强制转换为原始值,最常见的用法是转换为字符串<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"the Math object: "</span> + <span class="built_in">Math</span>; <span class="comment">// "the Math object: [object Math]"</span></span><br><span class="line"><span class="string">"the JSON object: "</span> + <span class="built_in">JSON</span>; <span class="comment">// "the JSON object: [object JSON]"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.toString(); <span class="comment">// "[object Math]"</span></span><br><span class="line"><span class="built_in">Math</span>.toString(); <span class="comment">// "[object JSON]"</span></span><br></pre></td></tr></table></figure></p>
+<p>对象也可以转换为数字,通过<code>valueOf</code>方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"J"</span> + &#123;<span class="attr">toString</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="string">"S"</span>;&#125;&#125;; <span class="comment">// "JS"</span></span><br><span class="line"><span class="number">2</span> * &#123;<span class="attr">valueOf</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="number">3</span>;&#125;&#125;; <span class="comment">//6</span></span><br></pre></td></tr></table></figure></p>
+<p>特别是,当一个对象同时包含<code>toString</code>和<code>valueOf</code>方法时,运算符<code>+</code>应该调用哪个方法并不明显,<br>做字符串连接还是加法应该根据参数的类型,但是存在隐式的强制转换,因此类型并不是显而易见!<br>JS默认选择<code>valueOf</code>而不是<code>toString</code>方法解决这种选择,所以产生的行为将出乎意料:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"[object MyObject]"</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">17</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">"object: "</span> + obj; <span class="comment">// "object: 17"</span></span><br></pre></td></tr></table></figure></p>
+<p>上面例子说明,<code>valueOf</code>方法才是为那些代表数值的对象(如<code>Number</code>对象)而设计的.对于这些数值对象,<code>toString</code>和<code>valueOf</code>应该返回一样的结果(相同的数字的字符串或数值)<br>一般的,字符串的强制转换远比数字的强制转换更常见,有用.最好避免使用<code>valueOf</code>,除非对象确实是一个数字的抽象,并且<code>obj.toString()</code>能产生一个<code>obj.valueOf()</code>的字符串表示.</p>
+<p>最后一种强制转换有时称为真值运算(truthiness). <code>if || &amp;&amp;</code>等运算符逻辑上需要布尔值作为操作参数,但实际上可以接受任何值.<br>JS按照简单的隐式强制转换规则将值解释为布尔值.  </p>
+<ul>
+<li>大多数JS值都为真值,也就是能隐式转换为<code>true</code></li>
+<li>对字符串和数字以外的其他对象, 真值运算不会隐式调用任何强制转换方法</li>
+<li>JS中有7个假值: <code>false, 0, -0, &quot;&quot;, NaN, null, undefined</code>,其他都为真值<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个带默认值的接受可选参数的函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">point</span>(<span class="params">x, y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!x) x = <span class="number">320</span>;</span><br><span class="line">    <span class="keyword">if</span>(!y) y = <span class="number">240</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">x</span>: x, <span class="attr">y</span>: y&#125; </span><br><span class="line">&#125;</span><br><span class="line">point(<span class="number">0</span>, <span class="number">0</span>); <span class="comment">// 本来预计输出原点&#123;x: 0, y: 0&#125;,却输出&#123;x: 320, y: 240&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查参数是否为undefined更为严格的方式是使用typeof</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">point</span>(<span class="params">x, y</span>)</span>&#123;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> x === <span class="string">'undefined'</span>) x = <span class="number">320</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> y === <span class="string">'undefined'</span>) y = <span class="number">240</span>;</span><br><span class="line"><span class="keyword">return</span> &#123;<span class="attr">x</span>: x, <span class="attr">y</span>: y&#125; </span><br><span class="line">&#125;</span><br><span class="line">point(); <span class="comment">// &#123;x: 320, y: 240&#125;</span></span><br><span class="line">point(<span class="number">0</span>,<span class="number">0</span>); <span class="comment">// &#123;x: 0, y: 0&#125;</span></span><br><span class="line"><span class="comment">//另外一种方式是直接与 undefined 比较</span></span><br><span class="line"><span class="keyword">if</span>(x === <span class="literal">undefined</span>) &#123;<span class="comment">//...&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>注意:</strong><br><strong>1. 类型错误可能会被隐式的强制转换隐藏</strong><br><strong>2. 重载的运算符<code>+</code>进行加法还是连接操作取决参数类型</strong><br><strong>3. 对象通过<code>valueOf</code>转换为数值,<code>toString</code>转为字符串</strong><br><strong>4. 具有<code>valueOf</code>方法的对象应该实现<code>toString</code>方法,返回一个<code>valueOf</code>方法产生的数字的字符串表示</strong><br><strong>5. 测试一个值是否为未定义,应该使用<code>typeof</code>或与<code>undefined</code>比较,而不是直接进行真值运算</strong></p>
+<h3 id="4-原始类型优于封装对象"><a href="#4-原始类型优于封装对象" class="headerlink" title="4.原始类型优于封装对象"></a>4.原始类型优于封装对象</h3><p>除对象外,JS有5种原始值类型: 布尔值, 数字, 字符串, <code>null</code> 和 <code>undefined</code>.  </p>
+<p><strong>但typeof null 的结果却是”object”</strong></p>
+<p>JS标准库提供了构造函数来封装布尔值,数字和字符串作为对象.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// String对象的行为和封装的字符串值类似</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"Hello"</span>);</span><br><span class="line">s + <span class="string">" World"</span>; <span class="comment">// "Hello World"</span></span><br><span class="line">s[<span class="number">4</span>]; <span class="comment">// "o"</span></span><br><span class="line"><span class="comment">// 但是不同点在于,String对象是一个真正的对象</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">"Hello"</span>; <span class="comment">// "string"</span></span><br><span class="line"><span class="keyword">typeof</span> s; <span class="comment">// "object"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 即不能用内置的操作符比较两个截然不同的String对象的内容</span></span><br><span class="line"><span class="comment">// 因为每个String对象都是一个单独的对象,其只等于自身</span></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"hello"</span>);</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"hello"</span>);</span><br><span class="line">s1 === s2; <span class="comment">// false</span></span><br><span class="line">s1 == s2; <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>其主要用处为: 这些对象有一些实用方法, 结合隐式强制转换,可以方便的使用这些方法</p>
+<p>当对原始值提取属性或进行方法调用时,它表现得像已经使用了对应对象类型封装了该值一样.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"hello"</span>.toUpperCase(); <span class="comment">// "HELLO"</span></span><br><span class="line"><span class="comment">// 而隐式封装的一个结果就是当对原始值设置属性,但对其没有任何作用</span></span><br><span class="line"><span class="comment">// 因为每次隐式封装都会产生一个新的String对象,所以这种设置原始值属性的方法是没有意义的</span></span><br><span class="line"><span class="string">"hello"</span>.property1 = <span class="number">1</span>;</span><br><span class="line"><span class="string">"hello"</span>.property1; <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 当做相等比较时,原始类型的封装对象与其原始值行为不一样</strong><br><strong>2. 获取和设置原始类型值的属性会隐式创建封装对象</strong>  </p>
+<h3 id="5-避免对混合类型使用-运算符"><a href="#5-避免对混合类型使用-运算符" class="headerlink" title="5. 避免对混合类型使用 == 运算符"></a>5. 避免对混合类型使用 <code>==</code> 运算符</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 表达式的值是什么? </span></span><br><span class="line"><span class="string">"1.0e0"</span> == &#123;<span class="attr">valueOf</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">true</span>;&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<p>结果为<code>true</code>, 由于隐式强制转换, 在比较之前,他们都会转为数字, 字符串解析为数字1,匿名对象调用自身的<code>valueOf</code>方法得到true, 然后再转换为数字, 得到1;</p>
+<p>一般的,JS显示调用Number函数或者一些一元运算符+将值转换为数字,而更好的替代方式是使用严格相等运算符,当两个参数为同一类型时,<code>==</code> 和 <code>===</code>没有差别, 但最好使用 <code>===</code></p>
+<p><img src="1.png" alt="==转换规则"></p>
+<p><strong>1. 当参数类型不同时, <code>==</code> 运算符会发生隐式强制转换规则</strong><br><strong>2. 使用 <code>===</code> 运算符, 使其不用任何转换规则比较</strong><br><strong>3. 当比较不用类型的值时,使用自定义的显示强制转换工具函数使程序清晰</strong></p>
+<h3 id="6-了解分号插入的局限"><a href="#6-了解分号插入的局限" class="headerlink" title="6. 了解分号插入的局限"></a>6. 了解分号插入的局限</h3><p>JS的自动分号插入(automatic semicolon insertion)是一种程序解析技术,能推断某些上下文中省略的分号</p>
+<ol>
+<li><p>分号插入规则1<br><strong>分号仅在 { 标记之前, 一个或多个换行之后 或 程序输入的结尾 被插入</strong><br>也就是说,只能在一行, 一个代码块和一段程序结束的地方省略分号</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">square</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n =+ x</span><br><span class="line">    <span class="keyword">return</span> n * n</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">area</span>(<span class="params">r</span>)</span>&#123;r = + r; <span class="keyword">return</span> <span class="built_in">Math</span>.PI * r * r&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">area</span>(<span class="params">r</span>)</span>&#123;r = + r <span class="keyword">return</span> <span class="built_in">Math</span>.PI * r * r&#125; <span class="comment">// error</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add1</span>(<span class="params">x</span>)</span>&#123;<span class="keyword">return</span> x + <span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分号插入规则2<br><strong>分号仅在随后的输入标记不能解析时插入</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line">(f());</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line">a = b(f());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以下则被解析为两句</span></span><br><span class="line"><span class="comment">// 因为 a = b f(); 是错误的</span></span><br><span class="line">a = b</span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>若某条语句的下一行的初始标记不能被解析为一个语句的延续,那么就不能省略该语句的分号  </p>
+<p><strong>5个字符需要注意:<code>( , [ ,  + , - , /</code>以及数组字面量, 不能作为表达式运算符或一条语句的前缀,否则会有歧义</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line">[<span class="string">'r'</span>,<span class="string">'g'</span>,<span class="string">'b'</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>)</span>&#123;</span><br><span class="line">    backgound[key] = foreground[key] / <span class="number">2</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 以上可解析为</span></span><br><span class="line">a = b[<span class="string">'r'</span>,<span class="string">'g'</span>,<span class="string">'b'</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>)</span>&#123;</span><br><span class="line">    backgound[key] = foreground[key] / <span class="number">2</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 其中,涉及到逗号表达式, 逗号分隔表达式依次从左至右执行, 并返回最后一个表达式的值</span></span><br><span class="line"><span class="comment">// 上例中,返回字符b</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>注意连接两个立即调用函数表达式时</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file1.js</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// file2.js</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 会被视作一条语句</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;)()(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确的方法是应该在文件头加上 ;</span></span><br><span class="line"><span class="comment">// file1.js</span></span><br><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// file2.js</span></span><br><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 分号仅在 <code>{</code> 标记之前, 一个或多个换行之后 或 程序输入的结尾被插入</strong><br><strong>2. 分号仅在随后的输入标记不能解析时插入</strong><br><strong>3. 注意连接两个立即调用函数表达式时</strong><br><strong>4. 在<code>return, throw, break, continue, ++, --</code> 的参数之前绝不能换行</strong><br><strong>5. 分号不能作为<code>for</code>循环的头部或空语句的分隔符而被推导出, 即不会在<code>for</code>中加入分号</strong>   </p>
+<h3 id="7-视字符串为16位代码单元序列"><a href="#7-视字符串为16位代码单元序列" class="headerlink" title="7. 视字符串为16位代码单元序列"></a>7. 视字符串为16位代码单元序列</h3><p><em>不是很明白啥意思</em></p>
+<p><strong>1. JS字符串由16位代码单元组成,而不是Unicode码点组成</strong><br><strong>2. JS使用两个代码单元表示2^16极其以上的Unicode码点,这两个代码单元被称为代理对</strong><br><strong>3. 代理对甩开了字符串元素计数, <code>length, charAt, charCodeAt</code>方法及其正则表达式模式(例如<code>.</code>)受影响</strong><br><strong>4. 使用第三方库编写可是别码点的字符串操作</strong><br><strong>5. 每当使用含有字符串操作的库时,需要查阅文档, 看它如何处理代码点的整个范围</strong>  </p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/02/26/effective-javascript2/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/21/js-data-structure2/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

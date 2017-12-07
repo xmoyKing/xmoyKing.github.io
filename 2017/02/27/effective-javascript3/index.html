@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            effective-javascript笔记-3 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,effective-javascript,note">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="effective-javascript笔记-3 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="effective-javascript"> <meta property="og:article:tag" content="note"> 
+
+    
+        <meta property="article:published_time" content="Mon Feb 27 2017 19:42:53 GMT+0800" />
+        <meta property="article:modified_time" content="Sat Mar 25 2017 00:00:00 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="effective-javascript笔记-3 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/02/27/effective-javascript3/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/02/27/effective-javascript3/index.html",
+    "headline": "effective-javascript笔记-3",
+    "datePublished": "Mon Feb 27 2017 19:42:53 GMT+0800",
+    "dateModified": "Sat Mar 25 2017 00:00:00 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,effective-javascript,notenull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用函数"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;&#x51FD;&#x6570;" class="headerlink" title="&#x4F7F;&#x7528;&#x51FD;&#x6570;"></a>&#x4F7F;&#x7528;&#x51FD;&#x6570;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#18-理解函数调用-方法调用及构造函数调用之间的不同"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#18-&#x7406;&#x89E3;&#x51FD;&#x6570;&#x8C03;&#x7528;-&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x53CA;&#x6784;&#x9020;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x4E4B;&#x95F4;&#x7684;&#x4E0D;&#x540C;" class="headerlink" title="18. &#x7406;&#x89E3;&#x51FD;&#x6570;&#x8C03;&#x7528;,&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x53CA;&#x6784;&#x9020;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x4E4B;&#x95F4;&#x7684;&#x4E0D;&#x540C;"></a>18. &#x7406;&#x89E3;&#x51FD;&#x6570;&#x8C03;&#x7528;,&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x53CA;&#x6784;&#x9020;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x4E4B;&#x95F4;&#x7684;&#x4E0D;&#x540C;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#19-熟练掌握告诫函数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#19-&#x719F;&#x7EC3;&#x638C;&#x63E1;&#x544A;&#x8BEB;&#x51FD;&#x6570;" class="headerlink" title="19. &#x719F;&#x7EC3;&#x638C;&#x63E1;&#x544A;&#x8BEB;&#x51FD;&#x6570;"></a>19. &#x719F;&#x7EC3;&#x638C;&#x63E1;&#x544A;&#x8BEB;&#x51FD;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#20-使用call方法自定义接收者来调用方法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#20-&#x4F7F;&#x7528;call&#x65B9;&#x6CD5;&#x81EA;&#x5B9A;&#x4E49;&#x63A5;&#x6536;&#x8005;&#x6765;&#x8C03;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="20. &#x4F7F;&#x7528;call&#x65B9;&#x6CD5;&#x81EA;&#x5B9A;&#x4E49;&#x63A5;&#x6536;&#x8005;&#x6765;&#x8C03;&#x7528;&#x65B9;&#x6CD5;"></a>20. &#x4F7F;&#x7528;call&#x65B9;&#x6CD5;&#x81EA;&#x5B9A;&#x4E49;&#x63A5;&#x6536;&#x8005;&#x6765;&#x8C03;&#x7528;&#x65B9;&#x6CD5;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#21-使用apply方法通过不同数量的参数调用函数"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"><a href="#21-&#x4F7F;&#x7528;apply&#x65B9;&#x6CD5;&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x6570;&#x91CF;&#x7684;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x51FD;&#x6570;" class="headerlink" title="21.  &#x4F7F;&#x7528;apply&#x65B9;&#x6CD5;&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x6570;&#x91CF;&#x7684;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x51FD;&#x6570;"></a>21.  &#x4F7F;&#x7528;apply&#x65B9;&#x6CD5;&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x6570;&#x91CF;&#x7684;&#x53C2;&#x6570;&#x8C03;&#x7528;&#x51FD;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#22-使用arguments创建可变参数的函数"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"><a href="#22-&#x4F7F;&#x7528;arguments&#x521B;&#x5EFA;&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;" class="headerlink" title="22. &#x4F7F;&#x7528;arguments&#x521B;&#x5EFA;&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;"></a>22. &#x4F7F;&#x7528;arguments&#x521B;&#x5EFA;&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#23-永远不要修改arguments对象"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"><a href="#23-&#x6C38;&#x8FDC;&#x4E0D;&#x8981;&#x4FEE;&#x6539;arguments&#x5BF9;&#x8C61;" class="headerlink" title="23. &#x6C38;&#x8FDC;&#x4E0D;&#x8981;&#x4FEE;&#x6539;arguments&#x5BF9;&#x8C61;"></a>23. &#x6C38;&#x8FDC;&#x4E0D;&#x8981;&#x4FEE;&#x6539;arguments&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#24-使用变量保存arguments的引用"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"><a href="#24-&#x4F7F;&#x7528;&#x53D8;&#x91CF;&#x4FDD;&#x5B58;arguments&#x7684;&#x5F15;&#x7528;" class="headerlink" title="24. &#x4F7F;&#x7528;&#x53D8;&#x91CF;&#x4FDD;&#x5B58;arguments&#x7684;&#x5F15;&#x7528;"></a>24. &#x4F7F;&#x7528;&#x53D8;&#x91CF;&#x4FDD;&#x5B58;arguments&#x7684;&#x5F15;&#x7528;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#25-使用bind方法提取具有确定接收者的方法"><span class="post-toc-number">1.8.</span> <span class="post-toc-text"><a href="#25-&#x4F7F;&#x7528;bind&#x65B9;&#x6CD5;&#x63D0;&#x53D6;&#x5177;&#x6709;&#x786E;&#x5B9A;&#x63A5;&#x6536;&#x8005;&#x7684;&#x65B9;&#x6CD5;" class="headerlink" title="25. &#x4F7F;&#x7528;bind&#x65B9;&#x6CD5;&#x63D0;&#x53D6;&#x5177;&#x6709;&#x786E;&#x5B9A;&#x63A5;&#x6536;&#x8005;&#x7684;&#x65B9;&#x6CD5;"></a>25. &#x4F7F;&#x7528;bind&#x65B9;&#x6CD5;&#x63D0;&#x53D6;&#x5177;&#x6709;&#x786E;&#x5B9A;&#x63A5;&#x6536;&#x8005;&#x7684;&#x65B9;&#x6CD5;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#26-使用bind方法实现函数柯里化"><span class="post-toc-number">1.9.</span> <span class="post-toc-text"><a href="#26-&#x4F7F;&#x7528;bind&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x51FD;&#x6570;&#x67EF;&#x91CC;&#x5316;" class="headerlink" title="26. &#x4F7F;&#x7528;bind&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x51FD;&#x6570;&#x67EF;&#x91CC;&#x5316;"></a>26. &#x4F7F;&#x7528;bind&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#x51FD;&#x6570;&#x67EF;&#x91CC;&#x5316;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#27-使用闭包而不是字符串来封装代码"><span class="post-toc-number">1.10.</span> <span class="post-toc-text"><a href="#27-&#x4F7F;&#x7528;&#x95ED;&#x5305;&#x800C;&#x4E0D;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x6765;&#x5C01;&#x88C5;&#x4EE3;&#x7801;" class="headerlink" title="27. &#x4F7F;&#x7528;&#x95ED;&#x5305;&#x800C;&#x4E0D;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x6765;&#x5C01;&#x88C5;&#x4EE3;&#x7801;"></a>27. &#x4F7F;&#x7528;&#x95ED;&#x5305;&#x800C;&#x4E0D;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x6765;&#x5C01;&#x88C5;&#x4EE3;&#x7801;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#28-不要信赖函数对象的toString方法"><span class="post-toc-number">1.11.</span> <span class="post-toc-text"><a href="#28-&#x4E0D;&#x8981;&#x4FE1;&#x8D56;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x7684;toString&#x65B9;&#x6CD5;" class="headerlink" title="28. &#x4E0D;&#x8981;&#x4FE1;&#x8D56;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x7684;toString&#x65B9;&#x6CD5;"></a>28. &#x4E0D;&#x8981;&#x4FE1;&#x8D56;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x7684;toString&#x65B9;&#x6CD5;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#29-避免使用非标准的栈检查属性"><span class="post-toc-number">1.12.</span> <span class="post-toc-text"><a href="#29-&#x907F;&#x514D;&#x4F7F;&#x7528;&#x975E;&#x6807;&#x51C6;&#x7684;&#x6808;&#x68C0;&#x67E5;&#x5C5E;&#x6027;" class="headerlink" title="29. &#x907F;&#x514D;&#x4F7F;&#x7528;&#x975E;&#x6807;&#x51C6;&#x7684;&#x6808;&#x68C0;&#x67E5;&#x5C5E;&#x6027;"></a>29. &#x907F;&#x514D;&#x4F7F;&#x7528;&#x975E;&#x6807;&#x51C6;&#x7684;&#x6808;&#x68C0;&#x67E5;&#x5C5E;&#x6027;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                effective-javascript笔记-3
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Feb 27, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Mar 25, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/effective-javascript/">effective-javascript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/note/">note</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=effective-javascript笔记-3&url=https://github.com/xmoyKING/2017/02/27/effective-javascript3/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=effective-javascript笔记-3&url=https://github.com/xmoyKING/2017/02/27/effective-javascript3/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/02/27/effective-javascript3/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/02/27/effective-javascript3/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="使用函数"><a href="#使用函数" class="headerlink" title="使用函数"></a>使用函数</h2><h3 id="18-理解函数调用-方法调用及构造函数调用之间的不同"><a href="#18-理解函数调用-方法调用及构造函数调用之间的不同" class="headerlink" title="18. 理解函数调用,方法调用及构造函数调用之间的不同"></a>18. 理解函数调用,方法调用及构造函数调用之间的不同</h3><p>在JS中,函数,方法,类的构造函数是单个构造对象的三种不用的使用模式.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数调用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hello '</span>+name;</span><br><span class="line">&#125;</span><br><span class="line">hello(<span class="string">'tom'</span>); <span class="comment">// hello tom</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法调用</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    hello: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'hello '</span>+ <span class="keyword">this</span>.name;</span><br><span class="line">    &#125;,</span><br><span class="line">    name: <span class="string">'han'</span></span><br><span class="line">&#125;</span><br><span class="line">obj.hello(); <span class="comment">// hello han</span></span><br><span class="line"><span class="comment">// 此处hello通过this变量访问obj对象的属性</span></span><br><span class="line"><span class="comment">// 在方法调用中,是由调用表达式自身来确定this变量的绑定,</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过构造函数使用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name, pass</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.pass = pass;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> u = <span class="keyword">new</span> User(<span class="string">'aa'</span>, <span class="string">'psa'</span>);</span><br><span class="line">u.name; <span class="comment">// aa</span></span><br><span class="line"><span class="comment">// 构造函数调用将一个全新对象作为this变量的值,并隐式返回这个新对象作为调用结果</span></span><br><span class="line"><span class="comment">// 构造函数的主要职责是初始化该新对象</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 方法调用将被查找方法属性的对象作为调用接收者</strong><br><strong>2. 函数调用将全局对象(处于严格模式下则为undefined)作为接收者,一般很少使用函数调用语法来调用方法</strong><br><strong>3. 构造函数需要通过new运算符调用,并产生一个新的对象作为其接收者</strong></p>
+<h3 id="19-熟练掌握告诫函数"><a href="#19-熟练掌握告诫函数" class="headerlink" title="19. 熟练掌握告诫函数"></a>19. 熟练掌握告诫函数</h3><p>高阶函数无非是那些将函数作为参数或者返回值的函数, 将函数作为参数(通常称为回调函数,因为高阶函数’随后调用’)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> names = [<span class="string">'fred'</span>, <span class="string">'wilma'</span>, <span class="string">'pebbles'</span>];</span><br><span class="line"><span class="keyword">var</span> upper = [];</span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, n = names.length; i &lt; n; ++i)&#123;</span><br><span class="line">    upper[i] = names[i].toUpperCase();</span><br><span class="line">&#125;</span><br><span class="line">upper; <span class="comment">// ['FRED', 'WILMA', 'PEBBLES']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用map方法,可以大大简化,</span></span><br><span class="line"><span class="keyword">var</span> upper = names.map(<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> name.toUpperCase();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>创建高阶函数抽象有很多好处,但在编码中需要注意一些问题,比如正确获取循环边界条件, 在高阶函数的实现中，将一些常见的模式移到高阶的工具函数中是一个好习惯.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个字符串,通过循环连接</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">buildStr</span>(<span class="params">n, cb</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        result += cb(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> alphabet = buildStr(<span class="number">26</span>, <span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">String</span>.fromCharCode(<span class="string">'a'</span>.charCodeAt() + i);</span><br><span class="line">&#125;);</span><br><span class="line">alphabet; <span class="comment">// 'abcdefghigklmnopqrstuvwxyz'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> digits = buildStr(<span class="number">10</span>, <span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;);</span><br><span class="line">digits; <span class="comment">// '0123456789'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> random = buildStr(<span class="number">8</span>, <span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">String</span>.fromCharCode(<span class="string">'a'</span>.charCodeAt() + <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">26</span>));</span><br><span class="line">&#125;);</span><br><span class="line">random; <span class="comment">// 随机值</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="20-使用call方法自定义接收者来调用方法"><a href="#20-使用call方法自定义接收者来调用方法" class="headerlink" title="20. 使用call方法自定义接收者来调用方法"></a>20. 使用call方法自定义接收者来调用方法</h3><p>通常情况下, 函数或方法的接收者(即绑定到特殊关键字<code>this</code>的值) 是由调用者的语法决定的. 方法调用将方法的被查找对象绑定到this变量.</p>
+<p>然而, 有时需要自定义接收者来调用函数, 因为该函数可能并不是期望的接收者对象的属性.   </p>
+<p>一种方式是, 将方法作为一个新的属性添加到接收者对象中，但这种方法是有问题的, 直接修改obj对象往往会出问题, 因为obj对象可能已经存在了一个<code>temporary</code>属性, 或者<code>temporary</code>属性是不可修改的， 或者对象可能被冻结(frozen)或密封(seal)以防止添加任何新属性.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj.temporary = f; </span><br><span class="line"><span class="keyword">var</span> result = obj.temporary(arg1, arg2, arg3);</span><br><span class="line"><span class="keyword">delete</span> obj.temporary;</span><br></pre></td></tr></table></figure></p>
+<p>此时, 可以使用函数对象的<code>call</code>方法来自定义接收者. <code>f.call(obj, arg1, arg2, arg3)</code>, 它的行为与<code>f(arg1, arg2, arg3)</code>类似.<br>但, 不同的是, 第一个参数提供了一个显示的接收者对象.</p>
+<p>当调用的方法已经被删除,修改或被覆盖时, <code>call</code>方法就派上用场了. 比如: <code>hasOwnProperty</code>方法可被任意的对象调用, 甚至该对象可以是一个字典对象.<br>在字典对象中, 查找<code>hasOwnProperty</code>属性会得到盖子点对象的属性值, 而不是继承过来的方法.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dict.hasOwnProperty = <span class="number">1</span>;</span><br><span class="line">dict.hasOwnProperty(<span class="string">'foo'</span>); <span class="comment">// error: 1 is not a function, 此时hasOwnProperty被覆盖为一个属性了, 而不是一个方法</span></span><br></pre></td></tr></table></figure></p>
+<p>call方法使调用字典对象中的方法成为可能,即使<code>hasOwnProperty</code>方法并没有在该对象中定义.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasOwnProperty = &#123;&#125;.hasOwnProperty;</span><br><span class="line">dict.foo = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">delete</span> dict.hasOwnProperty;</span><br><span class="line">hasOwnProperty.call(dict, <span class="string">'foo'</span>); <span class="comment">// true</span></span><br><span class="line">hasOwnProperty.call(dict, <span class="string">'hasOwnProperty'</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>当定义高阶函数时, <code>call</code>方法也很有用, 高阶函数的一个惯用法是接收一个可选的参数作为调用该函数的接收者. 例如, 表示键值对列表的对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 允许table对象的使用者将一个方法作为table.forEach的回调函数f, 并可自定义接收者</span></span><br><span class="line"><span class="keyword">var</span> table = &#123;</span><br><span class="line">    entries: [],</span><br><span class="line">    addEntry: <span class="function"><span class="keyword">function</span>(<span class="params">key, value</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.entries.push(&#123;<span class="attr">key</span>: key, <span class="attr">value</span>: value&#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    forEach: <span class="function"><span class="keyword">function</span>(<span class="params">f, thisArg</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> entries = <span class="keyword">this</span>.entries;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = entries.length; i &lt; n; ++i)&#123;</span><br><span class="line">            <span class="keyword">var</span> entry = entries[i];</span><br><span class="line">            f.call(thisArg, entry.key, entry.value, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将一个table内容复制到另一个table中</span></span><br><span class="line">table1.forEach(table2.addEntry, table2);</span><br><span class="line"><span class="comment">// 从table2中提取addEntry方法, forEach方法将table2作为接收者, 并反复调用该addEntry方法.</span></span><br><span class="line"><span class="comment">// 虽然addEntry方法期望2个参数,但是forEach方法调用它时却传递了三个参数,键, 值, 索引.</span></span><br><span class="line"><span class="comment">// 多余的参数是无害的, 因为addEntry方法会简单的忽略多余参数</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 使用call方法可以调用在给定的对象中不存在的方法</strong><br><strong>2. 使用call方法定义高阶函数允许使用者给回调函数指定接收者</strong></p>
+<h3 id="21-使用apply方法通过不同数量的参数调用函数"><a href="#21-使用apply方法通过不同数量的参数调用函数" class="headerlink" title="21.  使用apply方法通过不同数量的参数调用函数"></a>21.  使用apply方法通过不同数量的参数调用函数</h3><p>可变参数版本比较简洁,优雅. 可变参数函数具有简单的参数列表, 至少让调用者预先明确的知道提供了多少个参数.</p>
+<p><strong>1. 使用apply方法指定一个可计算的参数数组来调用可变参数的函数</strong><br><strong>2. 使用apply方法的第一个参数给可变参数的方法提供一个接收者</strong></p>
+<h3 id="22-使用arguments创建可变参数的函数"><a href="#22-使用arguments创建可变参数的函数" class="headerlink" title="22. 使用arguments创建可变参数的函数"></a>22. 使用arguments创建可变参数的函数</h3><p>可变参数提供灵活的接口, 不同的调用者可使用不同数量的参数来调用他们. 但提供一个可变参数的函数版本的同时也最好提供一个显示指定数组的固定元数的版本. </p>
+<p>或者,使用一个函数封装版本, 内部用固定元数的函数来实现可变参数函数.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">average</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> averageOfArray(<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 考虑对可变参数的函数提供一个额外的固定元素的版本,从而无需借助apply方法</strong></p>
+<h3 id="23-永远不要修改arguments对象"><a href="#23-永远不要修改arguments对象" class="headerlink" title="23. 永远不要修改arguments对象"></a>23. 永远不要修改arguments对象</h3><p><strong>1. 使用[].shift.call(arguments)将arguments对象复制到一个真正的数组中在进行修改</strong></p>
+<h3 id="24-使用变量保存arguments的引用"><a href="#24-使用变量保存arguments的引用" class="headerlink" title="24. 使用变量保存arguments的引用"></a>24. 使用变量保存arguments的引用</h3><p>迭代器(iterator)是一个可以顺序存取数据集合的对象,典型的api是next函数,获取序列中的下一个值.</p>
+<p>编写一个可以接收任意数量的参数,并使用迭代器获取值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> it = values(<span class="number">1</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line">it.next(); <span class="comment">// 1</span></span><br><span class="line">it.next(); <span class="comment">// 4</span></span><br><span class="line">it.next(); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">values</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="number">0</span>, n = <span class="built_in">arguments</span>.length;</span><br><span class="line">    <span class="comment">// var a = arguments;</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        hasNext: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> i &lt; n;</span><br><span class="line">        &#125;,</span><br><span class="line">        next: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= n)&#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'end of iteration'</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// return a[i++];</span></span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">arguments</span>[i++]; <span class="comment">// wrong arguments,此时的arguments已经改变</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于新的arguments变量被隐式的绑定到每一个函数内, 所以next函数有自己的arguments变量, 解决方案是使用一个变量a记住原来的arguments变量,在嵌套函数内使用变量a</p>
+<p><strong>1. 当引用arguments时需要注意嵌套层级</strong><br><strong>2. 绑定一个明确作用域的引用到arguments,在嵌套函数内使用</strong></p>
+<h3 id="25-使用bind方法提取具有确定接收者的方法"><a href="#25-使用bind方法提取具有确定接收者的方法" class="headerlink" title="25. 使用bind方法提取具有确定接收者的方法"></a>25. 使用bind方法提取具有确定接收者的方法</h3><p>一个普通的函数与对象中值为函数的属性(方法)没有区别,所以可以将对象的方法提取出来作为高阶函数的回调函数. 能很方便的重用一些现有的方法达到预期目标,但此时需要注意被提取方法的接收者绑定到使用该函数的对象上,即<code>this</code>的值!</p>
+<p>以下是一个字符串缓冲对象作为实例:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> buffer = &#123;</span><br><span class="line">    entries: [],</span><br><span class="line">    add: <span class="function"><span class="keyword">function</span>(<span class="params">s</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.entries.push(s);</span><br><span class="line">    &#125;,</span><br><span class="line">    concat: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.entries.join(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>将<code>buffer</code>对象的<code>add</code>方法提取出来,并作为其他数组对象的<code>forEach</code>方法的回调能省很多事儿<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> source = [<span class="string">'567'</span>, <span class="string">'-'</span>, <span class="string">'1234'</span>];</span><br><span class="line">source.forEach(buffer.add); <span class="comment">// error: entries is undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>此处报错是由于<code>source</code>中没有<code>entries</code>属性,也就是说,<code>buffer</code>的<code>add</code>方法的调用者不是<code>buffer</code>对象, 而是不知道的其他对象调用了<code>add</code>方法,所以没有找到<code>entries</code>属性, 此处的<code>forEach</code>方法的实现是使用全局对象作为默认的接收者的, 要想正确使用<code>forEach</code>方法, 可以提供第二个参数,将回调函数的接收者传入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source.forEach(buffer.add, source);</span><br><span class="line">buffer.join(); <span class="comment">// '567-1234'</span></span><br></pre></td></tr></table></figure></p>
+<p>但并不是所有函数都提供了作为回调函数的接收者的参数, 此时,我们可以使用一个局部匿名函数, 在这个局部函数中显示调用回调函数,这种方法非常常见,而ES5的标准库中也直接支持使用这种方法.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">source.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">s</span>)</span>&#123;</span><br><span class="line">    buffer.add(s);</span><br><span class="line">&#125;);</span><br><span class="line">buffer.join(); <span class="comment">// '567-1234'</span></span><br></pre></td></tr></table></figure></p>
+<p>第二种解决的方法,那就是<code>bind</code>方法, 其实函数对象都有bind方法,该方法接受一个对象, 并产生一个新的函数,功能与原函数相同, 以传入的对象为调用者,调用这个新的函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source.forEach(buffer.add.bind(buffer));</span><br></pre></td></tr></table></figure></p>
+<p>也就是说,此时<code>buffer.add.bind(buffer)</code>创建了一个新的函数,而不是原来的<code>buffer.add</code>函数了, 同时它的接收者绑定到了buffer对象上,而原来的则不变.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buffer.add === buffer.add.bind(buffer); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>这意味着<code>bind</code>方法是安全的, 即使是在程序的其他调用,也不会影响到原对象,这在调用原型对象上的公共方法时很有用</p>
+<p><strong>1. 提取一个方法不会将方法的接收者绑定到该方法的对象上</strong><br><strong>2. 当给高阶函数传递对象方法时,使用匿名函数在适当的接收者上调用该方法</strong><br><strong>3. 使用bind方法创建绑定到适当接收者的函数</strong></p>
+<h3 id="26-使用bind方法实现函数柯里化"><a href="#26-使用bind方法实现函数柯里化" class="headerlink" title="26. 使用bind方法实现函数柯里化"></a>26. 使用bind方法实现函数柯里化</h3><p>函数的<code>bind</code>方法除了能修改绑定的接收者之外,还有其他用途,比如:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">simpleURL</span>(<span class="params">protocol, domain, path</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> protocol + <span class="string">'://'</span> + domain +<span class="string">'/path'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个paths数组中保存着相对路径, 使用这些相对路径构造绝对路径</span></span><br><span class="line"><span class="keyword">var</span> urls = paths.map(<span class="function"><span class="keyword">function</span>(<span class="params">path</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> simpleURL(<span class="string">'http'</span>, siteDomain, path);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以用bind方法简化</span></span><br><span class="line"><span class="keyword">var</span> urls = paths.map(simpleURL.bind(<span class="literal">null</span>,<span class="string">'http'</span>, siteDomain));</span><br></pre></td></tr></table></figure></p>
+<p>使用 <code>simpleURL.bind</code> 产生一个委托到<code>simpleURL</code>的新函数. <code>bind</code>方法的第一个参数提供接收者的值. 由于<code>simpleURL</code>不需要引用<code>this</code>变量, 所以可以使用任何值, 使用<code>null</code>或<code>undefined</code>是惯用方法. <code>simpleURL.bind</code>的其余参数传递给<code>simpleURL</code>方法,</p>
+<p>使用单个参数<code>path</code>调用<code>simpleURL.bind</code>, 则该执行结果是一个委托到<code>simpleURL(&#39;http&#39;, siteDomain, path)</code>的函数.</p>
+<p>将函数与其参数的一个子集绑定的技术称为函数柯里化(currying), 以逻辑学家Haskell Curry的名字命名. 比起显示的封装函数, 函数柯里化是一种简洁的,使用更少引用来实现函数委托的方式.</p>
+<p><strong>1. 使用bind方法实现函数柯里化, 即创建一个固定需求参数子集的委托函数</strong><br><strong>2. 传入null和undefined作为接收者的参数来实现函数柯里化, 从而忽略其接收者</strong></p>
+<h3 id="27-使用闭包而不是字符串来封装代码"><a href="#27-使用闭包而不是字符串来封装代码" class="headerlink" title="27. 使用闭包而不是字符串来封装代码"></a>27. 使用闭包而不是字符串来封装代码</h3><p>函数是一种将代码作为数据结构存储的便利方式, 这些代码可以随后被执行. 这使得高阶函数抽象如<code>map, forEach</code>成为可能,也是JS异步I/O方法的核心.</p>
+<p>也可以将代码表示为字符串,传入<code>eval</code>函数达到相同的目的.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">repeat</span>(<span class="params">n, action</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        <span class="built_in">eval</span>(action);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>该函数在全局作用域会工作正常,因为<code>eval</code>函数会将出现在字符串中的所有变量引用作为全局变量来解释.如:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试函数执行速度的脚本, </span></span><br><span class="line"><span class="keyword">var</span> start = [], end = [], timings = [];</span><br><span class="line"></span><br><span class="line">repeat(<span class="number">1000</span>, <span class="string">'start.push(Date.now()); f(); end.push(Date.now())'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = start.length; i &lt; n; ++i)&#123;</span><br><span class="line">    timings[i] = end[i] - start[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接执行没问题,但是若移到函数中,则定义的start, end 不再是全局变量了</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">benchmark</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> start = [], end = [], timings = [];</span><br><span class="line"></span><br><span class="line">    repeat(<span class="number">1000</span>, <span class="string">'start.push(Date.now()); f(); end.push(Date.now())'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = start.length; i &lt; n; ++i)&#123;</span><br><span class="line">        timings[i] = end[i] - start[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> timings;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>该函数会导致repeat函数引用全局的start和end变量. 会使程序行为变得不可预测,同时eval函数的另一个问题是优化. JS引擎很难优化字符串中的代码, 因为编译器不能早的获取源代码来即使优化代码. 然而函数表达式在其代码出现的同时就能被编译.</p>
+<p>正确的方式是使用函数而不是字符串<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">repeat</span>(<span class="params">n, action</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; ++i)&#123;</span><br><span class="line">        action();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">benchmark</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> start = [], end = [], timings = [];</span><br><span class="line"></span><br><span class="line">    repeat(<span class="number">1000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        start.push(<span class="built_in">Date</span>.now()); </span><br><span class="line">        f(); </span><br><span class="line">        end.push(<span class="built_in">Date</span>.now());</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = start.length; i &lt; n; ++i)&#123;</span><br><span class="line">        timings[i] = end[i] - start[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> timings;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 当将字符串传递给eval函数的时候, 绝不要在字符串中包含局部变量引用</strong><br><strong>2. 接受函数调用的API优于使用eval函数执行字符串的API</strong></p>
+<h3 id="28-不要信赖函数对象的toString方法"><a href="#28-不要信赖函数对象的toString方法" class="headerlink" title="28. 不要信赖函数对象的toString方法"></a>28. 不要信赖函数对象的toString方法</h3><p>JS函数<code>toString</code>方法能将函数源代码作为字符串输出<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">1</span>;</span><br><span class="line">&#125;).toString(); <span class="comment">// 'function(x)&#123;\n return x + 1;\n&#125;'</span></span><br></pre></td></tr></table></figure></p>
+<p>这种反射获取函数源代码的功能很强大, 但使用函数对象<code>toString</code>方法有严重的局限性.</p>
+<p>ES标准并没有对函数对象的<code>toString</code>方法的返回结果做规定, 也就是说不同的JS引擎可以有不同的结果.</p>
+<p>同时,当使用了由宿主环境的内置库提供的函数后, 该方法也可能会失败<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">1</span>;</span><br><span class="line">&#125;).bind(<span class="number">16</span>).toString(); <span class="comment">// 'function(x)&#123; [native code] &#125;'</span></span><br></pre></td></tr></table></figure></p>
+<p>由于很多宿主环境下<code>bind</code>函数是有其他变成语言实现的(一般为C++), 宿主环境提供的是一个编译后的函数, 在此环境下函数没有JS的源代码用于显示.  </p>
+<p>同时,该方法生成的源代码并不展示闭包中保存的与内部变量引用相关的值.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">        x + y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="number">42</span>).toString(); <span class="comment">// 'function(y)&#123; return x + y; &#125;'</span></span><br></pre></td></tr></table></figure></p>
+<p>此处尽管函数是一个一个绑定<code>x</code>为42的闭包, 但结果字符串仍包含一个引用x的变量.</p>
+<p><strong>1. 函数对象的toString方法没有标准输出</strong><br><strong>2. 函数对象的toString方法的执行结果不会暴露存储在闭包中的局部变量值</strong><br><strong>3. 应该避免使用函数对象的toString方法</strong></p>
+<h3 id="29-避免使用非标准的栈检查属性"><a href="#29-避免使用非标准的栈检查属性" class="headerlink" title="29. 避免使用非标准的栈检查属性"></a>29. 避免使用非标准的栈检查属性</h3><p>许多JS环境都提供检查调用栈的功能, 调用栈是指当前正在执行的活动函数链. 在某些环境中,每个<code>arguments</code>对象都含有两个额外的属性: <code>arguments.callee</code> 和 <code>arguments.caller</code>, 前者指向使用该<code>arguments</code>对象被调用的函数. 后者指向调用该arguments对象的函数.</p>
+<p><code>arguments.callee</code>除了允许匿名函数递归调用其自身外, 就没有更多的用途了.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> factorial = (<span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (n &lt;= <span class="number">1</span>) ? <span class="number">1</span> : (n * <span class="built_in">arguments</span>.callee(n<span class="number">-1</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><code>arguments.caller</code>属性, 它指向函数最近的调用者.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">revealCaller</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> revealCaller.caller;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">start</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> revealCaller();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">start() === start; <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>使用该属性获取栈貌似很简单,很方便<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCallStack</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> stack = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> f = getCallStack.caller; f; f= f.caller)&#123;</span><br><span class="line">        stack.push(f);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> stack;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getCallStack();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> f1();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> trace = f2();</span><br><span class="line">trace; <span class="comment">// [f1, f2]</span></span><br></pre></td></tr></table></figure></p>
+<p>但<code>getCallStack</code>会有一个问题,那就是若某函数不止一次出现在调用栈中的时候, 会陷入死循环<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n === <span class="number">0</span> ? getCallStack() : f(n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> trace = f(<span class="number">1</span>); <span class="comment">// infinite loop</span></span><br></pre></td></tr></table></figure></p>
+<p>问题出在由于函数<code>f</code>递归调用其自身, 因此其<code>caller</code>属性会自动更新,指回到函数<code>f</code>. 此时函数<code>getCallStack</code>会陷入查找函数<code>f</code>的死循环中.</p>
+<p>虽然我们检测该循环,但是在函数<code>f</code>调用其自身之前也没有关于哪个函数调用了它的信息. 因为其他调用栈的信息已经丢失.</p>
+<p>所以严格模式下, 获取<code>arguments</code>对像的<code>caller / callee</code>属性会出错.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    ;<span class="string">"use strict"</span>; </span><br><span class="line">    <span class="keyword">return</span> f.caller;</span><br><span class="line">&#125;</span><br><span class="line">f(); <span class="comment">// error: caller may not be accessed on strict functions</span></span><br></pre></td></tr></table></figure></p>
+<!-- 由于主题theme样式问题，use strict前若没有分号会出现行错乱的方式 -->
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/03/01/effective-javascript4/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/26/effective-javascript2/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            opacity: 0.3;
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script>
+        window.onload = function() {
+            var oBtn = document.getElementById('btn1');
+            var oDiv = document.getElementById('div1');
+
+            oBtn.onclick = function() {
+                animate(oDiv, {
+                    width: 302,
+                    height: 200,
+                    opacity: 100
+                });
+            };
+        };
+
+        //获取当前o元素的attr属性c
+        function getStyle(o, attr) {
+            if (o.currentStyle)
+                return o.currentStyle[attr];
+            else
+                return getComputedStyle(o, false)[attr];
+        }
+
+        //动画函数 o为目标元素，json为一个包含变化属性和预期值的对象
+        //  fn为完成此动画后的回调，可以继续使用animate形成延时动画
+        function animate(o, json, fn) {
+            var itime = 30; //定时器时间
+            var iS = 8; //动画速度基准，越大越慢
+
+            clearInterval(o.timer); //清除上次在o元素上使用的定时器，防止动画重复
+
+            o.timer = setInterval(function() {
+                var bStop = true; //当所有值都变化为预期值后，标识此次动画结束
+
+                for (var attr in json) {
+                    // 1. 获取当前该attr的值
+                    var iCur = 0;
+                    if (attr == 'opacity') //防止小数与误差
+                        iCur = parseInt(parseFloat(getStyle(o, attr)) * 100);
+                    else
+                        iCur = parseInt(getStyle(o, attr));
+
+                    // 2. 算速度，防止小数误差积累，需要使用取整
+                    var iSpeed = (json[attr] - iCur) / iS;
+                    iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed); //正反速度区别对待
+
+                    // 3. 检测停止，每一轮定时，只要有一个属性未到预期值则设置为false
+                    if (iCur != json[attr])
+                        bStop = false;
+
+                    // 4. 透明度和其他属性单位不同
+                    if (attr == 'opacity')
+                        o.style.opacity = (iCur + iSpeed) / 100;
+                    else
+                        o.style[attr] = iCur + iSpeed + 'px';
+
+                }
+
+                // 5. 检测所有属性是否完成
+                if (bStop) {
+                    clearInterval(o.timer);
+                    if (fn)
+                        fn();
+                }
+            }, itime);
+        }
+    </script>
+</head>
+
+<body style="background:#0F0;">
+    <input id="btn1" type="button" value="开始运动" />
+    <div id="div1">
+    </div>
+</body>
+
+</html>

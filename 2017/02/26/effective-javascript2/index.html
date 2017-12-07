@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            effective-javascript笔记-2 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,effective-javascript,note">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="effective-javascript笔记-2 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="effective-javascript"> <meta property="og:article:tag" content="note"> 
+
+    
+        <meta property="article:published_time" content="Sun Feb 26 2017 13:37:50 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:08 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="effective-javascript笔记-2 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/02/26/effective-javascript2/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/02/26/effective-javascript2/index.html",
+    "headline": "effective-javascript笔记-2",
+    "datePublished": "Sun Feb 26 2017 13:37:50 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:08 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,effective-javascript,notenull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#变量作用域"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x53D8;&#x91CF;&#x4F5C;&#x7528;&#x57DF;" class="headerlink" title="&#x53D8;&#x91CF;&#x4F5C;&#x7528;&#x57DF;"></a>&#x53D8;&#x91CF;&#x4F5C;&#x7528;&#x57DF;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-尽量少用全局对象"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#8-&#x5C3D;&#x91CF;&#x5C11;&#x7528;&#x5168;&#x5C40;&#x5BF9;&#x8C61;" class="headerlink" title="8. &#x5C3D;&#x91CF;&#x5C11;&#x7528;&#x5168;&#x5C40;&#x5BF9;&#x8C61;"></a>8. &#x5C3D;&#x91CF;&#x5C11;&#x7528;&#x5168;&#x5C40;&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-始终声明局部变量"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#9-&#x59CB;&#x7EC8;&#x58F0;&#x660E;&#x5C40;&#x90E8;&#x53D8;&#x91CF;" class="headerlink" title="9. &#x59CB;&#x7EC8;&#x58F0;&#x660E;&#x5C40;&#x90E8;&#x53D8;&#x91CF;"></a>9. &#x59CB;&#x7EC8;&#x58F0;&#x660E;&#x5C40;&#x90E8;&#x53D8;&#x91CF;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10-避免使用with"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#10-&#x907F;&#x514D;&#x4F7F;&#x7528;with" class="headerlink" title="10. &#x907F;&#x514D;&#x4F7F;&#x7528;with"></a>10. &#x907F;&#x514D;&#x4F7F;&#x7528;with</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11-熟练掌握闭包"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"><a href="#11-&#x719F;&#x7EC3;&#x638C;&#x63E1;&#x95ED;&#x5305;" class="headerlink" title="11. &#x719F;&#x7EC3;&#x638C;&#x63E1;&#x95ED;&#x5305;"></a>11. &#x719F;&#x7EC3;&#x638C;&#x63E1;&#x95ED;&#x5305;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-JS允许引用在当前函数以外定义的变量"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text"><a href="#1-JS&#x5141;&#x8BB8;&#x5F15;&#x7528;&#x5728;&#x5F53;&#x524D;&#x51FD;&#x6570;&#x4EE5;&#x5916;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;" class="headerlink" title="1. JS&#x5141;&#x8BB8;&#x5F15;&#x7528;&#x5728;&#x5F53;&#x524D;&#x51FD;&#x6570;&#x4EE5;&#x5916;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;"></a>1. JS&#x5141;&#x8BB8;&#x5F15;&#x7528;&#x5728;&#x5F53;&#x524D;&#x51FD;&#x6570;&#x4EE5;&#x5916;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-即使外部函数已经返回-当前函数依然可以引用在外部函数所定义的变量"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text"><a href="#2-&#x5373;&#x4F7F;&#x5916;&#x90E8;&#x51FD;&#x6570;&#x5DF2;&#x7ECF;&#x8FD4;&#x56DE;-&#x5F53;&#x524D;&#x51FD;&#x6570;&#x4F9D;&#x7136;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x5728;&#x5916;&#x90E8;&#x51FD;&#x6570;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;" class="headerlink" title="2. &#x5373;&#x4F7F;&#x5916;&#x90E8;&#x51FD;&#x6570;&#x5DF2;&#x7ECF;&#x8FD4;&#x56DE;,&#x5F53;&#x524D;&#x51FD;&#x6570;&#x4F9D;&#x7136;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x5728;&#x5916;&#x90E8;&#x51FD;&#x6570;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;"></a>2. &#x5373;&#x4F7F;&#x5916;&#x90E8;&#x51FD;&#x6570;&#x5DF2;&#x7ECF;&#x8FD4;&#x56DE;,&#x5F53;&#x524D;&#x51FD;&#x6570;&#x4F9D;&#x7136;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x5728;&#x5916;&#x90E8;&#x51FD;&#x6570;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-闭包可以更新外部变量的值"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text"><a href="#3-&#x95ED;&#x5305;&#x53EF;&#x4EE5;&#x66F4;&#x65B0;&#x5916;&#x90E8;&#x53D8;&#x91CF;&#x7684;&#x503C;" class="headerlink" title="3. &#x95ED;&#x5305;&#x53EF;&#x4EE5;&#x66F4;&#x65B0;&#x5916;&#x90E8;&#x53D8;&#x91CF;&#x7684;&#x503C;"></a>3. &#x95ED;&#x5305;&#x53EF;&#x4EE5;&#x66F4;&#x65B0;&#x5916;&#x90E8;&#x53D8;&#x91CF;&#x7684;&#x503C;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12-理解变量声明提升"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"><a href="#12-&#x7406;&#x89E3;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x63D0;&#x5347;" class="headerlink" title="12. &#x7406;&#x89E3;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x63D0;&#x5347;"></a>12. &#x7406;&#x89E3;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x63D0;&#x5347;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13-使用立即调用的函数表达式创建局部作用域"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"><a href="#13-&#x4F7F;&#x7528;&#x7ACB;&#x5373;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x521B;&#x5EFA;&#x5C40;&#x90E8;&#x4F5C;&#x7528;&#x57DF;" class="headerlink" title="13. &#x4F7F;&#x7528;&#x7ACB;&#x5373;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x521B;&#x5EFA;&#x5C40;&#x90E8;&#x4F5C;&#x7528;&#x57DF;"></a>13. &#x4F7F;&#x7528;&#x7ACB;&#x5373;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x521B;&#x5EFA;&#x5C40;&#x90E8;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#14-当心命名函数表达式的作用域"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"><a href="#14-&#x5F53;&#x5FC3;&#x547D;&#x540D;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x4F5C;&#x7528;&#x57DF;" class="headerlink" title="14. &#x5F53;&#x5FC3;&#x547D;&#x540D;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x4F5C;&#x7528;&#x57DF;"></a>14. &#x5F53;&#x5FC3;&#x547D;&#x540D;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#15-当心局部块函数声明的作用域"><span class="post-toc-number">1.8.</span> <span class="post-toc-text"><a href="#15-&#x5F53;&#x5FC3;&#x5C40;&#x90E8;&#x5757;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x7684;&#x4F5C;&#x7528;&#x57DF;" class="headerlink" title="15. &#x5F53;&#x5FC3;&#x5C40;&#x90E8;&#x5757;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x7684;&#x4F5C;&#x7528;&#x57DF;"></a>15. &#x5F53;&#x5FC3;&#x5C40;&#x90E8;&#x5757;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x7684;&#x4F5C;&#x7528;&#x57DF;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#16-避免使用eval创建局部变量"><span class="post-toc-number">1.9.</span> <span class="post-toc-text"><a href="#16-&#x907F;&#x514D;&#x4F7F;&#x7528;eval&#x521B;&#x5EFA;&#x5C40;&#x90E8;&#x53D8;&#x91CF;" class="headerlink" title="16. &#x907F;&#x514D;&#x4F7F;&#x7528;eval&#x521B;&#x5EFA;&#x5C40;&#x90E8;&#x53D8;&#x91CF;"></a>16. &#x907F;&#x514D;&#x4F7F;&#x7528;eval&#x521B;&#x5EFA;&#x5C40;&#x90E8;&#x53D8;&#x91CF;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#17-间接调用eval函数优于直接调用"><span class="post-toc-number">1.10.</span> <span class="post-toc-text"><a href="#17-&#x95F4;&#x63A5;&#x8C03;&#x7528;eval&#x51FD;&#x6570;&#x4F18;&#x4E8E;&#x76F4;&#x63A5;&#x8C03;&#x7528;" class="headerlink" title="17. &#x95F4;&#x63A5;&#x8C03;&#x7528;eval&#x51FD;&#x6570;&#x4F18;&#x4E8E;&#x76F4;&#x63A5;&#x8C03;&#x7528;"></a>17. &#x95F4;&#x63A5;&#x8C03;&#x7528;eval&#x51FD;&#x6570;&#x4F18;&#x4E8E;&#x76F4;&#x63A5;&#x8C03;&#x7528;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                effective-javascript笔记-2
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Feb 26, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/effective-javascript/">effective-javascript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/note/">note</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=effective-javascript笔记-2&url=https://github.com/xmoyKING/2017/02/26/effective-javascript2/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=effective-javascript笔记-2&url=https://github.com/xmoyKING/2017/02/26/effective-javascript2/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/02/26/effective-javascript2/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/02/26/effective-javascript2/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><h3 id="8-尽量少用全局对象"><a href="#8-尽量少用全局对象" class="headerlink" title="8. 尽量少用全局对象"></a>8. 尽量少用全局对象</h3><p>由于全局命名空间是JS程序中独立组件进行交互的唯一途径,因此,利用全局命名空间的情况是不可避免的.</p>
+<p>JS的全局命名空间也被暴露为程序全局作用域中可以访问的全局对象,该对象作为<code>this</code>关键字的初始值.<br>在浏览器中,全局对象被绑定到全局的window变量,添加或修改全局变量会自动更新全局对象.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.foo; <span class="comment">// undefined</span></span><br><span class="line">foo = <span class="string">'global foo'</span>;</span><br><span class="line"><span class="keyword">this</span>.foo; <span class="comment">// 'global foo'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 或更新全局对象</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="string">'global foo'</span>;</span><br><span class="line"><span class="keyword">this</span>.foo = <span class="string">'changed'</span>;</span><br><span class="line">foo; <span class="comment">// 'changed'</span></span><br></pre></td></tr></table></figure></p>
+<p>特性检测是一种使程序在平台特性集合的变化中依旧健壮的相对简单的方法,也可以使同一技术在浏览器和服务器环境下共享库.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检测 JSON (从ES5引入) 对象是否存在</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">this</span>.JSON)&#123;</span><br><span class="line">  <span class="keyword">this</span>.JSON = &#123;</span><br><span class="line">    parse: <span class="comment">//... ,</span></span><br><span class="line">    stringify: <span class="comment">//...</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 避免声明全局变量</strong><br><strong>2. 避免对全局对象添加属性</strong><br><strong>3. 使用全局对象来做平台特性检测</strong></p>
+<h3 id="9-始终声明局部变量"><a href="#9-始终声明局部变量" class="headerlink" title="9. 始终声明局部变量"></a>9. 始终声明局部变量</h3><p>意外的创建全局变量将是灾难.</p>
+<p><strong>1. 始终用var声明新的变量</strong><br><strong>2. 考虑使用lint工具帮助检测未绑定的变量</strong></p>
+<h3 id="10-避免使用with"><a href="#10-避免使用with" class="headerlink" title="10. 避免使用with"></a>10. 避免使用with</h3><p>with语句可以很方便的避免对对象的重复引用, 但将使程序变得不可靠和低效.</p>
+<p><strong>1. 使用简短的变量名代替重复访问的对象</strong><br><strong>2. 显示的绑定局部变量到对象属性上,而不是使用with语句隐式地绑定他们</strong></p>
+<h3 id="11-熟练掌握闭包"><a href="#11-熟练掌握闭包" class="headerlink" title="11. 熟练掌握闭包"></a>11. 熟练掌握闭包</h3><p>理解闭包需要掌握三点:</p>
+<h4 id="1-JS允许引用在当前函数以外定义的变量"><a href="#1-JS允许引用在当前函数以外定义的变量" class="headerlink" title="1. JS允许引用在当前函数以外定义的变量"></a>1. JS允许引用在当前函数以外定义的变量</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeSandwich</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> magic = <span class="string">'peanut butter'</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">make</span>(<span class="params">filling</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> magic +<span class="string">' and '</span> + filling;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> make(<span class="string">'jelly'</span>);</span><br><span class="line">&#125;</span><br><span class="line">makeSandwich(); <span class="comment">// 'peanut butter and jelly'</span></span><br></pre></td></tr></table></figure>
+<p>make函数中引用了外部的magic变量</p>
+<h4 id="2-即使外部函数已经返回-当前函数依然可以引用在外部函数所定义的变量"><a href="#2-即使外部函数已经返回-当前函数依然可以引用在外部函数所定义的变量" class="headerlink" title="2. 即使外部函数已经返回,当前函数依然可以引用在外部函数所定义的变量"></a>2. 即使外部函数已经返回,当前函数依然可以引用在外部函数所定义的变量</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sandwichMaker</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> magic = <span class="string">'peanut butter'</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">make</span>(<span class="params">filling</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> magic +<span class="string">' and '</span> + filling;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> make;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> f = sandwichMaker(); </span><br><span class="line">f(<span class="string">'jelly'</span>); <span class="comment">// 'peanut butter and jelly'</span></span><br><span class="line">f(<span class="string">'bananas'</span>); <span class="comment">// 'peanut butter and bananas'</span></span><br></pre></td></tr></table></figure>
+<p>与第一例子几乎一样,但是不是返回调用后的make函数,而是返回make函数本身,因此,<code>f</code>的值为内部的make函数,调用f实际上调用了make函数,但即使<code>sandwichMaker</code>已经返回,make函数仍然记着了<code>magic</code>的值。</p>
+<p><strong>闭包工作原理:</strong><br>JS的函数值在内部存储他们可能会引用的定义在其内封闭作用域的变量.</p>
+<p>那些在其涵盖的作用域内跟踪变量的<strong>函数</strong>被称为<strong>闭包</strong>.make函数就是一个闭包,它引用了两个外部变量,<code>magic</code>和<code>filling</code>,每当make函数被调用,其代码都能引用到这两个变量,因为闭包存储了这些变量.  </p>
+<p>函数可以引用在其作用域内的任何变量,包括参数和外部变量:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sandwichMaker</span>(<span class="params">magic</span>)</span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">make</span>(<span class="params">filling</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> magic +<span class="string">' and '</span> + filling;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> make;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> f = sandwichMaker(<span class="string">'ham'</span>); </span><br><span class="line">f(<span class="string">'jelly'</span>); <span class="comment">// 'ham and jelly'</span></span><br><span class="line">f(<span class="string">'bananas'</span>); <span class="comment">// 'ham and bananas'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> f = sandwichMaker(<span class="string">'turkey'</span>); </span><br><span class="line">f(<span class="string">'cheess'</span>); <span class="comment">// 'turkey and cheess'</span></span><br><span class="line">f(<span class="string">'bananas'</span>); <span class="comment">// 'turkey and bananas'</span></span><br></pre></td></tr></table></figure></p>
+<p>闭包是JS最有用的特性之一,也是许多库和惯用法的核心.JS还有一种更方便的构造闭包的方法，即函数表达式（字面量语法）.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sandwichMaker</span>(<span class="params">magic</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">filling</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> magic +<span class="string">' and '</span> + filling;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>该函数表达式是匿名的,由于只需一个make函数能产生新的函数值,而不打算在局部调用它,因此没有必要给该函数命名</p>
+<h4 id="3-闭包可以更新外部变量的值"><a href="#3-闭包可以更新外部变量的值" class="headerlink" title="3. 闭包可以更新外部变量的值"></a>3. 闭包可以更新外部变量的值</h4><p>实际上,闭包存储的是外部变量的引用,而不是值的copy.因此,对任何具有访问这些外部变量的闭包,都可以更新他们.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">box</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> val = <span class="literal">undefined</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">newval</span>)</span>&#123; val = newval;&#125;,</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> val;&#125;,</span><br><span class="line">    type: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="keyword">typeof</span> val;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 函数可以引用定义在其外部作用域的变量</strong><br><strong>2. 闭包比创建他们的函数有更长的生命期</strong><br><strong>3. 闭包在内部存储其外部变量的引用,并能读写这些变量</strong></p>
+<h3 id="12-理解变量声明提升"><a href="#12-理解变量声明提升" class="headerlink" title="12. 理解变量声明提升"></a>12. 理解变量声明提升</h3><p>JS支持词法作用域(lexical scoping),即对变量foo的引用将被绑定到声明foo变量最近的作用域中.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isWinner</span>(<span class="params">player, others</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> higher = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = others.length; i&lt; n; ++i)&#123;</span><br><span class="line">    <span class="keyword">var</span> player = others[i]; <span class="comment">// 此处的var声明,将会使player变量被覆盖,每次都重写</span></span><br><span class="line">    <span class="keyword">if</span>(player.score &gt; higher)</span><br><span class="line">      highest = player.score;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> player.score &gt; highest;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于for循环内部声明的player局部变量,每次都会重写同一个变量, 所以return语句将player看作others的最后一个元素,而不是最初的player参数了.<br><img src="1.png" alt="变量作用域提升"></p>
+<p>JS没有块级作用域的例外是异常处理, <code>try...catch</code>语句将捕捉的异常绑定到一个变量,而该变量的作用域只是catch语句块.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="string">'var'</span>, result = [];</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="string">'exception'</span>;</span><br><span class="line">  &#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">    x = <span class="string">'catch'</span>; <span class="comment">// 此行的x已经是在块级作用域下了，所以随着作用域结束而销毁了</span></span><br><span class="line">    <span class="built_in">console</span>.log(x); <span class="comment">// 'catch'</span></span><br><span class="line">  &#125;</span><br><span class="line">  result.push(x);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">test(); <span class="comment">// ['var']</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 在代码块中的变量声明会被隐式地提升到封闭函数的顶部</strong><br><strong>2. 重声明变量被视为单个变量</strong><br><strong>3. 考虑手动提升变量的声明,可以避免混淆</strong></p>
+<h3 id="13-使用立即调用的函数表达式创建局部作用域"><a href="#13-使用立即调用的函数表达式创建局部作用域" class="headerlink" title="13. 使用立即调用的函数表达式创建局部作用域"></a>13. 使用立即调用的函数表达式创建局部作用域</h3><p>如下程序输出什么?<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wrapElements</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [], i , n;</span><br><span class="line">  <span class="keyword">for</span>(i = <span class="number">0</span>, n = a.length; i &lt; n; ++i)&#123;</span><br><span class="line">    result[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> a[i] &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> wrapped = wrapElements([<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>]);</span><br><span class="line"><span class="keyword">var</span> f = wrapped[<span class="number">0</span>];</span><br><span class="line">f(); <span class="comment">// ?</span></span><br></pre></td></tr></table></figure></p>
+<p>希望输出10, 但实际上它输出undefied,  </p>
+<p>搞清楚该例子是理解绑定和赋值的区别, 在运行时进入一个作用域, JS会为每一个绑定到该作用域的变量在内存内分配一个”槽”(slot)</p>
+<p><code>wrapElements</code>函数绑定了三个局部变量: <code>result, i, n</code>, 因此, 当它被调用的时候,wrapElements函数会为这三个变量分配槽. 在每次迭代中循环体都会为嵌套函数分配一个闭包.  </p>
+<p>这个例子的坑在于: 期望该函数存储的是嵌套函数创建时变量i的值, 但实际存储的是变量i的引用. 由于每次函数创建后变量i的值都发生了变化, 因此,内部函数最终看到的变量i的值为4, 而<code>a[4]</code>值为undefined</p>
+<p>所以需要注意, <strong>闭包存储的是其外部变量的引用而不是值</strong> 解决的方法是创建一个嵌套函数并立即调用它来强制创建一个局部作用域.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wrapElements</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = a.length; i &lt; n; ++i)&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> j = i; <span class="comment">//使用j这个局部变量保存每一次i的值</span></span><br><span class="line">      result[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> a[j] &#125;;</span><br><span class="line">    &#125;)()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另一种方法为变种,是将i作为IIFE的形参(局部变量)班定到IIFE,每次调用将其值作为实参传入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wrapElements</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = a.length; i &lt; n; ++i)&#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params">j</span>)</span>&#123;</span><br><span class="line">      result[i] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> a[j] &#125;;</span><br><span class="line">    &#125;)(i)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是这种IIFE的方式也存在一些弊端,如:<br>代码块不能包含任何跳出块的<code>break</code>语句和<code>continue</code>语句, 代码块引用了<code>this</code>或<code>arguments</code>变量时,IIFE会改变它们</p>
+<p><strong>1. 理解绑定与赋值的区别</strong><br><strong>2. 闭包通过引用而不是值捕捉外部变量</strong><br><strong>3. 使用IIEF来创建局部变量</strong><br><strong>4. IIFE中的代码块可能修改预期行为</strong>  </p>
+<h3 id="14-当心命名函数表达式的作用域"><a href="#14-当心命名函数表达式的作用域" class="headerlink" title="14. 当心命名函数表达式的作用域"></a>14. 当心命名函数表达式的作用域</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">double</span>(<span class="params">x</span>)</span>&#123; <span class="keyword">return</span> x * <span class="number">2</span>; &#125; <span class="comment">// 命名函数声明</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> <span class="title">double</span>(<span class="params">x</span>)</span>&#123; <span class="keyword">return</span> x * <span class="number">2</span>; &#125;; <span class="comment">// 命名函数表达式</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123; <span class="keyword">return</span> x * <span class="number">2</span>; &#125;; <span class="comment">// 匿名函数表达式</span></span><br><span class="line"><span class="comment">// 匿名和命名函数表达式的区别在于: 命名函数表达式会绑定到与其函数名相同的变量上, </span></span><br><span class="line"><span class="comment">// 这个变量可以作为函数内的一个局部变量,可以用来写递归函数表达式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设有tree是二叉树类型</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">tree, key</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!tree) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">if</span>(tree.key === key) <span class="keyword">return</span> tree.value;</span><br><span class="line">  <span class="keyword">return</span> find(tree.left, key) || find(tree.right, key);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 注意,find变量名仅仅只能用于其自身,不像函数声明,</span></span><br><span class="line"><span class="comment">// 命名函数表达式不能通过其内部的函数名在外部调用</span></span><br><span class="line"></span><br><span class="line">find(mytree, <span class="string">'foo'</span>); <span class="comment">// error: find is not defined</span></span><br><span class="line"><span class="comment">// 然而事实上，chrome下能成功运行</span></span><br></pre></td></tr></table></figure>
+<p>使用命名函数表达式进行递归似乎没必要,因为外部作用域的函数名也可以达到同样的效果, 命名函数表达式真正的用处在于<strong>调试</strong>, 在栈跟踪中,函数表达式的名称通常作为入口使用,  </p>
+<p><strong>1. 在Error对象和调试器中使用命名函数表达式改进栈跟踪</strong><br><strong>2. 在ES3和有问题的JS环境中需要记住:函数表达式作用域会被Object.prototype污染</strong><br><strong>3. 谨记在错误百出的JS环境中会提升命名函数表达式声明,并导致命名函数表达式的重复存储</strong><br><strong>4. 考虑避免使用命名函数表达式或在发布前删除函数名</strong>  </p>
+<h3 id="15-当心局部块函数声明的作用域"><a href="#15-当心局部块函数声明的作用域" class="headerlink" title="15. 当心局部块函数声明的作用域"></a>15. 当心局部块函数声明的作用域</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="string">'global'</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="string">'local'</span>;&#125; <span class="comment">// 覆盖外部global的同名函数</span></span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">if</span>(x)&#123; result.push(f()); &#125;</span><br><span class="line">  result.push(f());</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="literal">true</span>); <span class="comment">// ['local', 'local']</span></span><br><span class="line">test(<span class="literal">false</span>); <span class="comment">// ['local']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 若将f函数移到局部块内,</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="string">'global'</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = [];</span><br><span class="line">  <span class="keyword">if</span>(x) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="string">'local'</span>;&#125;</span><br><span class="line">    result.push(f());</span><br><span class="line">  &#125;</span><br><span class="line">  result.push(f());</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="literal">true</span>); <span class="comment">// ['local', 'local'] 而非 ['local', 'global']</span></span><br><span class="line">test(<span class="literal">false</span>); <span class="comment">// ['local'] 而不是 ['global']</span></span><br><span class="line"><span class="comment">// 上行的test(false)在有些环境下执行结果并不一样，在chrome 57下为 Error: f is not a function</span></span><br><span class="line"><span class="comment">// 因为函数声明提升，但是并没有将完整的函数体也提前</span></span><br></pre></td></tr></table></figure>
+<p><strong>1. 始终将函数声明置于程序或被包含的函数的最外层以避免不可移植的行为</strong><br><strong>2. 使用var声明和有条件的赋值语句替代有条件的函数声明</strong> </p>
+<h3 id="16-避免使用eval创建局部变量"><a href="#16-避免使用eval创建局部变量" class="headerlink" title="16. 避免使用eval创建局部变量"></a>16. 避免使用eval创建局部变量</h3><p>eval能将字符串解析为js语句并执行<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">eval</span>(<span class="string">'var y=x;'</span>);</span><br><span class="line">  <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line">test(<span class="string">'hello'</span>); <span class="comment">// 'hello'</span></span><br></pre></td></tr></table></figure></p>
+<p>eval函数直接执行赋予了外部调用者能改变test函数内部作用域的能力.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> y = <span class="string">'global'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">eval</span>(src);</span><br><span class="line">  <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line">test(<span class="string">'var y = "local";'</span>); <span class="comment">// 'local'</span></span><br><span class="line">test(<span class="string">'var z = "local";'</span>); <span class="comment">// 'global'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用IIFE能避免污染内部作用域</span></span><br><span class="line"><span class="keyword">var</span> y = <span class="string">'global'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">src</span>)</span>&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123; <span class="built_in">eval</span>(src); &#125;)();</span><br><span class="line">  <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line">test(<span class="string">'var y = "local";'</span>); <span class="comment">// 'global'</span></span><br><span class="line">test(<span class="string">'var z = "local";'</span>); <span class="comment">// 'global'</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 避免使用eval函数创建的变量污染调用者的作用域</strong><br><strong>2. 若eval函数代码可能创建全局变量,将此调用封装到嵌套的函数中以防止作用域污染</strong>  </p>
+<h3 id="17-间接调用eval函数优于直接调用"><a href="#17-间接调用eval函数优于直接调用" class="headerlink" title="17. 间接调用eval函数优于直接调用"></a>17. 间接调用eval函数优于直接调用</h3><p>eval函数不仅仅是一个函数, 因为eval函数具有访问调用它时的整个作用域的能力.<br>一般情况下,函数调用涉及eval标识符时,被认为是直接调用eval函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'global'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="string">'local'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">eval</span>(<span class="string">'x'</span>); <span class="comment">// 直接调用</span></span><br><span class="line">&#125;</span><br><span class="line">test(); <span class="comment">// 'local'</span></span><br></pre></td></tr></table></figure></p>
+<p>这种情况下, 编译器需要确保被执行的程序具有完全访问调用者局部作用域的权限</p>
+<p>而其他调用eval函数的方法被认为是间接的,这些方式在全局作用域内对eval函数的参数求值.<br>例如绑定eval函数到另外一个变量名, 通过该变量名调用函数会使代码失去对所有局部作用域的访问能力<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="string">'global'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> x = <span class="string">'local'</span>;</span><br><span class="line">  <span class="keyword">var</span> f = <span class="built_in">eval</span>(); <span class="comment">// 间接调用</span></span><br><span class="line">  <span class="keyword">return</span> f(<span class="string">'x'</span>);</span><br><span class="line">&#125;</span><br><span class="line">test(); <span class="comment">// 'global'</span></span><br><span class="line"><span class="comment">// 在chrome下为 Error: f is not a function</span></span><br></pre></td></tr></table></figure></p>
+<p>编写间接调用eval函数的一种简单方式是使用表达式序列运算符(逗号<code>,</code>)和一个毫无意义的数字字面量<br><code>(0,eval)(src);</code>这种方式被认为是间接调用eval函数.  </p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/02/27/effective-javascript3/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/24/effective-javascript/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

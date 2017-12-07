@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            信息安全小结 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,css,https,security,ip/icmp,linux,iptables,natcat,nmap,rootkit,xss,sql injection,buffer overflow">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="信息安全小结 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="css"> <meta property="og:article:tag" content="https"> <meta property="og:article:tag" content="security"> <meta property="og:article:tag" content="ip/icmp"> <meta property="og:article:tag" content="linux"> <meta property="og:article:tag" content="iptables"> <meta property="og:article:tag" content="natcat"> <meta property="og:article:tag" content="nmap"> <meta property="og:article:tag" content="rootkit"> <meta property="og:article:tag" content="xss"> <meta property="og:article:tag" content="sql injection"> <meta property="og:article:tag" content="buffer overflow"> 
+
+    
+        <meta property="article:published_time" content="Mon Jun 26 2017 18:59:09 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:09 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="信息安全小结 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/06/26/security-summary/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/06/26/security-summary/index.html",
+    "headline": "信息安全小结",
+    "datePublished": "Mon Jun 26 2017 18:59:09 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",css,https,security,ip/icmp,linux,iptables,natcat,nmap,rootkit,xss,sql injection,buffer overflownull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Web"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#Web" class="headerlink" title="Web"></a>Web</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTTPS"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#XSS"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SQL注入"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#SQL&#x6CE8;&#x5165;" class="headerlink" title="SQL&#x6CE8;&#x5165;"></a>SQL&#x6CE8;&#x5165;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#nc（NetCat）"><span class="post-toc-number">5.</span> <span class="post-toc-text"><a href="#nc&#xFF08;NetCat&#xFF09;" class="headerlink" title="nc&#xFF08;NetCat&#xFF09;"></a>nc&#xFF08;NetCat&#xFF09;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Linux权限"><span class="post-toc-number">6.</span> <span class="post-toc-text"><a href="#Linux&#x6743;&#x9650;" class="headerlink" title="Linux&#x6743;&#x9650;"></a>Linux&#x6743;&#x9650;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#IP-ICMP"><span class="post-toc-number">7.</span> <span class="post-toc-text"><a href="#IP-ICMP" class="headerlink" title="IP/ICMP"></a>IP/ICMP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Nmap"><span class="post-toc-number">8.</span> <span class="post-toc-text"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#iptables"><span class="post-toc-number">9.</span> <span class="post-toc-text"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Rootkit"><span class="post-toc-number">10.</span> <span class="post-toc-text"><a href="#Rootkit" class="headerlink" title="Rootkit"></a>Rootkit</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Buffer-Overflow"><span class="post-toc-number">11.</span> <span class="post-toc-text"><a href="#Buffer-Overflow" class="headerlink" title="Buffer Overflow"></a>Buffer Overflow</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                信息安全小结
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Jun 26, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/buffer-overflow/">buffer overflow</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/css/">css</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/https/">https</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/ip-icmp/">ip/icmp</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/iptables/">iptables</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/linux/">linux</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/natcat/">natcat</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/nmap/">nmap</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/rootkit/">rootkit</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/security/">security</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/sql-injection/">sql injection</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/xss/">xss</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=信息安全小结&url=https://github.com/xmoyKING/2017/06/26/security-summary/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=信息安全小结&url=https://github.com/xmoyKING/2017/06/26/security-summary/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/06/26/security-summary/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/06/26/security-summary/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>简要涉及Web、网络、Linux等攻击原理和防御方式。</p>
+<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><ol>
+<li>什么是盒模型<br>CSS盒子模式即具备这些属性：内容(content)、内边距(padding)、边框(border)、外边距(margin)。<br>这些属性我们可以用日常生活中的常见事物——盒子作一个比喻来理解，所以叫它盒子模式。<br><img src="box_model.jpg" alt="标准盒模型"></li>
+<li>CSS定位方式及其特性<br><a href="http://baike.baidu.com/item/CSS%E5%AE%9A%E4%BD%8D" target="_blank" rel="noopener">百度百科：CSS定位</a><br><a href="http://www.w3cplus.com/css/advanced-html-css-lesson2-detailed-css-positioning.html" target="_blank" rel="noopener">HTML和CSS高级指南之二——定位详解</a><br>static 默认值，遵循基本的定位规定，不能通过z-index进行层次分级。<br>relative 不脱离文档流，参考自身静态位置通过 top(上),bottom（下）,left（左）,right（右） 定位，并且可以通过z-index进行层次分级。<br>absolute 脱离文档流，通过 top,bottom,left,right 定位。选取其最近的父级定位元素，当所有父级 position 为 static 时，absolute元素将以body坐标原点进行定位，可以通过z-index进行层次分级。<br>fixed 固定定位，参考对像是可视窗口而并非是body或是父级元素。可通过z-index进行层次分级。</li>
+<li>点击劫持/利用CSS盗取浏览历史<br>利用不可见的iframe覆盖在伪装页面上，骗取用户对实际页面进行操作。<br>利用浏览器对超链接不同状态下（未访问状态、鼠标hover/focus状态、已访问状态）链接的颜色的不同，可以知道用户的访问历史。</li>
+</ol>
+<hr>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><ol>
+<li>HTTPS的作用<br>在HTTP协议的基础上添加了SSL层（Secure Socket Layer），提供数据加密和身份验证功能，保证数据传输的安全性和完整性。<br>SSL协议位于TCP/IP协议与各种应用层协议之间，为数据通讯提供安全支持。SSL协议可分为两层：SSL记录协议（SSL Record Protocol）：它建立在可靠的传输协议（如TCP）之上，为高层协议提供数据封装、压缩、加密等基本功能的支持。SSL握手协议（SSL Handshake Protocol）：它建立在SSL记录协议之上，用于在实际的数据传输开始前，通讯双方进行身份认证、协商加密算法、交换加密密钥等。<br>具体作用：<ul>
+<li>保障用户隐私信息安全：SSL证书让网站实现加密传输，可以很好的防止用户隐私信息如用户名、密码、交易记录、居住信息等被窃取和纂改。比如电商网站安装SSL证书，就可以有效保障你登录电商网站支付时提交的用户名密码的安全。</li>
+<li>帮助用户识别钓鱼网站：SSL证书可以认证服务器真实身份，可以有效的区别钓鱼网站和官方网站。网站部署全球信任的SSL证书后，浏览器内置安全机制，实时查验证书状态，通过浏览器向用户展示网站认证信息，让用户轻松识别网站真实身份，防止钓鱼网站仿冒。</li>
+<li>利于网站SEO优化：因为部署了SSL证书的网站相比没有部署SSL证书的网站更加可信，更加安全，可以有效的保障用户的利益不受侵害。因此搜索引擎如谷歌，百度站在确保用户信息安全的角度，都在大力倡导网站部署SSL证书实现https加密访问。在搜索、展现、排序方面也给予部署了SSL证书网站优待。</li>
+<li>提升公司品牌形象和可信度：网站部署SSL证书，让您的网站与其他网站与众不同。部署了SSL证书的网站会在浏览器地址栏显示https绿色安全小锁，如果是部署的EV SSL证书还会显示绿色地址栏和单位名称。可告诉用户其访问的是安全、可信的站点，可以放心的进行操作和交易，有效提升公司的品牌信息和可信度。</li>
+</ul>
+</li>
+<li>CSRF是什么，如何利用HTTPS防御CSRF<br><a href="http://xmoyking.github.io/2017/06/06/xss-csrf/" target="_blank" rel="noopener">了解XSS/CSRF</a><br>CSRF攻击的主要目的是让用户在不知情的情况下攻击用户当前已登录的某个网站，类似于钓鱼。如用户当前已经登录了邮箱，或bbs，同时用户又登录另外一个已经被攻击者控制的站点，我们姑且叫它钓鱼网站。用户一登陆钓鱼网站，此时可能就会触发一个js的点击事件，构造一个bbs发帖的请求，去往你的bbs发帖，由于当前你的浏览器状态已经是登陆状态，所以session登陆cookie信息都会跟正常的请求一样，纯天然的利用当前的登陆状态，让用户在不知情的情况下，攻击者完成了攻击。<br>CSRF防御<ul>
+<li>通过 referer、token 或者 验证码 来检测用户提交。</li>
+<li>尽量不要在页面的链接中暴露用户隐私信息。</li>
+<li>对于用户修改删除等操作最好都使用post操作 。</li>
+<li>避免全站通用的cookie，严格设置cookie的域。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><ol>
+<li>XSS原理、如何防御<br><a href="http://xmoyking.github.io/2017/06/06/xss-csrf/" target="_blank" rel="noopener">了解XSS/CSRF</a><br>攻击者往Web页面里插入恶意Script代码，当用户浏览该页之时，嵌入其中Web里面的Script代码会被执行，从而达到恶意攻击用户的特殊目的。<br>防御：<ul>
+<li>编码：不能对用户所有输入保持原样对用户输入的数据写入HTML文档</li>
+<li>过滤：把输入不合法的过滤掉，保持安全性</li>
+</ul>
+</li>
+<li>HTTPONLY属性作用<br><a href="http://netsecurity.51cto.com/art/200902/111143.htm" target="_blank" rel="noopener">利用HTTP-only Cookie缓解XSS之痛</a><br>为Cookie提供的一个新属性，阻止客户端脚本访问Cookie，缓解跨站点脚本攻击带来的信息泄露风险。<br>使用HTTP-only Cookie后，Web 站点就能排除cookie中的敏感信息被发送给黑客的计算机或者使用脚本的Web站点的可能性。</li>
+<li>Ajax异步特性<br><a href="http://louiszhai.github.io/2016/11/02/ajax/" target="_blank" rel="noopener">Ajax知识体系大梳理</a><em>非常全，而且讲到浏览器四种线程之间的配合</em><br><a href="http://www.cnblogs.com/SanMaoSpace/archive/2013/06/15/3137180.html" target="_blank" rel="noopener">AJAX工作原理及其优缺点</a><em>简版</em><br>Ajax其核心有JavaScript、XMLHTTPRequest、DOM对象组成，通过XmlHttpRequest对象来向服务器发异步请求，从服务器获得数据，然后用JavaScript来操作DOM而更新页面。<br>与传统的web应用比较<br>传统的Web应用交互由用户触发一个HTTP请求到服务器,服务器对其进行处理后再返回一个新的HTHL页到客户端, 每当服务器处理客户端提交的请求时,客户都只能空闲等待,并且哪怕只是一次很小的交互、只需从服务器端得到很简单的一个数据,都要返回一个完整的HTML页,而用户每次都要浪费时间和带宽去重新读取整个页面。这个做法浪费了许多带宽，由于每次应用的交互都需要向服务器发送请求，应用的响应时间就依赖于服务器的响应时间。这导致了用户界面的响应比本地应用慢得多。<br>与此不同，AJAX应用可以仅向服务器发送并取回必需的数据，它使用SOAP或其它一些基于XML的Web Service接口，并在客户端采用JavaScript处理来自服务器的响应。因为在服务器和浏览器之间交换的数据大量减少，结果我们就能看到响应更快的应用。同时很多的处理工作可以在发出请求的客户端机器上完成，所以Web服务器的处理时间也减少了。</li>
+</ol>
+<hr>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><p><a href="http://blog.csdn.net/stilling2006/article/details/8526458/" target="_blank" rel="noopener">SQL注入原理讲解，很不错！</a><br>本质：保证select查询的where语句恒真，绕过条件筛选，最终实现直接查询到结果，比如<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>     job_id, job_desc, min_lvl, max_lvl</span><br><span class="line"><span class="keyword">FROM</span>         jobs</span><br><span class="line"><span class="keyword">WHERE</span>     (job_id = <span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<p>在<code>WHERE (job_id = 1)</code>后添加<code>OR 1=1</code>修改为<code>WHERE (job_id = 1) OR 1 = 1</code>，修改后的select语句等同：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT     <span class="keyword">job_id, </span><span class="keyword">job_desc, </span>min_lvl, max_lvl</span><br><span class="line">FROM         <span class="keyword">jobs</span></span><br></pre></td></tr></table></figure></p>
+<p>如何防御，总的来说有以下几点：</p>
+<ol>
+<li>永远不要信任用户的输入，要对用户的输入进行校验，可以通过正则表达式，或限制长度，对单引号和双”-“进行转换等。</li>
+<li>永远不要使用动态拼装SQL，可以使用参数化的SQL或者直接使用存储过程进行数据查询存取。</li>
+<li>永远不要使用管理员权限的数据库连接，为每个应用使用单独的权限有限的数据库连接。</li>
+<li>不要把机密信息明文存放，请加密或者hash掉密码和敏感的信息。</li>
+<li>应用的异常信息应该给出尽可能少的提示，最好使用自定义的错误信息对原始错误信息进行包装，把异常信息存放在独立的表中。</li>
+</ol>
+<hr>
+<h3 id="nc（NetCat）"><a href="#nc（NetCat）" class="headerlink" title="nc（NetCat）"></a>nc（NetCat）</h3><p><a href="http://www.cnblogs.com/jnxb/p/3940593.html" target="_blank" rel="noopener">Linux nc命令用法收集</a><br><code>nc -l 1234</code>是什么意思<br>  作为服务器监听本机的1234端口</p>
+<hr>
+<h3 id="Linux权限"><a href="#Linux权限" class="headerlink" title="Linux权限"></a>Linux权限</h3><ol>
+<li><code>chmod 4755 some_binary</code>的作用<br>改变some_binary文件的权限，文件所有者（owner）权限为可读可写可执行，用户组（group）和其他人（others）的权限为可读不可写可执行，同时执行者有SUID权限，即执行该文件时临时拥有文件所有者（owner）的权限。<br>参考：<br>Linux权限入门：<a href="http://www.cnblogs.com/123-/p/4189072.html" target="_blank" rel="noopener">Linux下用户组、文件权限详解</a><br>Linux特殊权限标志位：<a href="http://blog.csdn.net/u011191259/article/details/50316581" target="_blank" rel="noopener"> Linux文件权限标志uid gid</a></li>
+</ol>
+<hr>
+<h3 id="IP-ICMP"><a href="#IP-ICMP" class="headerlink" title="IP/ICMP"></a>IP/ICMP</h3><p><a href="http://xmoyking.github.io/2017/06/23/ip-icmp/" target="_blank" rel="noopener">IP/ICMP Security</a></p>
+<ol>
+<li>通常的IP头最开始的01000101表示什么意思<br>表示IP版本和头部长度，0100表示ipv4，0101表示头部长度为5，单位为4字节，即头部长度为20字节</li>
+<li>为什么IP需要分片<br>在IP层一个IP报文包括头部最大长度为65535字节，但是在其他层，比如链路层以太网最大的帧长度为1500，这种情况下为了保存数据的完整，就必须将IP进行分片。</li>
+<li>TearDrop的原理（IP分片攻击）<br><a href="http://blog.csdn.net/nny715/article/details/7354961" target="_blank" rel="noopener">什么是Teardrop攻击</a><br>原理：攻击者A给受害者B发送一些分片IP报文，并且故意将“分片偏移”字段（第13位）设置成错误的值(既可与上一分片数据重叠，也可错开)，B在组合这种含有重叠偏移的伪造分片报文时，会导致系统崩溃。<br>防御：网络安全设备将接收到的分片报文先放入缓存中，并根据源IP地址和目的IP地址对报文进行分组，源IP地址和目的IP地址均相同的报文归入同一组，然后对每组IP报文的相关分片信息进行检查，丢弃分片信息存在错误的报文。为了防止缓存益处，当缓存快要存满是，直接丢弃后续分片报文。</li>
+<li>ICMP重定向攻击原理<br><a href="http://www.2cto.com/net/201310/253089.html" target="_blank" rel="noopener">ICMP重定向原理</a><br>ICMP重定向报文是ICMP控制报文中的一种。在特定的情况下，当路由器检测到一台机器使用非优化路由的时候，它会向该主机发送一个ICMP重定向报文，请求主机改变路由。<br>attacker伪装路由器router发送ICMP重定向包给受害者victim,通知其改变发包地址为other，受害者victim收到重定向包后将包发到改变自己的地址到指定的other处。</li>
+</ol>
+<hr>
+<h3 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h3><p><a href="http://www.2cto.com/article/201210/158960.html" target="_blank" rel="noopener">Nmap扫描原理与用法</a></p>
+<ol>
+<li>nmap判断OS原理<br>Nmap使用TCP/IP协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由此不同的TCP/IP方案中可能都有自己的特定方式。Nmap主要是根据这些细节上的差异来判断操作系统的类型的。<br>具体实现方式如下：<br>Nmap内部包含了2600多已知系统的指纹特征（在文件nmap-os-db文件中）。将此指纹数据库作为进行指纹对比的样本库。<br>分别挑选一个open和closed的端口，向其发送经过精心设计的TCP/UDP/ICMP数据包，根据返回的数据包生成一份系统指纹。<br>将探测生成的指纹与nmap-os-db中指纹进行对比，查找匹配的系统。如果无法匹配，以概率形式列举出可能的系统。</li>
+<li>nmap connect() 与nmap syn的异同<br>TCP SYN scanning:<br>这是Nmap默认的扫描方式，通常被称作半开放扫描（Half-open scanning）。该方式发送SYN到目标端口，如果收到SYN/ACK回复，那么判断端口是开放的；如果收到RST包，说明该端口是关闭的。如果没有收到回复，那么判断该端口被屏蔽（Filtered）。因为该方式仅发送SYN包对目标主机的特定端口，但不建立的完整的TCP连接，所以相对比较隐蔽，而且效率比较高，适用范围广。<br>TCP connect scanning:<br>TCP connect方式使用系统网络API connect向目标主机的端口发起连接，如果无法连接，说明该端口关闭。该方式扫描速度比较慢，而且由于建立完整的TCP连接会在目标机上留下记录信息，不够隐蔽。所以，TCP connect是TCP SYN无法使用才考虑选择的方式。</li>
+<li>nmap idle scan原理<br>伪造身份去扫描目标网络，所以看起来就像是无辜的Zombie主机在扫描。<br>1.探查Zombie的IP ID并记录下来。<br>2.在Zombie主机上伪造一个包，然后把包发送给目标主机端口。根据端口的状态，目标主机可能会也有可能不会导致Zombie主机IP ID值增加。<br>3.再探查Zombie主机的IP ID。比较两次得到IP ID值就能分析出目标的端口信息。</li>
+</ol>
+<hr>
+<h3 id="iptables"><a href="#iptables" class="headerlink" title="iptables"></a>iptables</h3><ol>
+<li>NAT原理<br><a href="http://blog.sina.com.cn/s/blog_4988d99a0102wt97.html" target="_blank" rel="noopener">NAT和端口映射的区别</a><br><a href="http://www.cnblogs.com/derrick/p/4052401.html" target="_blank" rel="noopener">NAT基本原理及应用</a><br>将一台外网IP地址机器的多个端口映射到内网不同机器上的不同端口</li>
+<li>熟知端口<ul>
+<li>21          FTP 文件传输协议的端口号</li>
+<li>23          Telnet远程终端协议的端口号</li>
+<li>25          SMTP简单邮件传输协议的端口号</li>
+<li>53          DNS域服务器所开放的端口</li>
+<li>69          TFTP简单文件传送协议的端口号</li>
+<li>80          HTTP超文本传输协议的端口号</li>
+<li>443       HTTPS（Hyper Text Transfer Protocol over Secure Socket Layer）端口号</li>
+<li>110          POP3邮局协议版本3的端口号</li>
+</ul>
+</li>
+<li>iptables 4表5链及其作用<br>4个表:filter,nat,mangle,raw，默认表是filter（没有指定表的时候就是filter表）。<br>表的处理优先级：raw&gt;mangle&gt;nat&gt;filter。<ul>
+<li>filter：包过滤</li>
+<li>nat:用于nat功能（端口映射，地址映射等）</li>
+<li>mangle:包修改</li>
+<li>raw:设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能<br>5个链：PREROUTING,INPUT,FORWARD,OUTPUT,POSTROUTING。</li>
+<li>PREROUTING:数据包进入路由表之前</li>
+<li>INPUT:通过路由表后目标为本机</li>
+<li>FORWARDING:通过路由表后，目标不为本机</li>
+<li>OUTPUT:由本机产生，向外转发</li>
+<li>POSTROUTIONG:发送到网卡接口之前。</li>
+</ul>
+</li>
+<li>iptables实例<br><a href="http://www.linuxidc.com/Linux/2016-09/134832.htm" target="_blank" rel="noopener">iptables超全详解</a><br><a href="http://www.linuxidc.com/Linux/2014-03/99159.htm" target="_blank" rel="noopener">iptables使用范例详解</a><br>利用iptables禁止外部访问，内部可访问https网站<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下命令存在的一些问题：</span></span><br><span class="line">sudo iptables -P INPUT DROP <span class="comment">#设置所有INPUT链默认规则为丢弃所有包，即不接受任何发至本机的包</span></span><br><span class="line">sudo iptables -A INPUT -p tcp -sport 80 -j ACCEPT <span class="comment">#接收所有协议为tcp源端口为80的发至本机的包</span></span><br><span class="line"><span class="comment"># 由于https的端口地址为443而不是80，所以应该将80换为443</span></span><br><span class="line"><span class="comment"># 同时，output不做任何限制，只用对input链做出规则即可实现限制某种访问</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h3 id="Rootkit"><a href="#Rootkit" class="headerlink" title="Rootkit"></a>Rootkit</h3><ol>
+<li>什么是Rootkit<br><a href="http://baike.baidu.com/link?url=n2HGAdcR9MOmSyTE5iN81Br2YBjje4WJteb3H2SNZ8tpK94FAD1--jkBKXc5G8IL50vM1qKeKTGtuiZN88F8xK" target="_blank" rel="noopener">百度百科：Rootkit</a><br>Rootkit是一种特殊的恶意软件，它的功能是在安装目标上隐藏自身及指定的文件、进程和网络链接等信息;<br>Rootkit一般都和木马、后门等其他恶意程序结合使用;<br>Rootkit通过加载特殊的驱动，修改系统内核，进而达到隐藏信息的目的。</li>
+<li>系统调用劫持过程<br><a href="http://blog.csdn.net/chosen0ne/article/details/7721550" target="_blank" rel="noopener">系统调用的实现原理</a><br><a href="http://blog.sina.com.cn/s/blog_596d00a70100jpa7.html" target="_blank" rel="noopener">linux 系统调用中断劫持实现—原理和代码。</a><br><a href="https://wenku.baidu.com/view/d5db076a7e21af45b307a89b.html" target="_blank" rel="noopener">Linux系统调用_详细全过程(PPT)</a><br>系统调用的正常过程为：<ol>
+<li>保存堆栈现场</li>
+<li>在调用号表中获取该系统调用名对应的系统调用号，将系统调用号存入eax寄存器</li>
+<li>CPU通过int 0x80软中断指令发起中断转入内核态</li>
+<li>在内核中调用system_call()，然后根据eax中已存的系统调用号在system_call_table（系统调用表）中找到对应该系统调用号（亦系统调用）的routine（服务例程）地址</li>
+<li>执行该routine</li>
+<li>执行完该routine后接着执行ret_from_sys_call()例程</li>
+<li>恢复堆栈，最后返回到用户态。本次系统调用过程完成。<br>系统调用劫持即修改routine的地址，指向攻击者设定的函数地址即可。<br>在linux中使用0x80 异常实现系统调用，因此，主要的实现路径：获得中断向量表-&gt;获得系统调用中断处理函数地址-&gt;获得系统调用符号表-&gt;修改对应变量的偏移值指向新的系统调用程序(后门程序)。</li>
+</ol>
+</li>
+<li><code>/proc</code>作用，<code>ps</code>命令工作原理<br><a href="http://blog.csdn.net/rzhzhz/article/details/7247912" target="_blank" rel="noopener">Linux proc详解</a><br><code>proc</code>是Linux内核信息的抽象文件接口，大量内核中的信息以及可调参数都被作为常规文件映射到一个目录树中，这样我们就可以简单直接的通过echo或cat这样的文件操作命令对系统信息进行查取和调整了。同时proc也提供了一个接口，使得我们自己的内核模块或用户态程序可以通过proc进行参数的传递。在当今的Linux系统中，大量的系统工具也通过proc获取内核参数，例如ps、lspci等等，没有proc它们将可能不能正常工作。<br><a href="http://www.cnblogs.com/zhaoyan001/p/6143218.html" target="_blank" rel="noopener">Linux ps命令示例说明</a><br><code>ps</code>命令是最基本同时也是非常强大的进程查看命令。使用该命令可以确定有哪些进程正在运行和运行的状态、进程是否结束、进程有没有僵死、哪些进程占用了过多资源等等。<br>在/proc目录下存在大量以数字为名的子目录，这个数字就是相关进程的进程ID，这些目录就是系统当前运行进程的proc抽象。每一个目录都以相关联的活动系统进程PID为目录名，在目录下包含了一些文件，用于显示进程相关的信息，其中有一个status文件保存着当前该进程状态总览，包含进程名字、当前状态和各种信息统计。<br><code>ps</code>命令就是通过读取每一个进程目录下的status文件，并最终整理输出。</li>
+</ol>
+<hr>
+<h3 id="Buffer-Overflow"><a href="#Buffer-Overflow" class="headerlink" title="Buffer Overflow"></a>Buffer Overflow</h3><p><a href="http://blog.csdn.net/linyt/article/details/43315429" target="_blank" rel="noopener">缓冲区溢出攻击原理分析</a></p>
+<ol>
+<li>发生函数调用时的堆栈结构（通用）<br><img src="./stack.png" alt="函数调用时的堆栈结构"></li>
+<li>如何利用Buffer Overflow获取Rootshell<br>由于buf变量在栈中的位置，当buf变量发生溢出时，就会往高地址空间覆盖。先是覆盖main函数的其它局部变量，然后是父函数的ebp，再次是当前函数的返回地址eip，最后是父函数的栈空间。<br>在buf中存放着精心设置过的内容，比如修改后的返回地址以及shellcode，同时将修改后返回地址覆盖在原返回地址处指向shellcode，当函数返回时，ret指令将0xffffd710弹出到寄存器，结果就是执行shellcode。</li>
+</ol>
+<hr>
+<p><a href="http://blog.csdn.net/zhangnn5/article/details/6525442" target="_blank" rel="noopener">DOS(拒绝服务攻击总结): SYN Foold ，IP欺骗DOS ，UDP洪水，Ping洪流 ，teardrop ，Land ，Smurf ，Fraggle 攻击 原理</a></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/06/28/angularjs21/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/25/linux-rootkit/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

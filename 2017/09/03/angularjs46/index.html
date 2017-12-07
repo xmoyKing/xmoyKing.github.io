@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            angularjs巩固实践-46-编码规范-1 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,angularjs,code conventions">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="angularjs巩固实践-46-编码规范-1 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="angularjs"> <meta property="og:article:tag" content="code conventions"> 
+
+    
+        <meta property="article:published_time" content="Sun Sep 03 2017 16:42:05 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:08 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="angularjs巩固实践-46-编码规范-1 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/09/03/angularjs46/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/09/03/angularjs46/index.html",
+    "headline": "angularjs巩固实践-46-编码规范-1",
+    "datePublished": "Sun Sep 03 2017 16:42:05 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:08 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",angularjs,code conventionsnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目录结构"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x76EE;&#x5F55;&#x7ED3;&#x6784;" class="headerlink" title="&#x76EE;&#x5F55;&#x7ED3;&#x6784;"></a>&#x76EE;&#x5F55;&#x7ED3;&#x6784;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型优先型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#&#x7C7B;&#x578B;&#x4F18;&#x5148;&#x578B;" class="headerlink" title="&#x7C7B;&#x578B;&#x4F18;&#x5148;&#x578B;"></a>&#x7C7B;&#x578B;&#x4F18;&#x5148;&#x578B;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#业务优先型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#&#x4E1A;&#x52A1;&#x4F18;&#x5148;&#x578B;" class="headerlink" title="&#x4E1A;&#x52A1;&#x4F18;&#x5148;&#x578B;"></a>&#x4E1A;&#x52A1;&#x4F18;&#x5148;&#x578B;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模块组织"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x5757;&#x7EC4;&#x7EC7;" class="headerlink" title="&#x6A21;&#x5757;&#x7EC4;&#x7EC7;"></a>&#x6A21;&#x5757;&#x7EC4;&#x7EC7;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#命名"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x547D;&#x540D;" class="headerlink" title="&#x547D;&#x540D;"></a>&#x547D;&#x540D;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Module声明"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#Module&#x58F0;&#x660E;" class="headerlink" title="Module&#x58F0;&#x660E;"></a>Module&#x58F0;&#x660E;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#依赖声明"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"><a href="#&#x4F9D;&#x8D56;&#x58F0;&#x660E;" class="headerlink" title="&#x4F9D;&#x8D56;&#x58F0;&#x660E;"></a>&#x4F9D;&#x8D56;&#x58F0;&#x660E;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Module组件声明"><span class="post-toc-number">2.4.</span> <span class="post-toc-text"><a href="#Module&#x7EC4;&#x4EF6;&#x58F0;&#x660E;" class="headerlink" title="Module&#x7EC4;&#x4EF6;&#x58F0;&#x660E;"></a>Module&#x7EC4;&#x4EF6;&#x58F0;&#x660E;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#控制器"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x63A7;&#x5236;&#x5668;" class="headerlink" title="&#x63A7;&#x5236;&#x5668;"></a>&#x63A7;&#x5236;&#x5668;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#命名-1"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#&#x547D;&#x540D;-1" class="headerlink" title="&#x547D;&#x540D;"></a>&#x547D;&#x540D;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Controller-as-vm-声明"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#Controller-as-vm-&#x58F0;&#x660E;" class="headerlink" title="Controller as vm &#x58F0;&#x660E;"></a>Controller as vm &#x58F0;&#x660E;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#初始化数据"><span class="post-toc-number">3.3.</span> <span class="post-toc-text"><a href="#&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;" class="headerlink" title="&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;"></a>&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#DOM操作"><span class="post-toc-number">3.4.</span> <span class="post-toc-text"><a href="#DOM&#x64CD;&#x4F5C;" class="headerlink" title="DOM&#x64CD;&#x4F5C;"></a>DOM&#x64CD;&#x4F5C;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#依赖的声明"><span class="post-toc-number">3.5.</span> <span class="post-toc-text"><a href="#&#x4F9D;&#x8D56;&#x7684;&#x58F0;&#x660E;" class="headerlink" title="&#x4F9D;&#x8D56;&#x7684;&#x58F0;&#x660E;"></a>&#x4F9D;&#x8D56;&#x7684;&#x58F0;&#x660E;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#精简控制器逻辑"><span class="post-toc-number">3.6.</span> <span class="post-toc-text"><a href="#&#x7CBE;&#x7B80;&#x63A7;&#x5236;&#x5668;&#x903B;&#x8F91;" class="headerlink" title="&#x7CBE;&#x7B80;&#x63A7;&#x5236;&#x5668;&#x903B;&#x8F91;"></a>&#x7CBE;&#x7B80;&#x63A7;&#x5236;&#x5668;&#x903B;&#x8F91;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#禁止用-rootScope传递数据"><span class="post-toc-number">3.7.</span> <span class="post-toc-text"><a href="#&#x7981;&#x6B62;&#x7528;-rootScope&#x4F20;&#x9012;&#x6570;&#x636E;" class="headerlink" title="&#x7981;&#x6B62;&#x7528;$rootScope&#x4F20;&#x9012;&#x6570;&#x636E;"></a>&#x7981;&#x6B62;&#x7528;$rootScope&#x4F20;&#x9012;&#x6570;&#x636E;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#格式化显示逻辑"><span class="post-toc-number">3.8.</span> <span class="post-toc-text"><a href="#&#x683C;&#x5F0F;&#x5316;&#x663E;&#x793A;&#x903B;&#x8F91;" class="headerlink" title="&#x683C;&#x5F0F;&#x5316;&#x663E;&#x793A;&#x903B;&#x8F91;"></a>&#x683C;&#x5F0F;&#x5316;&#x663E;&#x793A;&#x903B;&#x8F91;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Resolve"><span class="post-toc-number">3.9.</span> <span class="post-toc-text"><a href="#Resolve" class="headerlink" title="Resolve"></a>Resolve</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                angularjs巩固实践-46-编码规范-1
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Sep 03, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/angularjs/">angularjs</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/code-conventions/">code conventions</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=angularjs巩固实践-46-编码规范-1&url=https://github.com/xmoyKING/2017/09/03/angularjs46/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=angularjs巩固实践-46-编码规范-1&url=https://github.com/xmoyKING/2017/09/03/angularjs46/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/09/03/angularjs46/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/09/03/angularjs46/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>两个术语：“编码规范”、“编程风格”的区别：编程风格是编码规范的一种，用来规约单个文件中的代码规范，编码规范还包含编程的最佳实践、文件和目录组织规范等诸多方面。</p>
+<p>软件工程化“黄金定律”：一个项目应该永远遵循一套编码规范，不管多少人共同参与同一项目，一定要确保每一行代码都像同一个人编写的。</p>
+<p>编码规范统一非常重要，原因如下：</p>
+<ol>
+<li>每一个开发者不用去寻找写代码者是谁，也不需要额外花费精力去理解代码逻辑并依据自己的编码习惯重新改编，每个人都在同一上下文工作，能极大节约时间成本。</li>
+<li>能够很容易识别代码的问题并发现问题，当出现一段与众不同的代码时，很有可能问题就出自此。</li>
+<li>将一些具体技术、框架的最佳实践、常见的问题和坑编入项目编码规范，能减少很多爬坑时间，并在一定程度上降低代码中潜在的bug。比如：parseInt函数始终传入第二个参数，默认为10，避免错误的转换为其他机制。</li>
+</ol>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>目录结构对一个项目是非常重要的，一个好的目录结构能快速找到需要修改的文件，同时帮助成员高效工作并协调一致。ng项目主要分为两类目录结构组织方式：类型优先型和业务优先型。</p>
+<h4 id="类型优先型"><a href="#类型优先型" class="headerlink" title="类型优先型"></a>类型优先型</h4><p>类型优先型是ng团队最初的angular-seed的组织方式。</p>
+<ul>
+<li>app<ul>
+<li>app.js</li>
+<li>controller<ul>
+<li>FirstCtrl.js</li>
+<li>SecondCtrl.js</li>
+<li>ThirdCtrl.js</li>
+</ul>
+</li>
+<li>directives<ul>
+<li>directive1.js</li>
+<li>directive2.js</li>
+<li>directive3.js</li>
+</ul>
+</li>
+<li>filters<ul>
+<li>filter1.js</li>
+<li>filter2.js</li>
+<li>filter3.js</li>
+</ul>
+</li>
+<li>services<ul>
+<li>service1.js</li>
+<li>service2.js</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>lib</li>
+<li>test</li>
+</ul>
+<p>按照ng的组件类型，将Controller、Directive、Service、Filter分别放到不同的目录下，并用一个module来组织。它能快速定位文件位置，但不容易将相关代码凑到一起复用到其他项目，所以更适合小型项目。</p>
+<h4 id="业务优先型"><a href="#业务优先型" class="headerlink" title="业务优先型"></a>业务优先型</h4><p>按照业务Feature分类（Feature是一个业务领域的概念，它可能对应一个页面或好几个业务，比如订单、商品、支付都是独立的Feature模块），将不同的Feature分配在不同的目录结构下，他们都拥有自己独立的module，在module同级有按类型组织的Controller、Directive、Service、Filter目录结构，最后再将所有的Feature注入到应用程序的全局module中，对于模块之间公用的组件，将放入common的目录下，它们可以每个组件构建单独的module，也可以放在统一的module之下。</p>
+<ul>
+<li>app<ul>
+<li>mainModule.js</li>
+<li>common<ul>
+<li>controllers.js</li>
+<li>directives.js</li>
+<li>filters.js</li>
+<li>services.js</li>
+</ul>
+</li>
+<li>feature1<ul>
+<li>feature1Module.js</li>
+<li>controllers<ul>
+<li>FirstCtrl.js</li>
+<li>SecondCtrl.js</li>
+</ul>
+</li>
+<li>directives<ul>
+<li>directive1.js</li>
+</ul>
+</li>
+<li>filters<ul>
+<li>filter1.js</li>
+<li>filter2.js</li>
+</ul>
+</li>
+<li>services<ul>
+<li>service1.js</li>
+<li>service2.js</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>feature2<ul>
+<li>feature2Module.js</li>
+<li>controllers<ul>
+<li>FirstCtrl.js</li>
+<li>SecondCtrl.js</li>
+</ul>
+</li>
+<li>directives<ul>
+<li>directive2.js</li>
+</ul>
+</li>
+<li>filters<ul>
+<li>filter3.js</li>
+</ul>
+</li>
+<li>services<ul>
+<li>service3.js</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>lib</li>
+<li>test</li>
+</ul>
+<p>这样就解决了类型优先型目录结构业务分离的问题，团队保持一致上下文，也能快速定位文件，高效协作。</p>
+<p>若针对组件开发，可以尝试将组件的HTML、CSS、JS放在同一位置，以便统一打包发布到bower或npm服务器，在多个项目之间共享，对于HTML文件可以尝试用ng-html2js打包到JS中，缓存在$templateCache服务中。</p>
+<ul>
+<li>app<ul>
+<li>directives<ul>
+<li>directive1<ul>
+<li>directive1.html</li>
+<li>directive1.js</li>
+<li>directive1.sass</li>
+</ul>
+</li>
+<li>directive2<ul>
+<li>directive2.html</li>
+<li>directive2.js</li>
+<li>directive2.sass</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="模块组织"><a href="#模块组织" class="headerlink" title="模块组织"></a>模块组织</h3><h4 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h4><p>ng module是ng中js代码项目的组织形式，以及模块之间的依赖方式，按照功能划分，将Controller，Service，Filter，Directive内聚在一起，作为可复用的组件模块，建议如java那样，以全小写和<code>.</code>分割保证唯一命名。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>, [<span class="string">'dependency1'</span>,<span class="string">'dependency2'</span>, ...])</span><br></pre></td></tr></table></figure></p>
+<h4 id="Module声明"><a href="#Module声明" class="headerlink" title="Module声明"></a>Module声明</h4><p>对于同一个业务模块，只在一个文件中用双参数重载方法创建module：<code>angular.module(&#39;com.ngnice.app&#39;,[])</code>,其他文件使用单参重载方法获取module：<code>angular.module(&#39;com.ngnice.app&#39;)</code>。不要添加额外的js变量来保存module。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// controller 声明</span></span><br><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>).controller(<span class="string">'DemoController'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// service 声明</span></span><br><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>).service(<span class="string">'demoService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="依赖声明"><a href="#依赖声明" class="headerlink" title="依赖声明"></a>依赖声明</h4><p>在module声明的时候，应该随时保证模块没有无用的依赖或是冗余的依赖，模块的依赖具有传递性，对于子模块的依赖，同样也会被其所注入的主模块所依赖。应该保证每个模块都自己声明了它所依赖的模块，禁止在主模块中声明某依赖不使用而在其子module使用。这样做的问题是，让本该独立使用的模块却不能单独复用到其他模块了。</p>
+<h4 id="Module组件声明"><a href="#Module组件声明" class="headerlink" title="Module组件声明"></a>Module组件声明</h4><p>将module中的Controller、Service、Factory、Filter、Directive等移到独立文件，并保证组件名称和文件名同步，这样便于复用，也便于快速查找相应的业务组件。对于config、run以及路由这类公共初始化代码可以放在module声明文件，也可以独立出去。把路由按照功能分到多个子模块，而不是只有一个全局路由配置文件:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bookModule.js</span></span><br><span class="line">angular.module(<span class="string">'com.ngnic.app'</span>).config(<span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider</span>)</span>&#123;</span><br><span class="line">  $routeProvider</span><br><span class="line">    .when(<span class="string">'/book'</span>, &#123;</span><br><span class="line">      templateUrl: <span class="string">'bool.html'</span>,</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .when(<span class="string">'/book/:id'</span>,&#123;</span><br><span class="line">        templateUrl: <span class="string">'bool.html'</span>,</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// DemoController.js</span></span><br><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>).controller(<span class="string">'DemoController'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">return</span> vm;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// demoService.js</span></span><br><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>).service(<span class="string">'demoService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><h4 id="命名-1"><a href="#命名-1" class="headerlink" title="命名"></a>命名</h4><p>Controller提供了对$scope的初始化和加工处理，并不需要手动实例化。ng会更具路由或ng-controller配置，利用$controller服务自动实例化它。建议以首字母大写的驼峰命名，以及加“Controller”后缀方式命名。</p>
+<h4 id="Controller-as-vm-声明"><a href="#Controller-as-vm-声明" class="headerlink" title="Controller as vm 声明"></a>Controller as vm 声明</h4><p>ng1.2后引入Controller as语法，它是$scope方式的语法糖，使得Controller声明更像一个普通的js构造函数POJO，在View模版上ng-controller、路由配置和Directive声明上都可以使用controller as语法。vm是ViewModel的简称，它将ngModel变量中强制加入<code>.</code>变为引用对象，避免js在对原型链上值类型修改的问题。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DemoController.js</span></span><br><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>).controller(<span class="string">'DemoController'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> vm;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 视图</span></span><br><span class="line">&lt;div ng-controller=<span class="string">"DemoController as demo"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 路由</span></span><br><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>).config(<span class="function"><span class="keyword">function</span>(<span class="params">$routeProvider</span>)</span>&#123;</span><br><span class="line">  $routeProvider.when(<span class="string">'/Book/:bookId'</span>, &#123;</span><br><span class="line">    templateUrl: <span class="string">'demo.html'</span>,</span><br><span class="line">    controller: DemoController,</span><br><span class="line">    controllerAs: <span class="string">'demo'</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="初始化数据"><a href="#初始化数据" class="headerlink" title="初始化数据"></a>初始化数据</h4><p>将页面中的ng-init初始化数据方式，移到Controller代码中，对于默认配置甚至应该推到服务中去，不要让View模版过于复杂，并对于$scope的初始化统一放在Controller代码中，这样便于维护、分工。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不好的用法</span></span><br><span class="line">&lt;div ng-init=<span class="string">'person=&#123;name:"张三"&#125;'</span>&gt;</span><br><span class="line">  &lt;pre&gt;&#123;&#123;person | json&#125;&#125;&lt;<span class="regexp">/pre&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 推荐用法</span></span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;pre&gt;&#123;&#123;demo.person | json&#125;&#125;&lt;<span class="regexp">/pre&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>div&gt;</span><br><span class="line"></span><br><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>).controller(<span class="string">'DemoController'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> vm = <span class="keyword">this</span>;</span><br><span class="line">  vm.person = &#123;</span><br><span class="line">    name: <span class="string">'张三'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h4><p>禁止在控制器Controller中操作DOM，将必须的DOM操作移动并封装成一个独立的装饰型指令，在它的link方法中完成，并保持这个指令的功能尽可能简单。</p>
+<h4 id="依赖的声明"><a href="#依赖的声明" class="headerlink" title="依赖的声明"></a>依赖的声明</h4><p>坚持以数组语法方式定义控制器和声明其依赖，对于ng自动解析参数形式的注入，会在js函数混淆的时候，参数名被简化改变，导致注入失败，程序出错。所以坚持以数组的方式或function.$inject方式注入是好的实践，由于使用function.$inject方式注入时需要声明特定的函数名，这样对只使用一次的js函数来说，显得冗余，所以推荐数组方式声明依赖。若使用ES6或CoffeeScript的class方式声明，更推荐function.$inject方式。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'com.ngnice.app'</span>).controller(<span class="string">'DemoController'</span>, [<span class="string">'demoService'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">demoService</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// ... </span></span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure></p>
+<p>对于已经存在自动按参数名注入的项目，可以采用ngAnnotate或者ngMin插件，他们都有Gulp和Grunt插件。</p>
+<h4 id="精简控制器逻辑"><a href="#精简控制器逻辑" class="headerlink" title="精简控制器逻辑"></a>精简控制器逻辑</h4><p>Controller作为加工处理$scope的地方，应该尽可能的精简控制器的逻辑，并将更多的业务逻辑处理抽象到独立的服务中去，这样即便于维护，也能够通过服务来复用到更多的Controller中。</p>
+<p>$scope上，应该仅仅添加与视图相关的行为和数据，这些数据都会被View直接使用，不要将无用的数据或函数添加到$scope上，污染$scope，及时清理无用的$scope变量。</p>
+<h4 id="禁止用-rootScope传递数据"><a href="#禁止用-rootScope传递数据" class="headerlink" title="禁止用$rootScope传递数据"></a>禁止用$rootScope传递数据</h4><p>$rootScope是最顶级的scope，其他的scope都是直接或间接派上于它的，在这里声明的变量会被所有非独立scope共享，本质上，它就是一个全局变量，所以应该禁止利用$rootScope来传递和共享数据。</p>
+<p>若确实需要全局变量，应该根据场景选择不用的解决方案：</p>
+<ul>
+<li>若两个控制器之间耦合比较松散（比如：控制器A发生变化，它会告诉其他控制器，但并不关心谁会处理，也不关心处理结果），那么应该选用事件机制：$emit, $broadcast, $on等，若要通知下级，就用$broadcase,通知上级则用$emit，通知整个应用，则注入$rootScope，然后调用$rootScope.$boradcast向整个应用广播，ui-router等路优酷就是这种方式</li>
+<li>若两个控制器存在大量数据共享和交互，那么有2中可选方案，可以利用Factory等服务单例特性为他们专门注入一个共享对象来传递数据，也可以通过它们共同的上级scope来传递数据（但这种方式只能传递被所有下级scope使用的数据），根据软件设计的“组合优于继承”原则，前面一种更好。</li>
+</ul>
+<h4 id="格式化显示逻辑"><a href="#格式化显示逻辑" class="headerlink" title="格式化显示逻辑"></a>格式化显示逻辑</h4><p>对于需要将原始数据转换为特定的用户格式，如货币，时间，过滤，数字格式化等，应该将这部分逻辑抽取成一个Filter，而不要写在Controller中，Filter是专门处理View中格式转化的代码块，它是一个更简单、纯粹的js函数，并且会在每次View被渲染时自动执行。</p>
+<h4 id="Resolve"><a href="#Resolve" class="headerlink" title="Resolve"></a>Resolve</h4><p>路由库，如ui-router或ngRoute提供了resolve机制，用来在进入特定路由之前进行预处理。</p>
+<p>若在实例化控制器之前，需要准备一些特定数据，或有条件的阻止禁止路由，那么可以在$routeProvider中配置Resolve属性来解决，Resolve是一个对象，它的key是名称，值可以是一个Promise的异步请求，也可以是一个服务的字符串值。</p>
+<p>此外，若只是要阻止进入特定的路由，可以使用ngRoute的$locationChangeStart或uiRoute的$stateChangeStart事件。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/09/04/angularjs47/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/09/01/angularjs45/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

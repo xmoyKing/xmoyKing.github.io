@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JS设计模式-7-发布-订阅模式（观察者模式） | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,design pattern">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JS设计模式-7-发布-订阅模式（观察者模式） | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="design pattern"> 
+
+    
+        <meta property="article:published_time" content="Fri Nov 17 2017 22:38:20 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:09 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JS设计模式-7-发布-订阅模式（观察者模式） | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/11/17/js-pattern7/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/11/17/js-pattern7/index.html",
+    "headline": "JS设计模式-7-发布-订阅模式（观察者模式）",
+    "datePublished": "Fri Nov 17 2017 22:38:20 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,design patternnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发布－订阅模式的作用"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x4F5C;&#x7528;" class="headerlink" title="&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x4F5C;&#x7528;"></a>&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x4F5C;&#x7528;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#DOM事件"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#DOM&#x4E8B;&#x4EF6;" class="headerlink" title="DOM&#x4E8B;&#x4EF6;"></a>DOM&#x4E8B;&#x4EF6;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#自定义事件"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x4E8B;&#x4EF6;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x4E8B;&#x4EF6;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x4E8B;&#x4EF6;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#发布－订阅模式的通用实现"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x901A;&#x7528;&#x5B9E;&#x73B0;" class="headerlink" title="&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x901A;&#x7528;&#x5B9E;&#x73B0;"></a>&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x901A;&#x7528;&#x5B9E;&#x73B0;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#取消订阅的事件"><span class="post-toc-number">5.</span> <span class="post-toc-text"><a href="#&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x4E8B;&#x4EF6;" class="headerlink" title="&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x4E8B;&#x4EF6;"></a>&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x4E8B;&#x4EF6;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#例子——网站登录"><span class="post-toc-number">6.</span> <span class="post-toc-text"><a href="#&#x4F8B;&#x5B50;&#x2014;&#x2014;&#x7F51;&#x7AD9;&#x767B;&#x5F55;" class="headerlink" title="&#x4F8B;&#x5B50;&#x2014;&#x2014;&#x7F51;&#x7AD9;&#x767B;&#x5F55;"></a>&#x4F8B;&#x5B50;&#x2014;&#x2014;&#x7F51;&#x7AD9;&#x767B;&#x5F55;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全局的发布－订阅对象"><span class="post-toc-number">7.</span> <span class="post-toc-text"><a href="#&#x5168;&#x5C40;&#x7684;&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x5BF9;&#x8C61;" class="headerlink" title="&#x5168;&#x5C40;&#x7684;&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x5BF9;&#x8C61;"></a>&#x5168;&#x5C40;&#x7684;&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模块间通信"><span class="post-toc-number">8.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x5757;&#x95F4;&#x901A;&#x4FE1;" class="headerlink" title="&#x6A21;&#x5757;&#x95F4;&#x901A;&#x4FE1;"></a>&#x6A21;&#x5757;&#x95F4;&#x901A;&#x4FE1;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#必须先订阅再发布吗"><span class="post-toc-number">9.</span> <span class="post-toc-text"><a href="#&#x5FC5;&#x987B;&#x5148;&#x8BA2;&#x9605;&#x518D;&#x53D1;&#x5E03;&#x5417;" class="headerlink" title="&#x5FC5;&#x987B;&#x5148;&#x8BA2;&#x9605;&#x518D;&#x53D1;&#x5E03;&#x5417;"></a>&#x5FC5;&#x987B;&#x5148;&#x8BA2;&#x9605;&#x518D;&#x53D1;&#x5E03;&#x5417;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#全局事件的命名冲突"><span class="post-toc-number">10.</span> <span class="post-toc-text"><a href="#&#x5168;&#x5C40;&#x4E8B;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x51B2;&#x7A81;" class="headerlink" title="&#x5168;&#x5C40;&#x4E8B;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x51B2;&#x7A81;"></a>&#x5168;&#x5C40;&#x4E8B;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x51B2;&#x7A81;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#JavaScript实现发布－订阅模式的便利性"><span class="post-toc-number">11.</span> <span class="post-toc-text"><a href="#JavaScript&#x5B9E;&#x73B0;&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x4FBF;&#x5229;&#x6027;" class="headerlink" title="JavaScript&#x5B9E;&#x73B0;&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x4FBF;&#x5229;&#x6027;"></a>JavaScript&#x5B9E;&#x73B0;&#x53D1;&#x5E03;&#xFF0D;&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x7684;&#x4FBF;&#x5229;&#x6027;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#小结"><span class="post-toc-number">12.</span> <span class="post-toc-text"><a href="#&#x5C0F;&#x7ED3;" class="headerlink" title="&#x5C0F;&#x7ED3;"></a>&#x5C0F;&#x7ED3;</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JS设计模式-7-发布-订阅模式（观察者模式）
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Nov 17, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/design-pattern/">design pattern</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JS设计模式-7-发布-订阅模式（观察者模式）&url=https://github.com/xmoyKING/2017/11/17/js-pattern7/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JS设计模式-7-发布-订阅模式（观察者模式）&url=https://github.com/xmoyKING/2017/11/17/js-pattern7/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/11/17/js-pattern7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/11/17/js-pattern7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>发布-订阅模式（观察者模式）定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都将得到通知。在JavaScript开发中，我们一般用事件模型来替代传统的发布—订阅模式。</p>
+<p>不论是在程序世界里还是现实生活中，发布—订阅模式的应用都非常之广泛。先看一个现实中的例子。</p>
+<p>小明最近看上了一套房子，到了售楼处之后才被告知，该楼盘的房子早已售罄。好在售楼MM告诉小明，不久后还有一些尾盘推出，开发商正在办理相关手续，手续办好后便可以购买。但到底是什么时候，目前还没有人能够知道。</p>
+<p>于是小明记下了售楼处的电话，以后每天都会打电话过去询问是不是已经到了购买时间。除了小明，还有小红、小强、小龙也会每天向售楼处咨询这个问题。一个星期过后，售楼MM决定辞职，因为厌倦了每天回答1000个相同内容的电话。</p>
+<p>当然现实中没有这么笨的销售公司，实际上故事是这样的：小明离开之前，把电话号码留在了售楼处。售楼MM答应他，新楼盘一推出就马上发信息通知小明。小红、小强和小龙也是一样，他们的电话号码都被记在售楼处的花名册上，新楼盘推出的时候，售楼MM会翻开花名册，遍历上面的电话号码，依次发送一条短信来通知他们。</p>
+<h4 id="发布－订阅模式的作用"><a href="#发布－订阅模式的作用" class="headerlink" title="发布－订阅模式的作用"></a>发布－订阅模式的作用</h4><p>在刚刚的例子中，发送短信通知就是一个典型的发布—订阅模式，小明、小红等购买者都是订阅者，他们订阅了房子开售的消息。售楼处作为发布者，会在合适的时候遍历花名册上的电话号码，依次给购房者发布消息。<br>可以发现，在这个例子中使用发布—订阅模式有着显而易见的优点。</p>
+<ul>
+<li>购房者不用再天天给售楼处打电话咨询开售时间，在合适的时间点，售楼处作为发布者会通知这些消息订阅者。</li>
+<li>购房者和售楼处之间不再强耦合在一起，当有新的购房者出现时，他只需把手机号码留在售楼处，售楼处不关心购房者的任何情况，不管购房者是男是女还是一只猴子。而售楼处的任何变动也不会影响购买者，比如售楼MM离职，售楼处从一楼搬到二楼，这些改变都跟购房者无关，只要售楼处记得发短信这件事情。</li>
+</ul>
+<p>第一点说明发布—订阅模式可以广泛应用于异步编程中，这是一种替代传递回调函数的方案。比如，我们可以订阅ajax请求的error、succ等事件。或者如果想在动画的每一帧完成之后做一些事情，那我们可以订阅一个事件，然后在动画的每一帧完成之后发布这个事件。在异步编程中使用发布—订阅模式，我们就无需过多关注对象在异步运行期间的内部状态，而只需要订阅感兴趣的事件发生点。</p>
+<p>第二点说明发布—订阅模式可以取代对象之间硬编码的通知机制，一个对象不用再显式地调用另外一个对象的某个接口。发布—订阅模式让两个对象松耦合地联系在一起，虽然不太清楚彼此的细节，但这不影响它们之间相互通信。当有新的订阅者出现时，发布者的代码不需要任何修改；同样发布者需要改变时，也不会影响到之前的订阅者。只要之前约定的事件名没有变化，就可以自由地改变它们。</p>
+<h4 id="DOM事件"><a href="#DOM事件" class="headerlink" title="DOM事件"></a>DOM事件</h4><p>实际上，只要我们曾经在DOM节点上面绑定过事件函数，那我们就曾经使用过发布—订阅模式，来看看下面这两句简单的代码发生了什么事情：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.addEventListener( <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    alert( <span class="number">2</span>); </span><br><span class="line">&#125;, <span class="literal">false</span> ); </span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.click(); <span class="comment">// 模 拟 用 户 点 击</span></span><br></pre></td></tr></table></figure></p>
+<p>在这里需要监控用户点击document.body的动作，但是我们没办法预知用户将在什么时候点击。所以我们订阅document.body上的click事件，当body节点被点击时，body节点便会向订阅者发布这个消息。这很像购房的例子，购房者不知道房子什么时候开售，于是他在订阅消息后等待售楼处发布消息。</p>
+<p>当然我们还可以随意增加或者删除订阅者，增加任何订阅者都不会影响发布者代码的编写：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.addEventListener( <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert( <span class="number">2</span>); &#125;, <span class="literal">false</span> );</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener( <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert( <span class="number">3</span>); &#125;, <span class="literal">false</span> );</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener( <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert( <span class="number">4</span>); &#125;, <span class="literal">false</span> ); </span><br><span class="line"><span class="built_in">document</span>.body.click();<span class="comment">//模拟用户点击</span></span><br></pre></td></tr></table></figure></p>
+<p>注意，手动触发事件更好的做法是IE下用fireEvent，标准浏览器下用dispatchEvent实现。</p>
+<h4 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h4><p>除了DOM事件，我们还会经常实现一些自定义的事件，这种依靠自定义事件完成的发布—订阅模式可以用于任何JavaScript代码中。现在看看如何一步步实现发布—订阅模式。</p>
+<ol>
+<li>首先要指定好谁充当发布者（比如售楼处）；</li>
+<li>然后给发布者添加一个缓存列表（售楼处的花名册），用于存放回调函数以便通知订阅者；</li>
+<li>最后发布消息的时候，发布者会遍历这个缓存列表，依次触发里面存放的订阅者回调函数（遍历花名册，挨个发短信）。</li>
+</ol>
+<p>另外，我们还可以往回调函数里填入一些参数，订阅者可以接收这些参数。这是很有必要的，比如售楼处可以在发给订阅者的短信里加上房子的单价、面积、容积率等信息，订阅者接收到这些信息之后可以进行各自的处理：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> salesOffices = &#123;&#125;; <span class="comment">// 定 义 售 楼 处 </span></span><br><span class="line">salesOffices.clientList = []; <span class="comment">// 缓 存 列 表， 存 放 订 阅 者 的 回 调 函 数 </span></span><br><span class="line"></span><br><span class="line">salesOffices.listen = <span class="function"><span class="keyword">function</span>(<span class="params"> fn </span>)</span>&#123; <span class="comment">// 增 加 订 阅 者 </span></span><br><span class="line">  <span class="keyword">this</span>.clientList.push( fn ); <span class="comment">// 订 阅 的 消 息 添 加 进 缓 存 列 表 </span></span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">salesOffices.trigger = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 发 布 消 息 </span></span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = <span class="keyword">this</span>.clientList[ i++ ]; )&#123; </span><br><span class="line">    fn.apply( <span class="keyword">this</span>, <span class="built_in">arguments</span> ); <span class="comment">// (2) // arguments 是 发 布 消 息 时 带 上 的 参 数 </span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>进行一些简单的测试：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">salesOffices.listen( <span class="function"><span class="keyword">function</span>(<span class="params"> price, squareMeter </span>)</span>&#123; <span class="comment">// 小 明 订 阅 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); </span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'squareMeter = '</span> + squareMeter ); </span><br><span class="line">&#125;); </span><br><span class="line">salesOffices.listen( <span class="function"><span class="keyword">function</span>(<span class="params"> price, squareMeter </span>)</span>&#123; <span class="comment">// 小 红 订 阅 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); </span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'squareMeter = '</span> + squareMeter ); </span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">salesOffices.trigger( <span class="number">2000000</span>, <span class="number">88</span> ); <span class="comment">// 2次输 出： 200 万， 88 平 方 米 </span></span><br><span class="line">salesOffices.trigger( <span class="number">3000000</span>, <span class="number">110</span> ); <span class="comment">// 2次输 出： 300 万， 110 平 方 米</span></span><br></pre></td></tr></table></figure></p>
+<p>这里还存在一些问题。我们看到订阅者接收到了发布者发布的每个消息（每个消息都输出了2次），虽然小明只想买88平方米的房子，但是发布者把110平方米的信息也推送给了小明，这对小明来说是不必要的困扰。所以我们有必要增加一个标示key，让订阅者只订阅自己感兴趣的消息。改写后的代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> salesOffices = &#123;&#125;; <span class="comment">// 定 义 售 楼 处 </span></span><br><span class="line">salesOffices.clientList = &#123;&#125;; <span class="comment">// 缓 存 列 表， 存 放 订 阅 者 的 回 调 函 数 </span></span><br><span class="line">salesOffices.listen = <span class="function"><span class="keyword">function</span>(<span class="params"> key, fn </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">if</span> ( !<span class="keyword">this</span>.clientList[ key ] )&#123; <span class="comment">// 如 果 还 没 有 订 阅 过 此 类 消 息， 给 该 类 消 息 创 建 一 个 缓 存 列 表 </span></span><br><span class="line">    <span class="keyword">this</span>.clientList[ key ] = []; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">this</span>.clientList[ key ].push( fn ); <span class="comment">// 订 阅 的 消 息 添 加 进 消 息 缓 存 列 表 </span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">salesOffices.trigger = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 发 布 消 息 </span></span><br><span class="line">  <span class="keyword">var</span> key = <span class="built_in">Array</span>.prototype.shift.call( <span class="built_in">arguments</span> ), <span class="comment">// 取 出 消 息 类 型 </span></span><br><span class="line">  fns = <span class="keyword">this</span>.clientList[ key ]; <span class="comment">// 取 出 该 消 息 对 应 的 回 调 函 数 集 合 </span></span><br><span class="line">  <span class="keyword">if</span> ( !fns || fns.length === <span class="number">0</span> )&#123; <span class="comment">// 如 果 没 有 订 阅 该 消 息， 则 返 回   </span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125; </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = fns[ i++ ]; )&#123; </span><br><span class="line">    fn.apply( <span class="keyword">this</span>, <span class="built_in">arguments</span> ); <span class="comment">// arguments 是 发 布 消 息 时 附 送 的 参 数 </span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">salesOffices.listen( <span class="string">'squareMeter88'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> price </span>)</span>&#123; <span class="comment">// 小 明 订 阅 88 平 方 米 房 子 的 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); <span class="comment">// 输 出： 2000000 </span></span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">salesOffices.listen( <span class="string">'squareMeter110'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> price </span>)</span>&#123; <span class="comment">// 小 红 订 阅 110 平 方 米 房 子 的 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); <span class="comment">// 输 出： 3000000 </span></span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">salesOffices.trigger( <span class="string">'squareMeter88'</span>, <span class="number">2000000</span> ); <span class="comment">// 发 布 88 平 方 米 房 子 的 价 格</span></span><br><span class="line"></span><br><span class="line">salesOffices.trigger( <span class="string">'squareMeter110'</span>, <span class="number">3000000</span> ); <span class="comment">// 发 布 110 平 方 米 房 子 的 价 格</span></span><br></pre></td></tr></table></figure></p>
+<p>很明显，现在订阅者可以只订阅自己感兴趣的事件了。</p>
+<h4 id="发布－订阅模式的通用实现"><a href="#发布－订阅模式的通用实现" class="headerlink" title="发布－订阅模式的通用实现"></a>发布－订阅模式的通用实现</h4><p>现在我们已经看到了如何让售楼处拥有接受订阅和发布事件的功能。假设现在小明又去另一个售楼处买房子，那么这段代码是否必须在另一个售楼处对象上重写一次呢，有没有办法可以让所有对象都拥有发布—订阅功能呢？</p>
+<p>JavaScript作为一门解释执行的语言，给对象动态添加职责是理所当然的事情。所以我们把发布—订阅的功能提取出来，放在一个单独的对象内：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> event = &#123; </span><br><span class="line">  clientList: [], </span><br><span class="line">  listen: <span class="function"><span class="keyword">function</span>(<span class="params"> key, fn </span>)</span>&#123; </span><br><span class="line">    <span class="keyword">if</span> ( !<span class="keyword">this</span>.clientList[ key ] )&#123; </span><br><span class="line">      <span class="keyword">this</span>.clientList[ key ] = []; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">this</span>.clientList[ key ].push( fn ); <span class="comment">// 订 阅 的 消 息 添 加 进 缓 存 列 表 </span></span><br><span class="line">  &#125;, </span><br><span class="line">  trigger: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="keyword">var</span> key = <span class="built_in">Array</span>.prototype.shift.call( <span class="built_in">arguments</span> ), <span class="comment">// (1); </span></span><br><span class="line">        fns = <span class="keyword">this</span>.clientList[ key ]; </span><br><span class="line">    <span class="keyword">if</span> ( !fns || fns.length === <span class="number">0</span> )&#123; <span class="comment">// 如 果 没 有 绑 定 对 应 的 消 息 </span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = fns[ i++ ]; )&#123; </span><br><span class="line">      fn.apply( <span class="keyword">this</span>, <span class="built_in">arguments</span> ); <span class="comment">// (2) // arguments 是 trigger 时 带 上 的 参 数 </span></span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>再定义一个installEvent函数，这个函数可以给所有的对象都动态安装发布—订阅功能：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> installEvent = <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i <span class="keyword">in</span> event )&#123; </span><br><span class="line">    obj[ i ] = event[ i ]; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>来测试一番，我们给售楼处对象salesOffices动态增加发布—订阅功能：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> salesOffices = &#123;&#125;; </span><br><span class="line">installEvent( salesOffices ); </span><br><span class="line">salesOffices.listen( <span class="string">'squareMeter88'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> price </span>)</span>&#123; <span class="comment">// 小 明 订 阅 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); </span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">salesOffices.listen( <span class="string">'squareMeter100'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> price </span>)</span>&#123; <span class="comment">// 小 红 订 阅 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); </span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line">salesOffices.trigger( <span class="string">'squareMeter88'</span>, <span class="number">2000000</span> ); <span class="comment">// 输 出： 2000000 </span></span><br><span class="line">salesOffices.trigger( <span class="string">'squareMeter100'</span>, <span class="number">3000000</span> ); <span class="comment">// 输 出： 3000000</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="取消订阅的事件"><a href="#取消订阅的事件" class="headerlink" title="取消订阅的事件"></a>取消订阅的事件</h4><p>有时候，我们也许需要取消订阅事件的功能。比如小明突然不想买房子了，为了避免继续接收到售楼处推送过来的短信，小明需要取消之前订阅的事件。现在我们给event对象增加remove方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">event.remove = <span class="function"><span class="keyword">function</span>(<span class="params"> key, fn </span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> fns = <span class="keyword">this</span>.clientList[ key ]; </span><br><span class="line">  <span class="keyword">if</span> ( !fns )&#123; <span class="comment">// 如 果 key 对 应 的 消 息 没 有 被 人 订 阅， 则 直 接 返 回 </span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( !fn )&#123; <span class="comment">// 如 果 没 有 传 入 具 体 的 回 调 函 数， 表 示 需 要 取 消 key 对 应 消 息 的 所 有 订 阅 </span></span><br><span class="line">    fns &amp;&amp; ( fns.length = <span class="number">0</span> ); </span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">var</span> l = fns.length - <span class="number">1</span>; l &gt;= <span class="number">0</span>; l-- )&#123; <span class="comment">// 反 向 遍 历 订 阅 的 回 调 函 数 列 表 </span></span><br><span class="line">      <span class="keyword">var</span> _fn = fns[ l ]; </span><br><span class="line">      <span class="keyword">if</span> ( _fn === fn )&#123; </span><br><span class="line">        fns.splice( l, <span class="number">1</span> ); <span class="comment">// 删 除 订 阅 者 的 回 调 函 数 </span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> salesOffices = &#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> installEvent = <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i <span class="keyword">in</span> event )&#123; </span><br><span class="line">    obj[ i ] = event[ i ]; </span><br><span class="line">  &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">installEvent( salesOffices ); </span><br><span class="line"></span><br><span class="line">salesOffices.listen( <span class="string">'squareMeter88'</span>, fn1 = <span class="function"><span class="keyword">function</span>(<span class="params"> price </span>)</span>&#123; <span class="comment">// 小 明 订 阅 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); </span><br><span class="line">&#125;); </span><br><span class="line">salesOffices.listen( <span class="string">'squareMeter88'</span>, fn2 = <span class="function"><span class="keyword">function</span>(<span class="params"> price </span>)</span>&#123; <span class="comment">// 小 红 订 阅 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); </span><br><span class="line">&#125;); </span><br><span class="line">salesOffices.remove( <span class="string">'squareMeter88'</span>, fn1 ); <span class="comment">// 删 除 小 明 的 订 阅 </span></span><br><span class="line">salesOffices.trigger( <span class="string">'squareMeter88'</span>, <span class="number">2000000</span> ); <span class="comment">// 输 出： 2000000</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="例子——网站登录"><a href="#例子——网站登录" class="headerlink" title="例子——网站登录"></a>例子——网站登录</h4><p>假如我们正在开发一个商城网站，网站里有header头部、nav导航、消息列表、购物车等模块。这几个模块的渲染有一个共同的前提条件，就是必须先用ajax异步请求获取用户的登录信息。这是很正常的，比如用户的名字和头像要显示在header模块里，而这两个字段都来自用户登录后返回的信息。<br>至于ajax请求什么时候能成功返回用户信息，这点我们没有办法确定。现在的情节看起来像极了售楼处的例子，小明不知道什么时候开发商的售楼手续能够成功办下来。</p>
+<p>但现在还不足以说服我们在此使用发布—订阅模式，因为异步的问题通常也可以用回调函数来解决。更重要的一点是，我们不知道除了header头部、nav导航、消息列表、购物车之外，将来还有哪些模块需要使用这些用户信息。如果它们和用户信息模块产生了强耦合，比如下面这样的形式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">login.succ( <span class="function"><span class="keyword">function</span>(<span class="params"> data</span>)</span>&#123; </span><br><span class="line">  header.setAvatar( data.avatar); <span class="comment">// 设 置 header 模 块 的 头 像 </span></span><br><span class="line">  nav.setAvatar( data.avatar ); <span class="comment">// 设 置 导 航 模 块 的 头 像 </span></span><br><span class="line">  message.refresh(); <span class="comment">// 刷 新 消 息 列 表 </span></span><br><span class="line">  cart.refresh(); <span class="comment">// 刷 新 购 物 车 列 表 </span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>现在登录模块是我们负责编写的，但我们还必须了解header模块里设置头像的方法叫setAvatar、购物车模块里刷新的方法叫refresh，这种耦合性会使程序变得僵硬，header模块不能随意再改变setAvatar的方法名，它自身的名字也不能被改为header1、header2。这是针对具体实现编程的典型例子，针对具体实现编程是不被赞同的。</p>
+<p>等到有一天，项目中又新增了一个收货地址管理的模块，这个模块本来是另一个同事所写的，而此时你正在马来西亚度假，但是他却不得不给你打电话：“Hi，登录之后麻烦刷新一下收货地址列表。”于是你又翻开你3个月前写的登录模块，在最后部分加上这行代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">login.succ( <span class="function"><span class="keyword">function</span>(<span class="params"> data</span>)</span>&#123; </span><br><span class="line">  header.setAvatar( data.avatar); <span class="comment">// 设 置 header 模 块 的 头 像 </span></span><br><span class="line">  nav.setAvatar( data.avatar ); <span class="comment">// 设 置 导 航 模 块 的 头 像 </span></span><br><span class="line">  message.refresh(); <span class="comment">// 刷 新 消 息 列 表 </span></span><br><span class="line">  cart.refresh(); <span class="comment">// 刷 新 购 物 车 列 表 </span></span><br><span class="line"></span><br><span class="line">  address.refresh(); <span class="comment">// 增 加 这 行 代 码</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>我们就会越来越疲于应付这些突如其来的业务要求，要么跳槽了事，要么必须来重构这些代码。</p>
+<p>用发布—订阅模式重写之后，对用户信息感兴趣的业务模块将自行订阅登录成功的消息事件。当登录成功时，登录模块只需要发布登录成功的消息，而业务方接受到消息之后，就会开始进行各自的业务处理，登录模块并不关心业务方究竟要做什么，也不想去了解它们的内部细节。改善后的代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(<span class="string">'http://xxx.com?login'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> data</span>)</span>&#123; <span class="comment">// 登 录 成 功 </span></span><br><span class="line">  login.trigger( <span class="string">'loginSucc'</span>, data); <span class="comment">// 发 布 登 录 成 功 的 消 息 </span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>各模块监听登录成功的消息：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> header = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// header 模 块 </span></span><br><span class="line">  login.listen( <span class="string">'loginSucc'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> data</span>)</span>&#123; header.setAvatar( data.avatar ); &#125;); </span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">setAvatar</span>: <span class="function"><span class="keyword">function</span>(<span class="params"> data </span>)</span>&#123; <span class="built_in">console</span>.log( <span class="string">'设 置 header 模 块 的 头 像'</span> ); &#125; &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> nav = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// nav 模 块 </span></span><br><span class="line">  login.listen( <span class="string">'loginSucc'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> data </span>)</span>&#123; nav.setAvatar( data.avatar ); &#125;); </span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">setAvatar</span>: <span class="function"><span class="keyword">function</span>(<span class="params"> avatar </span>)</span>&#123; <span class="built_in">console</span>.log( <span class="string">'设 置 nav 模 块 的 头 像'</span> ); &#125; &#125; </span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>如上所述，我们随时可以把setAvatar的方法名改成setTouxiang。如果有一天在登录完成之后，又增加一个刷新收货地址列表的行为，那么只要在收货地址模块里加上监听消息的方法即可，而这可以让开发该模块的同事自己完成，你作为登录模块的开发者，永远不用再关心这些行为了。代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> address = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="comment">// address 模 块 </span></span><br><span class="line">  login.listen( <span class="string">'loginSucc'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>)</span>&#123; address.refresh( obj ); &#125;); </span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">refresh</span>: <span class="function"><span class="keyword">function</span>(<span class="params"> avatar </span>)</span>&#123; <span class="built_in">console</span>.log( <span class="string">'刷 新 收 货 地 址 列 表'</span> ); &#125; &#125; </span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<h4 id="全局的发布－订阅对象"><a href="#全局的发布－订阅对象" class="headerlink" title="全局的发布－订阅对象"></a>全局的发布－订阅对象</h4><p>回想下刚刚实现的发布—订阅模式，我们给售楼处对象和登录对象都添加了订阅和发布的功能，这里还存在两个小问题。</p>
+<ul>
+<li>我们给每个发布者对象都添加了listen和trigger方法，以及一个缓存列表clientList，这其实是一种资源浪费。</li>
+<li>小明跟售楼处对象还是存在一定的耦合性，小明至少要知道售楼处对象的名字是salesOffices，才能顺利的订阅到事件。<br>见如下代码：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">salesOffices.listen( <span class="string">'squareMeter100'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> price </span>)</span>&#123; </span><br><span class="line">  <span class="comment">// 小 明 订 阅 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果小明还关心300平方米的房子，而这套房子的卖家是salesOffices2，这意味着小明要开始订阅salesOffices2对象。</p>
+<p>其实在现实中，买房子未必要亲自去售楼处，我们只要把订阅的请求交给中介公司，而各大房产公司也只需要通过中介公司来发布房子信息。这样一来，我们不用关心消息是来自哪个房产公司，我们在意的是能否顺利收到消息。当然，为了保证订阅者和发布者能顺利通信，订阅者和发布者都必须知道这个中介公司。</p>
+<p>同样在程序中，发布—订阅模式可以用一个全局的Event对象来实现，订阅者不需要了解消息来自哪个发布者，发布者也不知道消息会推送给哪些订阅者，Event作为一个类似“中介者”的角色，把订阅者和发布者联系起来。见如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Event = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> clientList = &#123;&#125;, </span><br><span class="line">      listen, </span><br><span class="line">      trigger, </span><br><span class="line">      remove; </span><br><span class="line"></span><br><span class="line">  listen = <span class="function"><span class="keyword">function</span>(<span class="params"> key, fn </span>)</span>&#123; </span><br><span class="line">    <span class="keyword">if</span> ( !clientList[ key ] )&#123; </span><br><span class="line">      clientList[ key ] = []; </span><br><span class="line">    &#125; </span><br><span class="line">    clientList[ key ].push( fn ); </span><br><span class="line">  &#125;; </span><br><span class="line"></span><br><span class="line">  trigger = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="keyword">var</span> key = <span class="built_in">Array</span>.prototype.shift.call( <span class="built_in">arguments</span> ), </span><br><span class="line">        fns = clientList[ key ]; </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> ( !fns || fns.length === <span class="number">0</span> )&#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = fns[ i++ ]; )&#123; </span><br><span class="line">      fn.apply( <span class="keyword">this</span>, <span class="built_in">arguments</span> ); </span><br><span class="line">    &#125; </span><br><span class="line">  &#125;; </span><br><span class="line">  </span><br><span class="line">  remove = <span class="function"><span class="keyword">function</span>(<span class="params"> key, fn </span>)</span>&#123; </span><br><span class="line">    <span class="keyword">var</span> fns = clientList[ key ]; </span><br><span class="line">    <span class="keyword">if</span> ( !fns )&#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125; </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> ( !fn )&#123; </span><br><span class="line">      fns &amp;&amp; ( fns.length = <span class="number">0</span> ); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123; </span><br><span class="line">      <span class="keyword">for</span> ( <span class="keyword">var</span> l = fns.length - <span class="number">1</span>; l &gt;= <span class="number">0</span>; l-- )&#123; </span><br><span class="line">        <span class="keyword">var</span> _fn = fns[ l ]; </span><br><span class="line">        <span class="keyword">if</span> ( _fn === fn )&#123; fns.splice( l, <span class="number">1</span> ); &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">listen</span>: listen, <span class="attr">trigger</span>: trigger, <span class="attr">remove</span>: remove &#125; </span><br><span class="line"></span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">Event.listen( <span class="string">'squareMeter88'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> price </span>)</span>&#123; <span class="comment">// 小 红 订 阅 消 息 </span></span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'价 格 = '</span> + price ); <span class="comment">// 输 出：' 价 格 = 2000000' </span></span><br><span class="line">&#125;); </span><br><span class="line">Event.trigger( <span class="string">'squareMeter88'</span>, <span class="number">2000000</span> ); <span class="comment">// 售 楼 处 发 布 消 息</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="模块间通信"><a href="#模块间通信" class="headerlink" title="模块间通信"></a>模块间通信</h4><p>基于一个全局的Event对象实现的发布—订阅模式中，我们利用它可以在两个封装良好的模块中进行通信，这两个模块可以完全不知道对方的存在。就如同有了中介公司之后，我们不再需要知道房子开售的消息来自哪个售楼处。</p>
+<p>比如现在有两个模块，a模块里面有一个按钮，每次点击按钮之后，b模块里的div中会显示按钮的总点击次数，我们用全局发布—订阅模式完成下面的代码，使得a模块和b模块可以在保持封装性的前提下进行通信。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> count = <span class="number">0</span>; </span><br><span class="line">  <span class="keyword">var</span> button = <span class="built_in">document</span>.getElementById( <span class="string">'count'</span> ); </span><br><span class="line">  button.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; Event.trigger( <span class="string">'add'</span>, count++ ); &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById( <span class="string">'show'</span> ); </span><br><span class="line">  Event.listen( <span class="string">'add'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> count </span>)</span>&#123; div.innerHTML = count; &#125;); </span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>但在这里我们要留意另一个问题，模块之间如果用了太多的全局发布—订阅模式来通信，那么模块与模块之间的联系就被隐藏到了背后。我们最终会搞不清楚消息来自哪个模块，或者消息会流向哪些模块，这又会给我们的维护带来一些麻烦，也许某个模块的作用就是暴露一些接口给其他模块调用。</p>
+<h4 id="必须先订阅再发布吗"><a href="#必须先订阅再发布吗" class="headerlink" title="必须先订阅再发布吗"></a>必须先订阅再发布吗</h4><p>我们所了解到的发布—订阅模式，都是订阅者必须先订阅一个消息，随后才能接收到发布者发布的消息。如果把顺序反过来，发布者先发布一条消息，而在此之前并没有对象来订阅它，这条消息无疑将消失在宇宙中。</p>
+<p>在某些情况下，我们需要先将这条消息保存下来，等到有对象来订阅它的时候，再重新把消息发布给订阅者。就如同QQ中的离线消息一样，离线消息被保存在服务器中，接收人下次登录上线之后，可以重新收到这条消息。</p>
+<p>这种需求在实际项目中是存在的，比如在之前的商城网站中，获取到用户信息之后才能渲染用户导航模块，而获取用户信息的操作是一个ajax异步请求。当ajax请求成功返回之后会发布一个事件，在此之前订阅了此事件的用户导航模块可以接收到这些用户信息。</p>
+<p>但是这只是理想的状况，因为异步的原因，我们不能保证ajax请求返回的时间，有时候它返回得比较快，而此时用户导航模块的代码还没有加载好（还没有订阅相应事件），特别是在用了一些模块化惰性加载的技术后，这是很可能发生的事情。也许我们还需要一个方案，使得我们的发布—订阅对象拥有先发布后订阅的能力。</p>
+<p>为了满足这个需求，我们要建立一个存放离线事件的堆栈，当事件发布的时候，如果此时还没有订阅者来订阅这个事件，我们暂时把发布事件的动作包裹在一个函数里，这些包装函数将被存入堆栈中，等到终于有对象来订阅此事件的时候，我们将遍历堆栈并且依次执行这些包装函数，也就是重新发布里面的事件。当然离线事件的生命周期只有一次，就像QQ的未读消息只会被重新阅读一次，所以刚才的操作我们只能进行一次。</p>
+<h4 id="全局事件的命名冲突"><a href="#全局事件的命名冲突" class="headerlink" title="全局事件的命名冲突"></a>全局事件的命名冲突</h4><p>全局的发布—订阅对象里只有一个clinetList来存放消息名和回调函数，大家都通过它来订阅和发布各种消息，久而久之，难免会出现事件名冲突的情况，所以我们还可以给Event对象提供创建命名空间的功能。</p>
+<p>在提供最终的代码之前，我们来感受一下怎么使用这两个新增的功能。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/************** 先 发 布 后 订 阅 ********************/</span> </span><br><span class="line">Event.trigger( <span class="string">'click'</span>, <span class="number">1</span> ); </span><br><span class="line">Event.listen( <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> a </span>)</span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log( a ); <span class="comment">// 输 出： 1 </span></span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line"><span class="comment">/************** 使 用 命 名 空 间 ********************/</span> </span><br><span class="line">Event.create( <span class="string">'namespace1'</span> ).listen( <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> a </span>)</span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log( a ); <span class="comment">// 输 出： 1 </span></span><br><span class="line">&#125;); </span><br><span class="line">Event.create( <span class="string">'namespace1'</span> ).trigger( <span class="string">'click'</span>, <span class="number">1</span> );</span><br><span class="line"></span><br><span class="line">Event.create( <span class="string">'namespace2'</span> ).listen( <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"> a </span>)</span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log( a ); <span class="comment">// 输 出： 2 </span></span><br><span class="line">&#125;); </span><br><span class="line">Event.create( <span class="string">'namespace2'</span> ).trigger( <span class="string">'click'</span>, <span class="number">2</span> );</span><br></pre></td></tr></table></figure></p>
+<p>具体实现代码<a href="event.js">Event.js</a></p>
+<h4 id="JavaScript实现发布－订阅模式的便利性"><a href="#JavaScript实现发布－订阅模式的便利性" class="headerlink" title="JavaScript实现发布－订阅模式的便利性"></a>JavaScript实现发布－订阅模式的便利性</h4><p>这里要提出的是，我们一直讨论的发布—订阅模式，跟一些别的语言（比如Java）中的实现还是有区别的。在Java中实现一个自己的发布—订阅模式，通常会把订阅者对象自身当成引用传入发布者对象中，同时订阅者对象还需提供一个名为诸如update的方法，供发布者对象在适合的时候调用。而在JavaScript中，我们用注册回调函数的形式来代替传统的发布—订阅模式，显得更加优雅和简单。</p>
+<p>另外，在JavaScript中，我们无需去选择使用推模型还是拉模型。推模型是指在事件发生时，发布者一次性把所有更改的状态和数据都推送给订阅者。拉模型不同的地方是，发布者仅仅通知订阅者事件已经发生了，此外发布者要提供一些公开的接口供订阅者来主动拉取数据。拉模型的好处是可以让订阅者“按需获取”，但同时有可能让发布者变成一个“门户大开”的对象，同时增加了代码量和复杂度。</p>
+<p>刚好在JavaScript中，arguments可以很方便地表示参数列表，所以我们一般都会选择推模型，使用Function.prototype.apply方法把所有参数都推送给订阅者。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>发布—订阅模式的优点非常明显，一为时间上的解耦，二为对象之间的解耦。它的应用非常广泛，既可以用在异步编程中，也可以帮助我们完成更松耦合的代码编写。发布—订阅模式还可以用来帮助实现一些别的设计模式，比如中介者模式。从架构上来看，无论是MVC还是MVVM，都少不了发布—订阅模式的参与，而且JavaScript本身也是一门基于事件驱动的语言。</p>
+<p>当然，发布—订阅模式也不是完全没有缺点。创建订阅者本身要消耗一定的时间和内存，而且当你订阅一个消息后，也许此消息最后都未发生，但这个订阅者会始终存在于内存中。另外，发布—订阅模式虽然可以弱化对象之间的联系，但如果过度使用的话，对象和对象之间的必要联系也将被深埋在背后，会导致程序难以跟踪维护和理解。特别是有多个发布者和订阅者嵌套到一起的时候，要跟踪一个bug不是件轻松的事情。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/11/19/js-pattern8/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/11/15/js-pattern6/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

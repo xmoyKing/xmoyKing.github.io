@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            effective-javascript笔记-6 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,effective-javascript,note">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="effective-javascript笔记-6 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="effective-javascript"> <meta property="og:article:tag" content="note"> 
+
+    
+        <meta property="article:published_time" content="Mon Mar 06 2017 22:30:04 GMT+0800" />
+        <meta property="article:modified_time" content="Sun Mar 26 2017 00:00:00 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="effective-javascript笔记-6 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/03/06/effective-javascript6/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/03/06/effective-javascript6/index.html",
+    "headline": "effective-javascript笔记-6",
+    "datePublished": "Mon Mar 06 2017 22:30:04 GMT+0800",
+    "dateModified": "Sun Mar 26 2017 00:00:00 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,effective-javascript,notenull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#库和API设计"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x5E93;&#x548C;API&#x8BBE;&#x8BA1;" class="headerlink" title="&#x5E93;&#x548C;API&#x8BBE;&#x8BA1;"></a>&#x5E93;&#x548C;API&#x8BBE;&#x8BA1;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#53-保持一致的约定"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#53-&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x7684;&#x7EA6;&#x5B9A;" class="headerlink" title="53. &#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x7684;&#x7EA6;&#x5B9A;"></a>53. &#x4FDD;&#x6301;&#x4E00;&#x81F4;&#x7684;&#x7EA6;&#x5B9A;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#54-将undefined看做”没有值”"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#54-&#x5C06;undefined&#x770B;&#x505A;&#x201D;&#x6CA1;&#x6709;&#x503C;&#x201D;" class="headerlink" title="54. &#x5C06;undefined&#x770B;&#x505A;&#x201D;&#x6CA1;&#x6709;&#x503C;&#x201D;"></a>54. &#x5C06;undefined&#x770B;&#x505A;&#x201D;&#x6CA1;&#x6709;&#x503C;&#x201D;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#55-接收关键字参数的选项对象"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#55-&#x63A5;&#x6536;&#x5173;&#x952E;&#x5B57;&#x53C2;&#x6570;&#x7684;&#x9009;&#x9879;&#x5BF9;&#x8C61;" class="headerlink" title="55. &#x63A5;&#x6536;&#x5173;&#x952E;&#x5B57;&#x53C2;&#x6570;&#x7684;&#x9009;&#x9879;&#x5BF9;&#x8C61;"></a>55. &#x63A5;&#x6536;&#x5173;&#x952E;&#x5B57;&#x53C2;&#x6570;&#x7684;&#x9009;&#x9879;&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#56-避免不必要的状态"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"><a href="#56-&#x907F;&#x514D;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x72B6;&#x6001;" class="headerlink" title="56. &#x907F;&#x514D;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x72B6;&#x6001;"></a>56. &#x907F;&#x514D;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x72B6;&#x6001;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#57-使用结构类型设计灵活的接口"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"><a href="#57-&#x4F7F;&#x7528;&#x7ED3;&#x6784;&#x7C7B;&#x578B;&#x8BBE;&#x8BA1;&#x7075;&#x6D3B;&#x7684;&#x63A5;&#x53E3;" class="headerlink" title="57. &#x4F7F;&#x7528;&#x7ED3;&#x6784;&#x7C7B;&#x578B;&#x8BBE;&#x8BA1;&#x7075;&#x6D3B;&#x7684;&#x63A5;&#x53E3;"></a>57. &#x4F7F;&#x7528;&#x7ED3;&#x6784;&#x7C7B;&#x578B;&#x8BBE;&#x8BA1;&#x7075;&#x6D3B;&#x7684;&#x63A5;&#x53E3;</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#57-未完成-不太懂"><span class="post-toc-number"></span> <span class="post-toc-text"><a href="#57-&#x672A;&#x5B8C;&#x6210;-&#x4E0D;&#x592A;&#x61C2;" class="headerlink" title="57 &#x672A;&#x5B8C;&#x6210;, &#x4E0D;&#x592A;&#x61C2;"></a>57 &#x672A;&#x5B8C;&#x6210;, &#x4E0D;&#x592A;&#x61C2;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#58-区分数组对象和类数组对象"><span class="post-toc-number">0.1.</span> <span class="post-toc-text"><a href="#58-&#x533A;&#x5206;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x548C;&#x7C7B;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;" class="headerlink" title="58. &#x533A;&#x5206;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x548C;&#x7C7B;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;"></a>58. &#x533A;&#x5206;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x548C;&#x7C7B;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#59-避免过度的强制转换"><span class="post-toc-number">0.2.</span> <span class="post-toc-text"><a href="#59-&#x907F;&#x514D;&#x8FC7;&#x5EA6;&#x7684;&#x5F3A;&#x5236;&#x8F6C;&#x6362;" class="headerlink" title="59. &#x907F;&#x514D;&#x8FC7;&#x5EA6;&#x7684;&#x5F3A;&#x5236;&#x8F6C;&#x6362;"></a>59. &#x907F;&#x514D;&#x8FC7;&#x5EA6;&#x7684;&#x5F3A;&#x5236;&#x8F6C;&#x6362;</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#59不完全"><span class="post-toc-number"></span> <span class="post-toc-text"><a href="#59&#x4E0D;&#x5B8C;&#x5168;" class="headerlink" title="59&#x4E0D;&#x5B8C;&#x5168;"></a>59&#x4E0D;&#x5B8C;&#x5168;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#60-支持方法链"><span class="post-toc-number">0.1.</span> <span class="post-toc-text"><a href="#60-&#x652F;&#x6301;&#x65B9;&#x6CD5;&#x94FE;" class="headerlink" title="60. &#x652F;&#x6301;&#x65B9;&#x6CD5;&#x94FE;"></a>60. &#x652F;&#x6301;&#x65B9;&#x6CD5;&#x94FE;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                effective-javascript笔记-6
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Mar 06, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Mar 26, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/effective-javascript/">effective-javascript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/note/">note</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=effective-javascript笔记-6&url=https://github.com/xmoyKING/2017/03/06/effective-javascript6/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=effective-javascript笔记-6&url=https://github.com/xmoyKING/2017/03/06/effective-javascript6/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/03/06/effective-javascript6/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/03/06/effective-javascript6/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="库和API设计"><a href="#库和API设计" class="headerlink" title="库和API设计"></a>库和API设计</h2><p>开发可重用的程序和组件即可认为是在设计程序库, 设计良好的API能让人清楚,间接和明确的表达自己的程序.</p>
+<h3 id="53-保持一致的约定"><a href="#53-保持一致的约定" class="headerlink" title="53. 保持一致的约定"></a>53. 保持一致的约定</h3><p>对API的使用者来说, 命名和函数签名是最能产生影响的. </p>
+<p>其中一个关键的约定是参数的顺序. 比如宽高, 确保参数总是以相同的顺序出现, 选择与其他库匹配的顺序是值得的, 因为几乎所有的库接收的顺序都是宽度第一,然后是高度.</p>
+<p>又如CSS描述矩形的四条边的参数总是从top开始顺时针给出(top, right, bottom, left).</p>
+<p>若API使用选项对象, 则可以避免参数对顺序的依赖, 同时对于标准选项和方法名, 应该选一个命名约定并坚持它.</p>
+<p>每一个优秀的库都需要详尽的文档, 而一个极优秀的库会将其文档作为辅助. 一旦用户习惯了库中的约定, 则可以在做一些常见的任务而不需要每次查看文档. 一致的约定甚至能帮助用户推测哪些属性或方法是可用的而不需要去查看它们, 或者可以在控制台发现它们进而根据命名推测他们的行为.</p>
+<ol>
+<li><strong>在变量命名和函数签名中使用一致的约定</strong></li>
+<li><strong>不要偏离用户在他们的开发平台中很可能遇到的约定</strong></li>
+</ol>
+<h3 id="54-将undefined看做”没有值”"><a href="#54-将undefined看做”没有值”" class="headerlink" title="54. 将undefined看做”没有值”"></a>54. 将undefined看做”没有值”</h3><p><code>undefined</code>值很特殊, 每当JS无法提供具体的值时,就产生undefined.</p>
+<p>比如未赋值的变量初始值就是undefined.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x; </span><br><span class="line">x; <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>访问对象中不存在的属性也会产生undefined<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">obj.x; <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>一个函数体结尾使用未带参数的<code>return</code>语句,或未使用return语句都会产生返回值undefined<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">funtion g()&#123;&#125;</span><br><span class="line"></span><br><span class="line">f(); <span class="comment">// undefined</span></span><br><span class="line">g(); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>未给函数参数提供实参则该函数参数值为undefined<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line">f(); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>在以上这些情况中, <code>undefined</code>值表示操作结果并不是一个特定的值, 但是每一个操作都需要产出点什么, 所以可以认为JS使用undefined来填补这个空白.</p>
+<p>将undefined看做缺少某个特定的值是JS语言建立的一种公约, 将它用在其他目的会造成歧义.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 高亮函数的示例</span></span><br><span class="line">element.highlight(); <span class="comment">// 使用默认颜色</span></span><br><span class="line">element.highlight(<span class="string">'yellow'</span>); <span class="comment">// 使用传入的颜色</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 若想提供一个方式来设置随机颜色, 可能会用undefined作为特殊的值</span></span><br><span class="line">element.highlight(<span class="literal">undefined</span>); <span class="comment">// 使用一个随机颜色</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 但会使得从其他来源获取参数时更容易出错</span></span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">JSON</span>.parse(preferences);</span><br><span class="line">element.highlight(config.highlightColor); <span class="comment">// 此时可能传入undefined 导致了随机颜色</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 更好的方式是显示使用一个特殊颜色名表示随机</span></span><br><span class="line">element.highlight(<span class="string">'random'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最好的方式的使用一个对象描述这种情况</span></span><br><span class="line">element.highlight(&#123;<span class="attr">random</span>: <span class="literal">true</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>另一个提防undefined的地方是可选参数的实现. 理论上arguments对象可检测是否传入了一个参数, 但实际上, 测试是否为undefined能使程序更健壮.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> Server(<span class="number">80</span>, <span class="string">'example.com'</span>);</span><br><span class="line"><span class="keyword">var</span> s2 = <span class="keyword">new</span> Server(<span class="number">80</span>); <span class="comment">// 默认使用localhost</span></span><br></pre></td></tr></table></figure></p>
+<p>通过判断<code>arguments.length</code>来实现Server构造函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Server</span>(<span class="params">port, hostname</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length &lt; <span class="number">2</span>)&#123;</span><br><span class="line">        hostname = <span class="string">'localhost'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    hostname = <span class="built_in">String</span>(hostname);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>更为合理的替代方案是测试<code>hostname</code>是否为真<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Server</span>(<span class="params">port, hostname</span>)</span>&#123;</span><br><span class="line">    hostname = <span class="built_in">String</span>(hostname || <span class="string">'localhost'</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是这种真值测试并不总是安全的, 因为一些可以接收0或者一些特殊的字符的函数有时会这种测试误伤. 更好的方式是显示测试是否全等于(===)undefined<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如下的函数就接收0,0参数, 但是若使用简单的真值坚持, 则无法传入0,0参数.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Element</span>(<span class="params">width, height</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.width = width === <span class="literal">undefined</span> ? <span class="number">320</span> : width;</span><br><span class="line">    <span class="keyword">this</span>.height = height === <span class="literal">undefined</span> ? <span class="number">240</span> : height;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c1 = <span class="keyword">new</span> Element(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">c1.width; <span class="comment">// 0</span></span><br><span class="line">c1.height: <span class="comment">// 0</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>避免使用undefined表示任何非特定值</strong></li>
+<li><strong>使用描述性的字符串或命名布尔属性的对象, 而不要使用undefined或null来代表特定的应用标志</strong></li>
+<li><strong>提供参数默认值应当采用测试undefined的方式,而不是检查arguments.length</strong></li>
+<li><strong>在允许0, NaN或空字符串为有效参数的地方, 绝不要通过真值测试来实现参数默认值</strong></li>
+</ol>
+<h3 id="55-接收关键字参数的选项对象"><a href="#55-接收关键字参数的选项对象" class="headerlink" title="55. 接收关键字参数的选项对象"></a>55. 接收关键字参数的选项对象</h3><p>一个函数最初是很简单,但是随着库功能的扩展, 函数的参数变得越来越多, 这通常被叫做参数蔓延(argument creep).</p>
+<p>选项对象(object option)在应对较大规模的函数签名时很有用. 一个选项参数就是通过对其命名属性来提供额外参数数据的参数.</p>
+<p>每个参数都是自我描述的, 不需要注释来解释参数的作用, 因为其属性名清楚的解释了. 这对布尔值类型参数极其有用.</p>
+<p>选项对象的另一个好处是所有的参数都是可选的. 习惯上, 选项对象仅包含可选参数, 因此省略吊整个对象甚至都是可能的.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> alert = <span class="keyword">new</span> Alert(); <span class="comment">// 全为默认</span></span><br></pre></td></tr></table></figure></p>
+<p>若有一个或两个必须参数, 最好使其独立选项对象. 同时,实现一个接收选项对象的函数需要做更多的检查.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Alert</span>(<span class="params">parent, message, opts</span>)</span>&#123;</span><br><span class="line">    opts = opts || &#123;&#125;;</span><br><span class="line">    <span class="keyword">this</span>.width = opts.width === <span class="literal">undefined</span> ? <span class="number">320</span> : opts.width;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>许多JS库和框架都提供<code>extend</code>函数. 该函数接收target对象和source对象, 并将后者属性复制到前者中. 借助extend函数, 抽象出合并默认值和用户提供的选项对象值的逻辑, 使Alter函数变得简洁.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Alert</span>(<span class="params">parent, message, opts</span>)</span>&#123;</span><br><span class="line">    opts = extend(&#123;</span><br><span class="line">        width: <span class="number">320</span>,</span><br><span class="line">        height: <span class="number">240</span></span><br><span class="line">    &#125;);</span><br><span class="line">    opts = exted(&#123;</span><br><span class="line">        x: (parent.width / <span class="number">2</span>) - (opts.width / <span class="number">2</span>),</span><br><span class="line">        y: (parent.height / <span class="number">2</span>) - (opts.height / <span class="number">2</span>),</span><br><span class="line">        ...</span><br><span class="line">    &#125;, opts);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.width = opts.width;</span><br><span class="line">    <span class="keyword">this</span>.height = opts.height;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了避免不断重复检查每个参数是否存在的逻辑, 调用了两次extend函数, 因为<code>x</code>和<code>y</code>的默认值依赖于早期计算出的width和height值.</p>
+<p>若将整个options复制到this对象, 那么还可以进一步简化它.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Alert</span>(<span class="params">parent, message, opts</span>)</span>&#123;</span><br><span class="line">    opts = extend(&#123;</span><br><span class="line">        width: <span class="number">320</span>,</span><br><span class="line">        height: <span class="number">240</span></span><br><span class="line">    &#125;);</span><br><span class="line">    opts = exted(&#123;</span><br><span class="line">        x: (parent.width / <span class="number">2</span>) - (opts.width / <span class="number">2</span>),</span><br><span class="line">        y: (parent.height / <span class="number">2</span>) - (opts.height / <span class="number">2</span>),</span><br><span class="line">        ...</span><br><span class="line">    &#125;, opts);</span><br><span class="line">    extend(<span class="keyword">this</span>, opts);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不同框架提供了不同的extend函数的实现, 典型的实现是枚举源对象的属性, 并当这些属性不是undefined时将其复制到目标对象中.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">target, source</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(source)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> source)&#123;</span><br><span class="line">            <span class="keyword">var</span> val = source[key];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">typeof</span> val !== <span class="string">'undefined'</span>)&#123;</span><br><span class="line">                target[key] = val;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> target;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>使用选项对象使得API更具有可读性,更容易记忆</strong></li>
+<li><strong>所有通过选项对象提供的参数应当被视为可选的</strong></li>
+<li><strong>使用extend函数抽象出从选项对象中提取值的逻辑</strong></li>
+</ol>
+<h3 id="56-避免不必要的状态"><a href="#56-避免不必要的状态" class="headerlink" title="56. 避免不必要的状态"></a>56. 避免不必要的状态</h3><p>API可以被归为两类:有状态和无状态. </p>
+<p>无状态的API提供的函数或方法的行为只取决于输入, 而与程序的状态改变无关. </p>
+<p>比如, 字符串的方法是无状态的, 字符串的内容不能被修改, 方法只取决于字符串的内容及传递给方法的参数. 表达式<code>&quot;foo&quot;.toUpperCase();</code>总是产生<code>&quot;FOO&quot;</code>.</p>
+<p>相反,<code>Date</code>对象的方法却是有状态的. 对相同的<code>Date</code>对象调用<code>toString()</code>方法会产生不同的结果, 这取决于Date的各种<code>set</code>方法是否已经将Date的属性改变.</p>
+<p>虽然状态有时是必需的, 无状态的API状态往往更容易学习和使用, 更自我描述, 且不易出错. 比如Web的Canvas库就是有状态的API. 它提供绘制形状和图片到其画布的方法.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用fillText绘制文本到画布</span></span><br><span class="line">c.fillText(<span class="string">"hello, world."</span>, <span class="number">75</span>, <span class="number">25</span>);</span><br></pre></td></tr></table></figure></p>
+<p><code>fillText</code>方法提供了绘制字符串在画布中位置的参数, 但并没有指定文本的其他属性, 如颜色, 透明度, 文本样式. 这些其他属性通过改变画布的内部状态来单独指定.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">c.fillStyle = <span class="string">"blue"</span>;</span><br><span class="line">c.font = <span class="string">"24pt serif"</span>;</span><br><span class="line">c.textAligh = <span class="string">"center"</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>若想要改变这种有状态的API为无状态,则<code>fillText</code>的<strong>无状态版本可能</strong>如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">c.fillText(<span class="string">"hello, world."</span>, <span class="number">75</span>, <span class="number">25</span>, &#123;</span><br><span class="line">    fillStyle : <span class="string">"blue"</span>,</span><br><span class="line">    font : <span class="string">"24pt serif"</span>,</span><br><span class="line">    textAligh : <span class="string">"center"</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这种无状态的API更好, 有状态的API需要修改画布的内部状态, 这可能导致绘制操作之间相互影响, 即使他们之间没什么关联.</p>
+<p>无状态的API可以自动重用默认值, 而有状态的API的某些默认值可能会被其他操作所修改, 这时必须显示指定默认值.</p>
+<p>无状态的API更可读, 更简洁. 有状态的API更难学习, </p>
+<ol>
+<li><strong>尽可能地使用无状态的API</strong></li>
+<li><strong>如果API是有状态的,标示出每个操作与哪些状态有关联</strong></li>
+</ol>
+<h3 id="57-使用结构类型设计灵活的接口"><a href="#57-使用结构类型设计灵活的接口" class="headerlink" title="57. 使用结构类型设计灵活的接口"></a>57. 使用结构类型设计灵活的接口</h3><p>一个假象的创建Wiki的库, wiki库必须能提取元数据, 如页面标题,作者信息, 并将页面内容格式化呈现给wiki读者. 提供一个自定义格式化器的方法.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用如下</span></span><br><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Wiki(Wiki.formats.MEDIAWIKI);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类实现将格式化函数存储在wiki实例对象的内部</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Wiki</span>(<span class="params">format</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.format = format;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当读者查看页面时, 程序会检索出源文件并使用内部的格式化器将源文本渲染为HTML页面</span></span><br><span class="line">Wiki.prototype.displayPage = <span class="function"><span class="keyword">function</span>(<span class="params">source</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> page = <span class="keyword">this</span>.format(source);</span><br><span class="line">    <span class="keyword">var</span> title = page.getTitle();</span><br><span class="line">    <span class="keyword">var</span> author = page.getAuthor();</span><br><span class="line">    <span class="keyword">var</span> output = page.toHTML();</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="57-未完成-不太懂"><a href="#57-未完成-不太懂" class="headerlink" title="57 未完成, 不太懂"></a>57 未完成, 不太懂</h1><ol>
+<li><strong>使用结构类型(也称为鸭子类型)来设计灵活的对象接口</strong></li>
+<li><strong>结构接口更灵活, 轻量, 所以应该避免使用继承</strong></li>
+<li><strong>针对单元测试, 使用mock对象即接口的替代实现来提供可复验的行为</strong></li>
+</ol>
+<h3 id="58-区分数组对象和类数组对象"><a href="#58-区分数组对象和类数组对象" class="headerlink" title="58. 区分数组对象和类数组对象"></a>58. 区分数组对象和类数组对象</h3><p>设有两个不同类的API, 第一个是位向量: 有序的位集合.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bits = <span class="keyword">new</span> BitVector();</span><br><span class="line"></span><br><span class="line"><span class="comment">// enable方法被重载了, 可以传入一个索引或索引的数组</span></span><br><span class="line">bits.enable(<span class="number">4</span>);</span><br><span class="line">bits.enable([<span class="number">1</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">17</span>]);</span><br><span class="line"></span><br><span class="line">bits.bitAt(<span class="number">4</span>); <span class="comment">// 1</span></span><br><span class="line">bits.bitAt(<span class="number">8</span>); <span class="comment">// 1</span></span><br><span class="line">bits.bitAt(<span class="number">9</span>); <span class="comment">// 0</span></span><br></pre></td></tr></table></figure></p>
+<p>第二个类API是字符串集合:无序的字符串集合.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> set = <span class="keyword">new</span> StringSet();</span><br><span class="line"></span><br><span class="line">set.add(<span class="string">'Hamlet'</span>);</span><br><span class="line">set.add([<span class="string">'Roos'</span>, <span class="string">'Guild'</span>]);</span><br><span class="line">set.add(&#123;<span class="attr">Oph</span>:<span class="number">1</span>, <span class="attr">Pol</span>:<span class="number">1</span>, <span class="attr">Hor</span>:<span class="number">1</span>&#125;);</span><br><span class="line"></span><br><span class="line">set.contains(<span class="string">'Pol'</span>); <span class="comment">// true</span></span><br><span class="line">set.contains(<span class="string">'Guild'</span>); <span class="comment">// true</span></span><br><span class="line">set.contains(<span class="string">'Fals'</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+<p>为了实现<code>BitVector.prototype.enable</code>方法, 可以通过测试其他情况来避免如何判断一个对象是否为数组的问题.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BitVector.prototype.enable = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> x === <span class="string">'number'</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.enableBit(x);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123; <span class="comment">// 推测x为一个类数组对象</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = x.length; i &lt; n; ++i)&#123;</span><br><span class="line">            <span class="keyword">this</span>.enableBit(x[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而<code>StringSet.prototype.add</code>方法需要区分数组和对象. 数组其实是对象的一种. 我们需要区分数组和非数组. 使用<code>instanceof</code>操作符来测试一个对象继承自<code>Array.prototype</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">StringSet.prototype.add = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> x === <span class="string">'string'</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.addString(x);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(x <span class="keyword">instanceof</span> <span class="built_in">Array</span>)&#123;</span><br><span class="line">        x.forEach(functon(s)&#123;</span><br><span class="line">            <span class="keyword">this</span>.addString(s);</span><br><span class="line">        &#125;, <span class="keyword">this</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> x)&#123;</span><br><span class="line">            <span class="keyword">this</span>.addString(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但上述方法在跨frame通信时会有问题, 一个frame中的数组不会继承自另一个frame的<code>Array.prototype</code>. 出于这个原因, ES5引入了<code>Array.isArray</code>函数, 可以用来测试一个值是否为数组, 而不管原型继承.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">StringSet.prototype.add = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> x === <span class="string">'string'</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.addString(x);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(x))&#123; <span class="comment">// 使用ES5中的isArray方法</span></span><br><span class="line">        x.forEach(functon(s)&#123;</span><br><span class="line">            <span class="keyword">this</span>.addString(s);</span><br><span class="line">        &#125;, <span class="keyword">this</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> x)&#123;</span><br><span class="line">            <span class="keyword">this</span>.addString(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>若不支持ES5, 可以使用标准的<code>Object.prototype.toString</code>方法测试一个对象是否为数组.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> toString = <span class="built_in">Object</span>.prototype.toString;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> toString.call(x) === <span class="string">'[object Array]'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>若传入的是一个类数组对象,则使用add的正确方法是,将这个对象转换为真正的数组.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MyClass.prototype.update = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.keys.add([].slice.call(<span class="built_in">arguments</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>绝不重载与其他类型有重叠的结构类型</strong></li>
+<li><strong>当重载一个结构类型与其他类型时, 先测试其他类型</strong></li>
+<li><strong>当重载其他对象类型时, 接收真数组而不是类数组对象</strong></li>
+<li><strong>文档标注你的API是否接收真数组或类数组值</strong></li>
+<li><strong>使用ES5提供的Array.isArray方法测试真数组</strong></li>
+</ol>
+<h3 id="59-避免过度的强制转换"><a href="#59-避免过度的强制转换" class="headerlink" title="59. 避免过度的强制转换"></a>59. 避免过度的强制转换</h3><p>JS是弱类型语言, 许多标准的操作符和代码库会自动地将非预期的输入参数强制转换为预期的类型而不是抛出异常.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">square</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*x;</span><br><span class="line">&#125;</span><br><span class="line">square(<span class="string">'3'</span>); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure></p>
+<p>强制转换是方便的, 但当强制转换与重载的函数一起工作时结果令人困惑. 一般地, 在那些使用参数类型来决定重载函数行为的函数中避免强制转换参数是明智的.</p>
+<h1 id="59不完全"><a href="#59不完全" class="headerlink" title="59不完全"></a>59不完全</h1><ol>
+<li><strong>避免强制转换和重载的混用</strong></li>
+<li><strong>考虑防御性的监视非预期的输入</strong></li>
+</ol>
+<h3 id="60-支持方法链"><a href="#60-支持方法链" class="headerlink" title="60. 支持方法链"></a>60. 支持方法链</h3><p>无状态的API的部分能力是将复杂操作分解为更小的操作的灵活行. 比如<code>replace</code>方法.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">escapeBasicHTML</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/&amp;/g</span>, <span class="string">"&amp;amp;"</span>)</span><br><span class="line">        .replace(<span class="regexp">/&lt;/g</span>, <span class="string">"&amp;lt;"</span>)</span><br><span class="line">        .replace(<span class="regexp">/&gt;/g</span>, <span class="string">"&amp;gt;"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果一个API产生了一个接口对象, 调用这个接口对象的方法产生的对象如果具有相同的接口, 那么就可以使用方法链.</p>
+<p>下面的链式操作接收代表用户记录的对象的数组,提取每个记录中的username属性,过滤掉所有的空用户名, 最后将用户名转换为小写字符串.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users = records.map(<span class="function"><span class="keyword">function</span>(<span class="params">record</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> record.username;</span><br><span class="line">&#125;)</span><br><span class="line">.filter(<span class="function"><span class="keyword">function</span>(<span class="params">username</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !!username;</span><br><span class="line">&#125;)</span><br><span class="line">.map(<span class="function"><span class="keyword">function</span>(<span class="params">username</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> username.toLowerCase();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这种链式风格非常灵活, 使用起来很方便.</p>
+<p>通常的情况下,无状态的API中, 若API不修改对象,而是返回一个新对象, 则链式调用会很自然. </p>
+<p>有状态的API的设置中,链式也是很有用的. 技巧就是方法在更新对象时返回<code>this</code>, 而不是默认的undefined, 这使得通过一个链式方法调用的序列来对同一个对象执行多次更新成为可能.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">element.setBackgroundColor(<span class="string">'yellow'</span>)</span><br><span class="line">    .setColor(<span class="string">'red'</span>)</span><br><span class="line">    .setFontWeight(<span class="string">'bold'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 又比如jQuery</span></span><br><span class="line">$(<span class="string">'#notify'</span>).html(<span class="string">'server not respond'</span>)</span><br><span class="line">    .removeClass(<span class="string">'info'</span>)</span><br><span class="line">    .addClass(<span class="string">'error'</span>);</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>使用方法链来连接无状态的操作</strong></li>
+<li><strong>通过在无状态的方法中返回新对象来支持方法链</strong></li>
+<li><strong>通过在有状态的方法中返回this来支持方法链</strong></li>
+</ol>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/03/09/effective-javascript7/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/03/03/effective-javascript5/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Nodejs-HTTP模块 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,nodejs,http">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Nodejs-HTTP模块 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="nodejs"> <meta property="og:article:tag" content="http"> 
+
+    
+        <meta property="article:published_time" content="Fri Oct 28 2016 10:32:45 GMT+0800" />
+        <meta property="article:modified_time" content="Fri Oct 28 2016 10:32:45 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Nodejs-HTTP模块 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2016/10/28/nodejs-http/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2016/10/28/nodejs-http/index.html",
+    "headline": "Nodejs-HTTP模块",
+    "datePublished": "Fri Oct 28 2016 10:32:45 GMT+0800",
+    "dateModified": "Fri Oct 28 2016 10:32:45 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",nodejs,httpnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#处理URL"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x5904;&#x7406;URL" class="headerlink" title="&#x5904;&#x7406;URL"></a>&#x5904;&#x7406;URL</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#URL-字符串与-URL-对象："><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#URL-&#x5B57;&#x7B26;&#x4E32;&#x4E0E;-URL-&#x5BF9;&#x8C61;&#xFF1A;" class="headerlink" title="URL &#x5B57;&#x7B26;&#x4E32;&#x4E0E; URL &#x5BF9;&#x8C61;&#xFF1A;"></a>URL &#x5B57;&#x7B26;&#x4E32;&#x4E0E; URL &#x5BF9;&#x8C61;&#xFF1A;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解析URL"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#&#x89E3;&#x6790;URL" class="headerlink" title="&#x89E3;&#x6790;URL"></a>&#x89E3;&#x6790;URL</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#处理查询字符串和表单参数"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#&#x5904;&#x7406;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x548C;&#x8868;&#x5355;&#x53C2;&#x6570;" class="headerlink" title="&#x5904;&#x7406;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x548C;&#x8868;&#x5355;&#x53C2;&#x6570;"></a>&#x5904;&#x7406;&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;&#x548C;&#x8868;&#x5355;&#x53C2;&#x6570;</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#请求、响应、服务器对象"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x8BF7;&#x6C42;&#x3001;&#x54CD;&#x5E94;&#x3001;&#x670D;&#x52A1;&#x5668;&#x5BF9;&#x8C61;" class="headerlink" title="&#x8BF7;&#x6C42;&#x3001;&#x54CD;&#x5E94;&#x3001;&#x670D;&#x52A1;&#x5668;&#x5BF9;&#x8C61;"></a>&#x8BF7;&#x6C42;&#x3001;&#x54CD;&#x5E94;&#x3001;&#x670D;&#x52A1;&#x5668;&#x5BF9;&#x8C61;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#http-ClientRequest"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#http-ClientRequest" class="headerlink" title="http.ClientRequest"></a>http.ClientRequest</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#http-ServerResponse"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#http-ServerResponse" class="headerlink" title="http.ServerResponse"></a>http.ServerResponse</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#http-IncomingMessage"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"><a href="#http-IncomingMessage" class="headerlink" title="http.IncomingMessage"></a>http.IncomingMessage</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTTP-Server对象"><span class="post-toc-number">2.4.</span> <span class="post-toc-text"><a href="#HTTP-Server&#x5BF9;&#x8C61;" class="headerlink" title="HTTP Server&#x5BF9;&#x8C61;"></a>HTTP Server&#x5BF9;&#x8C61;</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HTTP客户端和服务器示例"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#HTTP&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x5668;&#x793A;&#x4F8B;" class="headerlink" title="HTTP&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x5668;&#x793A;&#x4F8B;"></a>HTTP&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x670D;&#x52A1;&#x5668;&#x793A;&#x4F8B;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#静态文件服务"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#&#x9759;&#x6001;&#x6587;&#x4EF6;&#x670D;&#x52A1;" class="headerlink" title="&#x9759;&#x6001;&#x6587;&#x4EF6;&#x670D;&#x52A1;"></a>&#x9759;&#x6001;&#x6587;&#x4EF6;&#x670D;&#x52A1;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#静态HTTP客户端"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#&#x9759;&#x6001;HTTP&#x5BA2;&#x6237;&#x7AEF;" class="headerlink" title="&#x9759;&#x6001;HTTP&#x5BA2;&#x6237;&#x7AEF;"></a>&#x9759;&#x6001;HTTP&#x5BA2;&#x6237;&#x7AEF;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现动态响应服务器"><span class="post-toc-number">3.3.</span> <span class="post-toc-text"><a href="#&#x5B9E;&#x73B0;&#x52A8;&#x6001;&#x54CD;&#x5E94;&#x670D;&#x52A1;&#x5668;" class="headerlink" title="&#x5B9E;&#x73B0;&#x52A8;&#x6001;&#x54CD;&#x5E94;&#x670D;&#x52A1;&#x5668;"></a>&#x5B9E;&#x73B0;&#x52A8;&#x6001;&#x54CD;&#x5E94;&#x670D;&#x52A1;&#x5668;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#处理get请求的服务器"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text"><a href="#&#x5904;&#x7406;get&#x8BF7;&#x6C42;&#x7684;&#x670D;&#x52A1;&#x5668;" class="headerlink" title="&#x5904;&#x7406;get&#x8BF7;&#x6C42;&#x7684;&#x670D;&#x52A1;&#x5668;"></a>&#x5904;&#x7406;get&#x8BF7;&#x6C42;&#x7684;&#x670D;&#x52A1;&#x5668;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#处理post请求的服务器"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text"><a href="#&#x5904;&#x7406;post&#x8BF7;&#x6C42;&#x7684;&#x670D;&#x52A1;&#x5668;" class="headerlink" title="&#x5904;&#x7406;post&#x8BF7;&#x6C42;&#x7684;&#x670D;&#x52A1;&#x5668;"></a>&#x5904;&#x7406;post&#x8BF7;&#x6C42;&#x7684;&#x670D;&#x52A1;&#x5668;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#与外部源交互"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text"><a href="#&#x4E0E;&#x5916;&#x90E8;&#x6E90;&#x4EA4;&#x4E92;" class="headerlink" title="&#x4E0E;&#x5916;&#x90E8;&#x6E90;&#x4EA4;&#x4E92;"></a>&#x4E0E;&#x5916;&#x90E8;&#x6E90;&#x4EA4;&#x4E92;</span></a></li></ol></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Nodejs-HTTP模块
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Oct 28, 2016</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Oct 28, 2016 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/http/">http</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/nodejs/">nodejs</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Nodejs-HTTP模块&url=https://github.com/xmoyKING/2016/10/28/nodejs-http/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Nodejs-HTTP模块&url=https://github.com/xmoyKING/2016/10/28/nodejs-http/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2016/10/28/nodejs-http/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2016/10/28/nodejs-http/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Node最重要的能力就是能非常迅速的实现HTTP和HTTPS服务，node提供内置的http和https模块。http模块是底层的，不提供路由，cookie，缓存等功能。</p>
+<h2 id="处理URL"><a href="#处理URL" class="headerlink" title="处理URL"></a>处理URL</h2><p>一个URL可分解为几个不同的部分，指明了Web服务器应该如何路由和处理请求<br><img src="1.png" alt="URL组成图"><br>node提供了url模块，可以将一个url字符串转变为url对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url.parse(urlStr, [parseQueryString], [salshesDenoteHost]);</span><br></pre></td></tr></table></figure></p>
+<p>url.parse 将URL字符串作为第一个参数，<br>parseQueryString 参数是一个布尔值，true表示把URL的查询字符串也解析为对象的一部分，默认为false<br>slashesDenoteHost 也是一个布尔值，true表示将格式为<code>//host/path</code>的URL解析为<code>{host: &#39;host&#39;, pathname: &#39;path&#39;}</code>而不是<code>{pathname: &#39;//host/path&#39;}</code>,默认为false</p>
+<p>也可以反转换，url.format(urlObj) 将一个URL对象转换为字符串</p>
+<h3 id="URL-字符串与-URL-对象："><a href="#URL-字符串与-URL-对象：" class="headerlink" title="URL 字符串与 URL 对象："></a>URL 字符串与 URL 对象：</h3><p>urlObject.href 完整的URL字符串<br>urlObject.protocol 协议，小写<br>urlObject.slashes<br>urlObject.host 主机完整部分，包括端口，小写<br>urlObject.auth 身份认证部分<br>urlObject.hostname 主机部分的主机名，小写<br>urlObject.port 主机端口号<br>urlObject.pathname 路径部分，包括最初的斜线<br>urlObject.search 查询字符串部分，包括前导问号？<br>urlObject.path 完整路径，包括路径和搜索<br>urlObject.query 要么是查询字符串的参数部分，要么是一个解析后的查询对象，取决于parseQueryString的值<br>urlObject.hash 散列部分，包括井号#<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">var</span> urlStr = <span class="string">'http://user:pass@host.com:80/resource/path?query=string&amp;quer2=2#hash'</span>;</span><br><span class="line"><span class="keyword">var</span> urlObj = url.parse(urlStr, <span class="literal">true</span>);</span><br><span class="line">urlString = url.format(urlObj);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(urlObj, urlString);</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br>Url {<br>  protocol: ‘http:’,<br>  slashes: true,<br>  auth: ‘user:pass’,<br>  host: ‘host.com:80’,<br>  port: ‘80’,<br>  hostname: ‘host.com’,<br>  hash: ‘#hash’,<br>  search: ‘?query=string&amp;quer2=2’,<br>  query: { query: ‘string’, quer2: ‘2’ },<br>  pathname: ‘/resource/path’,<br>  path: ‘/resource/path?query=string&amp;quer2=2’,<br>  href: ‘<a href="http://user:pass@host.com:80/resource/path?query=string&amp;quer2=2#hash" target="_blank" rel="noopener">http://user:pass@host.com:80/resource/path?query=string&amp;quer2=2#hash</a>‘<br>}</p>
+<p>‘<a href="http://user:pass@host.com:80/resource/path?query=string&amp;quer2=2#hash" target="_blank" rel="noopener">http://user:pass@host.com:80/resource/path?query=string&amp;quer2=2#hash</a>‘</p>
+<h3 id="解析URL"><a href="#解析URL" class="headerlink" title="解析URL"></a>解析URL</h3><p>url模块有一个resolve方法可以用与浏览器一样的方式来解析URL的组件，即可以让服务器端操作URL字符串，并对其做出调整，比如：由于资源变动了，那么可以新添加代码在处理一个url请求之前更改url位置，而不需要对源代码做出任何修改，。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url.resolve(<span class="keyword">from</span>, to);</span><br></pre></td></tr></table></figure></p>
+<p>from指定原始基础url字符串，to指定被解析到的新url<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">var</span> originalUrl = <span class="string">'http://user:pass@host.com:80/resource/path?query=string&amp;quer2=2#hash'</span>;</span><br><span class="line"><span class="keyword">var</span> newResource = <span class="string">'/another/path?querynew'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(url.resolve(originalUrl, newResource)); <span class="comment">// http://user:pass@host.com:80/another/path?querynew</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="处理查询字符串和表单参数"><a href="#处理查询字符串和表单参数" class="headerlink" title="处理查询字符串和表单参数"></a>处理查询字符串和表单参数</h3><p>url.parse方法能解析url，但是没有解析query字符串，即查询字符串<br>查询字符串和表单数据都是基本的键值对字符串，格式非常的规则，所以可以用querystring模块的parse方法将这种字符串转换为js对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">querystring.parse(str, [spe], [eq], [options]);</span><br></pre></td></tr></table></figure></p>
+<p>str 为查询或参数字符串<br>sep 可以指定使用的分隔符，默认&amp;<br>eq 可以指定解析时使用的复制运算符，默认=<br>options 是一个具有maxKeys属性的对象，可以限制生成对象的键的数量，即属性和方法的数量，默认为1000，设为0表示无限制<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> qstring = <span class="built_in">require</span>(<span class="string">'querystring'</span>);</span><br><span class="line"><span class="keyword">var</span> params = qstring.parse(<span class="string">'query=string&amp;quer2=2&amp;quer3=mine&amp;name=king'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(params); <span class="comment">// &#123; query: 'string', quer2: '2', quer3: 'mine', name: 'king' &#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>以上的输出对象也可以通过<code>querystring.stringify(obj, [sep], [eq])</code>反转换对象为查询字符串</p>
+<h2 id="请求、响应、服务器对象"><a href="#请求、响应、服务器对象" class="headerlink" title="请求、响应、服务器对象"></a>请求、响应、服务器对象</h2><p>请求和响应对象提供了信息流入/流出HTTP客户端和服务器的相关功能</p>
+<h3 id="http-ClientRequest"><a href="#http-ClientRequest" class="headerlink" title="http.ClientRequest"></a>http.ClientRequest</h3><p>http.request方法可以用node新建一个HTTP客户端，然后就可以如浏览器一样向一个HTTP服务器端发起http请求，<br>当调用http.request()的时候，即会在request方法内部自动创建一个ClientRequest对象，这个对象即表示请求，可以用这个对象来启动、监控、处理来自服务器的请求。<br>ClientRequest对象其实是一个Writable流<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.request(options,callback);</span><br></pre></td></tr></table></figure></p>
+<p>options 参数对象定义了如何把客户端的HTTP请求打卡并发送到服务器，callback回调的参数是一个IncomingMessage对象，表示来自服务器的响应。<br><img src="2.png" alt="options参数"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    hostname: <span class="string">'httpbin.org'</span>,</span><br><span class="line">    path: <span class="string">'/get'</span>,</span><br><span class="line">    port: <span class="string">'80'</span>,</span><br><span class="line">    method: <span class="string">'GET'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> req = http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> str = <span class="string">''</span>;</span><br><span class="line">    response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">        str += chunk;</span><br><span class="line">    &#125;);</span><br><span class="line">    response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(str);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">req.end();</span><br></pre></td></tr></table></figure>
+<p>输出：<br>{<br>  “args”: {},<br>  “headers”: {<br>    “Connection”: “close”,<br>    “Host”: “httpbin.org”<br>  },<br>  “origin”: “211.86.158.25”,<br>  “url”: “<a href="http://httpbin.org/get" target="_blank" rel="noopener">http://httpbin.org/get</a>“<br>}</p>
+<p>通过ClientRequest事件能，当在请求中遇到的一些状态的时候，可以进行处理<br><img src="3.png" alt="ClientRequest事件"></p>
+<p>ClientRequest方法可以将数据写入请求，中止请求等<br><img src="4.png" alt="ClientRequest方法"></p>
+<h3 id="http-ServerResponse"><a href="#http-ServerResponse" class="headerlink" title="http.ServerResponse"></a>http.ServerResponse</h3><p>当HTTP服务器接收到一个request请求的时候，它会在内部创建一个ServerResponse对象，这个对象作为第二个参数被传递到request事件处理程序，可以通过ServerResponse将响应发还到客户端。<br>ServerResponse也是一个Writable流，该对象提供了如下的一些属性和事件、方法：<br><img src="5.png" alt="ServerResponse属性和事件、方法"></p>
+<h3 id="http-IncomingMessage"><a href="#http-IncomingMessage" class="headerlink" title="http.IncomingMessage"></a>http.IncomingMessage</h3><p>无论是HTTP客户端还是HTTP服务器，都会创建IncomingMessage对象，表示从对应方接收到的消息（数据），它之所以能同时用在客户端和服务器是因为两端的功能基本相同，所以可以复用同一类型。<br>IncomingMessage是一个Readable流，对象提供了如下的一些属性和事件、方法：<br><img src="6.png" alt="IncomingMessage属性和事件、方法"></p>
+<h3 id="HTTP-Server对象"><a href="#HTTP-Server对象" class="headerlink" title="HTTP Server对象"></a>HTTP Server对象</h3><p>HTTP Server对象能提供了实现HTTP服务器的基本框架，如监听端口底层套接字和接收请求，发送响应到客户端。<br>Server对象实现了EventEmitter，并实现了如下的事件：<br><img src="7.png" alt="Server对象的事件"></p>
+<p>要启动一个HTTP服务器</p>
+<ol>
+<li>先用createServer方法创建一个Server对象，<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.createServer([requestListener]);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>requestListener参数表示在请求事件被出发时执行的函数，接受两个参数，第一个表示客户端请求的IncomingMessage对象，第二个表示响应的ServerResponse对象</p>
+<ol>
+<li>创建Server对象后，可以通过Server对象的listen方法监听<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen(port, [hostname], [backlog], [callback]);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>port 表示监听端口<br>hostname 表示可接受链接的主机名，若省略则表示接受任何ipv4地址的链接<br>backlog（积压） 表示运行排队等待链接的数量，即等待处理的请求链接数，默认511<br>callback 表示监听开始时执行回调的函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>)</span>&#123;</span><br><span class="line"> <span class="comment">// ....  处理请求和响应</span></span><br><span class="line">&#125;).listen(<span class="number">8080</span>); <span class="comment">// 监听8080端口</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以监听文件系统的连接</span></span><br><span class="line">listen(path, [callback]); <span class="comment">// 监听文件路径</span></span><br><span class="line">listen(handle, [callback]); <span class="comment">// 监听文件描述符</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 停止监听</span></span><br><span class="line">close([callback]);</span><br></pre></td></tr></table></figure></p>
+<h2 id="HTTP客户端和服务器示例"><a href="#HTTP客户端和服务器示例" class="headerlink" title="HTTP客户端和服务器示例"></a>HTTP客户端和服务器示例</h2><p>以下的示例为处理一般的http请求所需的基本流程</p>
+<h3 id="静态文件服务"><a href="#静态文件服务" class="headerlink" title="静态文件服务"></a>静态文件服务</h3><p>HTTP静态文件服务器<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ROOT_DIR = <span class="string">'html/'</span>; <span class="comment">// 此处为根目录，需设定</span></span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> urlObj = url.parse(req.url, <span class="literal">true</span>);</span><br><span class="line">    fs.readFile(ROOT_DIR + urlObj.pathname, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            res.writeHead(<span class="number">404</span>);</span><br><span class="line">            res.end(<span class="built_in">JSON</span>.stringify(err));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.writeHead(<span class="number">200</span>);</span><br><span class="line">            res.end(data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).listen(<span class="number">8080</span>);</span><br></pre></td></tr></table></figure></p>
+<p>在localhost:8080 即可打卡网站，然后输入对应的文件名称即可获取对应的文件，比如localhost:8080/index.html </p>
+<h3 id="静态HTTP客户端"><a href="#静态HTTP客户端" class="headerlink" title="静态HTTP客户端"></a>静态HTTP客户端</h3><p>模拟浏览器发出http get请求，用on监听data读取服务器的响应<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    hostname: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="string">'8000'</span>,</span><br><span class="line">    path: <span class="string">'/hello.html'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleResponse</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> serverData = <span class="string">''</span>;</span><br><span class="line">    response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">        serverData += chunk;</span><br><span class="line">    &#125;); </span><br><span class="line">    response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(serverData);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    handleResponse(response);</span><br><span class="line">&#125;).end();</span><br></pre></td></tr></table></figure></p>
+<h3 id="实现动态响应服务器"><a href="#实现动态响应服务器" class="headerlink" title="实现动态响应服务器"></a>实现动态响应服务器</h3><h4 id="处理get请求的服务器"><a href="#处理get请求的服务器" class="headerlink" title="处理get请求的服务器"></a>处理get请求的服务器</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> message = [</span><br><span class="line">    <span class="string">'helloworld'</span>,</span><br><span class="line">    <span class="string">'from a basic nodejs server'</span>,</span><br><span class="line">    <span class="string">'king'</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    res.setHeader(<span class="string">'Content-type'</span>, <span class="string">'text/html'</span>);</span><br><span class="line">    res.writeHead(<span class="number">200</span>);</span><br><span class="line">    res.write(<span class="string">'&lt;html&gt;&lt;body&gt;'</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> message)&#123;</span><br><span class="line">        res.write(message[i] + <span class="string">'&lt;br/&gt;'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    res.end(<span class="string">'&lt;/body&gt;&lt;/html&gt;'</span>);</span><br><span class="line">&#125;).listen(<span class="number">8000</span>);</span><br></pre></td></tr></table></figure>
+<p>对应的Http get客户端<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    hostname: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="string">'8000'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleResponse</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> serverData = <span class="string">''</span>;</span><br><span class="line">    response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">        serverData += chunk;</span><br><span class="line">    &#125;); </span><br><span class="line">    response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'response status: '</span>, response.statusCode);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'response headers: '</span>, response.headers);</span><br><span class="line">        <span class="built_in">console</span>.log(serverData);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">http.request(options, <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    handleResponse(response);</span><br><span class="line">&#125;).end();</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">response status:  <span class="number">200</span></span><br><span class="line">response headers:  &#123; <span class="string">'content-type'</span>: <span class="string">'text/html'</span>,</span><br><span class="line">  date: <span class="string">'Sat, 29 Apr 2017 07:05:09 GMT'</span>,</span><br><span class="line">  connection: <span class="string">'close'</span>,</span><br><span class="line">  <span class="string">'transfer-encoding'</span>: <span class="string">'chunked'</span> &#125;</span><br><span class="line">&lt;html&gt;<span class="xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span>helloworld<span class="tag">&lt;<span class="name">br</span>/&gt;</span>from a basic nodejs server<span class="tag">&lt;<span class="name">br</span>/&gt;</span>king<span class="tag">&lt;<span class="name">br</span>/&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<h4 id="处理post请求的服务器"><a href="#处理post请求的服务器" class="headerlink" title="处理post请求的服务器"></a>处理post请求的服务器</h4><p>上面处理与get请求的示例类似<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> jsonData = <span class="string">''</span>;</span><br><span class="line">    req.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>)</span>&#123;</span><br><span class="line">        jsonData += chunk;</span><br><span class="line">    &#125;);</span><br><span class="line">    req.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> reqObj = <span class="built_in">JSON</span>.parse(jsonData);</span><br><span class="line">        <span class="keyword">var</span> resObj = &#123;</span><br><span class="line">            message: <span class="string">'hello '</span> + reqObj.name,</span><br><span class="line">            question: <span class="string">'are you a good '</span>+ reqObj.occupation + <span class="string">' ?'</span></span><br><span class="line">        &#125;;</span><br><span class="line">        res.writeHead(<span class="number">200</span>);</span><br><span class="line">        res.end(<span class="built_in">JSON</span>.stringify(resObj));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).listen(<span class="number">8000</span>);</span><br></pre></td></tr></table></figure></p>
+<p>对应的客户端<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    hostname: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="string">'8000'</span>,</span><br><span class="line">    path: <span class="string">'/'</span>,</span><br><span class="line">    method: <span class="string">'POST'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readJSONResponse</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> responseData = <span class="string">''</span>;</span><br><span class="line">    response.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">        responseData += chunk;</span><br><span class="line">    &#125;);</span><br><span class="line">    response.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> dataObj = <span class="built_in">JSON</span>.parse(responseData);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Raw responseData: '</span> + responseData);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Message: '</span> + dataObj.message);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Question: '</span> + dataObj.question);        </span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> req = http.request(options, readJSONResponse);</span><br><span class="line">req.write(<span class="string">'&#123;"name":"bob", "occupation":"teacher"&#125;'</span>);</span><br><span class="line">req.end();</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br>Raw responseData: {“message”:”hello bob”,”question”:”are you a good teacher ?”}<br>Message: hello bob<br>Question: are you a good teacher ?</p>
+<h4 id="与外部源交互"><a href="#与外部源交互" class="headerlink" title="与外部源交互"></a>与外部源交互</h4><p>HTTP服务常需要访问外部系统获得数据来满足客户端，这种时候就需要在Web服务器实现一个本地Web客户端连接到外部服务(这个外部服务一般是数据库，也可以是其他http服务器提供的接口)，并获得数据然后处理, 完成响应。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/10/28/nodejs-fs/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/10/26/nodejs-events/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

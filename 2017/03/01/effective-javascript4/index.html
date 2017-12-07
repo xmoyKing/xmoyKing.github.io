@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            effective-javascript笔记-4 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,effective-javascript,note">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="effective-javascript笔记-4 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="effective-javascript"> <meta property="og:article:tag" content="note"> 
+
+    
+        <meta property="article:published_time" content="Wed Mar 01 2017 11:30:28 GMT+0800" />
+        <meta property="article:modified_time" content="Sat Mar 25 2017 00:00:00 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="effective-javascript笔记-4 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/03/01/effective-javascript4/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/03/01/effective-javascript4/index.html",
+    "headline": "effective-javascript笔记-4",
+    "datePublished": "Wed Mar 01 2017 11:30:28 GMT+0800",
+    "dateModified": "Sat Mar 25 2017 00:00:00 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,effective-javascript,notenull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象和原型"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x5BF9;&#x8C61;&#x548C;&#x539F;&#x578B;" class="headerlink" title="&#x5BF9;&#x8C61;&#x548C;&#x539F;&#x578B;"></a>&#x5BF9;&#x8C61;&#x548C;&#x539F;&#x578B;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#30-理解-prototype-getPrototypeOf-和-proto-之间的不同"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#30-&#x7406;&#x89E3;-prototype-getPrototypeOf-&#x548C;-proto-&#x4E4B;&#x95F4;&#x7684;&#x4E0D;&#x540C;" class="headerlink" title="30. &#x7406;&#x89E3; prototype, getPrototypeOf &#x548C; __proto__ &#x4E4B;&#x95F4;&#x7684;&#x4E0D;&#x540C;"></a>30. &#x7406;&#x89E3; prototype, getPrototypeOf &#x548C; <code>__proto__</code> &#x4E4B;&#x95F4;&#x7684;&#x4E0D;&#x540C;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#31-使用Object-getPrototypeOf函数而不是使用-proto-属性"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#31-&#x4F7F;&#x7528;Object-getPrototypeOf&#x51FD;&#x6570;&#x800C;&#x4E0D;&#x662F;&#x4F7F;&#x7528;-proto-&#x5C5E;&#x6027;" class="headerlink" title="31. &#x4F7F;&#x7528;Object.getPrototypeOf&#x51FD;&#x6570;&#x800C;&#x4E0D;&#x662F;&#x4F7F;&#x7528;__proto__&#x5C5E;&#x6027;"></a>31. &#x4F7F;&#x7528;Object.getPrototypeOf&#x51FD;&#x6570;&#x800C;&#x4E0D;&#x662F;&#x4F7F;&#x7528;<code>__proto__</code>&#x5C5E;&#x6027;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#32-始终不要修改-proto-属性"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#32-&#x59CB;&#x7EC8;&#x4E0D;&#x8981;&#x4FEE;&#x6539;-proto-&#x5C5E;&#x6027;" class="headerlink" title="32. &#x59CB;&#x7EC8;&#x4E0D;&#x8981;&#x4FEE;&#x6539;__proto__&#x5C5E;&#x6027;"></a>32. &#x59CB;&#x7EC8;&#x4E0D;&#x8981;&#x4FEE;&#x6539;<code>__proto__</code>&#x5C5E;&#x6027;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#33-使构造函数与new操作符无关"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"><a href="#33-&#x4F7F;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E0E;new&#x64CD;&#x4F5C;&#x7B26;&#x65E0;&#x5173;" class="headerlink" title="33. &#x4F7F;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E0E;new&#x64CD;&#x4F5C;&#x7B26;&#x65E0;&#x5173;"></a>33. &#x4F7F;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E0E;new&#x64CD;&#x4F5C;&#x7B26;&#x65E0;&#x5173;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#34-在原型中存储方法"><span class="post-toc-number">1.5.</span> <span class="post-toc-text"><a href="#34-&#x5728;&#x539F;&#x578B;&#x4E2D;&#x5B58;&#x50A8;&#x65B9;&#x6CD5;" class="headerlink" title="34. &#x5728;&#x539F;&#x578B;&#x4E2D;&#x5B58;&#x50A8;&#x65B9;&#x6CD5;"></a>34. &#x5728;&#x539F;&#x578B;&#x4E2D;&#x5B58;&#x50A8;&#x65B9;&#x6CD5;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#35-使用闭包存储私有数据"><span class="post-toc-number">1.6.</span> <span class="post-toc-text"><a href="#35-&#x4F7F;&#x7528;&#x95ED;&#x5305;&#x5B58;&#x50A8;&#x79C1;&#x6709;&#x6570;&#x636E;" class="headerlink" title="35. &#x4F7F;&#x7528;&#x95ED;&#x5305;&#x5B58;&#x50A8;&#x79C1;&#x6709;&#x6570;&#x636E;"></a>35. &#x4F7F;&#x7528;&#x95ED;&#x5305;&#x5B58;&#x50A8;&#x79C1;&#x6709;&#x6570;&#x636E;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#36-只将实例状态存储在实例对象中"><span class="post-toc-number">1.7.</span> <span class="post-toc-text"><a href="#36-&#x53EA;&#x5C06;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#x5B58;&#x50A8;&#x5728;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x4E2D;" class="headerlink" title="36. &#x53EA;&#x5C06;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#x5B58;&#x50A8;&#x5728;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x4E2D;"></a>36. &#x53EA;&#x5C06;&#x5B9E;&#x4F8B;&#x72B6;&#x6001;&#x5B58;&#x50A8;&#x5728;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#x4E2D;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#37-认识到this变量的隐式绑定问题"><span class="post-toc-number">1.8.</span> <span class="post-toc-text"><a href="#37-&#x8BA4;&#x8BC6;&#x5230;this&#x53D8;&#x91CF;&#x7684;&#x9690;&#x5F0F;&#x7ED1;&#x5B9A;&#x95EE;&#x9898;" class="headerlink" title="37. &#x8BA4;&#x8BC6;&#x5230;this&#x53D8;&#x91CF;&#x7684;&#x9690;&#x5F0F;&#x7ED1;&#x5B9A;&#x95EE;&#x9898;"></a>37. &#x8BA4;&#x8BC6;&#x5230;this&#x53D8;&#x91CF;&#x7684;&#x9690;&#x5F0F;&#x7ED1;&#x5B9A;&#x95EE;&#x9898;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#38-在子类的构造函数中调用父类的构造函数"><span class="post-toc-number">1.9.</span> <span class="post-toc-text"><a href="#38-&#x5728;&#x5B50;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x8C03;&#x7528;&#x7236;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;" class="headerlink" title="38. &#x5728;&#x5B50;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x8C03;&#x7528;&#x7236;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;"></a>38. &#x5728;&#x5B50;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x8C03;&#x7528;&#x7236;&#x7C7B;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#39-不要重用父类的属性名"><span class="post-toc-number">1.10.</span> <span class="post-toc-text"><a href="#39-&#x4E0D;&#x8981;&#x91CD;&#x7528;&#x7236;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;" class="headerlink" title="39. &#x4E0D;&#x8981;&#x91CD;&#x7528;&#x7236;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;"></a>39. &#x4E0D;&#x8981;&#x91CD;&#x7528;&#x7236;&#x7C7B;&#x7684;&#x5C5E;&#x6027;&#x540D;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#40-避免继承标准类"><span class="post-toc-number">1.11.</span> <span class="post-toc-text"><a href="#40-&#x907F;&#x514D;&#x7EE7;&#x627F;&#x6807;&#x51C6;&#x7C7B;" class="headerlink" title="40. &#x907F;&#x514D;&#x7EE7;&#x627F;&#x6807;&#x51C6;&#x7C7B;"></a>40. &#x907F;&#x514D;&#x7EE7;&#x627F;&#x6807;&#x51C6;&#x7C7B;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#41-将原型视为实现细节"><span class="post-toc-number">1.12.</span> <span class="post-toc-text"><a href="#41-&#x5C06;&#x539F;&#x578B;&#x89C6;&#x4E3A;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;" class="headerlink" title="41. &#x5C06;&#x539F;&#x578B;&#x89C6;&#x4E3A;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;"></a>41. &#x5C06;&#x539F;&#x578B;&#x89C6;&#x4E3A;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#42-避免使用猴子补丁"><span class="post-toc-number">1.13.</span> <span class="post-toc-text"><a href="#42-&#x907F;&#x514D;&#x4F7F;&#x7528;&#x7334;&#x5B50;&#x8865;&#x4E01;" class="headerlink" title="42. &#x907F;&#x514D;&#x4F7F;&#x7528;&#x7334;&#x5B50;&#x8865;&#x4E01;"></a>42. &#x907F;&#x514D;&#x4F7F;&#x7528;&#x7334;&#x5B50;&#x8865;&#x4E01;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                effective-javascript笔记-4
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Mar 01, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Mar 25, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/effective-javascript/">effective-javascript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/note/">note</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=effective-javascript笔记-4&url=https://github.com/xmoyKING/2017/03/01/effective-javascript4/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=effective-javascript笔记-4&url=https://github.com/xmoyKING/2017/03/01/effective-javascript4/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/03/01/effective-javascript4/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/03/01/effective-javascript4/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="对象和原型"><a href="#对象和原型" class="headerlink" title="对象和原型"></a>对象和原型</h2><h3 id="30-理解-prototype-getPrototypeOf-和-proto-之间的不同"><a href="#30-理解-prototype-getPrototypeOf-和-proto-之间的不同" class="headerlink" title="30. 理解 prototype, getPrototypeOf 和 __proto__ 之间的不同"></a>30. 理解 prototype, getPrototypeOf 和 <code>__proto__</code> 之间的不同</h3><p>原型包含三个独立但相关的访问器. 这三个访问器的命名对<code>prototype</code>属性做了一些变化.</p>
+<ol>
+<li><code>C.prototype</code>用于建立由<code>new C()</code>创建的对象的原型</li>
+<li><code>Object.getPrototypeOf(obj)</code>是ES5中用来获取<code>obj</code>对象的原型对象的标准方法</li>
+<li><code>obj.__proto__</code>是获取<code>obj</code>对象的原型对象的非标准方法.</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name, pwHash</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.pwHash = pwHash;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'[User '</span> + <span class="keyword">this</span>.name + <span class="string">']'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">User.prototype.checkPw = <span class="function"><span class="keyword">function</span>(<span class="params">pw</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> hash(pw) === <span class="keyword">this</span>.pwHash;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> u = <span class="keyword">new</span> User(<span class="string">'ssss'</span>, <span class="string">'0ef678sdsg567afh8dadsadasd'</span>);</span><br></pre></td></tr></table></figure>
+<p><code>User</code>函数带有一个默认的<code>prototype</code>属性,其包含一个开始几乎为空的对象. 在上例中,添加了两个方法到<code>User.prototype</code>对象. <code>toString</code>和<code>checkPw</code>方法. 当使用<code>new</code>操作符创建<code>User</code>的实例时, 产生的对象<code>u</code>会自动获得分配的原型对象, 这个对象存储在<code>User.prototype</code>中.</p>
+<p><img src="1.png" alt="User构造函数及其实例的原型关系"></p>
+<p>构造函数的<code>prototype</code>属性用来设置新实例的原型关系.</p>
+<p>ES5中的函数<code>Object.getPrototypeOf()</code>可以用于检索现有对象的原型. 如:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.gePrototypeOf(u) === User.prototype; <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>非标准的检索对象原型的方法, <code>__proto__</code>属性.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u.__proto__ === User.prototype; <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>JS中的类 本质上是一个构造函数(<code>User</code>)与一个用于在该类(<code>User.prototype</code>)实例间共享方法的原型对象的结合.</p>
+<ol>
+<li><strong>C.prototype属性是new C()创建的对象的原型</strong></li>
+<li><strong>Object.getPrototypeOf(obj)是ES5中检索对象原型的标准函数</strong></li>
+<li><strong><code>obj.__proto__</code>是检索对象原型的非标准方法</strong></li>
+<li><strong>类是由一个构造函数和一个关联的原型组成的一种设计模式</strong></li>
+</ol>
+<h3 id="31-使用Object-getPrototypeOf函数而不是使用-proto-属性"><a href="#31-使用Object-getPrototypeOf函数而不是使用-proto-属性" class="headerlink" title="31. 使用Object.getPrototypeOf函数而不是使用__proto__属性"></a>31. 使用Object.getPrototypeOf函数而不是使用<code>__proto__</code>属性</h3><p>无论何时,<code>getPrototypeOf</code>函数都是有效的,而且它是提取对象原型更加标准,可移植的方法. 由于<code>__proto__</code>属性会污染所有的对象,因此会有一些它引发的错误.</p>
+<h3 id="32-始终不要修改-proto-属性"><a href="#32-始终不要修改-proto-属性" class="headerlink" title="32. 始终不要修改__proto__属性"></a>32. 始终不要修改<code>__proto__</code>属性</h3><p><code>__proto__</code>属性提供了修改对象原型链的能力,而<code>Object.getPrototypeOf()</code>方法却不能修改. 所以尽量不要修改此属性,会破坏程序的可移植问题. </p>
+<p>另一个问题是性能, 所有的现代JS引擎都深度优化了获取和设置对象属性的行为, 因为这些都是一些最常见的JS程序的操作. 这些优化都是基于引擎在对象结构的认识上, 当修改对象的内部结构(如添加或删除该对象或其原型链中的对象的属性), 将会使一些优化失效. </p>
+<p>修改<code>__proto__</code>属性实际上改变了继承结构本身. 比起普通属性,修改<code>__proto__</code>会导致更多的优化失效.</p>
+<p>避免修改<code>__proto__</code>属性最大的原因是为了保障程序行为的可预测性, 对象的原型链通过一套确定的属性及属性值来定义它的行为.</p>
+<p>修改对象的原型链会交换对象的整个继承层次结构, 某些情况下这些操作可能会有用,但保持继承层次结构稳定是基本准则.</p>
+<h3 id="33-使构造函数与new操作符无关"><a href="#33-使构造函数与new操作符无关" class="headerlink" title="33. 使构造函数与new操作符无关"></a>33. 使构造函数与new操作符无关</h3><p>当使用30条中的User函数创建一个构造函数时, 程序需要依赖<code>new</code>操作符来调用该构造函数, 若忘记使用<code>new</code>关键字,则函数的接收者将会是全局对象.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> u = User(<span class="string">'bbbb'</span>, <span class="string">'790af7657ds6ad45adsa'</span>);</span><br><span class="line">u; <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">this</span>.name; <span class="comment">// 'bbbb'</span></span><br><span class="line"><span class="keyword">this</span>.pwHash; <span class="comment">// '790af7657ds6ad45adsa'</span></span><br></pre></td></tr></table></figure></p>
+<p>该函数不仅会返回无意义的<code>undefined</code>,而且会创建/修改全局变量<code>name</code>和<code>pwHash</code>. </p>
+<p>若在严格模式下,那么它的接收者默认为<code>undefined</code>. 这种情况下,错误的调用会导致错误, <code>User</code>的第一行试图给<code>this.name</code>赋值时, 会抛出<code>TypeError</code>错误.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name, pwHash</span>)</span>&#123;</span><br><span class="line">    ;<span class="string">'use strict'</span>;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.pwHash = pwHash;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> u = User(<span class="string">'bbbb'</span>, <span class="string">'790af7657ds6ad45adsa'</span>);  <span class="comment">// error: this is undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>可以用一个简单的方法检测函数的接收者是否为正确的<code>User</code>实例,即检测是否使用<code>new</code>操作符<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name, pwHash</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!(<span class="keyword">this</span> <span class="keyword">instanceof</span> User))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User(name, pwHash);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.pwHash = pwHash;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用这种方式,不管是以普通函数还是以构造函数的方式调用<code>User</code>函数,它都返回一个继承自<code>User.prototype</code>的对象.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = User(<span class="string">'bbbb'</span>, <span class="string">'790af7657ds6ad45adsa'</span>);</span><br><span class="line"><span class="keyword">var</span> y = <span class="keyword">new</span> User(<span class="string">'bbbb'</span>, <span class="string">'790af7657ds6ad45adsa'</span>);</span><br><span class="line">x <span class="keyword">instanceof</span> User; <span class="comment">// true</span></span><br><span class="line">y <span class="keyword">instanceof</span> User; <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>但这种方式的缺点是需要额外的函数调用, 而且很难适用与可变参数函数, 因为没有一种直接模拟<code>apply</code>方法将可变参数函数作为构造函数调用的方式.</p>
+<p>还有一个使用<code>Object.create()</code>函数的方法解决<code>new</code>操作符的问题.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name, pwHash</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span> <span class="keyword">instanceof</span> User ? <span class="keyword">this</span> : <span class="built_in">Object</span>.create(User.prototype);</span><br><span class="line">                            </span><br><span class="line">    self.name = name;</span><br><span class="line">    self.pwHash = pwHash;</span><br><span class="line">    <span class="keyword">return</span> self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>Object.create()</code>需要一个原型对象作为模版, 并返回一个继承自该原型对象的新对象. 因此,当以函数的方式调用该<code>User</code>函数时, 结果将返回一个继承自<code>User.prototype</code>的新对象,并且该对象具有已经初始化的<code>name</code>和<code>pwHash</code>属性.</p>
+<p><code>Object.create()</code>是ES5引进的, 在一些老的或不支持此特性的浏览器中,可通过创建一个局部的构造函数并使用<code>new</code>操作符初始化该构造函数来替代<code>Object.create()</code>.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">Object</span>.create === <span class="string">'undefined'</span>)&#123;</span><br><span class="line">    <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span>(<span class="params">prototype</span>)</span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">C</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">        C.prototype = prototype;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> C();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述版本仅是单参数版本的, 完整版本的<code>Object.create()</code>函数还接受一个可选参数, 用于描述一组定义在新对象上的属性描述符.</p>
+<p>若使用<code>new</code>操作符调用该新版本的<code>User</code>函数会发生什么? 由于构造函数覆盖模式, 使用<code>new</code>操作符调用的行为就如函数调用它的行为一样. </p>
+<p>构造函数覆盖模式即JS允许<code>new</code>表达式的结果可以被构造函数中的显示<code>return</code>语句所覆盖. 当<code>User</code>函数返回<code>self</code>对象时, <code>new</code> 表达式的结果就变成self对象, 该对象可能是另一个绑定到<code>this</code>的对象.</p>
+<p>防范误用构造函数可能没有那么重要,尤其是在局部作用域内使用构造函数的时候. 但最有用的在于理解若以错误的方式调用构造函数会照成的严重后果, 且在文档化构造函数期望使用<code>new</code>操作符调用是很重要, 尤其是在跨大型代码库中共享构造函数或该构造函数来自一个共享库时.</p>
+<ol>
+<li><strong>通过使用new操作符或Object.create方法在构造函数定义中调用自身使得该构造函数与调用语法无关.</strong></li>
+<li><strong>当一个函数期望使用new操作符调用时,清晰地文档化该函数</strong></li>
+</ol>
+<h3 id="34-在原型中存储方法"><a href="#34-在原型中存储方法" class="headerlink" title="34. 在原型中存储方法"></a>34. 在原型中存储方法</h3><p>JS完全有可能不借助原型链编程, 比如30条中的<code>User</code>类, 不在原型中定义方法.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name, pwHash</span>)</span>&#123;    </span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.pwHash = pwHash;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'[User '</span> + <span class="keyword">this</span>.name + <span class="string">']'</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">this</span>.checkPw = <span class="function"><span class="keyword">function</span>(<span class="params">pw</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> hash(pw) === <span class="keyword">this</span>.pwHash;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>大多数情况下都能正常运行,但若构造多个<code>User</code>类的实例时, 问题就暴露了.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> u1 = <span class="keyword">new</span> User(<span class="comment">/**/</span>);</span><br><span class="line"><span class="keyword">var</span> u2 = <span class="keyword">new</span> User(<span class="comment">/**/</span>);</span><br><span class="line"><span class="keyword">var</span> u3 = <span class="keyword">new</span> User(<span class="comment">/**/</span>);</span><br><span class="line">…</span><br></pre></td></tr></table></figure></p>
+<p><img src="2.png" alt="将方法存储在实例对象中"></p>
+<p>上图为三个对象及他们的原型对象结构图, 每个实例都包含<code>toString</code>和<code>checkPw</code>方法的副本, 而不是通过原型共享这些的方法,所以会有6个”相同的”函数对象.</p>
+<p><img src="3.png" alt="将方法存储在原型中"></p>
+<p>相反,若用原型链的方式, <code>toString</code>和<code>checkPw</code>方法只被创建一次,对象实例间通过原型共享. 将方法存储在原型中,使其可以被所有的实例使用, 而不需要存储方法实现的多个副本, 也不需要给每个实例对象增加额外的属性.</p>
+<p>在查找方法的速度上, 现代JS引擎深度优化了原型查找, 所以将方法复制到实例对象并不一定保证查找速度明显提升, 且实例方法比起原型方法会占用更多内存.</p>
+<h3 id="35-使用闭包存储私有数据"><a href="#35-使用闭包存储私有数据" class="headerlink" title="35. 使用闭包存储私有数据"></a>35. 使用闭包存储私有数据</h3><p>JS的对象系统并没有鼓励信息隐藏, 所有的属性名都是一个字符串, 任意一段程序都可以简单地通过访问属性名来获取相应的对象属性. 例如 <code>for…in</code>循环,ES5中的<code>Object.keys()</code>和<code>Object.hasOwnPropertyNames()</code>函数都能轻易获取对象的所有属性名.</p>
+<p>通常使用编码规范来”创建”私有属性, 如在命名的时候加上下划线<code>_</code>,这是一种命名规范, 表明对对象的正确行为操作的一种建议.</p>
+<p>JS提供了一种信息隐藏的机制——<strong>闭包</strong>.</p>
+<p>闭包将数据存储到封闭的变量中而不提供对这些变量的直接访问, 获取闭包内部结构的唯一方式是该函数显示地提供获取它的方法, 也就是说, 与普通对象相反, 对象的属性会被自动的暴露出去,而闭包则自动隐藏起来.</p>
+<p>利用这种特性在对象中存储真正的私有数据, 不是将数据作为对象的属性存储,而是在构造函数中以变量的方式来存储, 并将对象的方法转变为引用这些变量的闭包.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">name, pwHash</span>)</span>&#123;    </span><br><span class="line">    <span class="keyword">this</span>.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'[User '</span> + name + <span class="string">']'</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">this</span>.checkPw = <span class="function"><span class="keyword">function</span>(<span class="params">pw</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> hash(pw) === pwHash;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>注意</strong>: 此处的<code>toString</code>和<code>checkPw</code>方法是以变量的方式来引用<code>name</code>和<code>pwHash</code>变量的, 而不是以<code>this</code>属性的方式来引用. 现在, <code>User</code>的实例不包含任何实例属性, 因此外部的代码不能直接访问<code>User</code>实例的<code>name</code>和<code>pwHash</code>变量.</p>
+<p>该方式的缺点是, 为了让构造函数中的变量存在于使用它们的方法作用域内, 这些方法必须置于实例对象中. 这会导致副本的扩散.</p>
+<ol>
+<li><strong>闭包变量是私有的, 只能通过局部的引用获取</strong></li>
+<li><strong>将局部变量作为私有数据从而通过方法实现信息隐藏</strong></li>
+</ol>
+<h3 id="36-只将实例状态存储在实例对象中"><a href="#36-只将实例状态存储在实例对象中" class="headerlink" title="36. 只将实例状态存储在实例对象中"></a>36. 只将实例状态存储在实例对象中</h3><p>理解原型对象与其实例之间的一对多的关系对于实现正确的对象行为是非常重要的. 错误的做法是将每一实例的数据存储到原型中. 如: 一个树型数据结构, 将存储子节点的数组放置在原型对象中将会导致实现被完全破坏<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Tree</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = x;</span><br><span class="line">&#125;</span><br><span class="line">Tree.prototype = &#123;</span><br><span class="line">    children: [], <span class="comment">// 此属性应该作为实例状态</span></span><br><span class="line">    addChild: <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.children.push(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当使用此类构造一课树</span></span><br><span class="line"><span class="keyword">var</span> left = <span class="keyword">new</span> Tree(<span class="number">2</span>);</span><br><span class="line">left.addChild(<span class="number">1</span>);</span><br><span class="line">left.addChild(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> right = <span class="keyword">new</span> Tree(<span class="number">6</span>);</span><br><span class="line">right.addChild(<span class="number">5</span>);</span><br><span class="line">right.addChild(<span class="number">7</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> top = <span class="keyword">new</span> Tree(<span class="number">4</span>);</span><br><span class="line">top.addChild(left);</span><br><span class="line">top.addChild(right);</span><br><span class="line"></span><br><span class="line">top.children; <span class="comment">// [1, 3, 5, 7, left, right];</span></span><br></pre></td></tr></table></figure></p>
+<p>每次调用<code>addChild</code>方法, 都会将值添加到<code>Tree.prototype.children</code>数组中. <code>Tree.prototype.children</code>数组包含了任何地方按序调用<code>addChild</code>方法时传入的所有节点.<br><img src="4.png" alt="将实例状态存储在原型对象中"></p>
+<p>实现<code>Tree</code>类的正确方法是为每个实例对象创建一个单独的<code>children</code>数组.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Tree</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.value = x;</span><br><span class="line">    <span class="keyword">this</span>.children = []; <span class="comment">// 实例状态</span></span><br><span class="line">&#125;</span><br><span class="line">Tree.prototype = &#123;</span><br><span class="line">    addChild: <span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.children.push(x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p><img src="5.png" alt="将实例状态存储在实例对象中"></p>
+<p>通常在一个类的多个实例之间共享方法是安全的, 因为方法通常是无状态的, 这不同于通过<code>this</code>来引用实例状态,(因为方法调用的语法确保了<code>this</code>被绑定到实例对象, 即使该方法是从原型中继承来的,共享方法仍然可以访问实例状态)</p>
+<p>一般情况下,任何不可变的数据可以被存储在原型中从而被安全的共享, 有状态的数据原则上也可以存储在原型中, 但原型对象中一般是存储方法, 而每个实例状态存储在实例对象中.</p>
+<ol>
+<li><strong>共享可变数据可能会出问题, 因为原型是被其所有的实例共享的</strong></li>
+<li><strong>将可变的实例状态存储在实例对象中</strong></li>
+</ol>
+<h3 id="37-认识到this变量的隐式绑定问题"><a href="#37-认识到this变量的隐式绑定问题" class="headerlink" title="37. 认识到this变量的隐式绑定问题"></a>37. 认识到this变量的隐式绑定问题</h3><p>编写一个读取CSV(逗号分割型取值)数据的类, 构造函数需要一个可选的分隔器字符数组并构造出一个自定义的正则表达式将每一行分为不同的条目.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CSVReader</span>(<span class="params">separators</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.separators = separators || [<span class="string">","</span>];</span><br><span class="line">    <span class="keyword">this</span>.regexp = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="keyword">this</span>.separators.map(<span class="function"><span class="keyword">function</span>(<span class="params">sep</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"\\"</span> + sep[<span class="number">0</span>];</span><br><span class="line">    &#125;).join(<span class="string">"|"</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CSV 类 read 方法, 将输入字符串划分为一个二维数组</span></span><br><span class="line">CSVReader.prototype.read = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> lines = str.trim().split(<span class="regexp">/\n/</span>);</span><br><span class="line">    <span class="keyword">return</span> lines.map(<span class="function"><span class="keyword">function</span>(<span class="params">line</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> line.split(<span class="keyword">this</span>.regexp); <span class="comment">// 错误的 this 引用</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> CSVReader();</span><br><span class="line">reader.read(<span class="string">"a,b,c\nd,e,f\n"</span>); <span class="comment">// [["a,b,c"],["d,e,f"]]</span></span><br></pre></td></tr></table></figure></p>
+<p>上段代码由于this的错误, 引用了<code>lines.regexp (this.regexp)</code> 而lines没有regexp属性, 所以结果返回<code>line.split(underfined)</code>, 解决的方法有三种:<br>1.map方法接受的第二个参数,表示内部的this对象的绑定对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CSVReader.prototype.read = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> lines = str.trim().split(<span class="regexp">/\n/</span>);</span><br><span class="line">    <span class="keyword">return</span> lines.map(<span class="function"><span class="keyword">function</span>(<span class="params">line</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> line.split(<span class="keyword">this</span>.regexp); <span class="comment">// 此时的this表示外部传入的实例对象 </span></span><br><span class="line">    &#125;, <span class="keyword">this</span>); <span class="comment">// 将调用read方法的实例对象传入</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> CSVReader();</span><br><span class="line">reader.read(<span class="string">"a,b,c\nd,e,f\n"</span>); <span class="comment">// [["a","b","c"],["d","e","f"]]</span></span><br></pre></td></tr></table></figure></p>
+<p>2.可以在外部函数保存this的引用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CSVReader.prototype.read = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> lines = str.trim().split(<span class="regexp">/\n/</span>);</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>; <span class="comment">// self表示外部的实例对象</span></span><br><span class="line">    <span class="keyword">return</span> lines.map(<span class="function"><span class="keyword">function</span>(<span class="params">line</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> line.split(self.regexp); <span class="comment">// 显示获取self的的regexp属性</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> CSVReader();</span><br><span class="line">reader.read(<span class="string">"a,b,c\nd,e,f\n"</span>); <span class="comment">// [["a","b","c"],["d","e","f"]]</span></span><br></pre></td></tr></table></figure></p>
+<p>3.ES5中,可以使用回调函数的bind方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CSVReader.prototype.read = <span class="function"><span class="keyword">function</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> lines = str.trim().split(<span class="regexp">/\n/</span>);</span><br><span class="line">    <span class="keyword">return</span> lines.map(<span class="function"><span class="keyword">function</span>(<span class="params">line</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> line.split(<span class="keyword">this</span>.regexp); <span class="comment">// 此时的this表示外部传入的实例对象 </span></span><br><span class="line">    &#125;.bind(<span class="keyword">this</span>)); <span class="comment">// 使用bind方法绑定外部的实例对象</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> CSVReader();</span><br><span class="line">reader.read(<span class="string">"a,b,c\nd,e,f\n"</span>); <span class="comment">// [["a","b","c"],["d","e","f"]]</span></span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>this变量的作用域总是由其最近的封闭函数所确定</strong></li>
+<li><strong>使用一个局部变量(通常self,me)使得this绑定对于内部函数是可用的</strong></li>
+</ol>
+<h3 id="38-在子类的构造函数中调用父类的构造函数"><a href="#38-在子类的构造函数中调用父类的构造函数" class="headerlink" title="38. 在子类的构造函数中调用父类的构造函数"></a>38. 在子类的构造函数中调用父类的构造函数</h3><p>场景图是一个对象集合,包含了该场景图中的所有的对象(角色), 以及对底层图形的引用(context), 基于canvas<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Scene</span>(<span class="params">context, width, height, images</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.context = context;</span><br><span class="line">    <span class="keyword">this</span>.width = width;</span><br><span class="line">    <span class="keyword">this</span>.height = height;</span><br><span class="line">    <span class="keyword">this</span>.images = images;</span><br><span class="line">    <span class="keyword">this</span>.actors = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Scene.prototype.register = <span class="function"><span class="keyword">function</span>(<span class="params">actor</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.actors.push(actor);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Scene.prototype.unregister = <span class="function"><span class="keyword">function</span>(<span class="params">actor</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="keyword">this</span>.actors.indexOf(actor);</span><br><span class="line">    <span class="keyword">if</span>(i &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.actors.splice(i, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Scene.prototype.draw = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.context.clearRect(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.width,<span class="keyword">this</span>.height);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> a = <span class="keyword">this</span>.actors, i = <span class="number">0</span>, n = a.length; i &lt; n; ++i)&#123;</span><br><span class="line">        a[i].draw();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 角色继承自基类Actor, 每个角色存储自身场景的引用以及坐标位置, 同时将自身添加到角色注册表中</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Actor</span>(<span class="params">scene, x, y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.scene = scene;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">    scene.register(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// moveTo改变角色的坐标, 同时重绘场景</span></span><br><span class="line">Actor.prototype.moveTo = <span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">    <span class="keyword">this</span>.scene.draw();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 角色离开场景后需要从注册表中删除它并重绘场景</span></span><br><span class="line">Actor.prototype.exit = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.scene.unregister(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">this</span>.scene.draw();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 每个actor有一个type字段, 用来查找它在图表中的图像</span></span><br><span class="line">Actor.prototype.draw = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> image = <span class="keyword">this</span>.scene.images[<span class="keyword">this</span>.type];</span><br><span class="line">    <span class="keyword">this</span>.scene.context.drawImage(image, <span class="keyword">this</span>.x, <span class="keyword">this</span>.y);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Actor.prototype.width = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.scene.images[<span class="keyword">this</span>.type].width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Actor.prototype.height = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.scene.images[<span class="keyword">this</span>.type].height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>所有的特定角色都是Actor的子类, 例如太空飞船,SpaceShip类</p>
+<ol>
+<li>先调用Actor的构造函数能保证通过Actor创建的所有实例属性都被添到新对象中, </li>
+<li>然后再定义自身的实例属性,比如分数,point</li>
+<li>最后为了使SpaceShip成为Actor的一个正确子类, 原型必须继承自Actor.prototype, 这种扩展最好使用使用Object.create方法<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SpaceShip</span>(<span class="params">scene, x, y</span>)</span>&#123;</span><br><span class="line">    Actor.call(<span class="keyword">this</span>, scene, x, y); <span class="comment">//子类构造函数必须显示调用父类Actor的构造函数, 同时将接收者绑定为自己</span></span><br><span class="line">    <span class="keyword">this</span>.points = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">SpaceShip.prototype = <span class="built_in">Object</span>.create(Actor.prototype);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建了SpaceShip的原型对象后, 就可以添加被所有实例共享的属性和方法</span></span><br><span class="line">SpaceShip.prototype.type = <span class="string">'spaceShip'</span>;</span><br><span class="line">SpaceShip.prototype.scorePoint = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.point++;</span><br><span class="line">&#125;;</span><br><span class="line">SpaceShip.prtotype.left = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.moveTo(<span class="built_in">Math</span>.max(<span class="keyword">this</span>.x - <span class="number">10</span>, <span class="number">0</span>), <span class="keyword">this</span>.y);</span><br><span class="line">&#125;;</span><br><span class="line">SpaceShip.prototype.right = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> maxWidth = <span class="keyword">this</span>.scene.width - <span class="keyword">this</span>.width();</span><br><span class="line">    <span class="keyword">this</span>.moveTo(<span class="built_in">Math</span>.min(<span class="keyword">this</span>.x + <span class="number">10</span>, maxWidth), <span class="keyword">this</span>.y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>若使用Actor的构造函数来创建SpaceShip的原型对象, 会有几个问题,没有任何合理的参数传递给Actor,<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SpaceShip.prototype = <span class="keyword">new</span> Actor();</span><br></pre></td></tr></table></figure></p>
+<p><img src="6.png" alt="子类的继承构造层次结构"></p>
+<ol>
+<li><strong>在子类构造函数中显示传入this作为显示的接收者调用父类的构造函数</strong></li>
+<li><strong>使用Object.create函数来构造子类的原型对象以避免调用父类的构造函数</strong></li>
+</ol>
+<h3 id="39-不要重用父类的属性名"><a href="#39-不要重用父类的属性名" class="headerlink" title="39. 不要重用父类的属性名"></a>39. 不要重用父类的属性名</h3><p>为每一个Actor实例添加一个唯一的ID<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Actor</span>(<span class="params">scene, x, y</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.scene = scene;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">    <span class="keyword">this</span>.id = ++Actor.nextID;</span><br><span class="line">    scene.register(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line">Actor.nextID = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>当使用此方法为Actor的子类也添加唯一ID时<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Alien</span>(<span class="params">scene, x, y, direction, speed, strength</span>)</span>&#123;</span><br><span class="line">    Actor.call(<span class="keyword">this</span>, scene, x, y);</span><br><span class="line">    <span class="keyword">this</span>.direction = direction;</span><br><span class="line">    <span class="keyword">this</span>.speed = speed;</span><br><span class="line">    <span class="keyword">this</span>.strength = strength;</span><br><span class="line">    <span class="keyword">this</span>.damage = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">this</span>.id = ++Alien.nextID; <span class="comment">// 与Actor中的id冲突</span></span><br><span class="line">&#125;</span><br><span class="line">Alien.nextID = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
+<p>由于两个类都给实例属性id写入数据, 所以会冲突. 属性存储在实例对象上是一个字符串, 若在继承体系中的两个类指向相同的属性名, 那么它们指向同一个属性.</p>
+<p>解决的方法是两个类使用不同的属性名标识id<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.actorID = ++Actor.nextID;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">this</span>.alienID = ++Alien.nextID;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>留意父类使用的所有属性名</strong></li>
+<li><strong>不要在子类中重用父类的属性名</strong></li>
+</ol>
+<h3 id="40-避免继承标准类"><a href="#40-避免继承标准类" class="headerlink" title="40. 避免继承标准类"></a>40. 避免继承标准类</h3><p>ES标准预定义了很多重要的类, 它们有很多特殊的行为, 所以很难写出行为正确的子类. 比如Array类<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个抽象的目录类, 继承数组的所有行为</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dir</span>(<span class="params">path, entries</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.path = path;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = entries.length; i &lt; n; ++i)&#123;</span><br><span class="line">        <span class="keyword">this</span>[i] = entries[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Dir.prototype = <span class="built_in">Object</span>.create(<span class="built_in">Array</span>.prototype);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dir = <span class="keyword">new</span> Dir(<span class="string">"/tmp/mysite"</span>, [<span class="string">"index.html"</span>,<span class="string">"script.js"</span>,<span class="string">"style.css"</span>]);</span><br><span class="line">dir.length; <span class="comment">// 0 , 不是预期的3, 破坏了数组的length属性的预期行为</span></span><br></pre></td></tr></table></figure></p>
+<p>失败的原因是length属性只对内部被标记为”真正的”数组的特殊对象起作用. 在ES5标准中,它是一个不可见的内部属性, 称为[[class]].</p>
+<p>JS并不具备内部类系统, 不要被名字误导, [[class]]的值仅仅是一个简单的标签.</p>
+<p>数组对象(通过Array构造函数或[]语法创建)被加上了值为”Array”的[[class]]属性, 函数被加上了值为”Function”的[[class]]属性, 以此类推…</p>
+<p><strong>[[class]]属性对length的作用为</strong>: </p>
+<p>length的行为值被定义在内部属性为[[class]]的值为”Array”的特殊对象中, JS保持length属性与该对象的索引属性的数量同步. </p>
+<p>但当扩展Array类时, 子类的实例并不是通过<code>new Array()</code>或字面量<code>[]</code>语法创建的, 所以, Dir的实例的[[class]]属性值为”Object”.</p>
+<p>默认的<code>Object.prototype.toString</code>方法可以通过查询其接收者的内部[[class]]属性来创建对象的通用描述.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dir = <span class="keyword">new</span> Dir(<span class="string">'/'</span>,[]);</span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call(dir); <span class="comment">// [object Object]</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call([]); <span class="comment">// [object Array]</span></span><br></pre></td></tr></table></figure></p>
+<p>所以, 更好的实现方法是<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dir</span>(<span class="params">path, entries</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.path = path;</span><br><span class="line">    <span class="keyword">this</span>.entries = entries;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在原型中重新定义Array的方法,将相应的方法委托给entries属性来完成</span></span><br><span class="line">Dir.prototype.forEach = <span class="function"><span class="keyword">function</span>(<span class="params">f, thisArg</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> thisArg === <span class="string">'undefined'</span>)&#123;</span><br><span class="line">        thisArg = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.entries.forEach(f, thisArg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ES标准库的大多数构造函数都有类型的问题, 某些属性或方法需要有正确的内部属性, 而子类却无法提供. </p>
+<p>所以, 最好避免继承标准类: Array, Boolean, Date, Function, Number, RegExp, String.</p>
+<ol>
+<li><strong>继承标准类往往由于一些特殊的内部属性,如[[class]]而被破坏</strong></li>
+<li><strong>使用属性委托优于继承标准类</strong></li>
+</ol>
+<h3 id="41-将原型视为实现细节"><a href="#41-将原型视为实现细节" class="headerlink" title="41. 将原型视为实现细节"></a>41. 将原型视为实现细节</h3><p>一个对象给其使用者提供了简单,强大的操作集. 使用者与一个对象最基本的交互是获取属性值和调用其方法. 这些操作不在意属性存储在原型继承结构的那个位置上.</p>
+<p>无论实现对象时将属性”加”在对象原型链的那个位置, 只要其值保持不变, 这些基本操作的行为也不会变. 简言之<strong>原型是一种对象行为的实现细节</strong>.</p>
+<p>JS提供的<strong>内省机制(introspection mechanisms)</strong>来检查对象的细节.<code>Object.prototype.hasOwnProperty</code>方法确实一个属性是否为自己的属性, 而不是继承而来的.</p>
+<p><code>Object.getPropertyOf</code>和<code>__proto__</code>特性允许程序员便利对象的原型链并单独查询其原型对象.</p>
+<ol>
+<li><strong>对象是接口,原型是实现</strong></li>
+<li><strong>避免检查无法控制的对象的原型结构</strong></li>
+<li><strong>避免检查实现无法控制的对象内部属性</strong></li>
+</ol>
+<h3 id="42-避免使用猴子补丁"><a href="#42-避免使用猴子补丁" class="headerlink" title="42. 避免使用猴子补丁"></a>42. 避免使用猴子补丁</h3><p>由于对象共享原型, 因此每一个对象都可以增加,删除,修改原型的属性, 这种被称为<strong>猴子补丁(monkey-patching)</strong></p>
+<p>比如,若数组缺少一个方法,可以立即在数组的原型上添加它, 结果是每一个数组实例都可以使用这个方法了.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.split = <span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">this</span>.slice(<span class="number">0</span>, i), <span class="keyword">this</span>.slice(i)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但当多个库给同一个原型打补丁的时候, 问题就暴露了, 另一个库可能也给数组加了<code>split</code>方法,这样程序就有可能出错.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.split = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> i = <span class="built_in">Math</span>.floor(<span class="keyword">this</span>.length / <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">this</span>.slice(<span class="number">0</span>, i), <span class="keyword">this</span>.slice(i)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>尽管猴子补丁很危险, 但是有一个很可靠的使用场景: <strong>polyfill</strong>, 一些新标准API可能在一些浏览器中并没有支持,但是许多程序或库却依赖这些方法.</p>
+<p>这种时候, 由于这些API的行为是标准化的, 因此实现这些方法并不会造成库之间的不兼容.</p>
+<p>检测<code>Array.prototype.map</code>是否存在, 以确保内置的实现不会被覆盖, 一般而言,内置的实现更高效, 测试更充分.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> <span class="built_in">Array</span>.prototype.map !== <span class="string">"function"</span>)&#123;</span><br><span class="line">    <span class="built_in">Array</span>.prototype.map = <span class="function"><span class="keyword">function</span>(<span class="params">f, thisArg</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> result = [];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, n = <span class="keyword">this</span>.length; i &lt; n; ++i)&#123;</span><br><span class="line">            result[i] = f.call(thisArg, <span class="keyword">this</span>[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>避免使用轻率的猴子补丁</strong></li>
+<li><strong>记录程序库所执行的所有猴子补丁</strong></li>
+<li><strong>考虑通过将修改置于一个导出函数中, 使猴子补丁成为不可选的</strong></li>
+<li><strong>使用猴子补丁为缺失的标准API提供polyfill</strong></li>
+</ol>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/03/01/internship/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/02/27/effective-javascript3/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JS设计模式-1-基础复习-面向对象，this | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,design pattern">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JS设计模式-1-基础复习-面向对象，this | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="design pattern"> 
+
+    
+        <meta property="article:published_time" content="Wed Nov 01 2017 20:15:13 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:09 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JS设计模式-1-基础复习-面向对象，this | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/11/01/js-pattern1/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/11/01/js-pattern1/index.html",
+    "headline": "JS设计模式-1-基础复习-面向对象，this",
+    "datePublished": "Wed Nov 01 2017 20:15:13 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,design patternnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#面向对象的JS"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;JS" class="headerlink" title="&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;JS"></a>&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x7684;JS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#动态类型语言和鸭子类型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#&#x52A8;&#x6001;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#x548C;&#x9E2D;&#x5B50;&#x7C7B;&#x578B;" class="headerlink" title="&#x52A8;&#x6001;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#x548C;&#x9E2D;&#x5B50;&#x7C7B;&#x578B;"></a>&#x52A8;&#x6001;&#x7C7B;&#x578B;&#x8BED;&#x8A00;&#x548C;&#x9E2D;&#x5B50;&#x7C7B;&#x578B;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多态"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#&#x591A;&#x6001;" class="headerlink" title="&#x591A;&#x6001;"></a>&#x591A;&#x6001;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#封装"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#&#x5C01;&#x88C5;" class="headerlink" title="&#x5C01;&#x88C5;"></a>&#x5C01;&#x88C5;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原型模式和基于原型继承的JavaScript对象系统"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"><a href="#&#x539F;&#x578B;&#x6A21;&#x5F0F;&#x548C;&#x57FA;&#x4E8E;&#x539F;&#x578B;&#x7EE7;&#x627F;&#x7684;JavaScript&#x5BF9;&#x8C61;&#x7CFB;&#x7EDF;" class="headerlink" title="&#x539F;&#x578B;&#x6A21;&#x5F0F;&#x548C;&#x57FA;&#x4E8E;&#x539F;&#x578B;&#x7EE7;&#x627F;&#x7684;JavaScript&#x5BF9;&#x8C61;&#x7CFB;&#x7EDF;"></a>&#x539F;&#x578B;&#x6A21;&#x5F0F;&#x548C;&#x57FA;&#x4E8E;&#x539F;&#x578B;&#x7EE7;&#x627F;&#x7684;JavaScript&#x5BF9;&#x8C61;&#x7CFB;&#x7EDF;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#this、call和apply"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#this&#x3001;call&#x548C;apply" class="headerlink" title="this&#x3001;call&#x548C;apply"></a>this&#x3001;call&#x548C;apply</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#this"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#this" class="headerlink" title="this"></a>this</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#this的指向"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text"><a href="#this&#x7684;&#x6307;&#x5411;" class="headerlink" title="this&#x7684;&#x6307;&#x5411;"></a>this&#x7684;&#x6307;&#x5411;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#丢失的this"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text"><a href="#&#x4E22;&#x5931;&#x7684;this" class="headerlink" title="&#x4E22;&#x5931;&#x7684;this"></a>&#x4E22;&#x5931;&#x7684;this</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#call和apply"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#call&#x548C;apply" class="headerlink" title="call&#x548C;apply"></a>call&#x548C;apply</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#call和apply的区别"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text"><a href="#call&#x548C;apply&#x7684;&#x533A;&#x522B;" class="headerlink" title="call&#x548C;apply&#x7684;&#x533A;&#x522B;"></a>call&#x548C;apply&#x7684;&#x533A;&#x522B;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#call和apply的用途"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text"><a href="#call&#x548C;apply&#x7684;&#x7528;&#x9014;" class="headerlink" title="call&#x548C;apply&#x7684;&#x7528;&#x9014;"></a>call&#x548C;apply&#x7684;&#x7528;&#x9014;</span></a></li></ol></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JS设计模式-1-基础复习-面向对象，this
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Nov 01, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/design-pattern/">design pattern</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JS设计模式-1-基础复习-面向对象，this&url=https://github.com/xmoyKING/2017/11/01/js-pattern1/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JS设计模式-1-基础复习-面向对象，this&url=https://github.com/xmoyKING/2017/11/01/js-pattern1/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/11/01/js-pattern1/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/11/01/js-pattern1/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>学习设计模式的之前需要复习一些面向对象的基础知识、this等重要概念，以及一些函数式编程的技巧。</p>
+<h3 id="面向对象的JS"><a href="#面向对象的JS" class="headerlink" title="面向对象的JS"></a>面向对象的JS</h3><p>JavaScript没有提供传统面向对象语言中的类式继承，而是通过原型委托的方式来实现对象与对象之间的继承。JavaScript也没有在语言层面提供对抽象类和接口的支持。</p>
+<h4 id="动态类型语言和鸭子类型"><a href="#动态类型语言和鸭子类型" class="headerlink" title="动态类型语言和鸭子类型"></a>动态类型语言和鸭子类型</h4><p>编程语言按照数据类型大体可以分为两类，一类是静态类型语言，另一类是动态类型语言。静态类型语言在编译时便已确定变量的类型，而动态类型语言的变量类型要到程序运行的时候，待变量被赋予某个值之后，才会具有某种类型。</p>
+<p>静态类型语言的优点首先是在编译时就能发现类型不匹配的错误，编辑器可以帮助提前避免程序在运行期间有可能发生的一些错误。其次，如果在程序中明确地规定了数据类型，编译器还可以针对这些信息对程序进行一些优化工作，提高程序执行速度。<br>静态类型语言的缺点首先是迫使程序员依照强契约来编写程序，为每个变量规定数据类型，归根结底只是辅助编写可靠性高程序的一种手段，而不是编写程序的目的。其次，类型的声明也会增加更多的代码，在程序编写过程中，这些细节会让程序员的精力从思考业务逻辑上分散开来。</p>
+<p>动态类型语言的优点是编写的代码数量更少，看起来也更加简洁，程序员可以把精力更多地放在业务逻辑上面。虽然不区分类型在某些情况下会让程序变得难以理解，但整体而言，代码量越少，越专注于逻辑表达，对阅读程序是越有帮助的。<br>动态类型语言的缺点是无法保证变量的类型，从而在程序的运行期有可能发生跟类型相关的错误。</p>
+<p>动态类型语言对变量类型的宽容给实际编码带来了很大的灵活性。由于无需进行类型检测，可以尝试调用任何对象的任意方法，而无需去考虑它原本是否被设计为拥有该方法。这一切都建立在鸭子类型（ducktyping）的概念上，鸭子类型的通俗说法是：“如果它走起路来像鸭子，叫起来也是鸭子，那么它就是鸭子。”鸭子类型指导只关注对象的行为，而不关注对象本身，也就是关注HAS-A,而不是IS-A。</p>
+<p>在动态类型语言的面向对象设计中，鸭子类型的概念至关重要。利用鸭子类型的思想，不必借助超类型的帮助，就能轻松地在动态类型语言中实现一个原则：“面向接口编程，而不是面向实现编程”。例如，一个对象若有push和pop方法，并且这些方法提供了正确的实现，它就可以被当作栈来使用。一个对象如果有length属性，也可以依照下标来存取属性（最好还要拥有slice和splice等方法），这个对象就可以被当作数组来使用。</p>
+<p>在静态类型语言中，要实现“面向接口编程”并不是一件容易的事情，往往要通过抽象类或者接口等将对象进行向上转型。当对象的真正类型被隐藏在它的超类型身后，这些对象才能在类型检查系统的“监视”之下互相被替换使用。只有当对象能够被互相替换使用，才能体现出对象多态性的价值。</p>
+<p>“面向接口编程”是设计模式中最重要的思想。</p>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><p>“多态”一词源于希腊文polymorphism，拆开来看是poly（复数）+morph（形态）+ism，从字面上可以理解为复数形态。多态的实际含义是：同一操作作用于不同的对象上面，可以产生不同的解释和不同的执行结果。换句话说，给不同的对象发送同一个消息的时候，这些对象会根据这个消息分别给出不同的反馈。</p>
+<p>多态背后的思想是将“做什么”和“谁去做以及怎样去做”分离开来，也就是将“不变的事物”与“可能改变的事物”分离开来。动物都会叫，这是不变的，但是不同类型的动物具体怎么叫是可变的。把不变的部分隔离出来，把可变的部分封装起来，这给予了扩展程序的能力，程序看起来是可生长的，也是符合开放—封闭原则的，相对于修改代码来说，仅仅增加代码就能完成同样的功能，这显然优雅和安全得多。</p>
+<p>多态的思想实际上是把“做什么”和“谁去做”分离开来，要实现这一点，归根结底先要消除类型之间的耦合关系。如果类型之间的耦合关系没有被消除，那么在方法中指定了被执行对象是某个类型，它就不可能再被替换为另外一个类型。在Java中，可以通过向上转型来实现多态。</p>
+<p>而JavaScript的变量类型在运行期是可变的，这意味着JavaScript对象的多态性是与生俱来的。动态类型语言，它在编译时没有类型检查的过程，既没有检查创建的对象类型，又没有检查传递的参数类型。不存在任何程度上的“类型耦合”。这正是从上一节的鸭子类型中领悟的道理。在JavaScript中，并不需要诸如向上转型之类的技术来取得多态的效果。</p>
+<p>在《重构：改善既有代码的设计》里写到：多态的最根本好处在于，你不必再向对象询问“你是什么类型”而后根据得到的答案调用对象的某个行为——你只管调用该行为就是了，其他的一切多态机制都会为你安排妥当。换句话说，多态最根本的作用就是通过把过程化的条件分支语句转化为对象的多态性，从而消除这些条件分支语句。</p>
+<p>利用对象的多态性，每个对象应该做什么，已经成为了该对象的一个方法，被安装在对象的内部，每个对象负责它们自己的行为。所以这些对象可以根据同一个消息，有条不紊地分别进行各自的工作。将行为分布在各个对象中，并让这些对象各自负责自己的行为，这正是面向对象设计的优点。</p>
+<p>拿命令模式来说，请求被封装在一些命令对象中，这使得命令的调用者和命令的接收者可以完全解耦开来，当调用命令的execute方法时，不同的命令会做不同的事情，从而会产生不同的执行结果。而做这些事情的过程是早已被封装在命令对象内部的，作为调用命令的客户，根本不必去关心命令执行的具体过程。</p>
+<p>在组合模式中，多态性使得客户可以完全忽略组合对象和叶节点对象之前的区别，这正是组合模式最大的作用所在。对组合对象和叶节点对象发出同一个消息的时候，它们会各自做自己应该做的事情，组合对象把消息继续转发给下面的叶节点对象，叶节点对象则会对这些消息作出真实的反馈。</p>
+<p>在策略模式中，Context并没有执行算法的能力，而是把这个职责委托给了某个策略对象。每个策略对象负责的算法已被各自封装在对象内部。当对这些策略对象发出“计算”的消息时，它们会返回各自不同的计算结果。</p>
+<p>在JavaScript这种将函数作为一等对象的语言中，函数本身也是对象，函数用来封装行为并且能够被四处传递。当对一些函数发出“调用”的消息时，这些函数会返回不同的执行结果，这是“多态性”的一种体现，也是很多设计模式在JavaScript中可以用高阶函数来代替实现的原因。</p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><p>封装的目的是将信息隐藏。一般而言，讨论的封装是封装数据和封装实现。更广义的封装，不仅包括封装数据和封装实现，还包括封装类型和封装变化。</p>
+<p>在许多语言的对象系统中，封装数据是由语法解析来实现的，这些语言也许提供了private、public、protected等关键字来提供不同的访问权限。<br>但JavaScript并没有提供对这些关键字的支持，只能依赖变量的作用域来实现封装特性，而且只能模拟出public和private这两种封装性。<br>除了ECMAScript6中提供的let之外，一般通过函数来创建作用域：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">var</span> __name = <span class="string">'sven'</span>; <span class="comment">// 私 有（ private） 变 量 </span></span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">getName</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 公 开（ public） 方 法 </span></span><br><span class="line">    <span class="keyword">return</span> __name; </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line"><span class="built_in">console</span>.log( myObject.getName() ); <span class="comment">// 输 出： sven </span></span><br><span class="line"><span class="built_in">console</span>.log( myObject.__name ) <span class="comment">// 输 出： undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>在ECAMScript6中，还可以通过Symbol创建私有属性。</p>
+<p>封装的目的是将信息隐藏，封装应该被视为“任何形式的封装”，也就是说，封装不仅仅是隐藏数据，还包括隐藏实现细节、设计细节以及隐藏对象的类型等。</p>
+<p>从封装实现细节来讲，封装使得对象内部的变化对其他对象而言是透明的，也就是不可见的。对象对它自己的行为负责。其他对象或者用户都不关心它的内部实现。封装使得对象之间的耦合变松散，对象之间只通过暴露的API接口来通信。当修改一个对象时，可以随意地修改它的内部实现，只要对外的接口没有变化，就不会影响到程序的其他功能。</p>
+<p>封装实现细节的例子非常之多。拿迭代器来说明，迭代器的作用是在不暴露一个聚合对象的内部表示的前提下，提供一种方式来顺序访问这个聚合对象。编写了一个each函数，它的作用就是遍历一个聚合对象，使用这个each函数的人不用关心它的内部是怎样实现的，只要它提供的功能正确便可以。即使each函数修改了内部源代码，只要对外的接口或者调用方式没有变化，用户就不用关心它内部实现的改变。</p>
+<p>封装类型是静态类型语言中一种重要的封装方式。一般而言，封装类型是通过抽象类和接口来进行的。把对象的真正类型隐藏在抽象类或者接口之后，相比对象的类型，客户更关心对象的行为。在许多静态语言的设计模式中，想方设法地去隐藏对象的类型，也是促使这些模式诞生的原因之一。比如工厂方法模式、组合模式等。</p>
+<p>在JavaScript中，并没有对抽象类和接口的支持。JavaScript本身也是一门类型模糊的语言。在封装类型方面，JavaScript没有能力，也没有必要做得更多。对于JavaScript的设计模式实现来说，不区分类型是一种失色，也可以说是一种解脱。</p>
+<p>从设计模式的角度出发，封装在更重要的层面体现为<strong>封装变化</strong>。<br>《设计模式》提到的“找到变化并封装之”。《设计模式》一书中共归纳总结了23种设计模式。从意图上区分，这23种设计模式分别被划分为创建型模式、结构型模式和行为型模式。</p>
+<p>拿创建型模式来说，要创建一个对象，是一种抽象行为，而具体创建什么对象则是可以变化的，创建型模式的目的就是封装创建对象的变化。而结构型模式封装的是对象之间的组合关系。行为型模式封装的是对象的行为变化。<br>通过封装变化的方式，把系统中稳定不变的部分和容易变化的部分隔离开来，在系统的演变过程中，只需要替换那些容易变化的部分，如果这些部分是已经封装好的，替换起来也相对容易。这可以最大程度地保证程序的稳定性和可扩展性。</p>
+<h4 id="原型模式和基于原型继承的JavaScript对象系统"><a href="#原型模式和基于原型继承的JavaScript对象系统" class="headerlink" title="原型模式和基于原型继承的JavaScript对象系统"></a>原型模式和基于原型继承的JavaScript对象系统</h4><p>在以类为中心的面向对象编程语言中，类和对象的关系可以想象成铸模和铸件的关系，对象总是从类中创建而来。而在原型编程的思想中，类并不是必需的，对象未必需要从类中创建而来，一个对象是通过克隆另外一个对象所得到的。</p>
+<p>原型模式不单是一种设计模式，也被称为一种编程泛型。</p>
+<p>从设计模式的角度讲，原型模式是用于创建对象的一种模式，如果想要创建一个对象，一种方法是先指定它的类型，然后通过类来创建这个对象。原型模式选择了另外一种方式，不再关心对象的具体类型，而是找到一个对象，然后通过克隆来创建一个一模一样的对象。既然原型模式是通过克隆来创建对象的，那么很自然地会想到，如果需要一个跟某个对象一模一样的对象，就可以使用原型模式。</p>
+<p>原型模式的实现关键，是语言本身是否提供了clone方法。ECMAScript5提供了Object.create方法，可以用来克隆对象。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Plane = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">this</span>.blood = <span class="number">100</span>; </span><br><span class="line">  <span class="keyword">this</span>.attackLevel = <span class="number">1</span>; </span><br><span class="line">  <span class="keyword">this</span>.defenseLevel = <span class="number">1</span>; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="keyword">var</span> plane = <span class="keyword">new</span> Plane(); </span><br><span class="line">    plane.blood = <span class="number">500</span>; </span><br><span class="line">    plane.attackLevel = <span class="number">10</span>; </span><br><span class="line">    plane.defenseLevel = <span class="number">7</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> clonePlane = <span class="built_in">Object</span>.create( plane ); </span><br><span class="line"><span class="built_in">console</span>.log( clonePlane ); <span class="comment">// 输 出： Object &#123;blood: 500, attackLevel: 10, defenseLevel: 7&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在不支持Object.create方法的浏览器中，则可以使用以下代码：</span></span><br><span class="line"><span class="built_in">Object</span>.create = <span class="built_in">Object</span>.create | | <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line">  F.prototype = obj;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F(); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>克隆是创建对象的手段，原型模式的真正目的并非在于需要得到一个一模一样的对象，而是提供了一种便捷的方式去创建某个类型的对象，克隆只是创建这个对象的过程和手段。</p>
+<p>在用Java等静态类型语言编写程序的时候，类型之间的解耦非常重要。依赖倒置原则提醒创建对象的时候要避免依赖具体类型，而用newXXX创建对象的方式显得很僵硬。工厂方法模式和抽象工厂模式可以帮助解决这个问题，但这两个模式会带来许多跟产品类平行的工厂类层次，也会增加很多额外的代码。</p>
+<p>原型模式提供了另外一种创建对象的方式，通过克隆对象，就不用再关心对象的具体类型名字。在JavaScript这种类型模糊的语言中，创建对象非常容易，也不存在类型耦合的问题。从设计模式的角度来讲，原型模式的意义并不算大。但JavaScript本身是一门基于原型的面向对象语言，它的对象系统就是使用原型模式来搭建的，在这里称之为原型编程范型也许更合适。</p>
+<p>原型编程范型至少包括以下基本规则:</p>
+<ul>
+<li>所有的数据都是对象。</li>
+<li>要得到一个对象，不是通过实例化类，而是找到一个对象作为原型并克隆它。</li>
+<li>对象会记住它的原型。</li>
+<li>如果对象无法响应某个请求，它会把这个请求委托给它自己的原型。</li>
+</ul>
+<p>JavaScript在设计的时候，模仿Java引入了两套类型机制：基本类型和对象类型。基本类型包括undefined、number、boolean、string、function、object。按照JavaScript设计者的本意，除了undefined之外，一切都应是对象。为了实现这一目标，number、boolean、string这几种基本类型数据也可以通过“包装类”的方式变成对象类型数据来处理。</p>
+<p>JavaScript中的根对象是Object.prototype对象。Object.prototype对象是一个空的对象。在JavaScript遇到的每个对象，实际上都是从Object.prototype对象克隆而来的，Object.prototype对象就是它们的原型。</p>
+<p>在JavaScript语言里，并不需要关心克隆的细节，因为这是引擎内部负责实现的。所需要做的只是显式地调用varobj1=newObject()或者varobj2={}。此时，引擎内部会从Object.prototype上面克隆一个对象出来，最终得到的就是这个对象。<br>JavaScript的函数既可以作为普通函数被调用，也可以作为构造器被调用。当使用new运算符来调用函数时，此时的函数就是一个构造器。用new运算符来创建对象的过程，实际上也只是先克隆Object.prototype对象，再进行一些其他额外操作的过程。具体细节可以参阅《JavaScript语言精髓与编程实践》。</p>
+<p>在Chrome和Firefox等向外暴露了对象<code>__proto__</code>属性的浏览器下，可以通过下面这段代码来理解new运算的过程：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"> name </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">this</span>.name = name; </span><br><span class="line">&#125;; </span><br><span class="line">Person.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="keyword">var</span> objectFactory = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(), <span class="comment">// 从 Object.prototype 上 克 隆 一 个 空 的 对 象 </span></span><br><span class="line">  Constructor = [].shift.call( <span class="built_in">arguments</span> ); <span class="comment">// 取 得 外 部 传 入 的 构 造 器， 此 例 是 Person </span></span><br><span class="line">  obj.__proto__ = Constructor.prototype; <span class="comment">// 指 向 正 确 的 原 型 </span></span><br><span class="line">  <span class="keyword">var</span> ret = Constructor.apply( obj, <span class="built_in">arguments</span> ); <span class="comment">// 借 用 外 部 传 入 的 构 造 器 给 obj 设 置 属 性 </span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> ret === <span class="string">'object'</span> ? ret : obj; <span class="comment">// 确 保 构 造 器 总 是 会 返 回 一 个 对 象 </span></span><br><span class="line">&#125;; </span><br><span class="line"><span class="keyword">var</span> a = objectFactory( Person, <span class="string">'sven'</span> ); </span><br><span class="line"><span class="built_in">console</span>.log( a.name ); <span class="comment">// 输 出： sven </span></span><br><span class="line"><span class="built_in">console</span>.log( a.getName() ); <span class="comment">// 输 出： sven</span></span><br></pre></td></tr></table></figure></p>
+<p>如果请求可以在一个链条中依次往后传递，那么每个节点都必须知道它的下一个节点。同理，要完成JavaScript语言中的原型链查找机制，每个对象至少应该先记住它自己的原型。“对象的原型”，就JavaScript的真正实现来说，其实并不能说对象有原型，而只能说对象的构造器有原型。对于“对象把请求委托给它自己的原型”这句话，更好的说法是对象把请求委托给它的构造器的原型。那么对象如何把请求顺利地转交给它的构造器的原型呢？<br>JavaScript给对象提供了一个名为<code>__proto__</code>的隐藏属性，某个对象的<code>__proto__</code>属性默认会指向它的构造器的原型对象，即{Constructor}.prototype。</p>
+<p>实际上，<code>__proto__</code>就是对象跟“对象构造器的原型”联系起来的纽带。正因为对象要通过<code>__proto__</code>属性来记住它的构造器的原型，所以用objectFactory函数来模拟用new创建对象时，需要手动给obj对象设置正确的<code>__proto__</code>指向。<br><code>obj.__proto__=Constructor.prototype;</code>让<code>obj.__proto__</code>指向Person.prototype，而不是原来的Object.prototype。</p>
+<p>在JavaScript中，每个对象都是从Object.prototype对象克隆而来的，如果是这样的话，只能得到单一的继承关系，即每个对象都继承自Object.prototype对象，这样的对象系统显然是非常受限的。<br>实际上，虽然JavaScript的对象最初都是由Object.prototype对象克隆而来的，但对象构造器的原型并不仅限于Object.prototype上，而是可以动态指向其他对象。这样一来，当对象a需要借用对象b的能力时，可以有选择性地把对象a的构造器的原型指向对象b，从而达到继承的效果。下面的代码是最常用的原型继承方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">name</span>: <span class="string">'sven'</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> A = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line">A.prototype = obj; </span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A(); </span><br><span class="line"><span class="built_in">console</span>.log( a.name ); <span class="comment">// 输 出： sven</span></span><br></pre></td></tr></table></figure></p>
+<p>来看看执行这段代码的时候，引擎做了哪些事情。</p>
+<ol>
+<li>首先，尝试遍历对象a中的所有属性，但没有找到name这个属性。</li>
+<li>查找name属性的这个请求被委托给对象a的构造器的原型，它被<code>a.__proto__</code>记录着并且指向A.prototype，而A.prototype被设置为对象obj。</li>
+<li>在对象obj中找到了name属性，并返回它的值。</li>
+</ol>
+<p>当期望得到一个“类”继承自另外一个“类”的效果时，往往会用下面的代码来模拟实现：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line">A.prototype = &#123; <span class="attr">name</span>: <span class="string">'sven'</span> &#125;; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">B.prototype = <span class="keyword">new</span> A();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B(); </span><br><span class="line"><span class="built_in">console</span>.log( b.name ); <span class="comment">// 输 出： sven</span></span><br></pre></td></tr></table></figure></p>
+<p>再看这段代码执行的时候，引擎做了什么事情。<br>首先，尝试遍历对象b中的所有属性，但没有找到name这个属性。查找name属性的请求被委托给对象b的构造器的原型，它被<code>b.__proto__</code>记录着并且指向B.prototype，而B.prototype被设置为一个通过newA()创建出来的对象。在该对象中依然没有找到name属性，于是请求被继续委托给这个对象构造器的原型A.prototype。在A.prototype中找到了name属性，并返回它的值。</p>
+<p>和把B.prototype直接指向一个字面量对象相比，通过B.prototype=newA()形成的原型链比之前多了一层。但二者之间没有本质上的区别，都是将对象构造器的原型指向另外一个对象，继承总是发生在对象和对象之间。</p>
+<p>Object.create就是原型模式的天然实现。使用Object.create来完成原型继承看起来更能体现原型模式的精髓。目前大多数主流浏览器都提供了Object.create方法。但美中不足是在当前的JavaScript引擎下，通过Object.create来创建对象的效率并不高，通常比通过构造函数创建对象要慢。此外还有一些值得注意的地方，比如通过设置构造器的prototype来实现原型继承的时候，除了根对象Object.prototype本身之外，任何对象都会有一个原型。而通过Object.create(null)可以创建出没有原型的对象。</p>
+<p>另外，ECMAScript6带来了新的Class语法。这让JavaScript看起来像是一门基于类的语言，但其背后仍是通过原型机制来创建对象。通过Class创建对象的一段简单示例代码如下所示：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name)&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  getName()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name)&#123;</span><br><span class="line">    <span class="keyword">super</span>(name);</span><br><span class="line">  &#125;</span><br><span class="line">  speak()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'woo'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog(<span class="string">'foo'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(dog.getName() + <span class="string">' '</span> + dog.speak());</span><br></pre></td></tr></table></figure></p>
+<h3 id="this、call和apply"><a href="#this、call和apply" class="headerlink" title="this、call和apply"></a>this、call和apply</h3><p>在JavaScript编程中，this关键字总是让人感到迷惑，Function.prototype.call和Function.prototype.apply这两个方法也有着广泛的运用。</p>
+<h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><p>跟别的语言大相径庭的是，JavaScript的this总是指向一个对象，而具体指向哪个对象是在运行时基于函数的执行环境动态绑定的，而非函数被声明时的环境。</p>
+<h5 id="this的指向"><a href="#this的指向" class="headerlink" title="this的指向"></a>this的指向</h5><p>除去不常用的with和eval的情况，具体到实际应用中，this的指向大致可以分为以下4种。</p>
+<ul>
+<li>作为对象的方法调用。</li>
+<li>作为普通函数调用。</li>
+<li>构造器调用。</li>
+<li>Function.prototype.call或Function.prototype.apply调用。</li>
+</ul>
+<p><strong>1. 作为对象的方法调用</strong><br>当函数作为对象的方法被调用时，this指向该对象：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; </span><br><span class="line">  a: <span class="number">1</span>, </span><br><span class="line">  getA: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert ( <span class="keyword">this</span> === obj ); <span class="comment">// 输 出： true </span></span><br><span class="line">  alert ( <span class="keyword">this</span>.a ); <span class="comment">// 输 出: 1 </span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line">obj.getA();</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 作为普通函数调用</strong><br>当函数不作为对象的属性被调用时，也就是常说的普通函数方式，此时的this总是指向全局对象。在浏览器的JavaScript里，这个全局对象是window对象。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">'globalName'</span>;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(getName()); <span class="comment">// 输 出： globalName</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line"><span class="built_in">window</span>.name = <span class="string">'globalName'</span>;</span><br><span class="line"><span class="keyword">var</span> myObject = &#123;</span><br><span class="line">  name: <span class="string">'sven'</span>,</span><br><span class="line">  getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> getName = myObject.getName;</span><br><span class="line"><span class="built_in">console</span>.log(getName()); <span class="comment">// globalName</span></span><br></pre></td></tr></table></figure></p>
+<p>有时候会遇到一些困扰，比如在div节点的事件函数内部，有一个局部的callback方法，callback被作为普通函数调用时，callback内部的this指向了window，但往往是想让它指向该div节点，见如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.id = <span class="string">'window'</span>;</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id); <span class="comment">// 输 出：' div1' </span></span><br><span class="line">  <span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="keyword">this</span>.id); <span class="comment">// 输 出：' window' </span></span><br><span class="line">    &#125;</span><br><span class="line">  callback();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>此时有一种简单的解决方案，可以用一个变量保存div节点的引用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.id = <span class="string">'window'</span>;</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> that = <span class="keyword">this</span>; <span class="comment">// 保存div引用</span></span><br><span class="line">  <span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(that.id); <span class="comment">// 输 出：' window' </span></span><br><span class="line">    &#125;</span><br><span class="line">  callback();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在ECMAScript5的strict模式下，这种情况下的this已经被规定为不会指向全局对象，而是undefined：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line"><span class="meta">  "use strict"</span> </span><br><span class="line">  alert ( <span class="keyword">this</span> ); <span class="comment">// 输 出： undefined </span></span><br><span class="line">&#125; </span><br><span class="line">func();</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. 构造器调用</strong><br>JavaScript中没有类，但是可以从构造器中创建对象，同时也提供了new运算符，使得构造器看起来更像一个类。</p>
+<p>除了宿主提供的一些内置函数，大部分JavaScript函数都可以当作构造器使用。构造器的外表跟普通函数一模一样，它们的区别在于被调用的方式。当用new运算符调用函数时，该函数总会返回一个对象，通常情况下，构造器里的this就指向返回的这个对象，见如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="keyword">this</span>.name = <span class="string">'sven'</span>; &#125;; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> MyClass(); </span><br><span class="line">alert ( obj.name ); <span class="comment">// 输 出： sven</span></span><br></pre></td></tr></table></figure></p>
+<p>但用new调用构造器时，还要注意一个问题，如果构造器显式地返回了一个object类型的对象，那么此次运算结果最终会返回这个对象，而不是之前期待的this：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'sven'</span>;</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="comment">// 显 式 地 返 回 一 个 对 象 </span></span><br><span class="line">      name: <span class="string">'anne'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> MyClass();</span><br><span class="line">alert(obj.name); <span class="comment">// 输 出： anne</span></span><br></pre></td></tr></table></figure></p>
+<p>如果构造器不显式地返回任何数据，或者是返回一个非对象类型的数据，就不会造成上述问题：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'sven'</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'anne'</span>; <span class="comment">// 返 回 string 类 型 </span></span><br><span class="line">  &#125;;</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> MyClass();</span><br><span class="line">alert(obj.name); <span class="comment">// 输 出： sven</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>4. Function.prototype.call或Function.prototype.apply调用</strong><br>跟普通的函数调用相比，用Function.prototype.call或Function.prototype.apply可以动态地改变传入函数的this：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">  name: <span class="string">'sven'</span>,</span><br><span class="line">  getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">  name: <span class="string">'anne'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj1.getName()); <span class="comment">// 输 出: sven </span></span><br><span class="line"><span class="built_in">console</span>.log(obj1.getName.call(obj2)); <span class="comment">// 输 出： anne</span></span><br></pre></td></tr></table></figure></p>
+<p>call和apply方法能很好地体现JavaScript的函数式语言特性，在JavaScript中，几乎每一次编写函数式语言风格的代码，都离不开call和apply。在JavaScript诸多版本的设计模式中，也用到了call和apply</p>
+<h5 id="丢失的this"><a href="#丢失的this" class="headerlink" title="丢失的this"></a>丢失的this</h5><p>这是一个经常遇到的问题，先看下面的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  myName: <span class="string">'sven'</span>,</span><br><span class="line">  getName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.myName;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(obj.getName()); <span class="comment">// 输 出：' sven' </span></span><br><span class="line"><span class="keyword">var</span> getName2 = obj.getName;</span><br><span class="line"><span class="built_in">console</span>.log(getName2()); <span class="comment">// 输 出： undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>当调用obj.getName时，getName方法是作为obj对象的属性被调用的，此时的this指向obj对象，所以obj.getName()输出’sven’。</p>
+<p>当用另外一个变量getName2来引用obj.getName，并且调用getName2时，此时是普通函数调用方式，this是指向全局window的，所以程序的执行结果是undefined。</p>
+<p>再看另一个例子，document.getElementById这个方法名实在有点过长，大概尝试过用一个短的函数来代替它，如同prototype.js等一些框架所做过的事情：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getId = <span class="function"><span class="keyword">function</span>(<span class="params"> id </span>)</span>&#123; <span class="keyword">return</span> <span class="built_in">document</span>.getElementById( id ); &#125;; </span><br><span class="line">getId( <span class="string">'div1'</span> );</span><br></pre></td></tr></table></figure></p>
+<p>也许思考过为什么不能用下面这种更简单的方式：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getId = <span class="built_in">document</span>.getElementById; </span><br><span class="line">getId( <span class="string">'div1'</span> );</span><br></pre></td></tr></table></figure></p>
+<p>在Chrome、Firefox、IE10中执行过后就会发现，这段代码抛出了一个异常。这是因为许多引擎的document.getElementById方法的内部实现中需要用到this。这个this本来被期望指向document，当getElementById方法作为document对象的属性被调用时，方法内部的this确实是指向document的。</p>
+<p>但当用getId来引用document.getElementById之后，再调用getId，此时就成了普通函数调用，函数内部的this指向了window，而不是原来的document。可以尝试利用apply把document当作this传入getId函数，帮助“修正”this：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById = (<span class="function"><span class="keyword">function</span>(<span class="params">func</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> func.apply(<span class="built_in">document</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(<span class="built_in">document</span>.getElementById);</span><br><span class="line"><span class="keyword">var</span> getId = <span class="built_in">document</span>.getElementById;</span><br><span class="line"><span class="keyword">var</span> div = getId(<span class="string">'div1'</span>);</span><br><span class="line">alert(div.id); <span class="comment">// 输 出： div1</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="call和apply"><a href="#call和apply" class="headerlink" title="call和apply"></a>call和apply</h4><p>ECAMScript3给Function的原型定义了两个方法，它们是Function.prototype.call和Function.prototype.apply。在实际开发中，特别是在一些函数式风格的代码编写中，call和apply方法尤为有用。在JavaScript版本的设计模式中，这两个方法的应用也非常广泛，能熟练运用这两个方法，是真正成为一名JavaScript程序员的重要一步。</p>
+<h5 id="call和apply的区别"><a href="#call和apply的区别" class="headerlink" title="call和apply的区别"></a>call和apply的区别</h5><p>Function.prototype.call和Function.prototype.apply都是非常常用的方法。它们的作用一模一样，区别仅在于传入参数形式的不同。</p>
+<p>apply接受两个参数，第一个参数指定了函数体内this对象的指向，第二个参数为一个带下标的集合，这个集合可以为数组，也可以为类数组，apply方法把这个集合中的元素作为参数传递给被调用的函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">    alert([a, b, c]); <span class="comment">// 输 出 [ 1, 2, 3 ] </span></span><br><span class="line">  &#125;;</span><br><span class="line">func.apply(<span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>在这段代码中，参数1、2、3被放在数组中一起传入func函数，它们分别对应func参数列表中的a、b、c。call传入的参数数量不固定，跟apply相同的是，第一个参数也是代表函数体内的this指向，从第二个参数开始往后，每个参数被依次传入函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">    alert([a, b, c]); <span class="comment">// 输 出 [ 1, 2, 3 ]</span></span><br><span class="line">  &#125;;</span><br><span class="line">func.call(<span class="literal">null</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
+<p>当调用一个函数时，JavaScript的解释器并不会计较形参和实参在数量、类型以及顺序上的区别，JavaScript的参数在内部就是用一个数组来表示的。从这个意义上说，apply比call的使用率更高，不必关心具体有多少参数被传入函数，只要用apply一股脑地推过去就可以了。</p>
+<p>call是包装在apply上面的一颗语法糖，如果明确地知道函数接受多少个参数，而且想一目了然地表达形参和实参的对应关系，那么也可以用call来传送参数。</p>
+<p>当使用call或者apply的时候，如果传入的第一个参数为null，函数体内的this会指向默认的宿主对象，在浏览器中则是window：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span> === <span class="built_in">window</span>); <span class="comment">// 输 出 true </span></span><br><span class="line">  &#125;;</span><br><span class="line">func.apply(<span class="literal">null</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>但如果是在严格模式下，函数体内的this还是为null：</p>
+<p>有时候使用call或者apply的目的不在于指定this指向，而是另有用途，比如借用其他对象的方法。那么可以传入null来代替某个具体的对象：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.max.apply( <span class="literal">null</span>, [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span> ] ) <span class="comment">// 输 出： 5</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="call和apply的用途"><a href="#call和apply的用途" class="headerlink" title="call和apply的用途"></a>call和apply的用途</h5><p>在实际开发中的用途</p>
+<p><strong>1.改变this指向</strong><br>call和apply最常见的用途是改变函数内部的this指向，来看个例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">  name: <span class="string">'sven'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj2 = &#123;</span><br><span class="line">  name: <span class="string">'anne'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">window</span>.name = <span class="string">'window'</span>;</span><br><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">  &#125;;</span><br><span class="line">getName(); <span class="comment">// 输 出: window </span></span><br><span class="line">getName.call(obj1); <span class="comment">// 输 出: sven </span></span><br><span class="line">getName.call(obj2); <span class="comment">// 输 出: anne</span></span><br></pre></td></tr></table></figure></p>
+<p>当执行getName.call(obj1)这句代码时，getName函数体内的this就指向obj1对象，所以此处的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert ( <span class="keyword">this</span>.name ); &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>实际上相当于：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert ( obj1. name );&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在实际开发中，经常会遇到this指向被不经意改变的场景，比如有一个div节点，div节点的onclick事件中的this本来是指向这个div的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id); <span class="comment">// 输 出： div1 </span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>假如该事件函数中有一个内部函数func，在事件内部调用func函数时，func函数体内的this就指向了window，而不是预期的div，见如下代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.id); <span class="comment">// 输 出： div1</span></span><br><span class="line">  <span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="keyword">this</span>.id); <span class="comment">// 输 出： undefined </span></span><br><span class="line">    &#125;</span><br><span class="line">  func();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>这时候用call来修正func函数内的this，使其依然指向div：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="keyword">this</span>.id); <span class="comment">// 输 出： div1 </span></span><br><span class="line">    &#125;</span><br><span class="line">  func.call(<span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>使用call来修正this的场景，比如修正document.getElementById函数内部“丢失”的this，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById = (<span class="function"><span class="keyword">function</span>(<span class="params">func</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> func.apply(<span class="built_in">document</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(<span class="built_in">document</span>.getElementById);</span><br><span class="line"><span class="keyword">var</span> getId = <span class="built_in">document</span>.getElementById;</span><br><span class="line"><span class="keyword">var</span> div = getId(<span class="string">'div1'</span>);</span><br><span class="line">alert(div.id); <span class="comment">// 输 出： div1</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>2. Function.prototype.bind</strong><br>大部分高级浏览器都实现了内置的Function.prototype.bind，用来指定函数内部的this指向，即使没有原生的Function.prototype.bind实现，来模拟一个也不是难事，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>; <span class="comment">// 保 存 原 函 数 </span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">// 返 回 一 个 新 的 函 数 </span></span><br><span class="line">    <span class="keyword">return</span> self.apply(context, <span class="built_in">arguments</span>); <span class="comment">// 执 行 新 的 函 数 的 时 候， 会 把 之 前 传 入 的 context 当 作 新 函 数 体 内 的 this</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">'sven'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name); <span class="comment">// 输 出： sven </span></span><br><span class="line">  &#125;.bind(obj);</span><br><span class="line">func();</span><br></pre></td></tr></table></figure></p>
+<p>通过Function.prototype.bind来“包装”func函数，并且传入一个对象context当作参数，这个context对象就是想修正的this对象。</p>
+<p>在Function.prototype.bind的内部实现中，先把func函数的引用保存起来，然后返回一个新的函数。当在将来执行func函数时，实际上先执行的是这个刚刚返回的新函数。在新函数内部，self.apply(context,arguments)这句代码才是执行原来的func函数，并且指定context对象为func函数体内的this。</p>
+<p>这是一个简化版的Function.prototype.bind实现，通常还会把它实现得稍微复杂一点，使得可以往func函数中预先填入一些参数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.prototype.bind = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> self = <span class="keyword">this</span>,</span><br><span class="line">    <span class="comment">// 保 存 原 函 数 </span></span><br><span class="line">    context = [].shift.call(<span class="built_in">arguments</span>),</span><br><span class="line">    <span class="comment">// 需 要 绑 定 的 this 上 下 文 </span></span><br><span class="line">    args = [].slice.call(<span class="built_in">arguments</span>); <span class="comment">// 剩 余 的 参 数 转 成 数 组</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">// 返 回 一 个 新 的 函 数 </span></span><br><span class="line">	<span class="comment">// 执 行 新 的 函 数 的 时 候， 会 把 之 前 传 入 的 context 当 作 新 函 数 体 内 的 this </span></span><br><span class="line">	<span class="comment">// 并 且 组 合 两 次 分 别 传 入 的 参 数， 作 为 新 函 数 的 参 数 </span></span><br><span class="line">    <span class="keyword">return</span> self.apply(context, [].concat.call(args, [].slice.call(<span class="built_in">arguments</span>))); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">'sven'</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params">a, b, c, d</span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name); <span class="comment">// 输 出： sven </span></span><br><span class="line">    alert([a, b, c, d]) <span class="comment">// 输 出：[ 1, 2, 3, 4 ] </span></span><br><span class="line">  &#125;.bind(obj, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">func(<span class="number">3</span>, <span class="number">4</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. 借用其他对象的方法</strong><br>借用方法的第一种场景是“借用构造函数”，可以实现一些类似继承的效果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    A.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">B.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B(<span class="string">'sven'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(b.getName()); <span class="comment">// 输 出： 'sven'</span></span><br></pre></td></tr></table></figure></p>
+<p>第二种运用场景，函数的参数列表arguments是一个类数组对象，虽然它也有“下标”，但它并非真正的数组，所以也不能像数组一样，进行排序操作或者往集合里添加一个新的元素。这种情况下，常常会借用Array.prototype对象上的方法。</p>
+<p>比如想往arguments中添加一个新的元素，通常会借用Array.prototype.push：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Array</span>.prototype.push.call(<span class="built_in">arguments</span>, <span class="number">3</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>); <span class="comment">// 输 出[ 1,2,3] </span></span><br><span class="line">&#125;)(<span class="number">1</span>, <span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
+<p>在操作arguments的时候，经常非常频繁地找Array.prototype对象借用方法。</p>
+<p>想把arguments转成真正的数组的时候，可以借用Array.prototype.slice方法；想截去arguments列表中的头一个元素时，又可以借用Array.prototype.shift方法。</p>
+<p>这种机制的内部实现原理是什么呢？V8的引擎源码，以Array.prototype.push为例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ArrayPush</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = TO_UINT32(<span class="keyword">this</span>.length); <span class="comment">// 被 push 的 对 象 的 length </span></span><br><span class="line">  <span class="keyword">var</span> m = % _ArgumentsLength(); <span class="comment">// push 的 参 数 个 数 </span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">    <span class="keyword">this</span>[i + n] = % _Arguments(i); <span class="comment">// 复 制 元 素 (1) </span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.length = n + m; <span class="comment">// 修 正 length 属 性 的 值 (2) </span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.length;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>通过这段代码可以看到，Array.prototype.push实际上是一个属性复制的过程，把参数按照下标依次添加到被push的对象上面，顺便修改了这个对象的length属性。至于被修改的对象是谁，到底是数组还是类数组对象，这一点并不重要。</p>
+<p>由此可以推断，可以把“任意”对象传入Array.prototype.push：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"><span class="built_in">Array</span>.prototype.push.call(a, <span class="string">'first'</span>);</span><br><span class="line">alert(a.length); <span class="comment">// 输 出： 1 </span></span><br><span class="line">alert(a[<span class="number">0</span>]); <span class="comment">// first</span></span><br></pre></td></tr></table></figure></p>
+<p>这段代码在绝大部分浏览器里都能顺利执行，但由于引擎的内部实现存在差异，如果在低版本的IE浏览器中执行，必须显式地给对象a设置length属性：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; <span class="attr">length</span>: <span class="number">0</span> &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>前面之所以把“任意”两字加了双引号，是因为可以借用Array.prototype.push方法的对象还要满足以下两个条件，从ArrayPush函数的(1)处和(2)处也可以猜到，这个对象至少还要满足：</p>
+<ul>
+<li>对象本身要可以存取属性；</li>
+<li>对象的length属性可读写。</li>
+</ul>
+<p>对于第一个条件，对象本身存取属性并没有问题，但如果借用Array.prototype.push方法的不是一个object类型的数据，而是一个number类型的数据呢?无法在number身上存取其他数据，那么从下面的测试代码可以发现，一个number类型的数据不可能借用到Array.prototype.push方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">Array</span>.prototype.push.call(a, <span class="string">'first'</span>);</span><br><span class="line">alert(a.length); <span class="comment">// 输 出： undefined</span></span><br><span class="line">alert(a[<span class="number">0</span>]); <span class="comment">// 输 出： undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>对于第二个条件，函数的length属性就是一个只读的属性，表示形参的个数，尝试把一个函数当作this传入Array.prototype.push：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="built_in">Array</span>.prototype.push.call(func, <span class="string">'first'</span>);</span><br><span class="line">alert(func.length); <span class="comment">// 报 错： cannot assign to read only property ‘length’ of function()&#123;&#125;</span></span><br></pre></td></tr></table></figure></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/11/01/js-pattern/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/10/20/angular13/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

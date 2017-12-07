@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JavaScript高级程序设计-24-Ajax和Comet | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,ajax,js-pro,comet,web sockets">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JavaScript高级程序设计-24-Ajax和Comet | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="ajax"> <meta property="og:article:tag" content="js-pro"> <meta property="og:article:tag" content="comet"> <meta property="og:article:tag" content="web sockets"> 
+
+    
+        <meta property="article:published_time" content="Wed Sep 14 2016 19:07:57 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:09 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JavaScript高级程序设计-24-Ajax和Comet | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2016/09/14/js-pro24/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2016/09/14/js-pro24/index.html",
+    "headline": "JavaScript高级程序设计-24-Ajax和Comet",
+    "datePublished": "Wed Sep 14 2016 19:07:57 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,ajax,js-pro,comet,web socketsnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#XMLHttpRequest对象"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#XMLHttpRequest&#x5BF9;&#x8C61;" class="headerlink" title="XMLHttpRequest&#x5BF9;&#x8C61;"></a>XMLHttpRequest&#x5BF9;&#x8C61;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#HTTP头部信息"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#HTTP&#x5934;&#x90E8;&#x4FE1;&#x606F;" class="headerlink" title="HTTP&#x5934;&#x90E8;&#x4FE1;&#x606F;"></a>HTTP&#x5934;&#x90E8;&#x4FE1;&#x606F;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#GET和POST请求"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#GET&#x548C;POST&#x8BF7;&#x6C42;" class="headerlink" title="GET&#x548C;POST&#x8BF7;&#x6C42;"></a>GET&#x548C;POST&#x8BF7;&#x6C42;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#XHR2-0"><span class="post-toc-number">1.3.</span> <span class="post-toc-text"><a href="#XHR2-0" class="headerlink" title="XHR2.0"></a>XHR2.0</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#进度"><span class="post-toc-number">1.4.</span> <span class="post-toc-text"><a href="#&#x8FDB;&#x5EA6;" class="headerlink" title="&#x8FDB;&#x5EA6;"></a>&#x8FDB;&#x5EA6;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#跨域资源共享"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x8DE8;&#x57DF;&#x8D44;&#x6E90;&#x5171;&#x4EAB;" class="headerlink" title="&#x8DE8;&#x57DF;&#x8D44;&#x6E90;&#x5171;&#x4EAB;"></a>&#x8DE8;&#x57DF;&#x8D44;&#x6E90;&#x5171;&#x4EAB;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Comet"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#Comet" class="headerlink" title="Comet"></a>Comet</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#服务器推送技术"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x670D;&#x52A1;&#x5668;&#x63A8;&#x9001;&#x6280;&#x672F;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x63A8;&#x9001;&#x6280;&#x672F;"></a>&#x670D;&#x52A1;&#x5668;&#x63A8;&#x9001;&#x6280;&#x672F;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Web-Sockets"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"><a href="#Web-Sockets" class="headerlink" title="Web Sockets"></a>Web Sockets</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JavaScript高级程序设计-24-Ajax和Comet
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Sep 14, 2016</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/ajax/">ajax</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/comet/">comet</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js-pro/">js-pro</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/web-sockets/">web sockets</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript高级程序设计-24-Ajax和Comet&url=https://github.com/xmoyKING/2016/09/14/js-pro24/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript高级程序设计-24-Ajax和Comet&url=https://github.com/xmoyKING/2016/09/14/js-pro24/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2016/09/14/js-pro24/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2016/09/14/js-pro24/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>ajxa是基于XHR的，熟练使用XHR非常重要。</p>
+<h3 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h3><p>IE7+以及其他浏览器都支持XHR1.0，XHR现在是2.0版本。通过<code>new XMLHttpRequest()</code>创建XHR对象，然后调用open方法指定要发起请求的类型（GET、POST），url，是否异步（true为异步，false为同步）。</p>
+<p>然后调用send将要发送的数据传入即可，不传入数据时传入null，send执行后，发起请求后才会收到返回的status数据</p>
+<p>xhr在创建后，其对象内有一个readyState属性用于表示当前请求过程的阶段：</p>
+<ul>
+<li>0 为初始化、尚未调用xhr.open方法</li>
+<li>1 启动，open执行，但send未执行</li>
+<li>2 发生，send执行，但尚未收到响应</li>
+<li>3 接收，收到部分数据</li>
+<li>4 完成，接受到全部数据</li>
+</ul>
+<p>每当readyState发生改变时，会触发readystatechange事件，此时可以对onreadystatechange事件进行监听（必须在open之前，而且只能使用DOM0级的方式）。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;   <span class="comment">// 此处没有event对象，返回的数据在xhr对象中</span></span><br><span class="line">  xhr.responseText; <span class="comment">// 响应数据</span></span><br><span class="line">  xhr.responseXml; <span class="comment">// xml格式的响应数据，必须是xml格式，若不是则为null</span></span><br><span class="line">  xhr.status; <span class="comment">// 状态码</span></span><br><span class="line">  xhr.statusText; <span class="comment">// 状态名</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在send后，可以执行abort方法取消请求。因为xhr内存对象的问题，建议在停止请求后取消对xhr对象的引用。</p>
+<h4 id="HTTP头部信息"><a href="#HTTP头部信息" class="headerlink" title="HTTP头部信息"></a>HTTP头部信息</h4><p>每次发起xhr请求时都会同时将一些HTTP头部信息发送到服务器：</p>
+<ul>
+<li>Accept 浏览器能够处理的内容类型</li>
+<li>Accept-Charset 浏览器能够显示的字符集</li>
+<li>Accept-Encoding 浏览器能够处理的压缩编码</li>
+<li>Accept-Language 浏览器当前的语言</li>
+<li>Connection 浏览器当前与服务器之间链接的类型</li>
+<li>Cookie 当前页面的Cookie</li>
+<li>Host 请求页面的域</li>
+<li>Referer 请求页面的URL（HTTP规范拼写错误，正确的应该时referrer，但将错就错了）</li>
+<li>User-agent 浏览器用户代理字符串</li>
+</ul>
+<p>使用setRequestHeader(headerName, value)可以设置自定义的请求头信息。getRequestHeader(‘headerName’)可以获取对应头部信息，getAllRequestHeaders可以获取所有的头部信息<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xhr.setRequestHeader(<span class="string">'MyHeader'</span>, <span class="string">'value'</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="GET和POST请求"><a href="#GET和POST请求" class="headerlink" title="GET和POST请求"></a>GET和POST请求</h4><p>当发起GET请求时，需要对查询字符串的每个值和键名用encodeURIComponent进行编码才能放到URL末尾，键值对之间用&amp;符号分割。</p>
+<p>当发起POST请求时，默认情况下服务器对XHR请求和Web表单的请求不是一视同仁的，所以一般情况下为了兼容，除非特殊情况，否则对XHR请求伪装一下，模仿表单提交，将Content-Type头部设置为application/x-www-form-urlencoded, 其实Web的POST数据格式和查询字符串格式相同，所以可以用serialize方法将表单序列化然后传递给服务器。</p>
+<h4 id="XHR2-0"><a href="#XHR2-0" class="headerlink" title="XHR2.0"></a>XHR2.0</h4><p>XHR2级规范不是所有浏览器都实现了，但基本的内容都实现了。</p>
+<p>XHR2级规范了FormData类型，为序列化表单以及创建与表单格式相同的数据提供遍历，XHR对象能自动识别传入的数据类型是FormData的实例，所以可以不必明确在XHR对象上设置头部。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> FormData();</span><br><span class="line">data.append(<span class="string">'name'</span>, <span class="string">'value'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以通过传入表单初始化数据</span></span><br><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> FormData(<span class="built_in">document</span>.forms[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最后使用send发送即可</span></span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure></p>
+<p>XHR2.0规范添加了对timeout超时事件的处理，但只有IE8+支持。</p>
+<h4 id="进度"><a href="#进度" class="headerlink" title="进度"></a>进度</h4><p>W3C有一个Progress Events规范的草案，用于定义客户端服务器之间通信的进度事件。分为以下几种：</p>
+<ul>
+<li>loadstart 接收到响应数据第一个字节时触发</li>
+<li>progress 接收响应期间不断触发</li>
+<li>error 发生错误时触发</li>
+<li>abort 因调用abort方法而终止时触发</li>
+<li>load 接收完成时触发</li>
+<li>loadend 通信结束触发（包括abort、load、error），目前没有浏览器支持</li>
+</ul>
+<p>在onprogress事件处理过程中，event对象中有三个额外的属性：</p>
+<ul>
+<li>lengthComputable 表示进度信息是否可用的布尔值</li>
+<li>position 表示已经接收到的字节数</li>
+<li>totalSize 表示预期字节数（根据响应头部的Content-Length得出）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xhr.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(event.lengthComputable)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'received'</span>+ event.position + <span class="string">' of '</span> + event.totalSize+ <span class="string">' bytes!'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="跨域资源共享"><a href="#跨域资源共享" class="headerlink" title="跨域资源共享"></a>跨域资源共享</h3><p>CORS（Cross-Origin Resource Sharing）是W3C的一个草案，定义为在必须访问跨域资源时，浏览器与服务器应该如何沟通，CORS的基本思想是：使用自定义的HTTP头部让服务器和浏览器进行交互，从而决定请求或响应是否应该继续。</p>
+<p>比如，一个请求（主体内容是text/plain）发送时浏览器会自动添加一个额外的Origin头部，表示此请求的页面的源信息（即协议、域名、端口，例如<code>Origin: &#39;http://www.xxx.com&#39;</code>），让服务器知道是谁发起的请求，然后确定是否给与响应,若服务器认为此请求是合法的则在响应中添加一个自定义头部信息，内容与Origin相同,<code>Access-Control-Allow-Origin: &#39;http://www.xxx.com&#39;</code>，浏览器会自动解析响应中的头部，若响应头部的<code>Access-Control-Allow-Origin</code>和请求的<code>Origin</code>不匹配则浏览器会忽略响应同时报错。</p>
+<p>XHR标准原生支持跨域，但有一些限制：</p>
+<ul>
+<li>不能使用setRequestHeader方法设置自定义头部</li>
+<li>不带Cookie</li>
+<li>调用getAllResponseHeaders方法返回空字符串</li>
+</ul>
+<p>这样的限制是为了安全，尽量避免CSRF(Cross-Site Request Forgery 跨站请求伪造)和XSS(Cross-Site Scripting 跨站脚本)问题、</p>
+<p>IE8+引入的XDR(XDomianRequest)类型部分实现了CORS规范，与XHR类似，但有一些不同：</p>
+<ul>
+<li>只能是GET/POST</li>
+<li>只能设置Content-Type字段</li>
+<li>都是异步的，没有同步</li>
+<li>出错时只能用onerror事件监听到</li>
+</ul>
+<p>CORS虽然不能通过setRequestHeader方法设置自定义头部，但通过一个Preflighted Request（透明服务器验证机制）可以支持自定义头部、使用GET/POST之外的方法、不用类型的主体内容。使用时需要用到OPTION方法，除了Origin，同时会发送一些额外头部：</p>
+<ul>
+<li>Access-Control-Request-Method， 请求使用的方法</li>
+<li>Access-Control-Request-Headers, 自定义的头部信息，多个则用逗号分隔</li>
+</ul>
+<p>服务器接收到请求后也需要将上述的两个额外方法返回，同时会设置一个Access-Control-Max-Age用于表示此Preflight请求缓存时长</p>
+<p>默认情况下CORS是不需要发生凭据的（例如Cookie、HTTP认证信息、SSL证明等都视为凭据）,但通过将withCredentials属性为true可以指定某个请求发生凭据（IE10-不支持），若服务器接收此带凭据的请求则响应中带有<code>Access-Control-Allow-Crendentials:true</code>。若服务器没有返回此头部则浏览器不会将响应交给请求事件。</p>
+<p>其实，还有很多方式可以不依赖XHR对象，直接实现跨域请求，而且不用修改浏览器端代码。</p>
+<p>图像Ping：img标签可以从任何地址加载图像，不用担心跨域的问题，这也是在线广告跟踪浏览量的主要方式，动态创建img标记，通过onload和onerror事件来确定是否接收到了响应。<br>图像Ping是与服务器进行简单、单向的跨域通信的一种方式，请求的数据是通过查询字符串形式发送的，而响应可以是任意内容，但通常是像素图或204响应，通过图像Ping，浏览器得不到任何具体的数据，但通过监听load和error事件，能指定响应是什么时候接收到的。<br>缺点是只能发生GET请求，而且无法访问服务器的响应文本，即只能用于简单的单向通信。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line">img.src = <span class="string">'http://www.xx.com/test?name=value'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>JSONP,填充式JSON/参数式JSON(JSON with Padding)，是应用JSON的一种方法，JSONP其实就是服务器返回一个包含在函数调用同时附带的参数为JSON格式。一般情况下，请求由2部分组成：url和回调函数名,其中回调函数名即响应数据中执行语句的函数名。<br>JSONP是通过动态script元素来使用的，使用时为src指定一个跨域URL，因为script和img标签类似，都无视域的限制。<br>缺点是想要知道请求是否成功比较麻烦，虽然能通过onerror事件，但其支持不足。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">responseCallBackFunc</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">script.src = <span class="string">'http://www.xx.com/test/json?callback=responseCallBackFunc'</span>;</span><br><span class="line"><span class="built_in">document</span>.body.insertBefore(script, <span class="built_in">document</span>.body.firstChild);</span><br></pre></td></tr></table></figure></p>
+<h4 id="Comet"><a href="#Comet" class="headerlink" title="Comet"></a>Comet</h4><p>Comet是Alex Russll发明的一个词，指的是一种使用Ajax的技术，与Ajax从页面向服务器请求数据不同，Comet是一种服务器向页面推送数据的技术，Comet基本上能达到实时推送，这类技术被称为“服务器推送技术”。</p>
+<p>有两种Comet实现方式：<strong>*长轮询</strong>和<strong>HTTP流</strong></p>
+<p>长轮询是传统轮询（短轮询）的改版，即浏览器向服务器定时请求，看看有没有更新，优势是浏览器都支持，而且使用XHR对象和setTimeout即可实现。</p>
+<ul>
+<li>短轮询，每次请求服务器立即返回，连接关闭，然后一段时后页面又请求</li>
+<li>长轮询，每次请求服务器不立即返回，而是直到有数据才返回，连接关闭，页面处理完后立即再次请求<br>长轮询与短轮询都需要在浏览器接收数据之前发起请求，而两者的主要区别是：服务器如何响应，短轮询是服务器立即响应，无论是否有效，而长轮询是等待发生响应。</li>
+</ul>
+<p>HTTP流不同于轮询，因为它在页面的整个生命周期内只是用一次HTTP连接，具体就是浏览器向服务器发生一个请求，而服务器保存连接打开，然后周期性地向浏览器发生数据，即输出缓存然后刷新（将输出缓存中的内容一次性全部发生到客户端是后端语言都支持的）。<br>浏览器通过XHR对象实现流，对readystatechange事件检测readyState的值，当readyState的值为3时则表示responseText属性接收到了所有的数据，此时比较以前接收到的数据即可知道从何处开始是新数据，当readyState为4则表示连接关闭。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> received = <span class="number">0</span>,</span><br><span class="line">    xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(xhr.readyState == <span class="number">3</span>)&#123;</span><br><span class="line">    result = xhr.responseText.substring(received);</span><br><span class="line">    received += result.length;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>)&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="服务器推送技术"><a href="#服务器推送技术" class="headerlink" title="服务器推送技术"></a>服务器推送技术</h4><p>有新的标准为Comet创建了2个新的接口（IE不支持） ：<br>SSE（Server-Send Events 服务器推送事件）API用于创建到服务器的单向链接，服务器通过这个链接可以发生任意数据，服务器响应的MIME类型必须是text/event-stream，而浏览器中的js API能解析格式输出，SSE支持短轮询、长轮询、HTTP流，而且能在断开连接时自动重连。</p>
+<p>SSE的API与其他消息API类似，先创建一个EventSource对象并传入一个连接地址，此地址必须要同源，然后监听EventSource对象的事件即可。<br>EventSource有3个事件，open/message/error分别对应连接建立、收到响应数据、建立失败的情况。<br>EventSource对象有一个readyState属性，当值为0表示正在连接、1表示打开连接成功、2表示关闭了连接。响应的数据保存在event.data中。<br>最后可以调用close方法关闭连接而且不再自动重连。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> source = <span class="keyword">new</span> EventSource(<span class="string">'xxx.php'</span>);</span><br><span class="line"></span><br><span class="line">source.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  event.data; <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当响应的MIME类型为text/event-stream时，则表示此时为事件流，响应的格式是纯文本，且每个数据项都带有前缀<code>data:</code>,例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data: foo</span><br><span class="line">data: bar</span><br><span class="line">data: faa</span><br></pre></td></tr></table></figure></p>
+<p>则第一个message事件中event.data值为foo，第二个message事件中event.data值为bar，第三个message事件中event.data值为faa。<br>通过<code>id:</code>前缀可给指定的事件指定一个关联ID，这个ID位于<code>data:</code>行前后都可，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data: foo</span><br><span class="line">id: <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>通过id，EventSource对象会自动跟踪上次触发的事件，主要用在断开时向服务器发生一个包含名为Last-Event-ID的特殊HTTP头部请求，告知服务器下一次触发那个事件，在多次连接的事件流中，这种机制可以确保浏览器以正确的顺序收到连接的数据段。</p>
+<h4 id="Web-Sockets"><a href="#Web-Sockets" class="headerlink" title="Web Sockets"></a>Web Sockets</h4><p>Web Sockets的目标是在一个单独的持久链接上提供全双工、双向同学，在js创建Web Socket后会有一个HTTP请求发生到服务器，在取得服务器响应后，建立的连接会从HTTP变为Web Socket协议，因为标准的HTTP链接无法实现Web Sockets。</p>
+<p>由于WebSockets使用自定义的协议，所以URL模式和普通连接不用，未加密的连接是<code>ws://</code>，加密的连接是<code>wss://</code>，自定义协议的好处是能够在客户端和服务器之间交换少量的数据，而不必担心HTTP字节的开销，WebSocket非常适合移动应用，因为传递的数据包很小。但缺点是协议制定周期太长。</p>
+<p>WebSocket构造函数需要一个绝对地址，同时同源策略对其不适用，因此可以打开任何站点的链接，是否与某个域通信取决于服务器。在实例化Web Socket对象后浏览器会立即尝试创建链接，与XHR类似，有一个表示当前状态的readyState属性，但与XHR不同：</p>
+<ul>
+<li>WebSocket.OPENING，值为0，表示正在建立连接</li>
+<li>WebSocket.OPEN，值为1，表示已经建立连接</li>
+<li>WebSocket.CLOSING，值为2，表示正在关闭连接</li>
+<li>WebSocket.CLOSE，值为3，表示已经关闭连接<br>WebSocket的send方法用于发送数据（只能是文本数据），没有readystatechange事件，对应的是message事件，关闭连接为close方法，关闭后readyState值为2，成功关闭后为3。</li>
+</ul>
+<p>WebSocket对象的还有3个事件对应连接生命周期的不同阶段触发：</p>
+<ul>
+<li>open，在成功建立时触发</li>
+<li>error，发生错误时触发</li>
+<li>close，在连接关闭时触发<br>close事件中event对象有额外的信息，分别是：</li>
+<li>wasClean，布尔值，表示链接是否已经明确的关闭</li>
+<li>code，服务器返回的数值状态码</li>
+<li>reason，字符串，包含服务器发回的消息，一般用于记录日志或显示给用户</li>
+</ul>
+<p>WebSocket不支持DOM2级事件监听，只支持DOM0级。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">'ws://www.xxx.com/server'</span>);</span><br><span class="line">socket.onclose = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  event.data;</span><br><span class="line">&#125;</span><br><span class="line">socket.send(<span class="string">'&#123;name:king&#125;'</span>);</span><br><span class="line">socket.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  event.data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">socket.close();</span><br></pre></td></tr></table></figure></p>
+<p>SSE和WebSocket都能完成服务器推送的功能，如何选择需要考虑几个因数：</p>
+<ol>
+<li>由于WS协议不同于HTTP，所以需要服务器支持该协议</li>
+<li>是否需要双向通信，若只是读取服务器数据则SSE即可，但若需要双向通信则使用WS更好。而组合SSE和XHR也可以实现双向通信</li>
+</ol>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/09/17/js-pro25/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/09/11/js-pro23/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

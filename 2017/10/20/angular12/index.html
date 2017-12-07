@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Angular2入门-路由-1 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,typescript,angular">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Angular2入门-路由-1 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="typescript"> <meta property="og:article:tag" content="angular"> 
+
+    
+        <meta property="article:published_time" content="Fri Oct 20 2017 18:19:08 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:08 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Angular2入门-路由-1 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/10/20/angular12/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/10/20/angular12/index.html",
+    "headline": "Angular2入门-路由-1",
+    "datePublished": "Fri Oct 20 2017 18:19:08 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:08 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,typescript,angularnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概述和基本用法"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x6982;&#x8FF0;&#x548C;&#x57FA;&#x672C;&#x7528;&#x6CD5;" class="headerlink" title="&#x6982;&#x8FF0;&#x548C;&#x57FA;&#x672C;&#x7528;&#x6CD5;"></a>&#x6982;&#x8FF0;&#x548C;&#x57FA;&#x672C;&#x7528;&#x6CD5;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由策略"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x8DEF;&#x7531;&#x7B56;&#x7565;" class="headerlink" title="&#x8DEF;&#x7531;&#x7B56;&#x7565;"></a>&#x8DEF;&#x7531;&#x7B56;&#x7565;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#HashLocationStrategy策略"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#HashLocationStrategy&#x7B56;&#x7565;" class="headerlink" title="HashLocationStrategy&#x7B56;&#x7565;"></a>HashLocationStrategy&#x7B56;&#x7565;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#PathLocationStrategy策略"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#PathLocationStrategy&#x7B56;&#x7565;" class="headerlink" title="PathLocationStrategy&#x7B56;&#x7565;"></a>PathLocationStrategy&#x7B56;&#x7565;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由跳转"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;" class="headerlink" title="&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;"></a>&#x8DEF;&#x7531;&#x8DF3;&#x8F6C;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用指令跳转"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;&#x6307;&#x4EE4;&#x8DF3;&#x8F6C;" class="headerlink" title="&#x4F7F;&#x7528;&#x6307;&#x4EE4;&#x8DF3;&#x8F6C;"></a>&#x4F7F;&#x7528;&#x6307;&#x4EE4;&#x8DF3;&#x8F6C;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用代码跳转"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x8DF3;&#x8F6C;" class="headerlink" title="&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x8DF3;&#x8F6C;"></a>&#x4F7F;&#x7528;&#x4EE3;&#x7801;&#x8DF3;&#x8F6C;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#路由参数"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x8DEF;&#x7531;&#x53C2;&#x6570;" class="headerlink" title="&#x8DEF;&#x7531;&#x53C2;&#x6570;"></a>&#x8DEF;&#x7531;&#x53C2;&#x6570;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Path参数"><span class="post-toc-number">4.1.</span> <span class="post-toc-text"><a href="#Path&#x53C2;&#x6570;" class="headerlink" title="Path&#x53C2;&#x6570;"></a>Path&#x53C2;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Query参数"><span class="post-toc-number">4.2.</span> <span class="post-toc-text"><a href="#Query&#x53C2;&#x6570;" class="headerlink" title="Query&#x53C2;&#x6570;"></a>Query&#x53C2;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Matrix参数"><span class="post-toc-number">4.3.</span> <span class="post-toc-text"><a href="#Matrix&#x53C2;&#x6570;" class="headerlink" title="Matrix&#x53C2;&#x6570;"></a>Matrix&#x53C2;&#x6570;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Angular2入门-路由-1
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Oct 20, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/angular/">angular</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/typescript/">typescript</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Angular2入门-路由-1&url=https://github.com/xmoyKING/2017/10/20/angular12/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Angular2入门-路由-1&url=https://github.com/xmoyKING/2017/10/20/angular12/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/10/20/angular12/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/10/20/angular12/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>学习路由的相关内容，包括路由的基本原理、路由跳转、参数传递等。如何使用路由来对各组件进行管理，如何通过对各组件进行灵活搭配来满足不同业务场景的需求。</p>
+<h3 id="概述和基本用法"><a href="#概述和基本用法" class="headerlink" title="概述和基本用法"></a>概述和基本用法</h3><p>路由所需要解决的核心问题是通过建立URL和页面的对应关系，使得不同的页面可以用不同的URL来表示。主流前端框架围绕这个问题给了各自的路由实现，虽然语法和工作机制各不相同，但理念却殊途同归。</p>
+<p>在Angular中，页面由组件构成，因此URL和页面的对应关系实质上就是URL和组件的对应关系。建立URL和组件的对应关系可通过路由配置来指定。路由配置包含多个配置项，最简单的情况是一个配置项包含了path和component两个属性，path属性将被Angular用来生成一个URL，而component属性则指定了该URL所对应的组件。</p>
+<p>在定义了路由配置后，Angular路由将以其为依据，来管理应用中各个组件，路由的核心工作流程如下图：<br><img src="1.png" alt="路由工作流程"></p>
+<ol>
+<li>当用户在浏览器输入URL后，Angular将获取该URL并将其解析生成一个UrlTree实例</li>
+<li>在路由配置中寻找并激活与UrlTree实例匹配的配置项</li>
+<li>为配置项中指定的组件创建实例</li>
+<li>将该组件渲染于路由组件的模板中<code>&lt;router-outlet&gt;</code>指令所在位置</li>
+</ol>
+<p>Angular路由最为基本的用法是将一个URL所对应的组件在页面中显示出来，有3个步骤：</p>
+<ol>
+<li>定义路由配置</li>
+<li>创建根路由模块</li>
+<li>添加<code>&lt;router-outlet&gt;</code>指令标签</li>
+</ol>
+<p>以联系人列表页和收藏页为例。</p>
+<p><strong>1.路由配置</strong><br>路由配置是一个Routes类型的数组，数组的每一个元素即为一个路由配置项。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Routes &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; ListComponent &#125; <span class="keyword">from</span> <span class="string">'./list/list.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; CollectionComponent &#125; <span class="keyword">from</span> <span class="string">'./collection/collection.component'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> rootRouterConfig: Routes = [</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  &#123;path: <span class="string">'list'</span>, component: ListComponent &#125;,</span><br><span class="line">  &#123;path: <span class="string">'collection'</span>, component: CollectionComponent &#125;,</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+<p><strong>2.创建根路由模块</strong><br>根路由模块包含了路由所需的各项服务，是路由工作流程运行的基础。通过调用RouterModule.forRoot()方法来创建根路由模块，传入路由配置rootRouterConfig。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.module.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; ModuleWithProviders &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; RouterModule &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; rootRouterConfig &#125; <span class="keyword">from</span> <span class="string">'./app.routes'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> rootRouterModule: ModuleWithProviders = RouterModule.forRoot(rootRouterConfig);</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [rootRouterModule],</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>根路由模块默认提供的路由策略为PathLocationStrategy，该策略要求应用必须设置一个base路径，作为前缀来生成和解析URL，设置base路径最简单的方式是在index.html文件中设置<code>&lt;base&gt;</code>元素的href属性。</p>
+<p><strong>3.添加RouterOutlet指令</strong><br>RouterOutlet指令的作业是在组件的模板中开辟出一块区域，用于显示URL对应的组件。Angular将模板中使用了<code>&lt;router-outlet&gt;</code>标签的组件统称为路由组件。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- app.component.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">main</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">router-outlet</span>&gt;</span><span class="tag">&lt;/<span class="name">router-outlet</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="路由策略"><a href="#路由策略" class="headerlink" title="路由策略"></a>路由策略</h3><p>Angular提供PathLocationStrategy和HashLocationStrategy两种路由策略，分别表示使用URL的path部分和hash部分来进行路由匹配。<br>以通讯录联系人列表页的配置项为例：</p>
+<ul>
+<li>使用PathLocationStrategy策略，URL是<code>http://localhost:3000/list</code></li>
+<li>使用HashLocationStrategy策略，URL是<code>http://localhost:3000/#/list</code></li>
+</ul>
+<h4 id="HashLocationStrategy策略"><a href="#HashLocationStrategy策略" class="headerlink" title="HashLocationStrategy策略"></a>HashLocationStrategy策略</h4><p>HashLocationStrategy策略是Angular最为常见的策略，原理是利用了浏览器在处理hash部分的两个特性：</p>
+<ol>
+<li>浏览器向服务器请求时不会带上hash部分的内容，对于HashLocationStrategy策略配置项所对应的URL，浏览器向服务器发送的请求都是同一个，服务器只需返回首页，Angular在获取首页后根据hash的内容去匹配路由配置项并渲染相应的组件。</li>
+<li>更改URL的hash部分不会向服务器重新发送请求，这使得在跳转的时候不会引发页面的属性和应用的重新加载</li>
+</ol>
+<p>使用该策略，只需在注入路由服务时使用useHash属性指定：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.module.ts</span></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [RouterModule.forRoot(rootRouterConfig, &#123;useHash: <span class="literal">true</span>&#125;)],</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="PathLocationStrategy策略"><a href="#PathLocationStrategy策略" class="headerlink" title="PathLocationStrategy策略"></a>PathLocationStrategy策略</h4><p>PathLocationStrategy使用URL的path部分来进行路由匹配，因此与HashLocationStrategy策略不同，浏览器会将配置项对应的URL原封不动的发送到服务器。</p>
+<p>作为Angular的默认路由策略，其最大的有点在于为服务器端渲染提供了可能，比如，当使用PathLocationStrategy策略获取联系人列表页时，浏览器会向服务器发送请求<code>http://localhost:3000/list</code>，服务器可以通过解析URL上的path部分<code>/list</code>得知所访问的页面，对其进行渲染并将结果返回给浏览器，而当使用HashLocationStrategy策略时，由于hash不会发送到服务器，所以个页面请求的都是同一个URL，导致服务器无法通过URL得知所要访问的页面，也就无从渲染了。</p>
+<p>使用PathLocationStrategy策略必须满足3个条件：</p>
+<ol>
+<li>浏览器支持H5的history.pushState()方法，此方法是RouterLink指令在跳转时即使更改了URL的path部分也不会引起页面刷新的关键。</li>
+<li>需要在服务器进行设置，将应用的所有URL重定向到应用的首页，这个因为该策略所生成的URL在服务器上并不存在对应的文件结构，如果不重定向，服务器将返回404错误。</li>
+<li>需要为应用设置一个base路径，Angular将以base路径为前缀来生成和解析URL，好处是服务器可以根据base路径来区分来自不同应用的请求。</li>
+</ol>
+<p>设置base路径有2个方式，一个是通过设置<code>&lt;base&gt;</code>标签的href属性。另一个就是通过向应用注入<code>APP_BASE_HREF</code>变量来实现：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.module.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Component, NgModule &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; APP_BASE_HREF &#125; <span class="keyword">from</span> <span class="string">'@angular/common'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  providers: [&#123;provide: APP_BASE_HREF, useValue: <span class="string">'/app'</span>&#125;], <span class="comment">// 将base路径设置为'/app'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>若两种方式同时使用，则<code>APP_BASE_HREF</code>变量优先级更高。</p>
+<h3 id="路由跳转"><a href="#路由跳转" class="headerlink" title="路由跳转"></a>路由跳转</h3><p>Web中页面跳转，指的是应用响应某个事件，从一个页面跳转到另一个页面的行为。对于使用Angular构建的单页应用而言，页面跳转实质就是从一个配置项跳转到另一个配置项的行为。当某个事件引发了跳转时，Angular会根据跳转时的参数生成一个UrlTree实例来和配置项进行匹配，若成功则显示相应的组件并将新URL更新在浏览器地址栏上，若匹配不成功则报错。</p>
+<p>ANgular应用进行页面跳转有2种方式。</p>
+<h4 id="使用指令跳转"><a href="#使用指令跳转" class="headerlink" title="使用指令跳转"></a>使用指令跳转</h4><p>指令跳转通过使用RouterLink指令来完成，该指令接收一个链接参数数组，Angular将根据该数组来生成UrlTree实例进行跳转。通讯录例子中的FooterComponent组件将RouterLink指令应用在a标签上，分别为联系人列表页和收藏页定义了两个超链接，当用户单击超链接时便会跳转到相应的页面:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- app/shared/footer.component.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- http://localhost:3000/collection --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/collection']"</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span>收藏<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- http://localhost:3000/list --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/list']"</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span>通讯录<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>若不借助RouterLink指令而是使用原生HTML的方式来定义超链接（如<code>&lt;a href=&quot;/collection&quot;&gt;&lt;i&gt;收藏&lt;/i&gt;&lt;/a&gt;</code>），则单击链接后会导致页面重新加载。</p>
+<p>Angular通过以下两个步骤保证在不重新加载应用的情况下完成跳转</p>
+<ol>
+<li>在click事件中调用preventDefault()方法来禁止a标签的默认行为（阻止向服务器发送默认的GET请求，避免跳转加载）</li>
+<li>调用Router.navigateByUrl()方法来启动跳转流程<br>RouterLink的源码如下：<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@HostListener</span>(<span class="string">'click'</span>, [<span class="string">'$event.button'</span>, <span class="string">'$event.ctrlKey'</span>, <span class="string">'$event.metaKey'</span>])</span><br><span class="line">onClick(button: <span class="built_in">number</span>, ctrlKey: <span class="built_in">boolean</span>, metaKey: <span class="built_in">boolean</span>): <span class="built_in">boolean</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">this</span>.router.navigateByUrl(<span class="keyword">this</span>.urlTree); <span class="comment">//跳转至指定页面，渲染对应组件</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 当HostListener装饰器返回false时，Angular会调用preventDefault方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>RouterLink指令的一个特性就是它可以应用在任何HTML元素上，使得页面跳转不需要依赖超链接。例如：<code>&lt;button [routerLink]=&quot;[&#39;/list&#39;]&quot;&gt; &lt;i&gt;通讯录&lt;/i&gt;&lt;/button&gt;</code></p>
+<p>当RouterLink被激活时，还可以通过RouterLinkActive指令为其相应的HTML元素指定CSS类。比如定义一个CSS类<code>.active</code>，通过routerLinkActive将其赋给收藏页的链接，当单击该链接后，CSS类将被应用到标签上：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- footer.component.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- http://localhost:3000/collection --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/collection']"</span> <span class="attr">routerLinkActive</span>=<span class="string">"active"</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span>收藏<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- http://localhost:3000/list --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/list']"</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span>通讯录<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>而routerLinkActive指令除了可以用于routerLink所在的元素外，还可以作用于这些元素的任意祖先元素，当该祖先元素下的任意routerLink处于激活状态时，该祖先元素都将获得routerLinkActive指定的CSS类,下例中当前页面无论是在收藏页或通讯录页，nav标签都将获得CSS类：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- footer.component.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">routerLinkActive</span>=<span class="string">"active"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- http://localhost:3000/collection --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/collection']"</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span>收藏<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">&lt;!-- http://localhost:3000/list --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/list']"</span>&gt;</span> <span class="tag">&lt;<span class="name">i</span>&gt;</span>通讯录<span class="tag">&lt;/<span class="name">i</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="使用代码跳转"><a href="#使用代码跳转" class="headerlink" title="使用代码跳转"></a>使用代码跳转</h4><p>从RouterLink指令的部分源码可知，跳转流程是通过调用Router.navigateByUrl()方法来启动的，RouterLink指令仅响应click事件，若需要响应其他事件或需要根据运行时的数据动态决定跳转，则可以通过调用Router.navigateByUrl()或Router.navigate()来完成。</p>
+<p>假如需要在进入联系人页后1s自动跳转到收藏页的功能：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// list.component.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Router &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> ListComponent <span class="keyword">implements</span> OnInit &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> _router: Router</span>)&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      _router.navigateByUrl(<span class="string">'/collection'</span>);</span><br><span class="line">      <span class="comment">// 或 _router.navigate(['/collection']);</span></span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Router.navigateByUrl()和Router.navigate()的底层,最终都是通过调用Router.scheduleNavigation()方法来执行跳转，不同的地方在于两个方法指定跳转的目标配置项的方式。Router.navigateByUrl()方法通过一个URL字符串或UrlTree实例来指定。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">navigateByUrl(url: <span class="built_in">string</span>|UrlTree, extras: NavigationExtras = &#123;skipLocationChanges: <span class="literal">false</span>&#125;): <span class="built_in">Promise</span>&lt;<span class="built_in">boolean</span>&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span>(url <span class="keyword">instanceof</span> UrlTree)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.scheduleNavigation(url, extras);</span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 解析URL字符串生成对应的UrlTree实例</span></span><br><span class="line">    <span class="keyword">const</span> urlTree = <span class="keyword">this</span>.urlSerializer.parse(url);</span><br><span class="line">    <span class="comment">// 使用UrlTree实例进行跳转</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.scheduleNavigation(urlTree, extras);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而Router.navigate()方法和RouterLink指令相似，通过链接参数数组来指定：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">navigate(commands: <span class="built_in">any</span>[], extras: NavigationExtras = &#123;skipLocationChanges: <span class="literal">false</span>&#125;): <span class="built_in">Promise</span>&lt;<span class="built_in">boolean</span>&gt; &#123;</span><br><span class="line">    <span class="comment">// 通过链接参数数组生成对应的UrlTree实例</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.scheduleNavigation(<span class="keyword">this</span>.createUrlTree(commands, extras), extras);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这两个方法除了可以通过第一个参数来指定目标配置项外，还支持用extras参数定义跳转的具体行为。例如，若想要在不改变URL的情况下完成跳转,可调用<code>_router.navigateByUrl(&#39;/collection&#39;, {skipLocationChange: true})</code></p>
+<h3 id="路由参数"><a href="#路由参数" class="headerlink" title="路由参数"></a>路由参数</h3><p>在组件部分中学习如何使用@Input装饰器向组件传递数据，除此外，Angular路由还提供了路由参数的功能，允许通过URL向组件传递数据，在通讯录例子中，若想通过URL对不同的联系人进行区分，一种简单的实现方式是将联系人的id添加到URL中，此后联系人详情页通过提取URL中的联系人id便可以进一步获取该联系人的详情并予以显示。</p>
+<p>Angular路由获取URL参数包括Path参数和Query参数两种。</p>
+<h4 id="Path参数"><a href="#Path参数" class="headerlink" title="Path参数"></a>Path参数</h4><p>Path参数指通过解析URL的path部分来获取参数，在定义一个配置项的path属性时，可以使用<code>/</code>字符对path属性进行分段，若一个分段以<code>:</code>字符开头，则URL中与该分段进行匹配的部分将作为参数传递到组件中。</p>
+<p>以联系人详情页的路由配置项为例，其定义了一个名为id的Path参数，例如<code>http://localhost:3000/detail/1</code>,参数id为1。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.routes.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> ContactAppRouters: RouterConfig = [</span><br><span class="line">  &#123;</span><br><span class="line">    path: <span class="string">'detail/:id'</span>,</span><br><span class="line">    component: DetailComponent</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>注意：只有当URL解析出来的分段数与Path属性的分段数一致时，才能匹配到该配置项。例如：</p>
+<ul>
+<li><code>http://localhost:3000/detail</code> 分段数为1</li>
+<li><code>http://localhost:3000/detail/1</code> 分段数为2</li>
+<li><code>http://localhost:3000/detail/1/segment</code> 分段数为3 </li>
+</ul>
+<p>给路由参数赋值，除了可以直接在浏览器上输入URL外，还可以通过RouterLink指令或跳转方法来完成。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Angular 会将链接参数数组的每一个非对象元素当成一个分段进行拼接</span></span><br><span class="line"><span class="comment">// 如下的链接参数数组对应的path为 'detail/1'</span></span><br><span class="line"></span><br><span class="line">&lt;a [routerLink]=<span class="string">"['/detail', 1]"</span>&gt;</span><br><span class="line">_router.navigate([<span class="string">'/detail'</span>, <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或直接指定path</span></span><br><span class="line">_router.navigate([<span class="string">'/detail/1'</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>在组件中获取Path参数，需要导入ActivatedRoute服务，该服务提供了两种方式，分别适用于不同页面间跳转和同一页面内跳转。</p>
+<p>Angular应用从一个页面跳转到另一个新页面，实质上是从一个配置项跳转到另一个配置项，在这个过程中，Angular除了会为配置项所对应的组件创建实例外，还会为该配置项本身创建一个ActivatedRoute实例来表示该配置项已被激活。该ActivedRoute实例包含了一个快照（即snapshot属性），记录从当前URL中解析出来的所有Path参数。</p>
+<p>以通讯录例子中的DetailComponent组件如何通过snapshot属性获取Path参数：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// detail.component.ts</span></span><br><span class="line"><span class="comment">// 1. 导入ActivatedRoute服务</span></span><br><span class="line"><span class="keyword">import</span> &#123; ActivatedRoute &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> DetailComponent <span class="keyword">implements</span> OnInit, OnDestroy&#123;</span><br><span class="line">  contact_id: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> _activatedRoute: ActivatedRoute</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'创建DetailComponent组件实例'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit()&#123;</span><br><span class="line">    <span class="comment">// 2. 通过snapshot获取path参数</span></span><br><span class="line">    <span class="keyword">this</span>.contact_id = <span class="keyword">this</span>._activatedRoute.snapshot.params[<span class="string">'id'</span>];</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'参数id值为:'</span>+ <span class="keyword">this</span>.contact_id);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>访问<code>http://localhost:3000/detail/1</code>即可看到输出的id值为1.</p>
+<p>如何在通讯录例子页面跳转时获取参数值？<br>首先在联系人详情组件的模板detail.component.html上添加一个链接，希望达到的效果是当单击该链接后，能够显示下一名联系人的信息。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- detail.component.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"detail-contain"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"header-detail"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['']"</span> <span class="attr">class</span>=<span class="string">"back-to-list"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-back"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>所有联系人</span><br><span class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> [<span class="attr">routerLink</span>]=<span class="string">"['/detail', nextContactId()]"</span> <span class="attr">class</span>=<span class="string">"back-to-list"</span>&gt;</span></span><br><span class="line">      下一个联系人</span><br><span class="line">    <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- .... --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- .... --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>nextContactId()方法通过简单的加1来获取下一名联系人的id：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// detail.component.ts</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> DetailComponent <span class="keyword">implements</span> OnInit, OnDestroy &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  nextContactId()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">parseInt</span>(<span class="keyword">this</span>.contact_id) + <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>假设当前URL为<code>http://localhost:3000/detail/1</code>,单击下一个联系人链接后，URL按照预期变成了<code>http://localhost:3000/detail/2</code>，但在页面上显示的仍然是原先联系人的信息，这个因为Angular在处理同一个页面内跳转时，不会重新创建组件的实例，所以组件的构造函数和ngOnInit()方法都没有被调用到，虽然Angular会将快照中参数id的值更新为2，但没有将这个更新通知到组件，为了解决这个问题，ActivatedRoute服务提供了Observable对象，允许对参数的更新进行订阅。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// detail.component.ts</span></span><br><span class="line"><span class="comment">// ... </span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> DetailComponent <span class="keyword">implements</span> OnInit, OnDestory &#123;</span><br><span class="line">  contact_id: <span class="built_in">string</span>;</span><br><span class="line">  <span class="keyword">private</span> sub: <span class="built_in">any</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  ngOnInit()&#123;</span><br><span class="line">    <span class="keyword">this</span>.sub = <span class="keyword">this</span>._activatedRoute.params.subscribe(<span class="function"><span class="params">params</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.contact_id = params[<span class="string">'id'</span>];</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'参数值id为：'</span>+ <span class="keyword">this</span>.contact_id);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.getById(<span class="keyword">this</span>.contact_id);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnDestroy() &#123;</span><br><span class="line">    <span class="comment">// 避免内存系列，在组件销毁时取消订阅</span></span><br><span class="line">    <span class="keyword">this</span>.sub.unsubscribde();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Query参数"><a href="#Query参数" class="headerlink" title="Query参数"></a>Query参数</h4><p>通过解析URL的query部分来获取参数值，由于URL的query部分不用和配置项进行匹配，因此每一个配置项都可以拥有任意多个查询参数。</p>
+<p>以URL给联系人列表页定义一个表示页面显示5个联系人的查询参数为例<code>http://localhost:3000/list?limit=5</code></p>
+<p>与Path参数类似，Query参数同样可以通过RouterLink指令或者跳转方法来赋值：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a [routerLink]=<span class="string">"['/list']"</span> [queryParams]=<span class="string">"&#123;limit:5&#125;"</span>&gt;&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">this.router.navigat(['/list'], &#123;queryParams: &#123;limit:5&#125;&#125;);</span></span><br><span class="line"><span class="regexp">this._router.navigateByUrl('/</span>list?limit=<span class="number">5</span><span class="string">');</span></span><br></pre></td></tr></table></figure></p>
+<p>Query参数的获取，需要借助于ActivatedRoute服务提供的Observable类型对象queryParams来完成。下面代码通过获取Query参数来对显示在页面上的联系人数目进行限制：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// list.component.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; ActivatedRoute &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> ListComponent <span class="keyword">implements</span> OnInit, OnDestroy &#123;</span><br><span class="line">  constacts: <span class="built_in">any</span>[];</span><br><span class="line">  <span class="keyword">private</span> limit: <span class="built_in">number</span>;</span><br><span class="line">  <span class="keyword">private</span> sub: <span class="built_in">any</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> _activatedRoute: ActivatedRoute</span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit()&#123;</span><br><span class="line">    <span class="keyword">this</span>.getContacts();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnDestroy()&#123;</span><br><span class="line">    <span class="keyword">this</span>.sub.unsubscribe();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getContacts()&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">this</span>.sub = <span class="keyword">this</span>._activatedRoute.queryParams.subscribe(<span class="function"><span class="params">params</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>.limit = <span class="built_in">parseInt</span>(params[<span class="string">'limit'</span>]);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">this</span>.limit)&#123;</span><br><span class="line">        <span class="keyword">this</span>.contacts.splice(<span class="keyword">this</span>.limit);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Matrix参数"><a href="#Matrix参数" class="headerlink" title="Matrix参数"></a>Matrix参数</h4><p>页面上所有组件都可以访问Query参数的内容，若想精确的向某一个组件传递参数，则需要使用Matrix参数。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/10/20/angular13/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/10/17/angular11/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

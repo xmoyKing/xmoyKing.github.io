@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JS设计模式-5-代理模式 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,design pattern">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JS设计模式-5-代理模式 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="design pattern"> 
+
+    
+        <meta property="article:published_time" content="Sun Nov 12 2017 22:13:53 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:09 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JS设计模式-5-代理模式 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/11/12/js-pattern5/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/11/12/js-pattern5/index.html",
+    "headline": "JS设计模式-5-代理模式",
+    "datePublished": "Sun Nov 12 2017 22:13:53 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:09 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,design patternnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#熟悉代理模式结构"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x719F;&#x6089;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x7ED3;&#x6784;" class="headerlink" title="&#x719F;&#x6089;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x7ED3;&#x6784;"></a>&#x719F;&#x6089;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x7ED3;&#x6784;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#虚拟代理实现图片预加载"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5B9E;&#x73B0;&#x56FE;&#x7247;&#x9884;&#x52A0;&#x8F7D;" class="headerlink" title="&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5B9E;&#x73B0;&#x56FE;&#x7247;&#x9884;&#x52A0;&#x8F7D;"></a>&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5B9E;&#x73B0;&#x56FE;&#x7247;&#x9884;&#x52A0;&#x8F7D;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代理和本体接口的一致性"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x4EE3;&#x7406;&#x548C;&#x672C;&#x4F53;&#x63A5;&#x53E3;&#x7684;&#x4E00;&#x81F4;&#x6027;" class="headerlink" title="&#x4EE3;&#x7406;&#x548C;&#x672C;&#x4F53;&#x63A5;&#x53E3;&#x7684;&#x4E00;&#x81F4;&#x6027;"></a>&#x4EE3;&#x7406;&#x548C;&#x672C;&#x4F53;&#x63A5;&#x53E3;&#x7684;&#x4E00;&#x81F4;&#x6027;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#虚拟代理合并HTTP请求"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5408;&#x5E76;HTTP&#x8BF7;&#x6C42;" class="headerlink" title="&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5408;&#x5E76;HTTP&#x8BF7;&#x6C42;"></a>&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5408;&#x5E76;HTTP&#x8BF7;&#x6C42;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#虚拟代理在惰性加载中的应用"><span class="post-toc-number">5.</span> <span class="post-toc-text"><a href="#&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5728;&#x60F0;&#x6027;&#x52A0;&#x8F7D;&#x4E2D;&#x7684;&#x5E94;&#x7528;" class="headerlink" title="&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5728;&#x60F0;&#x6027;&#x52A0;&#x8F7D;&#x4E2D;&#x7684;&#x5E94;&#x7528;"></a>&#x865A;&#x62DF;&#x4EE3;&#x7406;&#x5728;&#x60F0;&#x6027;&#x52A0;&#x8F7D;&#x4E2D;&#x7684;&#x5E94;&#x7528;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#缓存代理"><span class="post-toc-number"></span> <span class="post-toc-text"><a href="#&#x7F13;&#x5B58;&#x4EE3;&#x7406;" class="headerlink" title="&#x7F13;&#x5B58;&#x4EE3;&#x7406;"></a>&#x7F13;&#x5B58;&#x4EE3;&#x7406;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缓存代理的例子——计算乘积"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x7F13;&#x5B58;&#x4EE3;&#x7406;&#x7684;&#x4F8B;&#x5B50;&#x2014;&#x2014;&#x8BA1;&#x7B97;&#x4E58;&#x79EF;" class="headerlink" title="&#x7F13;&#x5B58;&#x4EE3;&#x7406;&#x7684;&#x4F8B;&#x5B50;&#x2014;&#x2014;&#x8BA1;&#x7B97;&#x4E58;&#x79EF;"></a>&#x7F13;&#x5B58;&#x4EE3;&#x7406;&#x7684;&#x4F8B;&#x5B50;&#x2014;&#x2014;&#x8BA1;&#x7B97;&#x4E58;&#x79EF;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缓存代理用于ajax异步请求数据"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x7F13;&#x5B58;&#x4EE3;&#x7406;&#x7528;&#x4E8E;ajax&#x5F02;&#x6B65;&#x8BF7;&#x6C42;&#x6570;&#x636E;" class="headerlink" title="&#x7F13;&#x5B58;&#x4EE3;&#x7406;&#x7528;&#x4E8E;ajax&#x5F02;&#x6B65;&#x8BF7;&#x6C42;&#x6570;&#x636E;"></a>&#x7F13;&#x5B58;&#x4EE3;&#x7406;&#x7528;&#x4E8E;ajax&#x5F02;&#x6B65;&#x8BF7;&#x6C42;&#x6570;&#x636E;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用高阶函数动态创建代理"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x7528;&#x9AD8;&#x9636;&#x51FD;&#x6570;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x4EE3;&#x7406;" class="headerlink" title="&#x7528;&#x9AD8;&#x9636;&#x51FD;&#x6570;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x4EE3;&#x7406;"></a>&#x7528;&#x9AD8;&#x9636;&#x51FD;&#x6570;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x4EE3;&#x7406;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#其他代理模式"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x5176;&#x4ED6;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;" class="headerlink" title="&#x5176;&#x4ED6;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;"></a>&#x5176;&#x4ED6;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JS设计模式-5-代理模式
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Nov 12, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/design-pattern/">design pattern</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JS设计模式-5-代理模式&url=https://github.com/xmoyKING/2017/11/12/js-pattern5/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JS设计模式-5-代理模式&url=https://github.com/xmoyKING/2017/11/12/js-pattern5/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/11/12/js-pattern5/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/11/12/js-pattern5/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>代理模式是为一个对象提供一个代用品或占位符，以便控制对它的访问。</p>
+<p>代理模式是一种非常有意义的模式，在生活中可以找到很多代理模式的场景。比如，明星都有经纪人作为代理。如果想请明星来办一场商业演出，只能联系他的经纪人。经纪人会把商业演出的细节和报酬都谈好之后，再把合同交给明星签。</p>
+<p>代理模式的关键是，当客户不方便直接访问一个对象或者不满足需要的时候，提供一个替身对象来控制对这个对象的访问，客户实际上访问的是替身对象。替身对象对请求做出一些处理之后，再把请求转交给本体对象。</p>
+<h4 id="熟悉代理模式结构"><a href="#熟悉代理模式结构" class="headerlink" title="熟悉代理模式结构"></a>熟悉代理模式结构</h4><p>下面从一个小例子开始熟悉代理模式的结构：<br>小明遇见了他的女神A。两天之后，小明决定给A送一束花来表白。刚好小明打听到A和他有一个共同的朋友B，于是内向的小明决定让B来代替自己完成送花这件事情。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Flower = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> xiaoming = &#123; </span><br><span class="line">  sendFlower: <span class="function"><span class="keyword">function</span>(<span class="params"> target</span>)</span>&#123; </span><br><span class="line">    <span class="keyword">var</span> flower = <span class="keyword">new</span> Flower(); </span><br><span class="line">    target.receiveFlower( flower ); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> B = &#123; <span class="attr">receiveFlower</span>: <span class="function"><span class="keyword">function</span>(<span class="params"> flower </span>)</span>&#123; A.receiveFlower( flower ); &#125; &#125;; </span><br><span class="line"><span class="keyword">var</span> A = &#123; <span class="attr">receiveFlower</span>: <span class="function"><span class="keyword">function</span>(<span class="params"> flower </span>)</span>&#123; <span class="built_in">console</span>.log( <span class="string">'收 到 花 '</span> + flower ); &#125; &#125;; </span><br><span class="line"></span><br><span class="line">xiaoming.sendFlower( B );</span><br></pre></td></tr></table></figure></p>
+<p>现在我们改变故事的背景设定，假设当A在心情好的时候收到花，小明表白成功的几率有60%，而当A在心情差的时候收到花，小明表白的成功率无限趋近于0。A的朋友B很了解A，所以小明只管把花交给B，B会监听A的心情变化，然后选择A心情好的时候把花转交给A，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Flower = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;; </span><br><span class="line"><span class="keyword">var</span> xiaoming = &#123; </span><br><span class="line">  sendFlower: <span class="function"><span class="keyword">function</span>(<span class="params"> target</span>)</span>&#123; </span><br><span class="line">    <span class="keyword">var</span> flower = <span class="keyword">new</span> Flower(); </span><br><span class="line">    target.receiveFlower( flower ); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="keyword">var</span> B = &#123; </span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params"> flower </span>)</span>&#123; </span><br><span class="line">    A.listenGoodMood( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 监 听 A 的 好 心 情 </span></span><br><span class="line">      A.receiveFlower( flower ); </span><br><span class="line">    &#125;); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> A = &#123; </span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params"> flower </span>)</span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log( <span class="string">'收 到 花 '</span> + flower ); </span><br><span class="line">  &#125;, </span><br><span class="line">  listenGoodMood: <span class="function"><span class="keyword">function</span>(<span class="params"> fn </span>)</span>&#123; </span><br><span class="line">    setTimeout( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 假 设 10 秒 之 后 A 的 心 情 变 好 </span></span><br><span class="line">      fn(); </span><br><span class="line">    &#125;, <span class="number">10000</span> ); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line">xiaoming.sendFlower( B );</span><br></pre></td></tr></table></figure></p>
+<p>虽然这只是个虚拟的例子，但我们可以从中找到两种代理模式的身影。代理B可以帮助A过滤掉一些请求，比如送花的人中年龄太大的或者没有宝马的，这种请求就可以直接在代理B处被拒绝掉。这种代理叫作<strong>保护代理</strong>。A和B一个充当白脸，一个充当黑脸。白脸A继续保持良好的女神形象，不希望直接拒绝任何人，于是找了黑脸B来控制对A的访问。<br>另外，假设现实中的花价格不菲，导致在程序世界里，newFlower也是一个代价昂贵的操作，那么我们可以把newFlower的操作交给代理B去执行，代理B会选择在A心情好时再执行newFlower，这是代理模式的另一种形式，叫作<strong>虚拟代理</strong>。虚拟代理把一些开销很大的对象，延迟到真正需要它的时候才去创建。代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> B = &#123; </span><br><span class="line">  receiveFlower: <span class="function"><span class="keyword">function</span>(<span class="params"> flower </span>)</span>&#123; </span><br><span class="line">    A.listenGoodMood( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 监 听 A 的 好 心 情</span></span><br><span class="line">      <span class="keyword">var</span> flower = <span class="keyword">new</span> Flower(); <span class="comment">// 延 迟 创 建 flower 对 象 </span></span><br><span class="line">      A.receiveFlower( flower ); </span><br><span class="line">    &#125;); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>保护代理用于控制不同权限的对象对目标对象的访问，但在JavaScript并不容易实现保护代理，因为我们无法判断谁访问了某个对象。而虚拟代理是最常用的一种代理模式，主要讨论的也是虚拟代理。</p>
+<h4 id="虚拟代理实现图片预加载"><a href="#虚拟代理实现图片预加载" class="headerlink" title="虚拟代理实现图片预加载"></a>虚拟代理实现图片预加载</h4><p>在Web开发中，图片预加载是一种常用的技术，如果直接给某个img标签节点设置src属性，由于图片过大或者网络不佳，图片的位置往往有段时间会是一片空白。常见的做法是先用一张loading图片占位，然后用异步的方式加载图片，等图片加载好了再把它填充到img节点里，这种场景就很适合使用虚拟代理。<br>实现这个虚拟代理，首先创建一个普通的本体对象，这个对象负责往页面中创建一个img标签，并且提供一个对外的setSrc接口，外界调用这个接口，便可以给该img标签设置src属性：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement( <span class="string">'img'</span> ); </span><br><span class="line">  <span class="built_in">document</span>.body.appendChild( imgNode ); </span><br><span class="line">  <span class="keyword">return</span> &#123; </span><br><span class="line">    setSrc: <span class="function"><span class="keyword">function</span>(<span class="params"> src </span>)</span>&#123; imgNode.src = src; &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line">myImage.setSrc( <span class="string">'aaa.jpg'</span> );</span><br></pre></td></tr></table></figure></p>
+<p>把网速调至5KB/s，然后通过MyImage.setSrc给该img节点设置src，可以看到，在图片被加载好之前，页面中有一段长长的空白时间。</p>
+<p>现在开始引入代理对象proxyImage，通过这个代理对象，在图片被真正加载好之前，页面中将出现一张占位的菊花图loading.gif,来提示用户图片正在加载。代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement( <span class="string">'img'</span> ); </span><br><span class="line">  <span class="built_in">document</span>.body.appendChild( imgNode );</span><br><span class="line">  <span class="keyword">return</span> &#123; </span><br><span class="line">    setSrc: <span class="function"><span class="keyword">function</span>(<span class="params"> src </span>)</span>&#123; imgNode.src = src; &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> proxyImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image; </span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; myImage.setSrc( <span class="keyword">this</span>.src ); &#125; </span><br><span class="line">  <span class="keyword">return</span> &#123; </span><br><span class="line">    setSrc: <span class="function"><span class="keyword">function</span>(<span class="params"> src </span>)</span>&#123; </span><br><span class="line">      myImage.setSrc( <span class="string">'loading.gif'</span> ); </span><br><span class="line">      img.src = src; </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line">proxyImage.setSrc( <span class="string">'Nk.jpg'</span> );</span><br></pre></td></tr></table></figure></p>
+<p>通过proxyImage间接地访问MyImage。proxyImage控制了客户对MyImage的访问，并且在此过程中加入一些额外的操作，比如在真正的图片加载好之前，先把img节点的src设置为一张本地的loading图片。</p>
+<p>####代理的意义<br>不过是实现一个小小的图片预加载功能，即使不需要引入任何模式也能办到，那么引入代理模式的好处究竟在哪里呢？下面我们先抛开代理，编写一个更常见的图片预加载函数。不用代理的预加载图片函数实现如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement( <span class="string">'img'</span> ); </span><br><span class="line">  <span class="built_in">document</span>.body.appendChild( imgNode ); </span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image; </span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    imgNode.src = img.src; </span><br><span class="line">  &#125;; </span><br><span class="line">  <span class="keyword">return</span> &#123; </span><br><span class="line">    setSrc: <span class="function"><span class="keyword">function</span>(<span class="params"> src </span>)</span>&#123; </span><br><span class="line">      imgNode.src = <span class="string">'loading.gif'</span>; </span><br><span class="line">      img.src = src; </span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line">MyImage.setSrc( <span class="string">'Nk.jpg'</span> );</span><br></pre></td></tr></table></figure></p>
+<p>为了说明代理的意义，下面我们引入一个面向对象设计的原则——单一职责原则。单一职责原则指的是，就一个类（通常也包括对象和函数等）而言，应该仅有一个引起它变化的原因。如果一个对象承担了多项职责，就意味着这个对象将变得巨大，引起它变化的原因可能会有多个。面向对象设计鼓励将行为分布到细粒度的对象之中，如果一个对象承担的职责过多，等于把这些职责耦合到了一起，这种耦合会导致脆弱和低内聚的设计。当变化发生时，设计可能会遭到意外的破坏。<br>职责被定义为“引起变化的原因”。上段代码中的MyImage对象除了负责给img节点设置src外，还要负责预加载图片。我们在处理其中一个职责时，有可能因为其强耦合性影响另外一个职责的实现。</p>
+<p>另外，在面向对象的程序设计中，大多数情况下，若违反其他任何原则，同时将违反开放—封闭原则。如果我们只是从网络上获取一些体积很小的图片，或者5年后的网速快到根本不再需要预加载，我们可能希望把预加载图片的这段代码从MyImage对象里删掉。这时候就不得不改动MyImage对象了。<br>实际上，我们需要的只是给img节点设置src，预加载图片只是一个锦上添花的功能。如果能把这个操作放在另一个对象里面，自然是一个非常好的方法。于是代理的作用在这里就体现出来了，代理负责预加载图片，预加载的操作完成之后，把请求重新交给本体MyImage。</p>
+<p>纵观整个程序，我们并没有改变或者增加MyImage的接口，但是通过代理对象，实际上给系统添加了新的行为。这是符合开放—封闭原则的。给img节点设置src和图片预加载这两个功能，被隔离在两个对象里，它们可以各自变化而不影响对方。何况就算有一天我们不再需要预加载，那么只需要改成请求本体而不是请求代理对象即可。</p>
+<h4 id="代理和本体接口的一致性"><a href="#代理和本体接口的一致性" class="headerlink" title="代理和本体接口的一致性"></a>代理和本体接口的一致性</h4><p>如果有一天我们不再需要预加载，那么就不再需要代理对象，可以选择直接请求本体。其中关键是代理对象和本体都对外提供了setSrc方法，在客户看来，代理对象和本体是一致的，代理接手请求的过程对于用户来说是透明的，用户并不清楚代理和本体的区别，这样做有两个好处。</p>
+<ul>
+<li>用户可以放心地请求代理，他只关心是否能得到想要的结果。</li>
+<li>在任何使用本体的地方都可以替换成使用代理。<br>在Java等语言中，代理和本体都需要显式地实现同一个接口，一方面接口保证了它们会拥有同样的方法，另一方面，面向接口编程迎合依赖倒置原则，通过接口进行向上转型，从而避开编译器的类型检查，代理和本体将来可以被替换使用。<br>在JavaScript这种动态类型语言中，我们有时通过鸭子类型来检测代理和本体是否都实现了setSrc方法，另外大多数时候甚至干脆不做检测，全部依赖程序员的自觉性，这对于程序的健壮性是有影响的。不过对于一门快速开发的脚本语言，这些影响还是在可以接受的范围内，而且我们也习惯了没有接口的世界。</li>
+</ul>
+<p>另外值得一提的是，如果代理对象和本体对象都为一个函数（函数也是对象），函数必然都能被执行，则可以认为它们也具有一致的“接口”，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> imgNode = <span class="built_in">document</span>.createElement( <span class="string">'img'</span> ); </span><br><span class="line">  <span class="built_in">document</span>.body.appendChild( imgNode ); </span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"> src </span>)</span>&#123; imgNode.src = src; &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> proxyImage = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image; </span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; myImage( <span class="keyword">this</span>.src ); &#125; </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"> src </span>)</span>&#123; </span><br><span class="line">    myImage( <span class="string">'loading.gif'</span> );</span><br><span class="line">    img.src = src; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line"></span><br><span class="line">proxyImage( <span class="string">'Nk.jpg'</span> );</span><br></pre></td></tr></table></figure></p>
+<h4 id="虚拟代理合并HTTP请求"><a href="#虚拟代理合并HTTP请求" class="headerlink" title="虚拟代理合并HTTP请求"></a>虚拟代理合并HTTP请求</h4><p>先想象这样一个场景：每周我们都要写一份工作周报，周报要交给总监批阅。总监手下管理着150个员工，如果我们每个人直接把周报发给总监，那总监可能要把一整周的时间都花在查看邮件上面。现在我们把周报发给各自的组长，组长作为代理，把组内成员的周报合并提炼成一份后一次性地发给总监。这样一来，总监的邮箱便清净多了。</p>
+<p>这个例子在程序世界里很容易引起共鸣，在Web开发中，也许最大的开销就是网络请求。假设我们在做一个文件同步的功能，当我们选中一个checkbox的时候，它对应的文件就会被同步到另外一台备用服务器上面，<br>我们先在页面中放置好这些checkbox节点：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"1"</span> /&gt;</span>1</span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"2"</span> /&gt;</span>2</span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"3"</span> /&gt;</span>3</span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"4"</span> /&gt;</span>4</span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"5"</span> /&gt;</span>5</span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"6"</span> /&gt;</span>6</span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"7"</span> /&gt;</span>7</span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"8"</span> /&gt;</span>8</span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"9"</span> /&gt;</span>9</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当我们选中3个checkbox的时候，依次往服务器发送了3次同步文件的请求。可以预见，如此频繁的网络请求将会带来相当大的开销。</p>
+<p>解决方案是，我们可以通过一个代理函数proxySynchronousFile来收集一段时间之内的请求，最后一次性发送给服务器。比如我们等待2秒之后才把这2秒之内需要同步的文件ID打包发给服务器，如果不是对实时性要求非常高的系统，2秒的延迟不会带来太大副作用，却能大大减轻服务器的压力。代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> synchronousFile = <span class="function"><span class="keyword">function</span>(<span class="params"> id </span>)</span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'开 始 同 步 文 件， id 为: '</span> + id );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> proxySynchronousFile = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> cache = [], <span class="comment">// 保 存 一 段 时 间 内 需 要 同 步 的 ID </span></span><br><span class="line">  timer; <span class="comment">// 定 时 器 </span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"> id </span>)</span>&#123; </span><br><span class="line">    cache.push( id ); </span><br><span class="line">    <span class="keyword">if</span> ( timer )&#123; <span class="comment">// 保 证 不 会 覆 盖 已 经 启 动 的 定 时 器 </span></span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">    &#125; </span><br><span class="line">    timer = setTimeout( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">      synchronousFile( cache.join( <span class="string">','</span> ) ); <span class="comment">// 2 秒 后 向 本 体 发 送 需 要 同 步 的 ID 集 合 </span></span><br><span class="line">      clearTimeout( timer ); <span class="comment">// 清 空 定 时 器 </span></span><br><span class="line">      timer = <span class="literal">null</span>; </span><br><span class="line">      cache.length = <span class="number">0</span>; <span class="comment">// 清 空 ID 集 合 </span></span><br><span class="line">    &#125;, <span class="number">2000</span> ); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> checkbox = <span class="built_in">document</span>.getElementsByTagName( <span class="string">'input'</span> ); </span><br><span class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>, c; c = checkbox[ i ++ ]; )&#123; </span><br><span class="line">  c.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="keyword">if</span> ( <span class="keyword">this</span>.checked = = = <span class="literal">true</span> )&#123; </span><br><span class="line">      proxySynchronousFile( <span class="keyword">this</span>.id ); </span><br><span class="line">    &#125;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<h4 id="虚拟代理在惰性加载中的应用"><a href="#虚拟代理在惰性加载中的应用" class="headerlink" title="虚拟代理在惰性加载中的应用"></a>虚拟代理在惰性加载中的应用</h4><p>mini控制台的开源项目miniConsole.js，这个控制台可以帮助开发者在IE浏览器以及移动端浏览器上进行一些简单的调试工作。调用方式很简单：<code>miniConsole.log(1);</code>这句话会在页面中创建一个div，并且把log显示在div里面.<br>miniConsole.js的代码量大概有1000行左右，也许我们并不想一开始就加载这么大的JS文件，因为也许并不是每个用户都需要打印log。我们希望在有必要的时候才开始加载它，比如当用户按下F2来主动唤出控制台的时候。<br>在miniConsole.js加载之前，为了能够让用户正常地使用里面的API，通常我们的解决方案是用一个占位的miniConsole代理对象来给用户提前使用，这个代理对象提供给用户的接口，跟实际的miniConsole是一样的。</p>
+<p>用户使用这个代理对象来打印log的时候，并不会真正在控制台内打印日志，更不会在页面中创建任何DOM节点。即使我们想这样做也无能为力，因为真正的miniConsole.js还没有被加载。</p>
+<p>于是，我们可以把打印log的请求都包裹在一个函数里面，这个包装了请求的函数就相当于其他语言中命令模式中的Command对象。随后这些函数将全部被放到缓存队列中，这些逻辑都是在miniConsole代理对象中完成实现的。等用户按下F2唤出控制台的时候，才开始加载真正的miniConsole.js的代码，加载完成之后将遍历miniConsole代理对象中的缓存函数队列，同时依次执行它们。</p>
+<p>当然，请求的到底是什么对用户来说是不透明的，用户并不清楚它请求的是代理对象，所以他可以在任何时候放心地使用miniConsole对象。</p>
+<p>未加载真正的miniConsole.js之前的代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cache = []; </span><br><span class="line"><span class="keyword">var</span> miniConsole = &#123; </span><br><span class="line">  log: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">arguments</span>; </span><br><span class="line">    cache.push( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">      <span class="keyword">return</span> miniConsole.log.apply( miniConsole, args ); </span><br><span class="line">    &#125;); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line">miniConsole.log( <span class="number">1</span>);</span><br></pre></td></tr></table></figure></p>
+<p>当用户按下F2时，开始加载真正的miniConsole.js，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = <span class="function"><span class="keyword">function</span>(<span class="params"> ev </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">if</span> ( ev.keyCode = = = <span class="number">113</span> )&#123; </span><br><span class="line">    <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement( <span class="string">'script'</span> ); </span><br><span class="line">    script.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">      <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>, fn; fn = cache[ i ++ ]; )&#123; </span><br><span class="line">        fn(); </span><br><span class="line">      &#125; </span><br><span class="line">    &#125;; </span><br><span class="line">    script.src = <span class="string">'miniConsole.js'</span>; </span><br><span class="line">    <span class="built_in">document</span>.getElementsByTagName( <span class="string">'head'</span> )[<span class="number">0</span>].appendChild( script ); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">document</span>.body.addEventListener( <span class="string">'keydown'</span>, handler, <span class="literal">false</span> ); </span><br><span class="line"></span><br><span class="line"><span class="comment">// miniConsole.js 代 码： </span></span><br><span class="line">miniConsole = &#123; </span><br><span class="line">  log: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 真 正 代 码 略 </span></span><br><span class="line">    <span class="built_in">console</span>.log( <span class="built_in">Array</span>.prototype.join.call( <span class="built_in">arguments</span> ) ); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>虽然我们没有给出miniConsole.js的真正代码，但这不影响我们理解其中的逻辑。当然这里还要注意一个问题，就是我们要保证在F2被重复按下的时候，miniConsole.js只被加载一次。</p>
+<h3 id="缓存代理"><a href="#缓存代理" class="headerlink" title="缓存代理"></a>缓存代理</h3><p>缓存代理可以为一些开销大的运算结果提供暂时的存储，在下次运算时，如果传递进来的参数跟之前一致，则可以直接返回前面存储的运算结果。</p>
+<h4 id="缓存代理的例子——计算乘积"><a href="#缓存代理的例子——计算乘积" class="headerlink" title="缓存代理的例子——计算乘积"></a>缓存代理的例子——计算乘积</h4><p>这里编写一个简单的求乘积的程序，请读者自行把它脑补为复杂的计算。先创建一个用于求乘积的函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mult = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log( <span class="string">'开 始 计 算 乘 积'</span> ); </span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>; </span><br><span class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; l; i ++ )&#123; </span><br><span class="line">    a = a * <span class="built_in">arguments</span>[ i]; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> a; </span><br><span class="line">&#125;; </span><br><span class="line">mult( <span class="number">2</span>, <span class="number">3</span> ); <span class="comment">// 输 出： 6 </span></span><br><span class="line">mult( <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ); <span class="comment">// 输 出： 24</span></span><br></pre></td></tr></table></figure></p>
+<p>现在加入缓存代理函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> proxyMult = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> cache = &#123;&#125;; </span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.join.call( <span class="built_in">arguments</span>, <span class="string">','</span> ); </span><br><span class="line">    <span class="keyword">if</span> ( args <span class="keyword">in</span> cache )&#123; </span><br><span class="line">      <span class="keyword">return</span> cache[ args ]; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> cache[ args ] = mult.apply( <span class="keyword">this</span>, <span class="built_in">arguments</span> ); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;)(); </span><br><span class="line">proxyMult( <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ); <span class="comment">// 输 出： 24 </span></span><br><span class="line">proxyMult( <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ); <span class="comment">// 输 出： 24</span></span><br></pre></td></tr></table></figure></p>
+<p>当我们第二次调用proxyMult(1,2,3,4)的时候，本体mult函数并没有被计算，proxyMult直接返回了之前缓存好的计算结果。通过增加缓存代理的方式，mult函数可以继续专注于自身的职责——计算乘积，缓存的功能是由代理对象实现的。</p>
+<h4 id="缓存代理用于ajax异步请求数据"><a href="#缓存代理用于ajax异步请求数据" class="headerlink" title="缓存代理用于ajax异步请求数据"></a>缓存代理用于ajax异步请求数据</h4><p>常常在项目中遇到分页的需求，同一页的数据理论上只需要去后台拉取一次，这些已经拉取到的数据在某个地方被缓存之后，下次再请求同一页的时候，便可以直接使用之前的数据。<br>显然这里也可以引入缓存代理，实现方式跟计算乘积的例子差不多，唯一不同的是，请求数据是个异步的操作，我们无法直接把计算结果放到代理对象的缓存中，而是要通过回调的方式。</p>
+<h4 id="用高阶函数动态创建代理"><a href="#用高阶函数动态创建代理" class="headerlink" title="用高阶函数动态创建代理"></a>用高阶函数动态创建代理</h4><p>通过传入高阶函数这种更加灵活的方式，可以为各种计算方法创建缓存代理。现在这些计算方法被当作参数传入一个专门用于创建缓存代理的工厂中，这样一来，我们就可以为乘法、加法、减法等创建缓存代理，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**************** 计 算 乘 积 *****************/</span> </span><br><span class="line"><span class="keyword">var</span> mult = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>; </span><br><span class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; l; i ++ )&#123; </span><br><span class="line">    a = a * <span class="built_in">arguments</span>[ i]; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> a; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="comment">/**************** 计 算 加 和 *****************/</span> </span><br><span class="line"><span class="keyword">var</span> plus = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">0</span>; </span><br><span class="line">  <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; l; i ++ )&#123; </span><br><span class="line">    a = a + <span class="built_in">arguments</span>[ i]; </span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span> a; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="comment">/**************** 创 建 缓 存 代 理 的 工 厂 *****************/</span> </span><br><span class="line"><span class="keyword">var</span> createProxyFactory = <span class="function"><span class="keyword">function</span>(<span class="params"> fn </span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> cache = &#123;&#125;; </span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.join.call( <span class="built_in">arguments</span>, <span class="string">','</span> ); </span><br><span class="line">    <span class="keyword">if</span> ( args <span class="keyword">in</span> cache )&#123; </span><br><span class="line">      <span class="keyword">return</span> cache[ args ]; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> cache[ args ] = fn.apply( <span class="keyword">this</span>, <span class="built_in">arguments</span> ); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="keyword">var</span> proxyMult = createProxyFactory( mult ), </span><br><span class="line">    proxyPlus = createProxyFactory( plus ); </span><br><span class="line"></span><br><span class="line">alert( proxyMult( <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ) ); <span class="comment">// 输 出： 24 </span></span><br><span class="line">alert( proxyMult( <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ) ); <span class="comment">// 输 出： 24 </span></span><br><span class="line">alert( proxyPlus( <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ) ); <span class="comment">// 输 出： 10 </span></span><br><span class="line">alert( proxyPlus( <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ) ); <span class="comment">// 输 出： 10</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="其他代理模式"><a href="#其他代理模式" class="headerlink" title="其他代理模式"></a>其他代理模式</h4><p>代理模式的变体种类非常多，简约介绍一下这些代理，</p>
+<ul>
+<li>防火墙代理：控制网络资源的访问，保护主题不让“坏人”接近。</li>
+<li>远程代理：为一个对象在不同的地址空间提供局部代表，在Java中，远程代理可以是另一个虚拟机中的对象。</li>
+<li>保护代理：用于对象应该有不同访问权限的情况。</li>
+<li>智能引用代理：取代了简单的指针，它在访问对象时执行一些附加操作，比如计算一个对象被引用的次数。</li>
+<li>写时复制代理：通常用于复制一个庞大对象的情况。写时复制代理延迟了复制的过程，当对象被真正修改时，才对它进行复制操作。写时复制代理是虚拟代理的一种变体，DLL（操作系统中的动态链接库）是其典型运用场景。</li>
+</ul>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/11/15/js-pattern6/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/11/08/js-pattern4/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

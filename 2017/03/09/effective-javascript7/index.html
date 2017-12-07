@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            effective-javascript笔记-7 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,effective-javascript,note">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="effective-javascript笔记-7 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="effective-javascript"> <meta property="og:article:tag" content="note"> 
+
+    
+        <meta property="article:published_time" content="Thu Mar 09 2017 08:34:20 GMT+0800" />
+        <meta property="article:modified_time" content="Sun Mar 26 2017 00:00:00 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="effective-javascript笔记-7 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/03/09/effective-javascript7/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/03/09/effective-javascript7/index.html",
+    "headline": "effective-javascript笔记-7",
+    "datePublished": "Thu Mar 09 2017 08:34:20 GMT+0800",
+    "dateModified": "Sun Mar 26 2017 00:00:00 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,effective-javascript,notenull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#并发"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x5E76;&#x53D1;" class="headerlink" title="&#x5E76;&#x53D1;"></a>&#x5E76;&#x53D1;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#61-不要阻塞I-O事件队列"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#61-&#x4E0D;&#x8981;&#x963B;&#x585E;I-O&#x4E8B;&#x4EF6;&#x961F;&#x5217;" class="headerlink" title="61. &#x4E0D;&#x8981;&#x963B;&#x585E;I/O&#x4E8B;&#x4EF6;&#x961F;&#x5217;"></a>61. &#x4E0D;&#x8981;&#x963B;&#x585E;I/O&#x4E8B;&#x4EF6;&#x961F;&#x5217;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#62-在异步序列中使用嵌套或命名的回调函数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#62-&#x5728;&#x5F02;&#x6B65;&#x5E8F;&#x5217;&#x4E2D;&#x4F7F;&#x7528;&#x5D4C;&#x5957;&#x6216;&#x547D;&#x540D;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;" class="headerlink" title="62. &#x5728;&#x5F02;&#x6B65;&#x5E8F;&#x5217;&#x4E2D;&#x4F7F;&#x7528;&#x5D4C;&#x5957;&#x6216;&#x547D;&#x540D;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;"></a>62. &#x5728;&#x5F02;&#x6B65;&#x5E8F;&#x5217;&#x4E2D;&#x4F7F;&#x7528;&#x5D4C;&#x5957;&#x6216;&#x547D;&#x540D;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#此条笔记不完整-原因如下"><span class="post-toc-number"></span> <span class="post-toc-text"><a href="#&#x6B64;&#x6761;&#x7B14;&#x8BB0;&#x4E0D;&#x5B8C;&#x6574;-&#x539F;&#x56E0;&#x5982;&#x4E0B;" class="headerlink" title="&#x6B64;&#x6761;&#x7B14;&#x8BB0;&#x4E0D;&#x5B8C;&#x6574;,&#x539F;&#x56E0;&#x5982;&#x4E0B;:"></a>&#x6B64;&#x6761;&#x7B14;&#x8BB0;&#x4E0D;&#x5B8C;&#x6574;,&#x539F;&#x56E0;&#x5982;&#x4E0B;:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#63-当心丢弃错误"><span class="post-toc-number">0.1.</span> <span class="post-toc-text"><a href="#63-&#x5F53;&#x5FC3;&#x4E22;&#x5F03;&#x9519;&#x8BEF;" class="headerlink" title="63. &#x5F53;&#x5FC3;&#x4E22;&#x5F03;&#x9519;&#x8BEF;"></a>63. &#x5F53;&#x5FC3;&#x4E22;&#x5F03;&#x9519;&#x8BEF;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#64-对异步循环使用递归"><span class="post-toc-number">0.2.</span> <span class="post-toc-text"><a href="#64-&#x5BF9;&#x5F02;&#x6B65;&#x5FAA;&#x73AF;&#x4F7F;&#x7528;&#x9012;&#x5F52;" class="headerlink" title="64. &#x5BF9;&#x5F02;&#x6B65;&#x5FAA;&#x73AF;&#x4F7F;&#x7528;&#x9012;&#x5F52;"></a>64. &#x5BF9;&#x5F02;&#x6B65;&#x5FAA;&#x73AF;&#x4F7F;&#x7528;&#x9012;&#x5F52;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#65-不要在计算时阻塞事件队列"><span class="post-toc-number">0.3.</span> <span class="post-toc-text"><a href="#65-&#x4E0D;&#x8981;&#x5728;&#x8BA1;&#x7B97;&#x65F6;&#x963B;&#x585E;&#x4E8B;&#x4EF6;&#x961F;&#x5217;" class="headerlink" title="65. &#x4E0D;&#x8981;&#x5728;&#x8BA1;&#x7B97;&#x65F6;&#x963B;&#x585E;&#x4E8B;&#x4EF6;&#x961F;&#x5217;"></a>65. &#x4E0D;&#x8981;&#x5728;&#x8BA1;&#x7B97;&#x65F6;&#x963B;&#x585E;&#x4E8B;&#x4EF6;&#x961F;&#x5217;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#66-使用计数器来执行并行操作"><span class="post-toc-number">0.4.</span> <span class="post-toc-text"><a href="#66-&#x4F7F;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x6765;&#x6267;&#x884C;&#x5E76;&#x884C;&#x64CD;&#x4F5C;" class="headerlink" title="66. &#x4F7F;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x6765;&#x6267;&#x884C;&#x5E76;&#x884C;&#x64CD;&#x4F5C;"></a>66. &#x4F7F;&#x7528;&#x8BA1;&#x6570;&#x5668;&#x6765;&#x6267;&#x884C;&#x5E76;&#x884C;&#x64CD;&#x4F5C;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#67-绝不要同步调用异步的回调函数"><span class="post-toc-number">0.5.</span> <span class="post-toc-text"><a href="#67-&#x7EDD;&#x4E0D;&#x8981;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x5F02;&#x6B65;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;" class="headerlink" title="67. &#x7EDD;&#x4E0D;&#x8981;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x5F02;&#x6B65;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;"></a>67. &#x7EDD;&#x4E0D;&#x8981;&#x540C;&#x6B65;&#x8C03;&#x7528;&#x5F02;&#x6B65;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#68-使用Promise模式清洁异步逻辑"><span class="post-toc-number">0.6.</span> <span class="post-toc-text"><a href="#68-&#x4F7F;&#x7528;Promise&#x6A21;&#x5F0F;&#x6E05;&#x6D01;&#x5F02;&#x6B65;&#x903B;&#x8F91;" class="headerlink" title="68. &#x4F7F;&#x7528;Promise&#x6A21;&#x5F0F;&#x6E05;&#x6D01;&#x5F02;&#x6B65;&#x903B;&#x8F91;"></a>68. &#x4F7F;&#x7528;Promise&#x6A21;&#x5F0F;&#x6E05;&#x6D01;&#x5F02;&#x6B65;&#x903B;&#x8F91;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                effective-javascript笔记-7
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Mar 09, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Mar 26, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/effective-javascript/">effective-javascript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/note/">note</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=effective-javascript笔记-7&url=https://github.com/xmoyKING/2017/03/09/effective-javascript7/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=effective-javascript笔记-7&url=https://github.com/xmoyKING/2017/03/09/effective-javascript7/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/03/09/effective-javascript7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/03/09/effective-javascript7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p>JS是一种嵌入式的脚本语言, JS程序不是作为独立的应用程序运行的,而是作为大型应用程序环境下的脚本运行的. 比如Web浏览器, 具有多个窗体(Window)和标签(Tab), 没个程序需要响应不同的输入和事件, 如键盘,鼠标,网络,定时任务等.</p>
+<p>在JS中,编写响应多个并发事件的程序非常简单, 而且有时编写者甚至都不知道自己的代码是并发的. 这得益于JS的一个简单的执行模型, 即事件队列(事件循环并发) 和 异步API. </p>
+<p>但在官方ES标准中,并没有提及并发.</p>
+<h3 id="61-不要阻塞I-O事件队列"><a href="#61-不要阻塞I-O事件队列" class="headerlink" title="61. 不要阻塞I/O事件队列"></a>61. 不要阻塞I/O事件队列</h3><p>在JS中,大多的I/O操作都提供了异步的或非阻塞的API, 给程序提供一个回调函数, 一旦输入完成就可以被系统调用,而不是将程序阻塞在等待结果的线程上. 比如浏览器在加载网页过程中下载资源.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">downloadAsync(<span class="string">'http://example.com/file.txt'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>系统在程序调用的时候, 会适时的介入其中, 在完成操作的瞬间调用回调函数. 系统维护了一个按事件发生顺序排列的内部事件队列, 一次调用一个已注册的回调函数.</p>
+<p>所以JS并发的最重要的规则是不要在应用程序事件队列中使用阻塞I/O的API.</p>
+<p>异步的API在基于事件的环境中是安全的, 因为他们迫使应用程序逻辑在一个独立的事件循环”轮询”中继续处理. </p>
+<p>在上述下载文件的例子中, 假设下载资源需要一段时间, 在这段时间内, 有极其庞大的其他事件很可能发生. 在同步是实现中, 这些事件会堆积在事件队列中, 而事件循环将停留等待该JS代码执行完成, 这将阻塞任何其他事件的处理. </p>
+<p>但在异步版本中, JS代码注册一个事件处理程序并立即返回, 在下载完成之前, 允许其他事件处理程序处理这期间的事件.</p>
+<p>比如,Web中的<code>Worker</code>的API使大量的并行计算成为可能. 不同于传统的线程执行, Workers在一个完全隔离的状态下执行, 没有获取全局作用域或主线程页面内容的能力. 因此,他们不会阻塞主事件队列中运行的代码的执行. 在一个Worker中, 使用<code>XMLHttpRequest</code>同步的版本很少出问题, 下载的操作会阻塞Worker的执行, 但并不阻止页面的渲染或事件队列中的事件响应.</p>
+<p>在服务端环境, 阻塞的API在启动开始(在服务器开始接收响应输入的请求之前)是没问题的, 但在处理请求期间, 浏览器事件队列中存在阻塞API就是灾难.</p>
+<ol>
+<li><strong>异步API使用回调函数来延缓处理代价高昂的操作以避免阻塞主应用程序</strong></li>
+<li><strong>JS并发地接收事件,但会使用一个事件队列按序处理事件</strong></li>
+<li><strong>在程序事件队列中不要使用阻塞的I/O</strong></li>
+</ol>
+<h3 id="62-在异步序列中使用嵌套或命名的回调函数"><a href="#62-在异步序列中使用嵌套或命名的回调函数" class="headerlink" title="62. 在异步序列中使用嵌套或命名的回调函数"></a>62. 在异步序列中使用嵌套或命名的回调函数</h3><p>借助闭包, 使用嵌套能将异步操作按照”顺序”执行. 但嵌套的异步操作很容易看懂, 但当扩展到更多的操作时, 序列会变得很笨拙.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">downloadAsync(<span class="string">'url1'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    downloadAsync(url, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">        downloadAsync(<span class="string">'a.txt'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">            downloadAsync(<span class="string">'b.txt'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">b</span>)</span>&#123;</span><br><span class="line">                ...</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>减少过多嵌套的方法之一是将回调函数作为命名函数, 并将它们需要的附加数据作为额外的参数传递. </p>
+<h1 id="此条笔记不完整-原因如下"><a href="#此条笔记不完整-原因如下" class="headerlink" title="此条笔记不完整,原因如下:"></a>此条笔记不完整,原因如下:</h1><p>现在已经有<code>Promise</code>能结构良好的定义异步嵌套以及顺序调用的问题了.</p>
+<h3 id="63-当心丢弃错误"><a href="#63-当心丢弃错误" class="headerlink" title="63. 当心丢弃错误"></a>63. 当心丢弃错误</h3><p>管理异步编程的一个问题是对错误的处理, 对同步的代码, 通过<code>try</code>语句块包装一段代码很容易处理所有的错误.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    f();</span><br><span class="line">    g();</span><br><span class="line">    h();</span><br><span class="line">&#125; <span class="keyword">catch</span>(e)&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于异步的代码, 多步的处理通常被分割到事件队列的单独轮次中, 因此, 不可能将他们全部包在一个try语句中. </p>
+<p>事实上, 异步API甚至根本不抛出异常, 因为当一个异步错误发生时, 没有一个明显的执行上下文来抛出异常! 相反, 异步API倾向于将错误表示为回调函数的特定参数, 或使用一个附加的错误处理回调函数(也被称为errbacks).<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">downloadAsync(<span class="string">'url1'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>还有一种错误处理的风格由Node.js而起, 将回调函数的第一个参数作为错误标识, 若有错误发生就表示为错误, 否则就是一个假值, 如<code>null</code>. 对这种错误, 可以定义一个通用的错误处理函数, 使用<code>if</code>语句来控制每个回调函数.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onErr</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">downloadAsync(<span class="string">'url1'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, url</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">return</span> onErr(err);</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>通过编写共享的错误处理函数来避免复制和粘贴错误处理代码</strong></li>
+<li><strong>确保明确的处理所有的错误条件以避免丢弃错误</strong></li>
+</ol>
+<h3 id="64-对异步循环使用递归"><a href="#64-对异步循环使用递归" class="headerlink" title="64. 对异步循环使用递归"></a>64. 对异步循环使用递归</h3><p>将循环实现为一个函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downloadOneAsync</span>(<span class="params">urls, onsuccess, onfailure</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n = urls.length;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">tryNextURL</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &gt;= n)&#123;</span><br><span class="line">            onfailure(<span class="string">"all download failed"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        downloadOneAsync(urls[i], onsuccess, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            tryNextURL(i+<span class="number">1</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    tryNextURL(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通常情况下, 递归函数在调用自身太多后会产生运行错误, 由于耗尽栈空间, 最终抛出异常(栈溢出).</p>
+<p>但异步回调函数不会耗尽栈空间, 因为异步API在其回调函数被调用前会立即返回, 其栈帧在任何递归调用将新的栈帧推入栈前, 会从调用栈中弹出.</p>
+<p>事实上,回调函数总是在事件循环的单独轮次中被调用, 事件循环在每个轮次中调用其事件处理程序的调用栈最初是空的, 所以无论回调函数需要迭代调用多少次, 都不会耗尽栈空间.</p>
+<ol>
+<li><strong>循环不能是异步的</strong></li>
+<li><strong>使用递归函数在事件循环的单独轮次中执行迭代</strong></li>
+<li><strong>在事件循环的单独轮次中执行递归, 并不会导致调用栈溢出</strong></li>
+</ol>
+<h3 id="65-不要在计算时阻塞事件队列"><a href="#65-不要在计算时阻塞事件队列" class="headerlink" title="65. 不要在计算时阻塞事件队列"></a>65. 不要在计算时阻塞事件队列</h3><p>为了保持客户端应用程序的高度交互性和确保所有传入的请求在服务器程序中得到了充分的服务,保持事件循环的每轮次尽可能短是很重要的. 否则,事件队列会滞销, 其增长速度会超过分发处理事件程序的速度.</p>
+<p>当程序需要执行代价高昂的计算时如何办呢? 目前没有完全正确的答案, 但是一般是使用Worker API的并发机制.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 比如下面是一个用于搜索大量可移动距离的人工智能游戏</span></span><br><span class="line"><span class="keyword">var</span> ai = <span class="keyword">new</span> Worker(<span class="string">'ai.js'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>使用ai.js源文件作为worker的脚本, 产生一个新的线程独立的事件队列的并发执行线程. 该worker运行在一个完全隔离的状态, 没有任何程序对象能直接访问. 但程序可与worker之间可以用字符串messages来交互.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> userMove = <span class="string">'...'</span>;</span><br><span class="line"></span><br><span class="line">ai.postMessage(<span class="built_in">JSON</span>.stringify(&#123;<span class="attr">userMove</span>: userMove&#125;));</span><br></pre></td></tr></table></figure></p>
+<p><code>postMessage</code>的参数被作为一个消息增加到worker的事件队列中,为了处理worker的响应, 游戏需要注册一个事件处理程序.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ai.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    executeMove(<span class="built_in">JSON</span>.parse(event.data).computerMove);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在ai.js文件中, 写了worker监听消息并执行计算下一步移动所需的工作.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">self.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> userMove = <span class="built_in">JSON</span>.parse(event.data).userMove;</span><br><span class="line">    <span class="keyword">var</span> computerMove = computeNextMove(userMove);</span><br><span class="line">    <span class="keyword">var</span> message = <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">        computerMove: computerMove</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    self.postMessage(message);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">computerNextMove</span>(<span class="params">userMove</span>)</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Worker这样的API有时传递消息的开销可能很昂贵. 而且若没有这样的API,则可以将算法分解为多个步骤, 每个步骤组成一个工作块.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 搜索社交网络图的工作表</span></span><br><span class="line">Member.prototype.inNetwork = <span class="function"><span class="keyword">function</span>(<span class="params">other</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> visited = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> worklist = [<span class="keyword">this</span>];</span><br><span class="line">    <span class="keyword">while</span>(worklist.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> member = worklist.pop();</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">if</span>(member === other)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>若while循环代价太高, 搜索时间会很长, 同时阻塞程序事件队列. 即使用Worker, 也不方便, 因为它需要复制整个网络图的状态或在worker中存储网络图的状态, 并需要频繁使用消息传递来更新和查询网络.</p>
+<p>由于该算法是在whie循环内迭代,可以将它定义为步骤集的序列, 通过增加一个回调参数将<code>inNetWork</code>转换为一个匿名函数.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将while循环替换为一个匿名的递归函数</span></span><br><span class="line">Member.prototype.inNetwork = <span class="function"><span class="keyword">function</span>(<span class="params">other, callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> visited = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> worklist = [<span class="keyword">this</span>];</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(worklist.length === <span class="number">0</span>)&#123;</span><br><span class="line">            callback(<span class="literal">false</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> member = worklist.pop();</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">if</span>(member === other)&#123;</span><br><span class="line">            callback(<span class="literal">true</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        setTimeout(next, <span class="number">0</span>); <span class="comment">// 下一次迭代</span></span><br><span class="line">    &#125;</span><br><span class="line">    setTimeout(next, <span class="number">0</span>); <span class="comment">// 第一次迭代</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>以上代码中的<code>setTimeout</code>能立刻将回调函数添加到事件队列中, 但还可以用更好的方法替代. 比如<code>postMessage</code>.</p>
+<p>同时, 若每轮次next只执行一次算法,则可能效率太低, 可以增加每轮次的迭代次数.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在next函数的主体外围使用循环计数器</span></span><br><span class="line">Member.prototype.inNetwork = <span class="function"><span class="keyword">function</span>(<span class="params">other, callback</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)&#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">        setTimeout(next, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    setTimeout(next, <span class="number">0</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>避免在主事件队列中执行代价高昂的算法</strong></li>
+<li><strong>在支持Worker API的平台, 该API可以用来在一个独立的事件队列中运行长计算程序</strong></li>
+<li><strong>在Worker API不可用或代价昂贵的环境中, 考虑将计算程序分解到事件循环的多个轮次中</strong></li>
+</ol>
+<h3 id="66-使用计数器来执行并行操作"><a href="#66-使用计数器来执行并行操作" class="headerlink" title="66. 使用计数器来执行并行操作"></a>66. 使用计数器来执行并行操作</h3><p>并发事件是JS中不确定性的主要来源, 程序的执行顺序并不能保证与事件发生的顺序一致.</p>
+<p>工具函数<code>downloadAllAsync</code>接收一个URL数组并下载所有文件, 返回一个存储了文件内容的数组, 每个URL对应一个字符串.downloadAllAsync不仅可以清理嵌套回调函数,而且能并行下载文件. 可以在一次事件循环中启动所有的文件的下载.</p>
+<p>每次下载成功, 就将文件内容传入result数组, 若所有URL都成功下载,则调用onsuccess回调函数, 若有任何失败, 则调用onerror回调函数, <code>result = null</code>能保证若多次下载失败,onerror只被调用一次, 即第一次错误发生时.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downloadAllAsync</span>(<span class="params">urls, onsuccess, onerror</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [], length = urls.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(length === <span class="number">0</span>)&#123; <span class="comment">// 若没有需要下载的url,则直接调用成功事件并返回结果.</span></span><br><span class="line">        setTimeout(onsuccess.bind(<span class="literal">null</span>, result), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    urls.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">        downloadAsync(url, <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(result)&#123;</span><br><span class="line">                <span class="comment">// 存在竞争条件, 可能会出错</span></span><br><span class="line">                result.push(text); </span><br><span class="line">                <span class="keyword">if</span>(result.length === url.length)&#123;</span><br><span class="line">                    onsuccess(result);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(result)&#123;</span><br><span class="line">                result = <span class="literal">null</span>;</span><br><span class="line">                onerror(error);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">var</span> filenames = [</span><br><span class="line">    <span class="string">'huge.txt'</span>, <span class="comment">// 大文件</span></span><br><span class="line">    <span class="string">'tiny.txt'</span>, <span class="comment">// 小文件</span></span><br><span class="line">    <span class="string">'medium.txt'</span> <span class="comment">// 中等大小文件</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">downloadAllAsync(filnames, <span class="function"><span class="keyword">function</span>(<span class="params">files</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 以下顺序无法保证</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'huge.file'</span>, files[<span class="number">0</span>].length);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'tiny.file'</span>, files[<span class="number">1</span>].length);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'medium.file'</span>, files[<span class="number">2</span>].length);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error: '</span>+ error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>以上函数中, 当一个程序依赖于特定的事件顺序才能正常工作时, 程序就会出现数据竞争(data race), 数据竞争指多个并发操作可以修改共享的数据结构, 这取决于他们真正发生的顺序,而不是调用顺序.</p>
+<p>当一个程序依赖于特定的时间顺序才能正常工作时, 这个程序会遭受数据竞争, 数据竞争是指多个并发操作可以修改共享的数据结构, 这取决于他们的发生顺序.</p>
+<p>若想要不依赖事件的执行顺序而总是得到顺序的结果,我们需要将结果存储在原始索引的位置.而不是每次<code>push</code>到结果数组.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downloadAllAsync</span>(<span class="params">urls, onsuccess, onerror</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [], length = urls.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(length === <span class="number">0</span>)&#123; <span class="comment">// 若没有需要下载的url,则直接调用成功事件并返回结果.</span></span><br><span class="line">        setTimeout(onsuccess.bind(<span class="literal">null</span>, result), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    urls.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">url, i</span>)</span>&#123;</span><br><span class="line">        downloadAsync(url, <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(result)&#123;</span><br><span class="line">                result[i] = text; <span class="comment">// 将结果字符串存储在原始索引处</span></span><br><span class="line">                <span class="keyword">if</span>(result.length === url.length)&#123;</span><br><span class="line">                    onsuccess(result);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(result)&#123;</span><br><span class="line">                result = <span class="literal">null</span>;</span><br><span class="line">                onerror(error);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但以上程序还是会出错, 那就是若索引为<code>length-1</code>的文件先下载好, 比如共3个文件,索引为2的文件先下载好,这将导致<code>result.length</code>被更新为3, 用户的success回调函数将被过早的调用,其参数为一个不完整的数组.</p>
+<p>正确的实现应该是使用一个计数器来追踪操作数量.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downloadAllAsync</span>(<span class="params">urls, onsuccess, onerror</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [], pending = urls.length;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(pending === <span class="number">0</span>)&#123; <span class="comment">// 若没有需要下载的url,则直接调用成功事件并返回结果.</span></span><br><span class="line">        setTimeout(onsuccess.bind(<span class="literal">null</span>, result), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    urls.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">url, i</span>)</span>&#123;</span><br><span class="line">        downloadAsync(url, <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(result)&#123;</span><br><span class="line">                result[i] = text; <span class="comment">// 将结果字符串存储在原始索引处</span></span><br><span class="line">                --pending; <span class="comment">// 表示完成一次操作</span></span><br><span class="line">                <span class="keyword">if</span>(pending === <span class="number">0</span>)&#123;</span><br><span class="line">                    onsuccess(result);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(result)&#123;</span><br><span class="line">                result = <span class="literal">null</span>;</span><br><span class="line">                onerror(error);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>JS程序中的事件发生是不确定的,即顺序是不可预测的</strong></li>
+<li><strong>使用计数器避免并行操作中数据竞争</strong></li>
+</ol>
+<h3 id="67-绝不要同步调用异步的回调函数"><a href="#67-绝不要同步调用异步的回调函数" class="headerlink" title="67. 绝不要同步调用异步的回调函数"></a>67. 绝不要同步调用异步的回调函数</h3><p>假设有一个downloadAsync的变种版本, 它能缓存已经下载的文件, 避免多次下载同一个文件. 在文件已经缓存的情况下, 立即调用回调函数.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 缓存使用Dict类</span></span><br><span class="line"><span class="keyword">var</span> cache = <span class="keyword">new</span> Dict();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downloadCachingAsync</span>(<span class="params">url, onsuccess, onerror</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cache.has(url))&#123;</span><br><span class="line">        onsuccess(cache.get(url)); <span class="comment">// 直接调用</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> downloadAsynce(url, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">        cache.set(url, file);</span><br><span class="line">        onsuccess(file);</span><br><span class="line">    &#125;, onerror);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通常情况下,downloadCachingAsync会立即提供缓存的数据, 但会有一些小问题. 首先它改变了操作的预期顺序, 比如对一个正常的异步API应该是用可预测的顺序来记录日志.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">downloadAsync(<span class="string">'file.txt'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'finished'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'starting'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>而使用上面的downloadCachingAsync实现, 则上述的日志可能会以任意顺序记录事件, 因为文件是否被缓存对日志顺序有很大影响.</p>
+<p>除了日志的顺序, 异步API的目的是维持事件循环中每轮的严格分离, 这简化了并发, 通过减轻每轮事件循环的代码量而不用担心其他代码并发修改共享的数据结构. 同步调用异步回调违反了分离, 导致在当前轮完成之前, 代码用于执行一轮隔离的事件循环.</p>
+<p>比如, 下面程序用一个剩余文件队列给用户下载和显示消息<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">downloadCachingAsync(remaining[<span class="number">0</span>], <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    remaining.shift();</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">status.display(<span class="string">'downloading '</span>+ remaining[<span class="number">0</span>] + <span class="string">'...'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>若同步调用该函数, 那么将显示错误的文件名的消息, 若队列为空时, 会显示undefined.</p>
+<p>同步的调用异步回调函数可能导致一些问题, 64条中解释了异步回调函数本质上是以空的调用栈来调用, 因此将异步的循环实现为递归函数是安全的, 完全没有累积超越调用栈空间的危险. </p>
+<p>同步的调用不能保证这点, 因而会使得一个表面上异步循环很可能会耗尽调用栈空间. 另一个问题是异常,对于上述的downloadCachingAsync实现, 若回调函数抛出一个异常, 它将会在每轮的事件循环中, 也就是开始下载时而不是期望的一个分离的回合抛出该异常.</p>
+<p>为了确保总是异步调用回调函数, 可以使用已经存在的异步API, 使用通用的setTimeout在事件队列中增加一个回调函数.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cache = <span class="keyword">new</span> Dict();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downloadCachingAsync</span>(<span class="params">url, onsuccess, onerror</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(cache.has(url))&#123;</span><br><span class="line">        <span class="keyword">var</span> cached = cache.get(url);</span><br><span class="line">        setTimeout( onsuccess.bind(<span class="literal">null</span>, cached), <span class="number">0</span>); <span class="comment">// 使用bind将结果保存为onsuccess回调函数的第一个参数</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> downloadAsynce(url, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">        cache.set(url, file);</span><br><span class="line">        onsuccess(file);</span><br><span class="line">    &#125;, onerror);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>即使可以立即得到数据,也绝不要同步地调用异步回调函数</strong></li>
+<li><strong>同步地调用异步的回调函数扰乱了预期的操作序列, 并可能导致意向不到的交错代码</strong></li>
+<li><strong>同步调用异步的回调函数可能导致栈溢出或错误的处理异常</strong></li>
+<li><strong>使用异步的API, 比如setTimeout函数来调度异步回调函数,使其运行于另一个回合</strong></li>
+</ol>
+<h3 id="68-使用Promise模式清洁异步逻辑"><a href="#68-使用Promise模式清洁异步逻辑" class="headerlink" title="68. 使用Promise模式清洁异步逻辑"></a>68. 使用Promise模式清洁异步逻辑</h3><p>目前非常流行的构建异步API的方法为promise模式. 基于promise的API不接受回调函数作为参数, 相反, 它返回一个promise对象, 该对象通过其自身的<code>then</code>方法接收回调函数.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通回调模式</span></span><br><span class="line">downloadAsync(<span class="string">'file.txt'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file: '</span>+file);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// promise模式</span></span><br><span class="line"><span class="keyword">var</span> p = downLoadP(<span class="string">'file.txt'</span>);</span><br><span class="line"></span><br><span class="line">p.then(<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file: '</span>+file);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>上述两种方式的简单对比看不出有什么大的不同, 但promise的改进在于它们的组合性. 传递给then方法的回调函数不仅执行, 也可以传递返回结果. 通过回调函数返回一个值, 可以构造一个新的promise.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileP = downloadP(<span class="string">'file.txt'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> lengthP = fileP.then(<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> file.length;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">lengthP.then(<span class="function"><span class="keyword">function</span>(<span class="params">length</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'length: '</span>+length);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>可以将promise的方法理解为表示最终值的对象. 它封装了一个还未完成的并发操作, 但最终会产生一个结果值. then方法可以接收一个代表某种类型的最终值的promise对象, 并产生一个新的promise对象来代表另一种类型的最终值, 而不管回调函数返回了什么.</p>
+<p>从现有的promise中构建新的promise的能力带来了很大的灵活性,且简单强大. 比如,构造一个程序用于拼接多个promise的结果<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过join函数能构建promise对象</span></span><br><span class="line"><span class="keyword">var</span> filesP = join( downloadP(<span class="string">'file1.txt'</span>), downloadP(<span class="string">'file2.txt'</span>), downloadP(<span class="string">'file3.txt'</span>) );</span><br><span class="line"></span><br><span class="line">filesP.then(<span class="function"><span class="keyword">function</span>(<span class="params">files</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file1: '</span>+files[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file2: '</span>+files[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file3: '</span>+files[<span class="number">2</span>]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>promise还有一个<code>when</code>方法, 用法与<code>then</code>类似.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> file1P = downloadP(<span class="string">'file1.txt'</span>),</span><br><span class="line">    file2P = downloadP(<span class="string">'file2.txt'</span>), </span><br><span class="line">    file3P = downloadP(<span class="string">'file3.txt'</span>) );</span><br><span class="line"></span><br><span class="line">when([file1P, file2P, file3P],<span class="function"><span class="keyword">function</span>(<span class="params">files</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file1: '</span>+files[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file2: '</span>+files[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file3: '</span>+files[<span class="number">2</span>]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>promise通过then方法的返回值来联系结果, 或通过join函数能构建promise对象, 而不是在并行的回调函数间共享数据结构. 这本质上是安全的, 因为它避免了数据竞争.</p>
+<p>同时promise风格也是有序的, 但比笨重的嵌套模式清晰的多, 错误处理也会通过promise自动传播, 可以为整个序列提供一个error回调函数, 而不是将error回调传递给每一步.</p>
+<p>数据竞争在某些情况下是有用的,promise也提供了这种应用场景. 比如当需要从多个不同服务器下载同一份文件, 选择最先完成的那份. <code>select(或choose)</code>函数接收几个promise并返回最先完成的那个文件的promise(即几个promise彼此竞争).<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileP = select( downloadP(<span class="string">'http://example1.com/file.txt'</span>), </span><br><span class="line">    downloadP(<span class="string">'http://example2.com/file.txt'</span>), </span><br><span class="line">    downloadP(<span class="string">'http://example3.com/file.txt'</span>) );</span><br><span class="line"></span><br><span class="line">fileP.then(<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file: '</span>+file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>select的另一个用法是当超时的时候能终止操作.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileP = select(downloadP(<span class="string">'http://example1.com/file.txt'</span>), timeoutError(<span class="number">2000</span>));</span><br><span class="line"></span><br><span class="line">fileP.then(<span class="function"><span class="keyword">function</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'file: '</span>+file);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'I/O error or timeout: '</span>+ error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li><strong>promise代表最终值, 即并行操作完成时最终产生的结果</strong></li>
+<li><strong>使用promise组合不同的并行操作</strong></li>
+<li><strong>使用promise模式的API避免数据竞争</strong></li>
+<li><strong>在要求有意的竞争条件时使用select(也被称为choose)</strong></li>
+</ol>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/03/17/mobile-web-app/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/03/06/effective-javascript6/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

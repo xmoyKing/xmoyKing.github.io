@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            自建CA并将网站改为HTTPS协议网站 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,ca,https,openssl">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="自建CA并将网站改为HTTPS协议网站 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="ca"> <meta property="og:article:tag" content="https"> <meta property="og:article:tag" content="openssl"> 
+
+    
+        <meta property="article:published_time" content="Thu Apr 27 2017 23:48:16 GMT+0800" />
+        <meta property="article:modified_time" content="Thu Apr 27 2017 23:48:16 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="自建CA并将网站改为HTTPS协议网站 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/04/27/https-ca/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/04/27/https-ca/index.html",
+    "headline": "自建CA并将网站改为HTTPS协议网站",
+    "datePublished": "Thu Apr 27 2017 23:48:16 GMT+0800",
+    "dateModified": "Thu Apr 27 2017 23:48:16 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",ca,https,opensslnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一步：CA的配置文件"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;CA&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;CA&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;CA&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第二步：利用openssl生成CA的公私钥"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x5229;&#x7528;openssl&#x751F;&#x6210;CA&#x7684;&#x516C;&#x79C1;&#x94A5;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x5229;&#x7528;openssl&#x751F;&#x6210;CA&#x7684;&#x516C;&#x79C1;&#x94A5;"></a>&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x5229;&#x7528;openssl&#x751F;&#x6210;CA&#x7684;&#x516C;&#x79C1;&#x94A5;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第三步：网站的配置文件"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x7F51;&#x7AD9;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x7F51;&#x7AD9;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x7F51;&#x7AD9;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第四步：利用openssl生成网站的公私钥"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x5229;&#x7528;openssl&#x751F;&#x6210;&#x7F51;&#x7AD9;&#x7684;&#x516C;&#x79C1;&#x94A5;" class="headerlink" title="&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x5229;&#x7528;openssl&#x751F;&#x6210;&#x7F51;&#x7AD9;&#x7684;&#x516C;&#x79C1;&#x94A5;"></a>&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x5229;&#x7528;openssl&#x751F;&#x6210;&#x7F51;&#x7AD9;&#x7684;&#x516C;&#x79C1;&#x94A5;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第五步：CA利用网站的公钥tempreq-pem生成网站的数字证书，即签名"><span class="post-toc-number">5.</span> <span class="post-toc-text"><a href="#&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;CA&#x5229;&#x7528;&#x7F51;&#x7AD9;&#x7684;&#x516C;&#x94A5;tempreq-pem&#x751F;&#x6210;&#x7F51;&#x7AD9;&#x7684;&#x6570;&#x5B57;&#x8BC1;&#x4E66;&#xFF0C;&#x5373;&#x7B7E;&#x540D;" class="headerlink" title="&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;CA&#x5229;&#x7528;&#x7F51;&#x7AD9;&#x7684;&#x516C;&#x94A5;tempreq.pem&#x751F;&#x6210;&#x7F51;&#x7AD9;&#x7684;&#x6570;&#x5B57;&#x8BC1;&#x4E66;&#xFF0C;&#x5373;&#x7B7E;&#x540D;"></a>&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;CA&#x5229;&#x7528;&#x7F51;&#x7AD9;&#x7684;&#x516C;&#x94A5;tempreq.pem&#x751F;&#x6210;&#x7F51;&#x7AD9;&#x7684;&#x6570;&#x5B57;&#x8BC1;&#x4E66;&#xFF0C;&#x5373;&#x7B7E;&#x540D;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第六步：配置apache2"><span class="post-toc-number">6.</span> <span class="post-toc-text"><a href="#&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;apache2" class="headerlink" title="&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;apache2"></a>&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;apache2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#URL-组成"><span class="post-toc-number">7.</span> <span class="post-toc-text"><a href="#URL-&#x7EC4;&#x6210;" class="headerlink" title="URL &#x7EC4;&#x6210;"></a>URL &#x7EC4;&#x6210;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#URL中的转义"><span class="post-toc-number">8.</span> <span class="post-toc-text"><a href="#URL&#x4E2D;&#x7684;&#x8F6C;&#x4E49;" class="headerlink" title="URL&#x4E2D;&#x7684;&#x8F6C;&#x4E49;"></a>URL&#x4E2D;&#x7684;&#x8F6C;&#x4E49;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HTTPS优缺点"><span class="post-toc-number">9.</span> <span class="post-toc-text"><a href="#HTTPS&#x4F18;&#x7F3A;&#x70B9;" class="headerlink" title="HTTPS&#x4F18;&#x7F3A;&#x70B9;"></a>HTTPS&#x4F18;&#x7F3A;&#x70B9;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他总结HTTPS的优缺点-有些陈旧，仅供参考"><span class="post-toc-number">10.</span> <span class="post-toc-text"><a href="#&#x5176;&#x4ED6;&#x603B;&#x7ED3;HTTPS&#x7684;&#x4F18;&#x7F3A;&#x70B9;-&#x6709;&#x4E9B;&#x9648;&#x65E7;&#xFF0C;&#x4EC5;&#x4F9B;&#x53C2;&#x8003;" class="headerlink" title="&#x5176;&#x4ED6;&#x603B;&#x7ED3;HTTPS&#x7684;&#x4F18;&#x7F3A;&#x70B9;(&#x6709;&#x4E9B;&#x9648;&#x65E7;&#xFF0C;&#x4EC5;&#x4F9B;&#x53C2;&#x8003;)"></a>&#x5176;&#x4ED6;&#x603B;&#x7ED3;HTTPS&#x7684;&#x4F18;&#x7F3A;&#x70B9;(&#x6709;&#x4E9B;&#x9648;&#x65E7;&#xFF0C;&#x4EC5;&#x4F9B;&#x53C2;&#x8003;)</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                自建CA并将网站改为HTTPS协议网站
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Apr 27, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Apr 27, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/ca/">ca</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/https/">https</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/openssl/">openssl</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=自建CA并将网站改为HTTPS协议网站&url=https://github.com/xmoyKING/2017/04/27/https-ca/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=自建CA并将网站改为HTTPS协议网站&url=https://github.com/xmoyKING/2017/04/27/https-ca/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/04/27/https-ca/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/04/27/https-ca/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>本文讲解如何将http网站改为https网站，同时会讲解HTTPS的基础SSL，CA认证以及利用OPENSSL生成公私钥，Web容器apache2的一些基本配置。</p>
+<p>搭建环境如下：<br>  Ubuntu 16.04 64bit<br>  Apache2 2.3.5<br>  Ubuntu自带 Openssl</p>
+<p><img src="1.png" alt="ca验证过程"><br>上图主要是帮助理清客户端，网站，CA机构，浏览器之间的关系，以及他们之间的交互流程。</p>
+<p>HTTPS站点是为了让用户相信正在访问的网站是正确的网站，所以网站需要证明自己的身份，即向用户（浏览器）展示一份证书。而证书必须由第三方机构（CA机构）签发并认证，网站不能自证。CA作为第三方独立的存在，负责证明网站的正确性，一般是收费服务。</p>
+<p>网站向CA提交自身网站信息，包括基本信息和自己的公钥，CA将用自己的私钥对这些网站的信息进行加密，加密后的输出信息即为<strong>网站的数字证书</strong>，这个证书会发还给网站，CA机构会留存证书副本和相关的网站信息。</p>
+<p>根证书和其他证书的概念：<br>在网络关系中，存在一个信任链，这个链有一个源，这个源头就是根证书，其他的证书，如一级证书、二级证书就是信任链的其他元素。<br>在这些证书中，假定根证书是绝对安全且值得信任的，这样才能有后面的信任链的存在，因此，根证书是自签名证书（自己认证自己），而其他的证书则需要由根证书来签名验证。</p>
+<p>非对称加密算法RSA的简单运用原理：<br>一对公私钥，私钥只能由自己持有，需要保密存放，而公钥可以发放出去，让任何人持有，无需保密。<br>加密发送：公钥加密的信息只能被私钥正确解密，这就能保证信息不会被攻击者attacker窃取。<br>验证身份：私钥加密的信息只能被公钥正确解密，这就能保证信息是被唯一的私钥持有者发出的。</p>
+<p>CA机构拥有如下的一些文件(文件名自选)：<br>caconfig.conf ：CA机构的密钥配置文件，用于生成一对CA的公私钥<br>cacert.pem ： CA机构的公钥<br>cakey.pem ：CA机构的私钥<br>serial ：证书序列号文件 (初始内容为序列号，不能为空，可以设置比如<code>01</code>)<br>index.txt ：保存已被本机构认证的网站的信息 （初始化时可以为空）<br>private文件夹 ：用于保存自己的私钥<br>cert文件夹 ：用于保存以颁发证书的副本，证书副本以证书序列号命名</p>
+<p>网站拥有如下的一些文件（文件名自选）：<br>server.conf : 网站的密钥配置文件，用于生成一对网站的公私钥<br>tempreq.pem ： 网站的公钥<br>serverkey.pem ：网站的私钥<br>server_crt.pem : 网站的数字证书，由CA机构签发</p>
+<h3 id="第一步：CA的配置文件"><a href="#第一步：CA的配置文件" class="headerlink" title="第一步：CA的配置文件"></a>第一步：CA的配置文件</h3><p>caconfig.conf文件内容如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">[ ca ]</span><br><span class="line">default_ca = local_ca</span><br><span class="line">[ local_ca ]</span><br><span class="line">dir = /etc/ssl # 生成公私钥的根目录位置，可以选择放在其他位置，在此位置需要root管理权限</span><br><span class="line">certificate = $dir/cacert.pem  # CA机构的公钥</span><br><span class="line">database = $dir/index.txt # 保存已被本机构认证的网站的信息</span><br><span class="line">new_certs_dir = $dir/certs # 用于保存以颁发证书的副本，证书副本以证书序列号命名</span><br><span class="line">private_key = $dir/private/cakey.pem # CA机构的私钥</span><br><span class="line">serial = $dir/serial # 证书序列号文件  </span><br><span class="line">default_crl_days = 365</span><br><span class="line">default_days = 1825</span><br><span class="line">default_md = sha1</span><br><span class="line">policy = local_ca_policy</span><br><span class="line">x509_extensions = local_ca_extensions</span><br><span class="line">copy_extensions = copy</span><br><span class="line">[ local_ca_policy ]</span><br><span class="line">commonName = optional</span><br><span class="line">stateOrProvinceName = optional</span><br><span class="line">countryName = optional</span><br><span class="line">emailAddress = optional</span><br><span class="line">organizationName = optional</span><br><span class="line">organizationalUnitName = optional</span><br><span class="line">[ local_ca_extensions ]</span><br><span class="line">basicConstraints = CA:false</span><br><span class="line">[ req ]</span><br><span class="line">default_bits = 2048</span><br><span class="line">default_keyfile = /etc/ssl/private/cakey.pem # 默认的CA机构的私钥，即私钥可以有多个，但是必须选一个默认</span><br><span class="line">default_md = sha1</span><br><span class="line">prompt = no</span><br><span class="line">distinguished_name = root_ca_distinguished_name</span><br><span class="line">x509_extensions = root_ca_extensions</span><br><span class="line">[ root_ca_distinguished_name ]  # 以下为CA机构的一些基本信息，可以修改</span><br><span class="line">commonName = MyOwn Root Certificate Authority</span><br><span class="line">stateOrProvinceName = NC</span><br><span class="line">countryName = US</span><br><span class="line">emailAddress = root@ca.com</span><br><span class="line">organizationName = Trade Show Hell # 在浏览器里面找证书的时候，是在此机构下找的，证书名为 MyOwn Root Certificate Authority</span><br><span class="line">organizationalUnitName = IT Department</span><br><span class="line">[ root_ca_extensions ]</span><br><span class="line">basicConstraints = CA:true</span><br></pre></td></tr></table></figure></p>
+<p>以上caconfig.conf的目的是生成CA机构的公私钥，公钥即CA的根证书。</p>
+<h3 id="第二步：利用openssl生成CA的公私钥"><a href="#第二步：利用openssl生成CA的公私钥" class="headerlink" title="第二步：利用openssl生成CA的公私钥"></a>第二步：利用openssl生成CA的公私钥</h3><p>命令如下，这一步会需要设置CA私钥密码（每一个私钥都对应一个密码）：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -x509 -newkey rsa:2048 -out cacert.pem -outform PEM -days 365 -config "caconfig.conf"</span><br></pre></td></tr></table></figure></p>
+<p>-newkey rsa:2048 表示生成新的rsa密钥，2048是密钥大小<br>-out cacert.pem 表示输出，即生成的公钥名称<br>-outform PEM 表示输出内容格式，可以认为是文件类型，（linux中的文件类型不是以后缀区分）<br>-days 365 表示过期时间<br>-config “caconfig.conf” 表示手动指定配置文件，文件路径在双引号内，上述表示相对位置</p>
+<h3 id="第三步：网站的配置文件"><a href="#第三步：网站的配置文件" class="headerlink" title="第三步：网站的配置文件"></a>第三步：网站的配置文件</h3><p>server.conf文件内容如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[ req ]</span><br><span class="line">prompt = no</span><br><span class="line">distinguished_name = server_distinguished_name</span><br><span class="line">req_extensions = v3_req</span><br><span class="line">[ server_distinguished_name ]  # 以下为网站的基本信息，可以修改</span><br><span class="line">commonName = localhost # commonName需要与后面的alt_names内的DNS.*相等，用于证明自身</span><br><span class="line">stateOrProvinceName = NC</span><br><span class="line">countryName = US</span><br><span class="line">emailAddress = root@sites.com</span><br><span class="line">organizationName = My Organization Name</span><br><span class="line">organizationalUnitName = Subunit of My Large Organization</span><br><span class="line">[ v3_req ]</span><br><span class="line">basicConstraints = CA:FALSE</span><br><span class="line">keyUsage = nonRepudiation, digitalSignature,</span><br><span class="line">keyEncipherment</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line">[ alt_names ] # alt_names下的DNS.*需要与前面的commonName相等</span><br><span class="line">DNS.0 = localhost</span><br><span class="line">DNS.1 = localhost</span><br></pre></td></tr></table></figure></p>
+<h3 id="第四步：利用openssl生成网站的公私钥"><a href="#第四步：利用openssl生成网站的公私钥" class="headerlink" title="第四步：利用openssl生成网站的公私钥"></a>第四步：利用openssl生成网站的公私钥</h3><p>命令如下，这一步会需要设置网站私钥密码（自设，正常情况下与前面CA密码不同）：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -newkey rsa:1024 -keyout serverkey.pem -keyform PEM -out tempreq.pem -outform PEM -config "server.conf"</span><br></pre></td></tr></table></figure></p>
+<p>详细命令选项同前</p>
+<h3 id="第五步：CA利用网站的公钥tempreq-pem生成网站的数字证书，即签名"><a href="#第五步：CA利用网站的公钥tempreq-pem生成网站的数字证书，即签名" class="headerlink" title="第五步：CA利用网站的公钥tempreq.pem生成网站的数字证书，即签名"></a>第五步：CA利用网站的公钥tempreq.pem生成网站的数字证书，即签名</h3><p>由于这一步其实是CA操作，只与网站的公钥有关（可以认为是网站向CA请求证书），输入是网站公钥，输出是颁发给网站的数字证书，配置文件为CA机构的配置文件，由于需要用CA的私钥加密网站发的信息（即网站的公钥），所以需要输入CA的私钥密码。<br>命令如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl ca -in tempreq.pem -out server_crt.pem -config "caconfig.conf"</span><br></pre></td></tr></table></figure></p>
+<p>同时这一步也会对CA机构保存的一些文件进行更新，比如生成的server_crt.pem即为网站的数字证书，会在cert文件夾下自动生成一个副本01.pem （这里的01即为之前serial中的内容）,而serial中的内容会自增为02， 同时在index.txt中会自动添加网站的证书信息。（这些内容可通过<code>vi</code>或<code>cat</code>命令自行查看）</p>
+<h3 id="第六步：配置apache2"><a href="#第六步：配置apache2" class="headerlink" title="第六步：配置apache2"></a>第六步：配置apache2</h3><ol>
+<li><p>首先确保本机有apache2，若没有的话可以使用如下命令安装</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install apache2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在安装完成后即可配置apache2了, 若默认安装则可以使用如下命令修改default-ssl文件（需要为root账户，若不是默认安装，则需要找到对应的apache2安装目录，其他的路径则类似）,</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi <span class="regexp">/etc/</span>apache2<span class="regexp">/sites-available/</span><span class="keyword">default</span>-ssl</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改的内容如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ……</span></span><br><span class="line">SSLCertificateFile /etc/ssl/server_crt.pem # 这里配置网站的数字证书</span><br><span class="line">SSLCertificateKeyFile /etc/ssl/serverkey.pem # 这里配置网站的私钥</span><br><span class="line"><span class="meta">#</span><span class="bash"> ……</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行启动SSL模块命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a2enmod ssl # 允许apache2开启ssl模块</span><br><span class="line">a2ensite default-ssl # 允许站点开始ssl模块，指定站点配置文件为default-ssl</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启apache2服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service apache2 restart # 由于修改了apache2和网站的配置，此步骤需要输入网站的私钥密码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在浏览器中导入CA的公钥（根证书）<br>不同的浏览器有不同的导入流程，但是基本相同，以firefox为例：<br>Edit - Preferences - Advanced - View Certificates - Authorities - import - 选择CA的公钥</p>
+</li>
+<li>在浏览器输入<code>https://localhost</code> 即可访问https版本的apache2默认网站了，同时也可以直接输入<code>localhost</code>查看两者区别</li>
+</ol>
+<hr>
+<p>补充：</p>
+<h3 id="URL-组成"><a href="#URL-组成" class="headerlink" title="URL 组成"></a>URL 组成</h3><p>例如这样一个常见的url<code>http://news.stanford.edu:81/class/g4c2?name=cs155#homework</code>,分别有如下7个部分组成（也有可能不足7个）</p>
+<ul>
+<li>协议（Protocol）: <code>http</code></li>
+<li>二级域名（SLD  second-level domain）: <code>news</code></li>
+<li>主机名/域名（Hostname）：<code>stanford.edu</code></li>
+<li>端口号（Port）：<code>81</code></li>
+<li>路径（Path）：<code>class/g4c2</code></li>
+<li>查询字符串（Query）:<code>?name=cs155</code></li>
+<li>锚点（Fragment）：<code>#homework</code></li>
+</ul>
+<h3 id="URL中的转义"><a href="#URL中的转义" class="headerlink" title="URL中的转义"></a>URL中的转义</h3><p>中文以及一些特殊的字符在URL中是无法显示的，必须通过转义编码后浏览器才能识别，比如空格，换行符等，虽然可以在浏览器地址栏手动输入这些特殊字符，然后显示为人可识别的字符，但是其实它必须被转义才能传输，例如复制这段有特殊字符的url到其他地方，就会自动转义。</p>
+<h3 id="HTTPS优缺点"><a href="#HTTPS优缺点" class="headerlink" title="HTTPS优缺点"></a>HTTPS优缺点</h3><p>传统的HTTP模式，存在着大量的灰色中间环节，相关信息很容易被窃取，但HTTPS却是通过认证用户与服务器，将数据准确地发送到客户机与服务器，并采用加密方式以防数据中途被盗取，大大降低了第三方窃取信息、篡改冒充身份的风险。</p>
+<p>优点主要体现在安全性方面：</p>
+<ol>
+<li>使用HTTPS协议可认证用户和服务器，确保数据发送到正确的客户机和服务器;</li>
+<li>HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全，可防止数据在传输过程中不被窃取、改变，确保数据的完整性。</li>
+<li>HTTPS是现行架构下最安全的解决方案，虽然不是绝对安全，但它大幅增加了中间人攻击的成本。</li>
+</ol>
+<p>缺点：<br>技术方面</p>
+<ol>
+<li>相同网络环境下，HTTPS协议会使页面的加载时间延长近50%，增加10%到20%的耗电。此外，HTTPS协议还会影响缓存，增加数据开销和功耗。</li>
+<li>HTTPS协议的安全是有范围的，在黑客攻击、拒绝服务攻击、服务器劫持等方面几乎起不到什么作用。</li>
+<li>最关键的，SSL 证书的信用链体系并不安全。特别是在某些国家可以控制 CA 根证书的情况下，中间人攻击一样可行。</li>
+</ol>
+<p>成本方面</p>
+<ol>
+<li>SSL的专业证书需要购买，功能越强大的证书费用越高。个人网站、小网站可以选择入门级免费证书。</li>
+<li>SSL 证书通常需要绑定 固定IP，为服务器增加固定IP会增加一定费用。</li>
+<li>HTTPS 连接服务器端资源占用高较高多，相同负载下会增加带宽和服务器投入成本。</li>
+</ol>
+<h3 id="其他总结HTTPS的优缺点-有些陈旧，仅供参考"><a href="#其他总结HTTPS的优缺点-有些陈旧，仅供参考" class="headerlink" title="其他总结HTTPS的优缺点(有些陈旧，仅供参考)"></a>其他总结HTTPS的优缺点(有些陈旧，仅供参考)</h3><p>正方观点：</p>
+<ol>
+<li>HTTPS具有更好的加密性能，避免用户信息泄露;</li>
+<li>HTTPS复杂的传输方式，降低网站被劫持的风险;</li>
+<li>搜索引擎已经全面支持HTTPS抓取、收录，并且会优先展示HTTPS结果;</li>
+<li>从安全角度来说个人觉得要做HTTPS，不过HTTPS可以采用登录后展示;</li>
+<li>HTTPS绿锁表示可以提升用户对网站信任程度;</li>
+<li>基础成本可控，证书及服务器已经有了成型的支持方案;</li>
+<li>网站加载速度可以通过cdn等方式进行弥补，但是安全不能忽略;</li>
+<li>HTTPS是网络的发展趋势，早晚都要做;</li>
+<li>可以有效防止山寨、镜像网站;</li>
+</ol>
+<p>反方观点：</p>
+<ol>
+<li>HTTPS会降低用户访问速度，增加网站服务器的计算资源消耗;</li>
+<li>目前搜索引擎只是收录了小部分HTTPS内容，应该保持观望制度;</li>
+<li>HTTPS需要申请加密协议，增加了运营成本;</li>
+<li>百度目前对HTTPS的优先展现效果不明显，谷歌较为明显;</li>
+<li>技术门槛较高，无从下手;</li>
+<li>目前站点不涉及私密信息，无需HTTPS;</li>
+<li>兼容性有待提升，如robots不支持/联盟广告不支持等;</li>
+<li>HTTPS网站的安全程度有限，该被黑还是被黑;</li>
+<li>HTTPS维护比较麻烦，在搜索引擎支持HTTP的情况，没必要做HTTPS;</li>
+</ol>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/04/30/express/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/04/24/webgoat7-x-1/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

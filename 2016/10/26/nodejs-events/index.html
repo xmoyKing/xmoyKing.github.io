@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Nodejs-事件、监听器、定时器、回调 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,events,nodejs">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Nodejs-事件、监听器、定时器、回调 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="events"> <meta property="og:article:tag" content="nodejs"> 
+
+    
+        <meta property="article:published_time" content="Wed Oct 26 2016 19:32:34 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Oct 26 2016 19:32:34 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Nodejs-事件、监听器、定时器、回调 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2016/10/26/nodejs-events/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2016/10/26/nodejs-events/index.html",
+    "headline": "Nodejs-事件、监听器、定时器、回调",
+    "datePublished": "Wed Oct 26 2016 19:32:34 GMT+0800",
+    "dateModified": "Wed Oct 26 2016 19:32:34 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",events,nodejsnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事件模型"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x4E8B;&#x4EF6;&#x6A21;&#x578B;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x6A21;&#x578B;"></a>&#x4E8B;&#x4EF6;&#x6A21;&#x578B;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#比较事件回调和线程模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#&#x6BD4;&#x8F83;&#x4E8B;&#x4EF6;&#x56DE;&#x8C03;&#x548C;&#x7EBF;&#x7A0B;&#x6A21;&#x578B;" class="headerlink" title="&#x6BD4;&#x8F83;&#x4E8B;&#x4EF6;&#x56DE;&#x8C03;&#x548C;&#x7EBF;&#x7A0B;&#x6A21;&#x578B;"></a>&#x6BD4;&#x8F83;&#x4E8B;&#x4EF6;&#x56DE;&#x8C03;&#x548C;&#x7EBF;&#x7A0B;&#x6A21;&#x578B;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Node中的阻塞I-O"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#Node&#x4E2D;&#x7684;&#x963B;&#x585E;I-O" class="headerlink" title="Node&#x4E2D;&#x7684;&#x963B;&#x585E;I/O"></a>Node&#x4E2D;&#x7684;&#x963B;&#x585E;I/O</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#事件队列"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x4E8B;&#x4EF6;&#x961F;&#x5217;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x961F;&#x5217;"></a>&#x4E8B;&#x4EF6;&#x961F;&#x5217;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现定时器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x5B9E;&#x73B0;&#x5B9A;&#x65F6;&#x5668;" class="headerlink" title="&#x5B9E;&#x73B0;&#x5B9A;&#x65F6;&#x5668;"></a>&#x5B9E;&#x73B0;&#x5B9A;&#x65F6;&#x5668;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用nexTick调度"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;nexTick&#x8C03;&#x5EA6;" class="headerlink" title="&#x4F7F;&#x7528;nexTick&#x8C03;&#x5EA6;"></a>&#x4F7F;&#x7528;nexTick&#x8C03;&#x5EA6;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现事件发射器和监听器"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"><a href="#&#x5B9E;&#x73B0;&#x4E8B;&#x4EF6;&#x53D1;&#x5C04;&#x5668;&#x548C;&#x76D1;&#x542C;&#x5668;" class="headerlink" title="&#x5B9E;&#x73B0;&#x4E8B;&#x4EF6;&#x53D1;&#x5C04;&#x5668;&#x548C;&#x76D1;&#x542C;&#x5668;"></a>&#x5B9E;&#x73B0;&#x4E8B;&#x4EF6;&#x53D1;&#x5C04;&#x5668;&#x548C;&#x76D1;&#x542C;&#x5668;</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现回调"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x5B9E;&#x73B0;&#x56DE;&#x8C03;" class="headerlink" title="&#x5B9E;&#x73B0;&#x56DE;&#x8C03;"></a>&#x5B9E;&#x73B0;&#x56DE;&#x8C03;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#向回调函数传递额外的参数"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#&#x5411;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4F20;&#x9012;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;" class="headerlink" title="&#x5411;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4F20;&#x9012;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;"></a>&#x5411;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4F20;&#x9012;&#x989D;&#x5916;&#x7684;&#x53C2;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在回调中实现闭包"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#&#x5728;&#x56DE;&#x8C03;&#x4E2D;&#x5B9E;&#x73B0;&#x95ED;&#x5305;" class="headerlink" title="&#x5728;&#x56DE;&#x8C03;&#x4E2D;&#x5B9E;&#x73B0;&#x95ED;&#x5305;"></a>&#x5728;&#x56DE;&#x8C03;&#x4E2D;&#x5B9E;&#x73B0;&#x95ED;&#x5305;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#链式回调"><span class="post-toc-number">3.3.</span> <span class="post-toc-text"><a href="#&#x94FE;&#x5F0F;&#x56DE;&#x8C03;" class="headerlink" title="&#x94FE;&#x5F0F;&#x56DE;&#x8C03;"></a>&#x94FE;&#x5F0F;&#x56DE;&#x8C03;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Nodejs-事件、监听器、定时器、回调
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Oct 26, 2016</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Oct 26, 2016 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/events/">events</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/nodejs/">nodejs</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Nodejs-事件、监听器、定时器、回调&url=https://github.com/xmoyKING/2016/10/26/nodejs-events/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Nodejs-事件、监听器、定时器、回调&url=https://github.com/xmoyKING/2016/10/26/nodejs-events/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2016/10/26/nodejs-events/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2016/10/26/nodejs-events/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>node通过事件驱动模型提供了强大的扩展性和性能，node不同于其他Web服务器采用的传统线程模型</p>
+<h2 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h2><p>node应用是在一个单线程的事件驱动模型中运行的，虽然node在后台实现了一个线程池，但是应用程序本身不具备多线程的概念。</p>
+<h3 id="比较事件回调和线程模型"><a href="#比较事件回调和线程模型" class="headerlink" title="比较事件回调和线程模型"></a>比较事件回调和线程模型</h3><p>传统线程网络模型中，请求进入一个Web服务器，并被分配给一个可用的线程，对于该请求的处理工作继续在该线程上进行，直到请求完成并发回响应。</p>
+<p>Node不是在各个线程为每个请求执行所有的工作，而是将工作添加到一个事件队列中，然后有一个单独的线程运行一个事件循环把这个工作提取出来。 事件循环抓取队列中最上面的任务，执行，然后抓取下一个。</p>
+<p>当执行长期运行或有阻塞I/O的代码时，它不是直接调用该函数，而是把函数随同一个要在此函数完成执行的回调一起添加到事件队列，当node事件队列中所有的事件都被执行完成时，应用停止。</p>
+<p>比如有两个请求：GetFile和GetData，GetFile请求打开文件读取内容，然后在响应中将数据返回，GetData请求链接数据库，查询所需数据，然后返回。</p>
+<p>在线程模型中，这些操作都是在独立的按顺序发生的。</p>
+<p><img src="1.png" alt="线程模型"></p>
+<p>在事件回调方式中，node将GetFile和GetData请求添加到事件队列，然后先提取GetFile，执行，并指定Open回调函数添加到事件队列来完成它，然后提取GetData，执行，并指定Connect回调函数。<br>这种情况直到没有任何回调函数要执行。</p>
+<p><img src="2.png" alt="事件回调"><br>上图中，每个线程的事件并不完全遵守直接交错顺序。比如：Connect连接请求比Read读请求需要更长时间，所以Send()操作在Query查询之前调用。</p>
+<h3 id="Node中的阻塞I-O"><a href="#Node中的阻塞I-O" class="headerlink" title="Node中的阻塞I/O"></a>Node中的阻塞I/O</h3><p>阻塞I/O停止当前线程的执行并等待回应，直到收到回应才能继续。例如：</p>
+<ul>
+<li>读取文件</li>
+<li>查询数据库</li>
+<li>请求套接字</li>
+<li>访问远程服务</li>
+</ul>
+<p>Node使用事件回调来避免阻塞I/O，因此，执行阻塞I/O的任何请求都在后台不同的线程中执行，Node在后台实现线程池，当从队列中检索到一个I/O时，node从线程池中获取一个线程，并在线程中执行I/O操作，而不是主事件循环线程执行I/O操作，防止阻塞I/O阻碍事件队列中的其他事件。</p>
+<p>在被阻塞的线程上执行的函数仍然可以将新的事件添加到队列中。事件循环要么在事件循环线程本身上执行操作，要么在一个单独的线程上执行操作。<br><img src="3.png" alt="事件模型"></p>
+<p>线程模型必须共享CPU和资源，所以当一个线程使用CPU时，其他线程无法使用CPU。<br>事件回调则是尽快做出响应，完全的事件驱动，同一时间可以有尽可能多的会话，同时CPU总是只关注正在进行的任务。</p>
+<h2 id="事件队列"><a href="#事件队列" class="headerlink" title="事件队列"></a>事件队列</h2><p>在队列中使用下列方法传递回调函数：</p>
+<ul>
+<li>对阻塞IO调用做出回应</li>
+<li>对内置事件如http.request和server.connection添加事件监听器</li>
+<li>创建自定义事件发射器并对它们添加自定义监视器</li>
+<li>使用preocess.nextTick选项来调度事件循环的下一次循环中被提取的操作</li>
+<li>使用定时器来调度在特定时间或间隔时间后要做的</li>
+</ul>
+<h3 id="实现定时器"><a href="#实现定时器" class="headerlink" title="实现定时器"></a>实现定时器</h3><p>node中有三种类型的定时器：</p>
+<ul>
+<li>超时时间 setTimeout</li>
+<li>时间间隔 setInterval</li>
+<li>即时定时器 setImmediate 立即执行操作，在IO事件的回调函数开始执行后，比任何超时时间或时间间隔事件被执行之前, 每次调用时，回调函数被放在队列中，并在遍历事件队列循环的每次迭代中，在IO事件被调用后执行。</li>
+</ul>
+<p>以上三个方法都返回该定时器对象的ID，这个ID可以用于在队列提取它之前结束定时器。</p>
+<p>对setInterval和setTimeout对象有unref方法，unref能让队列中仅有此事件时也不会调用，即事件循环不继续，可以采用ref来重新引用。</p>
+<h3 id="使用nexTick调度"><a href="#使用nexTick调度" class="headerlink" title="使用nexTick调度"></a>使用nexTick调度</h3><p>process.nextTick能在事件循环的下一次循环中运行，nextTick在IO事件被触发之前执行，可能会导致IO事件的饥饿，node设置默认1000的process.maxTickDepth来限制事件队列的每次循环可执行的nextTick事件的数目。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试阻塞IO，定时器，nextTick的顺序, nexttick.js为本文件名称</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line">fs.stat(<span class="string">'nexttick.js'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, stats</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(stats)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'nexttick.js Exists'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Immediate Timer 1'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">setImmediate(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Immediate Timer 2'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'next tick 1'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'next tick 2'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>输出：<br>next tick 1<br>next tick 2<br>Immediate Timer 1<br>Immediate Timer 2<br>nexttick.js Exists</p>
+<h3 id="实现事件发射器和监听器"><a href="#实现事件发射器和监听器" class="headerlink" title="实现事件发射器和监听器"></a>实现事件发射器和监听器</h3><p>创建自定义事件，并实现监听器和回调。</p>
+<ol>
+<li><p>将自定义事件添加到JS对象中<br>事件使用一个EventEmitter对象发出，这个对象包含在events模块中，emit(eventName, [args])方法出发evenName事件，包括参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.EventEmitter();</span><br><span class="line">emitter.emit(<span class="string">'simpleEvent'</span>);</span><br></pre></td></tr></table></figure>
+<p>将事件添加到JS对象中，可以通过在对象实例中调用events.EventEmitter.call(this)来在对象中继承EventEmitter功能，同时需要将events.EventEmitter.prototype添加到对象的原型中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span> MyObj()&#123;</span><br><span class="line">  Events.EventEmitter.call(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line">MyObj.prototype.__proto__ = events.EventEmitter.prototype;</span><br><span class="line"><span class="comment">// 然后直接从对象实例中发出事件</span></span><br><span class="line"><span class="keyword">var</span> myObj = <span class="keyword">new</span> MyObje();</span><br><span class="line">myObj.emit(<span class="string">'someEvent'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把事件监听器添加到对象<br>通过下列方法将监听器添加到EventEmitter对象。</p>
+<ul>
+<li>addListener(eventName, callback); 将回调函数附加到对象监听器中，每当eventName事件触发，回调函数就被放在事件队列中执行。</li>
+<li>on(eventName, callback); 同addListener</li>
+<li>once(eventName, callback); 只有eventName事件第一次接触时，回调函数才被放在事件队列中执行。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myCallback</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  ……</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> myObject = <span class="keyword">new</span> MyObj();</span><br><span class="line">myObject.on(<span class="string">'someEvent'</span>, myCallback);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>从对象中删除监听器<br>node在EventEmitter对象上，提供了很多辅助函数来管理包含的监听器</p>
+</li>
+</ol>
+<ul>
+<li>listeners(eventName); 返回一个连接到eventName事件的监听器函数数组</li>
+<li>setMaxListeners(n); 若多于n个监听器加入到eventEmitter对象，就出发警报，默认为10</li>
+<li>removeListener(eventName, callback); 将callback函数从EventEmitter对象的eventName事件中删除。</li>
+</ul>
+<p>事件监听器和发射器事件示例，<br>Account对象从EventEmitter类继承并提供两种方法，deposit（存款）和withdraw（取款），这两个方法都发出balanceChanged事件，checkGoal(acc, goal)回调函数的实现不太一样，展示了如何在事件被触发之前，将变量传递到该事件监听器函数。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Account</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.balance = <span class="number">0</span>;</span><br><span class="line">  events.EventEmitter.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>.deposit = <span class="function"><span class="keyword">function</span>(<span class="params">amount</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.balance += amount;</span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">'balanceChanged'</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">this</span>.withdraw = <span class="function"><span class="keyword">function</span>(<span class="params">amount</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.balance -= amount;</span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">'balanceChangded'</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Account.prototype.__proto__ = events.EventEmitter.prototype;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">displayBalance</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Account balance: $%d'</span>, <span class="keyword">this</span>.balance);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkOverdraw</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">this</span>.balance &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Account overdrawn!'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkGoal</span>(<span class="params">acc, goal</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(acc.balance &gt; goal)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Goal Achieved'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> account = <span class="keyword">new</span> Account;</span><br><span class="line">account.on(<span class="string">'balanceChanged'</span>, displayBalance);</span><br><span class="line">account.on(<span class="string">'balanceChanged'</span>, checkOverdraw);</span><br><span class="line">account.on(<span class="string">'balanceChanged'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  checkGoal(<span class="keyword">this</span>, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br><span class="line">account.deposit(<span class="number">220</span>);</span><br><span class="line">account.deposit(<span class="number">320</span>);</span><br><span class="line">account.deposit(<span class="number">600</span>);</span><br><span class="line">account.withdraw(<span class="number">1200</span>);</span><br></pre></td></tr></table></figure></p>
+<p>输出<br>Account balance: $220<br>Account balance: $540<br>Account balance: $1140<br>Goal Achieved</p>
+<h2 id="实现回调"><a href="#实现回调" class="headerlink" title="实现回调"></a>实现回调</h2><p>回调有三种具体的实现：</p>
+<ul>
+<li>将参数传递给回调函数</li>
+<li>在循环内处理回调函数参数</li>
+<li>嵌套回调</li>
+</ul>
+<h3 id="向回调函数传递额外的参数"><a href="#向回调函数传递额外的参数" class="headerlink" title="向回调函数传递额外的参数"></a>向回调函数传递额外的参数</h3><p>大部分回调函数都传递给它们的自动参数，如错误或结果缓存buff，但使用回调时，常常需要从回调函数外给他们传递额外的参数，这种时候的一个方法就是，在一个匿名函数中实现该函数，然后用来自匿名函数的参数调用回调函数。</p>
+<p>如下，有两个sawCar事件处理程序，sawCar仅发出make参数。 第一个程序实现了logCar(make)回调处理程序，在logColorCar添加颜色时，使用一个匿名函数，随机的选择一个颜色被传递到logColorCar(make, color)。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CarShow</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  events.EventEmitter.call(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">this</span>.seeCar = <span class="function"><span class="keyword">function</span>(<span class="params">make</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">'sawCar'</span>, make);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CarShow.prototype.__proto__ = events.EventEmitter.prototype;</span><br><span class="line"><span class="keyword">var</span> show = <span class="keyword">new</span> CarShow();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logCar</span>(<span class="params">make</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Saw a '</span>+ make);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logColorCar</span>(<span class="params">make, color</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Saw a %s %s'</span>, color, make);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">show.on(<span class="string">'sawCar'</span>, logCar);</span><br><span class="line">show.on(<span class="string">'sawCar'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">make</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> colors = [<span class="string">'red'</span>, <span class="string">'blue'</span>, <span class="string">'black'</span>];</span><br><span class="line">  <span class="keyword">var</span> color = colors[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">3</span>)];</span><br><span class="line">  logColorCar(make, color);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">show.seeCar(<span class="string">'Ferrai'</span>);</span><br><span class="line">show.seeCar(<span class="string">'Porsche'</span>);</span><br><span class="line">show.seeCar(<span class="string">'Bugatti'</span>);</span><br><span class="line">show.seeCar(<span class="string">'Lamborghini'</span>);</span><br><span class="line">show.seeCar(<span class="string">'Aston Martin'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>输出<br>Saw a Ferrai<br>Saw a blue Ferrai<br>Saw a Porsche<br>Saw a black Porsche<br>Saw a Bugatti<br>Saw a blue Bugatti<br>Saw a Lamborghini<br>Saw a blue Lamborghini<br>Saw a Aston Martin<br>Saw a blue Aston Martin</p>
+<h3 id="在回调中实现闭包"><a href="#在回调中实现闭包" class="headerlink" title="在回调中实现闭包"></a>在回调中实现闭包</h3><p>异步回调往往与闭包有关，闭包（Closure）是一个JS术语，表示变量绑定到一个函数的作用域，但不绑定到它的父函数的作用域，当执行一个异步回调时，父函数的作用域可能修改（比如遍历并每次迭代时改变值）。</p>
+<p>若某个回调函数需要访问父函数的作用域的变量，就需要提供闭包，使这些值在回调函数从事件队列中被提取出来时可以得到，可以在函数块内部封装一个异步调用并传入所需变量达到目的。</p>
+<p>如下代码演示如何为logCar异步函数提供闭包的包装器函数，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logCar</span>(<span class="params">logMsg, callback</span>)</span>&#123;</span><br><span class="line">  process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    callback(logMsg);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cars = [<span class="string">'Ferrari'</span>, <span class="string">'Porsche'</span>, <span class="string">'Bugatti'</span>];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> cars)&#123;</span><br><span class="line">  <span class="keyword">var</span> message = <span class="string">'Saw a '</span>+ cars[i];</span><br><span class="line">  logCar(message, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Normal Callback '</span>+ message);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> cars)&#123;</span><br><span class="line">  <span class="keyword">var</span> message = <span class="string">'Saw a '</span>+ cars[i];</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">    logCar(msg, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Closure Callback '</span>+ msg);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)(message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出<br>Normal Callback Saw a Bugatti<br>Normal Callback Saw a Bugatti<br>Normal Callback Saw a Bugatti<br>Closure Callback Saw a Ferrari<br>Closure Callback Saw a Porsche<br>Closure Callback Saw a Bugatti</p>
+<p>在这个测试中，为了使回调真正的异步，使用process.nextTick()方法来调度回调函数。</p>
+<p>在程序中第一个for循环实现基本的回调函数，但是汽车名都是最后一个，因为每次循环迭代时，message的值都在变化。</p>
+<p>第二个for循环实现了将消息作为msg参数传递给包装器函数，而msg的值被负载回调函数上，因此，闭包输出显示正确的消息</p>
+<h3 id="链式回调"><a href="#链式回调" class="headerlink" title="链式回调"></a>链式回调</h3><p>使用异步的时候，若两个函数都在事件队列上，则无法保证它们的运行顺序，解决问题的方法是让异步函数的回调函数去调用该函数，执行链式回调，这样异步函数永远不会在事件队列上超过一次。</p>
+<p>如下，执行链式回调函数的例子，列表被传递到logCars中，然后异步函数logCar被调用，且logCars作为当前logCar完成时的回调函数，因此同一时间，只有一个logCar在事件队列上。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logCar</span>(<span class="params">car, callback</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Saw a %s'</span>, car);</span><br><span class="line">  <span class="keyword">if</span>(cars.length)&#123;</span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      callback();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logCars</span>(<span class="params">cars</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> car = cars.pop();</span><br><span class="line">  logCar(car, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    logCars(cars);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> cars = [<span class="string">'Ferrari'</span>, <span class="string">'Porsche'</span>, <span class="string">'Bugatti'</span>, <span class="string">'Lamborghini'</span>, <span class="string">'Aston Martin'</span>];</span><br><span class="line">logCars(cars);</span><br></pre></td></tr></table></figure></p>
+<p>输出<br>Saw a Aston Martin<br>Saw a Lamborghini<br>Saw a Bugatti<br>Saw a Porsche<br>Saw a Ferrari</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/10/28/nodejs-http/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/10/21/npm/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

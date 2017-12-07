@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Angular2入门-指令 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,typescript,angular">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Angular2入门-指令 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="typescript"> <meta property="og:article:tag" content="angular"> 
+
+    
+        <meta property="article:published_time" content="Wed Oct 11 2017 11:30:06 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:08 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Angular2入门-指令 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/10/11/angular7/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/10/11/angular7/index.html",
+    "headline": "Angular2入门-指令",
+    "datePublished": "Wed Oct 11 2017 11:30:06 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:08 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,typescript,angularnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#指令概览"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x6307;&#x4EE4;&#x6982;&#x89C8;" class="headerlink" title="&#x6307;&#x4EE4;&#x6982;&#x89C8;"></a>&#x6307;&#x4EE4;&#x6982;&#x89C8;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#指令分类"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#&#x6307;&#x4EE4;&#x5206;&#x7C7B;" class="headerlink" title="&#x6307;&#x4EE4;&#x5206;&#x7C7B;"></a>&#x6307;&#x4EE4;&#x5206;&#x7C7B;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#属性指令"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text"><a href="#&#x5C5E;&#x6027;&#x6307;&#x4EE4;" class="headerlink" title="&#x5C5E;&#x6027;&#x6307;&#x4EE4;"></a>&#x5C5E;&#x6027;&#x6307;&#x4EE4;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#结构指令"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text"><a href="#&#x7ED3;&#x6784;&#x6307;&#x4EE4;" class="headerlink" title="&#x7ED3;&#x6784;&#x6307;&#x4EE4;"></a>&#x7ED3;&#x6784;&#x6307;&#x4EE4;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#组件"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text"><a href="#&#x7EC4;&#x4EF6;" class="headerlink" title="&#x7EC4;&#x4EF6;"></a>&#x7EC4;&#x4EF6;</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#内置指令"><span class="post-toc-number">1.2.</span> <span class="post-toc-text"><a href="#&#x5185;&#x7F6E;&#x6307;&#x4EE4;" class="headerlink" title="&#x5185;&#x7F6E;&#x6307;&#x4EE4;"></a>&#x5185;&#x7F6E;&#x6307;&#x4EE4;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#通用指令"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text"><a href="#&#x901A;&#x7528;&#x6307;&#x4EE4;" class="headerlink" title="&#x901A;&#x7528;&#x6307;&#x4EE4;"></a>&#x901A;&#x7528;&#x6307;&#x4EE4;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#表单指令"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text"><a href="#&#x8868;&#x5355;&#x6307;&#x4EE4;" class="headerlink" title="&#x8868;&#x5355;&#x6307;&#x4EE4;"></a>&#x8868;&#x5355;&#x6307;&#x4EE4;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#路由指令"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text"><a href="#&#x8DEF;&#x7531;&#x6307;&#x4EE4;" class="headerlink" title="&#x8DEF;&#x7531;&#x6307;&#x4EE4;"></a>&#x8DEF;&#x7531;&#x6307;&#x4EE4;</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义属性指令"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x6307;&#x4EE4;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x6307;&#x4EE4;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x5C5E;&#x6027;&#x6307;&#x4EE4;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现属性指令"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x5B9E;&#x73B0;&#x5C5E;&#x6027;&#x6307;&#x4EE4;" class="headerlink" title="&#x5B9E;&#x73B0;&#x5C5E;&#x6027;&#x6307;&#x4EE4;"></a>&#x5B9E;&#x73B0;&#x5C5E;&#x6027;&#x6307;&#x4EE4;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#为指令绑定输入"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x4E3A;&#x6307;&#x4EE4;&#x7ED1;&#x5B9A;&#x8F93;&#x5165;" class="headerlink" title="&#x4E3A;&#x6307;&#x4EE4;&#x7ED1;&#x5B9A;&#x8F93;&#x5165;"></a>&#x4E3A;&#x6307;&#x4EE4;&#x7ED1;&#x5B9A;&#x8F93;&#x5165;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#响应用户操作"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"><a href="#&#x54CD;&#x5E94;&#x7528;&#x6237;&#x64CD;&#x4F5C;" class="headerlink" title="&#x54CD;&#x5E94;&#x7528;&#x6237;&#x64CD;&#x4F5C;"></a>&#x54CD;&#x5E94;&#x7528;&#x6237;&#x64CD;&#x4F5C;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义结构指令"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x7ED3;&#x6784;&#x6307;&#x4EE4;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x7ED3;&#x6784;&#x6307;&#x4EE4;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x7ED3;&#x6784;&#x6307;&#x4EE4;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现结构指令"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#&#x5B9E;&#x73B0;&#x7ED3;&#x6784;&#x6307;&#x4EE4;" class="headerlink" title="&#x5B9E;&#x73B0;&#x7ED3;&#x6784;&#x6307;&#x4EE4;"></a>&#x5B9E;&#x73B0;&#x7ED3;&#x6784;&#x6307;&#x4EE4;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模板标签与星号前缀"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x677F;&#x6807;&#x7B7E;&#x4E0E;&#x661F;&#x53F7;&#x524D;&#x7F00;" class="headerlink" title="&#x6A21;&#x677F;&#x6807;&#x7B7E;&#x4E0E;&#x661F;&#x53F7;&#x524D;&#x7F00;"></a>&#x6A21;&#x677F;&#x6807;&#x7B7E;&#x4E0E;&#x661F;&#x53F7;&#x524D;&#x7F00;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#模板标签"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x677F;&#x6807;&#x7B7E;" class="headerlink" title="&#x6A21;&#x677F;&#x6807;&#x7B7E;"></a>&#x6A21;&#x677F;&#x6807;&#x7B7E;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#星号前缀"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text"><a href="#&#x661F;&#x53F7;&#x524D;&#x7F00;" class="headerlink" title="&#x661F;&#x53F7;&#x524D;&#x7F00;"></a>&#x661F;&#x53F7;&#x524D;&#x7F00;</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NgIf指令原理"><span class="post-toc-number">3.3.</span> <span class="post-toc-text"><a href="#NgIf&#x6307;&#x4EE4;&#x539F;&#x7406;" class="headerlink" title="NgIf&#x6307;&#x4EE4;&#x539F;&#x7406;"></a>NgIf&#x6307;&#x4EE4;&#x539F;&#x7406;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Angular2入门-指令
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Oct 11, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/angular/">angular</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/typescript/">typescript</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Angular2入门-指令&url=https://github.com/xmoyKING/2017/10/11/angular7/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Angular2入门-指令&url=https://github.com/xmoyKING/2017/10/11/angular7/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/10/11/angular7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/10/11/angular7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>在Angular中，指令是一个重要的概念，它作用在特定的DOM元素上，可以扩展这个元素的功能，为元素增加新的行为。本质上，组件可以被理解为一种带有视图的指令，组件继承自指令，是指令的一个子类，通常被用来构造UI控件。</p>
+<h3 id="指令概览"><a href="#指令概览" class="headerlink" title="指令概览"></a>指令概览</h3><p>Angular中指令的使用方式与HTML元素中属性的使用方式相似，不同的是，HTML语法标准为HTML元素预定了特定的属性，浏览器遵循标准实现了这些属性的内置行为。语法标准预定义的属性是有限的、不可扩展的，而Angular的指令是可自定义的，可任意扩展的，这在一定程度上弥补了标准HTML元素属性功能的不足。</p>
+<h4 id="指令分类"><a href="#指令分类" class="headerlink" title="指令分类"></a>指令分类</h4><p>在Angular中包含三种类型的指令：</p>
+<h5 id="属性指令"><a href="#属性指令" class="headerlink" title="属性指令"></a>属性指令</h5><p>属性指令，是以元素属性的形式来使用的指令，与HTML元素内置属性不同，指令是Angular对HTML元素属性的扩展，浏览器本身不能识别这种指令，指令仅在Angular环境中才能被识别使用，属性指令通常被用来改变元素的外观和行为，如Angular的内置指令NgStyle，它可以基于组件的状态来动态设置目标元素的样式。</p>
+<h5 id="结构指令"><a href="#结构指令" class="headerlink" title="结构指令"></a>结构指令</h5><p>结构指令可以用来改变DOM树的结构，指令可以根据模板表达式的值，增加或删除DOM元素，从而改变DOM的布局，与属性指令的使用方式相同，都是以元素属性的形式来使用，两者的区别在于使用场景的不同，属性指令用来改变元素的外观和行为，而结构指令用来改变DOM树的结构。</p>
+<p>如Angular内置结构指令NgIf，使用NgIf指令需要为指令绑定一个表达式，表达式值为true时，该DOM元素及其子元素被添加至DOM中，表达式值为false时，元素从DOM中被移除。</p>
+<h5 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h5><p>组件是被用来构造带有自定义行为的可重用视图，组件与指令的结构类似，均使用装饰器描述元数据，二者均在各自对应的类中实现具体业务逻辑，最基本的组件和指令的结构示例：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Component</span></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  selector: <span class="string">'hello-world'</span>,</span><br><span class="line">  template: <span class="string">'&lt;div&gt;hello world&lt;/div&gt;'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">class</span> HelloWorldComponent&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Directive</span></span><br><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">'myHelloWorld'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">class</span> HelloWorldDirective&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，组件和指令的基本结构非常相似，差别在于组件中包含了模板，组件作为指令的一个子类，它的部分生命周期钩子与指令的相同。</p>
+<p>组件和指令相同的钩子方法如下表：</p>
+<table>
+<thead>
+<tr>
+<th>钩子方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ngOnInit</td>
+<td>在Angular完成初始化输入属性的数据绑定后，初始化指令/组件</td>
+</tr>
+<tr>
+<td>ngOnChanges</td>
+<td>在Angular初始化输入属性的数据绑定前响应一次，之后当检测到数据绑定发生变化后就会被调用，这个方法接收一个包含当前和之前数据的SimpleChanges对象</td>
+</tr>
+<tr>
+<td>ngDoCheck</td>
+<td>用于变化监测，该钩子方法会在每次变化监测发生时调用</td>
+</tr>
+<tr>
+<td>ngOnDestroy</td>
+<td>在Angular销毁指令/组件之前执行清理工作，此时应注销观察者对象或解绑事件处理器以避免内存泄漏</td>
+</tr>
+</tbody>
+</table>
+<p>尽管组件和指令有相似的结构和一些相同的生命周期方法，但它们也有一些不同点，不同于属性指令和结构指令，组件不是以HTML元素属性的形式使用，而是以自定义标签的形式使用，原因在于组件带有模板。<br>组件可作为对HTML元素的扩展，将自身的模板视图插入至DOM中，而属性指令和结构指令是对HTML元素属性的扩展，作用是扩展已有DOM元素的行为和样式，或改变这些元素在DOM中的结构。</p>
+<p>正因为指令中不仅有模板，因此在组件中，围绕模板视图的初始化和更新的生命周期钩子是组件独有而指令所没有的：</p>
+<ul>
+<li>ngAfterContentInit</li>
+<li>ngAfterContentChecked</li>
+<li>ngAfterViewInit</li>
+<li>ngAftetViewChecked</li>
+</ul>
+<h4 id="内置指令"><a href="#内置指令" class="headerlink" title="内置指令"></a>内置指令</h4><p>Angular内置了一些常用的指令，根据这些指令使用场景的不同，可将其划分为3个类别：</p>
+<ul>
+<li>通用指令</li>
+<li>路由指令</li>
+<li>表单指令<br><img src="1.png" alt="具体指令"></li>
+</ul>
+<h5 id="通用指令"><a href="#通用指令" class="headerlink" title="通用指令"></a>通用指令</h5><p>在Angular应用中经常会用到的指令，Angular将通用指令包含在CommonModule模块中，当需要使用通用指令时，本应在模块中引入CommonModule模块，而Angular的BrowserModule模块已包含了CommonModule模块，所以引入BrowserModule后间接引入了CommonModule。</p>
+<p>NgTemplateOutlet、NgPlural、NgPluralCase指令属于相对交生僻的指令，应用场景较少。</p>
+<h5 id="表单指令"><a href="#表单指令" class="headerlink" title="表单指令"></a>表单指令</h5><p>表单指令包含了一系列在Angular表单中使用的指令，这些指令分别被包含在三个模块中：</p>
+<ul>
+<li>FormsModule</li>
+<li>ReactiveFormsModule</li>
+<li>InternalFormsSharedModule</li>
+</ul>
+<p>FormsModule模块包含NgModel、NgModelGroup、NgForm指令和InternalFormsSharedModuel模块中包含的指令。</p>
+<p>ReactiveFormsModule模块包含FormControlDirective、FormGroupDirective、FormControlName、FormGroupName、FormArrayName指令和InternalFormsSharedModuel模块中包含的指令。</p>
+<p>InternalFormsSharedModuel模块是Angular的内部模块，在该模块包含的指令中，第一部分为表单元素访问器指令：</p>
+<ul>
+<li>DefaultValueAccessor</li>
+<li>NumberValueAccessor</li>
+<li>CheckboxControlValueAccessor</li>
+<li>RadioControlValueAccessor</li>
+<li>SelectControlValueAccessor、SelectMultipleControlValueAccessor</li>
+</ul>
+<p>这些访问器指令是Angular表单的内部指令，在应用中无需主动使用，它们是DOM元素和表单输入控件之间的桥梁。</p>
+<p>其中ControlValueAccessor是其他访问器指令的父接口，抽象了Angular控件与DOM元素交互的公共方法，ControlValueAccessor接口定义了3个方法：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> ControlValueAccessor&#123;</span><br><span class="line">  writeValue(obj: <span class="built_in">any</span>): <span class="built_in">void</span>; <span class="comment">// 向DOM元素写入新值的方法</span></span><br><span class="line">  registerOnChange(fn: <span class="built_in">any</span>): <span class="built_in">void</span>; <span class="comment">// 用于监听DOM元素值变更的方法</span></span><br><span class="line">  registerOnTouched(fn: <span class="built_in">any</span>): <span class="built_in">void</span>; <span class="comment">// 用于监听DOM元素触摸事件的方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对应不同的数据输入类型，表单指令集合提供了各自的访问器类：</p>
+<ul>
+<li>DefaultValueAccessor为text文本输入框的访问器</li>
+<li>CheckboxControlValueAccessor为checkbox复选框的访问器</li>
+<li>RadioControlValueAccessor为radio单选框的访问器，RadioButtonState保存单选框的选中状态和选中的值</li>
+<li>NumberValueAccessor为number数字输入框的访问器</li>
+<li>SelectControlValueAccessor为select下拉框的访问器，NgSelectOption指令动态地标记option选项，选项变更时，Angular会收到通知</li>
+</ul>
+<p>第二部分为选择框选项指令：</p>
+<ul>
+<li>NgSelectOption</li>
+<li>NgSlectMultipleOption<br>上述指令为Angular内部指令，它们动态地标记选择框的option选项</li>
+</ul>
+<p>第三部分为表单验证指令：</p>
+<ul>
+<li>RequiredValidator指令为表单输入元素增加required约束</li>
+<li>MinLengthValidator指令为表单输入元素增加minlength约束</li>
+<li>MaxLengthValidator指令为表单输入元素增加maxlength约束</li>
+<li>PatternValidator指令为表单输入元素增加正则表达式约束，输入内容必须符合正则表达式定义的模式</li>
+</ul>
+<p>最后一部分为控件状态指令：</p>
+<ul>
+<li>NgControlStatus</li>
+<li>NgControlStatusGroup<br>这些指令无需主动使用，是内部指令，会自动根据控件是否通过验证、是否被触摸等状态来设置元素的CSS类。</li>
+</ul>
+<h5 id="路由指令"><a href="#路由指令" class="headerlink" title="路由指令"></a>路由指令</h5><p>路由指令中：</p>
+<ul>
+<li>RouterOutlet指令是一个占位符、路由跳转时，Angular会查找当前匹配的组件并将组件插入到RouterOutlet中</li>
+<li>RouterLinkActive指令在当前路径与元素设置的链接匹配时为元素添加CSS样式</li>
+<li>RouterLink指令使得应用可以链接到特定的组件</li>
+</ul>
+<h3 id="自定义属性指令"><a href="#自定义属性指令" class="headerlink" title="自定义属性指令"></a>自定义属性指令</h3><p>以自定义一个属性指令BeautifulBackgroundDirective为例，在单击按钮时改变其背景色</p>
+<h4 id="实现属性指令"><a href="#实现属性指令" class="headerlink" title="实现属性指令"></a>实现属性指令</h4><p>一个属性指令需要一个控制器类，该控制器类使用@Directive装饰器来装饰，@Directive装饰器指定了用以标记指令所关联属性的选择器、控制器类则实现了指令所对应的特定行为。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// beautifulBackground.directive.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Directive, ElementRef &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">'[myBeautifulBackground]'</span> <span class="comment">// 此处的[]不可忽略</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> BeautifulBackgroundDirective&#123;</span><br><span class="line">  construtctor(el: ElementRef)&#123;</span><br><span class="line">    el.nativeElement.style.backgroundColor = <span class="string">'yellow'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Angular会为每一个匹配的DOM元素创建一个指令实例，同时将ElementRef作为参数注入到控制器构造函数。使用ElementRef服务，可以在代码中通过其nativeElement属性直接访问DOM元素，这样就可以通过DOM API设置元素的背景颜色。</p>
+<p>使用自定义指令到组件中：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.component.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Componet</span>(&#123;</span><br><span class="line">  selector: <span class="string">'my-app'</span>,</span><br><span class="line">  template: <span class="string">`&lt;div myBeautifulBackground&gt;按钮&lt;/div&gt;`</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppComponent&#123; &#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.module.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; NgModule &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BrowserModule &#125; <span class="keyword">from</span> <span class="string">'@angular/platform-browser'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AppComponent &#125; <span class="keyword">from</span> <span class="string">'./app.component'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; BeautifulBackgroundDirective &#125; <span class="keyword">from</span> <span class="string">'./beautifulBackground.directive'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NgModule</span>(&#123;</span><br><span class="line">  imports: [BrowserModule],</span><br><span class="line">  declarations: [AppComponent, BeautifulBackgroundDirective],</span><br><span class="line">  bootstrap: [AppComponent]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AppModule&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>运行时，Angular会在组件div元素上解析到myBeautifulBackground属性，然后创建BeautifulBackgroundDirective指令类的实例，将元素的引用传入构造函数，用以设置元素的样式。</p>
+<h4 id="为指令绑定输入"><a href="#为指令绑定输入" class="headerlink" title="为指令绑定输入"></a>为指令绑定输入</h4><p>作为自定义指令，为了增加灵活性，可以在指令外部使用绑定的方式设置背景色：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">myBeautifulBackground</span>]=<span class="string">"color"</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>为了给指令绑定外部变量，需要为指令声明一个可绑定的输入属性backgroundColor，需要在属性上使用@Input装饰器，@Input标识使得属性具有绑定能力，可将外部变量的值绑定到指令的属性中。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">'[myBeautifulBackground]'</span> <span class="comment">// 此处的[]不可忽略</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> BeautifulBackgroundDirective&#123;</span><br><span class="line">  <span class="meta">@Input</span>(<span class="string">'myBeautifulBackground'</span>)</span><br><span class="line">  backgroundColor: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述<code>@Input(&#39;myBeautifulBackground&#39;)</code>装饰器中，为输入属性backgroundColor指定了myBeautifulBackground别名，这里指定的别名与指令在@Directive装饰器中定义的选择器名称一致，这不是必须的，之所以定义成一样的，是为了在元素中使用指令时，不必再使用另外的名称来绑定输入变量。若将别名定义为其他的，比如<code>@Input(&#39;myBackgroundColor&#39;)</code>，则需要在组件中绑定这个属性：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">myBeautifulBackground</span> [<span class="attr">myBackgroundColor</span>]=<span class="string">"color"</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>若在装饰器中不指定别名，即：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Input</span>() </span><br><span class="line">backgroundColor: <span class="built_in">string</span></span><br></pre></td></tr></table></figure></p>
+<p>则模板用法为：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">myBeautifulBackground</span> [<span class="attr">backgroundColor</span>]=<span class="string">"color"</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>以上的<code>color</code>变量可以来自多个地方，比如组件中定义的变量，或组件模板的输入元素等。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"colors"</span> (<span class="attr">click</span>)=<span class="string">"color='green'"</span> /&gt;</span> 绿</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"colors"</span> (<span class="attr">click</span>)=<span class="string">"color='red'"</span> /&gt;</span> 红</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">myBeautifulBackground</span>]=<span class="string">"color"</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>同时，为了在输入属性backgroundColor的值变更时响应改变元素样式，可以将backgroundColor属性用set方法重写：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Directive, ElementRef, Input &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">'[myBeautifulBackground]'</span> <span class="comment">// 此处的[]不可忽略</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> BeautifulBackgroundDirective&#123;</span><br><span class="line">  <span class="keyword">private</span> _defaultColor = <span class="string">'yellow'</span>;</span><br><span class="line">  <span class="keyword">private</span> el: HTMLElement;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 重写backgroundColor属性的set方法</span></span><br><span class="line">  <span class="meta">@Input</span>(<span class="string">'myBeautifulBackground'</span>) <span class="keyword">set</span> backgroundColor(colorName: <span class="built_in">string</span>)&#123;</span><br><span class="line">    <span class="keyword">this</span>.setStyle(colorName);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  construtctor(el: ElementRef)&#123;</span><br><span class="line">    <span class="keyword">this</span>.el = el.nativeElement;</span><br><span class="line">    <span class="keyword">this</span>.setStyle(_defaultColor);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> setStyle(color: <span class="built_in">string</span>)&#123;</span><br><span class="line">    <span class="keyword">this</span>.el.style.backgroundColor = color;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="响应用户操作"><a href="#响应用户操作" class="headerlink" title="响应用户操作"></a>响应用户操作</h4><p>在为指令绑定了输入属性后，可以根据输入值动态地变更元素样式。</p>
+<p>为了实现用户单击按钮时改变元素的样式，需要在事件处理函数上添加@HostListener装饰器。</p>
+<p>@HostListener装饰器指向使用属性指令的DOM元素，使得DOM元素的事件与指令关联起来，除此外，可以直接为DOM元素添加事件监听器，但不建议这样做，因为有如下3个问题：</p>
+<ul>
+<li>必须正确编写监听器</li>
+<li>必须在指令销毁前移除监听器，避免内存泄漏</li>
+<li>会直接操作DOM API，这是应该避免的<br>因此，才会需要使用@HostListener装饰器来实现这个事件处理函数：<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="meta">@HostListener</span>(<span class="string">'click'</span>)</span><br><span class="line">onClick()&#123;</span><br><span class="line">  <span class="keyword">this</span>.setStyle(<span class="keyword">this</span>.backgroundColor || <span class="keyword">this</span>._defaultColor);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这样就可以根据用户操作来改变元素样式了，而不是在输入属性变更时触发样式更新.用户点击元素时，可以根据绑定的输入属性的值。</p>
+<p>修改后的指令代码：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Directive, ElementRef, Input &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">'[myBeautifulBackground]'</span> <span class="comment">// 此处的[]不可忽略</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> BeautifulBackgroundDirective&#123;</span><br><span class="line">  <span class="keyword">private</span> _defaultColor = <span class="string">'yellow'</span>;</span><br><span class="line">  <span class="keyword">private</span> el: HTMLElement;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 重写backgroundColor属性的set方法</span></span><br><span class="line">  <span class="meta">@Input</span>(<span class="string">'myBeautifulBackground'</span>) <span class="keyword">set</span> backgroundColor(colorName: <span class="built_in">string</span>)&#123;</span><br><span class="line">    <span class="keyword">this</span>.setStyle(colorName);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  construtctor(el: ElementRef)&#123;</span><br><span class="line">    <span class="keyword">this</span>.el = el.nativeElement;</span><br><span class="line">    <span class="keyword">this</span>.setStyle(_defaultColor);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@HostListener</span>(<span class="string">'click'</span>)</span><br><span class="line">  onClick()&#123;</span><br><span class="line">    <span class="keyword">this</span>.setStyle(<span class="keyword">this</span>.backgroundColor || <span class="keyword">this</span>._defaultColor);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> setStyle(color: <span class="built_in">string</span>)&#123;</span><br><span class="line">    <span class="keyword">this</span>.el.style.backgroundColor = color;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当使用<code>&lt;div [myBeautifulBackground]=&quot;&#39;red&#39;&quot;&gt;按钮&lt;/div&gt;</code>模板后，初始时，div的背景色是黄色，点击div后，颜色为红色。</p>
+<h3 id="自定义结构指令"><a href="#自定义结构指令" class="headerlink" title="自定义结构指令"></a>自定义结构指令</h3><p>以实现一个和NgIf指令作用相反的Unless指令为例，当表达式值为false时渲染模板内容，为true时将移除模板内容。</p>
+<h4 id="实现结构指令"><a href="#实现结构指令" class="headerlink" title="实现结构指令"></a>实现结构指令</h4><p>与自定义属性指令类似，创建自定义结构指令涉及如下内容：</p>
+<ul>
+<li>引入@Directive装饰器</li>
+<li>添加CSS属性选择器，用来标识指令</li>
+<li>声明一个input属性用以绑定表达式</li>
+<li>将装饰器应用在指令实现类上</li>
+</ul>
+<p>初始内容如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Directive, Input &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Directive</span>(&#123;selector: <span class="string">'[myUnless]'</span>&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> UnlessDirective&#123;</span><br><span class="line">  <span class="meta">@Input</span>(<span class="string">'myUnless'</span>) condition: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Unless指令需要访问组件模板内容，并且需要可以渲染组件模板内容的工具，通过使用TemplateRef和ViewContainerRef服务实现，TemplateRef用来访问组件的模板，而ViewContainerRef作为视图内容渲染器，将模板内容插入到DOM中，TemplateRef和ViewContainerRef服务来自@angular/core,在指令的构造函数中，需要将它们作为依赖注入，赋值给指令的变量。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">  <span class="keyword">private</span> templateRef: TemplateRef&lt;<span class="built_in">any</span>&gt;,</span></span><br><span class="line"><span class="params">  <span class="keyword">private</span> viewContainer: ViewContainerRef</span></span><br><span class="line"><span class="params"></span>)&#123;&#125;</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure></p>
+<p>在组件中使用Unless指令时，需要为指令绑定一个值为布尔类型的表达式或变量，指令根据绑定结果增加或删除模板内容，为了在接收到绑定结果时实现这一逻辑，需要为condition属性设置一个set方法：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Input</span>(<span class="string">'myUnless'</span>)</span><br><span class="line"><span class="keyword">set</span> condition(newCondition: <span class="built_in">boolean</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(!newCondition)&#123;</span><br><span class="line">    <span class="keyword">this</span>.viewContainer.createEmbeddedView(<span class="keyword">this</span>.templateRef);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.viewContainer.clear();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过调用渲染器的createEmbeddedView()方法和clear()方法，实现根据输入属性的值、添加和删除模板内容。</p>
+<p>最终Unless指令的代码如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Directive, Input, TemplateRef, ViewContainerRef &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Directive</span>(&#123;selector: <span class="string">'[myUnless]'</span>&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> UnlessDirective&#123;</span><br><span class="line">  <span class="meta">@Input</span>(<span class="string">'myUnless'</span>)</span><br><span class="line">  <span class="keyword">set</span> condition(newCondition: <span class="built_in">boolean</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!newCondition)&#123;</span><br><span class="line">      <span class="keyword">this</span>.viewContainer.createEmbeddedView(<span class="keyword">this</span>.templateRef);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.viewContainer.clear();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> templateRef: TemplateRef&lt;<span class="built_in">any</span>&gt;,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> viewContainer: ViewContainerRef</span></span><br><span class="line"><span class="params">  </span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在组件的模板中使用Unless指令：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> *<span class="attr">myUnless</span>=<span class="string">"boolValue"</span>&gt;</span> myUnless的值是false<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> *<span class="attr">myUnless</span>=<span class="string">"!boolValue"</span>&gt;</span> myUnless的值是true<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="模板标签与星号前缀"><a href="#模板标签与星号前缀" class="headerlink" title="模板标签与星号前缀"></a>模板标签与星号前缀</h4><p>前面实现的Unless自定义结构指令，并未涉及模板标签（<code>&lt;template&gt;</code>）和星号前缀（<code>*</code>）.</p>
+<h5 id="模板标签"><a href="#模板标签" class="headerlink" title="模板标签"></a>模板标签</h5><p>结构指令在将模板内容从DOM树中添加和移除时，使用了HTML5新增的<code>&lt;template&gt;</code>标签。</p>
+<p>在<code>&lt;template&gt;</code>中定义的内容，默认的CSS样式display属性为none，<code>&lt;template&gt;</code>标签中定义的脚本代码不会被执行，图片不会被加载，标签中的元素也不能被类似getElementById()方法访问。</p>
+<p>在普通的HTML代码中使用<code>&lt;template&gt;</code>标签，通过Chrome开发者工具可以查看生成的DOM树，在HTML页面中，<code>&lt;template&gt;</code>标签内容被<code>#document-fragment</code>包装。<br>而在Angular中，<code>&lt;template&gt;</code>标签和内容被移除，在<code>&lt;template&gt;</code>标签处仅留下一行注释</p>
+<h5 id="星号前缀"><a href="#星号前缀" class="headerlink" title="星号前缀"></a>星号前缀</h5><p>在Unless指令前，有一个星号前缀，星号是使用结构指令的语法糖，使用星号前缀可以简化对结构指令的使用，Angular会将带有星号的指令引用替换成带有<code>&lt;template&gt;</code>标签的代码，对比用星号前缀和<code>&lt;template&gt;</code>标签方式来使用Unless指令。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用星号方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> *<span class="attr">myUnless</span>=<span class="string">"condition"</span>&gt;</span> *星号方式中的myUnless, condition为false<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 使用`&lt;template&gt;`标签方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> [<span class="attr">myUnless</span>]=<span class="string">"condition"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span> template标签中的myUnless, condition为false<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>上述两种方式效果一样，Angular会将使用星号前缀的方式转换成<code>&lt;template&gt;</code>标签方式，并做一些如指令、属性绑定的特殊处理。</p>
+<p>比如NgFor的使用，其实也是这样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用星号方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> *<span class="attr">ngFor</span>=<span class="string">"let contact of contacts"</span>&gt;</span>&#123;&#123; contact &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 使用`&lt;template&gt;`标签方式 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">ngFor</span> <span class="attr">let-contact</span> [<span class="attr">ngForOf</span>]=<span class="string">"contacts"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; contact &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在上述代码标签的使用中，ngFor是指令的选择器，[ngForOf]绑定指令的输入属性，即将contacts集合绑定给[ngForOf]作为指令的输入，let-contact创建了一个模板局部变量contact。</p>
+<h4 id="NgIf指令原理"><a href="#NgIf指令原理" class="headerlink" title="NgIf指令原理"></a>NgIf指令原理</h4><p>在Web中，可以将display设置为none来隐藏目标元素，虽然这些元素不可见但仍然保存在DOM中，这样的好处是若元素不久就需要再次显示，组件不需要重新被初始化，组件的状态因为之前被保留所以可以马上显示。<br>但在Angular应用里，问题是若隐藏一个元素，但它仍然暴露在DOM树中，Angular会继续检查那些可能发生变化的数据绑定，组件的所有行为将会保持，这种情况下，组件及其所有的子节点仍然会占用资源，消耗更多的内存，从而影响性能。</p>
+<p>使用NgStyle指令可以通过改变样式将元素隐藏，当在组件中使用NgStyle指令进行如下设置时，可以将组件在DOM树中隐藏：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">ngStyle</span>]=<span class="string">"&#123;'display':'none'&#125;"</span>&gt;</span>display none<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>NgIf指令的不是通过样式隐藏的，与Unless一样，根据输入变量布尔值，其值为false时元素从DOM中移除，停止监测相关组件绑定的属性是否有变化，释放它的DOM事件监听器并且销毁组件，组件将会被垃圾回收且释放内存。<br>NgIf的实现如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Directive, Input, TemplateRef, ViewContainerRef &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; isBlank &#125; <span class="keyword">from</span> <span class="string">'../facade/lang'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Directive</span>(&#123;selector: <span class="string">'[ngIf]'</span>,  inputs: [<span class="string">'ngIf'</span>]&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> NgIf&#123;</span><br><span class="line">  <span class="keyword">private</span> _prevCondition: <span class="built_in">boolean</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> _templateRef: TemplateRef&lt;<span class="built_in">Object</span>&gt;,</span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> _viewContainer: ViewContainerRef</span></span><br><span class="line"><span class="params">  </span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> ngIf(newCondition: <span class="built_in">any</span> <span class="comment">/* boolean */</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(newCondition &amp;&amp; (isBlank(<span class="keyword">this</span>._prevCondition) || !<span class="keyword">this</span>._prevCondition))&#123;</span><br><span class="line">      <span class="keyword">this</span>._prevCondition = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">this</span>._viewContainer.createEmbeddedView(<span class="keyword">this</span>._templateRef);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(!newCondition &amp;&amp; (isBlank(<span class="keyword">this</span>._prevCondition) || <span class="keyword">this</span>._prevCondition))&#123;</span><br><span class="line">      <span class="keyword">this</span>._prevCondition = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">this</span>.viewContainer.clear();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在Unless指令中，指令通过@Input()装饰器绑定了输入属性，而在NgIf中，以键值对形式为inputs元数据赋值，效果是一致的。</p>
+<p>在NgIf的@Directive装饰器有两个键值对，selector属性为[ngIf],然后将inputs属性赋值为[ngIf],为指令绑定一个输入属性，它的值和指令选择器的值相同。</p>
+<p>虽然NgIf和Unless指令的实现代码很相似，但不同于Unless，在NgIf中设置的<code>_prevCondition</code>变量用于记录上次表达式的值，并在自定义输入属性的set()方法中，对<code>_prevCondition</code>变量做变更检查，这样在每次输入属性变更时，可以避免不必要的操作，从而提高性能。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/10/15/angular8/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/10/07/angular6/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Angular2入门-RxJs | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,typescript,angular,rxjs">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Angular2入门-RxJs | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="typescript"> <meta property="og:article:tag" content="angular"> <meta property="og:article:tag" content="rxjs"> 
+
+    
+        <meta property="article:published_time" content="Mon Oct 16 2017 16:00:10 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:08 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Angular2入门-RxJs | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/10/16/angular9/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/10/16/angular9/index.html",
+    "headline": "Angular2入门-RxJs",
+    "datePublished": "Mon Oct 16 2017 16:00:10 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:08 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,typescript,angular,rxjsnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#响应式编程"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x54CD;&#x5E94;&#x5F0F;&#x7F16;&#x7A0B;" class="headerlink" title="&#x54CD;&#x5E94;&#x5F0F;&#x7F16;&#x7A0B;"></a>&#x54CD;&#x5E94;&#x5F0F;&#x7F16;&#x7A0B;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ReactiveX"><span class="post-toc-number">1.1.</span> <span class="post-toc-text"><a href="#ReactiveX" class="headerlink" title="ReactiveX"></a>ReactiveX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Observable介绍"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text"><a href="#Observable&#x4ECB;&#x7ECD;" class="headerlink" title="Observable&#x4ECB;&#x7ECD;"></a>Observable&#x4ECB;&#x7ECD;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Operator介绍"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text"><a href="#Operator&#x4ECB;&#x7ECD;" class="headerlink" title="Operator&#x4ECB;&#x7ECD;"></a>Operator&#x4ECB;&#x7ECD;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#其他核心概念"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text"><a href="#&#x5176;&#x4ED6;&#x6838;&#x5FC3;&#x6982;&#x5FF5;" class="headerlink" title="&#x5176;&#x4ED6;&#x6838;&#x5FC3;&#x6982;&#x5FF5;"></a>&#x5176;&#x4ED6;&#x6838;&#x5FC3;&#x6982;&#x5FF5;</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RxJS"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建Observable对象"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x521B;&#x5EFA;Observable&#x5BF9;&#x8C61;" class="headerlink" title="&#x521B;&#x5EFA;Observable&#x5BF9;&#x8C61;"></a>&#x521B;&#x5EFA;Observable&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用RxJS处理复杂场景"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;RxJS&#x5904;&#x7406;&#x590D;&#x6742;&#x573A;&#x666F;" class="headerlink" title="&#x4F7F;&#x7528;RxJS&#x5904;&#x7406;&#x590D;&#x6742;&#x573A;&#x666F;"></a>&#x4F7F;&#x7528;RxJS&#x5904;&#x7406;&#x590D;&#x6742;&#x573A;&#x666F;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#RxJS和Promise对比"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"><a href="#RxJS&#x548C;Promise&#x5BF9;&#x6BD4;" class="headerlink" title="RxJS&#x548C;Promise&#x5BF9;&#x6BD4;"></a>RxJS&#x548C;Promise&#x5BF9;&#x6BD4;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#“冷”模式下的Observable"><span class="post-toc-number">2.4.</span> <span class="post-toc-text"><a href="#&#x201C;&#x51B7;&#x201D;&#x6A21;&#x5F0F;&#x4E0B;&#x7684;Observable" class="headerlink" title="&#x201C;&#x51B7;&#x201D;&#x6A21;&#x5F0F;&#x4E0B;&#x7684;Observable"></a>&#x201C;&#x51B7;&#x201D;&#x6A21;&#x5F0F;&#x4E0B;&#x7684;Observable</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#RxJS中的Operator"><span class="post-toc-number">2.5.</span> <span class="post-toc-text"><a href="#RxJS&#x4E2D;&#x7684;Operator" class="headerlink" title="RxJS&#x4E2D;&#x7684;Operator"></a>RxJS&#x4E2D;&#x7684;Operator</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#创建操作符"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text"><a href="#&#x521B;&#x5EFA;&#x64CD;&#x4F5C;&#x7B26;" class="headerlink" title="&#x521B;&#x5EFA;&#x64CD;&#x4F5C;&#x7B26;"></a>&#x521B;&#x5EFA;&#x64CD;&#x4F5C;&#x7B26;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#变换操作符"><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text"><a href="#&#x53D8;&#x6362;&#x64CD;&#x4F5C;&#x7B26;" class="headerlink" title="&#x53D8;&#x6362;&#x64CD;&#x4F5C;&#x7B26;"></a>&#x53D8;&#x6362;&#x64CD;&#x4F5C;&#x7B26;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#过滤操作符"><span class="post-toc-number">2.5.3.</span> <span class="post-toc-text"><a href="#&#x8FC7;&#x6EE4;&#x64CD;&#x4F5C;&#x7B26;" class="headerlink" title="&#x8FC7;&#x6EE4;&#x64CD;&#x4F5C;&#x7B26;"></a>&#x8FC7;&#x6EE4;&#x64CD;&#x4F5C;&#x7B26;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#组合操作符"><span class="post-toc-number">2.5.4.</span> <span class="post-toc-text"><a href="#&#x7EC4;&#x5408;&#x64CD;&#x4F5C;&#x7B26;" class="headerlink" title="&#x7EC4;&#x5408;&#x64CD;&#x4F5C;&#x7B26;"></a>&#x7EC4;&#x5408;&#x64CD;&#x4F5C;&#x7B26;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#工具操作符"><span class="post-toc-number">2.5.5.</span> <span class="post-toc-text"><a href="#&#x5DE5;&#x5177;&#x64CD;&#x4F5C;&#x7B26;" class="headerlink" title="&#x5DE5;&#x5177;&#x64CD;&#x4F5C;&#x7B26;"></a>&#x5DE5;&#x5177;&#x64CD;&#x4F5C;&#x7B26;</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Angular中的RxJS"><span class="post-toc-number">2.6.</span> <span class="post-toc-text"><a href="#Angular&#x4E2D;&#x7684;RxJS" class="headerlink" title="Angular&#x4E2D;&#x7684;RxJS"></a>Angular&#x4E2D;&#x7684;RxJS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#改造HTTP服务"><span class="post-toc-number">2.6.1.</span> <span class="post-toc-text"><a href="#&#x6539;&#x9020;HTTP&#x670D;&#x52A1;" class="headerlink" title="&#x6539;&#x9020;HTTP&#x670D;&#x52A1;"></a>&#x6539;&#x9020;HTTP&#x670D;&#x52A1;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#输入提示功能"><span class="post-toc-number">2.6.2.</span> <span class="post-toc-text"><a href="#&#x8F93;&#x5165;&#x63D0;&#x793A;&#x529F;&#x80FD;" class="headerlink" title="&#x8F93;&#x5165;&#x63D0;&#x793A;&#x529F;&#x80FD;"></a>&#x8F93;&#x5165;&#x63D0;&#x793A;&#x529F;&#x80FD;</span></a></li></ol></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Angular2入门-RxJs
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Oct 16, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/angular/">angular</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/rxjs/">rxjs</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/typescript/">typescript</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Angular2入门-RxJs&url=https://github.com/xmoyKING/2017/10/16/angular9/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Angular2入门-RxJs&url=https://github.com/xmoyKING/2017/10/16/angular9/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/10/16/angular9/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/10/16/angular9/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h3 id="响应式编程"><a href="#响应式编程" class="headerlink" title="响应式编程"></a>响应式编程</h3><p>响应式编程（Reactive Programming）是一种面向数据流（Data Flows）和变化传播（the Propogation of Change）的编程范式。</p>
+<p>所谓的<strong>面向变化传播</strong>就是看最初的数据是否会随着后续对应变量的变化而变化，比如3个变量的表达式<code>C = A + B</code>，A和B有初始值，这行语句第一次执行后，C的值会被计算出来。<br>在命令式编程（Imperative Programming）中，当B的数值改变后，C的数值并没有随着B的数值改变而改变，除非再次执行这行语句。<br>而在响应式编程中，不用再次执行，随着B的改变，C的值也会改变。</p>
+<p>在MVVM模型中，M（Model）到V（View）的绑定关系如下图，当model由model1变为model2时，view也随之变化，由view1变为view2，也体现了响应式编程中面向变化传播的思想:<br><img src="1.png" alt="MVVM模型"></p>
+<p><strong>面向数据流</strong><br>当监听一系列事件流并对这一系列事件流进行映射、过滤和合并等处理后，再响应整个事件流的回调，这个过程便属于面向数据流的编程。例如ReactiveX的编程范式中，数据流被封装在一个叫做Observable的对象实例中，通过观察者模式，对数据流进行统一的订阅（Subscribe），并在中间插入像filter()这样的操作函数，从而对Observable所封装的数据流进行过滤处理：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myObservable.filter(fn).subscribe(callback);</span><br></pre></td></tr></table></figure></p>
+<p>响应式编程清晰地表达了动态的异步数据流，而相关的计算模型也自动地将变化的值通过数据流的方式进行了传播。</p>
+<h4 id="ReactiveX"><a href="#ReactiveX" class="headerlink" title="ReactiveX"></a>ReactiveX</h4><p>ReactiveX（Reactive Extensions）简写为Rx，最初是微软开发并维护的基于Reactive Programming范式实现的一套工具库集合，后来开源，提供一系列接口规范来帮助开发者更方便地处理异步数据流。Rx系列结合了观察者模式、迭代器模式和函数式编程。</p>
+<h5 id="Observable介绍"><a href="#Observable介绍" class="headerlink" title="Observable介绍"></a>Observable介绍</h5><p>在Rx中，最核心的概念就是Obserable，应用中产生的异步数据都需要先包装成Observable对象，Observable对象的作业是把这些异步的数据变换为数据流形式，所以生成的这些Observable对象相当于数据流的源头，后续的操作都是围绕着这些被转换的流动数据展开。<br><img src="2.png" alt="Rx数据流动图"><br>上图中，最上面的时间线代表了最初的Observable对象，这个Observable数据流对外发出了3个数据，这3个数据可能是3次点击事件所携带的数据，也可能是3次网络请求返回的数据，经过map操作的时候，原来的Observable对象会变成一个新的Observable对象，并且原来的3个数据会转换成新的数据在新的Observable对象数据流里流动。</p>
+<p>这样的操作实际上与车间生产流水线非常相似，Observable对象相当于半成品输入，而上述的map操作相当于流水线的工人，加工后最终输出成品，而这个map操作在Rx中称为Operator，这样的操作更新是对一个事件集合做过滤处理，生成一个新的事件集。Rx借鉴了集合的操作思想，把复杂的异步数据流的处理问题，简化成了同步的集合处理问题。</p>
+<p>简而言之，Rx中，通过Observable对象，可以像操作集合一样操作复杂的异步数据流。</p>
+<h5 id="Operator介绍"><a href="#Operator介绍" class="headerlink" title="Operator介绍"></a>Operator介绍</h5><p>Rx在结合了观察者模式的同时，还结合了函数式编程和迭代器模式的思想，其中、Rx的Operator便是对这两种编程模式的具体体现。</p>
+<p>Operator，即Rx中Observable对象的操作符，在Rx中，每一个Observable对象，或者说数据流，都可以通过某个Operator对该Observable对象进行变换、过滤、合并和监听等操作。同时、大多数的Operator在对Observable对象处理后都会返回一个新的Observable对象供下一个Operator进行处理，这样方便在各个Operator之间通过链式调用的方式编写代码。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newObservable = observable.debounceTime(<span class="number">500</span>).take(<span class="number">2</span>); <span class="comment">// 生成新的Observable对象</span></span><br></pre></td></tr></table></figure></p>
+<p>上述代码中debounceTime()以及take()都是Operator。</p>
+<p>在Rx中，Observable作为观察者模式中的被观察者，需要一个方法来订阅它，而subscribe()便是这个方法，订阅Observable对象发出的所有事件：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">observable.subscribe(observer);</span><br></pre></td></tr></table></figure></p>
+<p>subscribe()方法接收一个observer作为参数，来对Observable发出的事件进行订阅，每当Observable对象完成并发送（Emit）一个事件时，该事件就会被observer所捕获，进入到observer对应的回调函数中。被subscribe()订阅过的Observable对象并不会返回一个新的Observable对象，因为subscribe()不是一个可以改变原始数据流的函数。相反，subscribe()会返回一个Subscription实例，这个Subscription实例提供了很多操作API，如取消订阅事件的unsubscribe()方法等。</p>
+<h5 id="其他核心概念"><a href="#其他核心概念" class="headerlink" title="其他核心概念"></a>其他核心概念</h5><p>除了Observable对象和Operator，Rx还有其他核心概念：</p>
+<ul>
+<li>Observer：对Observable对象发出的每个事件进行响应</li>
+<li>Subscription：Observable对象被订阅后返回的Subscription实例</li>
+<li>Subject：EventEmitter的等价数据结构，可以当做Observable被监听，也可以作为Observer发送新的事件</li>
+</ul>
+<h3 id="RxJS"><a href="#RxJS" class="headerlink" title="RxJS"></a>RxJS</h3><p>Rx继承自响应式编程范式，已经在多种语言中实现，除了在JS层面上的实现RxJS外，还有RxJava、Rx.Net、RxSwift等。</p>
+<h4 id="创建Observable对象"><a href="#创建Observable对象" class="headerlink" title="创建Observable对象"></a>创建Observable对象</h4><p>以一个简单示例开始，首先把数据流封装为统一的Observable对象，并对其进行处理：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> button = <span class="built_in">document</span>.querySelector(<span class="string">'button'</span>);</span><br><span class="line">Rx.Observable.fromEvent(button, <span class="string">'click'</span>) <span class="comment">// 返回一个Observable对象</span></span><br><span class="line">  .subscribe(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Clicked'</span>));</span><br></pre></td></tr></table></figure></p>
+<p>通过Observable中的fromEvent静态方法（Static Method），把button标签的所有点击事件封装到一个Observable对象中，并转化为数据流的形式，最后通过subscribe()方法对整个点击事件流进行监听，即，当按钮被点击是，对应的Observable对象变发出一个相应的信息，这条信息被会subscribe()中的observer回调函数所捕获，从而执行console.log()语句，这样便实现了一个最简单的数据流监听。</p>
+<h4 id="使用RxJS处理复杂场景"><a href="#使用RxJS处理复杂场景" class="headerlink" title="使用RxJS处理复杂场景"></a>使用RxJS处理复杂场景</h4><p>用JS原生的事件监听也可以完成上述例子，那么为什么还需要Observable、Operator等复杂的概念呢？</p>
+<p>以复杂例子说明，在实际开发中，经常有一个场景：当用户在一个文本输入框进行输入时，需要对用户的输入进行实时的监听，每当用户输入一些新字符时，便会发一个请求到服务器端，来获取一些推荐信息展示给用户，但实现这个功能的时候，可能还会有一些限制：</p>
+<ul>
+<li>不必在每次用户输入的时候都发起请求，用户在文本框输入文字时，可能会输入的很快，这时是不需要给用户推荐任何信息的，不然频繁发生网络请求可能会带来性能问题，因此需要优化，每当用户输入停顿500ms且没有在输入时才返回推荐信息给用户。</li>
+<li>要保证请求返回的顺序，在异步请求的情况下，由于服务器返回推荐数据的响应事件受各种因数影响，有时前端拿到的推荐数据不是最后依次请求，所以需要保证这些推荐信息的渲染顺序要与请求顺序一致。<br>以上需求其实不难实现，通过原生JS监听和回调函数可以解决，但会有点复杂，在代码上需要新增各种各样的状态量，使得原本的逻辑变得冗余难读，同时这些状态量往往难以维护，久而久之就成了一些bug的源头。</li>
+</ul>
+<p>在RxJS中，这样的数据流操作却可以非常优雅的实现：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> inputSelector = <span class="built_in">document</span>.querySelector(<span class="string">'input'</span>);</span><br><span class="line">Rx.Observable.fromEvent(inputSelector, <span class="string">'keyup'</span>)</span><br><span class="line">  .decounceTime(<span class="number">500</span>)</span><br><span class="line">  .switchMap(<span class="function"><span class="params">event</span> =&gt;</span> getRecommend(event.target.value))</span><br><span class="line">  .subscribe(callback);</span><br></pre></td></tr></table></figure></p>
+<p>不用详细解释，仅仅看流程就知道，RxJS借鉴函数式编程的理念，把所有状态量的操作都封装在一个个Operator函数中，并且通过链式调用的方法对原始数据流进行了过滤等操作，使得代码变得容易阅读且方便维护。</p>
+<h4 id="RxJS和Promise对比"><a href="#RxJS和Promise对比" class="headerlink" title="RxJS和Promise对比"></a>RxJS和Promise对比</h4><p>RxJS的Observable可以通过toPromise()方法把原有的Observable对象转为Promise对象，那么RxJS和Promise究竟那个更好？其实，从上面的转换可以看出，Promise能用的场景RxJS都能用，RxJS是作为Promise的超集存在的。</p>
+<p>先看看两种方式实例创建的简单代码：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Promise实例的创建</span></span><br><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">if</span>( <span class="comment">/* 成功 */</span> )&#123;</span><br><span class="line">    resolve(value);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    reject(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; );</span><br><span class="line"></span><br><span class="line"><span class="comment">// Observable实例的创建：</span></span><br><span class="line"><span class="keyword">let</span> Observable = <span class="keyword">new</span> Observable( <span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">  observer.next(value1);</span><br><span class="line">  observer.next(value2);</span><br><span class="line"></span><br><span class="line">  observer.error(err);</span><br><span class="line">&#125; );</span><br></pre></td></tr></table></figure></p>
+<p>对比上面的代码可以发现，Promise只能针对单一的异步事件进行resolve()操作，而在Observable中，不仅能处理一个单一的异步事件（即调用observer的next()方法），而且能以流的形式响应多个异步事件。<br>同时，Promise使用场景最多的all()、race()等方法，RxJS同样有对应的解决方案，对all()，RxJS通过forkJoin()方法实现，对于race()，RxJS通过merge()和take()来实现。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Promise中，all()方法用来合并请求，</span></span><br><span class="line"><span class="keyword">let</span> newPromise = <span class="built_in">Promise</span>.all(promiseReq1, promiseReq2);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Observable中，对应的forkJoin()方法合并请求</span></span><br><span class="line"><span class="keyword">let</span> newObservable = Rx.Observable.forkJoin(obsReq1, obsReq2);</span><br></pre></td></tr></table></figure></p>
+<h4 id="“冷”模式下的Observable"><a href="#“冷”模式下的Observable" class="headerlink" title="“冷”模式下的Observable"></a>“冷”模式下的Observable</h4><p>在Rx的理念中，Observable通常可以分成“热”（HOT）模式和“冷”（Cold）模式，在热模式下，Observable对象一旦创建，便会开始发送数据，而在冷模式下，Observable对象会一致等到自己被订阅才会开始数据流的发送。<br>在RxJS中，Observable实现的是冷模式:<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'Observable的数据发送顺序为：'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obs = <span class="keyword">new</span> Observable(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Observable start'</span>);</span><br><span class="line">  observer.next();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>);</span><br><span class="line">obs.subscribe();</span><br></pre></td></tr></table></figure></p>
+<p>在RxJS中，observer.next();在Observable对象被订阅后才执行。</p>
+<p>除了冷和热两种模式外，RxJS还存在另外一种被称为Connectable的模式，这种模式下的Observable对象不管有没有被订阅、都不会发送数据，除非ConnectableObservable实例的connect()方法被调用：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'ConnectableObservable的数据发送顺序为：'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obs = <span class="keyword">new</span> Observable(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Observable start'</span>);</span><br><span class="line">  observer.complete();</span><br><span class="line">&#125;).publish(); <span class="comment">// Observable对象被publish()方法转为Connectable模式</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'start'</span>);</span><br><span class="line">obs.subscribe();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'after Observable has been subscribed'</span>);</span><br><span class="line"></span><br><span class="line">obs.connect();</span><br></pre></td></tr></table></figure></p>
+<h4 id="RxJS中的Operator"><a href="#RxJS中的Operator" class="headerlink" title="RxJS中的Operator"></a>RxJS中的Operator</h4><p>RxJS中，Operator操作符分为几类：</p>
+<ul>
+<li>创建操作符（Creation Operators）</li>
+<li>变换操作符（Transformation Operators）</li>
+<li>过滤操作符（Filtering Operators）</li>
+<li>组合操作符（Combination Operators）</li>
+<li>工具操作符（Utility Operators）</li>
+</ul>
+<h5 id="创建操作符"><a href="#创建操作符" class="headerlink" title="创建操作符"></a>创建操作符</h5><p>RxJS中的创建操作符，例如<code>Observable.formEvent()</code>和<code>new Observable()</code>，<code>Observable.create()</code>接受一个工厂函数（该函数以observer作为参数传入）并返回一个新的Observable对象，这个对象最终被subscribe()方法所监听，每当observer的next()方法被调用时，subscribe()中的callback函数便能捕获到observer传来的数据并进行相应的处理，这样便实现了对数据流的订阅和监听功能。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> observable = Rx.Observable.create(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">  getData(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">    observer.next(data);</span><br><span class="line">    observer.complete();</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">observable.subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// doSomething(data);</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h5 id="变换操作符"><a href="#变换操作符" class="headerlink" title="变换操作符"></a>变换操作符</h5><p>有时，通过Observable对象获取到的数据需要做一些批量的小调整，比如数据接口经常会有自己的一套规范包裹数据：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"err_code"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="string">"data"</span>:&#123;<span class="string">"name"</span>: <span class="string">"Operators"</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>只有数据中的data字段是实际想要处理的，所以需要对每一个请求做依次变换操作，把原本的数据流变换成需要的数据流，这就需要用到RxJS的变换操作符。RxJS最常用的变换操作是Observable.prototype.map()：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">observable.map(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> response.data;</span><br><span class="line">&#125;).subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>当observable拿到响应数据response并传递给observer之前，可以通过map操作预先对response进行处理。</p>
+<h5 id="过滤操作符"><a href="#过滤操作符" class="headerlink" title="过滤操作符"></a>过滤操作符</h5><p>过滤操作符可以用来过滤掉数据流中一些不需要处理的数据，例如，前端获取数据时，接口会因为各种原因无法返回最终需要的数据，可能是异常导致数据为空，或只返回一个错误代码以及错误描述，但是并不需要处理这些错误信息，所以就需要过滤掉这些数据（实际情况也有可能需要对错误进行提示等），这时，就可以用Observable.prototype.filter()来对数据流进行过滤。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">observable.filter(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> !!response.data &amp;&amp; response.status === <span class="number">200</span>; <span class="comment">// 结果为false的数据不会再流向下一个operator，即下面的map</span></span><br><span class="line">&#125;).map(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> response.data;</span><br><span class="line">&#125;)</span><br><span class="line">.subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h5 id="组合操作符"><a href="#组合操作符" class="headerlink" title="组合操作符"></a>组合操作符</h5><p>每个接口都可以转换为相应的数据流，很多业务场景需要依赖两个甚至更多的接口数据，并且需要在这些接口数据都成功获取后，再进行关联合并。<br>要满足这样的场景，就需要各个数据流汇合组成新的数据流，这时候就需要用到组合操作符，常用的是Observable.forkJoin()方法。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getFirstDatObs = Rx.Observable.create(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">  observer.next(getFirstData());</span><br><span class="line">  observer.complet();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> getSecondDatObs = Rx.Observable.create(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">  observer.next(getSecondData());</span><br><span class="line">  observer.complet();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> observable = Rx.Observable.forkJoin(getFirstDataObs, getSecondDataObs);</span><br><span class="line"></span><br><span class="line">observable.subscribe(<span class="function"><span class="params">datas</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// datas[0] 是getFirstDatObs的数据</span></span><br><span class="line">  <span class="comment">// datas[1] 是getSecondDatObs的数据</span></span><br><span class="line">  <span class="comment">// doSomething(datas)....</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>Observable.forkJoin()方法把原本两个相互独立的Observable对象合并成一个新的Observable对象，它会在两个Observable对象的数据都抵达后才开始合并处理，且doSomething(datas)只会执行一次。datas数组包含两个数据流。</p>
+<p><strong>注意</strong>：Observable.forkJoin()是静态函数，不是实例函数（Observable.prototype.forkJoin()）。部分操作符只有实例函数版本而没有静态函数版本，而有一些同时存在两个版本的操作符方法的效果一般是一样的。</p>
+<p>若某次数据请求需要依赖前一次请求的结果，也就是说两次请求必须有先后顺序的，这时可以使用Observable.prototype.concatMap()。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getFirstDatObs = Rx.Observable.create(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">  observer.next(getFirstData());</span><br><span class="line">  observer.complet();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> createSecondDataObs = <span class="function"><span class="keyword">function</span>(<span class="params">firstData</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> Rx.Observable.create(<span class="function"><span class="params">observer</span> =&gt;</span> &#123;</span><br><span class="line">    getSecondData(firstData, <span class="function"><span class="params">secondData</span> =&gt;</span> &#123;</span><br><span class="line">      observer.next(secondData);</span><br><span class="line">      observer.complet();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> observable = getFirstDataObs.concatMap(<span class="function"><span class="params">firstData</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> createSecondDataObs(firstData);</span><br><span class="line">&#125;).subscribe(<span class="function"><span class="params">secondData</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>通过Observable.prototype.concatMap()方法，getSecondData()的数据流会紧接在getFirstDatObs()的数据流后，并最终被subscribe()所捕获。</p>
+<h5 id="工具操作符"><a href="#工具操作符" class="headerlink" title="工具操作符"></a>工具操作符</h5><p>Observable.prototype中还有很多有用的方法，统称为工具操作符，比如Observable.prototype.delay()或Observable.prototype.timeout()等。<br>当需要给某个请求设置timeout时，就会用到这些timeout方法：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prevObservable.timeout(<span class="number">5000</span>).subscribe(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="comment">// 超时抛出错误</span></span><br><span class="line">  handleErr(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="Angular中的RxJS"><a href="#Angular中的RxJS" class="headerlink" title="Angular中的RxJS"></a>Angular中的RxJS</h4><p>在Angular中，RxJS的使用非常频繁，例如：HTTP服务中的get/post/request等方法就返回Observable对象，以及路由中events，params等也都是Observable对象。</p>
+<p>以如下两个场景为例，学习如何在Angular中使用RxJS。</p>
+<h5 id="改造HTTP服务"><a href="#改造HTTP服务" class="headerlink" title="改造HTTP服务"></a>改造HTTP服务</h5><p>在开发复杂项目时，有时会觉得原来的HTTP服务不够强大，比如没有统一错误处理、没有统一回调捕获（Callback Capture），为了实现这点，需要对现有的HTTP服务进行该着，把一些统一的全局处理封装在自己实现的HTTP服务器里面，改造封装后的HTTP服务需要实现如下功能：</p>
+<ul>
+<li>对请求结果进行统一的预处理</li>
+<li>对捕获到的错误统一报错</li>
+<li>在HTTP请求发起时，开启加载动画</li>
+<li>在HTTP请求发起时，关闭加载动画</li>
+</ul>
+<p>对现有HTTP服务的在封装重写不应该修改原有的HTTP服务的方法，包括函数签名和返回的数据类型，所以不论是get、post、update还是delete方法都需要返回一个可以被订阅的Observable对象：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Http, RequestOptions, Headers &#125; <span class="keyword">from</span> <span class="string">'@angular/http'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Observable &#125; <span class="keyword">from</span> <span class="string">'rxjs/Rx'</span>;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> MyHttpService&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> http: Http</span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 对于get()方法，统一调用request()方法发送请求</span></span><br><span class="line">  <span class="keyword">get</span>(url: <span class="built_in">string</span>, reqOpts?: RequestOptions)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.request(url, <span class="built_in">Object</span>.assign(&#123;</span><br><span class="line">      method: <span class="string">'get'</span></span><br><span class="line">    &#125;, reqOpts));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// post、delete、update等方法的实现与get()方法类似</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// get、post、update、delete方法的统一封装</span></span><br><span class="line">  request(url: <span class="built_in">string</span>, reqOpts: RequestOptions)&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">this</span>.showLoading(); <span class="comment">// 开启加载动画</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.request(url, <span class="keyword">new</span> RequestOptions(reqOpts))</span><br><span class="line">              .map(<span class="function"><span class="params">res</span> =&gt;</span> res.join())</span><br><span class="line">              .do(<span class="keyword">this</span>.hideLoading().bind(<span class="keyword">this</span>)) <span class="comment">// 关闭加载动画</span></span><br><span class="line">              .map(<span class="keyword">this</span>.preprocessRes.bind(<span class="keyword">this</span>)) <span class="comment">// 对返回数据统一预处理</span></span><br><span class="line">              .catch(<span class="keyword">this</span>.handleErr.bind(<span class="keyword">this</span>)); <span class="comment">// 对请求错误统一处理</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> preprocessRes(res)&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">return</span> res.data;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>get、post、update、delete方法统一对request()方法进行调用，并且会通过request方法返回统一的Observable对象，这样，业务需求以及核心代码便被封装在request方法中。</p>
+<h5 id="输入提示功能"><a href="#输入提示功能" class="headerlink" title="输入提示功能"></a>输入提示功能</h5><p>实现一个较为完善的输入提示功能，需要完成如下需求：</p>
+<ul>
+<li>不必在每次用户输入的时候都发起请求</li>
+<li>发请求前检查内容，若输入内容相同，不发送请求</li>
+<li>要保证请求返回的顺序</li>
+</ul>
+<p>伪代码如下：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  selector: <span class="string">'demo-input'</span>,</span><br><span class="line">  tempalte: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;input type="text" [ngFormControl]="term" /&gt;</span></span><br><span class="line"><span class="string">  &lt;ul&gt;</span></span><br><span class="line"><span class="string">    &lt;li *ngFor="let recommend of recommends"&gt;&#123;&#123; recommend &#125;&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;/ul&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">  providers: [DemoService]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> DemoInputComponent <span class="keyword">implements</span> OnInit &#123;</span><br><span class="line">  recommends: <span class="built_in">Array</span>&lt;<span class="built_in">string</span>&gt;;</span><br><span class="line">  term = <span class="keyword">new</span> Control();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">private</span> _demoService: DemoService</span>)&#123;&#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit()&#123;</span><br><span class="line">    <span class="keyword">this</span>.term.valueChanges</span><br><span class="line">        .debounceTime(<span class="number">500</span>) <span class="comment">// 延迟500ms</span></span><br><span class="line">        .distinctUntilChanged() <span class="comment">// 输入值没变化则不发送请求</span></span><br><span class="line">        .switchMap(<span class="function"><span class="params">term</span> =&gt;</span> <span class="keyword">this</span>._demoService.getRecommend(term)) <span class="comment">// 保证请求顺序</span></span><br><span class="line">        .subscribe(<span class="function"><span class="params">term</span> =&gt;</span> <span class="keyword">this</span>.items = items);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码中，this.term.valueChanges是一个Observable对象，在其与subscribe()方法之间添加了debounceTime、distinctUntilChanged、switchMap三个RxJS内置的Operators。</p>
+<ul>
+<li>debounceTime过滤掉所有Observable对象抛出的时间间隔不超过500ms的事件</li>
+<li>distinctUntilChanged过滤掉所有Observable对象连续抛出的value值相同的事件</li>
+<li>switchMap，其接收另一个Observable对象，即<code>this._demoService.getRecommend(term)</code>,并把每一个valueChanges抛出的事件映射成一个新的Observable对象，再把这些新的单一的Observable对象合并整理成一个新的Observable对象。<br>当上游的数据流有新的数据变更时，switchMap参数里生成的新数据流会被截断，不再往下传递数据。即不用担心AJAX返回的过时数据往下流动，从而保证输出结果始终保证跟输入框的值保持一致。</li>
+</ul>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/10/17/angular10/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/10/15/angular8/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

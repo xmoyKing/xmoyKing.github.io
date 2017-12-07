@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Angular2入门-模板-1 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,js,typescript,angular">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Angular2入门-模板-1 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="typescript"> <meta property="og:article:tag" content="angular"> 
+
+    
+        <meta property="article:published_time" content="Sat Oct 07 2017 09:23:32 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Dec 06 2017 22:50:08 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Angular2入门-模板-1 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/10/07/angular4/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/10/07/angular4/index.html",
+    "headline": "Angular2入门-模板-1",
+    "datePublished": "Sat Oct 07 2017 09:23:32 GMT+0800",
+    "dateModified": "Wed Dec 06 2017 22:50:08 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,typescript,angularnull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模板语法概览"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x677F;&#x8BED;&#x6CD5;&#x6982;&#x89C8;" class="headerlink" title="&#x6A21;&#x677F;&#x8BED;&#x6CD5;&#x6982;&#x89C8;"></a>&#x6A21;&#x677F;&#x8BED;&#x6CD5;&#x6982;&#x89C8;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据绑定"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x6570;&#x636E;&#x7ED1;&#x5B9A;" class="headerlink" title="&#x6570;&#x636E;&#x7ED1;&#x5B9A;"></a>&#x6570;&#x636E;&#x7ED1;&#x5B9A;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模板表达式"><span class="post-toc-number">2.1.</span> <span class="post-toc-text"><a href="#&#x6A21;&#x677F;&#x8868;&#x8FBE;&#x5F0F;" class="headerlink" title="&#x6A21;&#x677F;&#x8868;&#x8FBE;&#x5F0F;"></a>&#x6A21;&#x677F;&#x8868;&#x8FBE;&#x5F0F;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#属性绑定"><span class="post-toc-number">2.2.</span> <span class="post-toc-text"><a href="#&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;" class="headerlink" title="&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;"></a>&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#事件绑定"><span class="post-toc-number">2.3.</span> <span class="post-toc-text"><a href="#&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;"></a>&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#双向数据绑定"><span class="post-toc-number">2.4.</span> <span class="post-toc-text"><a href="#&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;" class="headerlink" title="&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;"></a>&#x53CC;&#x5411;&#x6570;&#x636E;&#x7ED1;&#x5B9A;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#双向绑定的原理"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text"><a href="#&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x7684;&#x539F;&#x7406;" class="headerlink" title="&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x7684;&#x539F;&#x7406;"></a>&#x53CC;&#x5411;&#x7ED1;&#x5B9A;&#x7684;&#x539F;&#x7406;</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#输入、输出属性"><span class="post-toc-number">2.5.</span> <span class="post-toc-text"><a href="#&#x8F93;&#x5165;&#x3001;&#x8F93;&#x51FA;&#x5C5E;&#x6027;" class="headerlink" title="&#x8F93;&#x5165;&#x3001;&#x8F93;&#x51FA;&#x5C5E;&#x6027;"></a>&#x8F93;&#x5165;&#x3001;&#x8F93;&#x51FA;&#x5C5E;&#x6027;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内置指令"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x5185;&#x7F6E;&#x6307;&#x4EE4;" class="headerlink" title="&#x5185;&#x7F6E;&#x6307;&#x4EE4;"></a>&#x5185;&#x7F6E;&#x6307;&#x4EE4;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NgClass"><span class="post-toc-number">3.1.</span> <span class="post-toc-text"><a href="#NgClass" class="headerlink" title="NgClass"></a>NgClass</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NgStyle"><span class="post-toc-number">3.2.</span> <span class="post-toc-text"><a href="#NgStyle" class="headerlink" title="NgStyle"></a>NgStyle</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NgIf"><span class="post-toc-number">3.3.</span> <span class="post-toc-text"><a href="#NgIf" class="headerlink" title="NgIf"></a>NgIf</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NgSwitch"><span class="post-toc-number">3.4.</span> <span class="post-toc-text"><a href="#NgSwitch" class="headerlink" title="NgSwitch"></a>NgSwitch</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#NgFor"><span class="post-toc-number">3.5.</span> <span class="post-toc-text"><a href="#NgFor" class="headerlink" title="NgFor"></a>NgFor</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#NgFor中的索引"><span class="post-toc-number">3.5.1.</span> <span class="post-toc-text"><a href="#NgFor&#x4E2D;&#x7684;&#x7D22;&#x5F15;" class="headerlink" title="NgFor&#x4E2D;&#x7684;&#x7D22;&#x5F15;"></a>NgFor&#x4E2D;&#x7684;&#x7D22;&#x5F15;</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#NgForTrackBy"><span class="post-toc-number">3.5.2.</span> <span class="post-toc-text"><a href="#NgForTrackBy" class="headerlink" title="NgForTrackBy"></a>NgForTrackBy</span></a></li></ol></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Angular2入门-模板-1
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Oct 07, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 06, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/angular/">angular</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/typescript/">typescript</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Angular2入门-模板-1&url=https://github.com/xmoyKING/2017/10/07/angular4/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Angular2入门-模板-1&url=https://github.com/xmoyKING/2017/10/07/angular4/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/10/07/angular4/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/10/07/angular4/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>模板是一种自定义的标准化页面，通过模板和模板中的数据结合，可以生成各种各样的网页。</p>
+<p>在Angular中，模板的默认语言是HTML，几乎所有的HTML语法在模板中都适用，script标签除外，主要是为了防止XSS，同时一些HTML元素在模板中并不起作用，如html、body、base等标签。Angular可以通过组件和指令对模板的HTML元素进行扩展，这些扩展将以新的元素或属性的形式出现。</p>
+<h3 id="模板语法概览"><a href="#模板语法概览" class="headerlink" title="模板语法概览"></a>模板语法概览</h3><p>初步认识模板语法。 具体查看<a href="http://www.runoob.com/angularjs2/angularjs2-template-syntax.html" target="_blank" rel="noopener">Angular 2 模板语法</a></p>
+<table>
+<thead>
+<tr>
+<th>示例</th>
+<th>名称</th>
+<th>说明</th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;p&gt;｛｛detail.telNum ｝｝ &lt;/p&gt;</code></td>
+<td>插值</td>
+<td>绑定属性变量的值到模板中</td>
+<td><code>｛｛模板表达式｝｝</code></td>
+</tr>
+<tr>
+<td><code>&lt;div [title]=&quot;name&quot;&gt;hello world &lt;/div&gt;</code></td>
+<td>DOM元素属性绑定</td>
+<td>将模板表达式name的值绑定带元素div的属性title上</td>
+<td><code>[DOM元素属性]=&quot;模板表达式&quot;</code>或<code>bind-DOM元素属性=&quot;模板表达式&quot;</code></td>
+</tr>
+<tr>
+<td><code>&lt;td [attr.colspan]=&quot;｛｛ 1 + 2 ｝｝&quot;&gt;合并单元格&lt;/div&gt;</code></td>
+<td>HTML标签特性绑定</td>
+<td>将模板表达式的返回值绑定到元素td标签特性colspan上</td>
+<td><code>[attr.HTML标签特性]=&quot;模板表达式&quot;</code></td>
+</tr>
+<tr>
+<td><code>&lt;div [class.isblue]=&quot;isBlue()&quot;&gt;单击&lt;/div&gt;</code></td>
+<td>Class类绑定</td>
+<td>当isBlue()函数值为true时为div添加类名为isBlue的样式</td>
+<td><code>[class.css类名]=&quot;模板表达式&quot;</code></td>
+</tr>
+<tr>
+<td><code>&lt;button [style.color]=&quot;isRed?&#39;red&#39;:&#39;green&#39;&quot;&gt;红&lt;/div&gt;</code></td>
+<td>Style样式绑定</td>
+<td>当表达式isRed的值为true时设置button的文字颜色为红色，否则为绿色</td>
+<td><code>[style.css样式属性名]=&quot;模板表达式&quot;</code></td>
+</tr>
+<tr>
+<td><code>&lt;a class=&quot;edit&quot; (click)=&quot;editContact()&quot;&gt;编辑&lt;/a&gt;</code></td>
+<td>事件绑定</td>
+<td>单击元素时会触发click事件，需要时也可以传递$event对象，如<code>(click)=&quot;editContact($event)&quot;</code></td>
+<td><code>(事件)=&quot;模板语法&quot;</code>或<code>on-事件=&quot;模板语句&quot;</code></td>
+</tr>
+<tr>
+<td><code>&lt;div [(title)]=&quot;name&quot;&gt;&lt;/div&gt;</code></td>
+<td>双向绑定</td>
+<td>组件和模板间双向数据绑定，等价于<code>&lt;div [title]=&quot;name&quot; (titleChange)=&quot;name=$event&quot;&gt;&lt;/div&gt;</code></td>
+<td><code>[(绑定目标)]=&quot;模板表达式&quot;</code>或<code>bindon-绑定目标=&quot;模板表达式&quot;</code></td>
+</tr>
+<tr>
+<td><code>&lt;input type=&quot;text&quot; ##name name=&quot;name&quot; id=&quot;name&quot; /&gt;&lt;p&gt;｛｛name.value｝｝&lt;/p&gt;</code></td>
+<td>模板局部变量</td>
+<td>在当前模板中创建一个对id值为name的input元素的引用变量name，相当于<code>document.getElementById(&#39;name&#39;)</code></td>
+<td><code>##变量名</code>或<code>ref-变量名</code></td>
+</tr>
+<tr>
+<td><code>&lt;p&gt;张三的生日是｛｛birthdat 管道操作符 date ｝｝&lt;/p&gt;</code></td>
+<td>管道操作符</td>
+<td>元素数据birthday经管道转换后输出期望数据并显示在模板中</td>
+<td><code>输入数据 管道操作符 管道名:管道参数</code></td>
+</tr>
+<tr>
+<td><code>&lt;p&gt;｛｛detail?.telNum ｝｝&lt;/p&gt;</code></td>
+<td>模板表达式操作符</td>
+<td>模板表达式操作符表明detail.telNum属性不是必须存在的，若其值为undefined，那么后面的表达式将被忽略，不会引发异常</td>
+<td><code>?.</code></td>
+</tr>
+<tr>
+<td><code>&lt;p *myUnless=&quot;boolValue&quot;&gt;myUnless is false now.&lt;/p&gt;</code></td>
+<td>星号前缀</td>
+<td>使用星号前缀可以简化对结构指令的使用，Angular会将带有星号的指令引用替换成带有<code>&lt;template&gt;</code>标签的代码，等价于<code>&lt;template [myUnless]=&quot;boolValue&quot;&gt;&lt;p&gt;myUnless is false now.&lt;/p&gt;&lt;/template&gt;</code></td>
+<td><code>*指令</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><p>Angular提供了多种数据绑定的方式，根据数据流动的方向分为3种：</p>
+<table>
+<thead>
+<tr>
+<th>数据流向</th>
+<th>示例</th>
+<th>绑定类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单向：数据源到视图目标（属性绑定）</td>
+<td><code>&lt;p&gt;｛｛detail.telNum｝｝&lt;/p&gt;</code>, <code>&lt;div [title]=&quot;name&quot;&gt;hello world&lt;/div&gt;</code>, <code>&lt;div [style.color]=&quot;color&quot;&gt;hello world&lt;/div&gt;</code></td>
+<td>插值DOM元素属性绑定HTML标签特性绑定</td>
+</tr>
+<tr>
+<td>单向：从视图目标到数据源（事件绑定）</td>
+<td><code>(click)=&quot;editContact()&quot;</code>,<code>on-click=&quot;editContact()&quot;</code></td>
+<td>事件绑定</td>
+</tr>
+<tr>
+<td>双向</td>
+<td><code>&lt;div [(title)]=&quot;name&quot;&gt;&lt;/div&gt;</code>, <code>&lt;div bindon-title=&quot;name&quot;&gt;&lt;/div&gt;</code></td>
+<td>双向绑定</td>
+</tr>
+</tbody>
+</table>
+<p>上表中，除了插值外，在“=”的左侧都有一个目标名称，它可以被<code>[]</code>,<code>()</code>包裹，或者加上一个前缀（<code>bind-</code>,<code>on-</code>,<code>bindon-</code>）,这被称为绑定目标，而在“=”的右侧或者插值符号中的部分被称为绑定源。</p>
+<p>有一对非常重要的概念，即DOM对象属性（Property）与HTML标签特性（Attribute），在英语中Property和Attribute都可以翻译为”属性”，名字虽然相同，但在模板中意义却不同。理解它们的不同是理解Angular数据绑定的关键。</p>
+<table>
+<thead>
+<tr>
+<th>定义方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DOM对象属性（Property）</td>
+<td>以DOM元素为对象，其附加的内容，是在文档对象模型里定义的，如childNodes，firstChild等</td>
+</tr>
+<tr>
+<td>HTML标签特性（Attribute）</td>
+<td>是DOM节点自带的属性，是在HTML里定义的，即只要是HTML标签中出现的属性（HTML代码）都是Attribute，例如HTML中常用的colspan，align等</td>
+</tr>
+</tbody>
+</table>
+<p>大多数情况下，DOM对象属性与HTML标签特性不是一一对应的，但有少量属性既是DOM对象属性又是HTML标签特性，如id、title、class（CSS类）等。<br>通常HTML标签特性代表着初始值，初始化后就不再发生改变，而DOM对象属性代表当前值，默认为初始值，它它会随着属性值而变化。<br>数据绑定是借助元素和指令的DOM对象属性和事件来运作的，而不是HTML标签特性。在Angular中，HTML标签特性唯一的作用就是用来进行元素和指令状态的初始化。</p>
+<h4 id="模板表达式"><a href="#模板表达式" class="headerlink" title="模板表达式"></a>模板表达式</h4><p>模板表达式类似JS原生表达式，但不可以使用一些会引起副作用的JS表达式：</p>
+<ul>
+<li>带有new运算符的表达式</li>
+<li>赋值表达式（=，+=，-=等）</li>
+<li>带有;或,的链式表达式</li>
+<li>带有自增和自减操作（++和–）的表达式</li>
+<li>不支持位运算符 | 和 &amp;</li>
+<li>部分模板表达式操作符被赋予了新的含义，如管道操作符，和安全导航操作符<code>?.</code></li>
+</ul>
+<p>模板表达式上下文通常就是它所在组件的实例，也可以包括组件之外的对象，如模板局部变量，但需注意，模板表达式不能引用任何全局命名空间中的成员，如window、document，console，Math等。</p>
+<p>模板表达式书写原则：</p>
+<ul>
+<li>避免视图变化的副作用<br>一个模板表达式只能改变目标属性的值，不应改变应用的任何状态，Angular的单向数据流模式正是基于这条原则来的，在单独的渲染过程中，视图应该是可以预测到的，不必担心在读取组件值时会不小心改变其他的一些展示值</li>
+<li>高效执行<br>Angular执行表达式的频率很高，触发任何一次键盘或鼠标事件都可能执行，当计算成本很大时，可以考虑缓存那些计算得出的值。</li>
+<li>使用简单的语句<br>避免编写一些比较复杂的模板表达式</li>
+<li>幂等性优先<br>表达式应该遵循幂等性优先原则，幂等的表达式总是返回完全一致的东西，这样就没有副作用，并能提升Angular变化监测的性能，但表达式的返回值还是会随着它所依赖的值变化而变化。</li>
+</ul>
+<h4 id="属性绑定"><a href="#属性绑定" class="headerlink" title="属性绑定"></a>属性绑定</h4><p>属性绑定是一种单向的数据绑定，数据从组件类流向模板，当要把一个视图元素的属性设置为模板表达式时，就需要用到属性绑定。</p>
+<p>一般的，属性绑定不能用来从目标元素获取值，或者调用目标元素上的方法，即目标元素的值只能被设置，不能被读取，但可以使用@ViewChild和@ContentChild来读取目标元素的属性或调用它的方法。</p>
+<p>在属性绑定中，“=”左侧中括号的作用是让Angular执行“=”右侧的模板表达式，并将结果赋值给该目标属性，若没有中括号，Angular会把右侧的模板表达式当做一个普通的字符串常量而不会计算该表达式，所以若赋值给目标属性的值是一个固定的字符串，中括号推荐省略。</p>
+<p>Angular推荐使用DOM元素属性绑定，但当元素没有对应的属性可绑定的时候，则可以使用HTML标签特性绑定来设置值，例如table标签中的colspan或rowspan等，没有相对的DOM属性可供绑定，若直接用模板表达式赋值将会出现模板解析错误：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>"&#123;&#123; <span class="attr">1</span> + <span class="attr">2</span> &#125;&#125;"&gt;</span>合并单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>因为colspan在td元素中并不是DOM元素属性，而是HTML标签特性，插值和属性绑定只能设置DOM元素属性，不能设置HTML标签特性。<br>HTML标签特性绑定在语法上类似于属性绑定，但中括号中的部分不是一个元素的属性名，而是由<code>attr.</code>的前缀和HTML标签特性名称组成的形式，然后通过一个模板表达式来设置HTML标签特性的值：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span> [<span class="attr">attr.colspan</span>]=<span class="string">"&#123;&#123; 1 + 2 &#125;&#125;"</span>&gt;</span>合并单元格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>CSS类既属于HTML标签特性，又属于DOM对象属性，所以可以使用以上两种方式来完成属性绑定:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 标准HTML样式类设置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"font14"</span>&gt;</span>14号字体<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 通过绑定重设或覆盖类 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"red font14"</span> [<span class="attr">class</span>]=<span class="string">"changeGreen"</span>&gt;</span>14号绿字体<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当使用DOM对象属性绑定给<code>[class]</code>绑定值时，changeGreen对象会重写这个div元素的全部class。<br>另外Angular也提供了类似<code>[class.class-name]</code>的语法来完成属性绑定，当赋值为true时，将class-name这个类添加到该绑定的标签上，否则将移除这个类：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">class.color-blue</span>]=<span class="string">"isBlue()"</span>&gt;</span></span><br><span class="line">  若isBlue返回true，则变为蓝色</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer"</span> [<span class="attr">class.footer</span>]=<span class="string">"showFooter"</span>&gt;</span></span><br><span class="line">  若showFooter为false，则footer这个CSS类将被移除</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>HTML标签内联样式可以通过Style样式绑定的方式来设置，也可以带上样式单位,支持驼峰式命名和连字符式命名<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">style.font-size.px</span>]=<span class="string">"isLarge ? 18 : 13"</span>&gt;</span></span><br><span class="line">  若isLarge返回true，则变为18px</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>属性绑定和插值本质上没有区别，在渲染视图之前，Angular会将插值表达式转换成属性绑定的形式，插值只是属性绑定的一个语法糖，推荐插值表达式。同时渲染之前，Angular会对内容进行安全处理，不允许带有script标签的HTML展示到浏览器中。</p>
+<h4 id="事件绑定"><a href="#事件绑定" class="headerlink" title="事件绑定"></a>事件绑定</h4><p>事件绑定也是一种单向数据绑定形式，数据从模板流向组件类。<br>模板语法的上下文可以包含组件之外的对象，如模板局部变量和事件绑定语句中的$event。</p>
+<p>目标事件可以是常见的事件（如click），也可以是自定义指令的事件。Angular在解析目标事件时，会优先判断是否匹配已知指令的事件，若事件名既不是某个已知指令的事件，也不是元素事件，那么会报“未知指令”的错误。</p>
+<p>$event事件对象可以获取该事件的相关信息，目标事件的类型决定了事件对象的形态，目标事件是DOM元素事件则$event将是一个包含target和target.value属性的DOM事件对象。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> [<span class="attr">value</span>]=<span class="string">"currentUser.firstName"</span> (<span class="attr">input</span>)=<span class="string">"currentUser.firstName=$event.target.value"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>组件要触发自定义事件可以借助于EventEmitter，在组件中可以创建一个EventEmitter实例对象，并将其输出属性的形式暴露出来，父组件通过绑定这个输出属性来自定义一个事件，在组件中调用<code>EventEmitter.emit(payload)</code>来触发这个自定义事件，其中payload可以传入任何值，父组件绑定的事件可以通过$event对象来访问payload的数据。</p>
+<p>以通讯录为例，联系人列表页面，单击对应联系人区域，可以看到联系人的详细信息：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// item.component.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Component, Input, Output, EventEmitter &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; Router &#125; <span class="keyword">from</span> <span class="string">'@angular/router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  selector: <span class="string">'list-item'</span>,</span><br><span class="line">  templateUrl: <span class="string">'app/list/item.component.html'</span>,</span><br><span class="line">  styleUrls: [<span class="string">'app/list/item.component.css'</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> ListItemComponent &#123;</span><br><span class="line">  <span class="meta">@Input</span>() contact: <span class="built_in">any</span> = &#123;&#125;;</span><br><span class="line">  <span class="meta">@Output</span>() routerNavigate = <span class="keyword">new</span> EventEmitter&lt;<span class="built_in">number</span>&gt;();</span><br><span class="line"></span><br><span class="line">  goDetail(num: <span class="built_in">number</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.routerNavigate.emit(num);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- item.component.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> (<span class="attr">click</span>)=<span class="string">"goDetail(contact.id)"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>组件ListItemComponent定义了一个EventEmitter实例routerNavigate，点击a标签组件调用goDetail方法，其再去执行EventEmitter.emit()方法，传递一个数字，并跳转到对应的联系人详情页面，另外，作为宿主的父组件绑定了ListItemComponent的routerNavigate事件。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// list.component.html</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let contact of contacts"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">list-item</span> [<span class="attr">contact</span>]=<span class="string">"contact"</span> (<span class="attr">routerNavigate</span>)=<span class="string">"routerNavigate($event)"</span>&gt;</span><span class="tag">&lt;/<span class="name">list-item</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>当routerNavigate事件触发时，Angular就会调用父组建的routerNavigate方法，在$event中传入对应的联系人id。执行routerNavigate()方法使得页面内容更新，显示联系人详细信息。</p>
+<h4 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h4><p>双向数据绑定可以利用属性绑定和事件绑定结合的形式来处理：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> [<span class="attr">value</span>]=<span class="string">"currentUser.phone"</span> (<span class="attr">input</span>)=<span class="string">"currentUser.phone=$event.target.value"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>Angular提供NgModel指令可以更方便的进行双向绑定：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> </span></span><br><span class="line"><span class="tag">  [<span class="attr">ngModel</span>]=<span class="string">"currentUser.phone"</span></span></span><br><span class="line"><span class="tag">  (<span class="attr">ngModelChange</span>)=<span class="string">"currentUser.phone=$event"</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>通过ngModel输入属性和ngModelChange输出属性隐藏了一些繁琐的细节，但更简洁的是通过[()]语法实现,[]实现了数据流从组件类到模板，()实现了数据流从模板到组件类，两者结合的[()]就可以简单实现实现双向绑定了。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> [(<span class="attr">ngModel</span>)]=<span class="string">"currentUser.phone"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 等价于 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">bindon-ngModel</span>=<span class="string">"currentUser.phone"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>但[()]语法只能简单的设置一个数据绑定数据，若想完成更多任务，就得采用分离的形式来实现，例如在联系人手机号码前加上区号：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> </span></span><br><span class="line"><span class="tag">  [<span class="attr">ngModel</span>]=<span class="string">"currentUser.phone"</span></span></span><br><span class="line"><span class="tag">  (<span class="attr">ngModelChange</span>)=<span class="string">"addCodeForPhone($event)"</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="双向绑定的原理"><a href="#双向绑定的原理" class="headerlink" title="双向绑定的原理"></a>双向绑定的原理</h5><p>[(ngModel)]可以拆分为ngModel和ngModelChange两部分，其中，ngModel是作为NgModel指令的输入属性用来设置元素的值，ngModelChange作为NgModel指令的输出属性用来监听元素值是否变化。</p>
+<p>ngModelChange属性并不会生成DOM事件，实际上它是一个EvenEmiiter类型对象，[(ngModel)]的具体实现为：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">"[ngModel]"</span>,</span><br><span class="line">  host: &#123;</span><br><span class="line">    <span class="string">"[value]"</span>: <span class="string">"ngModel"</span>,</span><br><span class="line">    <span class="string">"(input)"</span>: <span class="string">"ngModelChange.next($event.target.value)"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">class</span> NgModelDirective&#123;</span><br><span class="line">  <span class="meta">@Input</span>() ngModel: ang;</span><br><span class="line">  <span class="meta">@Output</span>() ngModelChange: EventEmitter = <span class="keyword">new</span> EventEmitter();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码中设计指令相关知识，host属性用来描述和指令元素相关的输入输出属性变化，即当[ngModel]的ngModelChange事件发生时就会触发input事件，当[ngModel]的ngModel值变化时就会更新value属性。</p>
+<p>Angular提供了一种双向数据绑定的语法，即[(x)],也就是说当Angular解析一个[(x)]的绑定目标时，相当于为这个x指令绑定一个名为x的输入属性和一个名为xChange的输出属性,例如：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> [(<span class="attr">x</span>)]=<span class="string">"e"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 等价于 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> [<span class="attr">x</span>]=<span class="string">"e"</span> (<span class="attr">xChange</span>)=<span class="string">"e=$event"</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>总的来说，双向数据绑定实际上就是通过输入属性存储数据，同时通过一个与之对应的输出属性(输入属性+Change后缀)监听输入属性的数据变化来触发相应的事件。</p>
+<p>以创建一个支持双向绑定的组件为例，绑定一个number的输入输出属性，同时在组件中需要定义一个@Output输出属性来匹配@Input输入属性：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// amount.component.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Component, Input, Output, EventEmitter &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  selector: <span class="string">'amount'</span>,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;span&gt;</span></span><br><span class="line"><span class="string">    子组件当前值：&#123;&#123;value&#125;&#125; - &lt;button (click)="increment()"&gt;增加&lt;/button&gt;</span></span><br><span class="line"><span class="string">  &lt;/span&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> AmountComponent &#123;</span><br><span class="line">  <span class="meta">@Input</span>() value: <span class="built_in">number</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="meta">@Output</span>() valueChange: EventEmitter&lt;<span class="built_in">number</span>&gt; = <span class="keyword">new</span> EventEmitter&lt;<span class="built_in">number</span>&gt;();</span><br><span class="line"></span><br><span class="line">  increment()&#123;</span><br><span class="line">    <span class="keyword">this</span>.value++;</span><br><span class="line">    <span class="keyword">this</span>.valueChange.emit(<span class="keyword">this</span>.value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.component.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; Component, Input &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; AmountComponent &#125; <span class="keyword">from</span> <span class="string">'./amount.component'</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  selector: <span class="string">'app'</span>,</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;div&gt;</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;Number 1: &lt;/span&gt;</span></span><br><span class="line"><span class="string">      &lt;amount [(value)]="number1"&gt;&lt;/amount&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">      &lt;span&gt;Number 2: &lt;/span&gt;</span></span><br><span class="line"><span class="string">      &lt;amount [value]="number2" (valueChange)="number2=$event"&gt;&lt;/amount&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;ul&gt;</span></span><br><span class="line"><span class="string">      &lt;li&gt;Number 1: 父组件当前值：&#123;&#123; number1 &#125;&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="string">      &lt;li&gt;Number 2: 父组件当前值：&#123;&#123; number2 &#125;&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="string">    &lt;/ul&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> Parent &#123;</span><br><span class="line">  number1: <span class="built_in">number</span> = <span class="number">0</span>;</span><br><span class="line">  number2: <span class="built_in">number</span> = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="输入、输出属性"><a href="#输入、输出属性" class="headerlink" title="输入、输出属性"></a>输入、输出属性</h4><p>有时，输入、输出属性名的语义不是很明确，可能描述不清这个属性的作用或者功能，因此，给输入、输出属性名定义一个有语义的别名是非常有必要的，定义别名有2种方式：</p>
+<ol>
+<li>通过@Input和@Output装饰其为属性指定别名，语法形如：<code>@Output(别名) 事件属性名=&quot;...&quot;</code>， 例如给一个自定义事件定义了一个别名goto，<code>@Output(&#39;goto&#39;) clicks= new EventEmitter&lt;number&gt;();</code></li>
+<li>采用组件（指令）元数据的inputs或outputs数组可以为属性指定别名，语法形如：<code>outputs: [&#39;组件属性名: 别名&#39;]</code></li>
+</ol>
+<h3 id="内置指令"><a href="#内置指令" class="headerlink" title="内置指令"></a>内置指令</h3><p>在Angular中，指令作用在特定的DOM元素上，可以扩展这个元素的功能，为元素增加新的行为，Angular框架本身自带一些指令，如NgClass、NgStyle、NgIf、NgFor、NgSwitch等。</p>
+<h4 id="NgClass"><a href="#NgClass" class="headerlink" title="NgClass"></a>NgClass</h4><p>在属性绑定中，CSS类绑定的方式能够为标签元素添加或移除单个类，在实际开发中，通过动态添加或移除CSS类的方式，可以控制元素展示，在Angular中，通过NgClass指令，可以同时添加或移除多个类。NgClass绑定一个对象，其中数据为<code>CSS类名:value</code>的键值对，value是一个布尔类型的数据值，当value为true时则添加对应的类名到模板元素上，反之则移除。</p>
+<p>在组件中设置一个管理类状态的对象，用来控制在模板元素中是否添加red、font14、title类。<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">setClasses()&#123;</span><br><span class="line">  <span class="keyword">let</span> classes = &#123;</span><br><span class="line">    red: <span class="keyword">this</span>.red, <span class="comment">// true</span></span><br><span class="line">    font14: !<span class="keyword">this</span>.font14, <span class="comment">// false</span></span><br><span class="line">    title: <span class="keyword">this</span>.isTitle, <span class="comment">// true</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> classes;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure></p>
+<p>通过添加一个ngClass属性绑定，调用组件setClasses()方法来设置该元素的类样式：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">ngClass</span>]=<span class="string">"setClasses()"</span>&gt;</span>红色标题<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="NgStyle"><a href="#NgStyle" class="headerlink" title="NgStyle"></a>NgStyle</h4><p>在属性绑定中，Style样式绑定的方式能够给模板元素设置单一的样式，而采用NgStyle指令可以为模板元素设置多个内联样式，与NgClass类似，NgStyle绑定一个形如<code>CSS属性名:value</code>的对象，其中value为具体的CSS样式。</p>
+<p>在组件中设置一些内联的CSS样式，用来在模板元素中设置color，font-size，font-weight：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line">setStyles()&#123;</span><br><span class="line">  <span class="keyword">let</span> styles = &#123;</span><br><span class="line">    <span class="string">'color'</span>: <span class="keyword">this</span>.red ? <span class="string">'red'</span> : <span class="string">'blue'</span>, <span class="comment">// red</span></span><br><span class="line">    <span class="string">'font-size'</span>: !<span class="keyword">this</span>.font14 ? <span class="string">'14px'</span> : <span class="string">'16px'</span>, <span class="comment">// 16px</span></span><br><span class="line">    <span class="string">'font-weight'</span>: <span class="keyword">this</span>.isSpecial ? <span class="string">'bold'</span> : <span class="string">'normal'</span>, <span class="comment">// bold</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> styles;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure></p>
+<p>使用：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> [<span class="attr">ngStyle</span>]=<span class="string">"setStyles()"</span>&gt;</span>红色16px加粗<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="NgIf"><a href="#NgIf" class="headerlink" title="NgIf"></a>NgIf</h4><p>NgIf指令绑定一个布尔类型的表达式，当表达式返回true时，可以在DOM树节点上添加一个元素及其子元素，反之将被移除：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span> *<span class="attr">ngIf</span>=<span class="string">"collect.length === 0"</span> <span class="attr">class</span>=<span class="string">"no-collection"</span>&gt;</span>未收藏<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>写法<code>*ngIf</code>是一种语法糖，与NgSwitchCase、NgSwitchDefault、NgFor类似。</p>
+<p>NgIf与类、样式绑定的方式区别在于：<br>样式、类绑定的方式也可以设置模板元素的显示与隐藏，如通过class.hidden属性的绑定方式可以控制是否显示该模板元素:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span> [<span class="attr">class.hidden</span>]=<span class="string">"collect.length === 0"</span> <span class="attr">class</span>=<span class="string">"no-collection"</span>&gt;</span>未收藏<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>但与NgIf不同，它们仅仅只是设置了元素是否显示，而该元素还保留在DOM树的节点上，类似<code>display:none</code>,而NgIf则是当表达式返回值为false时，元素会从DOM树上移除。</p>
+<h4 id="NgSwitch"><a href="#NgSwitch" class="headerlink" title="NgSwitch"></a>NgSwitch</h4><p>NgSwitch指令需要结合NgSwitchCase和NgSwitchDefault指令来使用，根据NgSwitch绑定的模板表达式的返回值来决定添加哪个模板元素到DOM节点上，并移除其他备选模板元素：</p>
+<ul>
+<li>ngSwitch ： 绑定到一个返回控制条件的值的表达式</li>
+<li>ngSwitchCase ：绑定到一个返回匹配条件的值的表达式</li>
+<li>ngSwitchDefault ：用于标记默认元素的属性<br>注：ngSwitch前不加*、而ngSwitchCase和ngSwitchDefault前加</li>
+</ul>
+<p>根据组件的contactName属性来确定展示对应的中文名:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> [<span class="attr">ngSwitch</span>]=<span class="string">"contactName"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> *<span class="attr">ngSwitchCase</span>=<span class="string">"'TimCook'"</span>&gt;</span>蒂姆 库克<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> *<span class="attr">ngSwitchCase</span>=<span class="string">"'BillGates'"</span>&gt;</span>比尔盖茨<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> *<span class="attr">ngSwitchDefault</span>&gt;</span>无名<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>每个子指令ngSwitchCase根据ngSwitch属性绑定的条件值来进行相关匹配，看是否符号某个子指令的判断条件，若符合则把该元素添加到DOM树节点上，并移除其兄弟元素，若匹配不到所有的条件值则显示子指令ngSwitchDefault对应的模板元素。</p>
+<h4 id="NgFor"><a href="#NgFor" class="headerlink" title="NgFor"></a>NgFor</h4><p>NgFor指令可以实现重复执行某些步骤来展示数据，例如用来展示多列的模板列表，这些模板元素结构及布局一致，只是展示具体数据不一样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> *<span class="attr">ngFor</span>=<span class="string">"let contact of contacts"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">list-li</span> [<span class="attr">contact</span>]=<span class="string">"contact"</span> (<span class="attr">routerNavigate</span>)=<span class="string">"routerNavigate($event)"</span>&gt;</span><span class="tag">&lt;/<span class="name">list-li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>赋值给*ngFor的字符串不是一个模板表达式，前面的星号不能省略，这个Angular提供的语法糖。Angular会遍历出contacts对象数据中的每个contact，并将它存储在局部变量contact中，使其在每个循环迭代中对模板HTML可用。</p>
+<h5 id="NgFor中的索引"><a href="#NgFor中的索引" class="headerlink" title="NgFor中的索引"></a>NgFor中的索引</h5><p>NgFor指令支持一个可选的index索引，在循环迭代过程中，其下表范围是0 &lt;= index &lt; 数组长度。可以通过模板输入变量来捕获这个index，并应用在模板中。如把index赋值给变量i后，在当前的元素及其子元素中都可以使用该变量：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngFor</span>=<span class="string">"let contact of contacts; let i = index"</span>&gt;</span>&#123;&#123; i + 1 &#125;&#125; - &#123;&#123; contact.id &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="NgForTrackBy"><a href="#NgForTrackBy" class="headerlink" title="NgForTrackBy"></a>NgForTrackBy</h5><p>在一些包含复杂列表的项目中，每次更改都会引发很多相互关联的DOM操作，这里使用NgFor指令会让性能变得很差，在通讯录例子中，当重新从服务器拉取列表数据，拉取到的数据可能包含很多（部分数据）之前显示过的数据，虽然这些数据中的联系人标号（contact.id）没有发生变化，但Angular并不知道那些列表数据在数据更新前已经渲染过，只能清理旧列表的DOM元素，并用新列表数据填充DOM元素来重新建立一个新列表。</p>
+<p>这种情况下，可以通过追踪函数来避免这种重复渲染的性能浪费，追踪函数可以让Angular将具有相同id的对象处理成同一个联系人：<br><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">trackByContacts(index: <span class="built_in">number</span>, contact: Contact)&#123;</span><br><span class="line">  <span class="keyword">return</span> contact.id;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后通过NgForTrackBy指令设置追踪函数：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> *<span class="attr">ngFor</span>=<span class="string">"let contact of contacts; trackBy: trackByContacts"</span>&gt;</span>&#123;&#123; contact.id &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>若检查出同一个联系人的属性发生了变化，Angular会更新DOM元素，反之就会留下这个DOM元素，使用NgForTractkBy指令的最终效果就是让列表界面变得更加顺畅，响应更及时。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/10/07/angular5/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/10/03/angular3/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

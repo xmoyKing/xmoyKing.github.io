@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Express4-1入门配置 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content="null,express4,node">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Express4-1入门配置 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="express4"> <meta property="og:article:tag" content="node"> 
+
+    
+        <meta property="article:published_time" content="Sun Apr 30 2017 11:53:55 GMT+0800" />
+        <meta property="article:modified_time" content="Sun Apr 30 2017 11:53:55 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Express4-1入门配置 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/04/30/express/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/04/30/express/index.html",
+    "headline": "Express4-1入门配置",
+    "datePublished": "Sun Apr 30 2017 11:53:55 GMT+0800",
+    "dateModified": "Sun Apr 30 2017 11:53:55 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",express4,nodenull",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装"><span class="post-toc-number">1.</span> <span class="post-toc-text"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置"><span class="post-toc-number">2.</span> <span class="post-toc-text"><a href="#&#x8BBE;&#x7F6E;" class="headerlink" title="&#x8BBE;&#x7F6E;"></a>&#x8BBE;&#x7F6E;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动Express服务器"><span class="post-toc-number">3.</span> <span class="post-toc-text"><a href="#&#x542F;&#x52A8;Express&#x670D;&#x52A1;&#x5668;" class="headerlink" title="&#x542F;&#x52A8;Express&#x670D;&#x52A1;&#x5668;"></a>&#x542F;&#x52A8;Express&#x670D;&#x52A1;&#x5668;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置路由"><span class="post-toc-number">4.</span> <span class="post-toc-text"><a href="#&#x914D;&#x7F6E;&#x8DEF;&#x7531;" class="headerlink" title="&#x914D;&#x7F6E;&#x8DEF;&#x7531;"></a>&#x914D;&#x7F6E;&#x8DEF;&#x7531;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查询字符串"><span class="post-toc-number">4.1.</span> <span class="post-toc-text"><a href="#&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;" class="headerlink" title="&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;"></a>&#x67E5;&#x8BE2;&#x5B57;&#x7B26;&#x4E32;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#POST参数"><span class="post-toc-number">4.2.</span> <span class="post-toc-text"><a href="#POST&#x53C2;&#x6570;" class="headerlink" title="POST&#x53C2;&#x6570;"></a>POST&#x53C2;&#x6570;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#正则"><span class="post-toc-number">4.3.</span> <span class="post-toc-text"><a href="#&#x6B63;&#x5219;" class="headerlink" title="&#x6B63;&#x5219;"></a>&#x6B63;&#x5219;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#已定义的参数"><span class="post-toc-number">4.4.</span> <span class="post-toc-text"><a href="#&#x5DF2;&#x5B9A;&#x4E49;&#x7684;&#x53C2;&#x6570;" class="headerlink" title="&#x5DF2;&#x5B9A;&#x4E49;&#x7684;&#x53C2;&#x6570;"></a>&#x5DF2;&#x5B9A;&#x4E49;&#x7684;&#x53C2;&#x6570;</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Request对象"><span class="post-toc-number">5.</span> <span class="post-toc-text"><a href="#Request&#x5BF9;&#x8C61;" class="headerlink" title="Request&#x5BF9;&#x8C61;"></a>Request&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Response对象"><span class="post-toc-number">6.</span> <span class="post-toc-text"><a href="#Response&#x5BF9;&#x8C61;" class="headerlink" title="Response&#x5BF9;&#x8C61;"></a>Response&#x5BF9;&#x8C61;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#响应header"><span class="post-toc-number">6.1.</span> <span class="post-toc-text"><a href="#&#x54CD;&#x5E94;header" class="headerlink" title="&#x54CD;&#x5E94;header"></a>&#x54CD;&#x5E94;header</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设置status"><span class="post-toc-number">6.2.</span> <span class="post-toc-text"><a href="#&#x8BBE;&#x7F6E;status" class="headerlink" title="&#x8BBE;&#x7F6E;status"></a>&#x8BBE;&#x7F6E;status</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发送响应"><span class="post-toc-number">6.3.</span> <span class="post-toc-text"><a href="#&#x53D1;&#x9001;&#x54CD;&#x5E94;" class="headerlink" title="&#x53D1;&#x9001;&#x54CD;&#x5E94;"></a>&#x53D1;&#x9001;&#x54CD;&#x5E94;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发送JSON"><span class="post-toc-number">6.4.</span> <span class="post-toc-text"><a href="#&#x53D1;&#x9001;JSON" class="headerlink" title="&#x53D1;&#x9001;JSON"></a>&#x53D1;&#x9001;JSON</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发送文件"><span class="post-toc-number">6.5.</span> <span class="post-toc-text"><a href="#&#x53D1;&#x9001;&#x6587;&#x4EF6;" class="headerlink" title="&#x53D1;&#x9001;&#x6587;&#x4EF6;"></a>&#x53D1;&#x9001;&#x6587;&#x4EF6;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#发生下载响应"><span class="post-toc-number">6.6.</span> <span class="post-toc-text"><a href="#&#x53D1;&#x751F;&#x4E0B;&#x8F7D;&#x54CD;&#x5E94;" class="headerlink" title="&#x53D1;&#x751F;&#x4E0B;&#x8F7D;&#x54CD;&#x5E94;"></a>&#x53D1;&#x751F;&#x4E0B;&#x8F7D;&#x54CD;&#x5E94;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重定向响应"><span class="post-toc-number">6.7.</span> <span class="post-toc-text"><a href="#&#x91CD;&#x5B9A;&#x5411;&#x54CD;&#x5E94;" class="headerlink" title="&#x91CD;&#x5B9A;&#x5411;&#x54CD;&#x5E94;"></a>&#x91CD;&#x5B9A;&#x5411;&#x54CD;&#x5E94;</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用模版引擎"><span class="post-toc-number">7.</span> <span class="post-toc-text"><a href="#&#x4F7F;&#x7528;&#x6A21;&#x7248;&#x5F15;&#x64CE;" class="headerlink" title="&#x4F7F;&#x7528;&#x6A21;&#x7248;&#x5F15;&#x64CE;"></a>&#x4F7F;&#x7528;&#x6A21;&#x7248;&#x5F15;&#x64CE;</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在模版中加入locals对象"><span class="post-toc-number">7.1.</span> <span class="post-toc-text"><a href="#&#x5728;&#x6A21;&#x7248;&#x4E2D;&#x52A0;&#x5165;locals&#x5BF9;&#x8C61;" class="headerlink" title="&#x5728;&#x6A21;&#x7248;&#x4E2D;&#x52A0;&#x5165;locals&#x5BF9;&#x8C61;"></a>&#x5728;&#x6A21;&#x7248;&#x4E2D;&#x52A0;&#x5165;locals&#x5BF9;&#x8C61;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建模版文件"><span class="post-toc-number">7.2.</span> <span class="post-toc-text"><a href="#&#x521B;&#x5EFA;&#x6A21;&#x7248;&#x6587;&#x4EF6;" class="headerlink" title="&#x521B;&#x5EFA;&#x6A21;&#x7248;&#x6587;&#x4EF6;"></a>&#x521B;&#x5EFA;&#x6A21;&#x7248;&#x6587;&#x4EF6;</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#将模版生成的HTML文档发送给用户"><span class="post-toc-number">7.3.</span> <span class="post-toc-text"><a href="#&#x5C06;&#x6A21;&#x7248;&#x751F;&#x6210;&#x7684;HTML&#x6587;&#x6863;&#x53D1;&#x9001;&#x7ED9;&#x7528;&#x6237;" class="headerlink" title="&#x5C06;&#x6A21;&#x7248;&#x751F;&#x6210;&#x7684;HTML&#x6587;&#x6863;&#x53D1;&#x9001;&#x7ED9;&#x7528;&#x6237;"></a>&#x5C06;&#x6A21;&#x7248;&#x751F;&#x6210;&#x7684;HTML&#x6587;&#x6863;&#x53D1;&#x9001;&#x7ED9;&#x7528;&#x6237;</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Express4-1入门配置
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Apr 30, 2017</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Apr 30, 2017 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/express4/">express4</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/node/">node</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Express4-1入门配置&url=https://github.com/xmoyKING/2017/04/30/express/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Express4-1入门配置&url=https://github.com/xmoyKING/2017/04/30/express/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/04/30/express/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/04/30/express/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Express提供了轻量级模块，将Node的http模块封装并扩展，能处理路由，响应，cookie等</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install express@<span class="number">4.0</span><span class="number">.0</span></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br></pre></td></tr></table></figure>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>Express提供了控制服务器的一些设置，比如如何解析JSON，路由和视图，使用set(setting, value),enable(setting)和disable(setting)方法来设置这些值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置信任代理模式，设置模版引擎为jade</span></span><br><span class="line">app.enable(<span class="string">'trust proxy'</span>);</span><br><span class="line">app.diable(<span class="string">'strict routing'</span>);</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'jade'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>相对应的，使用get(setting)，enabled(setting)和disabled(setting)获取已经设置的值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.enabled(<span class="string">'trust proxy'</span>); <span class="comment">// true</span></span><br><span class="line">app.diabled(<span class="string">'strict routing'</span>); <span class="comment">// true</span></span><br><span class="line">app.get(<span class="string">'view engine'</span>); <span class="comment">// jade</span></span><br></pre></td></tr></table></figure></p>
+<p>常用的设置有：</p>
+<ul>
+<li>env 定义模式字符串，如development表示开发，testing表示测试，production表示生产，默认为process.env.NODE_ENV</li>
+<li>trust proxy 禁用/启用反向代理，默认disabled禁用</li>
+<li>jsonp callback name 定义JSONP请求的默认回调名称，默认值是?callback=</li>
+<li>json replacer 定义JSON replacer回调函数，默认null</li>
+<li>json space 指定格式化JSON响应时使用的空格数量，默认开发模式是2，生产模式是0</li>
+<li>case sensitive routing 禁用/启用区分大小写，默认disabled，如/home和/Home是不一样的</li>
+<li>strict routing 禁用/启用严格路由，默认disabled，如/home和/home/是不一样的</li>
+<li>view cache 禁用/启用视图模版编译缓存，开启后保留编译模版的缓存，默认enabled</li>
+<li>view engine 指定模版引擎，若视图省略文件扩展名，则应为默认</li>
+<li>views 知道模版引擎查找视图模版时的目录(路径)，默认<code>./views</code></li>
+</ul>
+<h2 id="启动Express服务器"><a href="#启动Express服务器" class="headerlink" title="启动Express服务器"></a>启动Express服务器</h2><p>使用Express启动服务器时，需要创建一个实例，并监听端口，如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.listen(<span class="number">8000</span>);</span><br></pre></td></tr></table></figure></p>
+<p>listen(port)调用底层的HTTP绑定连接到port端口上，然后监听，底层的HTTP连接直接利用了http模块中server对象的listen()方法产生的连接。<br>express()方法执行返回值是一个回调函数，它映射了传递到http.createServer()和https.createServer()方法的回调函数。<br>如下代码用express实现HTTP和HTTPS服务器<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">  host: <span class="string">'localhost'</span>,</span><br><span class="line">  key: fs.readFileSync(<span class="string">'ssl/server.key'</span>);</span><br><span class="line">  cert: fs.readFileSync(<span class="string">'ssl/server.cert'</span>);</span><br><span class="line">&#125;;</span><br><span class="line">http.createServer(app).listen(<span class="number">80</span>);</span><br><span class="line">https.createServer(options, app).listen(<span class="number">443</span>);</span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.send(<span class="string">'Hello Express'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置路由"><a href="#配置路由" class="headerlink" title="配置路由"></a>配置路由</h2><p>路由可以分为两部分，一个是请求方法method（POST,GET，PUT等），一个URL中的路径，如<code>/</code>表示根目录，<code>/login</code>表示登录页面</p>
+<p>express提供了一些便捷的方法设置路由<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 语法</span></span><br><span class="line">app.[method](path, [callback……], callback);</span><br><span class="line"><span class="comment">// 实例</span></span><br><span class="line">app.get(<span class="string">'/'</span>, [middleware……], callback);</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">'/save'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.send(<span class="string">'Saved'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>app.all方法会调用指定路径的每个请求，不管是什么method，同时也接受通配符*，在对记录日志等方面非常有用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.all(<span class="string">'*'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 处理所有请求……</span></span><br><span class="line">&#125;);</span><br><span class="line">app.all(<span class="string">'/users/*'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 处理所有users路径上的请求……</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>复杂的系统，会有许多的路由，为了减少路由数量，可以使用参数来定义如何处理一类路由，express提供了四个方法来实现参数化的路由</p>
+<h3 id="查询字符串"><a href="#查询字符串" class="headerlink" title="查询字符串"></a>查询字符串</h3><p>在URL路径后可以使用标准的HTTP查询字符串如<code>?key=value&amp;key2=value2</code>,这个是最简单常用的方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.get(<span class="string">'/find'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> urlparts = url.parse(req.url, <span class="literal">true</span>);</span><br><span class="line">  <span class="keyword">var</span> query = urlparts.query;</span><br><span class="line">  res.send(<span class="string">'author:'</span>+ query.author + <span class="string">' title:'</span>+ query.title);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上述路由对应的url路径为：<code>/find?author=king&amp;title=nodejs</code></p>
+<h3 id="POST参数"><a href="#POST参数" class="headerlink" title="POST参数"></a>POST参数</h3><p>当使用表单或POST方法时，一般是这种方法，在请求body正文中传递参数</p>
+<h3 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h3><p>可以定义一个正则表达式作为路由的路径，express会自动使用这个表达式解析URL<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/^\/book\/(\w+)\:(\w+)?$/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.send(<span class="string">'chapter:'</span>+ req.params[<span class="number">0</span>] + <span class="string">' page:'</span>+ req.params[<span class="number">1</span>]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上述路由对应的url路径为：<code>/book/12:15</code></p>
+<h3 id="已定义的参数"><a href="#已定义的参数" class="headerlink" title="已定义的参数"></a>已定义的参数</h3><p>可以在路径部分使用一个参数，当解析路径时，自动为该参数分配名称<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/user/:userid'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.send(<span class="string">'User:'</span>+ req.params(<span class="string">'userid'</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上述路由对应的url路径为：<code>/user/9527</code></p>
+<p>使用已定义的参数可指定服务器执行的回调函数，若express发现某个参数注册了回调函数，则express会在调用路由处理程序之前调用参数的回调函数，一个路由可注册多个回调函数, 使用app.param()方法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.param(param, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next, value</span>));</span></span><br></pre></td></tr></table></figure></p>
+<p>next参数是注册的喜爱一个回调函数，如注册了多个回调函数的话，必须在回调函数中调用next(),否则回调链会被破坏，value参数是从url路径中解析的参数的值。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.param(<span class="string">'userid'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next, value</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Userid: '</span> + value);</span><br><span class="line">  next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Request对象"><a href="#Request对象" class="headerlink" title="Request对象"></a>Request对象</h2><p>Request对象即路由回调函数中的第一个参数req，它提供了请求的数据和元数据，包括URL，header，查询字符串等等<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.listen(<span class="number">80</span>);</span><br><span class="line">app.get(<span class="string">'*'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req);</span><br><span class="line">    res.send(<span class="built_in">JSON</span>.stringify(req));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h2><p>对应Request对象，Response对象的功能也很强大，提供了很多便捷的方法。</p>
+<h3 id="响应header"><a href="#响应header" class="headerlink" title="响应header"></a>响应header</h3><p>res.set(header, value) 设置单个header，<br>res.get(header) 获取header的值<br>res.set(headerObj)<br>res.location(path)<br>res.type()<br>res.attachment([filepath])</p>
+<h3 id="设置status"><a href="#设置status" class="headerlink" title="设置status"></a>设置status</h3><p>res.status(200) //设置正确返回码</p>
+<h3 id="发送响应"><a href="#发送响应" class="headerlink" title="发送响应"></a>发送响应</h3><p>res.send(body) body是一个字符串或buffer对象<br>res.send(status, body)</p>
+<h3 id="发送JSON"><a href="#发送JSON" class="headerlink" title="发送JSON"></a>发送JSON</h3><p>res.json(body)<br>res.json(status, object)<br>res.jsonp(body) 发送jsonp，需要请求URL中有知道回调函数参数<code>?callback=fun</code><br>res.jsonp(status, object)<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.listen(<span class="number">80</span>);</span><br><span class="line">app.get(<span class="string">'/json'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  app.set(<span class="string">'json spaces'</span>, <span class="number">4</span>);</span><br><span class="line">  res.json(&#123;<span class="attr">name</span>:<span class="string">"Smithsonian"</span>, <span class="attr">built</span>:<span class="string">'1846'</span>, <span class="attr">items</span>:<span class="string">'137M'</span>,</span><br><span class="line">            centers: [<span class="string">'art'</span>, <span class="string">'astrophysics'</span>, <span class="string">'natural history'</span>,</span><br><span class="line">                      <span class="string">'planetary'</span>, <span class="string">'biology'</span>, <span class="string">'space'</span>, <span class="string">'zoo'</span>]&#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.get(<span class="string">'/error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.json(<span class="number">500</span>, &#123;<span class="attr">status</span>:<span class="literal">false</span>, <span class="attr">message</span>:<span class="string">"Internal Server Error"</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.get(<span class="string">'/jsonp'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  app.set(<span class="string">'jsonp callback name'</span>, <span class="string">'cb'</span>);</span><br><span class="line">  res.jsonp(&#123;<span class="attr">name</span>:<span class="string">"Smithsonian"</span>, <span class="attr">built</span>:<span class="string">'1846'</span>, <span class="attr">items</span>:<span class="string">'137M'</span>,</span><br><span class="line">            centers: [<span class="string">'art'</span>, <span class="string">'astrophysics'</span>, <span class="string">'natural history'</span>,</span><br><span class="line">                      <span class="string">'planetary'</span>, <span class="string">'biology'</span>, <span class="string">'space'</span>, <span class="string">'zoo'</span>]&#125;);</span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line"><span class="comment">// http://localhost/json</span></span><br><span class="line"><span class="comment">// http://localhost/error</span></span><br><span class="line"><span class="comment">// http://localhost/jsonp?cb=handleJSONP</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="发送文件"><a href="#发送文件" class="headerlink" title="发送文件"></a>发送文件</h3><p>res.sendfile()完成将文件发送到客户端需要做的所有操作和设置，该方法内部执行了如下操作：</p>
+<ul>
+<li>基于文件扩展名设置Content-type类型</li>
+<li>设置其他header，如Content-length等</li>
+<li>设置响应status</li>
+<li>将文件内容发到客户端<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// res.sendfile(path, options, callback);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.listen(<span class="number">80</span>);</span><br><span class="line">app.get(<span class="string">'/image'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.sendfile(<span class="string">'arch.jpg'</span>, </span><br><span class="line">               &#123; <span class="attr">maxAge</span>: <span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>,</span><br><span class="line">                 root: <span class="string">'./views/'</span>&#125;,</span><br><span class="line">               <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Error"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Success"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="发生下载响应"><a href="#发生下载响应" class="headerlink" title="发生下载响应"></a>发生下载响应</h3><p>res.download(path, filename, callback);<br>与sendfile类似，但res.download方法将文件作为HTTP响应的附件发送，即自动设置了Content-Disposition</p>
+<h3 id="重定向响应"><a href="#重定向响应" class="headerlink" title="重定向响应"></a>重定向响应</h3><p>将客户端请求重定向到一个新的位置处理<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.listen(<span class="number">80</span>);</span><br><span class="line">app.get(<span class="string">'/google'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.redirect(<span class="string">'http://google.com'</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.get(<span class="string">'/first'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.redirect(<span class="string">'/second'</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.get(<span class="string">'/second'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">"Response from Second"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.get(<span class="string">'/level/A'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.redirect(<span class="string">"/level/B"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.get(<span class="string">'/level/B'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">"Response from Level B"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用模版引擎"><a href="#使用模版引擎" class="headerlink" title="使用模版引擎"></a>使用模版引擎</h2><p>借助模版引擎生成HTML，能做到简单化，不用从头开始编写HTML文件，也能优化构建HTML文档的过程，大多数模版引擎都会将编译后的模版缓存起来。</p>
+<p>Express可以使用多种模版引擎，常用的是jade和ejs（内嵌的javascript）,jade的优点是模版文件小，采用速记符号模版，但是缺点是需要重新学习。<br>ejs的有点就是与现在的html和js语言相兼容，即在html中嵌入js，但是缺点是比html复杂，不如jade简洁。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install jade</span><br><span class="line">npm install ejs</span><br></pre></td></tr></table></figure></p>
+<p>在express中使用模版引擎需要先定义一个默认的模版引擎，以及设置模版文件的目录<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'jade'</span>);</span><br><span class="line">app.set(<span class="string">'views'</span>, <span class="string">'./views'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>然后使用app.engine(ext, callback)注册模版文件扩展名，callback是支持Express的呈现功能函数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.engine(<span class="string">'jade'</span>, <span class="built_in">require</span>(<span class="string">'jade'</span>).__express);</span><br></pre></td></tr></table></figure></p>
+<p>这里的__express方法表示使用默认，也可以为HTML文件扩展名注册EJS,使用renderFile函数使用其他函数执行回调，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.engine(<span class="string">'html'</span>, <span class="built_in">require</span>(<span class="string">'ejs'</span>).renderFile)</span><br></pre></td></tr></table></figure></p>
+<p>一旦扩展名注册后，引擎回调函数就会被调用来解析模版文件并呈现模版。</p>
+<h3 id="在模版中加入locals对象"><a href="#在模版中加入locals对象" class="headerlink" title="在模版中加入locals对象"></a>在模版中加入locals对象</h3><p>在转换一个模版为HTML文件时，常需要包含动态数据，比如数据库中的用户信息，这种情况下，可以生成一个locals对象，将它映射到模版中的对应变量的属性名上即可<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两种方式——直接定义属性</span></span><br><span class="line">app.locals.title = <span class="string">'KING APP'</span></span><br><span class="line">app.locals.version = <span class="number">1</span>;</span><br><span class="line"><span class="comment">// 通过对象赋值</span></span><br><span class="line">app.locals(&#123;<span class="attr">title</span>:<span class="string">'KING APP'</span>, <span class="attr">version</span>:<span class="string">'1'</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>以上的title和version都可以自定义，但是不能覆盖原生JS对象的一些属性或方法名称，比如name，apply，bind，call，arguments，length，constructor等</p>
+<h3 id="创建模版文件"><a href="#创建模版文件" class="headerlink" title="创建模版文件"></a>创建模版文件</h3><p>在创建模版文件时，需要注意可重用性，尽量将模版的重用性提高，使其在不同页面都能够使用，因为大多数模版引擎都会缓存模版来加速生成HTML文件，所以，模版越多，缓存可能越多，这种时候，最好将模版根据功能类型分类，比如菜单栏，表格，下拉框等</p>
+<p>用于显示用户信息的EJS模版<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;EJS Template&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;h1&gt;User using EJS Template&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">	&lt;ul&gt;</span></span><br><span class="line"><span class="regexp">		&lt;li&gt;Name: &lt;%= uname %&gt;&lt;/</span>li&gt;</span><br><span class="line">		&lt;li&gt;Vehicle: <span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">vehicle</span> %&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">		&lt;li&gt;Terrain: <span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">terrain</span> %&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">		&lt;li&gt;Climate: <span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">climate</span> %&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">		&lt;li&gt;Location: <span class="xml"><span class="tag">&lt;<span class="name">%=</span> <span class="attr">location</span> %&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">	&lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>同样功能的jade模版，同时重用了主模版，只修改了子模版<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doctype html</span><br><span class="line">html(lang=&quot;en&quot;)</span><br><span class="line">  head</span><br><span class="line">    title=&quot;Jade Template&quot;</span><br><span class="line">  body</span><br><span class="line">    block content</span><br></pre></td></tr></table></figure></p>
+<p>子模版,没有了外面的html声明等标记：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extends main_jade</span><br><span class="line">block content</span><br><span class="line">  h1 User using Jade Template</span><br><span class="line">  ul</span><br><span class="line">    li Name: #&#123;uname&#125;</span><br><span class="line">    li Vehicle: #&#123;vehicle&#125;</span><br><span class="line">    li Terrain: #&#123;terrain&#125;</span><br><span class="line">    li Climate: #&#123;climate&#125;</span><br><span class="line">    li Location: #&#123;location&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>以上EJS和jade的具体语法可以参考官网</strong></p>
+<h3 id="将模版生成的HTML文档发送给用户"><a href="#将模版生成的HTML文档发送给用户" class="headerlink" title="将模版生成的HTML文档发送给用户"></a>将模版生成的HTML文档发送给用户</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.render(view, [locals], callback);</span><br></pre></td></tr></table></figure>
+<p>view指定views目录中的某个视图文件名，locals指定传递的locals对象，回调函数在模版生成后执行，回调函数的参数中第一个参数为error对象，第二个对象为生成后的模版字符串（HTML文档）。</p>
+<p>若需要将模版直接生成的模版字符串作为响应发到客户端，即不需要在发送响应之前对数据做处理，可使用res.render函数，同app.render一样，但是不需要有回调函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>),</span><br><span class="line">    jade = <span class="built_in">require</span>(<span class="string">'jade'</span>),</span><br><span class="line">    ejs = <span class="built_in">require</span>(<span class="string">'ejs'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line">app.set(<span class="string">'views'</span>, <span class="string">'./views'</span>);</span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'jade'</span>);</span><br><span class="line">app.engine(<span class="string">'jade'</span>, jade.__express);</span><br><span class="line">app.engine(<span class="string">'html'</span>, ejs.renderFile);</span><br><span class="line">app.listen(<span class="number">80</span>);</span><br><span class="line">app.locals.uname = <span class="string">"Brad"</span>;</span><br><span class="line">app.locals.vehicle = <span class="string">"Jeep"</span>;</span><br><span class="line">app.locals.terrain = <span class="string">"Mountains"</span>;</span><br><span class="line">app.locals.climate = <span class="string">"Desert"</span>;</span><br><span class="line">app.locals.location = <span class="string">"Unknown"</span>;</span><br><span class="line">app.get(<span class="string">'/jade'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'user_jade'</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.get(<span class="string">'/ejs'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  app.render(<span class="string">'user_ejs.html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, renderedData</span>)</span>&#123;</span><br><span class="line">    res.send(renderedData);    </span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/04/30/express-middleware/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/04/27/https-ca/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">66</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">185</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
