@@ -3,14 +3,39 @@ title: jquery.noConflict无冲突函数原理
 categories: js
 tags:
   - js
+  - jquery
+  - noConflict
 date: 2017-12-09 23:08:08
 updated:
 ---
 
 无冲突处理也称为多库共存。许多框架都爱用$作为自己的命名空间。jQuery发明了noConflict函数，能解决多库共存问题。
 
-关于noConflict方法的使用，可以参考[三分钟玩转jQuery.noConflict()](https://www.cnblogs.com/laoyu/p/5189750.html),
+关于noConflict方法的使用，可以参考[三分钟玩转jQuery.noConflict()](https://www.cnblogs.com/laoyu/p/5189750.html)
 
+关键就是要理解，在页面加载jquery时，jquery自执行初始化对页面中的`jQuery`和`$`进行了缓存，无论这两个变量是否已经被占用，在使用noConflict方法后，都可以选择将其释放回缓存的内容。其实noConflict的布尔参数控制着是否释放`jQuery`变量，而`$`一定会被释放。
+
+使用示例：
+```html
+<!-- jQuery and $ are undefined -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- jQuery and $ now point to jQuery 1.10.2 -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<!-- jQuery and $ now point to jQuery 1.7.0 -->
+
+<script>jQuery.noConflict();</script>
+<!-- jQuery still points to jQuery 1.7.0; $ now points to jQuery 1.10.2 -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<!-- jQuery and $ now point to jQuery 1.6.4 -->
+
+<script>var jquery164 = jQuery.noConflict( true );</script>
+<!-- jQuery now points to jQuery 1.7.0; $ now points to jQuery 1.10.2; jquery164 points to jQuery 1.6.4 -->
+```
+
+源码解析：
 ```js
 var
        window = this,

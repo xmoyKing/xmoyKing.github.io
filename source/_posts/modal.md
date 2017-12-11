@@ -4,12 +4,13 @@ categories: js
 tags:
   - js
   - modal
+  - jquery
 date: 2017-12-08 23:59:07
 updated:
 ---
 
 
-动态模态框，参考自Sweetalert
+动态模态框，参考自Sweetalert,基于zepto/jquery
 
 ```js
 // 待完善
