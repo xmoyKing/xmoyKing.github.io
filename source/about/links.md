@@ -93,6 +93,8 @@ tags: [fe, links]
 
 [[译]JavaScript: __proto__](http://www.cnblogs.com/ziyunfei/archive/2012/10/05/2710955.html)
 
+[js中__proto__和prototype的区别和关系？](https://www.zhihu.com/question/34183746)
+
 [clearfix清除浮动进化史](http://www.admin10000.com/document/6259.html)
 
 [使用 CSS3 实现超炫的 Loading（加载）动画效果](http://www.cnblogs.com/lhb25/p/loading-spinners-animated-with-css3.html)
@@ -103,7 +105,7 @@ tags: [fe, links]
 [AJAX工作原理及其优缺点](http://www.cnblogs.com/SanMaoSpace/archive/2013/06/15/3137180.html)*简版*
 
 
-[浓缩解读《JavaScript设计模式与开发实践》①](http://www.jianshu.com/p/4829d45eb714)*后面还有2和3，都得看看*
+[浓缩解读《JavaScript设计模式与开发实践》①](http://www.jianshu.com/p/4829d45eb714)*主要讲的是一些js的基本内容，他的笔记共3章，KING自己对书中内容进行了整理和搬运*
 1. 主要讲设计模式的用途，以及原型继承的各方面特性
 2. 主要讲this、call和apply
 3. 主要讲闭包和高阶函数，包括命令模式，AOP，函数柯里化（这里代码有错误）。
