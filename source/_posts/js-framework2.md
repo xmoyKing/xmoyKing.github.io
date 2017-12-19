@@ -257,3 +257,33 @@ new Date(dateString);
 new Date(year, month, day /*, hour, minute, second, millisecond*/);
 ```
 其中第3种可以玩多种花样，作者建议只使用“2009/07/12 12:34:56”，后面的时分秒可省略。这个所有浏览器都支持。
+
+
+### 浏览器嗅探与特征检测
+
+浏览器嗅探已经不推荐了，但有些时候还是需要的。具体来说就是判断某个对象有没有此方法或属性，严格一些则看看该方法有没有达到预期效果。标准浏览器中提供了document.implementation.hasfeature方法，但不准确。
+
+特性侦测的好处是浏览器不会随意去掉某一个功能，但注意不能使用标准属性与方法做判断依据，每个浏览器都有自己的私有实现，用它们做判定就可以了。
+
+具体的检测方法可以看jquery 1.9以前的嗅探模块源码$.browser
+
+#### 事件的支持侦测
+判断浏览器对某种事件的支持,jQuery的实现：
+```js
+$.eventSupport = function(eventName, el){
+  el = el || document.documentElement;
+  eventNmae = 'on' + eventName;
+  var ret = eventName in el; // in 操作符用来判断属性是否存在与对象中,无论该属性存在于实例中还是原型中
+  if(el.setAttribute && !ret) {
+    el.setAttribute(eventName, '');
+    ret = typeof el[eventName] === 'function';
+    el.removeAttribute(eventName);
+  }
+  el = null;
+  return ret;
+};
+```
+但这种检测只对DOM0事件有效，像DOMMouseSroll，DOMContentLoaded，DOMFocusIn，DOMNodeInserted这些以DOM开头的事件就无能为力了。
+
+#### 样式的支持侦测
+一般的方法就是W3C推出CSS.supports方法，该API能够探知浏览器是否支持某种样式。但其实还是有很多无法检测。

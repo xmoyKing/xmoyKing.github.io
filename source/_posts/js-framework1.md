@@ -8,7 +8,7 @@ date: 2017-12-16 16:15:31
 updated: 2017-12-16 16:15:31
 ---
 
-本系列笔记来源于[《JavaScript框架设计》](http://www.epubit.com.cn/book/details/4849)一书，学习JS框架底层库知识，一个框架应该提供那些功能，应该如何区分这些模块等等。
+本系列笔记来源于《JavaScript框架设计》一书，但是非常尴尬的是，我买的不是第二版的，= =！[《JavaScript框架设计（第2版）》](http://www.epubit.com.cn/book/details/4849)一书，学习JS框架底层库知识，一个框架应该提供那些功能，应该如何区分这些模块等等，第二版前2章在网上有公开的，可以免费阅读。
 
 注：作者提到的很多都是以[Avalon](http://avalonjs.coding.me/)作为示例的，而本系列笔记仅提取个人记录之处，同时，书中的模块基于CommonJS规范（即Node模块的定义方式）
 
