@@ -264,3 +264,50 @@ console.log(b.__proto__ === B.prototype); // true
 console.log(b.__proto__.__proto__ === A.prototype); // true 父类的原型对象
 ```
 因为`b.__proto__.constructor`指向`B`,而B的原型（`B.prototype`）是从bridge中得到的（是bridge的一个实例），而`bridge.prototype = A.prototype`。反过来，在定义时，让`B.prototype.__proto__ = A.prototype`就能轻松实现原型继承了。
+
+#### 各种类工厂的实现
+由于主流框架类工厂的实现太依赖于各种庞杂的工具函数，而一个精巧的类工厂不过百行左右，只要传入相应的参数或按一定简单格式就能创建一个类。
+
+##### P.js
+[https://github.com/jneen/pjs](https://github.com/jneen/pjs)
+
+在调用父类的同名方法时，直接将父类的原型给出，省了_super的过程。
+
+##### JS.Class
+[https://github.com/dkraczkowski/js.class](https://github.com/dkraczkowski/js.class)
+
+通过父类构造器的extend方法来产生自己的子类，里面存在一个开关，防止在生成类时无意执行construct方法。
+
+在创建子类时，不通过中间的函数来断开双方的原型链，而是使用父类的实例来做子类的原型。
+
+##### simple-inheritance
+[https://github.com/html5crew/simple-inheritance](https://github.com/html5crew/simple-inheritance)
+
+特点是方法链的实现非常优雅，节俭！
+
+##### def.js
+[https://github.com/tobytailor/def.js](https://github.com/tobytailor/def.js)
+
+体现JS的灵活性，在形式上模拟Ruby继承，让学过Ruby的人一眼看出哪个是父类，哪个是子类。
+
+#### ES5属性描述符对OO库的影响
+ES5中为对象引入属性描述符，能对属性进行更精细的控制，比如，属性是否可以修改，是否可以在for in循环中枚举出来，是否可以删除等。
+
+Object提供的新方法如下：
+- Object.keys
+- Object.getOwnPropertyNames
+- Object.getPrototypeOf
+- Object.defineProperty
+- Object.defineProperties
+- Object.getOwnPropertyDescriptor
+- Object.create
+- Object.seal
+- Object.freeze
+- Object.preventExtensions
+- Object.isSealed
+- Object.isFrozen
+- Object.isExtensible
+
+关于如上方法的介绍和基本用法：[MDN/Object](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+Object.create让原型继承更方便了，但在增加子类的专有原型成员或类成员时，若它们的属性的enumerable为false，单纯的for in循环已经不管用了，就需要用到Object.getOwnPropertyNames, 另外，访问器属性的复制只有通过Object.getOwnPropertyDescriptor和Object.defineProperty才能完成。
