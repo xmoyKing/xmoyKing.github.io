@@ -79,3 +79,128 @@ Sizzle中的过滤函数如下：
 
 还有一种利用xpath实现的选择器，Base2就是，先实现xpath语法，然后将CSS选择符翻译为xpath。
 
+#### 选择器引擎涉及的通用函数
+
+**isXML**
+强大的选择器引擎都提供了XML操作的API，XML和HTML其实存在很大差异，有没有className，getElementById，nodeName大小写敏感等。
+
+无论是XML或HTML文档都支持createElement方法，但HTML对大小写不敏感，因此方法如下：
+```js
+var isXML = function(doc){
+  return doc.createElement('p').nodeName !== doc.createElement('P').nodeName;
+}
+```
+通过一些XML的专有方法或属性也可以判断，但会比较麻烦，而属性法很容易就被攻破。
+
+**contains**
+contains方法就是判断参数1是否包含参数2，通常用于优化。
+```js
+contains = function(a, b, same){
+  // 第一个节点是否包含第二个节点，same表示允许相等
+  if(a === b){
+    return !!same;
+  }
+  if(!b.parentNode){
+    return false;
+  }
+  if(a.contains){
+    return a.contains(b);
+  }else if(a.compareDocumentPosition){
+    return !!(a.compareDocumentPosition(b) && 16);
+  }
+
+  while((b = b=parentNode))
+    if(a === b) return true;
+  
+  return false;
+}
+```
+其中contains是一个元素节点的方法，若另一个节点等于或包含于它的内部，就返回true。
+compareDocumentPosition这个API是DOM3添加的，用于判断两个节点的关系，而不单单有包含关系，返回一个数用于表示节点关系. 
+
+具体可参考：[HTML DOM compareDocumentPosition() 方法](http://www.w3school.com.cn/jsref/met_node_comparedocumentposition.asp)
+
+注：两个元素的位置关系可连续满足多种情况，比如A包含B，且A在B的前面，结果就是20.
+
+**节点排序与去重**
+为了让选择器引擎搜索到的结果尽可能接近原生API的结果（querySelectorAll），需要让元素节点按照它们在DOM树出现的顺序排序。
+
+通过compareDocumentPosition()方法，只要将结果按位与4不等于0就知道其前后顺序了。同时标准浏览器的Range对象有一个compareBoundaryPoints方法，它能迅速得到两个元素的前后顺序。
+`var compare = compareRange.compareBoundaryPoints(how, sourceRange)`
+
+具体可参考：[XML DOM compareBoundaryPoints() 方法](http://www.w3school.com.cn/xmldom/met_range_compareboundarypoints.asp)
+
+特别的情况：当一些旧版本浏览器只有很基础的DOM API时，只能用nextSibling来判断单纯前后关系，若没有同一个父节点则就变成求最近公共祖先节点，此时就变为纯算法问题。
+
+排序去重的提升关键在于，很多算法都会用到数组的sort方法，当传入一个比较函数时，无论内部是采用何种排序算法，都需要多次对比，所以耗时，若能让排序不传参，即使用默认无参的sort函数，则能提高N倍的排序速度。
+
+思想如下（用于IE或不兼容浏览器）：
+1. 取出元素节点的souceIndex值，转换成一个String对象
+1. 将元素节点附在String对象上
+1. 用String对象组成数组
+1. 用原生的sort对String对象数组排序
+1. 在排好序的String数组中，按序取出元素节点，即可得到排好序的结果集
+
+```js
+function unique(nodes){
+  if(nodes.length < 2){
+    return nodes;
+  }
+
+  var result = [],
+    array = [],
+    uniqResult = {},
+    node = nodes[0],
+    index,
+    ri = 0,
+    sourceIndex = typeof node.sourceIndex === 'number',
+    compare = typeof node.compareDocumentPosition === 'function';
+
+  if(!sourceIndex && !compare){ // 用于旧版IE的XML
+    var all = (node.ownerDocument || node).getElementsByTagName('*');
+    for(var index = 0; node = all[index]; index++){
+      node.setAttribute('sourceIndex', index);
+    }
+    sourceIndex = true;
+  }
+
+  if(sourceIndex){
+    for(var i = 0, n = nodes.length; i < n; i++){
+      node = nodes[i];
+      index = (node.sourceIndex || node.getAttribute('sourceIndex')) + 1e8;
+      if(!uniqResult[index]){ // 去重
+        (array[ri++] = new String(index))._ = node;
+        uniqResult[index] = 1;
+      }
+    }
+    array.sort(); // 排序
+    while(ri)
+      result[--ri] = array[ri]._;
+    
+    return result;
+  }else{
+    nodes.sort(sortOrder); // 排序
+    if(sortOrder.hasDuplicate){ // 去重
+      for(i = 1; i < nodes.length; i++){
+        if(nodes[i] === nodes[i-1]){
+          nodes.splice(i--, 1);
+        }
+      }
+    }
+    sortOrder.hasDuplicate = false; // 还原
+    return nodes;
+  }
+}
+
+function sortOrder(a,b){
+  if(a === b){
+    sortOrder.hasDuplicate = true;
+    return 0;
+  }
+
+  if(!a.compareDocumentPosition || !b.compareDocumentPosition){
+    return a.compareDocumentPosition ? -1 : 1;
+  }
+  return a.compareDocumentPosition(b) & 4 ? -1 : 1; 
+}
+```
