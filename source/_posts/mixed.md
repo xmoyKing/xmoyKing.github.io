@@ -500,3 +500,7 @@ Object.defineProperty(obj, 'name', {
 ```
 如此，当对obj.name赋新值时，会自动调用set方法，然后对view元素进行操作，将其内容更新为新值。
 
+hexo3.x在node版本8.xX（npm5.x）环境下会报找不到hexo命令的错，将node降到6.x（npm3.X）则能够正常运行。
+*2017.12.26记*
+
+windows下的nvm感觉不是很好用，在国内，下载安装node实在太久了。。。
