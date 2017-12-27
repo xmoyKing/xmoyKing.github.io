@@ -504,3 +504,5 @@ hexo3.x在node版本8.xX（npm5.x）环境下会报找不到hexo命令的错，�
 *2017.12.26记*
 
 windows下的nvm感觉不是很好用，在国内，下载安装node实在太久了。。。
+
+hexo中配置了deploy需要安装对应的hexo-deployer-git包，否则在`hexo d`部署时会报错：ERROR Deployer not found: git
