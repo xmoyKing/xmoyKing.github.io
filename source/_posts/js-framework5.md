@@ -176,24 +176,26 @@ Sizzle.filter = function( expr, set, inplace, not ) {
 				if ( curLoop === result ) {
 					result = [];
 				}
-
+				// 对传参进行加工，比如#aaa变为aaa，将.bbb变为bbb，
 				if ( Expr.preFilter[ type ] ) {
+					// 在Expr.preFilter.CLASS中进行过滤优化，不用等于Expr.filter.CLASS
 					match = Expr.preFilter[ type ]( match, curLoop, inplace, result, not, isXMLFilter );
 
 					if ( !match ) {
 						anyFound = found = true;
 
-					} else if ( match === true ) {
+					} else if ( match === true ) { // CHILD、POS不被Expr.filter.PESUDO处理，直接跳过
 						continue;
 					}
 				}
 
 				if ( match ) {
+					// curLoop是一个映射集，里面包含false、true
 					for ( i = 0; (item = curLoop[i]) != null; i++ ) {
 						if ( item ) {
 							found = filter( item, match, i, curLoop );
 							pass = not ^ found;
-
+							// 在映射集模式下，将不匹配的元素置换为false
 							if ( inplace && found != null ) {
 								if ( pass ) {
 									anyFound = true;
@@ -201,7 +203,7 @@ Sizzle.filter = function( expr, set, inplace, not ) {
 								} else {
 									curLoop[i] = false;
 								}
-
+							// 否则result为种子集，将匹配项放入
 							} else if ( pass ) {
 								result.push( item );
 								anyFound = true;
@@ -212,9 +214,9 @@ Sizzle.filter = function( expr, set, inplace, not ) {
 
 				if ( found !== undefined ) {
 					if ( !inplace ) {
-						curLoop = result;
+						curLoop = result; // 重置种子集为curLoop
 					}
-
+					// 削减选择符直到变为空字符串
 					expr = expr.replace( Expr.match[ type ], "" );
 
 					if ( !anyFound ) {
@@ -225,7 +227,7 @@ Sizzle.filter = function( expr, set, inplace, not ) {
 				}
 			}
 		}
-
+		// 若到最后正则表达式无法改动选择符，则报错
 		// Improper expression
 		if ( expr === old ) {
 			if ( anyFound == null ) {
@@ -242,3 +244,44 @@ Sizzle.filter = function( expr, set, inplace, not ) {
 	return curLoop;
 };
 ```
+等到将最右边的选择器组的最后一个字符都去掉后，种子集就完成了，然后处理下一个选择器组并将种子集复制生成映射集。
+在关系选择器4个对应函数（在Sizzle.selectors.relative下）只是将映射集里的元素置换为它们的兄长父亲，个数不变，因此映射集和种子集的数量总是一样的，同时，这4个函数内部会调用Sizzle.filter函数，inplace参数为true，然后执行映射集的逻辑
+```js
+while ( parts.length ) {
+	cur = parts.pop(); // 取得关系选择器
+	pop = cur;
+
+	if ( !Expr.relative[ cur ] ) {
+		cur = ""; // 若不是则默认为后代选择器
+	} else {
+		pop = parts.pop(); // 取得后代选择器前面的子选择器群集
+	}
+
+	if ( pop == null ) {
+		pop = context;
+	}
+	// 根据其他4种迭代器改变映射集里的元素，结果是一个集合，如：
+	// [[object HTEMLDivElement], false, false, [object HTMLSpanElement]]
+	Expr.relative[ cur ]( checkSet, pop, contextXML );
+}
+
+// 略...
+
+// 最后根据映射集甄选候选集
+for ( i = 0; checkSet[i] != null; i++ ) {
+	if ( checkSet[i] && checkSet[i].nodeType === 1 ) {
+		results.push( set[i] );
+	}
+}
+```
+若存在并联选择器，那就再调用Sizzle主函数，把得到的两个结果合并去重
+```js
+if ( extra ) {
+	Sizzle( extra, origContext, results, seed );
+	Sizzle.uniqueSort( results );
+}
+```
+
+上述就是整个Sizzle的主流程。其他的很多代码都是关于如何根据浏览器的特性进行优化和调整，比如一些老旧浏览器下的DOM API的bug。
+
+还有一些小而细的知识点，比如getElementsByTagName会在内部使用缓存，所以比querySelectorAll快，同时getElementsByTagName返回的是一个NodeList对象，而querySelectorAll返回的是一个StaticNodeList对象，一个是动态的，一个是静态的，所谓动态就是返回是的同一个cache引用，而static返回的是不一样的对象。而创建NodeList比StaticNodeList对象快很多。
