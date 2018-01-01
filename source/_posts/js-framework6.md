@@ -218,3 +218,20 @@ $.fn.init.prototype = $.fn;
 });
 ```
 
+#### 节点的插入
+原生DOM接口很简单，参数类型确定，不会重载，每次只处理一个元素节点。而jquery则相反，参数类型复杂，过度重载，为了简化处理逻辑，jquery的做法时统统转换为文档碎片，然后将其复制到与当前jquery对象里面包含的节点集合相同的个数，一个个插入。
+
+由于jquery式的插入方法，如append、prepend、after、before、replace，太常用而且非常受欢迎，W3C在DOM4中会原生支持这些方法，参数的类型也相同，可以是字符串或DOM节点。
+
+通过统一调用manipulate的方式，非常容易实现对应的反转方法：
+```js
+'append,prepend,before,after,replace'.replace($.rword, function(method){
+  $.fn[method] = function(item){
+    return manipulate(this, method, item, this.ownerDocument);
+  };
+  $.fn[method+'To'] = function(item){
+    $(item, this.ownerDocument)[method](this);
+    return this;
+  };
+});
+```
