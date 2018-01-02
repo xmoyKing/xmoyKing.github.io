@@ -144,7 +144,7 @@ $.fn.extend({
     return this.length;
   },
   toString: function(){ // 收集tagName属性，做成纯数组返回
-    var i = this.length, 
+    var i = this.length,
         ret = [],
         getType = $.type;
 
@@ -172,7 +172,7 @@ $.fn.extend({
   gt: function(i){ // 取得大于索引值的所有节点
     return this.slice(i+1, this.length);
   },
-  lt: function(i){ 
+  lt: function(i){
     return this.slice(0, i);
   },
   first: function(){
@@ -223,7 +223,7 @@ $.fn.init.prototype = $.fn;
 
 由于jquery式的插入方法，如append、prepend、after、before、replace，太常用而且非常受欢迎，W3C在DOM4中会原生支持这些方法，参数的类型也相同，可以是字符串或DOM节点。
 
-通过统一调用manipulate的方式，非常容易实现对应的反转方法：
+mass framework通过统一调用manipulate的方式，接口变成了空心化的方法，用于提供语义化且便捷的名字而已，实现全部转至内部，由manipulate方法分配真正的执行方案，而且非常容易实现对应的反转方法：
 ```js
 'append,prepend,before,after,replace'.replace($.rword, function(method){
   $.fn[method] = function(item){
@@ -234,4 +234,155 @@ $.fn.init.prototype = $.fn;
     return this;
   };
 });
+
+function manipulate(nodes, name, item, doc){
+  // 只运行向元素节点内部插入东西，因此需要转换为纯正的元素节点集合
+  var elems = $.filter(nodes, function(el){
+    return el.nodeType === 1;
+  }),
+    handler = insetHooks[name];
+  if(item.nodeType){
+    // 若传入元素节点，文本节点或文档碎片
+    insertAdjacentNode(elems, item, handler);
+  }else if(typeof item === 'string'){
+    // 若传入的是字符串片段
+    // 若方法名不是replace，完美支持insertAdjacentHTML，并且不存在嵌套关系的标签
+    var fast = (name !== 'replace')&& $.support(adjacent) && !rnest.test(item);
+    if(!fast){
+      item = $.parseHTML(item, doc);
+    }
+    insertAdjacentHTML(elems, item, insertHooks[name+'2'], handler);
+  }else if(item.length){
+    // 若传入的是HTMLCollection nodeList mass实例，将转换为文档碎片
+    insertAdjacentFragment(elems, item, doc, handler);
+  }
+  return nodes;
+}
+
+function insertAdjacentNode(elems, item, handler){
+  // 使用appendChild， insertBefore实现，item为普通节点
+  for(var i = 0, el; el = elems[i]; i++){
+    // 第一个不需要复制，其他的要复制
+    handler(el, i ? cloneNode(item, true, true) : item);
+  }
+}
+
+function insertAdjacentHTML(elems, item, fastHandler, handler){
+  for(var i = 0, el; el = elems[i++];){
+    // 尝试使用insertAjacentHTML
+    if(item.nodeType){ // 若是文档碎片
+      handler(el, item.cloneNode(true));
+    }else{
+      fastHandler(el, item);
+    }
+  }
+}
+
+function insertAdjacentFragment(elems, item, doc, handler){
+  var fragment = doc.createDocumentFragment();
+  for(var i = 0, el; el = elems[i++];){
+    handler(el, makeFragment(item, fragment, i>1));
+  }
+}
+
+function makeFragment(nodes, fragment, bool){
+  // 只有非NodeList的情况下i才递增
+  var ret = fragment.cloneNode(false),
+    go = !nodes.item;
+
+  for(var i = 0, node; node = nodes[i]; go && i++){
+    ret.appendChild(bool && cloneNode(node, true, true) || node);
+  }
+  return ret;
+}
+
+var insertHooks = {
+  prepend: function(el, node){
+    el.insertBefore(node, el.firstChild);
+  },
+  append: function(el, node){
+    el.appendChild(node);
+  },
+  before: function(el, node){
+    el.parentNode.insertBefore(node, el);
+  },
+  after: function(el, node){
+    el.parentNode.insertBefore(node, el.nextSibling);
+  },
+  replace: function(el, node){
+    el.parentNode.replaceChild(node, el);
+  },
+  prepend2: function(el, html){
+    el[adjacent]('afterBegin', html);
+  },
+  append2: function(el, html){
+    el[adjacent]('beforeEnd', html);
+  },
+  before2: function(el, html){
+    el[adjacent]('beforeBegin', html);
+  },
+  after2: function(el, html){
+    el[adjacent]('afterEnd', html);
+  }
+};
 ```
+
+makeFragment函数需要注意两点，一个是NodeList的遍历，一个是文档碎片的复制。
+由于NodeList的动态性，每当其插入节点时会立即反映到length属性上，所以需要在循环之前将length保存到一个变量上。
+碎片对象的复制可以使用原生的cloneNode(true),但在IE下attachEvent绑定事件会跟着复制，而移除时无法找到对应的引用，所以需要特别注意。
+
+jquery除了提供上述的几种方法外，还提供了wrap、wrapAll、wrappInner三种特殊插入操作：
+- wrap,为当前元素提供一个新父节点，此新父节点将动态插入到原节点的父节点下，IE下`neo.applyElement(old, 'outside')`可以非常轻松的实现
+- wrapAll,为一堆元素提供一个共同的新父节点，插入到第一个原元素的父节点下，其他元素在依次挪到新节点下。
+- wrappInner,为当前元素插入一个新节点，然后将它之前的孩子挪到新节点下，IE下`neo.applyElement(old, 'inside')`可以非常轻松的实现
+
+#### 节点的复制
+IE下对元素的复制与innerHTML一样，有很多BUG，比如IE会复制attachEvent事件，标准浏览器的cloneNode只会复制元素写在标签内的属性或通过setAttribute设置的属性，而IE6~8还支持`node.aaa = 'xxx'`设置的属性复制。
+
+jquery的处理方法就是，支持2个参数，第一个是只复制节点，但不复制数据和事件，默认为false，第二个参数决定如何复制它的子孙，默认是参数一的决定。
+```js
+// 接口只对参数进行处理，具体操作由cloneNode执行
+$.fn.clone = function(dataAndEvents, deepDataAndEvents){
+  dataAndEvents = dataAndEvents == null ? false : dataAndEvents;
+  deepDataAndEvents = deepDataAndEvents == null ? dataAndEvents : deepDataAndEvents;
+  return this.map(function(){
+    return cloneNode(this, dataAndEvents, deepDataAndEvents);
+  });
+};
+
+function cloneNode(node, dataAndEvents, deepDataAndEvents){
+  if(node.nodeType === 1){
+    // 在标准浏览器下，fixCloneNode只是标准的cloneNode(true)，
+    // 否则内部需要加载node_fix模块，做大量的补丁工作
+    var neo = $.fixCloneNode(node), // 复制元素的attributes
+      src, neos, i;
+    if(dataAndEvents){
+      $.mergeData(neo, node); // 复制数据与事件
+      if(deepDataAndEvents){ // 处理子孙的复制
+        src = node[TAGS]('*');
+        neos = neo[TAGS]('*');
+        for(i = 0; src[i]; i++){
+          $.mergeData(neos[i], src[i]);
+        }
+      }
+    }
+    src = neos = null;
+    return neo;
+  }else{
+    return node.cloneNode(true);
+  }
+}
+```
+
+#### 节点的移除
+浏览器提供了多种移除节点的方法，如removeChild、removeNode。
+
+其中removeNode是IE的私有实现，它的作用是将目标节点从文档树删除返回目标节点，同时接收一个布尔值的参数，即是否只删除目标节点，保留子节点，true时作用同removeChild。
+
+在IE6，7下需要注意removeChild的内存泄漏问题。
+
+#### 一些特殊的元素
+有3个元素需要特殊注意，由于每个元素的内容都不同，而且篇幅都不短，所以暂时不给出具体的处理办法
+- iframe
+- object
+- video
