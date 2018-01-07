@@ -1,11 +1,11 @@
 ---
-title: JavaScript框架设计笔记-10-事件系统
+title: JavaScript框架设计笔记-10-事件系统-1
 categories: js
 tags:
   - js
   - js-framework
-date: 2018-01-06 19:31:10
-updated: 2018-01-06 19:31:10
+date: 2018-01-06 16:31:10
+updated: 2018-01-06 16:31:10
 ---
 
 事件系统是一个框架非常重要的部分，用于响应用户的各种行为。
@@ -57,7 +57,7 @@ function fireEvent(el, type, args, event){
       event[i] = args[i];
     }
   }
-  
+
   if(el.dispatchEvent){
     el.dispatchEvent(event);
   }else{
@@ -181,4 +181,3 @@ fixEvent.stopPropagation = function() {
 };
 ```
 在作者的第一篇博文有很多有用的回复和建议。Dean Edward的addEvent事件系统非常有意义，jquery事件系统与无入侵式JS就是在这之上发展起来的。
-
