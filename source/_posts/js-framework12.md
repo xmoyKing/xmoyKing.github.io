@@ -23,12 +23,18 @@ updated: 2018-01-07 14:53:49
 1. 标准浏览器与IE10，支持额外参数（从第三个算起），作为回调的传参传入
 1. setTimeout方法的事件参数若为极端值时（0、负数、极大值等），则浏览器会各自处理，大部分现代浏览器是立即执行
 
+#### AJAX
+请参考[Ajax知识体系大梳理](http://louiszhai.github.io/2016/11/02/ajax/)
+
+虽然现在ajax依然是主流，但可以预料，AJAX的未来应该是fetch。
+
+
 #### Deferred 和 Promise
 Deferred是一个著名的异步模型，Deferred是一个双链参数加工的流水线模型，双链是指它内部把回调分成两种，一个是成功回调，用于正常时执行，一个是错误回调，用于出错时执行。各自组成两个队列，可看作是成功队列和错误队列。添加回调时是以组为单位添加的，每组回调的参数都是上一组回调的处理结果，其中第一组的参数是用户传入的。之所以说是流水线，是指每个回调可能不是紧挨着顺序执行的，有时可能会是同步的，有时可能是异步的。若出错了则由后一组的错误回调捕捉错误处理，若处理没问题了则试着转回成功队列。
 
 它最初是Python的Twisted框架的一个类，后来被Mochikit框架引入，但是Mochikit的推广不足，没能发展起来。
 
-JSDeferred是cho45开发出的，其易用性远胜于Mochikit Deferred，它的实现形态基本奠定了“Promise/A”的范式，是js异步编程的一个里程碑式的库。其源码地址：[JSDeferred](https://github.com/cho45/jsdeferred/blob/master/jsdeferred.js)
+JSDeferred是cho45开发出的，其易用性远胜于Mochikit Deferred，它的实现形态基本奠定了“Promise/A”的范式，是js异步编程的一个里程碑式的库。其源码地址：[JSDeferred](https://github.com/cho45/jsdeferred/blob/master/jsdeferred.js)*非常建议查看，注释详细且带示例*
 
 到后来jquery1.5也引入[jQuery Deferred](http://www.css88.com/jqapi-1.9/category/deferred-object/)了,但存在感一直很低，受众也很小，一开始是因为其API如then、promise、resolve、reject其实不是很好懂，同时promise是一个学术化的东西，若没有官方讲解，会让开发人员一头雾水。
 
@@ -40,7 +46,7 @@ jQuery的实现方式为构造Deferred的子结构_Deferred，利用闭包、实
 jQuery保证每个Deferred每次调用promise总是返回单例对象，即一个Deferred只能有一个Promise，Promise拥有Deferred出resolve、reject、resolveWith、rejectWith外的一切成员。所以其实Promise是一个只读的Deferred，目的是防止在构造Deferred链的过程中就执行回调。
 但jQuery Deferred的初代实现有很多不足，首先，没有对异常进行处理，在异步中捕捉异常是非常重要的，其次，没有对原始参数进行流水化加工，而对参数进行加工处理是非常普遍的需求。
 
-Promise/A属于Promise规范，Promise规范属于CommonJS。
+Promise/A属于Promise规范，Promise规范属于CommonJS。可参考[ES6 Promise对象](http://es6.ruanyifeng.com/#docs/promise)
 
 Promise/A规范大致如下：一个带有then方法的对象，它拥有3个状态，pending、fulfilled、rejected。一开始是pending、执行then后，当前回调被执行时，会进入fulfilled或rejected状态。
 
@@ -49,5 +55,7 @@ then方法在添加了onFulfill或onReject会返回一个新的Promise对象，�
 
 后来在Promise/A规范上添加了更多的细则，形成了Promise/A+规范。添加了all，any等方法，并归并结果或处理竞态状态。现在一般而言有3种Promise/A+库，分别是Q、RSVP、When。其中Q的微缩版被整合进angular.js，RSVP被整合进ember.js。这两个库都是MVVM库。
 
-**js异步前景**
+**js异步前景：建议直接学习并运用**
 现在ES6已经支持yield（generator生成器）了，目标是以同步的方式写异步代码。只要将它们放入某个函数体内即可。
+
+参考[ES6 Generator](http://es6.ruanyifeng.com/#docs/generator)

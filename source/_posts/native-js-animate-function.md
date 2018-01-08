@@ -47,54 +47,54 @@ tags: [js, animate]
 ```js
 //获取当前o元素的attr属性c
 function getStyle(o, attr){
-    if(o.currentStyle)
-        return o.currentStyle[attr];
-    else
-        return getComputedStyle(o, false)[attr];
+  if(o.currentStyle)
+    return o.currentStyle[attr];
+  else
+    return getComputedStyle(o, false)[attr];
 }
 
 //动画函数 o为目标元素，json为一个包含变化属性和预期值的对象
 //  fn为完成此动画后的回调，可以继续使用animate形成延时动画
 function animate(o, json, fn){
-    var itime = 30; //定时器时间
-    var iS = 8; //动画速度基准，越大越慢
+  var itime = 30; //定时器时间
+  var iS = 8; //动画速度基准，越大越慢
 
-    clearInterval(o.timer); //清除上次在o元素上使用的定时器，防止动画重复
+  clearInterval(o.timer); //清除上次在o元素上使用的定时器，防止动画重复
 
-    o.timer = setInterval(function(){
-        var bStop = true; //当所有值都变化为预期值后，标识此次动画结束
+  o.timer = setInterval(function(){
+    var bStop = true; //当所有值都变化为预期值后，标识此次动画结束
 
-        for(var attr in json){
-            // 1. 获取当前该attr的值
-            var iCur = 0;
-            if(attr == 'opacity') //防止小数与误差
-                iCur = parseInt(parseFloat(getStyle(o, attr))*100);
-            else
-                iCur = parseInt(getStyle(o, attr));
-            
-            // 2. 算速度，防止小数误差积累，需要使用取整
-            var iSpeed = (json[attr]-iCur)/iS;
-            iSpeed = iSpeed>0 ? Math.ceil(iSpeed) : Math.floor(iSpeed); //正反速度区别对待
+    for(var attr in json){
+      // 1. 获取当前该attr的值
+      var iCur = 0;
+      if(attr == 'opacity') //防止小数与误差
+        iCur = parseInt(parseFloat(getStyle(o, attr))*100);
+      else
+        iCur = parseInt(getStyle(o, attr));
 
-            // 3. 检测停止，每一轮定时，只要有一个属性未到预期值则设置为false
-            if(iCur != json[attr])
-                bStop = false;
-            
-            // 4. 透明度和其他属性单位不同
-            if(attr == 'opacity')
-                o.style.opacity = (iCur + iSpeed)/100;
-            else
-                o.style[attr] = iCur + iSpeed + 'px';
+      // 2. 算速度，防止小数误差积累，需要使用取整
+      var iSpeed = (json[attr]-iCur)/iS;
+      iSpeed = iSpeed>0 ? Math.ceil(iSpeed) : Math.floor(iSpeed); //正反速度区别对待
 
-        }
+      // 3. 检测停止，每一轮定时，只要有一个属性未到预期值则设置为false
+      if(iCur != json[attr])
+        bStop = false;
 
-        // 5. 检测所有属性是否完成
-        if(bStop){
-            clearInterval(o.timer);
-            if(fn) 
-                fn();
-        }
-    }, itime);
+      // 4. 透明度和其他属性单位不同
+      if(attr == 'opacity')
+        o.style.opacity = (iCur + iSpeed)/100;
+      else
+        o.style[attr] = iCur + iSpeed + 'px';
+
+    }
+
+    // 5. 检测所有属性是否完成
+    if(bStop){
+      clearInterval(o.timer);
+      if(fn)
+        fn();
+    }
+  }, itime);
 }
 ```
 
@@ -112,27 +112,27 @@ function animate(o, json, fn){
 9. 弹性运动的适用范围：不能运用于物体超过原大小的动画
 
 ```js
-        var iSpeed = 0;
-        var left = 0;
+var iSpeed = 0;
+var left = 0;
 
-        function startMove(obj, iTarget) {
-            clearInterval(obj.timer); //防止一元素多次触发
+function startMove(obj, iTarget) {
+  clearInterval(obj.timer); //防止一元素多次触发
 
-            obj.timer = setInterval(function() {
-                //用预期位值和当前位置（offsetLeft）的差作为速度，系数5，越大则速度越小
-                iSpeed += (iTarget - obj.offsetLeft) / 5;
-                iSpeed *= 0.7; //0.7模拟摩擦力系数，越大则摩擦力越小
+  obj.timer = setInterval(function() {
+    //用预期位值和当前位置（offsetLeft）的差作为速度，系数5，越大则速度越小
+    iSpeed += (iTarget - obj.offsetLeft) / 5;
+    iSpeed *= 0.7; //0.7模拟摩擦力系数，越大则摩擦力越小
 
-                left += iSpeed;
-                //使用绝对值，将速度和距离差小于1像素当作0处理
-                if (Math.abs(iSpeed) < 1 && Math.abs(left - iTarget) < 1) {
-                    clearInterval(obj.timer);
-                    obj.style.left = iTarget + 'px'; //防止出现1像素的误差，结束动画时强制设置为预期值
-                } else {
-                    obj.style.left = left + 'px';
-                }
-            }, 30);
-        }
+    left += iSpeed;
+    //使用绝对值，将速度和距离差小于1像素当作0处理
+    if (Math.abs(iSpeed) < 1 && Math.abs(left - iTarget) < 1) {
+      clearInterval(obj.timer);
+      obj.style.left = iTarget + 'px'; //防止出现1像素的误差，结束动画时强制设置为预期值
+    } else {
+      obj.style.left = left + 'px';
+    }
+  }, 30);
+}
 ```
 
 <iframe src="slideMenu.html" frameborder="0" width="100%"></iframe>
@@ -150,44 +150,44 @@ function animate(o, json, fn){
 
 ```js
 window.onload = function() {
-    var oDiv = document.getElementById('div1');
+  var oDiv = document.getElementById('div1');
 
-    var lastX = 0;
-    var lastY = 0;
-    //拖拽需要监听鼠标按下事件以及传入event对象用于计算拖拽丢出的初速度
-    oDiv.onmousedown = function(ev) {
-        var oEvent = ev || event;
+  var lastX = 0;
+  var lastY = 0;
+  //拖拽需要监听鼠标按下事件以及传入event对象用于计算拖拽丢出的初速度
+  oDiv.onmousedown = function(ev) {
+    var oEvent = ev || event;
 
-        var disX = oEvent.clientX - oDiv.offsetLeft;
-        var disY = oEvent.clientY - oDiv.offsetTop;
+    var disX = oEvent.clientX - oDiv.offsetLeft;
+    var disY = oEvent.clientY - oDiv.offsetTop;
 
-        document.onmousemove = function(ev) {
-            var oEvent = ev || event;
+    document.onmousemove = function(ev) {
+      var oEvent = ev || event;
 
-            var l = oEvent.clientX - disX;
-            var t = oEvent.clientY - disY;
+      var l = oEvent.clientX - disX;
+      var t = oEvent.clientY - disY;
 
-            oDiv.style.left = l + 'px';
-            oDiv.style.top = t + 'px';
+      oDiv.style.left = l + 'px';
+      oDiv.style.top = t + 'px';
 
-            iSpeedX = l - lastX;
-            iSpeedY = t - lastY;
+      iSpeedX = l - lastX;
+      iSpeedY = t - lastY;
 
-            lastX = l;
-            lastY = t;
+      lastX = l;
+      lastY = t;
 
-            document.title = 'x:' + iSpeedX + ', y:' + iSpeedY;
-        };
-
-        document.onmouseup = function() {
-            document.onmousemove = null;
-            document.onmouseup = null;
-
-            startMove();
-        };
-
-        clearInterval(timer);
+      document.title = 'x:' + iSpeedX + ', y:' + iSpeedY;
     };
+
+    document.onmouseup = function() {
+      document.onmousemove = null;
+      document.onmouseup = null;
+
+      startMove();
+    };
+
+    clearInterval(timer);
+  };
 };
 
 var timer = null;
@@ -196,52 +196,52 @@ var iSpeedX = 0;
 var iSpeedY = 0;
 
 function startMove() {
-    clearInterval(timer);
+  clearInterval(timer);
 
-    timer = setInterval(function() {
-        var oDiv = document.getElementById('div1');
+  timer = setInterval(function() {
+    var oDiv = document.getElementById('div1');
 
-        iSpeedY += 3;
+    iSpeedY += 3;
 
-        var l = oDiv.offsetLeft + iSpeedX;
-        var t = oDiv.offsetTop + iSpeedY;
+    var l = oDiv.offsetLeft + iSpeedX;
+    var t = oDiv.offsetTop + iSpeedY;
 
-        if (t >= document.documentElement.clientHeight - oDiv.offsetHeight) {
-            iSpeedY *= -0.8;
-            iSpeedX *= 0.8;
-            t = document.documentElement.clientHeight - oDiv.offsetHeight;
-        } else if (t <= 0) {
-            iSpeedY *= -1;
-            iSpeedX *= 0.8;
-            t = 0;
-        }
+    if (t >= document.documentElement.clientHeight - oDiv.offsetHeight) {
+      iSpeedY *= -0.8;
+      iSpeedX *= 0.8;
+      t = document.documentElement.clientHeight - oDiv.offsetHeight;
+    } else if (t <= 0) {
+      iSpeedY *= -1;
+      iSpeedX *= 0.8;
+      t = 0;
+    }
 
-        if (l >= document.documentElement.clientWidth - oDiv.offsetWidth) {
-            iSpeedX *= -0.8;
-            l = document.documentElement.clientWidth - oDiv.offsetWidth;
-        } else if (l <= 0) {
-            iSpeedX *= -0.8;
-            l = 0;
-        }
+    if (l >= document.documentElement.clientWidth - oDiv.offsetWidth) {
+      iSpeedX *= -0.8;
+      l = document.documentElement.clientWidth - oDiv.offsetWidth;
+    } else if (l <= 0) {
+      iSpeedX *= -0.8;
+      l = 0;
+    }
 
-        //当速度足够小时（绝对值小于1），直接设为0
-        if (Math.abs(iSpeedX) < 1) {
-            iSpeedX = 0;
-        }
+    //当速度足够小时（绝对值小于1），直接设为0
+    if (Math.abs(iSpeedX) < 1) {
+      iSpeedX = 0;
+    }
 
-        if (Math.abs(iSpeedY) < 1) {
-            iSpeedY = 0;
-        }
-        //终止条件为：x，y方向上的速度都为0，且到达目标点
-        if (iSpeedX == 0 && iSpeedY == 0 && t == document.documentElement.clientHeight - oDiv.offsetHeight) {
-            clearInterval(timer);
-        } else {
-            oDiv.style.left = l + 'px';
-            oDiv.style.top = t + 'px';
-        }
+    if (Math.abs(iSpeedY) < 1) {
+      iSpeedY = 0;
+    }
+    //终止条件为：x，y方向上的速度都为0，且到达目标点
+    if (iSpeedX == 0 && iSpeedY == 0 && t == document.documentElement.clientHeight - oDiv.offsetHeight) {
+      clearInterval(timer);
+    } else {
+      oDiv.style.left = l + 'px';
+      oDiv.style.top = t + 'px';
+    }
 
-        document.title = iSpeedX;
-    }, 30);
+    document.title = iSpeedX;
+  }, 30);
 }
 ```
 
