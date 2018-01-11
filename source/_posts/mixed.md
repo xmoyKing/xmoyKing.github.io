@@ -1,7 +1,7 @@
 ---
 title: 小技巧集合
 date: 2017-03-01 13:58:45
-updated: 
+updated:
 tags: mixed
 top:
 ---
@@ -15,14 +15,14 @@ top:
 
 禁止input粘贴复制，右键等
 ```js
-onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" 
+onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false"
 ```
 
 注意一些列表中，若内容不是固定字数的，一定要加上css省略
 css实现一行内省略号,同时若出现换行则失效，所以需要禁止换行`nobr`标签和`white-space : normal/nowrap`, 同时，在android手机上（andriod 7）会出现字体上方2px左右被截取的bug，iphone上没有此问题
 ```css
 overflow: hidden;
-text-overflow: ellipsis; 
+text-overflow: ellipsis;
 white-space: nowrap;
 ```
 当行高限制了，overflow:hidden 有bug，上下端会被截取1-2px，解决方法：
@@ -45,7 +45,7 @@ $.fn.serializeObject = function() {
     var o = {};
     var a = this.serializeArray();
     $.each(a, function() {
-        
+
         if (o[this.name] !== undefined) { // 值不为undefined，已经存在对应的键值对了，此时为键值对为数组类型
             if (!o[this.name].push) { // 若第一次重复（第二次找到该name值）则直接转换为存储数组
                 o[this.name] = [o[this.name]];
@@ -102,18 +102,18 @@ button, button:hover, button:active, button:focus {
 
 placeholder颜色设置方式, 一下样式中，webkit需要单独写，否则无效
 ```css
-::-webkit-input-placeholder { /* WebKit browsers */ 
-color: #999; 
-} 
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
-color: #999; 
-} 
-::-moz-placeholder { /* Mozilla Firefox 19+ */ 
-color: #999; 
-} 
-:-ms-input-placeholder { /* Internet Explorer 10+ */ 
-color: #999; 
-} 
+::-webkit-input-placeholder { /* WebKit browsers */
+color: #999;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+color: #999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+color: #999;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+color: #999;
+}
 ```
 
 锯齿边框
@@ -148,7 +148,7 @@ color: #999;
 ```
 
 输入框仅允许输入数字(使用正则替换所有非数字)
-```js 
+```js
 style="ime-mode:Disabled" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
 ```
 
@@ -178,13 +178,13 @@ hexo博客遇到如下报错，可以试着重新安装.`npm install hexo-render
 
 [js 怎样判断用户是否在浏览当前页面](https://zhidao.baidu.com/question/541794991.html)
 ```js
-var hiddenProperty = 'hidden' in document ? 'hidden' :    
-    'webkitHidden' in document ? 'webkitHidden' :    
-    'mozHidden' in document ? 'mozHidden' :    
+var hiddenProperty = 'hidden' in document ? 'hidden' :
+    'webkitHidden' in document ? 'webkitHidden' :
+    'mozHidden' in document ? 'mozHidden' :
     null;
 var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
 var onVisibilityChange = function(){
-    if (!document[hiddenProperty]) {    
+    if (!document[hiddenProperty]) {
         console.log('页面非激活');
     }else{
         console.log('页面激活')
@@ -389,12 +389,12 @@ str.split(/[\n\r、]/)
 
 H5本地预览图片,采用base64方式
 ```js
-// 判断浏览器是否支持FileReader接口  
+// 判断浏览器是否支持FileReader接口
 if (typeof FileReader == 'undefined') {
     alert('浏览器太老了，不支持预览图片，请更换现代浏览器');
     // return false;
 }
-var reader = new FileReader();   //将文件以Data URL形式读入页面  
+var reader = new FileReader();   //将文件以Data URL形式读入页面
 reader.readAsDataURL(file);
 reader.onload = function (e) {
     var picUrl = this.result;
@@ -416,7 +416,7 @@ $(window).on('beforeunload', function(e){
 ```html
 <input type="file" accept="images/*">
 ```
-同时，如下的file包裹在button中时，点击button，chrome下正常弹出文本框，而在firefox下，无法触发文本选择框。 将button改为span，同时span上不能绑定点击事件，否则也无法弹出文本选择框。 
+同时，如下的file包裹在button中时，点击button，chrome下正常弹出文本框，而在firefox下，无法触发文本选择框。 将button改为span，同时span上不能绑定点击事件，否则也无法弹出文本选择框。
 ```html
 <button type="button" class="pr">
     文件上传按钮
@@ -436,9 +436,9 @@ IE11 下无法识别CSS的`initial`属性值，但是可以识别`auto`属性值
 
 pre 自动换行
 ```css
-pre{  
-    white-space: -moz-pre-wrap;   
-    white-space: -o-pre-wrap;    
+pre{
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
     word-wrap: break-word;
     white-space: pre-wrap;
 }
@@ -480,7 +480,7 @@ var frame = $('<iframe frameborder="0" src="..." id="previewIframe"></iframe>');
 $('body').append(frame);
 frame[0].onload = function () {
     $(frame[0].contentDocument).find('body,pre').css('margin','0'); // 将默认样式覆盖
-    ... 
+    ...
 }
 ```
 
@@ -506,3 +506,12 @@ hexo3.x在node版本8.xX（npm5.x）环境下会报找不到hexo命令的错，�
 windows下的nvm感觉不是很好用，在国内，下载安装node实在太久了。。。
 
 hexo中配置了deploy需要安装对应的hexo-deployer-git包，否则在`hexo d`部署时会报错：ERROR Deployer not found: git
+
+##### 2018.1.11
+关于MVVM与jQuery，MVVM基本上颠覆了jQuery以DOM为中心的体系，MVVM的出发点是数据，核心是数据。数据是底层，是心脏，数据发生变化，作为表层的UI就必然发生变化。若用户修改了UI元素的值，相当于透过UI元素直接修改了底层的数据。为了让用户专注于数据，许多绑定在名字上就带有各种操作节点的功能，如ms-html，ms-click，ms-class等，把这些原本是由用户处理的代码交给框架处理，用户只需要在目标节点上声明一下，最多传一两个参数，将它与ViewModel关联起来，DOM原本常用的工作就被掩盖了。若DOM很复杂，则$watch回调可以做这些额外的处理工作。
+
+那么jQuery就彻底抛弃了吗？当然不会，没有任何一个库能比它处理DOM的能力更强，在浏览器的世界总是需要与DOM打交道，把jQuery作为MVVM的一个底层单元是非常合理而自然的，而且多亏而了jQuery，需要生僻的浏览器特性与Bug被发掘出来，给出侦测的手段与修复的办法，若自己实现，也最多能做到半成品的jQuery。同时太多的jQuery like库，比如在angular内有jqLite，avalon也有一个mini jQuery对象。网站越大，用户越多，需要兼容的浏览器就越多，这时就越发的需要jQuery。
+
+在MVVM中，jQuery的样式操作、属性操作、事件系统是非常有用的。但如大规模移动删除节点，knockout、emberjs等有更好的方式，数据缓存上，H5的data-*特性节点更为实用，起码在移除节点时不需要调用专门的removeDat方法。jQuery的ajax非常强大，但当它被路由系统覆盖起来时，就不需要那么多配置了。动画引擎上，Bootstrap基于CSS3的动画其实已经够普通开发使用了。而jQuery的选择器在MVVM中其并没有什么用武之地，因为MVVM框架会扫描DOM，比jQuery对DOM遍历的次数更少，并且选择器其实会增加HTML和JS的耦合度，特别是一些结构伪类。
+
+而MVVM能让开发者换一个角度来看待浏览器世界。MVVM将jQuery的DOM操作的方式屏蔽掉了，将DOM与业务分离，所以用它组织代码会少很多，且功能越多越体现MVVM的优势。
