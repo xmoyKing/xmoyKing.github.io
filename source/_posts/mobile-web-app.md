@@ -1,7 +1,7 @@
 ---
 title: 移动Web端知识点集合
 date: 2017-03-17 10:25:56
-updated: 
+updated:
 categories: mixed
 tags: [mobile, web-app, links]
 ---
@@ -21,7 +21,7 @@ tags: [mobile, web-app, links]
 [移动端web开发进阶](http://www.cnblogs.com/vajoy/p/4119142.html)
 
 ### 书籍
-
+[指尖上行，移动前端开发进阶之路](#) *2017.9月出版*
 
 ### 知识点
 tap和touch的区别：
