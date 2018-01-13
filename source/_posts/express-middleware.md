@@ -1,9 +1,10 @@
 ---
 title: Express4-2中间件
 categories:
-  - express
+  - Nodejs
 tags:
-  - node
+  - nodejs
+  - express
   - express4
 date: 2017-04-30 16:47:31
 updated: 2017-04-30 16:47:31
@@ -141,9 +142,9 @@ app.use(cookieParser());
 app.get('/', function(req, res) {
   console.log(req.cookies);
   if (!req.cookies.hasVisited){
-    res.cookie('hasVisited', '1', 
-               { maxAge: 60*60*1000, 
-                 httpOnly: true, 
+    res.cookie('hasVisited', '1',
+               { maxAge: 60*60*1000,
+                 httpOnly: true,
                  path:'/'});
   }
   res.send("Sending Cookie");
@@ -163,7 +164,7 @@ app.use(cookieSession({secret: 'MAGICALEXPRESSKEY'}));
 app.get('/library', function(req, res) {
   console.log(req.cookies);
   if(req.session.restricted) {
-    res.send('You have been in the restricted section ' + 
+    res.send('You have been in the restricted section ' +
              req.session.restrictedCount + ' times.');
   }else {
     res.send('Welcome to the library.');
@@ -272,7 +273,7 @@ app.get('/login', function(req, res){
   if(req.session.user){
     res.redirect('/restricted');
   }else if(req.session.error){
-    response +='<h2>' + req.session.error + '<h2>'; 
+    response +='<h2>' + req.session.error + '<h2>';
   }
   res.type('html');
   res.send(response);

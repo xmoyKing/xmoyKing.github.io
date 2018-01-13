@@ -1,9 +1,10 @@
 ---
 title: Express4-1入门配置
 categories:
-  - express
+  - Nodejs
 tags:
-  - node
+  - nodejs
+  - express
   - express4
 date: 2017-04-30 11:53:55
 updated: 2017-04-30 11:53:55
@@ -51,7 +52,7 @@ app.get('view engine'); // jade
 ```js
 const express = require('express');
 var app = express();
-app.listen(8000); 
+app.listen(8000);
 ```
 listen(port)调用底层的HTTP绑定连接到port端口上，然后监听，底层的HTTP连接直接利用了http模块中server对象的listen()方法产生的连接。
 express()方法执行返回值是一个回调函数，它映射了传递到http.createServer()和https.createServer()方法的回调函数。
@@ -171,7 +172,7 @@ app.get('*', function(req, res){
 res.set(header, value) 设置单个header，
 res.get(header) 获取header的值
 res.set(headerObj)
-res.location(path) 
+res.location(path)
 res.type()
 res.attachment([filepath])
 
@@ -184,7 +185,7 @@ res.send(status, body)
 
 ### 发送JSON
 res.json(body)
-res.json(status, object) 
+res.json(status, object)
 res.jsonp(body) 发送jsonp，需要请求URL中有知道回调函数参数`?callback=fun`
 res.jsonp(status, object)
 ```js
@@ -206,7 +207,7 @@ app.get('/jsonp', function (req, res) {
   res.jsonp({name:"Smithsonian", built:'1846', items:'137M',
             centers: ['art', 'astrophysics', 'natural history',
                       'planetary', 'biology', 'space', 'zoo']});
-}); 
+});
 
 // http://localhost/json
 // http://localhost/error
@@ -227,7 +228,7 @@ var url = require('url');
 var app = express();
 app.listen(80);
 app.get('/image', function (req, res) {
-  res.sendfile('arch.jpg', 
+  res.sendfile('arch.jpg',
                { maxAge: 24*60*60*1000,
                  root: './views/'},
                function(err){
@@ -380,7 +381,7 @@ app.get('/jade', function (req, res) {
 });
 app.get('/ejs', function (req, res) {
   app.render('user_ejs.html', function(err, renderedData){
-    res.send(renderedData);    
+    res.send(renderedData);
   });
 });
 ```

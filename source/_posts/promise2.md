@@ -1,7 +1,7 @@
 ---
 title: Promise2-实践练习
 categories:
-  - promise
+  - js
 tags:
   - promise
 date: 2017-04-10 17:27:46
@@ -128,7 +128,7 @@ console.log('==Starting==');
 // DOM fully loaded and parsed
 ```
 
-### 方法链 promise chain 
+### 方法链 promise chain
 由于then方法返回一个promsie对象，所以可以使用链式调用
 ```js
 aPromise.then(function taskA(value){
@@ -170,7 +170,7 @@ promise.then(TA)
 
 上述流程中，没有在then中指定onRjected参数，也就是说，若TA，TB出现错误将会被catch捕捉，然后接着执行finalTask，而且无论如何都会执行finalTask.即：
 若TA出现异常，会按照TA - onRjected - finalTask 流程处理，会跳过TB，直接执行onRejected
-若TB出现异常，会按照TA - TB - onRjected - finalTask 
+若TB出现异常，会按照TA - TB - onRjected - finalTask
 
 #### 方法链中传递参数
 若上一个任务想给下一个任务（或后面的任务）传递参数时，可以使用return返回值。

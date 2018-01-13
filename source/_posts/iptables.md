@@ -1,7 +1,7 @@
 ---
 title: Linux IPtables Practice
 categories:
-  - it
+  - linux
 tags:
   - linux
   - network
@@ -14,7 +14,7 @@ updated: 2017-06-20 15:46:48
 Reference In Chinese:[iptables超全详解](http://www.linuxidc.com/Linux/2016-09/134832.htm)
 
 Stateful firewall
-- Traditional: 
+- Traditional:
   To allow outgoing website visiting and to drop other communication
   To allow input tcp with source port 80 and ack
   Can’t visit websites on ports other than 80
@@ -30,13 +30,13 @@ sudo iptables -A INPUT -p tcp --sport 80 --tcp-flags SYN,ACK,RST,FIN ACK -j ACCE
 ```
 
 Iptables Examples:
-`iptables -A OUTPUT -p tcp --dport 23 -j DROP` 
+`iptables -A OUTPUT -p tcp --dport 23 -j DROP`
 Prevent a machine from telneting to other machines
 
-`iptables –A INPUT –p tcp –dport 23 –j DROP` 
+`iptables –A INPUT –p tcp –dport 23 –j DROP`
 Prevent a telnet server from being connected by other machines
 
-`iptables –A INPUT –p tcp –d 1.2.3.4 –j DROP` 
+`iptables –A INPUT –p tcp –d 1.2.3.4 –j DROP`
 Prevent inner network from connecting a social network 1.2.3.4
 
 ```
@@ -55,7 +55,7 @@ To limit the number of pings
 `sudo iptables -t nat -A POSTROUTING -p icmp --icmp-type 8 -j SNAT --to-source 192.168.137.131`
 To change the source IP of a ping packet sent out from our machine
 
----- 
+----
 
 
 `sudo sysctl –p /etc/sysctl.conf`
@@ -101,11 +101,11 @@ sudo iptables -t nat -A OUTPUT -p tcp --dport 8123 -j DNAT --to 192.168.141.235:
 To disable traffic
 To enable ftp
 ```
-Must enable ip_conntrack_ftp 
+Must enable ip_conntrack_ftp
 
 Modprobe ip_conntrack_ftp
 ```
-You should use ESTABLISHED and RELATED at the same time. Otherwise, either the command or the data connection can’t be established. 
+You should use ESTABLISHED and RELATED at the same time. Otherwise, either the command or the data connection can’t be established.
 
 
 the secure version of telnet: ssh

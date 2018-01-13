@@ -1,12 +1,12 @@
 ---
 title: Promise4-高级进阶(resolve,reject)
 categories:
-  - promise
+  - js
 tags:
   - promise
   - web notifications
 date: 2017-04-13 22:54:03
-updated: 
+updated:
 ---
 
 基于前面学过的一些Promise知识，深入了解Promise里的一些内容，加深理解。
@@ -31,7 +31,7 @@ Notification的granted和denied与Promise的resolve和reject很相似。
 ```js
 function notifyMsg(msg, opts, cb){
   if(Notification && Notification.permission === 'granted'){ // 若已经获取到权限
-    var notification = new Notification(msg, opts); 
+    var notification = new Notification(msg, opts);
     cb(null, notification);
 
   }else if(Notification.requestPermission){
@@ -42,9 +42,9 @@ function notifyMsg(msg, opts, cb){
 
       if(status === 'granted'){
         var notification = new Notification(msg, opts);
-        cb(null, notification); 
+        cb(null, notification);
       }else{
-        cb(new Error('user denied')); 
+        cb(new Error('user denied'));
       }
     });
 

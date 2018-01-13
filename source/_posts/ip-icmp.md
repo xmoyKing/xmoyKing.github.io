@@ -1,7 +1,7 @@
 ---
 title: IP/ICMP Security
 categories:
-  - it
+  - linux
 tags:
   - network
   - security
@@ -43,88 +43,88 @@ normally 5, i.e. 20 bytes
 Max 60 bytes
 Header can be variable length (IP option)
 - TOS (3 bit unused, 4 TOS bits, 1 unused)
-1,  min delay, 0x10; 2, max throughput, 0x08; 3, max reliability, 0x40; 4, min cost, 0x20; 
+1,  min delay, 0x10; 2, max throughput, 0x08; 3, max reliability, 0x40; 4, min cost, 0x20;
 Only one bit can be set
 - Total Length: of datagram, in bytes
 Max size is 65535
 - IDENT, FLAGS, FRAGMENT OFFSET:
-Used for fragmentation and reassembly, will talk about this later 
-- TTL (Time To Live): upper limit on # routers that a datagram may pass through 
-Initialized by sender, and decremented by each router.  When zero, discard datagram. This can stop routing loops 
-Example: ping –t TTL IP allows us to specify the TTL field 
-Question: non-root users are not supposed to be able to modify the TTL field, how does ping do that?  
-- TYPE: IP needs to know to what protocol it should hand the received IP datagram  
- 1, ICMP; 2 IGMP; 6 TCP; 17 UDP; 
-- HEADER CHECKSUM    16-bit 1’s complement checksum   
-Calculated only over header , Recomputed at each hop 
+Used for fragmentation and reassembly, will talk about this later
+- TTL (Time To Live): upper limit on # routers that a datagram may pass through
+Initialized by sender, and decremented by each router.  When zero, discard datagram. This can stop routing loops
+Example: ping –t TTL IP allows us to specify the TTL field
+Question: non-root users are not supposed to be able to modify the TTL field, how does ping do that?
+- TYPE: IP needs to know to what protocol it should hand the received IP datagram
+ 1, ICMP; 2 IGMP; 6 TCP; 17 UDP;
+- HEADER CHECKSUM    16-bit 1’s complement checksum
+Calculated only over header , Recomputed at each hop
 
-An example of IP datagram   
+An example of IP datagram
 ```
-Header length: 20 octet    
-TYPE: 01 (ICMP)    
-Source IP: 128.10.2.3    
+Header length: 20 octet
+TYPE: 01 (ICMP)
+Source IP: 128.10.2.3
 Destination IP: 128.10.2.8
 ```
 ![IP Header Example](./ip_header_example.png)
 
 #### IP OPTIONS
-- IP OPTIONS field is not required in every datagram    Options are included primarily for network testing or debugging.  The length of IP OPTIONS field varies depending on which options are selected. 
+- IP OPTIONS field is not required in every datagram    Options are included primarily for network testing or debugging.  The length of IP OPTIONS field varies depending on which options are selected.
 - Record Route Option   The sender allocates space in the option to hold IP addresses of the routers (i.e., an empty list is included in the option field)    Each router records its IP address to the record route list;  If the list is full, router will stop adding to the list
 - Timestamp option; Source route option;
 
 #### IP Fragmentation
-1. Why do we need fragmentation?   
-  - MTU:  Maximum Transmission Unit    
+1. Why do we need fragmentation?
+  - MTU:  Maximum Transmission Unit
   - An IP datagram can contain up to 65535 total octets (including header)
   - Network hardware limits maximum size of frame (e.g., Ethernet limited to 1500 octets, i.e.,MTU=1500; FDDI limited to approximately 4470 octets/frame)
-2. IP fragmentation    
-  - IP layers divide an IP datagram into several smaller fragments based on MTU    
-  - Fragment uses same header format as datagram 
-  - Each fragment is routed independently 
-3. How is an IP datagram fragmented?   
+2. IP fragmentation
+  - IP layers divide an IP datagram into several smaller fragments based on MTU
+  - Fragment uses same header format as datagram
+  - Each fragment is routed independently
+3. How is an IP datagram fragmented?
 4. How to fragment an IP datagram?
-  - IDENT: unique number to identify an IP datagram; fragments with the same identifier belong to the same IP datagram    
+  - IDENT: unique number to identify an IP datagram; fragments with the same identifier belong to the same IP datagram
   - FRAGMENT OFFSET:  Specifies where data belongs in the original datagram  (dividable by 8 octets   )
-  - FLAGS:  
-    bit 0: reserved    
-    bit 1: do not fragment    
+  - FLAGS:
+    bit 0: reserved
+    bit 1: do not fragment
     bit 2: more fragments. This bit is turned off in the last fragment (Q: why do we need this bit?)
-5. How are IP fragments reassembled?    
-  - All the IP fragments of a datagram will be assembled before the datagram is delivered to the layers above.    
-  - Where should they be assembled? At routers or the destination?     
-    They are assembled at the destination.    
-    IP reassembly uses a timer. If timer expires and there are still missing fragments, all the fragments will be discarded. 
+5. How are IP fragments reassembled?
+  - All the IP fragments of a datagram will be assembled before the datagram is delivered to the layers above.
+  - Where should they be assembled? At routers or the destination?
+    They are assembled at the destination.
+    IP reassembly uses a timer. If timer expires and there are still missing fragments, all the fragments will be discarded.
 
 
 ### Attacks against IP
-1. Attack 1: Denial of Service Attack    
-  - 1st fragment: offset = 0   
-  - 2nd fragment: offset = 64800   
-  - Result: The target machine will allocate 64 kilobytes of memory, which is typically held for 15 to 255 seconds. Windows 2000, XP, and almost all versions of Unix are vulnerable. 
-2. Attack 2: TearDrop    
-  - First packet :    offset = 0    payload size N    More Fragments bit on    
-  - Second packet:    More Fragments bit off    offset + payload size  < N 
+1. Attack 1: Denial of Service Attack
+  - 1st fragment: offset = 0
+  - 2nd fragment: offset = 64800
+  - Result: The target machine will allocate 64 kilobytes of memory, which is typically held for 15 to 255 seconds. Windows 2000, XP, and almost all versions of Unix are vulnerable.
+2. Attack 2: TearDrop
+  - First packet :    offset = 0    payload size N    More Fragments bit on
+  - Second packet:    More Fragments bit off    offset + payload size  < N
   - i.e., the 2 fragment fits entirely inside the first one.
-  - When OS tries to put these two fragments together, it crashes. 
-3. Attack 3: Overlapping attacks against firewalls  
-  - Many firewalls inspect each packet (fragment) separately. 
+  - When OS tries to put these two fragments together, it crashes.
+3. Attack 3: Overlapping attacks against firewalls
+  - Many firewalls inspect each packet (fragment) separately.
   - FO==0, filter; otherwise, pass without filter
-  - When filtering rule based on TCP header, but the TCP header is fragmented, the rule will fail    
-  - TCP header is at the beginning of the data area of an IP packet.    
+  - When filtering rule based on TCP header, but the TCP header is fragmented, the rule will fail
+  - TCP header is at the beginning of the data area of an IP packet.
   - Firewalls often check TCP header: for example, SYN packet for connection request.
-    Tiny Fragment Attack: Assumption: firewalls only check the packets with offset=0.   
-    Overlapping attacks: Assumption: firewalls only check the packets with offset=0. 
+    Tiny Fragment Attack: Assumption: firewalls only check the packets with offset=0.
+    Overlapping attacks: Assumption: firewalls only check the packets with offset=0.
 
 #### Tiny Fragment Attack
 - RFC 791 : datagram with length 68 should not fragment anymore; IP header would be 60; and a minimum fragment is 8 bytes
 - However, 8 bytes only include TCP Sport and DPort
-- Prevention Methods 
+- Prevention Methods
   If FO == 0 and Protocol = TCP and TRANSPORTLEN < tmin,   then drop packet
   If FO ==1, then drop packet
 
 #### Overlapping Fragment Attack
 - A filter is to drop TCP connection request packets
-  First fragment comes with SYN=1, ACK=1; 
+  First fragment comes with SYN=1, ACK=1;
   Second fragment’s FO == 1, and with SYN=1, ACK = 0;
 - Prevention method
   If FO == 1 and Protocol == TCP then Drop packet;
@@ -215,7 +215,7 @@ Mapping Network Topology
 - RFC states that system must follow redirect unless it is a router
 - Winfreez(e):  in windows,
   ICMP Redirect: Yourself is the quickest link to Z
-  The victim changes its routing table 
+  The victim changes its routing table
   Host sends packets to itself in an infinite loop
 
 
@@ -252,12 +252,12 @@ Programming with Pcap
 
 
 void get_packet(u_char*args, const struct pcap_pkthdr *header,const u_char *packet){
-	
+
 	static int count = 1;
 	const char * payload;
 
 	printf("packet number: %d\n",count++);
-	
+
 	struct ip * ip = (struct ip *)(packet + ETHER_SIZE);
 	printf("IP header length: %d\n",ip->ip_hl<<2);
 	printf("From %s\n",inet_ntoa(ip->ip_src));
@@ -274,7 +274,7 @@ void get_packet(u_char*args, const struct pcap_pkthdr *header,const u_char *pack
 			int payload_size = ntohs(ip->ip_len)-ip_hl-h_size;
 			if(payload_size>0){
 			payload = (u_char *)(tcp+1);
-			printf("payload is: %s\n",payload);}			
+			printf("payload is: %s\n",payload);}
 		break;}
 		case IPPROTO_UDP:printf("Protocol UDP\n");break;
 		case IPPROTO_ICMP:printf("Protocol ICMP\n");break;
@@ -283,7 +283,7 @@ void get_packet(u_char*args, const struct pcap_pkthdr *header,const u_char *pack
 		return;
 
 	}
-		
+
 
 }
 
@@ -295,23 +295,23 @@ int main(int argc,char*argv[]){
 	bpf_u_int32 mask;
 	bpf_u_int32 net;
 	struct pcap_pkthdr header;
-	const u_char *packet;	
+	const u_char *packet;
 	int num_packets = 10;
-	
+
 	dev = pcap_lookupdev(errbuf);
 	if(dev==NULL){
 		printf("ERROR:%s\n",errbuf);
 		exit(2);
 	}
-	
+
 	printf("The sniff interface is:%s\n",dev);
 
-	
+
 	if(pcap_lookupnet(dev,&net,&mask,errbuf)==-1){
 		printf("ERROR:%s\n",errbuf);
 		net = 0;
 		mask = 0;
-	}	
+	}
 
 	pcap_t * handle = pcap_open_live(dev,BUFSIZ,1,0,errbuf);
 	if(handle == NULL){
@@ -323,12 +323,12 @@ int main(int argc,char*argv[]){
 		printf("Can't parse filter %s:%s\n",filter_exp,pcap_geterr(handle));
 		return(2);
 	}
-		
-	if(pcap_setfilter(handle,&fp)==-1){	
-		printf("cant' install filter %s:%s\n",filter_exp,pcap_geterr(handle));		      return(2);	
-	}	
 
-	printf("Hello\n");	
+	if(pcap_setfilter(handle,&fp)==-1){
+		printf("cant' install filter %s:%s\n",filter_exp,pcap_geterr(handle));		      return(2);
+	}
+
+	printf("Hello\n");
 
 //	packet = pcap_next(handle,&header);
 //	printf("Get a packet with length %d.\n",header.len);
@@ -336,7 +336,7 @@ int main(int argc,char*argv[]){
 	pcap_loop(handle,num_packets,get_packet,NULL);
 
 	pcap_freecode(&fp);
-	
+
 
 
 	pcap_close(handle);

@@ -2,14 +2,14 @@
 title: 精通CSS笔记-布局
 date: 2017-01-30 19:59:54
 categories: css
-tags: [css, CSS-Mastery, Note, layout]
+tags: [css, CSS-Mastery, flex, layout]
 ---
 
 学习内容：
 1. [水平居中](./centering-auto-margin.html)
 2. 两列和三列基于浮动的布局
-    - [2-col-fixed.html](./2-col-fixed.html)   
-    - [3-col-elastic.html](./3-col-elastic.html) 
+    - [2-col-fixed.html](./2-col-fixed.html)
+    - [3-col-elastic.html](./3-col-elastic.html)
     - [3-col-fixed.html](./3-col-fixed.html)
     - [3-col-liquid.html](./3-col-liquid.html)
     - [faux-2-col-fixed.html](./faux-2-col-fixed.html)
@@ -34,32 +34,32 @@ Flex也有行内元素和块级元素的区别：`display:flex, display: inline-
 
 ### 在容器上可以设置6个属性：
 1. flex-direction: 决定item的排列方向，属性值可以有：
-    - row（默认 水平排列） 
-    - row-reverse（倒转水平排列） 
-    - column（垂直排列） 
+    - row（默认 水平排列）
+    - row-reverse（倒转水平排列）
+    - column（垂直排列）
     - column-reverse （倒转垂直排列）
 2. flex-wrap：决定如何换行，属性值可以有：
-    - nowrap（默认 不换行） 
-    - wrap （换行 从上到下） 
+    - nowrap（默认 不换行）
+    - wrap （换行 从上到下）
     - wrap-reverse （换行 从下到上）
 3. flex-flow：是flex-direction和flex-wrap的简写，默认为row nowrap
 4. justify-content：决定项目在水平轴上的对齐方式,类似word中的对其方式，属性值可以有：
-    - flex-start（以水平排列为例：左对齐） 
-    - flex-end（右对齐） 
-    - center（居中对齐） 
+    - flex-start（以水平排列为例：左对齐）
+    - flex-end（右对齐）
+    - center（居中对齐）
     - space-between （两端对其，左右边缘item不空）
     - space-around（两端对其，左右边缘item空，即item中的间隔为两边间隔的两倍）;
-5. align-items：决定项目在垂直轴上的对齐方式，属性值可以有： 
+5. align-items：决定项目在垂直轴上的对齐方式，属性值可以有：
     - stretch（默认 拉伸为容器高度，item之间不存在对齐问题）
-    - flex-start(顶对齐) 
+    - flex-start(顶对齐)
     - flex-end （底部对齐）
-    - center（垂直居中） 
+    - center（垂直居中）
     - baseline（按第一行文字的基线对齐）
 6. align-content：决定多个轴线的对齐方式（即item排成在多行的情况），属性值可以有：
     - stretch（默认 拉伸为轴线高度，item行之间不存在对齐问题）
     - flex-start（以水平排列为例：左对齐）
-    - flex-end（右对齐） 
-    - center（居中对齐） 
+    - flex-end（右对齐）
+    - center（居中对齐）
     - space-between （两端对其，左右边缘item不空）
     - space-around（两端对其，左右边缘item空，即item中的间隔为两边间隔的两倍）;
 

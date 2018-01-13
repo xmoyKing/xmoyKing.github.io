@@ -1,12 +1,12 @@
 ---
 title: Promise5-高级进阶(deferred,race)
 categories:
-  - promise
+  - js
 tags:
   - promise
   - deferred
 date: 2017-04-14 08:36:26
-updated: 
+updated:
 ---
 
 简要介绍一下Deferred和Promise的关系
@@ -61,18 +61,18 @@ getUrl(url).then(function onFulfilled(value){
 }).catch(console.error.bind(console));
 // 等待一段时间，XHR回调输出如下json
 {
-  "args": {}, 
+  "args": {},
   "headers": {
-    "Accept": "*/*", 
-    "Accept-Encoding": "gzip, deflate, sdch", 
-    "Accept-Language": "en-US,en;q=0.8", 
-    "Connection": "close", 
-    "Host": "httpbin.org", 
-    "Origin": "http://liubin.org", 
-    "Referer": "http://liubin.org/promises-book/", 
+    "Accept": "*/*",
+    "Accept-Encoding": "gzip, deflate, sdch",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Connection": "close",
+    "Host": "httpbin.org",
+    "Origin": "http://liubin.org",
+    "Referer": "http://liubin.org/promises-book/",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
-  }, 
-  "origin": "122.193.105.218", 
+  },
+  "origin": "122.193.105.218",
   "url": "http://httpbin.org/get"
 }
 ```

@@ -1,11 +1,11 @@
 ---
 title: Promise1-相关知识点
 categories:
-  - promise
+  - js
 tags:
   - promise
 date: 2017-04-8 16:36:18
-updated: 
+updated:
 ---
 
 记录学习Promise的过程，以及查到的一些资料和博客，知识点，主要参考：[JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
@@ -38,7 +38,7 @@ getAsync('file.json', function(error, result){
     throw error;
   }
   // 成功时处理 ...
-  JSON.parse(result); 
+  JSON.parse(result);
 })
 ```
 在Nodejs中，规定JS回调函数的第一个参数为`Error`对象，但这仅仅是约定，不采用也不会出问题。
@@ -59,7 +59,7 @@ ES6 Promises标准中定义三种类型的promise：
 ```js
 var promise = new Promise(function(resolve, reject){
   // 处理
-  
+
   // 处理完成，使用resolve或reject
 });
 ```
@@ -100,7 +100,7 @@ asyncFunction().then(function(value){
 
 ```
 1. step1: 在asyncFunction函数内部，使用new Promise()实例化一个promise对象，然后返回。
-2. step2：设置asyncFunction函数返回的promise对象，比如then和catch，该promise对象，会在16ms时被resolve，此时，then的回调函数会被调用，并输出结果`'Async Hello world'`。 
+2. step2：设置asyncFunction函数返回的promise对象，比如then和catch，该promise对象，会在16ms时被resolve，此时，then的回调函数会被调用，并输出结果`'Async Hello world'`。
 
 上面的情况中，catch的回调函数不会执行，因为promise返回的是resolve，但若没有setTimeout的话，则会产生异常，此时catch中的回调就会执行。
 

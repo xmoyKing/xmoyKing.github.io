@@ -1,7 +1,7 @@
 ---
 title: 自建CA并将网站改为HTTPS协议网站
 categories:
-  - it
+  - mixed
 tags:
   - ca
   - https
@@ -34,18 +34,18 @@ HTTPS站点是为了让用户相信正在访问的网站是正确的网站，所
 验证身份：私钥加密的信息只能被公钥正确解密，这就能保证信息是被唯一的私钥持有者发出的。
 
 CA机构拥有如下的一些文件(文件名自选)：
-caconfig.conf ：CA机构的密钥配置文件，用于生成一对CA的公私钥  
-cacert.pem ： CA机构的公钥  
-cakey.pem ：CA机构的私钥  
-serial ：证书序列号文件 (初始内容为序列号，不能为空，可以设置比如`01`) 
+caconfig.conf ：CA机构的密钥配置文件，用于生成一对CA的公私钥
+cacert.pem ： CA机构的公钥
+cakey.pem ：CA机构的私钥
+serial ：证书序列号文件 (初始内容为序列号，不能为空，可以设置比如`01`)
 index.txt ：保存已被本机构认证的网站的信息 （初始化时可以为空）
 private文件夹 ：用于保存自己的私钥
 cert文件夹 ：用于保存以颁发证书的副本，证书副本以证书序列号命名
 
 网站拥有如下的一些文件（文件名自选）：
-server.conf : 网站的密钥配置文件，用于生成一对网站的公私钥  
-tempreq.pem ： 网站的公钥  
-serverkey.pem ：网站的私钥  
+server.conf : 网站的密钥配置文件，用于生成一对网站的公私钥
+tempreq.pem ： 网站的公钥
+serverkey.pem ：网站的私钥
 server_crt.pem : 网站的数字证书，由CA机构签发
 
 ### 第一步：CA的配置文件
@@ -59,7 +59,7 @@ certificate = $dir/cacert.pem  # CA机构的公钥
 database = $dir/index.txt # 保存已被本机构认证的网站的信息
 new_certs_dir = $dir/certs # 用于保存以颁发证书的副本，证书副本以证书序列号命名
 private_key = $dir/private/cakey.pem # CA机构的私钥
-serial = $dir/serial # 证书序列号文件  
+serial = $dir/serial # 证书序列号文件
 default_crl_days = 365
 default_days = 1825
 default_md = sha1

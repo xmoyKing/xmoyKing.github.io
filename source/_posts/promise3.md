@@ -1,7 +1,7 @@
 ---
 title: Promise3-测试
 categories:
-  - promise
+  - js
 tags:
   - promise
   - mocha
@@ -175,7 +175,7 @@ it('catch -> then', function(){
 2. 若预期为Rejected状态的话
   - 结果为Fulfilled测试为Fail
   - assertion的结果不一致的时候要Fail
-也就是说，一个测试用例应该包含下面的测试内容， 
+也就是说，一个测试用例应该包含下面的测试内容，
 1. 结果满足Fulfilled / Rejected之一
 2. 对传递给assertion的值进行检查
 

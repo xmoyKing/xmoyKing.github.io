@@ -2,7 +2,7 @@
 title: 前端面试题-1-各大公司前端面试题集
 date: 2017-02-11 10:10:56
 updated: 2017-02-11
-categories: interview
+categories: mixed
 tags: [interview]
 ---
 
@@ -117,11 +117,11 @@ from [奇虎360Web前端开发工程师面试题](http://yanhaijing.com/work/201
         vertical-align: middle;
     }
     ```
-3. 如下代码，在空白处填写代码，使其点击时，前景色为白色，背景色为黑色。  
+3. 如下代码，在空白处填写代码，使其点击时，前景色为白色，背景色为黑色。
     `<div onclick="_________________">颜海镜</div>`
     - 前景色：`color:#fff`,背景色：`background-color:#000;`
     - `this.style.color='#fff';this.style.backgroundColor='#000';`
-4. 书写代码，点击时从1分钟开始，每秒递减到0。  
+4. 书写代码，点击时从1分钟开始，每秒递减到0。
     `<div onclick="test();">颜海镜</div>`
     ```js
     function test(){        /* 无法多次点击，否则会出现多个计时器 */
@@ -130,8 +130,8 @@ from [奇虎360Web前端开发工程师面试题](http://yanhaijing.com/work/201
         var s = 59;
         var timer = setInterval(function(){
             if(s>=0)_self.innerHTML = s--;
-            else clearInterval(timer);  		
-        },1000);  
+            else clearInterval(timer);
+        },1000);
     }
     ```
 5. 简述在IE下mouseover和mouseenter的区别？
@@ -141,9 +141,9 @@ from [奇虎360Web前端开发工程师面试题](http://yanhaijing.com/work/201
 [为什么 [ ] 是 false 而 !![ ] 是 true](https://www.h5jun.com/post/why-false-why-true.html)
 
 1. 已知圆心(x,y)，求圆上任一点(x1,y1)的坐标
-    - 利用圆的方程，圆的方程：（x-x1)^2+(y-x2)^2=r^2  
-    把其中的一个x，y化成x2,y2就是切线方程  
-    (x2-x1)(x-x1)+(y2-y1)(y-y1)=r^2  
+    - 利用圆的方程，圆的方程：（x-x1)^2+(y-x2)^2=r^2
+    把其中的一个x，y化成x2,y2就是切线方程
+    (x2-x1)(x-x1)+(y2-y1)(y-y1)=r^2
 2. 随机抛五枚硬币，求三枚及以上朝上的概率
 
 

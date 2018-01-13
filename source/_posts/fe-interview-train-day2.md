@@ -1,8 +1,8 @@
 ---
 title: 前端面试题-2-阿里技术之瞳前端问答题
 date: 2017-02-12 16:42:15
-updated: 
-categories: interview
+updated:
+categories: mixed
 tags: [interview]
 ---
 
