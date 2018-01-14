@@ -515,3 +515,9 @@ hexo中配置了deploy需要安装对应的hexo-deployer-git包，否则在`hexo
 在MVVM中，jQuery的样式操作、属性操作、事件系统是非常有用的。但如大规模移动删除节点，knockout、emberjs等有更好的方式，数据缓存上，H5的data-*特性节点更为实用，起码在移除节点时不需要调用专门的removeDat方法。jQuery的ajax非常强大，但当它被路由系统覆盖起来时，就不需要那么多配置了。动画引擎上，Bootstrap基于CSS3的动画其实已经够普通开发使用了。而jQuery的选择器在MVVM中其并没有什么用武之地，因为MVVM框架会扫描DOM，比jQuery对DOM遍历的次数更少，并且选择器其实会增加HTML和JS的耦合度，特别是一些结构伪类。
 
 而MVVM能让开发者换一个角度来看待浏览器世界。MVVM将jQuery的DOM操作的方式屏蔽掉了，将DOM与业务分离，所以用它组织代码会少很多，且功能越多越体现MVVM的优势。
+
+##### 2018.1.14
+hexo报错：hexo FATAL Cannot set property 'lastIndex' of undefined
+解决方法：_config.yml 文件中的高亮功能设置`auto_detect: false`
+
+[参考资料](https://www.jianshu.com/p/9f3291805cae)
