@@ -39,7 +39,7 @@
     
     <title>
         
-            JavaScript框架设计笔记-10-事件系统 | 
+            JavaScript框架设计笔记-10-事件系统-1 | 
         
         KING · NOTE
     </title>
@@ -253,18 +253,18 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="https://github.com/xmoyKING">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="JavaScript框架设计笔记-10-事件系统 | KING · NOTE">
+    <meta property="og:title" content="JavaScript框架设计笔记-10-事件系统-1 | KING · NOTE">
     <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
     <meta property="og:description" content="Loneliness is the carnival of one single soul.">
     <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="js-framework"> 
 
     
-        <meta property="article:published_time" content="Sat Jan 06 2018 19:31:10 GMT+0800" />
-        <meta property="article:modified_time" content="Sat Jan 06 2018 19:31:10 GMT+0800" />
+        <meta property="article:published_time" content="Sat Jan 06 2018 16:31:10 GMT+0800" />
+        <meta property="article:modified_time" content="Sat Jan 06 2018 16:31:10 GMT+0800" />
     
 
     <!-- The Twitter Card protocol -->
-    <meta name="twitter:title" content="JavaScript框架设计笔记-10-事件系统 | KING · NOTE">
+    <meta name="twitter:title" content="JavaScript框架设计笔记-10-事件系统-1 | KING · NOTE">
     <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
     <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
     <meta name="twitter:card" content="summary_large_image" />
@@ -285,9 +285,9 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "mainEntityOfPage": "https://github.com/xmoyKING/2018/01/06/js-framework10/index.html",
-    "headline": "JavaScript框架设计笔记-10-事件系统",
-    "datePublished": "Sat Jan 06 2018 19:31:10 GMT+0800",
-    "dateModified": "Sat Jan 06 2018 19:31:10 GMT+0800",
+    "headline": "JavaScript框架设计笔记-10-事件系统-1",
+    "datePublished": "Sat Jan 06 2018 16:31:10 GMT+0800",
+    "dateModified": "Sat Jan 06 2018 16:31:10 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "KING",
@@ -403,7 +403,7 @@
         
     
             <p class="article-headline-p">
-                JavaScript框架设计笔记-10-事件系统
+                JavaScript框架设计笔记-10-事件系统-1
             </p>
         </div>
 
@@ -465,7 +465,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript框架设计笔记-10-事件系统&url=https://github.com/xmoyKING/2018/01/06/js-framework10/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript框架设计笔记-10-事件系统-1&url=https://github.com/xmoyKING/2018/01/06/js-framework10/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 Share to Weibo
             </li>
@@ -474,7 +474,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript框架设计笔记-10-事件系统&url=https://github.com/xmoyKING/2018/01/06/js-framework10/index.html&via=KING" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript框架设计笔记-10-事件系统-1&url=https://github.com/xmoyKING/2018/01/06/js-framework10/index.html&via=KING" target="_blank">
             <li class="mdl-menu__item">
                 Share to Twitter
             </li>
@@ -536,7 +536,7 @@
 </ul>
 </li>
 </ul>
-<p>若是简单的页面，就用简单的形式打发，没必要使用框架。当然，其实框架的事件系统是建立在简单实现的基础上的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addEvent</span>(<span class="params">el, type, callback, useCapture</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(el.dispatchEvent)&#123; <span class="comment">// W3C式优先</span></span><br><span class="line">    el.addEventListener(type, callback, !!useCapture);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    el.attachEvent(<span class="string">'on'</span>+type, callback);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> callback <span class="comment">//返回callback方便卸载使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeEvent</span>(<span class="params">el, type, callback, useCapture</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(el.dispatchEvent)&#123;</span><br><span class="line">    el.removeEventListener(type, callback, !!useCapture);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    el.detachEvent(<span class="string">'on'</span>+type, callback);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fireEvent</span>(<span class="params">el, type, args, event</span>)</span>&#123;</span><br><span class="line">  args = args || &#123;&#125;;</span><br><span class="line">  <span class="keyword">if</span>(el.dispatchEvent)&#123;</span><br><span class="line">    event = <span class="built_in">document</span>.createEvent(<span class="string">'HTMLEvents'</span>);</span><br><span class="line">    event.initEvent(type, <span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    event = <span class="built_in">document</span> = <span class="built_in">document</span>.createEventObject();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> args)&#123;</span><br><span class="line">    <span class="keyword">if</span>(args.hasOwnProperty(i))&#123;</span><br><span class="line">      event[i] = args[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span>(el.dispatchEvent)&#123;</span><br><span class="line">    el.dispatchEvent(event);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    el.fireEvent(<span class="string">'on'</span>+type, event);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>若是简单的页面，就用简单的形式打发，没必要使用框架。当然，其实框架的事件系统是建立在简单实现的基础上的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addEvent</span>(<span class="params">el, type, callback, useCapture</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(el.dispatchEvent)&#123; <span class="comment">// W3C式优先</span></span><br><span class="line">    el.addEventListener(type, callback, !!useCapture);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    el.attachEvent(<span class="string">'on'</span>+type, callback);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> callback <span class="comment">//返回callback方便卸载使用</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeEvent</span>(<span class="params">el, type, callback, useCapture</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(el.dispatchEvent)&#123;</span><br><span class="line">    el.removeEventListener(type, callback, !!useCapture);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    el.detachEvent(<span class="string">'on'</span>+type, callback);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fireEvent</span>(<span class="params">el, type, args, event</span>)</span>&#123;</span><br><span class="line">  args = args || &#123;&#125;;</span><br><span class="line">  <span class="keyword">if</span>(el.dispatchEvent)&#123;</span><br><span class="line">    event = <span class="built_in">document</span>.createEvent(<span class="string">'HTMLEvents'</span>);</span><br><span class="line">    event.initEvent(type, <span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    event = <span class="built_in">document</span> = <span class="built_in">document</span>.createEventObject();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> args)&#123;</span><br><span class="line">    <span class="keyword">if</span>(args.hasOwnProperty(i))&#123;</span><br><span class="line">      event[i] = args[i];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(el.dispatchEvent)&#123;</span><br><span class="line">    el.dispatchEvent(event);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    el.fireEvent(<span class="string">'on'</span>+type, event);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="onXXX绑定方式的缺陷"><a href="#onXXX绑定方式的缺陷" class="headerlink" title="onXXX绑定方式的缺陷"></a>onXXX绑定方式的缺陷</h4><p>onXXX既可以写在HTML标签内，也可以独立出来，作为元素节点的一个特殊属性来处理，不过作为一种古老的绑定方式，它很难预测到后来人对该事件的扩展。总结有如下不足：</p>
 <ul>
 <li>onXXX对DOM3新增事件或FF某些私有实现无法支持，主要如下：<br>DOMActive、DOMAttrModified、DOMAttributeNameChanged、DOMCharacterDataModified、DOMContentLoaded、DOMElementNameChanged、DOMFocusIn、DOMFocusOut、DOMMouseScroll、DOMNodeINserted、DOMNodeInsertedIntoDocument、DOMNodeRemoved、DOMNodeRemovedFromDocument、DOMSubtreeModified、MozMousePixelScroll<br>当然，其实上面那么多DOMXXX的事件只有很少一部分会被用到，即使是框架用的也很少，主要用的是DOMContentLoaded，用于检测DomReady，DOMMouseSrcoll用于mousewheel事件(MozMousePixelScroll在FF模拟)</li>
@@ -591,6 +591,14 @@
             <!-- Post Prev & Next Nav -->
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
+    
+        <a href="/2018/01/06/js-framework11/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
     
 
     <!-- Section Spacer -->
@@ -690,7 +698,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
             </ul>
         </li>
         
@@ -708,7 +716,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/express/">express<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/interview/">interview<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/it/">it<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">78</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/promise/">promise<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">88</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
             </ul>
         </li>
         
@@ -762,7 +770,7 @@
         <li>
             <a href="/archives">
                 Number of articles
-                <span class="sidebar-badge">197</span>
+                <span class="sidebar-badge">207</span>
             </a>
         </li>
         

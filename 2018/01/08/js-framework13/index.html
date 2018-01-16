@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JavaScript框架设计笔记-13-动画引擎-1 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",js,jquery,js-framework,css3 animation,easing">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JavaScript框架设计笔记-13-动画引擎-1 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="jquery"> <meta property="og:article:tag" content="js-framework"> <meta property="og:article:tag" content="css3 animation"> <meta property="og:article:tag" content="easing"> 
+
+    
+        <meta property="article:published_time" content="Mon Jan 08 2018 10:20:33 GMT+0800" />
+        <meta property="article:modified_time" content="Mon Jan 08 2018 10:20:33 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JavaScript框架设计笔记-13-动画引擎-1 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2018/01/08/js-framework13/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2018/01/08/js-framework13/index.html",
+    "headline": "JavaScript框架设计笔记-13-动画引擎-1",
+    "datePublished": "Mon Jan 08 2018 10:20:33 GMT+0800",
+    "dateModified": "Mon Jan 08 2018 10:20:33 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,jquery,js-framework,css3 animation,easing",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原生JS实现最简单的JS动画"><span class="post-toc-number">1.</span> <span class="post-toc-text">原生JS实现最简单的JS动画</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#缓动公式"><span class="post-toc-number">2.</span> <span class="post-toc-text">缓动公式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#动画方法的API"><span class="post-toc-number">3.</span> <span class="post-toc-text">动画方法的API</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#mass-Framework的js动画引擎"><span class="post-toc-number">4.</span> <span class="post-toc-text">mass Framework的js动画引擎</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JavaScript框架设计笔记-13-动画引擎-1
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Jan 08, 2018</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Jan 08, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/css3-animation/">css3 animation</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/easing/">easing</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/jquery/">jquery</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js-framework/">js-framework</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript框架设计笔记-13-动画引擎-1&url=https://github.com/xmoyKING/2018/01/08/js-framework13/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript框架设计笔记-13-动画引擎-1&url=https://github.com/xmoyKING/2018/01/08/js-framework13/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2018/01/08/js-framework13/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2018/01/08/js-framework13/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>浏览网页，经常被一些创意所感动，尤其是一些很有创意或极具视觉冲击的动画。而动画引擎就是创造这些动画的基础，动画引擎的原理很简单，即利用人眼的视觉残留现象，在一定时间内改变页面的样式。比如，改变宽高就是缩放动画、改变坐标就是位移动画、改变坐标轴就是旋转动画、改变透明度就是淡入淡出动画…一般的情况下，我们将控制样式的任务交给CSS，控制时间的任务交给JS。</p>
+<p>可计算的样式大致3类，在标准浏览器中，获取时已经将样式值计算好了，无须再次转化，而旧版IE需要自己手动转换（如原来单位是em，则获取时也是em）</p>
+<ul>
+<li>一类是尺寸如width、height、margin-XXX、padding-XXX等，单位一般可以换算为px</li>
+<li>一类是颜色，如color、background-color，单位基本都最终可以换算分解为RGBA，很容易格式化为数组</li>
+<li>最后一类是transform这样的变形样式，它有两种传值方式，一种是面向计算机，传入矩阵，matrix()；另一种是rotate()/skew()/scale()/translate()，面向人类，但其实最后也会转化为矩阵计算。</li>
+</ul>
+<p>因此，要开发一个动画引擎，第一步是获取元素的精确的样式值，这一点可以参考样式模块。第二步就是时间，涉及到2个时间，一个是动画执行总时间，一个是变动的间隔时间，而间隔时间通常可以转化为帧数，就是我们熟知的fps（每秒多少张图片），一般来说间隔25ms是最佳值，这一点上看看动漫，30p/1s，即每秒30张图片，间隔时间约等于27.77ms。</p>
+<h4 id="原生JS实现最简单的JS动画"><a href="#原生JS实现最简单的JS动画" class="headerlink" title="原生JS实现最简单的JS动画"></a>原生JS实现最简单的JS动画</h4><p>新建一个页面，有一个方块，点击就从一端跑到另一段，动画总时间2s，fps为30帧。效果如下：</p>
+<p></p><p data-height="208" data-theme-id="0" data-slug-hash="MrraLg" data-default-tab="result" data-user="xmoyking" data-embed-version="2" data-pen-title="simple div animate by simple JS" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/MrraLg/" target="_blank" rel="noopener">simple div animate by simple JS</a> by XmoyKing (<a href="https://codepen.io/xmoyking" target="_blank" rel="noopener">@xmoyking</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> el = <span class="built_in">document</span>.querySelector(<span class="string">'#move'</span>);</span><br><span class="line">	<span class="keyword">var</span> parent = <span class="built_in">document</span>.querySelector(<span class="string">'#taxiway'</span>);</span><br><span class="line">	<span class="keyword">var</span> distance = parent.offsetWidth - el.offsetWidth; <span class="comment">// 总距离</span></span><br><span class="line">	<span class="keyword">var</span> begin = <span class="built_in">parseFloat</span>(<span class="built_in">window</span>.getComputedStyle(el, <span class="literal">null</span>).left); <span class="comment">// 开始位置</span></span><br><span class="line">	<span class="keyword">var</span> end = begin + distance; <span class="comment">// 结束位置</span></span><br><span class="line">	<span class="keyword">var</span> fps = <span class="number">30</span>; <span class="comment">// 刷新率</span></span><br><span class="line">	<span class="keyword">var</span> interval = <span class="number">1000</span> / fps; <span class="comment">// 间隔时间</span></span><br><span class="line">	<span class="keyword">var</span> duration = <span class="number">2000</span>; <span class="comment">// 时长</span></span><br><span class="line">	<span class="keyword">var</span> times = duration / <span class="number">1000</span> * fps; <span class="comment">// 总刷新次数</span></span><br><span class="line">	<span class="keyword">var</span> step = distance / times; <span class="comment">// 每次移动距离</span></span><br><span class="line"></span><br><span class="line">	el.onclick = simpleProgress;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 简单累加距离</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">simpleAdd</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">		<span class="keyword">var</span> id = setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(begin &gt;= end)&#123;</span><br><span class="line">				el.style.left = end +<span class="string">'px'</span>;</span><br><span class="line">				clearInterval(id);</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Date</span>() - now);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				begin += step;</span><br><span class="line">				el.style.left = begin +<span class="string">'px'</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;, interval);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 加入进度变量,这样当改变进度per时，就能随意控制加速减速，也就是后面的缓动公式</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">simpleProgress</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">var</span> beginTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">		<span class="keyword">var</span> id = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">			<span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Date</span>() - beginTime; <span class="comment">// 当前已经用掉的时间</span></span><br><span class="line">			<span class="keyword">if</span>(t &gt;= duration)&#123;</span><br><span class="line">				el.style.left = end +<span class="string">'px'</span>;</span><br><span class="line">				clearInterval(id);</span><br><span class="line">				<span class="built_in">console</span>.log(t);</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">var</span> per = t / duration; <span class="comment">// 当前进度</span></span><br><span class="line">				el.style.left = begin + per * distance +<span class="string">'px'</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;, interval)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所谓缓动公式其实是来自数学上的三角函数，二次向方程式，高阶方程式等。有了缓动公式，就能轻易模拟现实中的加速、减速、急刹车、重力、摇摆、弹簧、来回弹动等效果。</p>
+<h4 id="缓动公式"><a href="#缓动公式" class="headerlink" title="缓动公式"></a>缓动公式</h4><p>经过多年的发展，缓动公式的各项参数都稳定下来，而且一般情况下都直接使用默认的easeIn或linear效果，当然缓动公式还在源源不断被人发掘出新的公式。</p>
+<p>基本的缓动公式（没有介入高阶函数或三角函数），基本上除了linear外（也被称为easeNone，表示匀速），都以ease作为前缀开头，后缀有3种：</p>
+<ul>
+<li>In表示加速</li>
+<li>Out表示减速</li>
+<li>InOut表示加速到中途开始减速<br>于是就有easeIn、easeOut、easeInOut这3种。</li>
+</ul>
+<p>然后再以实现方式与指数或开根进行区分：</p>
+<ul>
+<li>Sine表示三角函数实现，</li>
+<li>Quad表示二次方、Cubic表示三次方、Quart表示四次方、Quint表示五次方，</li>
+<li>Circ表示使用开平方根的Math.sqit，</li>
+<li>Expo表示开立方根的Math.pow,</li>
+<li>Elastic则表示结合三角函数与开立方根的初级弹簧效果，</li>
+<li>Back表示使用了特殊常数（1.70158）来计算的回退效果，</li>
+<li>Bounce则表示高级弹簧效果</li>
+</ul>
+<p>jquery.easing.js里有具体是实现，其缓动公式图示如下：<br><img src="1.png" alt="缓动公式图示"></p>
+<p><a href="http://code.ciaoca.com/jquery/easing/" target="_blank" rel="noopener">具体效果演示参考</a></p>
+<p>jQuery标准库中只默认实现了2个linear和swing：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">linear: <span class="function"><span class="keyword">function</span>(<span class="params">p</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> p;</span><br><span class="line">&#125;,</span><br><span class="line">swing: <span class="function"><span class="keyword">function</span>(<span class="params">p</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">.5</span> - <span class="built_in">Math</span>.cos(p*<span class="built_in">Math</span>.PI) / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一般缓动库的参数形式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> easing = &#123;</span><br><span class="line">  easeInQuad: <span class="function"><span class="keyword">function</span>(<span class="params">t, b, c, d</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> c * (t /=d ) * t + b;</span><br><span class="line">  &#125;,</span><br><span class="line">  easeOutQuad: <span class="function"><span class="keyword">function</span>(<span class="params">t, b, c, d</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> - c * (t /=d ) * (t - <span class="number">2</span>) + b;</span><br><span class="line">  &#125;,</span><br><span class="line">  easeInOutQuad: <span class="function"><span class="keyword">function</span>(<span class="params">t, b, c, d</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>((t /= d /<span class="number">2</span>) &lt; <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">return</span> c / <span class="number">2</span> * t * t + b;</span><br><span class="line">    <span class="keyword">return</span> - c / <span class="number">2</span> * ((--t) * (t - <span class="number">2</span>) - <span class="number">1</span>) + b;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述easing的函数参数t, b, c, d含义如下：</p>
+<ul>
+<li>T, timestamp, 指缓动效果开始执行到当前帧所经过的时间段，单位ms</li>
+<li>B, begining, 起始值</li>
+<li>C, change, 变化总量</li>
+<li>D, duration, 动画持续时间<br>返回的是直接可用的数值，即直接加上单位进行赋值即可。</li>
+</ul>
+<p>而jquery参数的风格是当前时间减去动画开始时间除以总时间的比值，一个小数，它用于乘以总变化量，然后加上起始值。即上面simpleProgress的逻辑，比如修改为bounce弹簧效果，到达终点时有一个弹簧的效果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bounce = <span class="function"><span class="keyword">function</span>(<span class="params">per</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(per &lt; (<span class="number">1</span> / <span class="number">2.75</span>))&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">4.5625</span> * per * per);</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(per &lt; (<span class="number">2</span> / <span class="number">2.75</span>))&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">7.5625</span> * (per -= (<span class="number">1.5</span> / <span class="number">2.75</span>)) * per + <span class="number">.75</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(per &lt; (<span class="number">2.5</span> / <span class="number">2.75</span>))&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">7.5625</span> * (per -= (<span class="number">2.25</span> / <span class="number">2.75</span>)) * per + <span class="number">.9375</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="number">7.5625</span> * (per -= (<span class="number">2.625</span> / <span class="number">2.75</span>)) * per + <span class="number">.984375</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 修改后的bounce弹簧效果的simpleProgress</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">simpleProgress</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> beginTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">var</span> id = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> per = (<span class="keyword">new</span> <span class="built_in">Date</span>() - beginTime) / duration; <span class="comment">// 进度</span></span><br><span class="line">    <span class="keyword">if</span>(per &gt;= <span class="number">1</span>)&#123;</span><br><span class="line">      el.style.left = end +<span class="string">'px'</span>;</span><br><span class="line">      clearInterval(id);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      el.style.left = begin + bounce(per) * distance +<span class="string">'px'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, interval)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="动画方法的API"><a href="#动画方法的API" class="headerlink" title="动画方法的API"></a>动画方法的API</h4><p>由于选择器的流行，注定动画API也是需要集化操作的，能处理多个元素，当然关键还是函数名以及参数的设定。</p>
+<p>jquery的API易用性非常强，其animate方法有两种用法，其中第一个参数始终为要进行动画的属性：</p>
+<ul>
+<li>animate(properties, [, duration] [, easing] [,complete])，其他参数都是可选的，即duration除了slow,fast,default三个字符串外就是数字，easing为缓动公式的名称，complete为完成动画时执行的函数</li>
+<li>animate(properties, options)，options为参数对象</li>
+</ul>
+<p>除此之外，jquery还提供了一个queue参数，目的是让作用于同一个元素的动画进行排队，一个一个处理，所有动画对象都有自己的setInterval驱动。而其他框架如YUI、kissy、mass Framework等则有一个中央队列，所有不排队的动画全部放在这数组中，然后由一个setInterval来驱动它们，排队的动画作为它的兄弟的属性而存在，当前面的动画执行完后，排队的动画就能接着执行了。</p>
+<p>除了jquery的animate方法的API，还有一个CSS3 keyframe animation的API也需要详细了解一番。<br>其实上面的简单move动画可以改为CSS3版本，只需要定义一个CSS类，在CSS类中定义动画, 然后当点击方块时为方块加上animate的CSS类名即可：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.animate</span>&#123;</span><br><span class="line">  <span class="attribute">animation-duration</span>: <span class="number">2s</span>;</span><br><span class="line">  <span class="attribute">animation-name</span>: slidein;</span><br><span class="line">  <span class="attribute">animation-timing-function</span>: ease-in-out;</span><br><span class="line">  <span class="attribute">animation-fill-mode</span>: forwards;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">keyframes</span> slidein&#123;</span><br><span class="line">  <span class="selector-tag">from</span>&#123;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0%</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">to</span>&#123;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">700px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一个CSS3动画：</p>
+<ul>
+<li>第一部分一个普通的样式规则（CSS类animate），动画属性可以用于描述动画所需时长(2s)，缓动公式（ease-in-out），结束后保留状态(为写明，使用默认值)，重复多少次(forwards)，以及关键帧动画的引用名字（slidein）。</li>
+<li>第二部分是关键帧规则（@keyframes slidein），此处只插入了2个关键帧，实际上可以插入多个，以百分比作为节点，开始和结束可用from/to表示，但其实也会被转换为0%和100%,若缺省结尾关键帧，则浏览器会自动补足。</li>
+</ul>
+<h4 id="mass-Framework的js动画引擎"><a href="#mass-Framework的js动画引擎" class="headerlink" title="mass Framework的js动画引擎"></a>mass Framework的js动画引擎</h4><p>那么动画引擎到底是如何做的呢？<br>首先，需要一个中央队列（也叫时间轴，可以在里面插入关键帧，两个关键帧之间就是补间动画），其实就是一个数组，只要它里面有元素，它就会驱动setInterval执行动画，若动画执行完毕，就删掉其node属性，并且从数组中删除此元素。最后检查数组是否为空，空了就clearInterval，否则就继续。</p>
+<p><a href="https://github.com/RubyLouvre/mass-Framework/blob/master/fx.js">源码</a>如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> timeline = $.timeline = []; <span class="comment">//时间轴</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertFrame</span>(<span class="params">frame</span>) </span>&#123; <span class="comment">//插入包含关键帧原始信息的帧对象</span></span><br><span class="line">  <span class="keyword">if</span> (frame.queue) &#123; <span class="comment">//如果指定要排队</span></span><br><span class="line">      <span class="keyword">var</span> gotoQueue = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = timeline.length, el; el = timeline[--i];) &#123;</span><br><span class="line">          <span class="keyword">if</span> (el.node === frame.node) &#123; <span class="comment">//★★★第一步</span></span><br><span class="line">              el.positive.push(frame); <span class="comment">//子列队</span></span><br><span class="line">              gotoQueue = <span class="number">0</span>;</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (gotoQueue) &#123; <span class="comment">//★★★第二步</span></span><br><span class="line">          timeline.unshift(frame);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      timeline.push(frame);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (insertFrame.id === <span class="literal">null</span>) &#123; <span class="comment">//只要数组中有一个元素就开始运行</span></span><br><span class="line">      insertFrame.id = setInterval(deleteFrame, <span class="number">1000</span> / $.fps);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">insertFrame.id = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></p>
+<p>主队列的动画是立即执行的，一个元素可以对应多个动画，比如它的宽、高、背景色同时改变。<br>子队列防止等待执行的动画，只有前面的动画执行完毕，才能执行它们。比如，若要实现倒带效果（CSS3 animation-direction:alternate）,JS的实现方式是把第一帧和最后一帧调换，将这些动画放到negative子队列中。不倒带则放在positive队列。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> effect = $.fn.animate = $.fn.fx = <span class="function"><span class="keyword">function</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//将多个参数整成两个，第一参数暂时别动</span></span><br><span class="line">  <span class="keyword">var</span> opts = addOptions.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>), p;</span><br><span class="line">  <span class="comment">//第一个参数为元素的样式，我们需要将它们从CSS的连字符风格统统转为驼峰风格，</span></span><br><span class="line">  <span class="comment">//如果需要私有前缀，也在这里加上</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> name <span class="keyword">in</span> props) &#123;</span><br><span class="line">      p = $.cssName(name) || name;</span><br><span class="line">      <span class="keyword">if</span> (name !== p) &#123;</span><br><span class="line">          props[p] = props[name]; <span class="comment">//添加borderTopWidth, styleFloat</span></span><br><span class="line">          <span class="keyword">delete</span> props[name]; <span class="comment">//删掉border-top-width, float</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, node; node = <span class="keyword">this</span>[i++];) &#123;</span><br><span class="line">      <span class="comment">//包含关键帧的原始信息的对象到主列队或子列队。</span></span><br><span class="line">      insertFrame($.mix(&#123;</span><br><span class="line">          positive: [], <span class="comment">//正向列队</span></span><br><span class="line">          negative: [], <span class="comment">//外队列队</span></span><br><span class="line">          node: node, <span class="comment">//元素节点</span></span><br><span class="line">          props: props <span class="comment">//@keyframes中要处理的样式集合</span></span><br><span class="line">      &#125;, opts));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>deleteFrame方法的任务就把已经完成或强制完成的动画从主队列中删除<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteFrame</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//执行动画与尝试删除已经完成或被强制完成的帧对象</span></span><br><span class="line">  <span class="keyword">var</span> i = timeline.length;</span><br><span class="line">  <span class="keyword">while</span> (--i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!timeline[i].paused) &#123; <span class="comment">//如果没有被暂停</span></span><br><span class="line">          <span class="keyword">if</span> (!(timeline[i].node &amp;&amp; enterFrame(timeline[i], i))) &#123;</span><br><span class="line">              timeline.splice(i, <span class="number">1</span>);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  timeline.length || (clearInterval(insertFrame.id), insertFrame.id = <span class="literal">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用animate方法（别名为fx）即可添加关键帧，参数与jquery一样，内部使用addOptions/addOption方法裁剪用户传参到可用状态，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addOptions</span>(<span class="params">properties</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">isFinite</span>(properties)) &#123; <span class="comment">//如果第一个为数字</span></span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">          duration: properties</span><br><span class="line">      &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> opts = &#123;&#125;;</span><br><span class="line">  <span class="comment">//如果第二参数是对象</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">      addOption(opts, <span class="built_in">arguments</span>[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  opts.duration = <span class="keyword">typeof</span> opts.duration === <span class="string">"number"</span> ? opts.duration : <span class="number">400</span>;</span><br><span class="line">  opts.queue = !! (opts.queue == <span class="literal">null</span> || opts.queue); <span class="comment">//默认进行排队</span></span><br><span class="line">  opts.easing = $.easing[opts.easing] ? opts.easing : <span class="string">"swing"</span>;</span><br><span class="line">  opts.update = <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> opts;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addOption</span>(<span class="params">opts, p</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> ($.type(p)) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"Object"</span>:</span><br><span class="line">          addCallback(opts, p, <span class="string">"after"</span>);</span><br><span class="line">          addCallback(opts, p, <span class="string">"before"</span>);</span><br><span class="line">          $.mix(opts, p);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"Number"</span>:</span><br><span class="line">          opts.duration = p;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"String"</span>:</span><br><span class="line">          opts.easing = p;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"Function"</span>:</span><br><span class="line">          opts.complete = p;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addCallback</span>(<span class="params">target, source, name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> source[name] === <span class="string">"function"</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> fn = target[name];</span><br><span class="line">      <span class="keyword">if</span> (fn) &#123;</span><br><span class="line">          target[name] = <span class="function"><span class="keyword">function</span>(<span class="params">node, fx</span>) </span>&#123;</span><br><span class="line">              fn(node, fx);</span><br><span class="line">              source[name](node, fx);</span><br><span class="line">          &#125;;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          target[name] = source[name];</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">delete</span> source[name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后才进入insertFrame方法，insertFrame方法会间接调用enterFrame方法，这才是动画的真正执行者，在setInterval内运行：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">enterFrame</span>(<span class="params">fx, index</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//驱动主列队的动画实例进行补间动画(update)，</span></span><br><span class="line">  <span class="comment">//并在动画结束后，从子列队选取下一个动画实例取替自身</span></span><br><span class="line">  <span class="keyword">var</span> node = fx.node,</span><br><span class="line">      now = +<span class="keyword">new</span> <span class="built_in">Date</span>;</span><br><span class="line">  <span class="keyword">if</span> (!fx.startTime) &#123; <span class="comment">//第一帧</span></span><br><span class="line">      callback(fx, node, <span class="string">"before"</span>); <span class="comment">//动画开始前做些预操作</span></span><br><span class="line">      fx.props &amp;&amp; parseFrames(fx.node, fx, index); <span class="comment">//parse原始材料为关键帧</span></span><br><span class="line">      fx.props = fx.props || [];</span><br><span class="line">      AnimationPreproccess[fx.method || <span class="string">"noop"</span>](node, fx); <span class="comment">//parse后也要做些预处理</span></span><br><span class="line">      fx.startTime = now;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">//中间自动生成的补间</span></span><br><span class="line">      <span class="keyword">var</span> per = (now - fx.startTime) / fx.duration;</span><br><span class="line">      <span class="keyword">var</span> end = fx.gotoEnd || per &gt;= <span class="number">1</span>; <span class="comment">//gotoEnd可以被外面的stop方法操控,强制中止</span></span><br><span class="line">      <span class="keyword">var</span> hooks = effect.updateHooks;</span><br><span class="line">      <span class="keyword">if</span> (fx.update) &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, obj; obj = fx.props[i++];) &#123; <span class="comment">// 处理渐变</span></span><br><span class="line">              (hooks[obj.type] || hooks._default)(node, per, end, obj);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (end) &#123; <span class="comment">//最后一帧</span></span><br><span class="line">          callback(fx, node, <span class="string">"after"</span>); <span class="comment">//动画结束后执行的一些收尾工作</span></span><br><span class="line">          callback(fx, node, <span class="string">"complete"</span>); <span class="comment">//执行用户回调</span></span><br><span class="line">          <span class="keyword">if</span> (fx.revert &amp;&amp; fx.negative.length) &#123; <span class="comment">//如果设置了倒带</span></span><br><span class="line">              <span class="built_in">Array</span>.prototype.unshift.apply(fx.positive, fx.negative.reverse());</span><br><span class="line">              fx.negative = []; <span class="comment">// 清空负向列队</span></span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">var</span> neo = fx.positive.shift();</span><br><span class="line">          <span class="keyword">if</span> (!neo) &#123;</span><br><span class="line">              <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">          &#125; <span class="comment">//如果存在排队的动画,让它继续</span></span><br><span class="line">          timeline[index] = neo;</span><br><span class="line">          neo.positive = fx.positive;</span><br><span class="line">          neo.negative = fx.negative;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          callback(fx, node, <span class="string">"step"</span>); <span class="comment">//每执行一帧调用的回调</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后是parseFrames方法，此方法的任务就是从已有资料中分解出关键帧，每个关键帧包括样式名、缓动公式（之前只是名字）、开始值、结束值、单位与类型。类型分三种，颜色值、滚动、默认处理，根据这些程序会选用不用钩子函数进行分解、刷新。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">effect.updateHooks = &#123;</span><br><span class="line">  _default: <span class="function"><span class="keyword">function</span>(<span class="params">node, per, end, obj</span>) </span>&#123;</span><br><span class="line">      $.css(node, obj.name, (end ? obj.to : obj.from + obj.easing(per) * (obj.to - obj.from)) + obj.unit)</span><br><span class="line">  &#125;,</span><br><span class="line">  color: <span class="function"><span class="keyword">function</span>(<span class="params">node, per, end, obj</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> pos = obj.easing(per),</span><br><span class="line">          rgb = end ? obj.to : obj.from.map(<span class="function"><span class="keyword">function</span>(<span class="params">from, i</span>) </span>&#123;</span><br><span class="line">              <span class="keyword">return</span> <span class="built_in">Math</span>.max(<span class="built_in">Math</span>.min(<span class="built_in">parseInt</span>(<span class="keyword">from</span> + (obj.to[i] - <span class="keyword">from</span>) * pos, <span class="number">10</span>), <span class="number">255</span>), <span class="number">0</span>);</span><br><span class="line">          &#125;);</span><br><span class="line">      node.style[obj.name] = <span class="string">"rgb("</span> + rgb + <span class="string">")"</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  scroll: <span class="function"><span class="keyword">function</span>(<span class="params">node, per, end, obj</span>) </span>&#123;</span><br><span class="line">      node[obj.name] = (end ? obj.to : obj.from + obj.easing(per) * (obj.to - obj.from));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在enterFrame方法中有一个预处理的过程，主要用于show、hide等方法，AnimationPreprocess里有四个方法：noop（表示不处理）、show、hide、toggle。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> AnimationPreproccess = &#123;</span><br><span class="line">  noop: $.noop,</span><br><span class="line">  show: <span class="function"><span class="keyword">function</span>(<span class="params">node, frame</span>) </span>&#123;</span><br><span class="line">      <span class="comment">//show 开始时计算其width1 height1 保存原来的width height display改为inline-block或block overflow处理 赋值（width1，height1）</span></span><br><span class="line">      <span class="comment">//hide 保存原来的width height 赋值为(0,0) overflow处理 结束时display改为none;</span></span><br><span class="line">      <span class="comment">//toggle 开始时判定其是否隐藏，使用再决定使用何种策略</span></span><br><span class="line">      <span class="keyword">if</span> (node.nodeType === <span class="number">1</span> &amp;&amp; $.isHidden(node)) &#123;</span><br><span class="line">          <span class="keyword">var</span> display = $._data(node, <span class="string">"olddisplay"</span>);</span><br><span class="line">          <span class="keyword">if</span> (!display || display === <span class="string">"none"</span>) &#123;</span><br><span class="line">              display = $.parseDisplay(node.nodeName);</span><br><span class="line">              $._data(node, <span class="string">"olddisplay"</span>, display);</span><br><span class="line">          &#125;</span><br><span class="line">          node.style.display = display;</span><br><span class="line">          <span class="keyword">if</span> (<span class="string">"width"</span> <span class="keyword">in</span> frame.props || <span class="string">"height"</span> <span class="keyword">in</span> frame.props) &#123; <span class="comment">//如果是缩放操作</span></span><br><span class="line">              <span class="comment">//修正内联元素的display为inline-block，以让其可以进行width/height的动画渐变</span></span><br><span class="line">              <span class="keyword">if</span> (display === <span class="string">"inline"</span> &amp;&amp; $.css(node, <span class="string">"float"</span>) === <span class="string">"none"</span>) &#123;</span><br><span class="line">                  <span class="keyword">if</span> (!$.support.inlineBlockNeedsLayout) &#123; <span class="comment">//w3c</span></span><br><span class="line">                      node.style.display = <span class="string">"inline-block"</span>;</span><br><span class="line">                  &#125; <span class="keyword">else</span> &#123; <span class="comment">//IE</span></span><br><span class="line">                      <span class="keyword">if</span> (display === <span class="string">"inline"</span>) &#123;</span><br><span class="line">                          node.style.display = <span class="string">"inline-block"</span>;</span><br><span class="line">                      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                          node.style.display = <span class="string">"inline"</span>;</span><br><span class="line">                          node.style.zoom = <span class="number">1</span>;</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  hide: <span class="function"><span class="keyword">function</span>(<span class="params">node, frame</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (node.nodeType === <span class="number">1</span> &amp;&amp; !$.isHidden(node)) &#123;</span><br><span class="line">          <span class="keyword">var</span> display = $.css(node, <span class="string">"display"</span>),</span><br><span class="line">              s = node.style;</span><br><span class="line">          <span class="keyword">if</span> (display !== <span class="string">"none"</span> &amp;&amp; !$._data(node, <span class="string">"olddisplay"</span>)) &#123;</span><br><span class="line">              $._data(node, <span class="string">"olddisplay"</span>, display);</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">var</span> overflows;</span><br><span class="line">          <span class="keyword">if</span> (<span class="string">"width"</span> <span class="keyword">in</span> frame.props || <span class="string">"height"</span> <span class="keyword">in</span> frame.props) &#123; <span class="comment">//如果是缩放操作</span></span><br><span class="line">              <span class="comment">//确保内容不会溢出,记录原来的overflow属性，</span></span><br><span class="line">              <span class="comment">//因为IE在改变overflowX与overflowY时，overflow不会发生改变</span></span><br><span class="line">              overflows = [s.overflow, s.overflowX, s.overflowY];</span><br><span class="line">              s.overflow = <span class="string">"hidden"</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">var</span> fn = frame.after || $.noop;</span><br><span class="line">          frame.after = <span class="function"><span class="keyword">function</span>(<span class="params">node, fx</span>) </span>&#123;</span><br><span class="line">              <span class="keyword">if</span> (fx.method === <span class="string">"hide"</span>) &#123;</span><br><span class="line">                  node.style.display = <span class="string">"none"</span>;</span><br><span class="line">                  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> fx.orig) &#123; <span class="comment">//还原为初始状态</span></span><br><span class="line">                      $.css(node, i, fx.orig[i]);</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span> (overflows) &#123;</span><br><span class="line">                  [<span class="string">""</span>, <span class="string">"X"</span>, <span class="string">"Y"</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">postfix, index</span>) </span>&#123;</span><br><span class="line">                      s[<span class="string">"overflow"</span> + postfix] = overflows[index];</span><br><span class="line">                  &#125;);</span><br><span class="line">              &#125;</span><br><span class="line">              fn(node, fx);</span><br><span class="line">          &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  toggle: <span class="function"><span class="keyword">function</span>(<span class="params">node, fx</span>) </span>&#123;</span><br><span class="line">      $[$.isHidden(node) ? <span class="string">"show"</span> : <span class="string">"hide"</span>](node, fx);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/01/08/js-framework14/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/01/07/js-framework12/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">88</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">207</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
