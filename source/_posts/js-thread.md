@@ -4,7 +4,7 @@ categories: js
 tags:
   - js
   - Concurrent.Thread.js
-  - webwork
+  - webworkor
 date: 2016-11-11 21:04:34
 updated: 2016-11-11 21:04:34
 ---
@@ -25,7 +25,7 @@ updated: 2016-11-11 21:04:34
 阅读源码需对setTimeout和setInterval有相当的理解才行！
 
 ### WebWork
-H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作。 
+H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作。
 
 [HTML5新功能之八 《web works多线程》](http://www.cnblogs.com/couxiaozi1983/p/3799898.html)
 
