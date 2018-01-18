@@ -1,5 +1,5 @@
 ---
-title: 指尖上行，移动前端开发进阶之路笔记-5
+title: 指尖上行，移动前端开发进阶之路笔记-6
 categories: WebApp
 tags:
   - webapp
@@ -69,3 +69,40 @@ PV/UV的统计比较简单，很多现有的统计工具首先统计的就是页
 每屏触达率、每屏回翻率
 这是一个单屏滑动页面，用户会滑动到第几屏代表着页面内容的曝光率有多少，并且页面最重要的按钮“打开游戏APP”是放置在最后一屏的，有多少用户触达到最后一屏是非常重要的研究数据。
 需要在组件执行滑动完成的时候，给一个数据上报：
+```js
+window.pageSlider = new mo.PageSlide({
+  target: $('#section.sec'),
+  event: {
+    change: function(e){
+      if(this.curPage !== this.prevPage){
+        curPageNum = this.curPage;
+        // 数据上报：第几屏到第几屏，即可统计每屏触达率，又可统计每屏回翻率
+        sendData('page.'+this.prevPage+'to'+this.curPage);
+      }
+    }
+  }
+});
+```
+
+变浪按钮点击率
+每屏都有一个“变浪”按钮，点击会在当前屏显示新画面，对这些按钮进行数据监考，可以了解到按钮的设计和位置摆放是不是能引起浏览者的注意和兴趣。
+```js
+$('#lang').tap(function(){
+  sendData('btn.lang'+curPageNum); // curPageNum是当前屏数，在滑动组件中定义
+});
+```
+
+晃动手机
+最后一个变浪按钮完成会提示摇一摇手机，最后落地到新角色上，晃动手机会显示最后一屏，换屏成功说明晃动的动作被捕捉成功，可以在最后一屏显示的函数里添加数据上报。
+```js
+function secAppear(){
+  $('.sec04 .appear').show();
+  sendData('gesture.shake');
+}
+```
+
+每屏停留时长
+收集每屏的停留时长可以看出用户对那个内容更感兴趣，是对后续页面设计有用的一个参考数据。
+
+数据分析平台可以网上搜索一番，很多可用的。
+
