@@ -8,7 +8,7 @@ date: 2018-01-19 21:34:42
 updated: 2018-01-19 21:34:42
 ---
 
-
+*未翻译完全*
 
 本译文翻译自[Thoughts on Self-Documenting CSS](https://keithjgrant.com/posts/2017/06/self-documenting-css/)，将会同时发布在[众成翻译](http://zcfy.cc)上。
 
