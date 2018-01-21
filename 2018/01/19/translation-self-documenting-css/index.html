@@ -517,16 +517,15 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p><em>未翻译完全</em></p>
-<p>本译文翻译自<a href="https://keithjgrant.com/posts/2017/06/self-documenting-css/" target="_blank" rel="noopener">Thoughts on Self-Documenting CSS</a>，将会同时发布在<a href="http://zcfy.cc" target="_blank" rel="noopener">众成翻译</a>上。</p>
+        <p>本文翻译自<a href="https://keithjgrant.com/posts/2017/06/self-documenting-css/" target="_blank" rel="noopener">Thoughts on Self-Documenting CSS</a>，将会同时发布在<a href="http://zcfy.cc" target="_blank" rel="noopener">众成翻译</a>上。</p>
 <p>作者：<a href="https://keithjgrant.com/" target="_blank" rel="noopener">Keith J. Grant</a></p>
 <p>===============================================================================================</p>
 <p>2017.1.9</p>
-<p>Robert C. Martin所写的<a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/" target="_blank" rel="noopener">《Clean Code》</a>是我所读过的最好的编程书籍之一，若你没有读过，那么推荐你将它加入书单。</p>
+<p>Robert C. Martin写的<a href="https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/" target="_blank" rel="noopener">《Clean Code》</a>是我读过的最好的编程书籍之一，若没有读过，推荐你将它加入书单。</p>
 <blockquote>
-<p>注释就意味着代码无法自说明—— Robert C. Martin</p>
+<p>注释就意味着代码无法自说明 —— Robert C. Martin</p>
 </blockquote>
-<p>在文中，Martin讨论了代码注释，我不会完全重复他的话，简而言之他的意思就是，这些注释是注定会过时的。程序执行时会忽视注释，所以无法保证这些说明注释会准确的描述代码作用。所以最好的方式是让代码自说明，如此，按照代码逻辑，程序员和程序获取到的信息是一致的。</p>
+<p>Martin在文中详细讨论了代码注释，我不会完全重复他的话。简而言之，他的意思就是，这些注释是注定会过时的。程序执行时会忽视注释，所以无法保证这些说明注释会准确的描述代码作用。所以最好的方式是让代码自说明，如此，按照代码逻辑，程序员和程序获取到的信息是一致的。</p>
 <p>思考如下代码：</p>
 <pre><code>// Check to see if the employee is eligible for full benefits
 // 检查员工是否有资格获取全部福利
@@ -537,9 +536,9 @@ if ((employee.flags &amp; HOURLY_FLAG) &amp;&amp; (employee.age &gt; 65)) {
 <pre><code>if (employee.isEligibleForFullBenefits()) {
   …
 }
-</code></pre><p>代码“言行一致”.长久以来，注释是能够被命名良好的函数或变量取代的。Martin的意思并不是说永不使用注释，而是应该尽量避免写注释。让代码自说明的注释代表着失败。</p>
-<h2 id="那么对CSS而言呢？"><a href="#那么对CSS而言呢？" class="headerlink" title="那么对CSS而言呢？"></a>那么对CSS而言呢？</h2><p>我非常赞同Martin关于注释的讨论。当涉及到声明式的语言如CSS时，他的这种想法引发了许多有趣的问题。声明必须完全符合格式，选择器基本是由HTML结构决定的。而对这个代码结构，能做的不多，这是否意味着CSS代码必须注释满天飞？</p>
-<p>额，也许吧。有很多的理由使用注释，且注释的方法也很多。让我们来看一些注释，思考这些注释是否应该添加。先从答案显然的开始吧，然后一步步深入到不那么好判断的。</p>
+</code></pre><p>代码需要“言行一致”，注释是能够被命名良好的函数或变量取代的。Martin的意思并不是说永不使用注释，而是应该尽量避免写注释，注释就意味着代码无法自说明。</p>
+<h2 id="那么对CSS而言呢？"><a href="#那么对CSS而言呢？" class="headerlink" title="那么对CSS而言呢？"></a>那么对CSS而言呢？</h2><p>我非常赞同Martin关于注释的看法。当涉及到声明式的语言如CSS时，就发现了一些有趣的地方。声明式语言式必须符合对应格式的，而CSS选择器基本是由HTML结构决定的。对这种代码结构，我们能做的不多，这是否意味着CSS代码必须注释满天飞？</p>
+<p>额，也许吧。有很多的理由使用注释，且注释的写法也有很多。让我们来看一些注释，思考这些注释是否应该添加。先从答案显然的开始吧，然后一步步深入到不那么好判断的。</p>
 <p>不好：显而易见注释</p>
 <hr>
 <p>任何语言，显而易见的注释都是多余的，如下的示例出自Bootstrap3的早期版本：</p>
