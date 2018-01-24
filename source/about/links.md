@@ -168,6 +168,8 @@ tags: [fe, links]
 ## Three.js
 [WebGL中文网：Threejs基础教程](http://www.hewebgl.com/article/articledir/1)
 
+[张雯莉：Three.js入门指南](http://www.ituring.com.cn/book/1272)
+
 [Three.js 现学现卖](http://web.jobbole.com/92335/)
 
 ## ES6 ##
