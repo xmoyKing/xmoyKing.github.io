@@ -257,6 +257,90 @@ geometry.faces.push(new THREE.Face3(0, 5, 1));
 - 使用法向量作为材质
 - 使用图像作为材质
 
+**基本材质**
+使用基本材质（BasicMaterial）的物体，渲染后物体的颜色始终为该材质的颜色，而不会由于光照产生明暗、阴影效果。如果没有指定材质的颜色，则颜色是随机的。其构造函数是`THREE.MeshBasicMaterial(opt)`,其中参数opt为一个对象，包含如下参数：
+- visible：是否可见，默认为true
+- side：渲染面片正面或是反面，默认为正面THREE.FrontSide，可设置为反面THREE.BackSide，或双面THREE.DoubleSide
+- wireframe：是否渲染线而非面，默认为false
+- color：十六进制RGB颜色，如红色表示为0xff0000
+- map：使用纹理贴图
+
+简单使用如下：
+```js
+new THREE.MeshBasicMaterial({
+    color: 0xffff00,
+    opacity: 0.75
+});
+```
+
+对于基本材质，即使改变场景中的光源，使用该材质的物体也始终为颜色处处相同的效果。这并不符合真实的情况，因此，常用的是Lambert光照模型材质以及Phong光照模型材质。
+
+**基于Lambert光照模型的材质**
+MeshLambertMaterial（一般称为Lambert材质）是指符合Lambert光照模型的材质。
+
+Lambert光照模型的主要特点是只考虑漫反射而不考虑镜面反射的效果，因而对于金属、镜子等需要镜面反射效果的物体就不适用，但对于其他大部分物体的漫反射效果都是适用的。
+
+其构造函数是`THREE.MeshLambertMaterial(opt)`，其配置参数如下：
+- color是用来表现材质对散射光的反射能力，也是最常用来设置材质颜色的属性。除此之外，还可以用ambient和emissive控制材质的颜色。
+- ambient表示对环境光的反射能力，只有当设置了AmbientLight后，该值才是有效的，材质对环境光的反射能力与环境光强相乘后得到材质实际表现的颜色。
+- emissive是材质的自发光颜色，可以用来表现光源的颜色。
+
+<p data-height="265" data-theme-id="0" data-slug-hash="QaXWRp" data-default-tab="js,result" data-user="xmoyking" data-embed-version="2" data-pen-title="Three.js - LambertMaterial" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/QaXWRp/">Three.js - LambertMaterial</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+必须添加一个点光源用于测试LambertMaterial,若不添加光源，则无法看到物体，因为物体的颜色是基于光照模型的，类比现实就是没有任何光源的情况下，在漆黑一片的屋里人眼应该是看不到任何东西的。
+
+当取消光源，而材质添加emissive自发光颜色则效果与基本材质一样。
+
+**基于Phong光照模型的材质**
+MeshPhongMaterial（Phong材质）与Lambert材质不同，Phong模型考虑了镜面反射的效果，因此对于金属、镜面的表现尤为适合。而漫反射部分与Lambert材质相同。
+其构造函数是`THREE.MeshPhongMaterial(opt)`，其配置参数如下：
+- 可以指定color、emissive、ambient值，同Lambert材质效果
+- specular值指定镜面反射系数
+- shininess属性控制光照模型中的高光指数，越大则高光光斑越小，默认值为30
+
+<p data-height="265" data-theme-id="0" data-slug-hash="ppXvgp" data-default-tab="js,result" data-user="xmoyking" data-embed-version="2" data-pen-title="Three.js - PhongMaterial" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/ppXvgp/">Three.js - PhongMaterial</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+**法向材质**
+法向材质可以将材质的颜色设置为其法向量的方向，有时候对于调试很有帮助。法向材质的设定很简单，甚至不用设置任何参数：`new THREE.MeshNormalMaterial()`
+
+材质的颜色与照相机与该物体的角度相关，改变照相机位置，观察不同角度的颜色变化。在调试时，要知道物体的法向量，使用法向材质就很有效。
+
+<p data-height="265" data-theme-id="0" data-slug-hash="ppXvba" data-default-tab="js,result" data-user="xmoyking" data-embed-version="2" data-pen-title="Three.js - NormalMaterial" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/ppXvba/">Three.js - NormalMaterial</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+**材质的纹理贴图**
+大多数情况下材质都不会仅仅是单色的，而是多种多样的，这时就需要导入图像作为纹理贴图，并添加到相应的材质中。
+
+[官方示例：单张图像应用](https://threejs.org/examples/#webgl_geometry_cube)
+
+注意：资源跨域问题，在本地测试时可以引用网络资源。
+
+官方示例修改如下，即可实现多张图片应用到一个立方体内：
+```js
+var materials = [];
+for (var i = 0; i < 6; ++i) {
+  materials.push(new THREE.MeshBasicMaterial({
+    map: new THREE.TextureLoader().load('https://raw.githubusercontent.com/Ovilia/ThreeExample.js/master/img/' + i + '.png'), // 引用网络资源
+    overdraw: true
+  }));
+}
+var geometry = new THREE.CubeGeometry(200,200,200);
+var material = new THREE.MeshFaceMaterial(materials); // 此MeshFaceMaterial在官方文档内未找到，猜测应该是已经废弃了，或转为内部方法
+```
+
+<iframe src="webgl_geometry_cube.html"></iframe>
+
+很多情况下不会用一整张图片作为一个面，而是仅仅使用一小部分的切图，然后重复，如CSS中的background-repeat属性，以如下图片为例
+![chess](https://raw.githubusercontent.com/Ovilia/ThreeExample.js/master/img/chess.png)
+```js
+texture.wrapS = texture.wrapT = THREE.RepeatWrapping; // 指定重复方向为两个方向
+texture.repeat.set(4, 4); // 设置重复次数都为4
+```
+
+<iframe src="webgl_geometry_chess.html"></iframe>
+
 
 参考：
 - [WebGL中文网：Threejs基础教程](http://www.hewebgl.com/article/articledir/1)
