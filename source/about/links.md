@@ -163,6 +163,18 @@ tags: [fe, links]
 
 [半深入理解CSS3 object-position/object-fit属性](http://www.zhangxinxu.com/wordpress/2015/03/css3-object-position-object-fit/)
 
+[CSS3线性渐变背景 linear-gradients](https://www.w3cplus.com/css3/do-you-really-understand-css-linear-gradients.html)
+
+
+---
+
+## PWA
+
+[第一本 PWA 中文书](https://juejin.im/entry/5a1c394a5188255851326da5)
+
+[改造你的网站，变身 PWA](https://segmentfault.com/a/1190000008880637)
+
+[您的第一个 Progressive Web App](https://www.w3cplus.com/pwa/your-first-pwapp.html)
 
 ---
 
@@ -173,7 +185,7 @@ tags: [fe, links]
 
 [Three.js 现学现卖](http://web.jobbole.com/92335/)
 
-## ES6 ##
+## ES6
 
 [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 
