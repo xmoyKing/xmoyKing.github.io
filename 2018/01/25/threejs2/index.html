@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Three.js入门-2 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",js,three.js,webgl">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Three.js入门-2 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="three.js"> <meta property="og:article:tag" content="webgl"> 
+
+    
+        <meta property="article:published_time" content="Thu Jan 25 2018 11:16:58 GMT+0800" />
+        <meta property="article:modified_time" content="Thu Jan 25 2018 11:16:58 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Three.js入门-2 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2018/01/25/threejs2/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2018/01/25/threejs2/index.html",
+    "headline": "Three.js入门-2",
+    "datePublished": "Thu Jan 25 2018 11:16:58 GMT+0800",
+    "dateModified": "Thu Jan 25 2018 11:16:58 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,three.js,webgl",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Mesh（网格）"><span class="post-toc-number">1.</span> <span class="post-toc-text">Mesh（网格）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#动画"><span class="post-toc-number">2.</span> <span class="post-toc-text">动画</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#外部模型"><span class="post-toc-number">3.</span> <span class="post-toc-text">外部模型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#光与影"><span class="post-toc-number">4.</span> <span class="post-toc-text">光与影</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#AmbientLight（环境光）"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">AmbientLight（环境光）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#PointLight（点光源）"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">PointLight（点光源）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#DirectionalLight（平行光）"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">DirectionalLight（平行光）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#SpotLight（聚光灯）"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">SpotLight（聚光灯）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#阴影"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">阴影</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Shader（着色器）"><span class="post-toc-number">5.</span> <span class="post-toc-text">Shader（着色器）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#渲染与着色器"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">渲染与着色器</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Three.js入门-2
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Jan 25, 2018</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Jan 25, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/three-js/">three.js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/webgl/">webgl</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Three.js入门-2&url=https://github.com/xmoyKING/2018/01/25/threejs2/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Three.js入门-2&url=https://github.com/xmoyKING/2018/01/25/threejs2/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2018/01/25/threejs2/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2018/01/25/threejs2/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h4 id="Mesh（网格）"><a href="#Mesh（网格）" class="headerlink" title="Mesh（网格）"></a>Mesh（网格）</h4><p>网格是由顶点、边、面等组成的物体，创建物体需要指定几何形状和材质，其中，几何形状决定了物体的顶点位置等信息，材质决定了物体的颜色、纹理等信息。<br>网格是最常用的一种物体，其他物体包括线段（Line）、骨骼（Bone）、粒子系统（ParticleSystem）等。</p>
+<p>而创建网格:<code>var mesh = new THREE.Mesh(geometry, material);</code>，除了在构造函数中指定材质，在网格被创建后，也能对材质进行修改。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如此，无论前面构造函数中material是什么，最后都会被红色的Lambert材质覆盖</span></span><br><span class="line">mesh.material = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123;</span><br><span class="line">    color: <span class="number">0xff0000</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>位置、缩放、旋转</strong><br>位置、缩放、旋转是物体三个常用属性，分别由THREE.Object3D类的scale、rotation、position三个属性实现，三个属性都是THREE.Vector3的实例，THREE.Vector3有x、y、z三个属性，分别对应3个方向，修改其值的方法是类似的。</p>
+<p>THREE.Mesh继承自THREE.Object3D。</p>
+<p>以修改位置为例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只设置其中一个属性</span></span><br><span class="line">mesh.position.z = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同时设置多个属性</span></span><br><span class="line">mesh.position.set(<span class="number">1.5</span>, <span class="number">-0.5</span>, <span class="number">0</span>);</span><br><span class="line"><span class="comment">// 或用一个新的Vector3实例覆盖</span></span><br><span class="line">mesh.position = <span class="keyword">new</span> THREE.Vector3(<span class="number">1.5</span>, <span class="number">-0.5</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h4><p>如何使用Three.js进行动态画面的渲染？</p>
+<p>为了衡量画面切换速度，引入了每秒帧数FPS（Frames Per Second）的概念，是指每秒画面重绘的次数。FPS越大，则动画效果越平滑，当FPS小于20时，一般就能明显感受到画面的卡滞现象。当FPS足够大（比如达到60），再增加帧数人眼也不会感受到明显的变化，反而相应地就要消耗更多资源（比如电影的胶片就需要更长了，或是电脑刷新画面需要消耗计算资源等等）。因此，选择一个适中的FPS即可。对于Three.js动画而言，一般FPS在30到60之间都是可取的。</p>
+<p>其实Three.js只是建立在js之上的封装的库而已，所以，通过setInterval是能够实现动画的，例如一个让图像随y轴旋转的动画:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">id = setInterval(draw, <span class="number">20</span>); <span class="comment">// 指定每20ms就更新一次y的角度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    mesh.rotation.y = (mesh.rotation.y + <span class="number">0.01</span>) % (<span class="built_in">Math</span>.PI * <span class="number">2</span>);</span><br><span class="line">    renderer.render(scene, camera); <span class="comment">// 每次改变y的角度就重新渲染一次</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而一般情况下，开发者不关心多久重绘一次，而只要能尽快的重绘就行了，此时可用requestAnimationFrame方法，通过它，浏览器会在合适的时候调用指定的函数，通常FPS能达到60。</p>
+<p>而requestAnimationFrame方法的调用方式和setTimeout类似,取消则使用<code>cancelAnimationFrame(id)</code>：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">id = requestAnimationFrame(draw);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    mesh.rotation.y = (mesh.rotation.y + <span class="number">0.01</span>) % (<span class="built_in">Math</span>.PI * <span class="number">2</span>);</span><br><span class="line">    renderer.render(scene, camera);</span><br><span class="line">    id = requestAnimationFrame(draw);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>setInterval方法与requestAnimationFrame方法的区别较为微妙。</p>
+<ul>
+<li>一方面，最明显的差别表现在setInterval可以手动设定FPS，而requestAnimationFrame则会自动设定FPS；</li>
+<li>但另一方面，即使是setInterval也不能保证按照给定的FPS执行，在浏览器处理繁忙时，很可能低于设定值。当浏览器达不到设定的调用周期时，requestAnimationFrame采用跳过某些帧的方式来表现动画，虽然会有卡滞的效果但是整体速度不会拖慢，而setInterval会因此使整个程序放慢运行，但是每一帧都会绘制出来；</li>
+</ul>
+<p>总而言之，requestAnimationFrame适用于对于时间较为敏感的环境（但是动画逻辑更加复杂），而setInterval则可在保证程序的运算不至于导致延迟的情况下提供更加简洁的逻辑（无需自行处理时间）。</p>
+<p><strong>stat.js</strong><br><a href="https://github.com/mrdoob/stats.js">stat.js</a>是Three.js的作者Mr. Doob的另一个有用的JavaScript库。很多情况下，我们希望知道实时的FPS信息，从而更好地监测动画效果。这时候，stat.js就能提供一个很好的帮助，它占据屏幕中的一小块位置，点击可以切换FPS和每帧渲染时间的动态折线图。</p>
+<p>页面引入stat.js的文件后,简单使用如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stat = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    stat = <span class="keyword">new</span> Stats();</span><br><span class="line">    stat.domElement.style.position = <span class="string">'absolute'</span>;</span><br><span class="line">    stat.domElement.style.right = <span class="string">'0px'</span>;</span><br><span class="line">    stat.domElement.style.top = <span class="string">'0px'</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(stat.domElement);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Three.js init ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每次重绘渲染页面前后都需要调用，begin/end方法分别表示一帧的开始与结束：</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    stat.begin();</span><br><span class="line"></span><br><span class="line">    mesh.rotation.y = (mesh.rotation.y + <span class="number">0.01</span>) % (<span class="built_in">Math</span>.PI * <span class="number">2</span>);</span><br><span class="line">    renderer.render(scene, camera);</span><br><span class="line"></span><br><span class="line">    stat.end();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="外部模型"><a href="#外部模型" class="headerlink" title="外部模型"></a>外部模型</h4><p>使用Three.js创建常见几何体是十分方便的，但是对于人或者动物这样非常复杂的模型使用几何体组合就非常麻烦了。一般模型是用更强大的建模工具制作，然后导入并添加到场景中。</p>
+<p><strong>支持格式</strong><br>Three.js支持很多格式，而不同的格式是需要使用不同的辅助导入函数（loader）的，具体支持的格式和loader参考<a href="https://github.com/mrdoob/three.js/tree/dev/docs/api/loaders">Three.js loaders</a></p>
+<p>比如<code>*.obj</code>是最常用的模型格式，导入<code>*.obj</code>文件需要OBJLoader.js；导入带<code>*.mtl</code>材质的<code>*.obj</code>文件需要MTLLoader.js以及OBJMTLLoader.js。</p>
+<p>示例如下：</p>
+<iframe src="webgl_loader_object.html"></iframe>
+
+<p><a href="https://threejs.org/examples/?q=obj#webgl_loader_obj" target="_blank" rel="noopener">官方示例-无材质obj模型</a></p>
+<p><a href="https://threejs.org/examples/?q=obj#webgl_loader_obj_mtl" target="_blank" rel="noopener">官方示例-有材质obj模型</a></p>
+<h4 id="光与影"><a href="#光与影" class="headerlink" title="光与影"></a>光与影</h4><p>图像渲染的丰富效果很大程度上也要归功于光与影的利用。真实世界中的光影效果非常复杂，为了使计算机模拟丰富的光照效果，提出了几种不同的光源模型（环境光、平行光、点光源、聚光灯等），在不同场合下组合利用，将能达到很好的光照效果。</p>
+<h5 id="AmbientLight（环境光）"><a href="#AmbientLight（环境光）" class="headerlink" title="AmbientLight（环境光）"></a>AmbientLight（环境光）</h5><p>环境光是指场景整体的光照效果，是由于场景内若干光源的多次反射形成的亮度一致的效果，通常用来为整个场景指定一个基础亮度。因此，环境光没有明确的光源位置，在各处形成的亮度也是一致的。</p>
+<p>在设置环境光时，只需要指定光的颜色, hex是十六进制的RGB颜色信息，如红色表示为<code>0xff0000</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> light = <span class="keyword">new</span> THREE.AmbientLight(<span class="number">0xffffff</span>); <span class="comment">// 设置一个白色环境光</span></span><br><span class="line">scene.add(light);</span><br></pre></td></tr></table></figure></p>
+<p>当环境光不是白色或灰色的时候，渲染的效果往往会很奇怪。因此，环境光通常使用白色或者灰色，作为整体光照的基础。</p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="YYoGVX" data-default-tab="js,result" data-user="xmoyking" data-embed-version="2" data-pen-title="Three.js - AmbientLight" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/YYoGVX/" target="_blank" rel="noopener">Three.js - AmbientLight</a> by XmoyKing (<a href="https://codepen.io/xmoyking" target="_blank" rel="noopener">@xmoyking</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+
+<p>环境光并不在乎物体材质的color属性，而是ambient属性。ambient属性的默认值是0xffffff。因此，如果将这两个长方体设置为如下ambient属性，比如本来绿色和白色的两个方块在红色环境光下却呈现为全红：<br><img src="1.png" alt="1"></p>
+<h5 id="PointLight（点光源）"><a href="#PointLight（点光源）" class="headerlink" title="PointLight（点光源）"></a>PointLight（点光源）</h5><p>点光源是不计光源大小，可以看作一个点发出的光源。点光源照到不同物体表面的亮度是线性递减的，因此，离点光源距离越远的物体会显得越暗。光在每个面上的亮度是不同的，对于每个三角面片，将根据三个顶点的亮度进行插值。</p>
+<p>点光源的构造函数是<code>THREE.PointLight(hex, intensity, distance)</code></p>
+<ul>
+<li>hex是光源十六进制的颜色值</li>
+<li>intensity是亮度，缺省值为1，表示100%亮度</li>
+<li>distance是光源最远照射到的距离，缺省值为0，不衰减</li>
+</ul>
+<p>示例代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> light = <span class="keyword">new</span> THREE.PointLight(<span class="number">0xffffff</span>, <span class="number">2</span>, <span class="number">100</span>);</span><br><span class="line">light.position.set(<span class="number">0</span>, <span class="number">1.5</span>, <span class="number">2</span>); <span class="comment">// 需要将点光源设置一个位置</span></span><br><span class="line">scene.add(light);</span><br></pre></td></tr></table></figure></p>
+<h5 id="DirectionalLight（平行光）"><a href="#DirectionalLight（平行光）" class="headerlink" title="DirectionalLight（平行光）"></a>DirectionalLight（平行光）</h5><p>太阳光常常被看作平行光，这是因为相对地球上物体的尺度而言，太阳离我们的距离足够远。对于任意平行的平面，平行光照射的亮度都是相同的，而与平面所在位置无关。</p>
+<p>平行光的构造函数是<code>THREE.DirectionalLight(hex, intensity)</code>,参数含义同点光源类似。</p>
+<p>示例代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> light = <span class="keyword">new</span> THREE.DirectionalLight();</span><br><span class="line">light.position.set(<span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>);</span><br><span class="line">scene.add(light);</span><br></pre></td></tr></table></figure></p>
+<p>这里设置光源位置并不意味着所有光从(2, 5, 3)点射出（如果是的话，就成了点光源），而是意味着，平行光将以矢量(-2, -5, -3)的方向照射到所有平面。因此，平面亮度与平面的位置无关，而只与平面的法向量相关。只要平面是平行的，那么得到的光照也一定是相同的。</p>
+<h5 id="SpotLight（聚光灯）"><a href="#SpotLight（聚光灯）" class="headerlink" title="SpotLight（聚光灯）"></a>SpotLight（聚光灯）</h5><p>聚光灯是一种特殊的点光源，它能够朝着一个方向投射光线。聚光灯投射出的是类似圆锥形的光线，这与我们现实中看到的聚光灯是一致的。</p>
+<p>其构造函数为<code>THREE.SpotLight(hex, intensity, distance, angle, exponent)</code>,相比点光源，多了angle和exponent两个参数。</p>
+<ul>
+<li>angle是聚光灯的张角，缺省值是Math.PI / 3，最大值是Math.PI / 2</li>
+<li>exponent是光强在偏离target的衰减指数，缺省值是10,其中target需要在之后单独设置，缺省值为(0, 0, 0)</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">light.position.set(x1, y1, z1);</span><br><span class="line">light.target.position.set(x2, y2, z2);</span><br></pre></td></tr></table></figure>
+<p>如果想让聚光灯跟着某一物体移动（就像真的聚光灯！），可以target指定为该物体：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">light.target = cube; <span class="comment">// 此处的cube是一个THREE.Mesh</span></span><br></pre></td></tr></table></figure></p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="YYopEr" data-default-tab="js,result" data-user="xmoyking" data-embed-version="2" data-pen-title="Three.js - SpotLight" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/YYopEr/" target="_blank" rel="noopener">Three.js - SpotLight</a> by XmoyKing (<a href="https://codepen.io/xmoyking" target="_blank" rel="noopener">@xmoyking</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<h5 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h5><p>在Three.js中，能形成阴影的光源只有THREE.DirectionalLight与THREE.SpotLight；而相对地，能表现阴影效果的材质只有THREE.LambertMaterial与THREE.PhongMaterial。</p>
+<p>开启阴影需要如下3步：</p>
+<ol>
+<li>在初始化时，告诉渲染器渲染阴影：<code>renderer.shadowMap.enabled = true;</code></li>
+<li>对于光源以及所有要产生阴影的物体调用：<code>xxx.castShadow = true;</code></li>
+<li>对于接收阴影的物体调用：<code>xxx.receiveShadow = true;</code></li>
+</ol>
+<p>比如场景中一个平面上有一个正方体cube，想要让聚光灯照射在正方体上，产生的阴影投射在平面plane上，那么就需要对聚光灯light和正方体cube调用<code>cube.castShadow = true; light.castShadow = true</code>，对于平面调用<code>plane.receiveShadow = true</code>。</p>
+<p>不过通常还需要设置光源的阴影相关属性，才能正确显示出阴影效果(建议直接查看<a href="https://threejs.org/docs/index.html#api/lights/shadows/LightShadow" target="_blank" rel="noopener">官网阴影API文档</a>):</p>
+<ul>
+<li>对于聚光灯，需要设置shadow.camera.near、shadow.camera.far、shadow.camera.fov三个值，类比透视投影照相机，只有介于shadow.camera.near与shadow.camera.far之间的物体将产生阴影，shadow.camera.fov表示张角。</li>
+<li>对于平行光，需要设置shadow.camera.near、shadow.camera.far、shadow.camera.left、shadow.camera.right、shadow.camera.top以及shadow.camera.bottom六个值，相当于正交投影照相机的六个面。同样，只有在这六个面围成的长方体内的物体才会产生阴影效果。</li>
+</ul>
+<p>为了看到阴影照相机的位置，通常可以在调试时开启CameraHelper<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> helper = <span class="keyword">new</span> THREE.CameraHelper( light.shadow.camera );</span><br><span class="line">scene.add( helper );</span><br></pre></td></tr></table></figure></p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="OzebKd" data-default-tab="js,result" data-user="xmoyking" data-embed-version="2" data-pen-title="Three.js - Shadow" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/OzebKd/" target="_blank" rel="noopener">Three.js - Shadow</a> by XmoyKing (<a href="https://codepen.io/xmoyking" target="_blank" rel="noopener">@xmoyking</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<h4 id="Shader（着色器）"><a href="#Shader（着色器）" class="headerlink" title="Shader（着色器）"></a>Shader（着色器）</h4><p>着色器可以更灵活地控制渲染效果，结合纹理，可以进行多次渲染，达到更强大的效果。</p>
+<h5 id="渲染与着色器"><a href="#渲染与着色器" class="headerlink" title="渲染与着色器"></a>渲染与着色器</h5><p>其实着色器与渲染（Rendering）联系非常紧密。</p>
+<p>一般的理解上，渲染就是将模型数据在屏幕上显示出来的过程，Three.js最强大之处就是让我们在无需知道图形学知识的前提下完成从建模到渲染的一整套工作。</p>
+<p>在定义了场景中的物体、照相机、光源等等之后，渲染的结果就确定了吗？是否可以再次修改呢？<br>当然可以，通过着色器程序对GPU编程来控制渲染的结果。着色器是屏幕上呈现画面之前的最后一步，用它可以对先前渲染的结果做修改，包括对颜色、位置等等信息的修改，甚至可以对先前渲染的结果做后处理，实现高级的渲染效果。但是对于很多应用而言，并不需要着色器。</p>
+<p>同样的模型、光源、照相机，但是不同的着色器，我们就能得到不同的渲染效果。着色器通常分为几何着色器（Geometry Shader）、顶点着色器（Vertex Shader）、片元着色器（Fragment Shader）等等。WebGL支持的着色器只有顶点着色器与片元着色器。</p>
+<ul>
+<li>顶点着色器，顶点着色器中的“顶点”指的正是Mesh中的顶点，对于每个顶点调用一次。因此，如果场景中有一个正方体，那么对八个顶点将各自调用一次顶点着色器，可以修改顶点的位置或者颜色等信息，然后传入片元着色器。</li>
+<li>片元着色器，片元是栅格化之后，在形成像素之前的数据。片元着色器是每个片元会调用一次的程序，因此，片元着色器特别适合用来做图像后处理。</li>
+</ul>
+<p>Three.js允许你不定义着色器（如前面所有的例子）采用默认的方法渲染，而仅在你有需要时，才使用自定义的着色器，这大大减少了程序员的工作量，而且对于初学者而言，无疑是减少入门难度的福音。</p>
+<p>Three.js Shader官方示例：</p>
+<iframe src="https://threejs.org/examples/webgl_materials_shaders_fresnel.html"></iframe>
+
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/01/31/css-secrets1/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/01/24/threejs1/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">89</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about/links.html" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="http://www.filmboard.cn" title="Works">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Works
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">214</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
