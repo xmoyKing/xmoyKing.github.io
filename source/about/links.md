@@ -165,6 +165,7 @@ tags: [fe, links]
 
 [CSS3线性渐变背景 linear-gradients](https://www.w3cplus.com/css3/do-you-really-understand-css-linear-gradients.html)
 
+[webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
 
 ---
 
@@ -217,6 +218,8 @@ promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-
 [深入理解 Express.js](http://blog.jobbole.com/41325/)
 
 [forever让nodejs应用后台应用](http://tcrct.iteye.com/blog/2043644)
+
+[Node应用的进程管理器 PM2](http://pm2.keymetrics.io/docs/usage/quick-start/)
 
 ---
 
