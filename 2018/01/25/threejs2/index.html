@@ -606,6 +606,17 @@
 <p>Three.js Shader官方示例：</p>
 <iframe src="https://threejs.org/examples/webgl_materials_shaders_fresnel.html"></iframe>
 
+<p>着色器的代码类似C语言，以下面的顶点着色器为例：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">varying vec2 vUv;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span> <span class="comment">// 入口函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// passing texture to fragment shader</span></span><br><span class="line">    vUv = uv;</span><br><span class="line"></span><br><span class="line">    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>varying vec2 vUv;</code>声明一个varying性质的vec2类型的变量vUv，</p>
+<p>varying是WebGL定义的限定符之一，限定符用在变量前，表示变量的性质，有如下4中限定符：</p>
+<ul>
+<li>const 即常量</li>
+<li>attribute 从js代码传递到着色器内（比如顶点着色器，那么每个顶点对应不同的值）</li>
+<li>uniform 每个顶点/片元对应相同的值</li>
+<li>varying 从定点着色器传递到片元着色器中</li>
+</ul>
+<p><code>vUv = uv;</code>中uv是Three.js传入的，表示顶点在UV映射时的横纵坐标（简单理解就是将复杂图形贴到模型上的一种映射方式）</p>
+<p><code>gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);</code>中的projectionMatrix、modelViewMatrix其实是在做投影矩阵、模型矩阵变换（其实就是计算三维模型在二维显示屏上的坐标），position也是Three.js传入的，表示顶点在物体坐标系中的位置（以物体自身为参照物的坐标系）。</p>
 
         
     
