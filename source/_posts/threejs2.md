@@ -225,3 +225,27 @@ Three.js允许你不定义着色器（如前面所有的例子）采用默认的
 Three.js Shader官方示例：
 <iframe src="https://threejs.org/examples/webgl_materials_shaders_fresnel.html"></iframe>
 
+着色器的代码类似C语言，以下面的顶点着色器为例：
+```c
+varying vec2 vUv;
+
+void main() // 入口函数
+{
+    // passing texture to fragment shader
+    vUv = uv;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+```
+
+`varying vec2 vUv;`声明一个varying性质的vec2类型的变量vUv，
+
+varying是WebGL定义的限定符之一，限定符用在变量前，表示变量的性质，有如下4中限定符：
+- const 即常量
+- attribute 从js代码传递到着色器内（比如顶点着色器，那么每个顶点对应不同的值）
+- uniform 每个顶点/片元对应相同的值
+- varying 从定点着色器传递到片元着色器中
+
+`vUv = uv;`中uv是Three.js传入的，表示顶点在UV映射时的横纵坐标（简单理解就是将复杂图形贴到模型上的一种映射方式）
+
+`gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);`中的projectionMatrix、modelViewMatrix其实是在做投影矩阵、模型矩阵变换（其实就是计算三维模型在二维显示屏上的坐标），position也是Three.js传入的，表示顶点在物体坐标系中的位置（以物体自身为参照物的坐标系）。

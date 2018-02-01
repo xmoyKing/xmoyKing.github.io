@@ -163,6 +163,21 @@ tags: [fe, links]
 
 [半深入理解CSS3 object-position/object-fit属性](http://www.zhangxinxu.com/wordpress/2015/03/css3-object-position-object-fit/)
 
+[CSS3线性渐变背景 linear-gradients](https://www.w3cplus.com/css3/do-you-really-understand-css-linear-gradients.html)
+
+[webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
+
+[入门Webpack，看这篇就够了](https://www.jianshu.com/p/42e11515c10f)
+
+---
+
+## PWA
+
+[第一本 PWA 中文书](https://juejin.im/entry/5a1c394a5188255851326da5)
+
+[改造你的网站，变身 PWA](https://segmentfault.com/a/1190000008880637)
+
+[您的第一个 Progressive Web App](https://www.w3cplus.com/pwa/your-first-pwapp.html)
 
 ---
 
@@ -173,7 +188,7 @@ tags: [fe, links]
 
 [Three.js 现学现卖](http://web.jobbole.com/92335/)
 
-## ES6 ##
+## ES6
 
 [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 
@@ -205,6 +220,8 @@ promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-
 [深入理解 Express.js](http://blog.jobbole.com/41325/)
 
 [forever让nodejs应用后台应用](http://tcrct.iteye.com/blog/2043644)
+
+[Node应用的进程管理器 PM2](http://pm2.keymetrics.io/docs/usage/quick-start/)
 
 ---
 
