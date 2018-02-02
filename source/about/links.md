@@ -195,7 +195,7 @@ tags: [fe, links]
 [前端开发者必不得不知的ES6十大特性](http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/?utm_source=tuicool&utm_medium=referral)
 *10种特性的简短介绍和使用方式*
 
-promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
+[JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
 ## nodejs
 
