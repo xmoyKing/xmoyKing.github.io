@@ -12,6 +12,8 @@ updated: 2018-01-31 20:57:35
 
 PS:本书在网上有公开的文字版本PDF电子书。
 
+本节主要介绍一些具体CSS版本内容及编程技巧。
+
 ### Web标准
 #### CSS的各种版本及其具体内涵
 CSS 1 的规范发表于 1996 年，它非常短，而且比较简单。
@@ -19,24 +21,24 @@ CSS 1 的规范发表于 1996 年，它非常短，而且比较简单。
 CSS 2 发表于 1998 年，它的定义更加严格，囊括了更多的功能，此时，规范的篇幅暴增，凭人的记忆已经无能为力了。
 
 在 CSS 2 之后，CSS 工作组意识到这门语言已经变得非常庞大，再也无法把它塞进单个规范中了。这样不仅阅读和编辑极其困难，而且限制了 CSS本身的快速发展。一项规范如果要推进到最终阶段，其中的每项特性都必须具备两个独立的实现和全面的测试。原先的那种方式已经玩不转了。因此，将 CSS 打散到多个不同的规范（ 模块 ）中，每个模块都可以独立更新版本。这其中，那些延续 CSS 2.1 已有特性的模块会升级到 3 这个版本号。比如以下模块：
--  CSS 语法（ http://w3.org/TR/css-syntax-3 ）
--  CSS 层叠与继承（ http://w3.org/TR/css-cascade-3 ）
--  CSS 颜色（ http://w3.org/TR/css3-color ）
--  选择符（ http://w3.org/TR/selectors ）
--  CSS 背景与边框（ http://w3.org/TR/css3-background ）
--  CSS 值与单位（ http://w3.org/TR/css-values-3 ）
--  CSS 文本排版（ http://w3.org/TR/css-text-3 ）
--  CSS 文本装饰效果（ http://w3.org/TR/css-text-decor-3 ）
--  CSS 字体（ http://w3.org/TR/css3-fonts ）
--  CSS 基本 UI 特性（ http://w3.org/TR/css3-ui ）
+- CSS 语法（ http://w3.org/TR/css-syntax-3 ）
+- CSS 层叠与继承（ http://w3.org/TR/css-cascade-3 ）
+- CSS 颜色（ http://w3.org/TR/css3-color ）
+- 选择符（ http://w3.org/TR/selectors ）
+- CSS 背景与边框（ http://w3.org/TR/css3-background ）
+- CSS 值与单位（ http://w3.org/TR/css-values-3 ）
+- CSS 文本排版（ http://w3.org/TR/css-text-3 ）
+- CSS 文本装饰效果（ http://w3.org/TR/css-text-decor-3 ）
+- CSS 字体（ http://w3.org/TR/css3-fonts ）
+- CSS 基本 UI 特性（ http://w3.org/TR/css3-ui ）
 
 此外，如果某个模块是前所未有的新概念，那它的版本号将从 1 开始。比如下面这些：
--  CSS 变形（ http://w3.org/TR/css-transforms-1 ）
--  图像混合效果（ http://w3.org/TR/compositing-1 ）
--  滤镜效果（ http://w3.org/TR/filter-effects-1 ）
--  CSS 遮罩（ http://w3.org/TR/css-masking-1 ）
--  CSS 伸缩盒布局（ http://w3.org/TR/css-flexbox-1 ）
--  CSS 网格布局（ http://w3.org/TR/css-grid-1 ）
+- CSS 变形（ http://w3.org/TR/css-transforms-1 ）
+- 图像混合效果（ http://w3.org/TR/compositing-1 ）
+- 滤镜效果（ http://w3.org/TR/filter-effects-1 ）
+- CSS 遮罩（ http://w3.org/TR/css-masking-1 ）
+- CSS 伸缩盒布局（ http://w3.org/TR/css-flexbox-1 ）
+- CSS 网格布局（ http://w3.org/TR/css-grid-1 ）
 
 尽管“CSS3”这个名词非常流行，但它实际上并没有在任何规范中定义过。这一点跟 CSS 2.1 或更早的 CSS 1 不一样。真正的情况是，绝大多数在提到这个词时，指的是一个非正式的集合，它包括 CSS 规范第三版（ Level 3 ）再加上一些版本号还是 1 的新规范。
 
@@ -58,10 +60,10 @@ CSS 2 发表于 1998 年，它的定义更加严格，囊括了更多的功能�
 border-radius: 10px;
 ```
 这里面有两条声明是完全多余的： -ms-border-radius 和 -o-border-radius 这两个属性从来没有在任何浏览器中出现过，因为 IE 和 Opera 从一开始就是直接实现 border-radius 这个无前缀版本的。显然，把每个声明都重复五遍是相当枯燥的，而且很难维护。因此出现某个工具来把这项工作自动化只是个时间问题。
--  像 CSS3, Please!（ http://css3please.com ）和 pleeease（ http://pleee-ase.io/playground.html ）这样的网站允许你把无前缀的 CSS 代码粘贴进去，它们会自动帮你把必要的前缀都加好。这类网站是“前缀危机”所催生出的第一批工具，很快就过气了，因为跟其他方案相比，它们的使用成本太高了。
--  Autoprefixer（ https://github.com/ai/autoprefixer ）采用 Can I Use...（ http://caniuse.com ）的数据库来判断哪些前缀是需要添加的；此外，它是在本地完成编译的，类似预处理器。
--  作者自己开发的 -prefix-free（ http://leaverou.github.io/prefixfree ）会在浏览器中进行特性检测，来决定哪些前缀是需要的。它的好处在于几乎不需要更新，因为其所有信息都是用一份属性清单在真实的浏览器环境中跑出来的结果。
--  类 似 Stylus（ http://stylus-lang.com/ ） 、 LESS（ http://lesscss.org ） 或 Sass（ http://sass-lang.com ）的预处理器并不自带任何加前缀的方法，但很多人开发过一些能为常用属性加前缀的 mixin；社区中也有一些库提供了这类 mixin。
+- 像 CSS3, Please!（ http://css3please.com ）和 pleeease（ http://pleee-ase.io/playground.html ）这样的网站允许你把无前缀的 CSS 代码粘贴进去，它们会自动帮你把必要的前缀都加好。这类网站是“前缀危机”所催生出的第一批工具，很快就过气了，因为跟其他方案相比，它们的使用成本太高了。
+- Autoprefixer（ https://github.com/ai/autoprefixer ）采用 Can I Use...（ http://caniuse.com ）的数据库来判断哪些前缀是需要添加的；此外，它是在本地完成编译的，类似预处理器。
+- 作者自己开发的 -prefix-free（ http://leaverou.github.io/prefixfree ）会在浏览器中进行特性检测，来决定哪些前缀是需要的。它的好处在于几乎不需要更新，因为其所有信息都是用一份属性清单在真实的浏览器环境中跑出来的结果。
+- 类 似 Stylus（ http://stylus-lang.com/ ） 、 LESS（ http://lesscss.org ） 或 Sass（ http://sass-lang.com ）的预处理器并不自带任何加前缀的方法，但很多人开发过一些能为常用属性加前缀的 mixin；社区中也有一些库提供了这类 mixin。
 
 由于网页开发者使用无前缀的属性是想确保代码的向前兼容，那么工作组想要修改这些无前缀语法就变得不可能了。基本上就跟这些半生不熟的早期规范绑在一起了，只能通过极其有限的途径来修改它们。用不了多久，这个“坑”里的每个人就会意识到，浏览器前缀已是一场史诗般的失败。
 
@@ -240,7 +242,7 @@ background-repeat: no-repeat;
 
 
 #### 应该使用预处理器吗
-你很可能听说过像 Stylus（http://stylus-lang.com/）、Sass（http://sass-lang.com/）或 LESS（http://lesscss.org/）这样的 CSS 预处理器。它们为 CSS的编写提供提供了一些便利，比如变量、mixin、函数、规则嵌套、颜色处理等。
+你很可能听说过像 Stylus（ http://stylus-lang.com/ ）、Sass（ http://sass-lang.com/ ）或 LESS（ http://lesscss.org/ ）这样的 CSS 预处理器。它们为 CSS的编写提供提供了一些便利，比如变量、mixin、函数、规则嵌套、颜色处理等。
 
 如果使用得当，它们在大型项目中可以让代码更加灵活，而 CSS 自身在这方面确实有很大局限。只要我们在代码健壮性、灵活性和 DRY 方面有追求，就会感受到 CSS 在这方面的局限。不过，预处理器也不是完美无缺的。
 
