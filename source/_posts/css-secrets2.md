@@ -72,3 +72,93 @@ outline: 5px solid deeppink;
  - 如上所述，它只适用于双层“边框”的场景，因为 outline 并不能接受用逗号分隔的多个值。如果我们需要获得更多层的边框，前一种方案就是我们唯一的选择了。
  - 边框不一定会贴合 border-radius 属性产生的圆角，因此如果元素是圆角的，它的描边可能还是直角的（参见图 2-9）。请注意，这种行为被 CSS 工作组认为是一个 bug，因此未来可能会改为贴合 border-radius 圆角。
  - 根据 CSS 基本 UI 特性（第三版）规范（http://w3.org/TR/css3-ui）所述，“描边可以不是矩形”。尽管在绝大多数情况下，描边都是矩形的，但如果你想使用这个方法，请切记：最好在不同浏览器中完整地测试最终效果。
+
+#### 灵活的背景定位
+很多时候，我们想针对容器某个角对背景图片做偏移定位，在 CSS 2.1 中，我们只能指定距离左上角的偏移量，或者干脆完全靠齐到其他三个角。但是，我们有时希望图片和容器的边角之间能留出一定的空隙（类似内边距的效果）：
+![3](3.png)
+
+对于具有固定尺寸的容器来说，使用 CSS 2.1 来做到这一点是可能的，但很麻烦：可以基于它自身的尺寸以及我们期望它距离右下角的偏移量，计算出背景图片距离左上角的偏移量，然后再把计算结果设置给 background-position 。当容器元素的尺寸不固定时（因为内容往往是可变的），这就不可能做到了。网页开发者通常只能把 background-position 设置为某个接近 100% 的百分比值，以便近似地得到想要的效果。如你所愿，借助现代的CSS 特性，我们已经拥有了更好的解决方案！
+
+##### background-position 的扩展语法方案
+在 CSS 背景与边框（第三版）（http://w3.org/TR/css3-background）中，background-position 属性已经得到扩展，它允许我们指定背景图片距离任意角的偏移量，只要我们在偏移量前面指定关键字。举例来说，如果想让背景图片跟右边缘保持 20px 的偏移量，同时跟底边保持 10px 的偏移量，可以这样做(结果如上图):
+```css
+background: url(code-pirate.svg) no-repeat #58a;
+background-position: right 20px bottom 10px;
+```
+最后一步，我们还需要提供一个合适的回退方案。因为对上述方案来说，在不支持 background-position 扩展语法的浏览器中，背景图片会紧贴在左上角（背景图片的默认位置）。这看起来会很奇怪，而且它会干扰到文字的可读性。提供一个回退方案也很简单，就是把老套的bottom right 定位值写进 background 的简写属性中：
+```css
+background: url(code-pirate.svg)
+            no-repeat bottom right #58a;
+background-position: right 20px bottom 10px;
+```
+
+##### background-origin 方案
+在给背景图片设置距离某个角的偏移量时，有一种情况极其常见：偏移量与容器的内边距一致。如果采用上面提到的 background-position 的扩展语法方案，代码看起来会是这样的：
+```css
+padding: 10px;
+background: url(code-pirate.svg) no-repeat #58a;
+background-position: right 10px bottom 10px;
+```
+我们可以在下图中看到结果。如你所见，它起作用了，但代码不够DRY：每次改动内边距的值时，我们都需要在三个地方更新这个值！谢天谢地，还有一个更简单的办法可以实现这个需求：让它自动地跟着我们设定的内边距走，不用另外声明偏移量的值。
+![4](4.png)
+
+在网页开发生涯中，你很可能多次写过类似 background-position:top left; 这样的代码。你是否曾经有过疑惑：这个 top left 到底是哪个左上角？你可能知道，每个元素身上都存在三个矩形框：border box（边框的外沿框）、padding box（内边距的外沿框）和 content box（内容区的外沿框）。那 background-position 这个属性指定的到底是哪个矩形框的左上角？
+
+默认情况下， background-position 是以 padding box 为准的，这样边框才不会遮住背景图片。因此， top left 默认指的是 padding box 的左上角。不过，在背景与边框（第三版）（http://w3.org/TR/css3-background）中，我们得到了一个新的属性 background-origin ，可以用它来改变这种行为。在默认情况下，它的值是（闭着眼睛也猜得到） padding-box 。如果把它的值改成 content-box （参见下面的代码），我们在 background-position 属性中使用的边角关键字将会以内容区的边缘作为基准（也就是说，此时背景图片距离边角的偏移量就跟内边距保持一致了）：
+```css
+padding: 10px;
+background: url("code-pirate.svg") no-repeat #58a
+            bottom right; /* 或 100% 100% */
+background-origin: content-box;
+```
+它的视觉效果跟上图是完全一样的，但我们的代码变得更加 DRY了。另外别忘了，在必要时可以把这两种技巧组合起来！如果你想让偏移量与内边距稍稍有些不同（比如稍微收敛或超出），那么可以在使用background-origin: content-box 的同时，再通过 background-position的扩展语法来设置这些额外的偏移量。
+
+##### calc() 方案
+把背景图片定位到距离底边 10px 且距离右边 20px 的位置。如果我们仍然以左上角偏移的思路来考虑，其实就是希望它有一个 100% - 20px 的水平偏移量，以及 100% - 10px 的垂直偏移量。 calc() 函数允许我们执行此类运算，它可以完美地在background-position 属性中使用：
+```css
+background: url("code-pirate.svg") no-repeat;
+background-position: calc(100% - 20px) calc(100% - 10px);
+```
+
+#### 边框内圆角
+有时我们需要一个容器，只在内侧有圆角，而边框或描边的四个角在外部仍然保持直角的形状，如图所示。这是一个有趣的效果，目前还没有被滥用。用两个元素可以实现这个效果，这并没有什么特别的：
+![5](5.png)
+
+```html
+<div class="something-meaningful"><div>
+I have a nice subtle inner rounding,
+don't I look pretty?
+</div></div>
+
+.something-meaningful {
+background: #655;
+padding: .8em;
+}
+.something-meaningful > div {
+background: tan;
+border-radius: .8em;
+padding: 1em;
+}
+```
+这个方法很好，但要求我们使用两个元素，而我们只需要一个元素。有没有办法可以只用一个元素达成同样的效果呢？
+
+其实上述方案要更加灵活一些，因为它允许我们充分运用背景的能力。举个例子，如果我们希望这一圈“边框”不只是纯色的，而是要加一层淡淡的纹理，它也可以很容易地做到。不过，如果只需要达成简单的实色效果，那我们就还有另一条路可走，只需用到一个元素（但这个办法有一些 hack的味道）。我们来看看以下 CSS 代码：
+```css
+background: tan;
+border-radius: .8em;
+padding: 1em;
+box-shadow: 0 0 0 .6em #655;
+outline: .6em solid #655;
+```
+你能猜到视觉效果是怎样的吗？它产生的效果正如图所示。我们基本上受益于两个事实：描边并不会跟着元素的圆角走（因而显示出直角），但 box-shadow 却是会的。因此，如果我们把这两者叠加到一起， box-shadow 会刚好填补描边和容器圆角之间的空隙，这两者的组合达成了我们想要的效果,把投影和描边显示为不同的颜色，从而在视觉上提供了更清晰的解释。
+
+请注意，我们为 box-shadow 属性指定的扩张值并不一定等于描边的宽度，我们只需要指定一个足够填补“空隙”的扩张值就可以了。事实上，指定一个等于描边宽度的扩张值在某些浏览器中可能会得到渲染异常，因此我推荐一个稍小些的值。这又引出了另一个问题：到底多大的投影扩张值可以填补这些空隙呢？
+
+为了解答这个问题，我们需要回忆起中学时学过的勾股定理，用来计算直角三角形各边的长度.
+
+<!-- 如果直角边分别是 a 和 b，则斜边
+（正对着直角的最长边）等于`(a^2 + b^2)开平方`当两条直角边的长度相等时，这个算式会演化为 -->
+
+你可能还很纳闷，中学几何到底是怎么跟我们的内圆角效果扯上关系的？关于怎样用它来计算我们需要的最小扩张值，请看图形化的解释。在我们的例子中， border-radius 是 .8em ，那么最小的扩张值就是  `( 2开平方 - 1 ) * 0.8 ≈ 0.33137085em` 。我们要做的就是把它稍微向上取个整，把 .34em 设置为投影的扩张半径。为了避免每次都要计算，你可以直接使用圆角半径的一半，因为 `2开平方 − 1  < 0.5`。请注意，该计算过程揭示了这个方法的另一个限制：为了让这个效果得以达成，扩张半径需要比描边的宽度值小，但它同时又要比 `( 2开平方 - 1 )*r`大（这里的 r 表示 border-radius ）。这意味着，如果描边的宽度比`( 2开平方 - 1 )*r`小，那我们是不可能用这个方法达成该效果的。
+![6](6.png)
+
