@@ -162,3 +162,47 @@ outline: .6em solid #655;
 你可能还很纳闷，中学几何到底是怎么跟我们的内圆角效果扯上关系的？关于怎样用它来计算我们需要的最小扩张值，请看图形化的解释。在我们的例子中， border-radius 是 .8em ，那么最小的扩张值就是  `( 2开平方 - 1 ) * 0.8 ≈ 0.33137085em` 。我们要做的就是把它稍微向上取个整，把 .34em 设置为投影的扩张半径。为了避免每次都要计算，你可以直接使用圆角半径的一半，因为 `2开平方 − 1  < 0.5`。请注意，该计算过程揭示了这个方法的另一个限制：为了让这个效果得以达成，扩张半径需要比描边的宽度值小，但它同时又要比 `( 2开平方 - 1 )*r`大（这里的 r 表示 border-radius ）。这意味着，如果描边的宽度比`( 2开平方 - 1 )*r`小，那我们是不可能用这个方法达成该效果的。
 ![6](6.png)
 
+#### 条纹背景
+不论是在网页设计中，还是在其他传统媒介中（比如杂志和墙纸等），各种尺寸、颜色、角度的条纹图案在视觉设计中无处不在。要想在网页中实现条纹图案，其过程还远远不够理想。通常，我们的方法是创建一个单独的位图文件，然后每次需要做些调整时，都用图像编辑器来修改它。可能有人试过用 SVG 来取代位图，但这样还是会有一个独立的文件，而且它的语法也远远不够友好。如果可以直接在 CSS 中创建条纹图案，那该有多棒啊！你可能会惊讶地发现，我们居然真的可以。
+
+假设我们有一条基本的垂直线性渐变，颜色从 #fb3 过渡到 #58a，`background: linear-gradient(#fb3, #58a);`。
+
+现在，让我们试着把这两个色标拉近一点，`background: linear-gradient(#fb3 20%, #58a 80%);`。
+
+现在容器顶部的 20% 区域被填充为 #fb3 实色，而底部 20% 区域被填充为 #58a 实色。真正的渐变只出现在容器 60% 的高度区域。如果我们把两个色标继续拉近（分别改为 40% 和 60%），那真正的渐变区域就变得更窄了。你是不是开始好奇，如果我们把两个色标重合在一起，会发生什么？`background: linear-gradient(#fb3 50%, #58a 50%);`
+
+“如果多个色标具有相同的位置，它们会产生一个无限小的过渡区域，过渡的起止色分别是第一个和最后一个指定值。从效果上看，颜色会在那个位置突然变化，而不是一个平滑的渐变过程。” —— CSS 图像（第三版）（http://w3.org/TR/css3-images）
+
+你在图中可以看到，已经没有任何渐变效果了，只有两块实色，各占据了 background-image 一半的面积。本质上，我们已经创建了两条巨大的水平条纹。
+![7](7.png)
+
+因为渐变是一种由代码生成的图像，我们能像对待其他任何背景图像那样对待它，而且还可以通过 background-size 来调整其尺寸：
+```css
+background: linear-gradient(#fb3 50%, #58a 50%);
+background-size: 100% 30px;
+```
+我们把这两条条纹的高度都缩小到了 15px 。由于背景在默认情况下是重复平铺的，整个容器其实已经被填满了水平条纹。还可以用相同的方法来创建不等宽的条纹，只需调整色标的位置值即可。
+```css
+background: linear-gradient(#fb3 30%, #58a 30%);
+background-size: 100% 30px;
+```
+
+为了避免每次改动条纹宽度时都要修改两个数字，我们可以再次从规范那里找到捷径。
+
+“如果某个色标的位置值比整个列表中在它之前的色标的位置值都要小，则该色标的位置值会被设置为它前面所有色标位置值的最大值。” —— CSS 图像（第三版）（http://w3.org/TR/css3-images）
+
+这意味着，如果我们把第二个色标的位置值设置为 0 ，那它的位置就总是会被浏览器调整为前一个色标的位置值，这个结果正是我们想要的。因此，下面的代码会产生完全一样的条纹背景，但代码会更加DRY：
+```css
+background: linear-gradient(#fb3 30%, #58a 0);
+background-size: 100% 30px;
+```
+
+如果要创建超过两种颜色的条纹，也是很容易的。举例来说，下面的代码可以生成三种颜色的水平条纹
+```css
+background: linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);
+background-size: 100% 45px;
+```
+
+<p data-height="265" data-theme-id="0" data-slug-hash="KQzPPL" data-default-tab="css,result" data-user="xmoyking" data-embed-version="2" data-pen-title="Horizontal stripes" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/KQzPPL/">Horizontal stripes</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
