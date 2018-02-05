@@ -165,9 +165,12 @@ tags: [fe, links]
 
 [CSS3线性渐变背景 linear-gradients](https://www.w3cplus.com/css3/do-you-really-understand-css-linear-gradients.html)
 
-[webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
+[Webpack中文文档](https://doc.webpack-china.org)
 
 [入门Webpack，看这篇就够了](https://www.jianshu.com/p/42e11515c10f)
+
+[webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
+
 
 ---
 
