@@ -44,15 +44,6 @@ tags: [fe, links]
 
 ---
 
-## 友链/博客
-
-[ZhangShu](https://sherry-zhang.github.io/)
-
-[@何海宝](http://www.hehaibao.com/)
-
-
----
-
 ## 林散知识点 ##
 
 [css position 初解10步](http://blog.jobbole.com/49320/)
@@ -106,10 +97,12 @@ tags: [fe, links]
 [AJAX工作原理及其优缺点](http://www.cnblogs.com/SanMaoSpace/archive/2013/06/15/3137180.html)*简版*
 
 
-[浓缩解读《JavaScript设计模式与开发实践》①](http://www.jianshu.com/p/4829d45eb714)*主要讲的是一些js的基本内容，他的笔记共3章，KING自己对书中内容进行了整理和搬运*
+[浓缩解读《JavaScript设计模式与开发实践》](http://www.jianshu.com/p/4829d45eb714)*主要讲的是一些js的基本内容，他的笔记共3章*
 1. 主要讲设计模式的用途，以及原型继承的各方面特性
 2. 主要讲this、call和apply
 3. 主要讲闭包和高阶函数，包括命令模式，AOP，函数柯里化（这里代码有错误）。
+
+我自己对书中内容进行了整理和搬运
 
 [一次完整的HTTP请求过程（以chrome为例）](http://linux5588.blog.51cto.com/65280/1351007)*其中有谈到计算机网络，操作系统文件管理，浏览器渲染参考*
 
@@ -180,8 +173,6 @@ tags: [fe, links]
 [深入浅出webpack教程系列](http://www.cnblogs.com/ghostwu/p/7499237.html)
 
 
----
-
 ## PWA
 
 [第一本 PWA 中文书](https://juejin.im/entry/5a1c394a5188255851326da5)
@@ -190,7 +181,6 @@ tags: [fe, links]
 
 [您的第一个 Progressive Web App](https://www.w3cplus.com/pwa/your-first-pwapp.html)
 
----
 
 ## Three.js
 [WebGL中文网：Threejs基础教程](http://www.hewebgl.com/article/articledir/1)
@@ -203,7 +193,7 @@ tags: [fe, links]
 
 [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 
-[前端开发者必不得不知的ES6十大特性](http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/?utm_source=tuicool&utm_medium=referral)
+[前端开发者必不得不知的ES6十大特性](http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/)
 *10种特性的简短介绍和使用方式*
 
 [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
@@ -234,16 +224,13 @@ tags: [fe, links]
 
 [Node应用的进程管理器 PM2](http://pm2.keymetrics.io/docs/usage/quick-start/)
 
----
-
 ## JS题目 ##
 
 ## do you really know JavaScript?: ##
 [JavaScript Puzzlers!](http://javascript-puzzlers.herokuapp.com/)
-
-解析:[44个 Javascript 变态题解析](http://www.admin10000.com/document/9203.html)
-
-1. ["1", "2", "3"].map(parseInt) 的输出为other，[解析](https://segmentfault.com/a/1190000000411840)
+解析:
+- [44个 Javascript 变态题解析](http://www.admin10000.com/document/9203.html)
+- [1.解析](https://segmentfault.com/a/1190000000411840)
 
 ---
 
@@ -270,3 +257,11 @@ tags: [fe, links]
 现在APP界面风格趋势大都趋近于简约风，而国内APP中，微信的UI设计得就挺不错，这段时间看了下微信小程序，发现可以从微信小程序设计指南学习一些通用的移动端UI设计规范。
 
 总原则：功能确定-》元素少-》体验统一-》界面美观
+
+
+## 友链/博客
+
+[ZhangShu](https://sherry-zhang.github.io/)
+
+[@何海宝](http://www.hehaibao.com/)
+
