@@ -2,8 +2,8 @@
 title: 知识点/连接合集
 date: 2017-01-01 16:42:15
 updated:
-categories: it
-tags: [fe, links]
+categories: mixed
+tags: [mixed, links]
 ---
 
 ## 前端资源 ##
@@ -12,25 +12,9 @@ tags: [fe, links]
 
 [成为专业程序员路上用到的各种优秀资料、神器及框架](https://github.com/stanzhai/be-a-professional-programmer)
 
-[推荐前端技术书- 伯乐在线](https://github.com/jobbole/awesome-web-dev-books)
-
-[前端知识点大百科全书](https://github.com/Wscats/Good-text-Share)
-
-[前端开发者手册](https://dwqs.gitbooks.io/frontenddevhandbook/content/)
-
-[前端实习生面试总结](http://www.cnblogs.com/xiaoruo/p/4665163.html)
-
-[前端面试经典题目合集介绍- 牛客网](https://www.nowcoder.com/ta/front-end-interview?query=&asc=true&order=&page=1)
-
-[Web前端面试题目汇总](http://www.cnblogs.com/bigboyLin/p/5272902.html)
-
 [JavaScript 全栈工程师培训教程- 阮一峰](http://www.ruanyifeng.com/blog/2016/11/javascript.html)
 
 [你可能不知道的10个设计神器（内附使用教程）](http://www.zcool.com.cn/article/ZNDM4NjY4.html)
-
-前端入门及学习路线，分两部分，一个是HTML和CSS基础，一个是Javascript。由于是译文，资源和链接都是英文的:
-1. [前端开发，从草根到英雄（第一部分）](http://www.jianshu.com/p/8e639ae10dfe#)
-2. [前端开发，从草根到英雄（第二部分）](http://www.jianshu.com/p/e2be2bb9d229)
 
 [httpbin(1): HTTP Request & Response Service](http://httpbin.org/) 免费可以用来测试的http请求、响应服务
 
@@ -42,7 +26,44 @@ tags: [fe, links]
 
 [JS函数式编程](https://github.com/DrBoolean/mostly-adequate-guide)*初略过一遍，了解思想即可，这是一种编程范式，讲解虽然由浅入深，但由于思想问题，接收程度不一，所以习惯了传统js编程的人感觉有些别扭，综合而言：运用在实际开发中或想要掌握需多练习*
 
+[推荐前端技术书- 伯乐在线](https://github.com/jobbole/awesome-web-dev-books)
+
+[前端知识点大百科全书](https://github.com/Wscats/Good-text-Share)
+
+[前端开发者手册](https://dwqs.gitbooks.io/frontenddevhandbook/content/)
+
+### 学习路径/方向
+1. 《JS语言发展》：ES6、TypeScript、Linux等
+1. 《Node》：Express、KOA2、NodeJS源码分析等
+1. 《前端工程化那些事儿》 ：Webpack3、Gulp、Rollup、FIS等
+1. 《性能优化与工程化》 ：直播平台、Webapp优化等
+1. 《MV*框架大集合》 ：Vue2、React、Angular5等
+1. 《网页重构之道》 ：CSS3D、CSS工作流、渲染原理等
+1. 《前端工程师跨界之旅》 ：前端开发iOS、Android、iOT、PC
+1. 《前端图形学与游戏》 ：Cocos2d-JS、WebGL、Three.js等
+1. 《数据结构和算法》 ：JavaScript实践数据结构和算法等
+1. 《设计模式与前端安全》 ：常用设计模式、网络安全等
+
 ---
+
+前端入门及学习路线，分两部分，一个是HTML和CSS基础，一个是Javascript。由于是译文，资源和链接都是英文的:
+1. [前端开发，从草根到英雄（第一部分）](http://www.jianshu.com/p/8e639ae10dfe#)
+2. [前端开发，从草根到英雄（第二部分）](http://www.jianshu.com/p/e2be2bb9d229)
+
+## 题目/面试 ##
+
+[前端实习生面试总结](http://www.cnblogs.com/xiaoruo/p/4665163.html)
+
+[前端面试经典题目合集介绍- 牛客网](https://www.nowcoder.com/ta/front-end-interview?query=&asc=true&order=&page=1)
+
+[Web前端面试题目汇总](http://www.cnblogs.com/bigboyLin/p/5272902.html)
+
+[JavaScript Puzzlers!](http://javascript-puzzlers.herokuapp.com/)
+解析:
+- [44个 Javascript 变态题解析](http://www.admin10000.com/document/9203.html)
+- [1.解析](https://segmentfault.com/a/1190000000411840)
+
+[Front-end Job Interview Questions](https://h5bp.github.io/Front-end-Developer-Interview-Questions/)、
 
 ## 林散知识点 ##
 
@@ -158,7 +179,12 @@ tags: [fe, links]
 
 [CSS3线性渐变背景 linear-gradients](https://www.w3cplus.com/css3/do-you-really-understand-css-linear-gradients.html)
 
+[使用jquery获取url及url参数的方法](http://www.cnblogs.com/babycool/p/3169058.html)
+
+[vscode: Visual Studio Code 常用快捷键](https://lzw.me/a/vscode-visual-studio-code-shortcut.html)
+
 ---
+
 
 ## Webpack
 
@@ -171,7 +197,6 @@ tags: [fe, links]
 [webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
 
 [深入浅出webpack教程系列](http://www.cnblogs.com/ghostwu/p/7499237.html)
-
 
 ## PWA
 
@@ -191,10 +216,10 @@ tags: [fe, links]
 
 ## ES6
 
-[ECMAScript 6 入门](http://es6.ruanyifeng.com/)
-
 [前端开发者必不得不知的ES6十大特性](http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/)
 *10种特性的简短介绍和使用方式*
+
+[ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 
 [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
@@ -224,25 +249,6 @@ tags: [fe, links]
 
 [Node应用的进程管理器 PM2](http://pm2.keymetrics.io/docs/usage/quick-start/)
 
-## JS题目 ##
-
-## do you really know JavaScript?: ##
-[JavaScript Puzzlers!](http://javascript-puzzlers.herokuapp.com/)
-解析:
-- [44个 Javascript 变态题解析](http://www.admin10000.com/document/9203.html)
-- [1.解析](https://segmentfault.com/a/1190000000411840)
-
----
-
-[使用jquery获取url及url参数的方法](http://www.cnblogs.com/babycool/p/3169058.html)
-
-[vscode: Visual Studio Code 常用快捷键](https://lzw.me/a/vscode-visual-studio-code-shortcut.html)
-
------
-
-[一灯学堂学习路径](http://www.yidengxuetang.com/recruit/?f=zhangxinxu.com)
-
-
 ## Python
 
 [Python3入门-by廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)*非常非常适合入门*
@@ -265,3 +271,33 @@ tags: [fe, links]
 
 [@何海宝](http://www.hehaibao.com/)
 
+[H5BP](https://h5bp.github.io/)
+
+## 书单
+### 已完成
+1. 《学习JavaScript数据结构与算法 （2015.10）》
+1. 《JavaScript高级程序设计（第3版）（2012.3）》
+1. 《JavaScript权威指南(第六版) （2012.4）》
+1. 《Effective JavaScript 编写高质量JavaScript代码的68个有效方法 （2014.1）》
+1. 《Pro.AngularJS-AngularJS高级程序设计 （2015.8）》
+1. 《AngularJS开发下一代Web应用》
+1. 《AngularJS深度剖析与最佳实践 (2016.1)》 
+1. 《AngularJS权威教程 （2014.8）》
+1. 《揭秘angular 2 （2016.12）》
+1. 《Javascript框架设计 （2014.4）》
+1. 《指尖上行 移动前端开发进阶之路 （2017.9）》
+1. 《精通CSS：高级Web标准解决方案(2010.5 第2版)》
+1. 《JavaScript设计模式与开发实践 （2015.5）》
+1. 《Understanding ECMAScript6 (深入理解ES6) （2017.1）》
+1. 《CSS.Secrets / CSS揭秘 (2015.6)》 *2018.2.13*
+1. 《Node与Express开发（2015.2）》 *2018.2.14*
+1. 《响应式Web设计：HTML5和CSS3实战（2013.2）》 *2018.2.15*
+
+### 未完成/计划中
+1. 《Pro.CSS.for.High.Traffic.Websites-高流量网站CSS开发技术》
+1. 《Professional.Node.js-Node.js高级编程》
+1. 《程序员的数学 （2012。11）》
+1. 《你不知道的JavaScript（上/中/下三卷）》
+1. 《构建高性能Web站点 （2009）》
+1. 《图解HTTP （2014-04）》
+1. 《黑客与画家》
