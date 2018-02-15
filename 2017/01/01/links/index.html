@@ -51,7 +51,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="KING">
     <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
-    <meta name="keywords" content="">
+    <meta name="keywords" content=",links,mixed">
 
     <!-- Import lsloader -->
     <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
@@ -256,8 +256,11 @@
     <meta property="og:title" content="知识点/连接合集 | KING · NOTE">
     <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
     <meta property="og:description" content="Loneliness is the carnival of one single soul.">
-    
+    <meta property="og:article:tag" content="links"> <meta property="og:article:tag" content="mixed"> 
 
+    
+        <meta property="article:published_time" content="Sun Jan 01 2017 16:42:15 GMT+0800" />
+        <meta property="article:modified_time" content="Thu Feb 15 2018 17:55:15 GMT+0800" />
     
 
     <!-- The Twitter Card protocol -->
@@ -269,13 +272,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="https://github.com/xmoyKING/about/links.html" />
+        <link rel="canonical" href="https://github.com/xmoyKING/2017/01/01/links/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2017/01/01/links/index.html",
+    "headline": "知识点/连接合集",
+    "datePublished": "Sun Jan 01 2017 16:42:15 GMT+0800",
+    "dateModified": "Thu Feb 15 2018 17:55:15 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",links,mixed",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
 
 
     
@@ -310,6 +343,39 @@
                     
 
                     <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前端资源"><span class="post-toc-number">1.</span> <span class="post-toc-text">前端资源</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#学习路径-方向"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">学习路径/方向</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题目-面试"><span class="post-toc-number">2.</span> <span class="post-toc-text">题目/面试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#林散知识点"><span class="post-toc-number">3.</span> <span class="post-toc-text">林散知识点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Webpack"><span class="post-toc-number">4.</span> <span class="post-toc-text">Webpack</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PWA"><span class="post-toc-number">5.</span> <span class="post-toc-text">PWA</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Three-js"><span class="post-toc-number">6.</span> <span class="post-toc-text">Three.js</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ES6"><span class="post-toc-number">7.</span> <span class="post-toc-text">ES6</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nodejs"><span class="post-toc-number">8.</span> <span class="post-toc-text">nodejs</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python"><span class="post-toc-number">9.</span> <span class="post-toc-text">Python</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设计、模版"><span class="post-toc-number">10.</span> <span class="post-toc-text">设计、模版</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#友链-博客"><span class="post-toc-number">11.</span> <span class="post-toc-text">友链/博客</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#书单"><span class="post-toc-number">12.</span> <span class="post-toc-text">书单</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#已完成"><span class="post-toc-number">12.1.</span> <span class="post-toc-text">已完成</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#未完成-计划中"><span class="post-toc-number">12.2.</span> <span class="post-toc-text">未完成/计划中</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
 
 
 <!-- Layouts -->
@@ -358,7 +424,7 @@
         <strong>KING</strong>
         <span>Jan 01, 2017</span>
         <!-- Updated Time , add By KING 2017.11.16 -->
-        <span>Feb 02, 2018 UPDATED</span> 
+        <span>Feb 15, 2018 UPDATED</span> 
     </div>
 
     <div class="section-spacer"></div>
@@ -382,7 +448,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/">undefined</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/">undefined</a>
+        <a class="post_tag-link" href="/tags/links/">links</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/mixed/">mixed</a>
     </ul>
     
 
@@ -399,7 +465,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=知识点/连接合集&url=https://github.com/xmoyKING/about/links.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=知识点/连接合集&url=https://github.com/xmoyKING/2017/01/01/links/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 Share to Weibo
             </li>
@@ -408,7 +474,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=知识点/连接合集&url=https://github.com/xmoyKING/about/links.html&via=KING" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=知识点/连接合集&url=https://github.com/xmoyKING/2017/01/01/links/index.html&via=KING" target="_blank">
             <li class="mdl-menu__item">
                 Share to Twitter
             </li>
@@ -417,7 +483,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/about/links.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2017/01/01/links/index.html" target="_blank">
             <li class="mdl-menu__item">
                 Share to Facebook
             </li>
@@ -426,7 +492,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/about/links.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2017/01/01/links/index.html" target="_blank">
             <li class="mdl-menu__item">
                 Share to Google+
             </li>
@@ -453,28 +519,43 @@
     
         <h2 id="前端资源"><a href="#前端资源" class="headerlink" title="前端资源"></a>前端资源</h2><p><a href="http://www.w3cplus.com/" target="_blank" rel="noopener">w3cplus</a></p>
 <p><a href="https://github.com/stanzhai/be-a-professional-programmer">成为专业程序员路上用到的各种优秀资料、神器及框架</a></p>
-<p><a href="https://github.com/jobbole/awesome-web-dev-books">推荐前端技术书- 伯乐在线</a></p>
-<p><a href="https://github.com/Wscats/Good-text-Share">前端知识点大百科全书</a></p>
-<p><a href="https://dwqs.gitbooks.io/frontenddevhandbook/content/" target="_blank" rel="noopener">前端开发者手册</a></p>
-<p><a href="http://www.cnblogs.com/xiaoruo/p/4665163.html" target="_blank" rel="noopener">前端实习生面试总结</a></p>
-<p><a href="https://www.nowcoder.com/ta/front-end-interview?query=&amp;asc=true&amp;order=&amp;page=1" target="_blank" rel="noopener">前端面试经典题目合集介绍- 牛客网</a></p>
-<p><a href="http://www.cnblogs.com/bigboyLin/p/5272902.html" target="_blank" rel="noopener">Web前端面试题目汇总</a></p>
 <p><a href="http://www.ruanyifeng.com/blog/2016/11/javascript.html" target="_blank" rel="noopener">JavaScript 全栈工程师培训教程- 阮一峰</a></p>
 <p><a href="http://www.zcool.com.cn/article/ZNDM4NjY4.html" target="_blank" rel="noopener">你可能不知道的10个设计神器（内附使用教程）</a></p>
-<p>前端入门及学习路线，分两部分，一个是HTML和CSS基础，一个是Javascript。由于是译文，资源和链接都是英文的:</p>
-<ol>
-<li><a href="http://www.jianshu.com/p/8e639ae10dfe#" target="_blank" rel="noopener">前端开发，从草根到英雄（第一部分）</a></li>
-<li><a href="http://www.jianshu.com/p/e2be2bb9d229" target="_blank" rel="noopener">前端开发，从草根到英雄（第二部分）</a></li>
-</ol>
 <p><a href="http://httpbin.org/" target="_blank" rel="noopener">httpbin(1): HTTP Request &amp; Response Service</a> 免费可以用来测试的http请求、响应服务</p>
 <p><a href="http://www.cnblogs.com/PeunZhang/p/3407453.html" target="_blank" rel="noopener">移动web资源整理</a></p>
 <p><a href="http://www.alloyteam.com/2015/06/yi-dong-web-wen-ti-xiao-jie/" target="_blank" rel="noopener">Alloyteam：移动web问题小结</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/27283922" target="_blank" rel="noopener">收藏指数满格！帮你打包前端之巅一整年好文！</a><em>前端之巅公众号文章很多都是精华啊！</em></p>
 <p><a href="https://github.com/DrBoolean/mostly-adequate-guide">JS函数式编程</a><em>初略过一遍，了解思想即可，这是一种编程范式，讲解虽然由浅入深，但由于思想问题，接收程度不一，所以习惯了传统js编程的人感觉有些别扭，综合而言：运用在实际开发中或想要掌握需多练习</em></p>
+<p><a href="https://github.com/jobbole/awesome-web-dev-books">推荐前端技术书- 伯乐在线</a></p>
+<p><a href="https://github.com/Wscats/Good-text-Share">前端知识点大百科全书</a></p>
+<p><a href="https://dwqs.gitbooks.io/frontenddevhandbook/content/" target="_blank" rel="noopener">前端开发者手册</a></p>
+<h3 id="学习路径-方向"><a href="#学习路径-方向" class="headerlink" title="学习路径/方向"></a>学习路径/方向</h3><ol>
+<li>《JS语言发展》：ES6、TypeScript、Linux等</li>
+<li>《Node》：Express、KOA2、NodeJS源码分析等</li>
+<li>《前端工程化那些事儿》 ：Webpack3、Gulp、Rollup、FIS等</li>
+<li>《性能优化与工程化》 ：直播平台、Webapp优化等</li>
+<li>《MV*框架大集合》 ：Vue2、React、Angular5等</li>
+<li>《网页重构之道》 ：CSS3D、CSS工作流、渲染原理等</li>
+<li>《前端工程师跨界之旅》 ：前端开发iOS、Android、iOT、PC</li>
+<li>《前端图形学与游戏》 ：Cocos2d-JS、WebGL、Three.js等</li>
+<li>《数据结构和算法》 ：JavaScript实践数据结构和算法等</li>
+<li>《设计模式与前端安全》 ：常用设计模式、网络安全等</li>
+</ol>
 <hr>
-<h2 id="友链-博客"><a href="#友链-博客" class="headerlink" title="友链/博客"></a>友链/博客</h2><p><a href="https://sherry-zhang.github.io/" target="_blank" rel="noopener">ZhangShu</a></p>
-<p><a href="http://www.hehaibao.com/" target="_blank" rel="noopener">@何海宝</a></p>
-<hr>
+<p>前端入门及学习路线，分两部分，一个是HTML和CSS基础，一个是Javascript。由于是译文，资源和链接都是英文的:</p>
+<ol>
+<li><a href="http://www.jianshu.com/p/8e639ae10dfe#" target="_blank" rel="noopener">前端开发，从草根到英雄（第一部分）</a></li>
+<li><a href="http://www.jianshu.com/p/e2be2bb9d229" target="_blank" rel="noopener">前端开发，从草根到英雄（第二部分）</a></li>
+</ol>
+<h2 id="题目-面试"><a href="#题目-面试" class="headerlink" title="题目/面试"></a>题目/面试</h2><p><a href="http://www.cnblogs.com/xiaoruo/p/4665163.html" target="_blank" rel="noopener">前端实习生面试总结</a></p>
+<p><a href="https://www.nowcoder.com/ta/front-end-interview?query=&amp;asc=true&amp;order=&amp;page=1" target="_blank" rel="noopener">前端面试经典题目合集介绍- 牛客网</a></p>
+<p><a href="http://www.cnblogs.com/bigboyLin/p/5272902.html" target="_blank" rel="noopener">Web前端面试题目汇总</a></p>
+<p><a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="noopener">JavaScript Puzzlers!</a><br>解析:</p>
+<ul>
+<li><a href="http://www.admin10000.com/document/9203.html" target="_blank" rel="noopener">44个 Javascript 变态题解析</a></li>
+<li><a href="https://segmentfault.com/a/1190000000411840" target="_blank" rel="noopener">1.解析</a></li>
+</ul>
+<p><a href="https://h5bp.github.io/Front-end-Developer-Interview-Questions/" target="_blank" rel="noopener">Front-end Job Interview Questions</a>、</p>
 <h2 id="林散知识点"><a href="#林散知识点" class="headerlink" title="林散知识点"></a>林散知识点</h2><p><a href="http://blog.jobbole.com/49320/" target="_blank" rel="noopener">css position 初解10步</a></p>
 <p><a href="https://www.w3cplus.com/blog/tags/356.html?page=2" target="_blank" rel="noopener">w3cplus-大漠:CSS Grid布局相关博客</a><br><em>若有codepen显示空白的情况则说明是http协议，改为https即可</em></p>
 <p><a href="https://segmentfault.com/q/1010000002709361?_ea=600759" target="_blank" rel="noopener">两列布局</a></p>
@@ -499,12 +580,13 @@
 <p><a href="http://www.cnblogs.com/lhb25/p/loading-spinners-animated-with-css3.html" target="_blank" rel="noopener">使用 CSS3 实现超炫的 Loading（加载）动画效果</a></p>
 <p><a href="http://blog.sina.com.cn/s/blog_61671b520101gelr.html" target="_blank" rel="noopener">css3(border-radius)边框圆角详解</a></p>
 <p><a href="http://louiszhai.github.io/2016/11/02/ajax/" target="_blank" rel="noopener">Ajax知识体系大梳理</a><em>非常全，而且讲到浏览器四种线程之间的配合</em><br><a href="http://www.cnblogs.com/SanMaoSpace/archive/2013/06/15/3137180.html" target="_blank" rel="noopener">AJAX工作原理及其优缺点</a><em>简版</em></p>
-<p><a href="http://www.jianshu.com/p/4829d45eb714" target="_blank" rel="noopener">浓缩解读《JavaScript设计模式与开发实践》①</a><em>主要讲的是一些js的基本内容，他的笔记共3章，KING自己对书中内容进行了整理和搬运</em></p>
+<p><a href="http://www.jianshu.com/p/4829d45eb714" target="_blank" rel="noopener">浓缩解读《JavaScript设计模式与开发实践》</a><em>主要讲的是一些js的基本内容，他的笔记共3章</em></p>
 <ol>
 <li>主要讲设计模式的用途，以及原型继承的各方面特性</li>
 <li>主要讲this、call和apply</li>
 <li>主要讲闭包和高阶函数，包括命令模式，AOP，函数柯里化（这里代码有错误）。</li>
 </ol>
+<p>我自己对书中内容进行了整理和搬运</p>
 <p><a href="http://linux5588.blog.51cto.com/65280/1351007" target="_blank" rel="noopener">一次完整的HTTP请求过程（以chrome为例）</a><em>其中有谈到计算机网络，操作系统文件管理，浏览器渲染参考</em></p>
 <p><a href="http://ourjs.com/detail/532bc9f36922aa7e1d000001" target="_blank" rel="noopener">用纯CSS实现的箭头</a></p>
 <p><a href="http://louiszhai.github.io/2015/12/15/prototypeChain/" target="_blank" rel="noopener">详解JS原型链与继承</a></p>
@@ -532,18 +614,22 @@
 <p><a href="https://segmentfault.com/a/1190000006110417" target="_blank" rel="noopener">如何优雅的选择字体(font-family)</a></p>
 <p><a href="http://www.zhangxinxu.com/wordpress/2015/03/css3-object-position-object-fit/" target="_blank" rel="noopener">半深入理解CSS3 object-position/object-fit属性</a></p>
 <p><a href="https://www.w3cplus.com/css3/do-you-really-understand-css-linear-gradients.html" target="_blank" rel="noopener">CSS3线性渐变背景 linear-gradients</a></p>
-<p><a href="https://segmentfault.com/a/1190000006843916" target="_blank" rel="noopener">webpack多页应用架构系列</a></p>
-<p><a href="https://www.jianshu.com/p/42e11515c10f" target="_blank" rel="noopener">入门Webpack，看这篇就够了</a></p>
+<p><a href="http://www.cnblogs.com/babycool/p/3169058.html" target="_blank" rel="noopener">使用jquery获取url及url参数的方法</a></p>
+<p><a href="https://lzw.me/a/vscode-visual-studio-code-shortcut.html" target="_blank" rel="noopener">vscode: Visual Studio Code 常用快捷键</a></p>
 <hr>
+<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><p><a href="https://doc.webpack-china.org" target="_blank" rel="noopener">Webpack中文文档</a></p>
+<p><a href="https://www.jianshu.com/p/42e11515c10f" target="_blank" rel="noopener">入门Webpack，看这篇就够了</a></p>
+<p><a href="http://webpack.wuhaolin.cn/" target="_blank" rel="noopener">深入浅出 Webpack</a></p>
+<p><a href="https://segmentfault.com/a/1190000006843916" target="_blank" rel="noopener">webpack多页应用架构系列</a></p>
+<p><a href="http://www.cnblogs.com/ghostwu/p/7499237.html" target="_blank" rel="noopener">深入浅出webpack教程系列</a></p>
 <h2 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h2><p><a href="https://juejin.im/entry/5a1c394a5188255851326da5" target="_blank" rel="noopener">第一本 PWA 中文书</a></p>
 <p><a href="https://segmentfault.com/a/1190000008880637" target="_blank" rel="noopener">改造你的网站，变身 PWA</a></p>
 <p><a href="https://www.w3cplus.com/pwa/your-first-pwapp.html" target="_blank" rel="noopener">您的第一个 Progressive Web App</a></p>
-<hr>
 <h2 id="Three-js"><a href="#Three-js" class="headerlink" title="Three.js"></a>Three.js</h2><p><a href="http://www.hewebgl.com/article/articledir/1" target="_blank" rel="noopener">WebGL中文网：Threejs基础教程</a></p>
 <p><a href="http://www.ituring.com.cn/book/1272" target="_blank" rel="noopener">张雯莉：Three.js入门指南</a></p>
 <p><a href="http://web.jobbole.com/92335/" target="_blank" rel="noopener">Three.js 现学现卖</a></p>
-<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">ECMAScript 6 入门</a></p>
-<p><a href="http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">前端开发者必不得不知的ES6十大特性</a><br><em>10种特性的简短介绍和使用方式</em></p>
+<h2 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h2><p><a href="http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/" target="_blank" rel="noopener">前端开发者必不得不知的ES6十大特性</a><br><em>10种特性的简短介绍和使用方式</em></p>
+<p><a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">ECMAScript 6 入门</a></p>
 <p><a href="http://liubin.org/promises-book/" target="_blank" rel="noopener">JavaScript Promise迷你书（中文版）</a></p>
 <h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><p><a href="http://blog.fens.me/series-nodejs/" target="_blank" rel="noopener">从零开始nodejs系列文章</a></p>
 <p><a href="https://cnodejs.org/getstart" target="_blank" rel="noopener">Nodejs中文社区资料</a></p>
@@ -557,22 +643,42 @@
 <p><a href="http://blog.jobbole.com/41325/" target="_blank" rel="noopener">深入理解 Express.js</a></p>
 <p><a href="http://tcrct.iteye.com/blog/2043644" target="_blank" rel="noopener">forever让nodejs应用后台应用</a></p>
 <p><a href="http://pm2.keymetrics.io/docs/usage/quick-start/" target="_blank" rel="noopener">Node应用的进程管理器 PM2</a></p>
-<hr>
-<h2 id="JS题目"><a href="#JS题目" class="headerlink" title="JS题目"></a>JS题目</h2><h2 id="do-you-really-know-JavaScript"><a href="#do-you-really-know-JavaScript" class="headerlink" title="do you really know JavaScript?:"></a>do you really know JavaScript?:</h2><p><a href="http://javascript-puzzlers.herokuapp.com/" target="_blank" rel="noopener">JavaScript Puzzlers!</a></p>
-<p>解析:<a href="http://www.admin10000.com/document/9203.html" target="_blank" rel="noopener">44个 Javascript 变态题解析</a></p>
-<ol>
-<li>[“1”, “2”, “3”].map(parseInt) 的输出为other，<a href="https://segmentfault.com/a/1190000000411840" target="_blank" rel="noopener">解析</a></li>
-</ol>
-<hr>
-<p><a href="http://www.cnblogs.com/babycool/p/3169058.html" target="_blank" rel="noopener">使用jquery获取url及url参数的方法</a></p>
-<p><a href="https://lzw.me/a/vscode-visual-studio-code-shortcut.html" target="_blank" rel="noopener">vscode: Visual Studio Code 常用快捷键</a></p>
-<hr>
-<p><a href="http://www.yidengxuetang.com/recruit/?f=zhangxinxu.com" target="_blank" rel="noopener">一灯学堂学习路径</a></p>
 <h2 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h2><p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="noopener">Python3入门-by廖雪峰</a><em>非常非常适合入门</em></p>
 <h2 id="设计、模版"><a href="#设计、模版" class="headerlink" title="设计、模版"></a>设计、模版</h2><p><a href="http://idesign.qq.com/#!index/feed/id/14" target="_blank" rel="noopener">设计导航</a></p>
 <p><a href="https://thefwa.com" target="_blank" rel="noopener">FWA</a><em>罗列顶尖交互和视觉效果网站及APP</em></p>
 <p><a href="https://mp.weixin.qq.com/debug/wxadoc/design/index.html" target="_blank" rel="noopener">微信小程序设计指南</a><br>现在APP界面风格趋势大都趋近于简约风，而国内APP中，微信的UI设计得就挺不错，这段时间看了下微信小程序，发现可以从微信小程序设计指南学习一些通用的移动端UI设计规范。</p>
 <p>总原则：功能确定-》元素少-》体验统一-》界面美观</p>
+<h2 id="友链-博客"><a href="#友链-博客" class="headerlink" title="友链/博客"></a>友链/博客</h2><p><a href="https://sherry-zhang.github.io/" target="_blank" rel="noopener">ZhangShu</a></p>
+<p><a href="http://www.hehaibao.com/" target="_blank" rel="noopener">@何海宝</a></p>
+<p><a href="https://h5bp.github.io/" target="_blank" rel="noopener">H5BP</a></p>
+<h2 id="书单"><a href="#书单" class="headerlink" title="书单"></a>书单</h2><h3 id="已完成"><a href="#已完成" class="headerlink" title="已完成"></a>已完成</h3><ol>
+<li>《学习JavaScript数据结构与算法 （2015.10）》</li>
+<li>《JavaScript高级程序设计（第3版）（2012.3）》</li>
+<li>《JavaScript权威指南(第六版) （2012.4）》</li>
+<li>《Effective JavaScript 编写高质量JavaScript代码的68个有效方法 （2014.1）》</li>
+<li>《Pro.AngularJS-AngularJS高级程序设计 （2015.8）》</li>
+<li>《AngularJS开发下一代Web应用》</li>
+<li>《AngularJS深度剖析与最佳实践 (2016.1)》 </li>
+<li>《AngularJS权威教程 （2014.8）》</li>
+<li>《揭秘angular 2 （2016.12）》</li>
+<li>《Javascript框架设计 （2014.4）》</li>
+<li>《指尖上行 移动前端开发进阶之路 （2017.9）》</li>
+<li>《精通CSS：高级Web标准解决方案(2010.5 第2版)》</li>
+<li>《JavaScript设计模式与开发实践 （2015.5）》</li>
+<li>《Understanding ECMAScript6 (深入理解ES6) （2017.1）》</li>
+<li>《CSS.Secrets / CSS揭秘 (2015.6)》 <em>2018.2.13</em></li>
+<li>《Node与Express开发（2015.2）》 <em>2018.2.14</em></li>
+<li>《响应式Web设计：HTML5和CSS3实战（2013.2）》 <em>2018.2.15</em></li>
+</ol>
+<h3 id="未完成-计划中"><a href="#未完成-计划中" class="headerlink" title="未完成/计划中"></a>未完成/计划中</h3><ol>
+<li>《Pro.CSS.for.High.Traffic.Websites-高流量网站CSS开发技术》</li>
+<li>《Professional.Node.js-Node.js高级编程》</li>
+<li>《程序员的数学 （2012。11）》</li>
+<li>《你不知道的JavaScript（上/中/下三卷）》</li>
+<li>《构建高性能Web站点 （2009）》</li>
+<li>《图解HTTP （2014-04）》</li>
+<li>《黑客与画家》</li>
+</ol>
 
         
     
@@ -593,11 +699,27 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2017/01/20/native-js-animate-function/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
+    
+        <a href="/2016/11/13/mongodb-begin/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
     
 </nav>
 
@@ -683,7 +805,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
             </ul>
         </li>
         
@@ -701,7 +823,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">89</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">89</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -730,7 +852,7 @@
         
     
         <li>
-            <a href="/about/links.html" title="Links">
+            <a href="/2017/01/01/links/" title="Links">
                 
                     <i class="material-icons sidebar-material-icons">polymer</i>
                 
@@ -755,7 +877,7 @@
         <li>
             <a href="/archives">
                 Number of articles
-                <span class="sidebar-badge">215</span>
+                <span class="sidebar-badge">219</span>
             </a>
         </li>
         
@@ -805,6 +927,14 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
 
                     
 
