@@ -185,6 +185,13 @@ tags: [mixed, links]
 
 [vscode: Visual Studio Code 常用快捷键](https://lzw.me/a/vscode-visual-studio-code-shortcut.html)
 
+## Vue
+
+*对Vue实例/组件的生命周期了解多少？到底在每一个阶段都能做什么，vue又做了些什么？*
+[关于Vue.js2.0生命周期的研究与理解](https://segmentfault.com/a/1190000010336178)
+
+[Vue2.0 探索之路——生命周期和钩子函数的一些理解](https://segmentfault.com/a/1190000008010666)
+
 ## Webpack
 
 [Webpack中文文档](https://doc.webpack-china.org)
@@ -277,8 +284,3 @@ tags: [mixed, links]
 [深入浅出 Webpack](http://webpack.wuhaolin.cn/)
 
 [webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
-
-*对Vue实例/组件的生命周期了解多少？到底在每一个阶段都能做什么，vue又做了些什么？*
-[关于Vue.js2.0生命周期的研究与理解](https://segmentfault.com/a/1190000010336178)
-
-[Vue2.0 探索之路——生命周期和钩子函数的一些理解](https://segmentfault.com/a/1190000008010666)
