@@ -9,7 +9,7 @@ updated: 2018-02-06 14:54:58
 ---
 
 
-本文翻译自[Roll Your Own Copy to Clipboard Feature in 20 Lines of JavaScript — SitePoint](https://www.sitepoint.com/javascript-copy-to-clipboard/)，将会同时发布在众成翻译，地址：[20行JS代码实现粘贴板功能](http://zcfy.cc/article/roll-your-own-copy-to-clipboard-feature-in-20-lines-of-javascript-sitepoint)上。
+本文翻译自[Roll Your Own Copy to Clipboard Feature in 20 Lines of JavaScript — SitePoint](https://www.sitepoint.com/javascript-copy-to-clipboard/)，将会同时发布在众成翻译，地址：[20行JS代码实现粘贴板功能](http://zcfy.cc/article/roll-your-own-copy-to-clipboard-feature-in-20-lines-of-javascript-sitepoint)。
 
 作者：[Craig Buckler](https://www.sitepoint.com/author/craig-buckler/)
 

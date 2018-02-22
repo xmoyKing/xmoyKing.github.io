@@ -8,7 +8,7 @@ updated: 2018-02-06 15:07:17
 ---
 
 
-本文翻译自[What really is the difference between AR / MR / VR / XR ?](https://medium.com/@northof41/what-really-is-the-difference-between-ar-mr-vr-xr-f697be78baa0)，将会同时发布在众成翻译，地址：[AR / MR / VR / XR有什么区别？](http://zcfy.cc/article/what-really-is-the-difference-between-ar-mr-vr-xr)上。
+本文翻译自[What really is the difference between AR / MR / VR / XR ?](https://medium.com/@northof41/what-really-is-the-difference-between-ar-mr-vr-xr-f697be78baa0)，将会同时发布在众成翻译，地址：[AR / MR / VR / XR有什么区别？](http://zcfy.cc/article/what-really-is-the-difference-between-ar-mr-vr-xr)。
 
 作者：[North of 41](https://medium.com/@northof41?source=post_header_lockup)
 

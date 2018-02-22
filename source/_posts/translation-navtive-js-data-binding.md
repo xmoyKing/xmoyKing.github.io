@@ -8,23 +8,26 @@ date: 2018-02-21 20:48:59
 updated: 2018-02-21 20:48:59
 ---
 
+本文翻译自[Native JavaScript Data-Binding](https://www.sellarafaeli.com/blog/native_javascript_data_binding)，将会同时发布在众成翻译，地址：[原生JS数据绑定](http://zcfy.cc/article/native-javascript-data-binding)。
 
-## 原生JS数据绑定
+作者：[Sella Rafaeli](https://www.sellarafaeli.com/)
 
-双向数据绑定是非常重要的特性 —— 将JS模型与HTML视图对应，能减少模板编译并提高用户体验。我们将学习如何在不使用框架的情况下，使用原生JS实现双向绑定 —— 一种为Object.observe*（译注：已废弃）*，另一种为覆盖get / set。PS: 第二种更好，详情请参阅底部的TL;DR。
+===============================================================================================
 
-### 1: Object.observe && DOM.onChange
+双向数据绑定是非常重要的特性 —— 将JS模型与HTML视图对应，能减少模板编译时间同时提高用户体验。我们将学习在不使用框架的情况下，使用原生JS实现双向绑定 —— 一种为Object.observe*（译注：现已废弃，作者写博客时为14年11月）*，另一种为覆盖get / set。PS: 第二种更好，详情请参阅底部的TL;DR*（译注：too long；don't read. 直译为“太长，不想看”，意译为“简单粗暴来吧”）*。
 
-`Object.observe()`是[一种新特性][2]。JS提供的新特性，其在ES7中实现，但在最新的Chrome中已可用 —— 允许对JS对象进行动态更新。简单说就是 —— 只要对象（的属性）发生变化就调用注册的回调函数。
+### 1: Object.observe 和 DOM.onChange
+
+`Object.observe()`是[一种新特性][2]，其在ES7中实现，但在最新的Chrome中已可用 —— 允许对JS对象进行响应式更新。简单说就是 —— 只要对象（的属性）发生变化就调用回调函数。
 
 一般用法为：
 
 ```
 log = console.log
 user = {}
-Object.observe(user, function(changes){    
+Object.observe(user, function(changes){
     changes.forEach(function(change) {
-        user.fullName = user.firstName + " " + user.lastName;         
+        user.fullName = user.firstName + " " + user.lastName;
     });
 });
 
@@ -34,17 +37,17 @@ user.fullName // 'Bill Clinton'
 
 ```
 
-这很方便，能进行动态编程 —— 既保证了所有内容都是最新的。
+这很方便，且能实现响应式编程 —— 保证所有内容都是最新的。
 
-先看下一步：
+如下：
 
 ```
 //<input id="foo">
 user = {};
 div = $("#foo");
-Object.observe(user, function(changes){    
+Object.observe(user, function(changes){
     changes.forEach(function(change) {
-        var fullName = (user.firstName || "") + " " + (user.lastName || "");         
+        var fullName = (user.firstName || "") + " " + (user.lastName || "");
         div.text(fullName);
     });
 });
@@ -58,16 +61,16 @@ div.text() //Bill Clinton
 
 _[JSFiddle][4]_
 
-如上，我们自己实现了模型到数据的绑定！封装一下：
+如上，我们自己实现了模型到数据的绑定！封装一下*（译注：此处原文为`Let’s DRY ourselves with a helper function.` DRY即 don't repeat yourself）*：
 
 ```
 //<input id="foo">
-function bindObjPropToDomElem(obj, property, domElem) { 
-  Object.observe(obj, function(changes){    
+function bindObjPropToDomElem(obj, property, domElem) {
+  Object.observe(obj, function(changes){
     changes.forEach(function(change) {
-      $(domElem).text(obj[property]);        
+      $(domElem).text(obj[property]);
     });
-  });  
+  });
 }
 
 user = {};
@@ -79,12 +82,12 @@ $("#foo").text() //'William'
 
 _[JSFiddle][5]_
 
-现在换一种方式 —— 将DOM元素与JS值绑定起来。一种简单的方法是使用[jQuery.change](http://api.jquery.com/change/)
+换一种方式 —— 将DOM元素与JS值绑定起来。简单的方法是使用[jQuery.change](http://api.jquery.com/change/)
 
 ```
 //<input id="foo">
 $("#foo").val("");
-function bindDomElemToObjProp(domElem, obj, propertyName) {  
+function bindDomElemToObjProp(domElem, obj, propertyName) {
   $(domElem).change(function() {
     obj[propertyName] = $(domElem).val();
     alert("user.name is now "+user.name);
@@ -94,95 +97,93 @@ function bindDomElemToObjProp(domElem, obj, propertyName) {
 user = {}
 bindDomElemToObjProp($("#foo"), user, 'name');
 //enter 'obama' into input
-user.name //Obama. 
+user.name //Obama.
 
 ```
 
 _[JSFiddle][6]_
 
-简直不要太方便，简单总结一下，在实际开发时，可以将两者结合，通过函数来创建一个双向数据绑定：
+简直不要太方便，在实际开发时，可以将两者结合，通过函数来创建一个双向数据绑定：
 
 ```
-function bindObjPropToDomElem(obj, property, domElem) { 
-  Object.observe(obj, function(changes){    
+function bindObjPropToDomElem(obj, property, domElem) {
+  Object.observe(obj, function(changes){
     changes.forEach(function(change) {
-      $(domElem).text(obj[property]);        
+      $(domElem).text(obj[property]);
     });
-  });  
+  });
 }
 
-function bindDomElemToObjProp(obj, propertyName, domElem) {  
+function bindDomElemToObjProp(obj, propertyName, domElem) {
   $(domElem).change(function() {
     obj[propertyName] = $(domElem).val();
     console.log("obj is", obj);
   });
 }
 
-function bindModelView(obj, property, domElem) {  
+function bindModelView(obj, property, domElem) {
   bindObjPropToDomElem(obj, property, domElem)
   bindDomElemToObjProp(obj, propertyName, domElem)
 }
 
 ```
 
-注意：在双向绑定时，DOM操作有不同的方式，例如不同的DOM元素（input，div，textarea，select）有不同的取值方式（text，val）。同时注意：双向数据绑定并不总是必须的 —— “输出型”元素一般不需要视图到模型的绑定，而“输入型”元素一般不需要模型到视图的绑定。但也有例外，例如：
+注意：在双向绑定时，需正确进行DOM操作，因为不同的DOM元素（input，div，textarea，select）有不同的取值方式（text，val）。同时注意：双向数据绑定并不是必须的 —— “输出型”元素一般不需要视图到模型的绑定，而“输入型”元素一般不需要模型到视图的绑定。
+
+下面为第二种方式：
 
 ### 2: 深入'get'和'set'属性
 
-上面的解决方法并不完美。比如用`.change`并不会触发jQuery的“change”事件 —— 例如，直接通过代码对DOM进行修改，在上面的代码中，以下代码不起作用：
+上面的解决方法并不完美。比如直接的修改并不会自动触发jQuery的“change”事件 —— 例如，直接通过代码对DOM进行修改，比如以下代码不起作用：
 
 ```
 $("#foo").val('Putin')
-user.name //still Obama. Oops. 
+user.name //still Obama. Oops.
 
 ```
 
-我们将用一种更激进的方式实现 —— 重写getter和setter。因为我们不仅要动态更新，同时我们将重写JS最底层的功能，既get/setting变量的能力，所以不那么“安全”。这种元编程能力非常强。
+现在，我们来用一种更激进的方式实现 —— 重写getter和setter。因为我们不仅要监测变化，我们将重写JS最底层的功能，即get/setting变量的能力，所以不那么“安全”。后面我们将会看到，这种元编程的方式有多强大。
 
-那么，如果我们可以重写getting和setting对象值会怎么样呢？其实，这也是数据绑定的实质。其实，[用 `Object.defineProperty()` 即可实现][7].
+那么，如果我们可以重写get和set对象值的方法会怎么样呢？这也是数据绑定的实质。[用 `Object.defineProperty()` 即可实现][7].
 
-其实，以前就有[旧的，非标准的，不赞成使用的实现方式][8]，但现在我们有了更好的方式（最重要的是标准）`Object.defineProperty`，如下所示：
+其实，以前就有[已废弃且非标准实现方式][8]，但通过`Object.defineProperty`的实现方式更好（最重要的是标准），如下所示：
 
 ```
 user = {}
 nameValue = 'Joe';
 Object.defineProperty(user, 'name', {
-  get: function() { return nameValue }, 
+  get: function() { return nameValue },
   set: function(newValue) { nameValue = newValue; },
   configurable: true //to enable redefining the property later
 });
 
-user.name //Joe 
+user.name //Joe
 user.name = 'Bob'
 user.name //Bob
 nameValue //Bob
 
 ```
 
-OK, so now user.name is an alias for nameValue. But we can do more than just redirect the variable to be used - we can use it to create an alignment between the model and the view. Observe:
-
-现在`user.name`是`nameValue`的别名。但可做的不仅仅是换个变量名 - 我们可以通过它来保证模型和视图的一致。如下：
+现在`user.name`是`nameValue`的别名。但可做的不仅仅是创建新的变量名 - 我们可以通过它来保证模型和视图的一致。如下：
 
 ```
 //<input id="foo">
 Object.defineProperty(user, 'name', {
-  get: function() { return document.getElementById("foo").value }, 
+  get: function() { return document.getElementById("foo").value },
   set: function(newValue) { document.getElementById("foo").value = newValue; },
   configurable: true //to enable redefining the property later
 });
 
 ```
 
-`user.name` is now binded to the input `#foo`. This is a very concise expression of ‘binding’ at a native level - by defining (or extending) the native get/set. Since the implementation is so concise, one can easily extend/modify this code for custom situation - binding only get/set or extending either one of them, for example to enable binding of other data types.
+`user.name`现在绑定到`#foo`元素。这种底层的方式非常简洁 —— 通过定义（或扩展）变量属性的get / set实现。由于实现非常简洁，因此可以根据情况轻松扩展/修改代码 —— 仅绑定或扩展get / set中的一个，比如绑定其他数据类型。
 
-`user.name`现在绑定到`#foo`元素。这是一个非常简洁的在本地级别的“绑定”表达式 - 通过定义（或扩展）本机get / set。由于实现非常简洁，因此可以轻松扩展/修改此自定义情况的代码 - 仅绑定获取/设置或扩展其中一个，例如启用其他数据类型的绑定。
-
-As usual we make sure to DRY ourselves with something like:
+可封装如下：
 
 ```
 function bindModelInput(obj, property, domElem) {
   Object.defineProperty(obj, property, {
-    get: function() { return domElem.value; }, 
+    get: function() { return domElem.value; },
     set: function(newValue) { domElem.value = newValue; },
     configurable: true
   });
@@ -190,8 +191,7 @@ function bindModelInput(obj, property, domElem) {
 
 ```
 
-usage:
-
+使用：
 ```
 user = {};
 inputElem = document.getElementById("foo");
@@ -207,20 +207,20 @@ alert("user.name is now "+user.name) //model is now 'Bob';
 
 _[JSFiddle][9]_
 
-Note the above still uses ‘domElem.value’ and so will still work only on `<input>` elements. (This can be extended and abstracted away within the bindModelInput, to identify the appropriate DOM type and use the correct method to set its ‘value’).
+注意：上面的`domElem.value`只对`input`元素有效。（可在`bindModelInput`中扩展，对不同的DOM类型使用对应的方法来设置它的值）。
 
-Discussion:
+思考：
+* [` DefineProperty `浏览器兼容性][10]良好 。
+* 注意：上面的实现中，在某些场景下，`视图`可认为是符合`SPOT (single point of truth )`原则的，但该原则常常被忽视（因为双向数据绑定也就意味着等价）。然而，深究下去可能就会发现问题了，在实际开发中也会遇到。 —— 比如，当删除DOM元素时，关联的模型会自动注销么？答案是不会。`bindModelInput`函数在`domElem`元素上创建了一个闭包，使DOM元素常驻在内存中 —— 并保持模型与模型的绑定关系 —— 即使DOM元素被移除。即使视图被移除了，但模型依旧存在。反之一样 —— 若模型被移除了，视图依然能够正常显示。在某些刷新视图和模型无效的情况下，理解这些内部原理就能找到原因了。
 
-*   DefineProperty is available in [pretty much every browser][10].
-*   It is worth mentioning that in the above implementation, the _view_ is now the ‘single point of truth’ (at least, to a certain perspective). This is generally unremarkable (since the point of two-way data-binding means equivalency). However on a principle level this may make some uncomfortable, and in some cases may have actual effect - for example in case of a removal of the DOM element, would our model would essentially be rendered useless? The answer is no, it would not. Our `bindModelInput` creates a closure over `domElem`, keeping it in memory - and preserving the behavior a la binding with the model - even if the DOM element is removed. Thus the model lives on, even if the view is removed. Naturally the reverse is also true - if the model is removed, the view still functions just fine. Understanding these internals could prove important in extreme cases of refreshing both the data and the view.
+*（译注：`SPOT`简单翻译为“单点原则”，即引起变化最好的是由单一入口引起的，而不是由多个入口引起的，比如一个函数，其返回结果最好仅由参数决定，这样输入和输出才能一致，而不会由于其他变化导致用一个输入会出现不同的输出）*
 
-Using such a bare-hands approach presents many benefits over using a framework such as Knockout or Angular for data-binding, such as:
+这种自己实现的数据绑定方法与Knockout或Angular等框架的数据绑定相比，有一些优点，例如：
+* 理解：一旦掌握数据绑定的源码，不仅理解更深入，而且也能对其进行扩展和修改。
+* 性能：不要将所有东西都绑定在一起，只绑定所需的，避免监测过多对象
+* 避免锁定：若所用的框架不支持数据绑定，则自行实现的数据绑定更强大
 
-*   Understanding: Once the source code of the data-binding is in your own hands, you can better understand it and modify it to your own use-cases.
-*   Performance: Don’t bind everything and the kitchen sink, only what you need, thus avoiding performance hits at large numbers of observables.
-*   Avoiding lock-in: Being able to perform data-binding yourself is of course immensely powerful, if you’re not in a framework that supports that.
-
-One weakness is that since this is not a ‘true’ binding (there is no ‘dirty checking’ going on), some cases will fail - updating the view will not ‘trigger’ anything in the model, so for example trying to ‘sync’ two dom elements _via the view_ will fail. That is, binding two elements to the same model will only refresh both elements correctly when the model is ‘touched’. This can be amended by adding a custom ‘toucher’:
+缺点是由于不是`真正的`绑定（没有`脏检查`），有些情况会失败 —— 视图更新时不会`触发`模型中的数据，所以当试着`同步`视图中的两个DOM元素时将会失败。也就是说，将两个元素绑定到同一个模型上时，只有更新模型，则两个元素才会被正确更新。可以通过自定义一个更新函数来实现：
 
 ```
 //<input id='input1'>
@@ -229,7 +229,7 @@ input1 = document.getElementById('input1')
 input2 = document.getElementById('input2')
 user = {}
 Object.defineProperty(user, 'name', {
-  get: function() { return input1.value; }, 
+  get: function() { return input1.value; },
   set: function(newValue) { input1.value = newValue; input2.value = newValue; },
   configurable: true
 });
@@ -237,14 +237,13 @@ input1.onchange = function() { user.name = user.name } //sync both inputs.
 
 ```
 
-### TL;DR:
-
-Create a two way data-binding between model and view with native JavaScript as such:
+### TL;DR：
+当需要使用原生JS创建模型和视图的双向数据绑定时，如下：
 
 ```
 function bindModelInput(obj, property, domElem) {
   Object.defineProperty(obj, property, {
-    get: function() { return domElem.value; }, 
+    get: function() { return domElem.value; },
     set: function(newValue) { domElem.value = newValue; },
     configurable: true
   });
@@ -256,23 +255,9 @@ bindModelInput(user,'name',document.getElementById('foo')); //hey presto, we now
 
 ```
 
-Thanks for reading. Previously published on [JavaScript Weekly][11], comments at [reddit][12] or at [\[email protected\]][13]
+感谢阅读，本文也发布在 [JavaScript Weekly][11], 可在[reddit][12]回复我
 
-Feel free to [drop me a line][14]. I [write extensively][15] about advanced web development and am available for [consulting][16] anywhere in the world.
 
-© [sellarafaeli.com][17], 2017
-
- 
-
----
-
-via: [https://www.sellarafaeli.com/blog/native\_javascript\_data_binding][18]
-
-作者: [null][19] 选题者: [@undefined][20] 译者: [译者ID][21] 校对: [校对者ID][22]
-
-本文由 [LCTT][23] 原创编译，[Linux中国][24] 荣誉推出
-
-[1]: https://www.sellarafaeli.com/
 [2]: http://www.html5rocks.com/en/tutorials/es7/observe/
 [3]: http://kangax.github.io/compat-table/es7/#Object.observe
 [4]: http://jsfiddle.net/v2bw6658/
@@ -284,15 +269,3 @@ via: [https://www.sellarafaeli.com/blog/native\_javascript\_data_binding][18]
 [10]: http://kangax.github.io/compat-table/es5/#Object.defineProperty
 [11]: http://javascriptweekly.com/issues/207
 [12]: http://redd.it/2manfb
-[13]: https://www.sellarafaeli.com/cdn-cgi/l/email-protection
-[14]: https://www.sellarafaeli.com/contact
-[15]: https://www.sellarafaeli.com/blog
-[16]: https://www.sellarafaeli.com/consulting.html
-[17]: https://www.sellarafaeli.com/
-[18]: https://www.sellarafaeli.com/blog/native_javascript_data_binding
-[19]: undefined
-[20]: https://github.com/undefined
-[21]: https://github.com/译者ID
-[22]: https://github.com/校对者ID
-[23]: https://github.com/LCTT/TranslateProject
-[24]: https://linux.cn/

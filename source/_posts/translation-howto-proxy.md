@@ -7,7 +7,7 @@ date: 2018-02-08 15:09:52
 updated: 2018-02-08 15:09:52
 ---
 
-本文翻译自[JavaScript: Use a Web Proxy for Cross-Domain XMLHttpRequest Calls](https://developer.yahoo.com/javascript/howto-proxy.html)，将会同时发布在众成翻译，地址：[JavaScript：通过Web代理发起跨域请求](http://zcfy.cc/article/javascript-developer-center-use-a-web-proxy-for-cross-domain-xmlhttprequest-calls-ydn)上。
+本文翻译自[JavaScript: Use a Web Proxy for Cross-Domain XMLHttpRequest Calls](https://developer.yahoo.com/javascript/howto-proxy.html)，将会同时发布在众成翻译，地址：[JavaScript：通过Web代理发起跨域请求](http://zcfy.cc/article/javascript-developer-center-use-a-web-proxy-for-cross-domain-xmlhttprequest-calls-ydn)。
 
 ===============================================================================================
 
