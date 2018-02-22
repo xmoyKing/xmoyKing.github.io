@@ -7,8 +7,13 @@ tags: [mixed, links]
 ---
 
 ## 前端资源 ##
+[DocsChina印记](https://docschina.org/home/doc)
+
+[GitBook开源书籍](https://www.gitbook.com/explore)
 
 [w3cplus](http://www.w3cplus.com/)
+
+[H5BP](https://h5bp.github.io/)
 
 [成为专业程序员路上用到的各种优秀资料、神器及框架](https://github.com/stanzhai/be-a-professional-programmer)
 
@@ -63,7 +68,8 @@ tags: [mixed, links]
 - [44个 Javascript 变态题解析](http://www.admin10000.com/document/9203.html)
 - [1.解析](https://segmentfault.com/a/1190000000411840)
 
-[Front-end Job Interview Questions](https://h5bp.github.io/Front-end-Developer-Interview-Questions/)、
+[Front-end Job Interview Questions](https://h5bp.github.io/Front-end-Developer-Interview-Questions/)
+ - *[对应中文版](https://github.com/h5bp/Front-end-Developer-Interview-Questions/tree/master/Translations/Chinese)*
 
 ## 林散知识点 ##
 
@@ -188,9 +194,9 @@ tags: [mixed, links]
 ## Vue
 
 *对Vue实例/组件的生命周期了解多少？到底在每一个阶段都能做什么，vue又做了些什么？*
-[关于Vue.js2.0生命周期的研究与理解](https://segmentfault.com/a/1190000010336178)
+[关于Vue.js2.0生命周期的研究与理解](https://segmentfault.com/a/1190000010336178) *没有非常详细的说明原理，但示例展示了el、data、template等在每个阶段的形态*
 
-[Vue2.0 探索之路——生命周期和钩子函数的一些理解](https://segmentfault.com/a/1190000008010666)
+[Vue2.0 探索之路——生命周期和钩子函数的一些理解](https://segmentfault.com/a/1190000008010666) *虽然依然没有说明原理，但示例比上例要详细一些，涉及到了子组件及keep-alive的用法*
 
 ## Webpack
 
@@ -249,6 +255,12 @@ tags: [mixed, links]
 
 [Node应用的进程管理器 PM2](http://pm2.keymetrics.io/docs/usage/quick-start/)
 
+## iOS与JS之间交互
+*需对OC有基础，否则看不太懂*：
+[iOS WebViewJavascriptBridge初步尝试与图文详细讲解](https://www.cnblogs.com/yajunLi/p/6369257.html) 
+
+[WebViewJavascriptBridge原理解析](https://www.jianshu.com/p/d45ce14278c7) *比上一篇详细很多*
+
 ## Python
 
 [Python3入门-by廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)*非常非常适合入门*
@@ -270,8 +282,6 @@ tags: [mixed, links]
 [ZhangShu](https://sherry-zhang.github.io/)
 
 [@何海宝](http://www.hehaibao.com/)
-
-[H5BP](https://h5bp.github.io/)
 
 
 ## 未读
