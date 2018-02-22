@@ -37,6 +37,8 @@ tags: [mixed, links]
 
 [前端开发者手册](https://dwqs.gitbooks.io/frontenddevhandbook/content/)
 
+[前端回忆录](https://github.com/Wscats/Good-text-Share)
+
 ### 学习路径/方向
 1. 《JS语言发展》：ES6、TypeScript、Linux等
 1. 《Node》：Express、KOA2、NodeJS源码分析等
@@ -66,10 +68,12 @@ tags: [mixed, links]
 [JavaScript Puzzlers!](http://javascript-puzzlers.herokuapp.com/)
 解析:
 - [44个 Javascript 变态题解析](http://www.admin10000.com/document/9203.html)
-- [1.解析](https://segmentfault.com/a/1190000000411840)
+- [第一题详细解析](https://segmentfault.com/a/1190000000411840)
 
 [Front-end Job Interview Questions](https://h5bp.github.io/Front-end-Developer-Interview-Questions/)
  - *[对应中文版](https://github.com/h5bp/Front-end-Developer-Interview-Questions/tree/master/Translations/Chinese)*
+
+ [那些年我准备的前端面试题](http://blog.csdn.net/liangklfang/article/details/52142679)
 
 ## 林散知识点 ##
 
@@ -257,7 +261,7 @@ tags: [mixed, links]
 
 ## iOS与JS之间交互
 *需对OC有基础，否则看不太懂*：
-[iOS WebViewJavascriptBridge初步尝试与图文详细讲解](https://www.cnblogs.com/yajunLi/p/6369257.html) 
+[iOS WebViewJavascriptBridge初步尝试与图文详细讲解](https://www.cnblogs.com/yajunLi/p/6369257.html)
 
 [WebViewJavascriptBridge原理解析](https://www.jianshu.com/p/d45ce14278c7) *比上一篇详细很多*
 
