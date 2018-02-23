@@ -36,6 +36,18 @@ tags: [mixed, links]
 [推荐前端技术书- 伯乐在线](https://github.com/jobbole/awesome-web-dev-books)
 
 ### 博客/博文汇总
+[w3cplus](http://www.w3cplus.com/)
+
+[阮一峰的网络日志](http://www.ruanyifeng.com/blog/archives.html)
+
+[张鑫旭-鑫空间-鑫生活](http://www.zhangxinxu.com/)
+
+[廖雪峰](https://www.liaoxuefeng.com/)
+
+[前端回忆录](https://github.com/Wscats/Good-text-Share)
+
+[小青年博客](https://segmentfault.com/blog/zhaomenghuan) *一个专注于混合式开发和vue.js+node.js全栈开发的技术分享专栏。PS:东西不多，但是都很干货*
+
 [移动web资源整理](http://www.cnblogs.com/PeunZhang/p/3407453.html)
 
 [Alloyteam：移动web问题小结](http://www.alloyteam.com/2015/06/yi-dong-web-wen-ti-xiao-jie/)
@@ -43,16 +55,6 @@ tags: [mixed, links]
 [前端知识点大百科全书](https://github.com/Wscats/Good-text-Share)
 
 [收藏指数满格！帮你打包前端之巅一整年好文！](https://zhuanlan.zhihu.com/p/27283922)*前端之巅公众号文章很多都是精华啊！*
-
-[前端回忆录](https://github.com/Wscats/Good-text-Share)
-
-[小青年博客](https://segmentfault.com/blog/zhaomenghuan) *一个专注于混合式开发和vue.js+node.js全栈开发的技术分享专栏。PS:东西不多，但是都很干货*
-
-[w3cplus](http://www.w3cplus.com/)
-
-[阮一峰的网络日志](http://www.ruanyifeng.com/blog/archives.html)
-
-[张鑫旭-鑫空间-鑫生活](http://www.zhangxinxu.com/)
 
 ### 其他
 [DocsChina印记](https://docschina.org/home/doc)
