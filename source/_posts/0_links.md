@@ -231,6 +231,9 @@ tags: [mixed, links]
 
 [ECMAScript 6 入门](http://es6.ruanyifeng.com/)
 
+[Understanding ECMAScript6](https://leanpub.com/understandinges6/read/)
+[本书中文版(深入理解ES6)](深入理解ES6翻译完整版.pdf)
+
 [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
 ## nodejs
