@@ -286,6 +286,8 @@ tags: [mixed, links]
 
 [httpbin(1): HTTP Request & Response Service](http://httpbin.org/) 免费可以用来测试的http请求、响应服务
 
+[中文文案排版指北（简体中文版）](https://github.com/mzlogin/chinese-copywriting-guidelines)
+
 ### iOS与JS之间交互
 *需对OC有基础，否则看不太懂*：
 [iOS WebViewJavascriptBridge初步尝试与图文详细讲解](https://www.cnblogs.com/yajunLi/p/6369257.html)
