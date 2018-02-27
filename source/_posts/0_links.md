@@ -71,7 +71,11 @@ tags: [mixed, links]
 
 ## Webpack
 
+[搜罗一切webpack的好文章好工具](https://github.com/webpack-china/awesome-webpack-cn)
+
 [Webpack中文文档](https://doc.webpack-china.org)
+
+[webpack 优秀中文文章](https://github.com/webpack-china/awesome-webpack-cn)
 
 [入门Webpack，看这篇就够了](https://www.jianshu.com/p/42e11515c10f)
 
@@ -167,7 +171,7 @@ tags: [mixed, links]
 
 [BAT及各大互联网公司2014前端笔试面试题--JavaScript篇](http://www.cnblogs.com/coco1s/p/4029708.html)*博主还有很多优秀博文值得学习*
 
-## 林散知识点
+## 零散知识点
 ### HTML&CSS
 [css position 初解10步](http://blog.jobbole.com/49320/)
 
