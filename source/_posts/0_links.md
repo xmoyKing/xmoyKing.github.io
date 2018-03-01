@@ -298,6 +298,9 @@ tags: [mixed, links]
 
 [WebViewJavascriptBridge原理解析](https://www.jianshu.com/p/d45ce14278c7) *比上一篇详细很多*
 
+### 区块链
+[一个故事告诉你比特币的原理及运作机制](http://www.javacui.com/block/476.html)
+
 ## 友链（博客）
 
 [ZhangShu](https://sherry-zhang.github.io/)
