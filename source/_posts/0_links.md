@@ -301,6 +301,9 @@ tags: [mixed, links]
 ### 区块链
 [一个故事告诉你比特币的原理及运作机制](http://www.javacui.com/block/476.html)
 
+[开源书：Node.js开发加密货币](https://www.gitbook.com/book/imfly/bitcoin-on-nodejs/details)
+
+
 ## 友链（博客）
 
 [ZhangShu](https://sherry-zhang.github.io/)
