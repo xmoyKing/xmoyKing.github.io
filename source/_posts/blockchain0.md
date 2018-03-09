@@ -10,7 +10,7 @@ updated: 2018-03-05 23:23:30
 
 ## 图解区块链简化版（PPT）
 <iframe src="http://www.ipresst.com/w/jzccbm/play" height="500"></iframe>
-[地址](http://www.ipresst.com/w/jzccbm/play)
+[在线PPT地址](http://www.ipresst.com/w/jzccbm/play)
 
 ## 区块链资源
 以下资源从网络收集汇总而来，网站中除了“巴比特”都是英文网站，博客文章除了白皮书外都是中文，书籍都是中文书籍。
@@ -34,6 +34,8 @@ updated: 2018-03-05 23:23:30
 ### 博客/文章
 
 [本博客关于区块链分类文章汇总](/tags/blockchain/)
+
+[区块链领域常见术语大盘点](http://storage.it168.com/a2017/1113/3179/000003179480.shtml)
 
 [一个故事告诉你比特币的原理及运作机制](http://www.javacui.com/block/476.html)
 
@@ -59,6 +61,16 @@ updated: 2018-03-05 23:23:30
 [区块链核心技术演进之路-共识机制演进](http://www.8btc.com/blockchain-tech-consensus-mechanism)
 
 [隔离验证钱包开发指南](http://8btc.com/article-3472-1.html)
+
+### 一些报告/访谈记录
+
+[2017817区块链行业研究报告](2017817区块链行业研究报告.pdf)
+
+[18-01-18刘润谈区块链直播重点记录](18-01-18刘润谈区块链直播重点记录.doc)
+
+[18 年至今 ICO 私募上线及价格](18 年至今 ICO 私募上线及价格.pdf)
+
+[3 点钟无眠区块链深度分享](3 点钟无眠区块链深度分享.pdf)
 
 ### 书籍
 
