@@ -371,7 +371,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、简单支付验证（SPV）"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、简单支付验证（SPV）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（一）SPV的技术原理"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">（一）SPV的技术原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（二）SPV的功能扩展"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">（二）SPV的功能扩展</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（三）SPV面临的问题"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">（三）SPV面临的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、侧链"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、侧链</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（一）侧链的起源"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">（一）侧链的起源</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（二）侧链协议"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">（二）侧链协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（三）元素链"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">（三）元素链</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、简单支付验证（SPV）"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、简单支付验证（SPV）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（一）SPV的技术原理"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">（一）SPV的技术原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（二）SPV的功能扩展"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">（二）SPV的功能扩展</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（三）SPV面临的问题"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">（三）SPV面临的问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、侧链"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、侧链</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（一）侧链的起源"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">（一）侧链的起源</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（二）侧链协议"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">（二）侧链协议</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#（三）元素链"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">（三）元素链</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于区块链业务分析"><span class="post-toc-number">3.</span> <span class="post-toc-text">关于区块链业务分析</span></a></li></ol>
     </ul>
     
 
@@ -572,27 +572,37 @@
 <ol>
 <li>私密交易<br>元素链中最具创新意义的特性莫过于私密交易。私密交易中的金额仅有该交易的参与者知道（或者参与者指定的人），元素链以密码学算法保证不会多花币。比特币用地址来保证隐私，同时公开交易让别人验证；元素链在保护个人隐私上更进一步，隐藏了交易金额。金额隐藏的具体技术见下文。<br>私密交易最明显的一点是引入了一种新地址类型，称为私密地址。私密地址含了一个盲化因子，比普通比特币地址更长，这种地址在元素链Alpha版本中是默认地址。</li>
 <li>隔离见证<br>Alpha版的交易中，签名从交易中分离出来。此举完全消除了任何已知形式的交易可塑性的威胁，并且允许有效的区块链剪枝。<br>在比特币中，交易包含转账信息（未花费交易集、地址和金额）和用于证明交易合法性的签名；对于隔离见证来说，交易ID仅由转账信息生成，区块中包含签名。这样做有如下好处：<ol>
-<li>①比特币有一些“正常化交易ID”的建议，隔离见证包含了这些建议。因为正常化交易ID机制在可塑性的输入后还要重写所依赖的交易，对高层协议如闪电网络来说是必要基础。</li>
-<li>②交易ID不覆盖签名，以比BIP62更好的方式，避免了交易可塑性的所有形式，而后可以安全地使用更大尺寸的多语句智能合同。</li>
-<li>③具有更有效提供SPV证明（用于轻钱包）的潜力，因为签名可以从交易中被省略而不破坏默克尔树结构。节点无须存贮或验证签名，可以把签名从磁盘中删除或无须在网络上传输它，以大幅度减少区块链存储容量和宽带要求。但在Alpha版本中，证明数据比比特币签名更占空间，因为还包含了大段的输出金额证明（因为使用了私密交易，隐藏了金额，因而要使用密码学证明以防止多花）。</li>
+<li>比特币有一些“正常化交易ID”的建议，隔离见证包含了这些建议。因为正常化交易ID机制在可塑性的输入后还要重写所依赖的交易，对高层协议如闪电网络来说是必要基础。</li>
+<li>交易ID不覆盖签名，以比BIP62更好的方式，避免了交易可塑性的所有形式，而后可以安全地使用更大尺寸的多语句智能合同。</li>
+<li>具有更有效提供SPV证明（用于轻钱包）的潜力，因为签名可以从交易中被省略而不破坏默克尔树结构。节点无须存贮或验证签名，可以把签名从磁盘中删除或无须在网络上传输它，以大幅度减少区块链存储容量和宽带要求。但在Alpha版本中，证明数据比比特币签名更占空间，因为还包含了大段的输出金额证明（因为使用了私密交易，隐藏了金额，因而要使用密码学证明以防止多花）。</li>
 </ol>
 </li>
 <li>相对锁定时间<br>为序列号赋予了新的意义，使已签名交易被确认后，其输入在一段特定时间内保持无效，目的是支持交易替换功能。<br>比特币每个交易都有个序列号，初始想法是相比低序列号，最高序列号应该最占优势，矿工应该更喜欢它，但这个想法从未真正实现。在假设矿工利益最大化的前提下，为了使得交易替换机制得以加强，新增一个操作码CHECKSEQUENCEVERIFY，用于比特币脚本检查序列号限制。<br>相对锁定时间与常规锁定时间用途一致，如时间锁定的担保服务等。但所指的“相对”会使以区块链为媒介的应用更有意思。例如双向锚定阶段可描述为以交易开始的一个相对锁定时间条件，该交易声明了赎回证据。</li>
 <li>Schnorr签名验证<br>元素链未使用ECDSA签名方案，而使用了同一曲线上的Schnorr签名方案。其好处如下。<ol>
-<li>①更有效的n/n阈值签名。多个Schnorr签名可以被合成一个签名，该签名对公钥的总和来说是有效的，所以任意大的n/n多签名只需用一个合签名就可以完成，同时可以被一个CHECKSIG操作所验证。</li>
-<li>②更小的签名容量（64字节，而非71~72字节），没有DER编码问题。潜在支持批量验证（同时验证32个签名达到最高2倍加速），这需要知道R.y坐标（ECDSA忽略这个参数）和脚本级别，确保所有签名验证错误导致脚本运行错误（比如所有CHECKSIG操作与CHECKSIGVERIFY类似），以便提供更强的安全证明。</li>
-<li>③能证明没有固有的签名可塑性问题。ECDSA有可塑性问题，并且不知道是否存在其他形式的可塑性问题。注意，分离证据使得签名可塑性不会导致交易可塑性。</li>
-<li>④比ECDSA的签名和验证速度更快一点。</li>
+<li>更有效的n/n阈值签名。多个Schnorr签名可以被合成一个签名，该签名对公钥的总和来说是有效的，所以任意大的n/n多签名只需用一个合签名就可以完成，同时可以被一个CHECKSIG操作所验证。</li>
+<li>更小的签名容量（64字节，而非71~72字节），没有DER编码问题。潜在支持批量验证（同时验证32个签名达到最高2倍加速），这需要知道R.y坐标（ECDSA忽略这个参数）和脚本级别，确保所有签名验证错误导致脚本运行错误（比如所有CHECKSIG操作与CHECKSIGVERIFY类似），以便提供更强的安全证明。</li>
+<li>能证明没有固有的签名可塑性问题。ECDSA有可塑性问题，并且不知道是否存在其他形式的可塑性问题。注意，分离证据使得签名可塑性不会导致交易可塑性。</li>
+<li>比ECDSA的签名和验证速度更快一点。</li>
 </ol>
 </li>
 <li>新操作码<br>元素链Alpha版本新增几个新脚本操作码。<ol>
-<li>①被禁用的操作码。比特币以前支持许多操作码，一些操作码在2010年因为安全考虑被禁用，需要硬分叉才能重新启用。Alpha版本重新启用了一些被禁用但是安全的操作码，如字符串连接和字串操作码，整数位移码和几个位操作码。</li>
-<li>②DETERMINISTICRANDOM操作码：根据种子在一个范围内产生一个随机数。</li>
-<li>③CHECKSIGFROMSTACK操作码：验证堆栈中对消息的签名，而不是验证对交易本身的签名。<br>这些新操作码有一些使用场景，包括双花保护债券、彩票、允许1/N多签名的默克尔树结构（N可为成千上万）、概率支付等。</li>
+<li>被禁用的操作码。比特币以前支持许多操作码，一些操作码在2010年因为安全考虑被禁用，需要硬分叉才能重新启用。Alpha版本重新启用了一些被禁用但是安全的操作码，如字符串连接和字串操作码，整数位移码和几个位操作码。</li>
+<li>DETERMINISTICRANDOM操作码：根据种子在一个范围内产生一个随机数。</li>
+<li>CHECKSIGFROMSTACK操作码：验证堆栈中对消息的签名，而不是验证对交易本身的签名。<br>这些新操作码有一些使用场景，包括双花保护债券、彩票、允许1/N多签名的默克尔树结构（N可为成千上万）、概率支付等。</li>
 </ol>
 </li>
 <li>金额隐藏技术</li>
 </ol>
+<h2 id="关于区块链业务分析"><a href="#关于区块链业务分析" class="headerlink" title="关于区块链业务分析"></a>关于区块链业务分析</h2><p>摘抄自<a href="http://gitbook.cn/books/58fdab163515a1306c6a6566/index.html" target="_blank" rel="noopener">如何设计一个“成功”的区块链项目?</a></p>
+<p>区块链的业务分析跟传统的数据库系统的业务分析，差别还是很大的，总结几个重要的方面：</p>
+<ul>
+<li>网络架构。<br>传统的系统架构大多是BS或CS的，简单说就是“一台服务器+多个终端”。区块链的网络架构，首先是分布式架构，也就是“多个服务器+多个终端（包括既是服务同时又是终端）”，还有“内涵”和“外延”的区别，有“完全节点”和“SPV”（Simplified Payment Verification）的区别。另外，节点部署的地理位置和网络延迟速度也需要考虑。</li>
+<li>数据架构。<br>主要关注数据与业务的交互关系，比如数据存储和数据流。在传统的数据库系统中，业务逻辑可以放在代码中，也可以放在数据库的存储过程中实现。在区块链系统中，需要设计，业务逻辑是在链上实现还是在更上面的业务层实现。（在链上实现的逻辑就叫智能合约）</li>
+<li>权限架构。<br>区块链本身是没有权限的（或者说权限是统一的），而权限管理是应用系统的基础核心功能。在区块链的业务分析中，我们需要明确，权限是如何划分的？在去中心化的系统中，谁有权力给其他人设定权限？</li>
+<li>交易规则设计。也叫共识机制设计。<br>我们需要在IT规划时明确，区块链系统中哪些交易是合法的、被接受的，哪些是被拒绝的；不同操作者发起的交易之间存在互相依赖的关系是什么？比如A向B发起一个交易，B又向C发起一个交易。这种情况B的交易就依赖于A的交易，如果不验证A交易的合法性，也就无法验证B交易的合法性。这种关于交易规则的设计，与传统的数据库中的规则相比要更复杂。</li>
+<li>交易仲裁者的选择。<br>交易仲裁在传统数据库系统中是没有的，但是在区块链系统中却是核心的，因为分布式系统稳定运行的基本条件，就是不能出现分歧，而仲裁者的首要任务就是消除分歧。在区块链业务分析时，需要明确哪些节点（或用户）充当仲裁者的角色？它们仲裁的内容和标准是什么？<br>仲裁者跟中介的一个本质区别是，仲裁者对数据操作的权限要小得多，他们不能虚假交易或者违反规则修改数据内容。在金融系统案例中，仲裁者不能花别人的钱，也不能改变资产的总数量。</li>
+<li>区块链资产的锚定。<br>在应用系统中，数据肯定要代表现实生活中的某一种资产。在传统数据库系统中，谁拥有这个系统，谁能控制数据库，谁就对资产锚定负责。在区块链系统中，可能存在多个法律主体、多种资产、甚至所有人对数据都有修改的能力，如果不提前做好资产的锚定，很容易出现法律问题。</li>
+</ul>
 
         
     
@@ -613,7 +623,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2018/03/08/blockchain0/" id="post_nav-newer" class="prev-content">
+        <a href="/2018/03/09/blockchain3/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -719,7 +729,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
             </ul>
         </li>
         
@@ -737,7 +747,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/blockchain/">blockchain<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">90</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/blockchain/">blockchain<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">89</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
@@ -791,7 +801,7 @@
         <li>
             <a href="/archives">
                 Number of articles
-                <span class="sidebar-badge">226</span>
+                <span class="sidebar-badge">227</span>
             </a>
         </li>
         
