@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            【译】Storage Access API 介绍 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",translation">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="【译】Storage Access API 介绍 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="translation"> 
+
+    
+        <meta property="article:published_time" content="Tue Mar 13 2018 19:23:23 GMT+0800" />
+        <meta property="article:modified_time" content="Tue Mar 13 2018 19:23:23 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="【译】Storage Access API 介绍 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2018/03/13/translation-introducing-storage-access-api/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2018/03/13/translation-introducing-storage-access-api/index.html",
+    "headline": "【译】Storage Access API 介绍",
+    "datePublished": "Tue Mar 13 2018 19:23:23 GMT+0800",
+    "dateModified": "Tue Mar 13 2018 19:23:23 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",translation",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#介绍Storage-Access-API"><span class="post-toc-number">1.</span> <span class="post-toc-text">介绍Storage Access API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Partitioned-Cookies-and-Embedded-Content"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Partitioned Cookies and Embedded Content</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#隔离-cookies-和嵌入内容"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">隔离 cookies 和嵌入内容</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-Solution-Storage-Access-API"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">The Solution: Storage Access API</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案：Storage-Access-API"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">解决方案：Storage Access API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Check-For-Storage-Access"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">Check For Storage Access</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#检查-Storage-Access"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">检查 Storage Access</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Request-Storage-Access"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">Request Storage Access</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#请求-Storage-Access"><span class="post-toc-number">1.4.4.</span> <span class="post-toc-text">请求 Storage Access</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Access-Removal"><span class="post-toc-number">1.4.5.</span> <span class="post-toc-text">Access Removal</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Access-移除"><span class="post-toc-number">1.4.6.</span> <span class="post-toc-text">Access 移除</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Sandboxed-Iframes"><span class="post-toc-number">1.4.7.</span> <span class="post-toc-text">Sandboxed Iframes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#沙盒-iframe"><span class="post-toc-number">1.4.8.</span> <span class="post-toc-text">沙盒 iframe</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A-Note-On-Potential-Abuse"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">A Note On Potential Abuse</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于潜在滥用的说明"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">关于潜在滥用的说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Availability"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">Availability</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#可用性"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">可用性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Feedback"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">Feedback</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#反馈"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">反馈</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                【译】Storage Access API 介绍
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Mar 13, 2018</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Mar 13, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/translation/">translation</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=【译】Storage Access API 介绍&url=https://github.com/xmoyKING/2018/03/13/translation-introducing-storage-access-api/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=【译】Storage Access API 介绍&url=https://github.com/xmoyKING/2018/03/13/translation-introducing-storage-access-api/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2018/03/13/translation-introducing-storage-access-api/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2018/03/13/translation-introducing-storage-access-api/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="介绍Storage-Access-API"><a href="#介绍Storage-Access-API" class="headerlink" title="介绍Storage Access API"></a><a href="https://webkit.org/blog/8124/introducing-storage-access-api/" title="Permanent Link: Introducing Storage Access API" target="_blank" rel="noopener">介绍Storage Access API</a></h1><p>2018.2.21</p>
+<p>作者：John Wilander</p>
+<p><a href="https://twitter.com/johnwilander" target="_blank" rel="noopener">@johnwilander</a></p>
+<p>In June last year we introduced <a href="https://webkit.org/blog/7675/intelligent-tracking-prevention/" target="_blank" rel="noopener">Intelligent Tracking Prevention</a> (ITP). ITP is a privacy feature that detects which domains have the ability to track the user cross-site and either partitions the domain’s cookies or purges its website data all together.</p>
+<p>去年6月，我们推出了 <a href="https://webkit.org/blog/7675/intelligent-tracking-prevention/" target="_blank" rel="noopener">Intelligent Tracking Prevention</a>（ITP）（智能防跟踪）。ITP 是一项隐私功能，可以跨站点检测哪些域可以跟踪用户，并分割该域的 cookie 或完全清除其网站数据。</p>
+<p>The strongest developer feedback we got on ITP was that it needs to provide a way for embedded cross-site content to authenticate users who are already logged in to their first-party services. Today we are happy to provide a solution in the form of Storage Access API. It allows for authenticated embeds while continuing to protect customers’ privacy by default.</p>
+<p>在 ITP 上我们获得的最多的开发者反馈意见是，它需要为嵌入的跨站点内容提供一种方式来验证用户，而该用户已登录当前站点。今天，我们很高兴能以 Storage Access API 的方式提供一个解决方案。它允许对嵌入内容通过验证的同时默认保护客户的隐私。</p>
+<h2 id="Partitioned-Cookies-and-Embedded-Content"><a href="#Partitioned-Cookies-and-Embedded-Content" class="headerlink" title="Partitioned Cookies and Embedded Content"></a>Partitioned Cookies and Embedded Content</h2><h2 id="隔离-cookies-和嵌入内容"><a href="#隔离-cookies-和嵌入内容" class="headerlink" title="隔离 cookies 和嵌入内容"></a>隔离 cookies 和嵌入内容</h2><p>Let’s say that socialexample.org is embedded on multiple websites to facilitate commenting or “liking” content with the user’s socialexample ID. ITP will detect that such multi-page embeds gives socialexample.org the ability to track the user cross-site and therefore deny embedded content from socialexample.org access to its first-party cookies, providing only partitioned cookies. This breaks the user’s ability to comment and like content unless they have interacted with socialexample.org as first-party site in the last 24 hours. (Please see the <a href="https://webkit.org/blog/7675/intelligent-tracking-prevention/" target="_blank" rel="noopener">original ITP blog post</a> for the exact rules around partitioned cookies.)</p>
+<p>假设 socialexample.org 嵌入到多个网站上，可以让用户通过 socialexample ID 对内容评论或“点赞”。ITP 将检测到此类多次页面嵌入的情况，同时让 socialexample.org 能够追踪跨站点的用户，并拒绝socialexample.org 的嵌入内容访问当前站点的 cookie，仅提供隔离的 cookie。这会禁止用户对内容评论和点赞，除非他们在过去 24 小时内曾直接登录过 socialexample.org 网站。（参阅 <a href="https://webkit.org/blog/7675/intelligent-tracking-prevention/" target="_blank" rel="noopener">ITP 原博客文章</a> ，了解有关隔离 cookie 的详细规则。）</p>
+<p>The same goes for embedded third-party payment providers and embedded third-party videos from subscription services. As soon as ITP detects their tracking abilities, it denies them first-party cookie access outside the 24 hour window, and the embedded content treats the user as logged out even though they are logged in.</p>
+<p>对嵌入的第三方支付提供商和订阅服务中嵌入的第三方视频也是如此。只要 ITP 检测到他们的跟踪行为，就会拒绝他们在24小时之外访问当前站点的 cookie，并且嵌入的内容会将用户视为注销状态即使他们已登录。</p>
+<p>We’ve made tradeoffs for user privacy. But it would be even better if we could provide the benefits of being logged in to third party iframes, provided that the user is actually interested in using them, while still protecting privacy.</p>
+<p>我们对用户隐私进行了权衡。如果我们能够能提供既登录第三方 iframe 的优势，用户又确实有兴趣使用它们的同时保护隐私，那就更好了。</p>
+<h2 id="The-Solution-Storage-Access-API"><a href="#The-Solution-Storage-Access-API" class="headerlink" title="The Solution: Storage Access API"></a>The Solution: Storage Access API</h2><h2 id="解决方案：Storage-Access-API"><a href="#解决方案：Storage-Access-API" class="headerlink" title="解决方案：Storage Access API"></a>解决方案：Storage Access API</h2><p>The solution is to allow third-party embeds to request access to their first-party cookies <em>when the user interacts with them</em>. To do this, we created the Storage Access API.<br>解决方案是当用户与当前网站交互时，允许第三方嵌入内容请求访问当前网站的 cookie 。为此，我们创造了 Storage Access API。</p>
+<p>The Storage Access API offers two new functions to cross-origin iframes — document.hasStorageAccess() and document.requestStorageAccess(). It also offers the embedding top frame a new <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox" target="_blank" rel="noopener">iframe sandbox</a> token — “allow-storage-access-by-user-activation”.</p>
+<p>Storage Access API 为跨域 iframe 提供了两项新功能 —— document.hasStorageAccess() 和document.requestStorageAccess()。它还为嵌入的顶级 frame 提供了一个新的  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox" target="_blank" rel="noopener">iframe sandbox</a> token —— “allow-storage-access-by-user-activation”。</p>
+<p>Storage access in this context means that the iframe has access to its first-party cookies, i.e. the same cookies it would have access to as a first-party site. Note that <strong>storage access does not relax the same-origin policy in any way</strong>. Specifically, this is not about third-party iframes getting access to the embedding website’s cookies and storage, or vice versa.</p>
+<p>在这种情况下，storage access 意味着 iframe 可以访问宿主站点的 cookie，即它可以像宿主站点一样访问当前网站的 cookie。注意，<strong>storage access 不会以任何方式放宽同源策略</strong>。具体来说，这并不是指第三方 iframe 能访问宿主站点的 cookie 和存储，反之亦然。</p>
+<p>WebKit’s implementation of the API only covers cookies for now. It does not affect the partitioning of other storage forms such as IndexedDB or LocalStorage.<br>现在，WebKit 对该 API 的实现仅包含 cookie。它不会影响其他存储形式的隔离，如 IndexedDB 或LocalStorage。</p>
+<h3 id="Check-For-Storage-Access"><a href="#Check-For-Storage-Access" class="headerlink" title="Check For Storage Access"></a>Check For Storage Access</h3><h3 id="检查-Storage-Access"><a href="#检查-Storage-Access" class="headerlink" title="检查 Storage Access"></a>检查 Storage Access</h3><p>A call to document.hasStorageAccess() returns a promise that resolves with a boolean indicating whether the document already has access to its first-party cookies or not. Should the iframe be same-origin as the top frame, the promise returns true.</p>
+<p>调用 document.hasStorageAccess() 会返回一个 promise，该 promise 使用布尔值来指示文档是否已经访问过宿主网站的cookie。如果 iframe 与 顶级 frame 的同源，则 promise 将返回 true。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var promise = document.hasStorageAccess();</span><br><span class="line">promise.then(</span><br><span class="line">  function (hasAccess) &#123;</span><br><span class="line">    // 布尔值 hasAccess 表示当前 document 是否访问过</span><br><span class="line">  &#125;,</span><br><span class="line">  function (reason) &#123;</span><br><span class="line">    // 由于某些问题 promise 处于 rejected 状态</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="Request-Storage-Access"><a href="#Request-Storage-Access" class="headerlink" title="Request Storage Access"></a>Request Storage Access</h3><h3 id="请求-Storage-Access"><a href="#请求-Storage-Access" class="headerlink" title="请求 Storage Access"></a>请求 Storage Access</h3><p>A call to document.requestStorageAccess() upon a user gesture such as a tap or click returns a promise that is resolved if storage access was granted and is rejected if access was denied. If storage access was granted, a call to document.hasStorageAccess() will return true. The reason why iframes need to call this API explicitly is to offer developers control over when the document’s cookies change.</p>
+<p>通过用户的交互（如 tap 或 click）调用 document.requestStorageAccess() 会返回一个 promise，如果允许 storage access，则 promise 将被接收，如果访问被拒绝，则 promise 将被拒绝。如果允许 storage access ，则对 document.hasStorageAccess() 的调用将返回 true。而 iframe 需要显式调用此 API 的原因是为了让开发人员在 cookie 修改时也能操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">function makeRequestWithUserGesture() &#123;</span><br><span class="line">  var promise = document.requestStorageAccess();</span><br><span class="line">  promise.then(</span><br><span class="line">    function () &#123;</span><br><span class="line">      // 允许 storage access</span><br><span class="line">    &#125;,</span><br><span class="line">    function () &#123;</span><br><span class="line">      // 拒绝 storage access</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;button onclick=&quot;makeRequestWithUserGesture()&quot;&gt;Play video&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<p>The iframe needs to adhere to a set of rules to be able to get storage access granted. The <strong>basic rules</strong> are:</p>
+<p>iframe 需要遵循一组规则才能获得 storage access 的权限。<strong>基本规则</strong>是：</p>
+<ul>
+<li>The iframe’s cookies need to be currently partitioned by ITP. If they’re not, the iframe either already has cookie access or cannot be granted access because its cookies have been purged.</li>
+<li>The iframe needs to be a direct child of the top frame.</li>
+<li><p>The iframe needs to be processing a user gesture at the time of the API call.</p>
+</li>
+<li><p>iframe 的 cookie 需要由 ITP 当场隔离。否则表示 iframe 已经具有 cookie 的访问权限，或由于 cookie 已被清除而不能获取权限。</p>
+</li>
+<li>iframe 是顶级 frame 的直系子项<code>（译注：非 iframe 嵌套的情况）</code>。</li>
+<li>在 API 调用时，iframe 需要处理用户的交互。</li>
+</ul>
+<p>Below are the <strong>detailed rules</strong> for the promise returned by a call to document.requestStorageAccess(). When we say eTLD+1 we mean effective top-level domain + 1. An eTLD is .com or .co.uk so an example of an eTLD+1 would be social.co.uk but not sub.social.co.uk (eTLD+2) or co.uk (just eTLD).</p>
+<p>以下是调用 document.requestStorageAccess() 返回的 promise 的<strong>详细规则</strong>。当我们说 eTLD + 1时，指的是 effective top-level domain + 1（有效的顶级域名+1）。eTLD 指的是 .com 或 .co.uk，所以 social.co.uk 是 eTLD + 1 ，而 sub.social.co.uk （eTLD + 2）或 co.uk（只是 eTLD）不是。</p>
+<ol>
+<li>If the sub frame is sandboxed but doesn’t have the tokens “allow-storage-access-by-user-activation” and “allow-same-origin”, reject.</li>
+<li>If the sub frame’s parent is not the top frame, reject.</li>
+<li>If the browser is not processing a user gesture, reject.</li>
+<li>If the sub frames eTLD+1 is equal to the top frame’s eTLD+1, resolve. As an example, login.socialexample.co.uk has the same eTLD+1 as <a href="http://www.socialexample.co.uk/" target="_blank" rel="noopener">www.socialexample.co.uk</a>.</li>
+<li>If the sub frame’s origin’s cookies are currently blocked, reject. This means that ITP has either purged the origin’s website data or will do so in the near future. Thus there is no storage to get access to.</li>
+<li><p>If all the above has passed, resolve.</p>
+</li>
+<li><p>如果子 frame 是 sandboxed <code>（译注：指的是处于沙盒隔离状态）</code>，但没有 “allow-storage-access-by-user-activation” 和 “allow-same-origin” token，则 reject。</p>
+</li>
+<li>如果子 frame 的父级不是顶级 frame，则 reject。</li>
+<li>如果浏览器未处理用户的交互，则 reject。</li>
+<li>如果子 frame 的 eTLD + 1 等于顶级 frame 的 eTLD + 1，则 resolve。例如，login.socialexample.co.uk 与 <a href="http://www.socialexample.co.uk/" target="_blank" rel="noopener">www.socialexample.co.uk</a> 具有相同的 eTLD + 1 。</li>
+<li>如果子 frame 的原始 cookie 已被屏蔽，则 reject。这意味着 ITP 已经清空了原始网站的数据，或不久的将来会清空。因此没有 storage 可以访问。</li>
+<li>如果以上全部通过了，则 resolve。</li>
+</ol>
+<h3 id="Access-Removal"><a href="#Access-Removal" class="headerlink" title="Access Removal"></a>Access Removal</h3><h3 id="Access-移除"><a href="#Access-移除" class="headerlink" title="Access 移除"></a>Access 移除</h3><p>Storage access is granted for the life of the document as long as the document’s frame is attached to the DOM. This means:</p>
+<p>只要文档的 frame 被 DOM 解析，那么在文档的整个生命周期内，storage access 都是允许的。即：</p>
+<ul>
+<li>在子 frame 导航时 Access 移除。</li>
+<li>子 frame 与 DOM 分离时， Access 移除。</li>
+<li>顶级 frame 导航时 Access 移除。</li>
+<li>当网页消失时，如关闭标签，Access 移除。</li>
+</ul>
+<h3 id="Sandboxed-Iframes"><a href="#Sandboxed-Iframes" class="headerlink" title="Sandboxed Iframes"></a>Sandboxed Iframes</h3><h3 id="沙盒-iframe"><a href="#沙盒-iframe" class="headerlink" title="沙盒 iframe"></a>沙盒 iframe</h3><p>If the embedding website has sandboxed the iframe, it cannot be granted storage access by default. The embedding website needs to add the sandbox token “allow-storage-access-by-user-activation” to allow successful storage access requests. The iframe sandbox also needs the tokens “allow-scripts” and “allow-same-origin” since otherwise it can’t call the API and doesn’t execute in an origin that can have cookies.</p>
+<p>如果宿主网站对 iframe 进行了沙盒处理，则默认情况下不能无 storage access 权限。宿主网站需要添加沙盒“allow-storage-access-by-user-activation”token 来允许 storage access 的请求。iframe 沙盒还需要“allow-scripts”和“allow-same-origin” token，否则它不能调用 API 并且不能在需要 cookie 的宿主站点中执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe sandbox=&quot;allow-storage-access-by-user-activation allow-scripts allow-same-origin&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="A-Note-On-Potential-Abuse"><a href="#A-Note-On-Potential-Abuse" class="headerlink" title="A Note On Potential Abuse"></a>A Note On Potential Abuse</h2><h2 id="关于潜在滥用的说明"><a href="#关于潜在滥用的说明" class="headerlink" title="关于潜在滥用的说明"></a>关于潜在滥用的说明</h2><p>We have decided not to prompt the user when an iframe calls the Storage Access API to make the user experience as smooth as possible. ITP’s rules are an effective gatekeeper for who can be granted access, and for the time being we rely on them.</p>
+<p>我们决定在 iframe 调用 Storage Access API 时不提示用户，让用户体验尽可能流畅。ITP 规则是对谁可以获准访问的有效防护，并且目前我们依靠这些规则。</p>
+<p>However, we will monitor the adoption of the API and make changes if we find widespread abuse where the user is clearly not trying to take some authenticated action in the calling iframe. Such API behavior changes may be prompts, abuse detection resulting in a rejected promise, rate limiting of API calls per origin, and more.</p>
+<p>若我们对API的使用情况做监测，一旦发现有滥用的情况，即用户明显并不想在宿主 iframe 中获取认证操作，我们会对该 API 进行修改。此 API 更改后的行为可能是提示，滥用检测（会使 promise reject），站点 API 调用的速率限制等等。</p>
+<h2 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h2><h2 id="可用性"><a href="#可用性" class="headerlink" title="可用性"></a>可用性</h2><p>Storage Access API is available in Safari 11.1 on iOS 11.3 beta and macOS High Sierra 10.13.4 beta, as well as in Safari Technology Preview 47+. If you’re interested in cross-browser compatibility, please follow the <a href="https://github.com/whatwg/html/issues/3338">whatwg/html issue for Storage Access API</a>.</p>
+<p>Storage Access API 可在 iOS 11.3 beta 和 macOS High Sierra 10.13.4 beta 以及Safari Technology Preview 47+ 上的 Safari 11.1 中使用。如果您对跨浏览器兼容性感兴趣，请关注 <a href="https://github.com/whatwg/html/issues/3338">whatwg/html issue for Storage Access API</a>。</p>
+<h2 id="Feedback"><a href="#Feedback" class="headerlink" title="Feedback"></a>Feedback</h2><h2 id="反馈"><a href="#反馈" class="headerlink" title="反馈"></a>反馈</h2><p>Please report bugs through <a href="http://bugs.webkit.org/" target="_blank" rel="noopener">bugs.webkit.org</a>, or send feedback on Twitter to the team <a href="https://twitter.com/webkit" target="_blank" rel="noopener">@webkit</a>, or our evangelist <a href="https://twitter.com/jonathandavis" target="_blank" rel="noopener">@jonathandavis</a>. If you have technical questions about how the Storage Access API works, you can find me on Twitter <a href="https://twitter.com/johnwilander" target="_blank" rel="noopener">@johnwilander</a>.</p>
+<p>在 <a href="http://bugs.webkit.org/" target="_blank" rel="noopener">bugs.webkit.org</a> 报告错误，或者在 Twitter 上向团队 <a href="https://twitter.com/webkit" target="_blank" rel="noopener">@webkit</a> 或布道人 <a href="https://twitter.com/jonathandavis" target="_blank" rel="noopener">@jonathandavis</a> 发送反馈。如果你对 Storage Access API 的工作方式有技术问题，可以在 Twitter <a href="https://twitter.com/johnwilander" target="_blank" rel="noopener">@johnwilander</a> 上找到我。</p>
+<hr>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/03/09/blockchain3/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/blockchain/">blockchain<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">89</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/01/01/0_links/" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2018/02/16/0_booklist/" title="Booklist">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Booklist
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">229</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
