@@ -320,3 +320,11 @@ tags: [mixed, links]
 [深入浅出 Webpack](http://webpack.wuhaolin.cn/)
 
 [webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
+
+[BEM的定义](https://www.w3cplus.com/css/bem-definitions.html)
+
+[DOM中关于脱离文档流的几种情况分析](https://www.cnblogs.com/chuaWeb/p/html_css_position_float.html)
+
+[谈谈自己对js闭包，执行上下文，作用域链，活动对象AO，变量对象VO的理解](https://www.cnblogs.com/songjum/p/4545800.html)
+
+讲清楚this，闭包的概念，文档流，z-index，移动端适配问题。
