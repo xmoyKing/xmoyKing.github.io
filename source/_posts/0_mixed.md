@@ -551,3 +551,8 @@ hexo报错：hexo FATAL Cannot set property 'lastIndex' of undefined
 在搜狗浏览器下和在chrome下，通过jquery获取浏览器滚动高度存在兼容性问题，chrome下对`html`和`document`使用`.scrollTop()`方法都可以获取滚动高度，而搜狗浏览器下，html无法获取。
 
 而对`body`获取滚动高度是不对的，始终为0。
+
+##### 2018.3.15
+wechat1面纪要：
+1. BFC、IFC、BEM
+1. 讲清楚this，闭包的概念，文档流，z-index，移动端适配问题。

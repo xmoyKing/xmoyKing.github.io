@@ -56,6 +56,8 @@ tags: [mixed, links]
 
 [收藏指数满格！帮你打包前端之巅一整年好文！](https://zhuanlan.zhihu.com/p/27283922)*前端之巅公众号文章很多都是精华啊！*
 
+[汤姆大叔:深入理解JavaScript系列](http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html)
+
 ### 其他
 [DocsChina印记](https://docschina.org/home/doc)
 
@@ -265,6 +267,10 @@ tags: [mixed, links]
 
 [JS函数式编程](https://github.com/DrBoolean/mostly-adequate-guide)*初略过一遍，了解思想即可，这是一种编程范式，讲解虽然由浅入深，但由于思想问题，接收程度不一，所以习惯了传统js编程的人感觉有些别扭，综合而言：运用在实际开发中或想要掌握需多练习*
 
+[BEM的定义](https://www.w3cplus.com/css/bem-definitions.html)
+
+[DOM中关于脱离文档流的几种情况分析](https://www.cnblogs.com/chuaWeb/p/html_css_position_float.html)
+
 ### 其他 & 综合
 [KING的小技巧/知识点贴](/2017/03/01/_mixed/)
 
@@ -303,7 +309,7 @@ tags: [mixed, links]
 
 [开源书：Node.js开发加密货币](https://www.gitbook.com/book/imfly/bitcoin-on-nodejs/details)
 
- 
+
 ## 友链（博客）
 
 [ZhangShu](https://sherry-zhang.github.io/)
@@ -320,11 +326,3 @@ tags: [mixed, links]
 [深入浅出 Webpack](http://webpack.wuhaolin.cn/)
 
 [webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
-
-[BEM的定义](https://www.w3cplus.com/css/bem-definitions.html)
-
-[DOM中关于脱离文档流的几种情况分析](https://www.cnblogs.com/chuaWeb/p/html_css_position_float.html)
-
-[谈谈自己对js闭包，执行上下文，作用域链，活动对象AO，变量对象VO的理解](https://www.cnblogs.com/songjum/p/4545800.html)
-
-讲清楚this，闭包的概念，文档流，z-index，移动端适配问题。
