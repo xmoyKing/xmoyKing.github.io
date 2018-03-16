@@ -184,6 +184,8 @@ tags: [mixed, links]
 
 [去除inline-block元素间间距的N种方法 « 张鑫旭-鑫空间-鑫生活](http://www.zhangxinxu.com/wordpress/2012/04/inline-block-space-remove-%E5%8E%BB%E9%99%A4%E9%97%B4%E8%B7%9D/)
 
+[理解CSS布局和BFC_BFC, Layout, 布局, CSS 教程_w3cplus](https://www.w3cplus.com/css/understanding-css-layout-block-formatting-context.html)
+
 [BFC，haslayout是什么，怎么触发](http://www.cnblogs.com/fsjohnhuang/p/5291166.html)
 
 [关于Block Formatting Context－－BFC和IE的hasLayout](http://www.cnblogs.com/pigtail/archive/2013/01/23/2871627.html)
