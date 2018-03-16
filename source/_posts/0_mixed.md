@@ -554,5 +554,14 @@ hexo报错：hexo FATAL Cannot set property 'lastIndex' of undefined
 
 ##### 2018.3.15
 wechat1面纪要：
-1. BFC、IFC、BEM
-1. 讲清楚this，闭包的概念，文档流，z-index，移动端适配问题。
+1. Angular/AngularJS与Vue相关
+    - 两者双向绑定机制
+    - scoped-slot，ng-translucent
+    - Vuex 状态管理，为什么要有状态管理
+1. CSS，侧重对原理的理解
+    - 文档流，z-index，移动端适配问题
+    - BFC、IFC
+    - scale(-1), 0.5px问题，rem/em区别
+    - 伪元素/伪类的好处，比如：少些一个类和一个元素，
+1. BEM，编码规范，命名规范，最佳实践一类
+1. 讲清楚this，闭包的概念，

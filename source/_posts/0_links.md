@@ -226,6 +226,13 @@ tags: [mixed, links]
 
 [CSS3线性渐变背景 linear-gradients](https://www.w3cplus.com/css3/do-you-really-understand-css-linear-gradients.html)
 
+[BEM的定义](https://www.w3cplus.com/css/bem-definitions.html)
+
+[DOM中关于脱离文档流的几种情况分析](https://www.cnblogs.com/chuaWeb/p/html_css_position_float.html)
+
+[再谈Retina下1px的解决方案,  0.5px线](https://www.w3cplus.com/css/fix-1px-for-retina.html)
+
+
 ### JS
 [事件代理 & 什么是冒泡什么是捕获](http://www.cnblogs.com/owenChen/archive/2013/02/18/2915521.html)
 
@@ -269,9 +276,6 @@ tags: [mixed, links]
 
 [JS函数式编程](https://github.com/DrBoolean/mostly-adequate-guide)*初略过一遍，了解思想即可，这是一种编程范式，讲解虽然由浅入深，但由于思想问题，接收程度不一，所以习惯了传统js编程的人感觉有些别扭，综合而言：运用在实际开发中或想要掌握需多练习*
 
-[BEM的定义](https://www.w3cplus.com/css/bem-definitions.html)
-
-[DOM中关于脱离文档流的几种情况分析](https://www.cnblogs.com/chuaWeb/p/html_css_position_float.html)
 
 ### 其他 & 综合
 [KING的小技巧/知识点贴](/2017/03/01/_mixed/)
