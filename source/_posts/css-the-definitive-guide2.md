@@ -3,7 +3,9 @@ title: CSS权威指南（3rd）笔记-查缺补漏2 - 基本视觉格式化
 categories: css
 tags:
   - css
-date: 2016-11-05 10:17:30
+  - display:block
+  - display:inline
+date: 2016-11-08 18:46:18
 updated: 2018-03-19 18:46:18
 ---
 
