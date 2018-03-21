@@ -3,7 +3,7 @@ title: deployd入门安装
 categories:
   - Nodejs
 tags:
-  - node
+  - nodejs
   - mongodb
   - deployd
 date: 2017-05-11 14:37:44
@@ -25,7 +25,7 @@ updated: 2017-05-11 14:37:44
 
 若要开启服务器上的mongod作为常驻服务，需要配置`bind_ip`，将bind_ip配置为0.0.0.0，表示接受任何IP的连接。
 
-mongodb的配置文件中的bind_ip 默认为127.0.0.1，默认只有本机可以连接。  
+mongodb的配置文件中的bind_ip 默认为127.0.0.1，默认只有本机可以连接。
 
 配置完成后需要重新启动mongod， 然后就可以使用Robomongo远程链接了
 
