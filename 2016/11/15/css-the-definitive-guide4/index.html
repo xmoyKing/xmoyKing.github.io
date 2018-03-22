@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            CSS权威指南（3rd）笔记-查缺补漏4 - 浮动 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",css,float">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CSS权威指南（3rd）笔记-查缺补漏4 - 浮动 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="css"> <meta property="og:article:tag" content="float"> 
+
+    
+        <meta property="article:published_time" content="Tue Nov 15 2016 10:16:46 GMT+0800" />
+        <meta property="article:modified_time" content="Tue Mar 20 2018 10:16:46 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="CSS权威指南（3rd）笔记-查缺补漏4 - 浮动 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2016/11/15/css-the-definitive-guide4/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2016/11/15/css-the-definitive-guide4/index.html",
+    "headline": "CSS权威指南（3rd）笔记-查缺补漏4 - 浮动",
+    "datePublished": "Tue Nov 15 2016 10:16:46 GMT+0800",
+    "dateModified": "Tue Mar 20 2018 10:16:46 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",css,float",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#不浮动"><span class="post-toc-number">1.</span> <span class="post-toc-text">不浮动</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#浮动的详细内幕"><span class="post-toc-number">2.</span> <span class="post-toc-text">浮动的详细内幕</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实用行为"><span class="post-toc-number">3.</span> <span class="post-toc-text">实用行为</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#负外边距"><span class="post-toc-number">4.</span> <span class="post-toc-text">负外边距</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#浮动元素、内容和重叠"><span class="post-toc-number">5.</span> <span class="post-toc-text">浮动元素、内容和重叠</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#清除"><span class="post-toc-number">6.</span> <span class="post-toc-text">清除</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                CSS权威指南（3rd）笔记-查缺补漏4 - 浮动
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Nov 15, 2016</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Mar 20, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/css/">css</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/float/">float</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=CSS权威指南（3rd）笔记-查缺补漏4 - 浮动&url=https://github.com/xmoyKING/2016/11/15/css-the-definitive-guide4/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=CSS权威指南（3rd）笔记-查缺补漏4 - 浮动&url=https://github.com/xmoyKING/2016/11/15/css-the-definitive-guide4/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2016/11/15/css-the-definitive-guide4/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2016/11/15/css-the-definitive-guide4/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>对于浮动元素有几点要记住。首先，会以某种方式将浮动元素从文档的正常流中删除，不过它还是会影响布局。采用css的特有方式，浮动元素几乎“自成一派”，不过它们还是对文档的其余部分有影响。</p>
+<p>这种影响源自于这样一个事实：一个元素浮动时，其他内容会“环绕”该元素。对于浮动图像来说，这种行为我们已经很熟悉了，不过要知道，元素浮动时也同样如此（例如，浮动一个段落在下图中，由于为浮动段落增加了外边距，可以很清楚地看到这种行为：<br><code>p.aside {float: right; width: 15em; margin: 0 1em 1em; padding: 0.25em; border: 1px solid;}</code><br><img src="1.png" alt="浮动段落"></p>
+<p>首先，浮动元素周围的外边距不会合并。如果浮动一个有20像素外边距的图像，在这个图像周围将至少有20像素的空间。如果其他元素与此图像相邻（这表示水平相邻和垂直相邻），而且这些元素也有外边距，那么这些外边距不会与浮动图像的外边距合并，如下图所示：<br><code>p img {float: left; margin: 25px;}</code></p>
+<p><img src="2.png" alt="浮动有外边距的图像"></p>
+<p>如果确实要浮动一个非替换元素，则必须为该元素声明一个width。否则，根据CSS规范，元素的宽度趋于0。因此，假设浏览器的最小width值是1个字符，那么浮动段落可能只有1个字符宽。如果没有为浮动元素声明width值，最后可能得到如下图所示的结果（坦率地说，这种情况很少见，但确实是可能的）。<br><img src="3.png" alt="没有显式宽度的浮动文本不浮动"></p>
+<h4 id="不浮动"><a href="#不浮动" class="headerlink" title="不浮动"></a>不浮动</h4><p>除了left和right外，float属性还有一个值，float: none用于防止元素浮动，</p>
+<p>这看上去可能有些傻，因为要让一个元素不浮动，最容易的办法就是不声明float，这样不就行了吗？确实如此。首先，float的默认值是none。换句话说，要得到正常的非浮动行为，必须有这个值，如果没有这个none值，所有元素都会以某种方式浮动。</p>
+<p>其次，你可能想覆盖导入样式表中的某个样式。假设你在使用一个服务器端样式表，这个样式表要让图像浮动。不过在某个特定的页面上，你不希望图像浮动。不必为此再编写一个全新的样式表，而只需在文档的嵌套样式表中增加img {float: none;}，不过，除了这种情况，确实很少有必要真正使用float: none。</p>
+<h4 id="浮动的详细内幕"><a href="#浮动的详细内幕" class="headerlink" title="浮动的详细内幕"></a>浮动的详细内幕</h4><p>深入讨论浮动的详细内容之前，首先要建立包含块的概念，这很重要。浮动元素的包含块是其最近的块级祖先元素。因此，在以下标记中，浮动元素的包含块就是包含该浮动元素的段落元素：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">This is paragraph text, but you knew that. Within the content of this paragraph is an image that's been floated.</span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"testy.gif"</span> <span class="attr">style</span>=<span class="string">"float: right;"</span>&gt;</span></span><br><span class="line">The containing block for the floated image is the paragraph.</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>此外，浮动元素会生成一个块级框，而不论这个元素本身是什么。因此，如果设置一个链接浮动，即使该链接元素本身是行内元素，通常会生成一个行内框，但只要它是浮动的，就会生成一个块级框。它会像块级元素一样摆放和表现（例如，就好像是一个div元素）。对浮动元素声明display: block也不是不可能，不过没有必要这么做。</p>
+<p>有一系列特定规则控制着浮动元素的摆放，所以在介绍浮动元素的行为之前，先来讨论这些规则。这些规则与控制外边距和宽度计算的规则很相似，开始看起来都一样。规则如下：</p>
+<ol>
+<li>浮动元素的左（或右）外边界不能超出其包含块的左（或右）内边界。<br>这一点很显然。左浮动元素的左外边界向左最远只能到其包含块的左内边界，类似地，右浮动元素向右最远只能到达其包含块的右内边界。<br><img src="4.png" alt="向左（或向右）浮动"></li>
+<li>浮动元素的左（或右）外边界必须是源文档中之前出现的左浮动（或右浮动）元素的右（左）外边界，除非后出现浮动元素的顶端在先出现浮动元素的底端下面。这条规则可以防止浮动元素彼此“覆盖”。如果一个元素向左浮动，而另一个元素已经在那个位置，后放置的元素将挨着前一个浮动元素的右外边界放置。不过，如果一个浮动元素的顶端在所有之前浮动图像（元素）的底端下面，它可以一直浮动到父元素的左内边界。<br><img src="5.png" alt="避免浮动产生重叠"><br>这个规则的好处是，所有浮动内容都是可见的，因为你不必担心一个浮动元素与另一个浮动元素重叠。这使得浮动很安全。使用定位时情况则完全不同，定位很容易导致元素相互覆盖。</li>
+<li>左浮动元素的右外边界不会在其右边右浮动元素的左外边界的右边。一个右浮动元素的左外边界不会在其左边任何左浮动元素的右外边界的左边。<br>这条规则可以防止浮动元素相互重叠。假设有一个body，宽为500像素，它只有两个300像素宽的图像。第一个图像浮动到左边，第二个浮动到右边。这个规则可以防止第二个图像与第一个图像重叠100像素。实际上，它会要求第二个图像向下浮动，直到其顶端在左浮动图像的底端之下，如下图所示。<br><img src="6.png" alt="进一步防止重叠"></li>
+<li>一个浮动元素的顶端不能比其父元素的内顶端更高。<br>如果一个浮动元素在两个合并外边距之间，放置这个浮动元素时就好像在两个元素之间有一个块级父元素。这个规则的前半部分很简单，可以防止浮动元素一直浮动到文档的顶端。正确的行为见下图所示。这个规则的第二部分则是对某些情况下的对齐进行微调一例如，如果有三个段落，其中中间的段落浮动。在这种情况下，浮动段落就会像有一个块级父元素一样浮动。这能防止浮动段落一直向上移动到三个段落共同的父元素的顶端。<br><img src="7.png" alt="不同于气球，浮动元素不能向上一直浮动"></li>
+<li>浮动元素的顶端不能比之前所有浮动元素或块级元素的顶端更高。<br>类似于规则4，规则5要求浮动元素不能一直浮动到其父元素的顶端。另外，浮动元素的顶端也不可能比之前出现的浮动元素的顶端更高。下图所示就是这样一个例子，在这里可以看到，由于第二个浮动元素必须在第一个浮动元素的下面，第三个浮动元素的顶端则是第二个浮动元素的顶端，而不是第一个浮动元素的顶端。<br><img src="8.png" alt="使浮动元素总在其之前浮动元素的下面"></li>
+<li>如果源文档中一个浮动元素之前出现另一个元素，浮动元素的顶端不能比包含该元素所生成框的任何行框的顶端更高。<br>类似于规则4和规则5，这个规则进一步限制了元素的向上浮动，不允许元素浮动到包含该浮动元素之前内容的行的顶端之上。假设一个段落的正中间有一个浮动图像。这个图像顶端最高只能放在该图像所在行框的顶端。从下图中可以看到，这样图像就不会向上浮动太远。<br><img src="9.png" alt="使浮动元素在其上下文内"></li>
+<li>左（或右）浮动元素的左边（右边）有另一个浮动元素，前者的右外边界不能在其包含块的右（左）边界的右边（左边）<br>也就是说，浮动元素不能超出其包含元素的边界，除非它太宽，本身都无法放下，这就能防止出现以下情况，即多个浮动元素出现在一个水平行上，远远超出其包含块的边界，相反，如果浮动元素出现在另一个浮动元素的旁边，而因此可能导致超出包含块的话，实际上这个浮动元素会向下浮动到之前浮动元素下面的某一点，如下图所示（图中浮动元素从下一行开始，由此更清楚地说明这个规则在起作用）。<br><img src="10.png" alt="如果没有足够的空间，浮动元素会被挤到一个新的“行”上"></li>
+<li>浮动元素必须尽可能高地放置。<br>当然，规则8要受前7条规则的限制。历史上，浏览器会把浮动元素的顶端与该图像标记所在行之后的行框的顶端对齐。不过，从规则8可以看出，浮动元素的顶端应当与其标记所在行框的顶端对齐，在此假设有足够的空间。这种理论上正确的行为如下图所示。<br><img src="11.png" alt="满足其他约束条件的前提下，浮动尽可能高"></li>
+<li>左浮动元素必须向左尽可能远，右浮动元素则必须向右尽可能远。位置越高，就会向右或向左浮动得越远。<br>同样的，这条规则要受前几条规则的限制。这里同样存在规则8中的警告，不过不那么模糊。从下图可以看到，很容易确定元素已经向右或向左走得尽可能远。<br><img src="12.png" alt="向右（或向左）尽可能远"></li>
+</ol>
+<h4 id="实用行为"><a href="#实用行为" class="headerlink" title="实用行为"></a>实用行为</h4><p>前面介绍的规则有一些有意思的后果，这些结果源干两方面，一方面是规则中指出了一些要求，另一方面是规则中有些方面没有谈到。首先要讨论浮动元素比其父元素高时会有什么结果。</p>
+<p>实际上，这种情况经常发生，以一个小文档为例，这个文档只包含几个段落和h3元素，其中第一个段落包含一个浮动图像。另外，这个浮动图像有5像素的外边距（5px）。你可能认为这个文档应该昆示如下，如下图所示。<br><img src="13.png" alt="期望的浮动行为"></p>
+<p>当然，这里并没有什么反常的地方，不过图10-15显示了为第一个段落设置一个背景时会发生什么。</p>
+<p><img src="14.png" alt="背景和浮动元素"><br>这与第二个例子基本上没有什么不同，只不过背景可见。可以看到，浮动图像超出了其父元素的底端。当然，在第一个例子中也是如此，只不过第一个例子中不明显，因为无法看到背景。前面讨论的浮动规则只处理了浮动元素和其父元素的左。右和上边界，而没有涉及下边界，这个遗漏是故意的，这就会得到如上图中所示的行为。</p>
+<p>警告：实际上，有些浏览器不能正确地做到这一点。相反，它们会增加父元素的高度，使浮动元素能够包含在父元素中，即使这会导致父元素中出现大量多余的空白。</p>
+<p>CSS2.1澄清了浮动元素行为的一个方面：浮动元素会延伸，从而包含其所有后代浮动元素（而CSS的先前版本没有明确指出会发生什么情况）。所以，通过将父元素置为浮动元素，就可以把浮动元素包含在其父元素内，如下例所示：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"float: left; width: 100%;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"hay.gif"</span> <span class="attr">style</span>=<span class="string">"float: left;"</span>&gt;</span></span><br><span class="line">The 'div' will stretch around the floated image because the 'div' has been floated.</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>与此相关，考虑背景及其与文档中之前出现的浮动元素的关系，见下图所示。<br><img src="15.png" alt="元素背景“滑到”浮动元素下面"></p>
+<p>由于浮动元素同时处于流内和流外，所以这种情况肯定会发生。然后会怎样呢？标题的内容由浮动元素“显示”，不过，标题的元素宽度还是与父元素宽度相等。因此，其内容区将跨父元素的宽度，相应地，背景宽度也与父元素宽度相等。为了避免盖在浮动元素下面，具体内容并不从其内容区左边界开始显示。</p>
+<h4 id="负外边距"><a href="#负外边距" class="headerlink" title="负外边距"></a>负外边距</h4><p>有意思的是，负外边距可能导致浮动元素移到其父元素的外面。这看上去与先前的规则相矛盾，不过其实并不矛盾。通过设置负外边距，元素可能看上去比其父元素更宽，同样的道理，浮动元素也可能超出其父元素。<br>下面考虑一个向左浮动的浮动图像，其左外边距和上外边距都是-15px。这个图像放在一个div中，该div没有内边距、边框和外边距。结果如下图所示。</p>
+<p><img src="16.png" alt="有负外边距时的浮动"><br>尽管看上去有问题，但实际上并没有违反浮动元素放在其父元素之外的相关限制。</p>
+<p>仔细研究上一节的规则可以发现，从技术上讲这种行为是允许的：一个浮动元素的外边界必须在父元素内。不过，由于外边距为负，放置浮动元素的内容时就好像覆盖了自己的外边界一样，如下图所示，<br><img src="17.png" alt="利用负外边距向上和向左浮动详解"></p>
+<p>通过数学计算描述如下：假设div的上内边界在100像素处。为了得出浮动元素的上内边界应该在哪里，浏览器会做以下计算：100px +(-15pX）外边距+0内边距=85px，因此，浮动元素的上内边界应当在85像素处，尽管比浮动元素父元素的上内边界还要高，但从数学计算可知，这并没有违反规范。出于类似的原因，同样可以解释为什么浮动元素的左内边界可以放在其父元素左内边界的左边。</p>
+<p>这里有一个重要问题：在使用负外边距时，如果浮动元素元素超出其父元素，文档会如何显示？例如，一个图像可能浮动得太远，超出了用户代理已显示的一个段落。在这种情况下，要由用户代理决定文档是否重新显示，CSS1和CSS2规范明确地指出，用户代理不必重新显示已显示内容来适应文档中后来出现的内容。换句话说，如果一个图像浮动到之前已经显示的段落中，它可能只是覆盖该位置上原有的内容。另一方面，用户代理也可能采用一种不同的方法处理这种情况，让内容环绕浮动元素重新显示。不论采用哪种方式，都不要指望肯定会发生某一种行为，否则为浮动元素设置负外边距的作用会受到限制。让元素浮动可能很安全，不过试图将元素在页面上向上推往往不是好主意。</p>
+<p>还有另外一种方法可以让浮动元素超出其父元素的左右内边界：即浮动元素比其父元素更宽。在这种情况下，浮动元素会超出右或左内边界，从而尽可能正确地显示，究竞是超出右内边界还是左内边界，取决于元素以何种方式浮动。这会得到如下图所示的结果。<br><img src="18.png" alt="浮动一个比父元素更宽的元素"></p>
+<h4 id="浮动元素、内容和重叠"><a href="#浮动元素、内容和重叠" class="headerlink" title="浮动元素、内容和重叠"></a>浮动元素、内容和重叠</h4><p>还有一个更有意思的问题：如果一个浮动元素与正常流中的内容发生重叠会怎么样呢？</p>
+<p>例如，如果一个浮动元素在内容流过的边上有负外边距（例如，右浮动元素上的左外边距为负），就会发生这种情况。你已经看到了对块级元素的边框和背景有什么影响。那么行内元素呢？</p>
+<p>CSS1和CSS2对于这种情况下会有何种行为并不完全明确。CSS2.1则澄清了这个问题，指出以下明确的规则：</p>
+<ul>
+<li>行内框与一个浮动元素重叠时，其边框。背景和内容都在该浮动元素“之上”显示。</li>
+<li>块框与一个浮动元素重叠时，其边框和背景在该浮动元素“之下”显示，而内容在浮动元素“之上”显示。</li>
+</ul>
+<p>为了说明这些规则，考虑以下情况：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">img.sideline &#123;float: left; margin: 10px -15px 10px 10px;&#125;</span><br><span class="line">p.box &#123;border: 1px solid gray; padding: 0.5em;&#125;</span><br><span class="line">p.box strong &#123;border: 3px double black; background: silver; padding: 2px;&#125;</span><br><span class="line">h2#jump-up &#123;margin-top:-15px; background: silver;&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"testy.gif"</span> <span class="attr">class</span>=<span class="string">"sideline"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">This paragraph, unremarkable in most ways, does contain an inline element. This inline contains some <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Btrongly emphasized text, which is so marked to make an inportant point<span class="tag">&lt;/<span class="name">strong</span>&gt;</span>. The rest of the element's contentis normal anonymous inline content.</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">P</span>&gt;</span></span><br><span class="line">This is a second paragraph. There's nothing remarkable about it, really. Please move along.</span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">id</span>=<span class="string">"jump-up"</span>&gt;</span>A Heading!<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="19.png" alt="与浮动元素重叠时的布局行为"><br>行内元素完全覆盖了浮动图像（包括背景、边框、内容和一切）。另一方面，块元素只是将其内容显示在浮动元素之上，但其背景和边框都放在浮动元素之下。</p>
+<h4 id="清除"><a href="#清除" class="headerlink" title="清除"></a>清除</h4><p>我们已经讨论了一些浮动行为，介绍定位前还有一个内容没有谈到。你可能并不总是希望内容流过浮动元素，某些情况下，可能要特意避免这种行为。如果你的文档分组为小节，可能不希望一个小节的浮动元素浮动到另一个小节中。在这种情况下。你希望将每小节的第一个元素设置为禁止浮动元素出现在它旁边。如果第一个元素可能放在一个浮动元素旁边，则会向下推，直到出现在浮动元素的下面，而且所有后续内容都在其后面出现，如下图所示。<br><img src="20.png" alt="显示一个有clear属性的元素"></p>
+<p>这可以利用clear属性完成。</p>
+<ul>
+<li>值：left | right | both | none | inherit</li>
+<li>初始值：none</li>
+<li>应用于：块级元素</li>
+<li>继承性：无</li>
+</ul>
+<p>例如，为了确保所有h3元素不会放在左浮动元素的右边，可以声明h3{clear: left;}。这可以解释为“确保一个h3的左边没有浮动图像”，其效果非常类似干HTML中的<code>&lt;br clear=&quot;left&quot;&gt;</code>（有讽刺意味的是，大多数浏览器的默认行为都是为br元素生成行内框，所以clear不能应用于br，除非改变其display值！）。以下规则使用clear 来防止h3元素左边有浮动元素：<br><code>h3 {clear: left;}</code></p>
+<p>这会把h3推过所有左浮动元素，不过还允许浮动元素出现在h3元素的右边，如下图所示。<br><img src="21.png" alt="清除左边，但不清除右边的浮动元素"></p>
+<p>为了避免这种情况，确保h3元素不会与任何浮动元素在同一行上，要使用值both:<br><code>h3 {clear: both;}</code></p>
+<p>这很好理解，这个值会防止指定了clear的元素两边存在浮动元素，如下图所示。<br><img src="22.png" alt="两边都清除"></p>
+<p>另一方面，如果只是不希望h3元素的右边有浮动元素，要使用<code>h3{clear: right;}</code>。</p>
+<p>最后还有一个clear: none，它允许元素浮动到另一个元素的任意两边。float: none 值之所以存在，主要是为了支持正常的文档行为，即元素允许其两边有浮动元素。当然，可以用none来覆盖其他样式，如下图所示。尽管有规则指出h3元素不允许两边有浮动元素，不过，有一个h3特别设置为允许两边有浮动元素：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h3 &#123;clear: both;&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span> <span class="attr">style</span>=<span class="string">"clear: none;"</span>&gt;</span>What's With All The Latin?<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="23.png" alt="不清除浮动元素"></p>
+<p>在CSS1和CSS2中，clear工作如下，它会增加元素的上外边距，使之最后落在浮动元素的下面，这实际上会忽略为清除元素（设置了clear的元素）顶端设置的外边距宽度。也就是说，清除元素的上外边距可能会调整，例如，并不是1.5em，而可能增加到10em或25px，甚至7.133in，或者是将元素下移足够远（使内容区在浮动元素下边界的下面）所需的任何长度。</p>
+<p>在CSS2.1中，引入了一个清除区域。清除区域是在元素上外边距之上增加的额外间隔，不允许任何浮动元素进入这个范围内。这意味着元素设置clear属性时，它的外边距并不改变。之所以会向下移是这个清除区域造成的。要特别注意下图中标题边框的放置，这是由以下标记得到的结果：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">img.sider &#123;float: left; margin: 0;&#125;</span><br><span class="line">h3 &#123;border: 1px solid gray; clear: left; margin-top: 15px;&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"boxer.gif"</span> <span class="attr">class</span>=<span class="string">"sider"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"stripe.gif"</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>Why Doubt Salmon?<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="24.png" alt="清除及其对外边距的影响"><br>h3上边框与浮动图像下边框之间没有间隔，因为在h3的上外边距（15像素）之上增加了25像素的清除区域，将h3的上边框边界推到刚好越过浮动元素的下边界。一般都会这样，除非h3的上外边距计算为40像素或更多，在这种情况下，h3会很自然地放在浮动元素下面，clear值是什么则无关紧要。</p>
+<p>当然，大多数情况下无法知道一个元素周围多大范围内不允许有浮动元素。要确保一个清除元素（设置clear属性的元素）的顶端与一个浮动元素的底端之间有一定空间，可以为浮动元素本身设置一个下外边距。所以，如果希望上例中的浮动元素下面至少有15 像素的空间，可以修改如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">img</span><span class="selector-class">.sider</span> &#123;<span class="attribute">float</span>: left; <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">15px</span>;&#125;</span><br><span class="line"><span class="selector-tag">h3</span> &#123;<span class="attribute">border</span>: <span class="number">1px</span> solid gray; <span class="attribute">clear</span>: left;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>浮动元素的下外边距会增加浮动框的大小，且由于清除元素必须推到浮动框下面的某个点以下，浮动框大小的增加会使这个点下移。前面已经看到过，这是因为浮动元素的外边距边界定义了浮动框的边界。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/11/15/css-the-definitive-guide5/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/11/13/mongodb-begin/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/blockchain/">blockchain<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">85</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/01/01/0_links/" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2018/02/16/0_booklist/" title="Booklist">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Booklist
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">230</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

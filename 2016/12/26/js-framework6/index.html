@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            JavaScript框架设计笔记-6-节点模块 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",js,js-framework">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JavaScript框架设计笔记-6-节点模块 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="js-framework"> 
+
+    
+        <meta property="article:published_time" content="Mon Dec 26 2016 15:24:04 GMT+0800" />
+        <meta property="article:modified_time" content="Mon Dec 26 2016 15:24:04 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="JavaScript框架设计笔记-6-节点模块 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2016/12/26/js-framework6/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2016/12/26/js-framework6/index.html",
+    "headline": "JavaScript框架设计笔记-6-节点模块",
+    "datePublished": "Mon Dec 26 2016 15:24:04 GMT+0800",
+    "dateModified": "Mon Dec 26 2016 15:24:04 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,js-framework",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#节点的创建"><span class="post-toc-number">1.</span> <span class="post-toc-text">节点的创建</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#节点的插入"><span class="post-toc-number">2.</span> <span class="post-toc-text">节点的插入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#节点的复制"><span class="post-toc-number">3.</span> <span class="post-toc-text">节点的复制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#节点的移除"><span class="post-toc-number">4.</span> <span class="post-toc-text">节点的移除</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一些特殊的元素"><span class="post-toc-number">5.</span> <span class="post-toc-text">一些特殊的元素</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JavaScript框架设计笔记-6-节点模块
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Dec 26, 2016</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Dec 26, 2016 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/js-framework/">js-framework</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JavaScript框架设计笔记-6-节点模块&url=https://github.com/xmoyKING/2016/12/26/js-framework6/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JavaScript框架设计笔记-6-节点模块&url=https://github.com/xmoyKING/2016/12/26/js-framework6/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2016/12/26/js-framework6/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2016/12/26/js-framework6/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>DOM操作占前端工作的很大一部分，而节点操作又占了DOM操作的一半左右，由于选择器引擎让繁琐的元素选择变得简单，jQuery更是让节点操作简单到极致，一下子返回很多元素，能够操作一组元素。</p>
+<p>而节点操作其实和数据库中的CRUD操作是一致的，来来回回也就四大类。</p>
+<h4 id="节点的创建"><a href="#节点的创建" class="headerlink" title="节点的创建"></a>节点的创建</h4><p>浏览器提供了多种创建元素节点的API，从使用频率来看，依次是document.createEl6ment,innerHTML,insertAdjacentHTML,createContextualFragment。</p>
+<p>document.createElement方法传入标签名然后返回此类型的元素节点,<code>document.createElement(&#39;div&#39;)</code>，并且对于浏览器不支持的标签类型，它也能成功返回，所以很多老旧浏览器（IE6-8）能支持H5新标签就靠这个方法，同时它还能连同属性一块儿生成，即如jquery那样，传入带属性的标签，<code>document.createElement(&#39;&lt;div id=aaa&gt;&lt;/div&gt;&#39;)</code>,这样可以更方便生成标签，同时在老旧浏览器下（IE6,7）, name属性是只读的，所以没办法动态修改，只能这样连同标签一起生成。</p>
+<p>innerHTML属性非常的厉害，通过它能一次性创建出一大堆的节点，而不是一个一个创建，所以其效率比createElement高了很多倍，<code>document.createElement(&#39;div&#39;).innerHTML = &quot;&lt;span class=&quot;left&quot;&gt;aaa&lt;/span&gt;&lt;span class=&quot;right&quot;&gt;bbb&lt;/span&gt;&quot;</code>。<br>但这个属性在一些老版本的IE下存在兼容性问题，比如某些元素的innerHTML属性是只读的，只能用appendChild或inserBefore来出来。同时innerHTML中插入的script标签不会被执行，而是当做普通文本处理，但某些浏览器支持script标签的defer属性，这样它被插入到innerHTML中会被执行。一种解决方法是利用正则将script中的内容抽取出来然后用eval执行，或者等innerHTML赋值完成后script标签的内容重新抽取出来包裹在一个新的document.createElement(‘script’)生成的script标签中。<br>其次就是某些标签不能独立存在，必须有外部的合法标签容器才行，比如tr、td、th节点必须在table thead/tbody内，area节点必须在map内，option节点必须在select内…当这些标签没有正确嵌套的时候，不同浏览器解析会有差异，大部分浏览器会自动补全，有一些会报错。</p>
+<p>insertAdjacentHTML这个方法也非常强大，而且其插入方式非常灵活，它可以插入一个元素的内部的最前面（afterBegin）、内部最后面（beforeEnd），外部前面（beforeBegin），外部后面（afterEnd），对应着jQuery的方法就是prepend，append，before，after。但其内插入节点的规则的限制同innerHTML一样。</p>
+<p>而jquery为了实现方便简单的创建节点，其实内部做了很多处理，比如先经过append方法进入domManip方法，在到buildFragment方法，再到clean方法，期间有字符串加工，script内容抽取，innerHTML序列化，文档随便对象生成，插入DOM，全局eval等多个操作。</p>
+<p>mass Framework与jquery的结构类似，通过两个构造器与一个原型实现无new实例化，这样链式操作就不会被new关键字打断。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">$</span>(<span class="params">a, b</span>)</span>&#123; <span class="comment">// 第一个构造器</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> $.fn.init(a, b); <span class="comment">// 第二个构造器</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 将原型对象放到一个名字更短更好记的属性名中</span></span><br><span class="line"><span class="comment">// 方便扩展原型方法，类似jquery,同时是实现链式操作的关键</span></span><br><span class="line">$.fn = $.prototype = &#123;</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.a = a;</span><br><span class="line">    <span class="keyword">this</span>.b = b;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 公用一个原型</span></span><br><span class="line">$.fn.init.prototype = $.fn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = $(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> $);</span><br><span class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> $.fn.init);</span><br></pre></td></tr></table></figure></p>
+<p>jquery的重载非常丰富灵活，其$的用法包含9种不同的传参方式：</p>
+<ul>
+<li>jQuery(selector, [context])</li>
+<li>jQuery(element)</li>
+<li>jQuery(elementArray)</li>
+<li>jQuery(object)</li>
+<li>jQuery(jQuery Object)</li>
+<li>jQuery()</li>
+<li>jQuery(html ,[ownerDocument])</li>
+<li>jQuery(callback)<br>大致分为3种，选择器、domParser、domReady，除了domReady，其他的都是为了获取操作的节点集合。而这些节点与实例通过索引可以联系起来，构成一个类数组对象，</li>
+</ul>
+<p>若不支持IE，则可以使用<code>__proto__</code>属性，这样能更加方便的实现无new实例化，同时，jquery对象其实是一个类数组对象，所以可以考虑用数组代替。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $ = <span class="function"><span class="keyword">function</span>(<span class="params">expr, context</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 这个dom数组通过选择器引擎或domparser得到，是节点集合</span></span><br><span class="line">  <span class="keyword">var</span> dom = [];</span><br><span class="line">  <span class="keyword">return</span> DomArray(dom, expr, context);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// DomArray为内部函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DomArray</span>(<span class="params">dom, expr, context</span>)</span>&#123;</span><br><span class="line">  dom = dom || [];</span><br><span class="line">  dom.context = context;</span><br><span class="line">  dom.expr = expr;</span><br><span class="line">  dom.__proto__ = DomArray.prototype;</span><br><span class="line">  <span class="keyword">return</span> dom;</span><br><span class="line">&#125;</span><br><span class="line">DomArray.prototype = $.fn = []; <span class="comment">// 为了使用数组的方法</span></span><br><span class="line">$.fn.get = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 添加原型方法</span></span><br><span class="line">  alert(<span class="keyword">this</span>.expr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = $(<span class="string">'div'</span>);</span><br><span class="line">a.push(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>);</span><br><span class="line">a.get(); <span class="comment">// div</span></span><br><span class="line">a.lenght; <span class="comment">// 3</span></span><br><span class="line">a.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">  i; <span class="comment">// 依次a, b, c</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>接下来对其这个类数组对象进行扩展，<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line">$.fn.extend(&#123;</span><br><span class="line">  init: <span class="function"><span class="keyword">function</span>(<span class="params">expr, context</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 分支1，处理空白字符，null， undefined参数</span></span><br><span class="line">    <span class="keyword">if</span>(!expr)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分支2，让$实例与元素节点一样拥有ownerDocument属性</span></span><br><span class="line">    <span class="keyword">var</span> doc, nodes; <span class="comment">// 用于节点搜索的起点</span></span><br><span class="line">    <span class="keyword">if</span>($.isArrayLike(context))&#123; <span class="comment">// typeof context === 'string'</span></span><br><span class="line">      <span class="keyword">return</span> $(context).find(expr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分支3，处理节点参数</span></span><br><span class="line">    <span class="keyword">if</span>(expr.nodeType)&#123;</span><br><span class="line">      <span class="keyword">this</span>.ownerDocument = expr.nodeType === <span class="number">9</span> ? expr : expr.ownerDocument;</span><br><span class="line">      <span class="keyword">return</span> $.<span class="built_in">Array</span>.merge(<span class="keyword">this</span>, [expr]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.selector = expr + <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分支4，处理css3选择器</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> epxr === <span class="string">'string'</span>)&#123;</span><br><span class="line">      doc = <span class="keyword">this</span>.ownerDocument = !context ? <span class="built_in">document</span> : getDoc(context, context[<span class="number">0</span>]);</span><br><span class="line">      <span class="keyword">var</span> scope = context || doc;</span><br><span class="line">      expr = expr.trim();</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 分支5，动态生成新节点</span></span><br><span class="line">      <span class="keyword">if</span>(expr.charAt(<span class="number">0</span>) === <span class="string">'&lt;'</span> &amp;&amp; expr.charAt(expr.length - <span class="number">1</span>) === <span class="string">'&gt;'</span> &amp;&amp; expr.length &gt;= <span class="number">3</span>)&#123;</span><br><span class="line">        nodes = $.parseHTML(expr, doc);</span><br><span class="line">        nodes = nodes.childNodes;</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>(rtag.test(expr))&#123;</span><br><span class="line">        <span class="comment">// 分支6，getElementsByTagName</span></span><br><span class="line">        nodes = scope[TAGS](expr);</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 分支7，进入选择器模块</span></span><br><span class="line">        nodes = $.query(expr, scope);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> $.<span class="built_in">Array</span>.merge(<span class="keyword">this</span>, nodes);</span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="comment">// 分支8，处理数组、节点集合、mass对象或window对象</span></span><br><span class="line">      <span class="keyword">this</span>.ownerDocument = getDoc(expr[<span class="number">0</span>]);</span><br><span class="line">      $.<span class="built_in">Array</span>.merge(<span class="keyword">this</span>, $.isArrayLike(expr)?expr:[expr]);</span><br><span class="line">      <span class="keyword">delete</span> <span class="keyword">this</span>.selector;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  mass: $.mass,</span><br><span class="line">  length: <span class="number">0</span>,</span><br><span class="line">  valueOf: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 转换为纯数组对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.slice.call(<span class="keyword">this</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  size: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.length;</span><br><span class="line">  &#125;,</span><br><span class="line">  toString: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 收集tagName属性，做成纯数组返回</span></span><br><span class="line">    <span class="keyword">var</span> i = <span class="keyword">this</span>.length,</span><br><span class="line">        ret = [],</span><br><span class="line">        getType = $.type;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(i--)&#123;</span><br><span class="line">      ret[i] = getType(<span class="keyword">this</span>[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret.join(<span class="string">', '</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  labor: <span class="function"><span class="keyword">function</span>(<span class="params">nodes</span>)</span>&#123; <span class="comment">// 用于构建一个与对象具有相同属性，但节点集不用的mass对象</span></span><br><span class="line">    <span class="keyword">var</span> neo = <span class="keyword">new</span> $;</span><br><span class="line">    neo.context = <span class="keyword">this</span>.context;</span><br><span class="line">    neo.selector = <span class="keyword">this</span>.selector;</span><br><span class="line">    neo.ownerDocument = <span class="keyword">this</span>.ownerDocument;</span><br><span class="line">    <span class="keyword">return</span> $.<span class="built_in">Array</span>.merge(neo, nodes || []);</span><br><span class="line">  &#125;,</span><br><span class="line">  slice: <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>)</span>&#123; <span class="comment">// 截取原来某部分组成mass对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.labor($.slice(<span class="keyword">this</span>, a, b));</span><br><span class="line">  &#125;,</span><br><span class="line">  get: <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123; <span class="comment">// 传入索引值获取节点，支持负数,若不传返回节点集的纯数组</span></span><br><span class="line">    <span class="keyword">return</span> !<span class="built_in">arguments</span>.length ? <span class="keyword">this</span>.valueOf() : <span class="keyword">this</span>[num&lt;<span class="number">0</span> ? <span class="keyword">this</span>.length+num : num];</span><br><span class="line">  &#125;,</span><br><span class="line">  eq: <span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123; <span class="comment">// 传入索引值获取节点，</span></span><br><span class="line">    <span class="keyword">return</span> i === <span class="number">-1</span> ? <span class="keyword">this</span>.slice(i) : <span class="keyword">this</span>.slice(i, +i+<span class="number">1</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  gt: <span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123; <span class="comment">// 取得大于索引值的所有节点</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.slice(i+<span class="number">1</span>, <span class="keyword">this</span>.length);</span><br><span class="line">  &#125;,</span><br><span class="line">  lt: <span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.slice(<span class="number">0</span>, i);</span><br><span class="line">  &#125;,</span><br><span class="line">  first: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  last: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  even: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.labor($.filter(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params">_, i</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> i % <span class="number">2</span> === <span class="number">0</span>;</span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;,</span><br><span class="line">  odd: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  each: <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $.each(<span class="keyword">this</span>, fn);</span><br><span class="line">  &#125;,</span><br><span class="line">  map: <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.labor($.map(<span class="keyword">this</span>, fn));</span><br><span class="line">  &#125;,</span><br><span class="line">  clone: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  html: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  text: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  outerHTML: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.fn.init.prototype = $.fn;</span><br><span class="line"><span class="string">'push,unshift,pop,shift,splice,sort,reverse'</span>.replace($.rword, <span class="function"><span class="keyword">function</span>(<span class="params">method</span>)</span>&#123;</span><br><span class="line">  $.fn[method] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">Array</span>.prototype[method].apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="节点的插入"><a href="#节点的插入" class="headerlink" title="节点的插入"></a>节点的插入</h4><p>原生DOM接口很简单，参数类型确定，不会重载，每次只处理一个元素节点。而jquery则相反，参数类型复杂，过度重载，为了简化处理逻辑，jquery的做法时统统转换为文档碎片，然后将其复制到与当前jquery对象里面包含的节点集合相同的个数，一个个插入。</p>
+<p>由于jquery式的插入方法，如append、prepend、after、before、replace，太常用而且非常受欢迎，W3C在DOM4中会原生支持这些方法，参数的类型也相同，可以是字符串或DOM节点。</p>
+<p>mass framework通过统一调用manipulate的方式，接口变成了空心化的方法，用于提供语义化且便捷的名字而已，实现全部转至内部，由manipulate方法分配真正的执行方案，而且非常容易实现对应的反转方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'append,prepend,before,after,replace'</span>.replace($.rword, <span class="function"><span class="keyword">function</span>(<span class="params">method</span>)</span>&#123;</span><br><span class="line">  $.fn[method] = <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> manipulate(<span class="keyword">this</span>, method, item, <span class="keyword">this</span>.ownerDocument);</span><br><span class="line">  &#125;;</span><br><span class="line">  $.fn[method+<span class="string">'To'</span>] = <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">    $(item, <span class="keyword">this</span>.ownerDocument)[method](<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">manipulate</span>(<span class="params">nodes, name, item, doc</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 只运行向元素节点内部插入东西，因此需要转换为纯正的元素节点集合</span></span><br><span class="line">  <span class="keyword">var</span> elems = $.filter(nodes, <span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> el.nodeType === <span class="number">1</span>;</span><br><span class="line">  &#125;),</span><br><span class="line">    handler = insetHooks[name];</span><br><span class="line">  <span class="keyword">if</span>(item.nodeType)&#123;</span><br><span class="line">    <span class="comment">// 若传入元素节点，文本节点或文档碎片</span></span><br><span class="line">    insertAdjacentNode(elems, item, handler);</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> item === <span class="string">'string'</span>)&#123;</span><br><span class="line">    <span class="comment">// 若传入的是字符串片段</span></span><br><span class="line">    <span class="comment">// 若方法名不是replace，完美支持insertAdjacentHTML，并且不存在嵌套关系的标签</span></span><br><span class="line">    <span class="keyword">var</span> fast = (name !== <span class="string">'replace'</span>)&amp;&amp; $.support(adjacent) &amp;&amp; !rnest.test(item);</span><br><span class="line">    <span class="keyword">if</span>(!fast)&#123;</span><br><span class="line">      item = $.parseHTML(item, doc);</span><br><span class="line">    &#125;</span><br><span class="line">    insertAdjacentHTML(elems, item, insertHooks[name+<span class="string">'2'</span>], handler);</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(item.length)&#123;</span><br><span class="line">    <span class="comment">// 若传入的是HTMLCollection nodeList mass实例，将转换为文档碎片</span></span><br><span class="line">    insertAdjacentFragment(elems, item, doc, handler);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> nodes;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertAdjacentNode</span>(<span class="params">elems, item, handler</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 使用appendChild， insertBefore实现，item为普通节点</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, el; el = elems[i]; i++)&#123;</span><br><span class="line">    <span class="comment">// 第一个不需要复制，其他的要复制</span></span><br><span class="line">    handler(el, i ? cloneNode(item, <span class="literal">true</span>, <span class="literal">true</span>) : item);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertAdjacentHTML</span>(<span class="params">elems, item, fastHandler, handler</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, el; el = elems[i++];)&#123;</span><br><span class="line">    <span class="comment">// 尝试使用insertAjacentHTML</span></span><br><span class="line">    <span class="keyword">if</span>(item.nodeType)&#123; <span class="comment">// 若是文档碎片</span></span><br><span class="line">      handler(el, item.cloneNode(<span class="literal">true</span>));</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      fastHandler(el, item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertAdjacentFragment</span>(<span class="params">elems, item, doc, handler</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> fragment = doc.createDocumentFragment();</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, el; el = elems[i++];)&#123;</span><br><span class="line">    handler(el, makeFragment(item, fragment, i&gt;<span class="number">1</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeFragment</span>(<span class="params">nodes, fragment, bool</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 只有非NodeList的情况下i才递增</span></span><br><span class="line">  <span class="keyword">var</span> ret = fragment.cloneNode(<span class="literal">false</span>),</span><br><span class="line">    go = !nodes.item;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, node; node = nodes[i]; go &amp;&amp; i++)&#123;</span><br><span class="line">    ret.appendChild(bool &amp;&amp; cloneNode(node, <span class="literal">true</span>, <span class="literal">true</span>) || node);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> insertHooks = &#123;</span><br><span class="line">  prepend: <span class="function"><span class="keyword">function</span>(<span class="params">el, node</span>)</span>&#123;</span><br><span class="line">    el.insertBefore(node, el.firstChild);</span><br><span class="line">  &#125;,</span><br><span class="line">  append: <span class="function"><span class="keyword">function</span>(<span class="params">el, node</span>)</span>&#123;</span><br><span class="line">    el.appendChild(node);</span><br><span class="line">  &#125;,</span><br><span class="line">  before: <span class="function"><span class="keyword">function</span>(<span class="params">el, node</span>)</span>&#123;</span><br><span class="line">    el.parentNode.insertBefore(node, el);</span><br><span class="line">  &#125;,</span><br><span class="line">  after: <span class="function"><span class="keyword">function</span>(<span class="params">el, node</span>)</span>&#123;</span><br><span class="line">    el.parentNode.insertBefore(node, el.nextSibling);</span><br><span class="line">  &#125;,</span><br><span class="line">  replace: <span class="function"><span class="keyword">function</span>(<span class="params">el, node</span>)</span>&#123;</span><br><span class="line">    el.parentNode.replaceChild(node, el);</span><br><span class="line">  &#125;,</span><br><span class="line">  prepend2: <span class="function"><span class="keyword">function</span>(<span class="params">el, html</span>)</span>&#123;</span><br><span class="line">    el[adjacent](<span class="string">'afterBegin'</span>, html);</span><br><span class="line">  &#125;,</span><br><span class="line">  append2: <span class="function"><span class="keyword">function</span>(<span class="params">el, html</span>)</span>&#123;</span><br><span class="line">    el[adjacent](<span class="string">'beforeEnd'</span>, html);</span><br><span class="line">  &#125;,</span><br><span class="line">  before2: <span class="function"><span class="keyword">function</span>(<span class="params">el, html</span>)</span>&#123;</span><br><span class="line">    el[adjacent](<span class="string">'beforeBegin'</span>, html);</span><br><span class="line">  &#125;,</span><br><span class="line">  after2: <span class="function"><span class="keyword">function</span>(<span class="params">el, html</span>)</span>&#123;</span><br><span class="line">    el[adjacent](<span class="string">'afterEnd'</span>, html);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>makeFragment函数需要注意两点，一个是NodeList的遍历，一个是文档碎片的复制。<br>由于NodeList的动态性，每当其插入节点时会立即反映到length属性上，所以需要在循环之前将length保存到一个变量上。<br>碎片对象的复制可以使用原生的cloneNode(true),但在IE下attachEvent绑定事件会跟着复制，而移除时无法找到对应的引用，所以需要特别注意。</p>
+<p>jquery除了提供上述的几种方法外，还提供了wrap、wrapAll、wrappInner三种特殊插入操作：</p>
+<ul>
+<li>wrap,为当前元素提供一个新父节点，此新父节点将动态插入到原节点的父节点下，IE下<code>neo.applyElement(old, &#39;outside&#39;)</code>可以非常轻松的实现</li>
+<li>wrapAll,为一堆元素提供一个共同的新父节点，插入到第一个原元素的父节点下，其他元素在依次挪到新节点下。</li>
+<li>wrappInner,为当前元素插入一个新节点，然后将它之前的孩子挪到新节点下，IE下<code>neo.applyElement(old, &#39;inside&#39;)</code>可以非常轻松的实现</li>
+</ul>
+<h4 id="节点的复制"><a href="#节点的复制" class="headerlink" title="节点的复制"></a>节点的复制</h4><p>IE下对元素的复制与innerHTML一样，有很多BUG，比如IE会复制attachEvent事件，标准浏览器的cloneNode只会复制元素写在标签内的属性或通过setAttribute设置的属性，而IE6~8还支持<code>node.aaa = &#39;xxx&#39;</code>设置的属性复制。</p>
+<p>jquery的处理方法就是，支持2个参数，第一个是只复制节点，但不复制数据和事件，默认为false，第二个参数决定如何复制它的子孙，默认是参数一的决定。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接口只对参数进行处理，具体操作由cloneNode执行</span></span><br><span class="line">$.fn.clone = <span class="function"><span class="keyword">function</span>(<span class="params">dataAndEvents, deepDataAndEvents</span>)</span>&#123;</span><br><span class="line">  dataAndEvents = dataAndEvents == <span class="literal">null</span> ? <span class="literal">false</span> : dataAndEvents;</span><br><span class="line">  deepDataAndEvents = deepDataAndEvents == <span class="literal">null</span> ? dataAndEvents : deepDataAndEvents;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.map(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> cloneNode(<span class="keyword">this</span>, dataAndEvents, deepDataAndEvents);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cloneNode</span>(<span class="params">node, dataAndEvents, deepDataAndEvents</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(node.nodeType === <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">// 在标准浏览器下，fixCloneNode只是标准的cloneNode(true)，</span></span><br><span class="line">    <span class="comment">// 否则内部需要加载node_fix模块，做大量的补丁工作</span></span><br><span class="line">    <span class="keyword">var</span> neo = $.fixCloneNode(node), <span class="comment">// 复制元素的attributes</span></span><br><span class="line">      src, neos, i;</span><br><span class="line">    <span class="keyword">if</span>(dataAndEvents)&#123;</span><br><span class="line">      $.mergeData(neo, node); <span class="comment">// 复制数据与事件</span></span><br><span class="line">      <span class="keyword">if</span>(deepDataAndEvents)&#123; <span class="comment">// 处理子孙的复制</span></span><br><span class="line">        src = node[TAGS](<span class="string">'*'</span>);</span><br><span class="line">        neos = neo[TAGS](<span class="string">'*'</span>);</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; src[i]; i++)&#123;</span><br><span class="line">          $.mergeData(neos[i], src[i]);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    src = neos = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> neo;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> node.cloneNode(<span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="节点的移除"><a href="#节点的移除" class="headerlink" title="节点的移除"></a>节点的移除</h4><p>浏览器提供了多种移除节点的方法，如removeChild、removeNode。</p>
+<p>其中removeNode是IE的私有实现，它的作用是将目标节点从文档树删除返回目标节点，同时接收一个布尔值的参数，即是否只删除目标节点，保留子节点，true时作用同removeChild。</p>
+<p>在IE6，7下需要注意removeChild的内存泄漏问题。</p>
+<h4 id="一些特殊的元素"><a href="#一些特殊的元素" class="headerlink" title="一些特殊的元素"></a>一些特殊的元素</h4><p>有3个元素需要特殊注意，由于每个元素的内容都不同，而且篇幅都不短，所以暂时不给出具体的处理办法</p>
+<ul>
+<li>iframe</li>
+<li>object</li>
+<li>video</li>
+</ul>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2016/12/30/js-framework7/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/12/22/js-framework5/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/blockchain/">blockchain<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">85</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/01/01/0_links/" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2018/02/16/0_booklist/" title="Booklist">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Booklist
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">230</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

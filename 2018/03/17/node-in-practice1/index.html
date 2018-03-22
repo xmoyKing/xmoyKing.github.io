@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Node 技巧笔记1 - Node 环境，全局变量 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",js,nodejs,stream,process">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Node 技巧笔记1 - Node 环境，全局变量 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="js"> <meta property="og:article:tag" content="nodejs"> <meta property="og:article:tag" content="stream"> <meta property="og:article:tag" content="process"> 
+
+    
+        <meta property="article:published_time" content="Sat Mar 17 2018 09:13:03 GMT+0800" />
+        <meta property="article:modified_time" content="Wed Mar 21 2018 09:13:03 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Node 技巧笔记1 - Node 环境，全局变量 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2018/03/17/node-in-practice1/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2018/03/17/node-in-practice1/index.html",
+    "headline": "Node 技巧笔记1 - Node 环境，全局变量",
+    "datePublished": "Sat Mar 17 2018 09:13:03 GMT+0800",
+    "dateModified": "Wed Mar 21 2018 09:13:03 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",js,nodejs,stream,process",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通过-stream-简单使用入门"><span class="post-toc-number">1.</span> <span class="post-toc-text">通过 stream 简单使用入门</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模块"><span class="post-toc-number">2.</span> <span class="post-toc-text">模块</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧1-安装和加载模块"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">技巧1 安装和加载模块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧2-创建和管理模块"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">技巧2 创建和管理模块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧3-加载一组相关模块"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">技巧3 加载一组相关模块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧4-使用路径"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">技巧4 使用路径</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标准-I-O-以及-console-对象"><span class="post-toc-number">3.</span> <span class="post-toc-text">标准 I/O 以及 console 对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧5-标准-I-O-流的读写"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">技巧5 标准 I/O 流的读写</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧6-打印日志消息"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">技巧6 打印日志消息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧7-基准测试"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">技巧7 基准测试</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#操作系统与命令行"><span class="post-toc-number">4.</span> <span class="post-toc-text">操作系统与命令行</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧8-获取平台信息"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">技巧8 获取平台信息</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧9-传递命令行参数"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">技巧9 传递命令行参数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧10-退出程序"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">技巧10 退出程序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧11-响应信号量"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">技巧11 响应信号量</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用-timer-延迟执行"><span class="post-toc-number">5.</span> <span class="post-toc-text">使用 timer 延迟执行</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧12-setTimeout-延迟执行"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">技巧12 setTimeout 延迟执行</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧13-通过定时器定时调用回调函数"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">技巧13 通过定时器定时调用回调函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#技巧14-安全的操作异步接口"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">技巧14 安全的操作异步接口</span></a></li></ol></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Node 技巧笔记1 - Node 环境，全局变量
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Mar 17, 2018</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Mar 21, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/js/">js</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/nodejs/">nodejs</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/process/">process</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/stream/">stream</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Node 技巧笔记1 - Node 环境，全局变量&url=https://github.com/xmoyKING/2018/03/17/node-in-practice1/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Node 技巧笔记1 - Node 环境，全局变量&url=https://github.com/xmoyKING/2018/03/17/node-in-practice1/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2018/03/17/node-in-practice1/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2018/03/17/node-in-practice1/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>Node 最主要的特性是它的标准类库，模块系统和 NPM，其中最强大的是标准类库，主要由二进制类库以及核心模块两部分组成，二进制类库包括 libuv，它为网络以及文件系统提供了快速的事件循环以及非阻塞的 I/O。</p>
+<p>EventEmitter 是大多数Node核心模块的基础，stream，网络，文件系统全都继承自它。比如可以基于 EventEmitter 自定义的基于事件的 API，例如开发一个 paypal 付款处理模块，让其基于事件，这样 Payment 对象的实例可以触发像 paid 和 refund 这样的事件，可以将这个模块从业务逻辑中分离解耦，在其他项目中重用。</p>
+<h3 id="通过-stream-简单使用入门"><a href="#通过-stream-简单使用入门" class="headerlink" title="通过 stream 简单使用入门"></a>通过 stream 简单使用入门</h3><p>stream 是高可扩展 I/O 的基础，其能被用来在不可预测的输入下创建数据，如网络连接。通过 stream 可以将多个 streams 连接起来，一个 stream 对象从网络读取数据，然后把读取到的数据输送给另外一个 stream 中加工处理…</p>
+<p>以一个简单的例子, 创建一个用于计数的可写流：<br>countstream.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> Writable = <span class="built_in">require</span>(<span class="string">'stream'</span>).Writable;</span><br><span class="line"><span class="keyword">let</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = CountStream;</span><br><span class="line"></span><br><span class="line">util.inherits(CountStream, Writable); <span class="comment">// 继承可写流</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CountStream</span>(<span class="params">txt, opt</span>)</span>&#123;</span><br><span class="line">    Writable.call(<span class="keyword">this</span>, opt);</span><br><span class="line">    <span class="keyword">this</span>.count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">this</span>.matcher = <span class="keyword">new</span> <span class="built_in">RegExp</span>(txt, <span class="string">'ig'</span>); <span class="comment">// 创建一个全局且忽略大小写的正则表达式</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CountStream.prototype._write = <span class="function"><span class="keyword">function</span> (<span class="params">chunk, encoding, cb</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> matches = chunk.toString().match(<span class="keyword">this</span>.matcher); <span class="comment">// 将输入流转化为字符串并进行匹配</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(matches)&#123;</span><br><span class="line">        <span class="keyword">this</span>.count += matches.length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cb();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CountStream.prototype.end = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.emit(<span class="string">'total'</span>, <span class="keyword">this</span>.count); <span class="comment">// 输入流结束时，触发total事件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用CountStream类:<br>index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> CountStream = <span class="built_in">require</span>(<span class="string">'./countstream'</span>);</span><br><span class="line"><span class="keyword">let</span> countStream = <span class="keyword">new</span> CountStream(<span class="string">'js'</span>); <span class="comment">// 假设传入的匹配文本为js</span></span><br><span class="line"><span class="keyword">let</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line">http.get(<span class="string">'xmoyking.github.io'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123; <span class="comment">// 下载页面</span></span><br><span class="line">    res.pipe(countStream); <span class="comment">// 将网站数据以管道方式把数据传给countStream用于文本计数</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">countStream.on(<span class="string">'total'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">count</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Total matches:'</span>, count);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>编写测试, 利用 node 自带的 assert 模块，无需依赖第三方的测试，进行简单测试：<br>test.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> assert = <span class="built_in">require</span>(<span class="string">'assert'</span>);</span><br><span class="line"><span class="keyword">let</span> CountStream = <span class="built_in">require</span>(<span class="string">'./countStream'</span>);</span><br><span class="line"><span class="keyword">let</span> countStream = <span class="keyword">new</span> CountStream(<span class="string">'example'</span>);</span><br><span class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> passed = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">countStream.on(<span class="string">'total'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">count</span>) </span>&#123; <span class="comment">// 当流结束时，触发total事件</span></span><br><span class="line">    assert.equal(count, <span class="number">1</span>); <span class="comment">// 断言预计数量</span></span><br><span class="line">    passed++;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个可独流并通过管道将当前文件传给CountStream</span></span><br><span class="line">fs.createReadStream(__filename).pipe(countStream);</span><br><span class="line"></span><br><span class="line">process.on(<span class="string">'exit'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Assertion passed:'</span>, passed); <span class="comment">// 展示断言数量</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>全局对象能被用在所有的模块中，无论是网络应用、网站、还是命令行脚本。学习 Node 的全局对象和方法能帮助我们更好的理解 Node、与操作系统的关系、与其他JS运行环境的区别，如浏览器。</p>
+<p>其中一个重要的全局对象是 process，它可以用来于操作系统通信。 UNIX 的标准输入输出流，可以通过 Node 的 streaming 接口从 process 对象获取。又比如 Buffer 类，它为 JS 操作二进制数据提供了支持，现在的很多 Node 应用都依赖与 Buffer 类。</p>
+<p>一些全局对象在每一个模块中都是独立的实体，如 module 对象在所有的 Node 程序中都存在，但每个 module 对象仅仅存在于它当前的模块中，因为 Node 程序可由多个模块组成，所以 module 彼此间的作用域是不互通的。</p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h4 id="技巧1-安装和加载模块"><a href="#技巧1-安装和加载模块" class="headerlink" title="技巧1 安装和加载模块"></a>技巧1 安装和加载模块</h4><p>在 Node 中，通过 npm 可以查找、安装和管理包，包可由一个或多个模块组成，每个模块可以有自己的依赖。</p>
+<p>通过 <code>npm install 模块名</code> 安装，一般是安装在 <code>./node_modules</code>目录下。全局安装则安装到全局目录下（注：此处的全局安装其实指的是能在命令行全局的直接输入执行命令），在 UNIX 系统中通常是 <code>/usr/local/lib/node_modules</code> 目录，Windows下则与 node.exe 文件同目录。</p>
+<p>若考虑到于其他人协作，并共同开发，则将模块作为依赖添加到项目中的 package.json 文件比较好，严格管理项目依赖可以在将来模块更新维护时较轻松。</p>
+<p>通过 <code>require(&#39;模块名&#39;)</code> 来加载模块，通常 require 返回一个对象或方法，具体取决于模块的导出设置。</p>
+<p>判断 Node 具体加载了那个模块，可以通过 <code>require.resolve(id)</code>, 其将返回文件的绝对路径。</p>
+<p>一旦模块被加载了，则其会被缓存，即，多次记载同一个模块将返回同一个对象。</p>
+<h4 id="技巧2-创建和管理模块"><a href="#技巧2-创建和管理模块" class="headerlink" title="技巧2 创建和管理模块"></a>技巧2 创建和管理模块</h4><p>对象、方法、以及变量都可以从一个模块通过 exports 导出，当一个模块只有一个类时，那么应该使用 module.export 导出，因为在使用时，<code>let MyClass = require(&#39;myclass&#39;);</code> 比 <code>let MyClass = require(&#39;myclass&#39;).MyClass;</code> 更清晰:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyClass</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">MyClass.prototype = &#123;</span><br><span class="line">  method()&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hello'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> myClass = <span class="keyword">new</span> MyClass();</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = myClass;</span><br></pre></td></tr></table></figure></p>
+<p>对外导出多个对象、方法和值时，则使用 exports：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">exports.method = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'hello'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">exports.method2 = funcion()&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'world'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="技巧3-加载一组相关模块"><a href="#技巧3-加载一组相关模块" class="headerlink" title="技巧3 加载一组相关模块"></a>技巧3 加载一组相关模块</h4><p>Node 可以将目录作为模块，将相关模块按逻辑组合起来的方法：</p>
+<ul>
+<li>通过在文件夹下创建一个 index.js 的文件来加载各个模块，并将它们一起导出</li>
+<li>在文件夹下创建一个 package.json 文件</li>
+</ul>
+<p>通常一个模块是逻辑自包含的，当将其分隔为多个文件防止单文件臃肿并解耦也非常有必要，大多数 npm 上的模块都将一个大模块拆分为多个文件, 使用 index.js 的方法加载一组模块：</p>
+<p>比如 group/index.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  one: <span class="built_in">require</span>(<span class="string">'./one'</span>);</span><br><span class="line">  two: <span class="built_in">require</span>(<span class="string">'./two'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> group = <span class="built_in">require</span>(<span class="string">'./group'</span>);</span><br><span class="line">group.one();</span><br><span class="line">group.two();</span><br></pre></td></tr></table></figure></p>
+<p>若采用 package.json 的方式，则需要该 package.json 文件中有一个 main 属性指向一个 JS 文件，而这个 JS 文件其实就类似上面的 index.js 文件，好处就是可以指定其他名字的 JS 文件作为入口而不是必须要 index.js。</p>
+<h4 id="技巧4-使用路径"><a href="#技巧4-使用路径" class="headerlink" title="技巧4 使用路径"></a>技巧4 使用路径</h4><p>Node 提供了类库来找到当前路径、目录或模块的路径，通过 <code>__dirname</code> 或 <code>__filename</code> 来找到文件的位置。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出当前脚本的绝对路径</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'__dirname'</span>, __dirname);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'__filename'</span>, __filename);</span><br></pre></td></tr></table></figure></p>
+<p>大多数时候都通过拼接字符串的方法来组合路径和变量，兼容 Windows 和 UNIX，在 Windows 下会将斜杠转换为标准格式。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> view = __dirname + <span class="string">'/views/view.html'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以使用 path 模块的 path.join 方法:</span></span><br><span class="line">path.join(__dirname, <span class="string">'views'</span>, <span class="string">'view.html'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="标准-I-O-以及-console-对象"><a href="#标准-I-O-以及-console-对象" class="headerlink" title="标准 I/O 以及 console 对象"></a>标准 I/O 以及 console 对象</h3><h4 id="技巧5-标准-I-O-流的读写"><a href="#技巧5-标准-I-O-流的读写" class="headerlink" title="技巧5 标准 I/O 流的读写"></a>技巧5 标准 I/O 流的读写</h4><p>通过 process.stdout 和 process.stdin 来读写 I/O 流。其中，process.stdout 对象是一个可写的 stream。</p>
+<p>示例：如何从命令行接收文字，处理并输出<br>process.test.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过 | 管道符号，将输出直接转到 node 输入中</span></span><br><span class="line"><span class="comment">// 在命令行运行： cat file.txt | node process.js</span></span><br><span class="line">process.stdin.resume(); <span class="comment">// 通知 stream 准备开始读取数据</span></span><br><span class="line">process.stdin.setEncoding(<span class="string">'utf8'</span>); <span class="comment">// 设置编码格式</span></span><br><span class="line"></span><br><span class="line">process.stdin.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">txt</span>)</span>&#123;</span><br><span class="line">    process.stdout.write(txt.toUpperCase()); <span class="comment">// 转换为大写并输出</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="技巧6-打印日志消息"><a href="#技巧6-打印日志消息" class="headerlink" title="技巧6 打印日志消息"></a>技巧6 打印日志消息</h4><p>使用 console 对象提供的方法将消息按类型记录起来，如 log、info、error、warn。</p>
+<p>log 和 error 的区别是输出流的不同，log 写入的流是 process.stdout，error 方法将写入的流是 process.stderr。可在终端或 shell 脚本中将 Node 程序的错误消息重定向。</p>
+<p>通过 <code>2&gt; errorfile.log</code> 错误的消息将会被重定向到 errorfile.log 文件，其他消息则会被打印到正常终端。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node process.test.js 2&gt; errorfile.log</span><br></pre></td></tr></table></figure></p>
+<p>其中，在 UNIX 系统上，2句柄代表错误流，1代表标准输出流，0代表输入流。</p>
+<p>通过 console.trace 方法可以在当前执行点产生堆栈日志，包括执行异步回调的代码的行号。</p>
+<h4 id="技巧7-基准测试"><a href="#技巧7-基准测试" class="headerlink" title="技巧7 基准测试"></a>技巧7 基准测试</h4><p>Node 可以不依赖其他工具的情况下完成基准测试，通过 console.time() 和 console.timeEnd()。</p>
+<p>调用 <code>console.time(&#39;label&#39;)</code> 以毫秒记录当前的时间，并在后来调用 <code>console.timeEnd(&#39;label&#39;)</code> 显示从前一个 label 点开始的持续的时间，整个持续时间会自动以毫秒和 label 标签打印在一起。</p>
+<p>示例：接收一个命令行参数，通过基准测试来看读取文件有多快<br>benchmark.test.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个简单的对象，表示可用的参数</span></span><br><span class="line"><span class="keyword">let</span> args = &#123;</span><br><span class="line">    <span class="string">'-h'</span>: displayHelp,</span><br><span class="line">    <span class="string">'-r'</span>: readFile</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">displayHelp</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Argument processor:'</span>, args);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFile</span>(<span class="params">file</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(file &amp;&amp; file.length)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Reading:'</span>, file);</span><br><span class="line">        <span class="built_in">console</span>.time(<span class="string">'read'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> stream = <span class="built_in">require</span>(<span class="string">'fs'</span>).createReadStream(file);</span><br><span class="line"></span><br><span class="line">        stream.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.timeEnd(<span class="string">'read'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        stream.pipe(process.stdout);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">'A file must be provided with the -r option'</span>);</span><br><span class="line">        process.exit(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(process.argv.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    process.argv.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">arg, index</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 调用从参数模型中匹配到的方法，并将参数列表中的选项内容取出</span></span><br><span class="line">        args[arg] &amp;&amp; args[arg].apply(<span class="keyword">this</span>, process.argv.slice(index + <span class="number">1</span>));</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述示例运行结果如下：<br><img src="1.png" alt=""></p>
+<p>通过多次交叉调用 conosle.time 与不同的标签，可以产生多次基准测试，这对探究复杂、多层嵌套的异步函数的性能是非常有用的。</p>
+<p>这些方法基于 Date.now() 计算函数的执行时间，精确到毫秒，若要更加精确，则需要结合 <a href="https://npmjs.org/package/benchmark" target="_blank" rel="noopener">benchamar</a> 和 <a href="https://npmjs.org/package/microtime" target="_blank" rel="noopener">microtime</a> 使用。</p>
+<h3 id="操作系统与命令行"><a href="#操作系统与命令行" class="headerlink" title="操作系统与命令行"></a>操作系统与命令行</h3><p>process 对象能被用来获取操作系统的信息，并且通过退出码（exit code）、信号量（signal）与其他进程进行通信。</p>
+<h4 id="技巧8-获取平台信息"><a href="#技巧8-获取平台信息" class="headerlink" title="技巧8 获取平台信息"></a>技巧8 获取平台信息</h4><p>有的时候需要基于操作系统或处理器架构运行基于特定平台的代码、通过 process.arch 与 process.platform 属性即可。</p>
+<p>示例：基于系统架构的分支<br>arch.test.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(process.arch)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'x64'</span>:</span><br><span class="line">        <span class="built_in">require</span>(<span class="string">'./基于.x64.模块名'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'ia32'</span>:</span><br><span class="line">        <span class="built_in">require</span>(<span class="string">'./基于.Win32.模块名'</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Unsupported arch:'</span>, process.arch);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另外，通过 process.memoryUsage() 可以获取当前进程的内存使用情况，其属性如下：</p>
+<ul>
+<li>rss 常驻内存大小，是指在 RAM 中维持进程的部分</li>
+<li>heapTotal 动态分配的可用内存</li>
+<li>heapUsed 已经使用的堆大小</li>
+</ul>
+<h4 id="技巧9-传递命令行参数"><a href="#技巧9-传递命令行参数" class="headerlink" title="技巧9 传递命令行参数"></a>技巧9 传递命令行参数</h4><p>Node 提供了一个简单的 API 来处理命令行参数，使用 process.argv 即可。</p>
+<p>process.argv 是一个数组，可以用来查看有多少参数传入，其中头两个是 node 以及当前运行脚本的文件名，具体参考 benchmark.test.js 的内容。</p>
+<p>对于有复杂参数的程序，可以使用参数解析模块，如 <a href="https://npmjs.org/package/optimist" target="_blank" rel="noopener">optimist</a> 、<a href="https://npmjs.org/package/commander" target="_blank" rel="noopener">commander</a></p>
+<ul>
+<li>optimist 将参数转换为一个对象，同时支持默认值、自动生成用例、以及简单的验证等功能</li>
+<li>commander 可以使用链式 API</li>
+</ul>
+<h4 id="技巧10-退出程序"><a href="#技巧10-退出程序" class="headerlink" title="技巧10 退出程序"></a>技巧10 退出程序</h4><p>Node 在需要退出时指定退出码，因为其他程序会通过检查退出码来确定一个程序是否启动成功，当程序是一个大系统中的某部分时，对维护和调试非常有用了，通过 process.exit() 指定退出码。</p>
+<p>在 Node 中，默认退出的返回退出码为0，即正常终止，任何非0状态认为是出错，在 UNIX 中这个退出码可以通过 <code>$?</code> 在 shell 中获取，在 Windows 中可以通过 <code>%errorlevel%</code> 获取。</p>
+<h4 id="技巧11-响应信号量"><a href="#技巧11-响应信号量" class="headerlink" title="技巧11 响应信号量"></a>技巧11 响应信号量</h4><p>Node 中，通过 process 对象的信号事件，可以响应其他进程发出的信号。</p>
+<p>process 对象是一个 EventEmitter 对象，即可以对其添加监听器，在 UNIX 中对一个 POSIX 信号添加一个监听器就可以。</p>
+<p>示例：对 POSIX 信号添加监听器<br>signal.test.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">process.stdin.resume(); <span class="comment">// 从标准输入流中读取，其会一直执行，直到进程被杀死</span></span><br><span class="line">process.on(<span class="string">'SIGNAL'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 对 SIGNAL 信号绑定监听器</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Reloading config'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'PID:'</span>, process.pid); <span class="comment">// 显示PID</span></span><br></pre></td></tr></table></figure></p>
+<p>在对标准输入进行任何操作前，都应该调用 resume 来防止 Node 直接退出。</p>
+<h3 id="使用-timer-延迟执行"><a href="#使用-timer-延迟执行" class="headerlink" title="使用 timer 延迟执行"></a>使用 timer 延迟执行</h3><p>Node 实现了 JS 的计时器功能：setTimeout、setInterval、clearTimeout等</p>
+<h4 id="技巧12-setTimeout-延迟执行"><a href="#技巧12-setTimeout-延迟执行" class="headerlink" title="技巧12 setTimeout 延迟执行"></a>技巧12 setTimeout 延迟执行</h4><p>示例：将 setTimeout 与 bind 配合, 延迟执行<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bomb</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.message = <span class="string">'Bomb'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Bomb.prototype.explode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.message);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> bomb = <span class="keyword">new</span> Bomb();</span><br><span class="line"><span class="comment">// 通过 bind 将方法绑定到正确的对象上</span></span><br><span class="line">setTimeout(bomb.explode.bind(bomb), <span class="number">1000</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="技巧13-通过定时器定时调用回调函数"><a href="#技巧13-通过定时器定时调用回调函数" class="headerlink" title="技巧13 通过定时器定时调用回调函数"></a>技巧13 通过定时器定时调用回调函数</h4><p>对 setInterval，除了调用 clearInterval 终止，Node 0.10 版本还提供了 timerRef.unref() 方法，即，你可以在一些操作的同时使用 setTimeout 和 setInterval，而不用在操作执行后通知 timer。</p>
+<p>在没有合适的调用 clearInterval 的时候，unref 就会很有用了。</p>
+<p>示例：让计时器持续运行知道程序退出<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">monitor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(process.memoryUsage());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> id = setInterval(monitor, <span class="number">100</span>);</span><br><span class="line">id.unref(); <span class="comment">// 在程序完成长时间的操作后，告知 Node 停止计时器</span></span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Done!'</span>);</span><br><span class="line">&#125;, <span class="number">4000</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="技巧14-安全的操作异步接口"><a href="#技巧14-安全的操作异步接口" class="headerlink" title="技巧14 安全的操作异步接口"></a>技巧14 安全的操作异步接口</h4><p>有时候需要在一个尽可能短的延迟后执行一个回调，使用 setTimeout 为0的延迟不是最佳解决方案，Node 提供的 process.nextTick 更好用。</p>
+<p>process.nextTick 方法允许你把一个回调放在下一次事件轮询队列的头上（注：不是队尾！），即它可以延迟执行，但它比 setTimeout 优先级更高。</p>
+<p>也可以通过 nextTick 将一个同步方法包装为异步方法。</p>
+<p>示例：返回一个 EventEmitter 实例的方法，这个方法提供一个基于事件的接口，允许调用者订阅这个事件。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">complexOperations</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> events = <span class="keyword">new</span> EvenEmitter();</span><br><span class="line"></span><br><span class="line">    events.emit(<span class="string">'success'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> events;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">complexOperations().on(<span class="string">'success'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'success!'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>上例在运行后并不会在最后触发 success 事件，因为这个事件在监听器订阅之前就已经触发了，通常，一个事件会在一个异步操作中触发，但有时候也会提前触发。</p>
+<p>使用 nextTick 改进如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">complexOperations</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> events = <span class="keyword">new</span> EvenEmitter();</span><br><span class="line"></span><br><span class="line">    process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// success 事件将在监听器准备好后才触发</span></span><br><span class="line">        events.emit(<span class="string">'success'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> events;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Node 文档中建议，接口要么是同步，要么是异步，表示如果一个方法接受一个回调，且很可能是异步调用，那么你应该在同步的情况下通过 nextTick 来执行它，这样能确保执行顺序。</p>
+<p>示例：异步读取文件，并缓存，之后的调用将直接返回缓存内容。当返回缓存时，通过调用 nextTick 来使接口异步执行。<br>alwayAsyncRead.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</span><br><span class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> content;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFileIfRequired</span>(<span class="params">cb</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!content)&#123;</span><br><span class="line">        <span class="comment">// 若内容没准备好，则异步读取</span></span><br><span class="line">        fs.readFile(__filename, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">            content = data;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'ReadFile: first'</span>);</span><br><span class="line">            cb(err, content);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 直接返回缓存的内容，但第一次调用使用 process.nextTick</span></span><br><span class="line">        process.nextTick(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'ReadFile: cached'</span>);</span><br><span class="line">            cb(<span class="literal">null</span>, content);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">readFileIfRequired(<span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'1. length:'</span>, data.length);</span><br><span class="line"></span><br><span class="line">   readFileIfRequired(<span class="function"><span class="keyword">function</span>(<span class="params">err, data2</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'2. length:'</span>, data2.length);</span><br><span class="line">   &#125;)</span><br><span class="line"></span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'reading file again.'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'reading file.'</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>setImmediate 和 process.maxTickDepth</strong>：<br>setImmediate 以及 clearImmediate 全局方法接受一个回调和可选参数，它会在下一次 I/O 事件后并在 setTimeout 和 setInterval 之前运行。</p>
+<!-- 通过这个方法添加的回调函数被推入队列中，而且在每次轮询时执行回调，和 nextTick 不同，process.maxTickDepth 回调在每轮轮询都会执行。 -->
+<p>传入 process.nextTick 的回调通常在当前事件轮询结束后才执行，可以被安全的执行回调数量由 maxTickDepth 指定，默认1000。</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/03/21/node-in-practice2/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/03/13/translation-introducing-storage-access-api/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/Translation/">Translation<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/angularjs/">angularjs<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/blockchain/">blockchain<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/categories/java/">java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/js/">js<span class="sidebar_archives-count">85</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/01/01/0_links/" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2018/02/16/0_booklist/" title="Booklist">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Booklist
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">230</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
