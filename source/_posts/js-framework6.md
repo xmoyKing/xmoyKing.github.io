@@ -4,8 +4,8 @@ categories: js
 tags:
   - js
   - js-framework
-date: 2017-12-26 15:24:04
-updated: 2017-12-26 15:24:04
+date: 2016-12-26 15:24:04
+updated: 2016-12-26 15:24:04
 ---
 
 DOM操作占前端工作的很大一部分，而节点操作又占了DOM操作的一半左右，由于选择器引擎让繁琐的元素选择变得简单，jQuery更是让节点操作简单到极致，一下子返回很多元素，能够操作一组元素。
@@ -13,7 +13,7 @@ DOM操作占前端工作的很大一部分，而节点操作又占了DOM操作�
 而节点操作其实和数据库中的CRUD操作是一致的，来来回回也就四大类。
 
 #### 节点的创建
-浏览器提供了多种创建元素节点的API，从使用频率来看，依次是document.createElement,innerHTML,insertAdjacentHTML,createContextualFragment。
+浏览器提供了多种创建元素节点的API，从使用频率来看，依次是document.createEl6ment,innerHTML,insertAdjacentHTML,createContextualFragment。
 
 document.createElement方法传入标签名然后返回此类型的元素节点,`document.createElement('div')`，并且对于浏览器不支持的标签类型，它也能成功返回，所以很多老旧浏览器（IE6-8）能支持H5新标签就靠这个方法，同时它还能连同属性一块儿生成，即如jquery那样，传入带属性的标签，`document.createElement('<div id=aaa></div>')`,这样可以更方便生成标签，同时在老旧浏览器下（IE6,7）, name属性是只读的，所以没办法动态修改，只能这样连同标签一起生成。
 

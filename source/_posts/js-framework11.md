@@ -6,8 +6,8 @@ tags:
   - js-framework
   - jquery.event
   - jquery
-date: 2018-01-06 19:31:10
-updated: 2018-01-06 19:31:10
+date: 2017-01-06 19:31:10
+updated: 2017-01-06 19:31:10
 ---
 
 

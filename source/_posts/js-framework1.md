@@ -4,11 +4,11 @@ categories: js
 tags:
   - js
   - js-framework
-date: 2017-12-16 16:15:31
-updated: 2017-12-16 16:15:31
+date: 2016-12-16 16:15:31
+updated: 
 ---
 
-本系列笔记来源于《JavaScript框架设计》一书，但是非常尴尬的是，我买的不是第二版的，= =！[《JavaScript框架设计（第2版）》](http://www.epubit.com.cn/book/details/4849)一书，学习JS框架底层库知识，一个框架应该提供那些功能，应该如何区分这些模块等等，第二版前2章在网上有公开的，可以免费阅读。
+PS:本系列笔记来源于《JavaScript框架设计》一书，但是非常尴尬的是，我买的不是第二版的，= =！[《JavaScript框架设计（第2版）》](http://www.epubit.com.cn/book/details/4849)一书，学习JS框架底层库知识，一个框架应该提供那些功能，应该如何区分这些模块等等，第二版前2章在网上有公开的，可以免费阅读。
 
 注：作者提到的很多都是以[Avalon](http://avalonjs.coding.me/)作为示例的，而本系列笔记仅提取个人记录之处，同时，书中的模块基于CommonJS规范（即Node模块的定义方式）
 
@@ -195,7 +195,7 @@ avalon.isWindow = function (obj) {
         return false
     // 利用IE6、IE7、IE8 window == document为true,document == window竟然为false的神奇特性
     // 标准浏览器及IE9、IE10等使用正则检测
-    return obj == obj.document && obj.document != obj 
+    return obj == obj.document && obj.document != obj
 }
 
 var rwindow = /^\[object (?:Window|DOMWindow|global)\]$/

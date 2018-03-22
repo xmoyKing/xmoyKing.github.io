@@ -4,8 +4,8 @@ categories: js
 tags:
   - js
   - js-framework
-date: 2017-12-18 17:25:38
-updated: 2017-12-18 17:25:38
+date: 2016-12-18 17:25:38
+updated: 
 ---
 
 直到ES6之前，JS没有真正传统的类，但可以模拟实现，所以类工厂是很多框架的标配，本篇主要学习各种类的实现。（PS:其实ES6中的`class`是一个语法糖，看着像传统的类而已，本质没变过，- -。）
@@ -137,7 +137,7 @@ console.log(b instanceof B); // true
 // 返回子类的原型
 Object.create = function(o){
   function F(){} // 相当于bridge函数，
-  F.prototype = o; 
+  F.prototype = o;
   return new F();
 }
 
@@ -148,7 +148,7 @@ B.prototype = Object.create(A.prototype); // 如此即可指定B的原型为A的
 
 在JS中的原型继承没有让子类获取到父类的类成员和特权成员，只能手动添加，这样就需要用到上面的方法一了，特权成员可以在子类的构造器中通过apply实现（即绑定this到父类上）。
 ```js
-// 
+//
 function inherit(init, Parent, proto){
   // 声明一个构造器，即真正的子类
   function Son(){
@@ -192,7 +192,7 @@ function B(){}
 B.prototype = {
   aa: 3
 }
-a.constructor = B; 
+a.constructor = B;
 console.log(a.aa); // 不影响
 ```
 上述的测试可以发现，无论修改类原型还是实例的constructor属性，都无法影响到实例查找某个原型上的属性，即回溯查找机制不是通过上面的prototype和constructor属性实现的。

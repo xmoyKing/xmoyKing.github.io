@@ -6,8 +6,8 @@ tags:
   - js-framework
   - deferred
   - promise
-date: 2018-01-07 14:53:49
-updated: 2018-01-07 14:53:49
+date: 2017-01-07 14:53:49
+updated: 2017-01-07 14:53:49
 ---
 
 浏览器环境与后端的nodejs存在各种消耗巨大或堵塞线程的行为，对于JS这样的单线程环境唯一的解耦方法就是提供异步API。预设浏览器首先提供了两个异步API，setTimeout和setInterval，后来就开始出现各种事件回调，只有用户执行了某些操作后才会触发的回调函数，再然后，XMLHttpRequest、postMessage、WebWorker、setImmediate、requestAnimationFrame等相继出现，它们的共同特点就是有用回调函数，有的异步API会提供对应的中断API，如clearTimeout、clearInterval、clearImmediate、cancelAnimateionFrame。

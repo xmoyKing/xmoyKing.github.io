@@ -7,8 +7,8 @@ tags:
   - css3 animation
   - requestAnimationFrame
   - transition
-date: 2018-01-08 18:27:46
-updated: 2018-01-08 18:27:46
+date: 2017-01-08 18:27:46
+updated: 2017-01-08 18:27:46
 ---
 
 #### requestAnimationFrame

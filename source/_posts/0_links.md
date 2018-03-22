@@ -278,6 +278,29 @@ tags: [mixed, links]
 
 [十大经典排序算法用javascript实现](http://blog.damonare.cn/2016/12/20/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%EF%BC%88javascript%E6%8F%8F%E8%BF%B0%EF%BC%89/)
 
+#### JS 多线程
+了解js多线程，主要分为Concurrent.Thread.js（对不支持webwork的浏览器）和WebWork两部分
+
+[JavaScript多线程初步学习](http://www.cnblogs.com/fanfan-nancy/p/5722234.html)
+
+[拔开云雾见明月 透析JavaScript定时机制](http://developer.51cto.com/art/201007/211468_all.htm)
+
+[从JavaScript的单线程执行说起](http://www.raychase.net/1968)
+
+利用setTimeout和setInterval模拟多线程的一个库 [github备份地址](https://github.com/bringmehome/Concurrent.Thread.js)
+
+[JavaScript 编写线程代码引用Concurrent.Thread.js](http://www.cnblogs.com/0banana0/archive/2011/06/01/2067402.html)
+
+阅读源码需对setTimeout和setInterval有相当的理解才行！
+
+H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作。
+
+[HTML5新功能之八 《web works多线程》](http://www.cnblogs.com/couxiaozi1983/p/3799898.html)
+
+[深入 HTML5 Web Worker 应用实践：多线程编程](https://www.ibm.com/developerworks/cn/web/1112_sunch_webworker/)
+
+[HTML5之Javascript多线程](http://blog.sina.com.cn/s/blog_63940ce201018lyh.html)*有讲共享型SharedWebWorker*
+
 ### 其他 & 综合
 [KING的小技巧/知识点贴](/2017/03/01/_mixed/)
 
@@ -305,7 +328,22 @@ tags: [mixed, links]
 
 [中文文案排版指北（简体中文版）](https://github.com/mzlogin/chinese-copywriting-guidelines)
 
+[分享几个令人震撼的JS和HTML5游戏](http://www.oschina.net/news/30457/js-html5-games)
 
+[7款值得你心动的HTML5动画和游戏](http://www.html5tricks.com/7-mindful-html5-game-animation.html)
+
+### 移动端 WebApp
+
+[移动端 Web 开发前端知识整理](http://www.restran.net/2015/05/14/mobile-web-front-end-collections/) *内附大量链接！结尾处有成体系移动前端知识库参考，*
+
+[移动端web开发技巧](http://liujinkai.com/2015/06/06/mobile-web-skill/) *各种林散知识点*
+
+[TAT.tennylv 移动web问题小结](http://www.alloyteam.com/2015/06/yi-dong-web-wen-ti-xiao-jie/)
+
+*2014年12月左右，时间有点老了：*
+[跨终端响应式页面设计入门](http://www.cnblogs.com/vajoy/p/3903591.html) *其中的关于chrome字体的问题已经解决，可以允许小于12px的字体了*
+
+[移动端web开发进阶](http://www.cnblogs.com/vajoy/p/4119142.html)
 
 ### iOS与JS之间交互
 *需对OC有基础，否则看不太懂*：
