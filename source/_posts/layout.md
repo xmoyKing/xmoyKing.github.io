@@ -75,3 +75,7 @@ Flex也有行内元素和块级元素的区别：`display:flex, display: inline-
 具体布局实例参考：[Flex 布局教程：实例篇](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
 
 学习flexbox布局的游戏,可以帮助快速熟悉：[flexboxfroggy](http://flexboxfroggy.com/)
+
+这篇博文无论是原文还是翻译都绝对算得上精品: [理解Flexbox：你需要知道的一切](https://www.w3cplus.com/css3/understanding-flexbox-everything-you-need-to-know.html)
+
+很长，详细探究了width、max/min-width、absolute 对flex-item的影响： [深入理解 flex 布局以及计算](https://www.w3cplus.com/css3/flexbox-layout-and-calculation.html) 
