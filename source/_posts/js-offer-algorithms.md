@@ -166,12 +166,10 @@ let stack1 = [],
  
 function push(node)
 {
-    // write code here
     stack1.push(node);
 }
 function pop()
 {
-    // write code here
     if(stack2.length == 0){
         while(stack1.length > 0){
             stack2.push(stack1.pop());
@@ -189,8 +187,8 @@ function pop()
 思路：插入元素是仅插入到stack1中，每次需要删除队头元素时检查stack2，若stack2非空则直接弹出stack2中栈顶元素，否则先将stack1中全部元素弹出到stack2中，然后再弹出stack2栈顶元素。
 
 相关题目：
-  - 用两个队列实现一个栈
-    解法：插入时始终只在一个队列queue1操作，另一个队列queue2为空，弹出时将当前queue1内除最后一个元素外的其他元素依次弹入queue2，然后弹出最后一个元素即可，完成一次弹出操作后，queue1和queue2的角色互换即可复原原来的操作顺序了。
+- 用两个队列实现一个栈
+解法：插入时始终只在一个队列queue1操作，另一个队列queue2为空，弹出时将当前queue1内除最后一个元素外的其他元素依次弹入queue2，然后弹出最后一个元素即可，完成一次弹出操作后，queue1和queue2的角色互换即可复原原来的操作顺序了。
 
 ### 问题8 旋转数组最小值
 **问题描述：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。**
@@ -199,7 +197,6 @@ function pop()
 ```js
 function minNumberInRotateArray(rotateArray)
 {
-    // write code here
     if(rotateArray.length == 0){
         return 0
     }else{
@@ -213,3 +210,50 @@ function minNumberInRotateArray(rotateArray)
 使用二分法的时候需要注意，数组不是完全有序的，而是一个类似凹形，所以最小值一定在中间（只要检查一下数组头和数组尾的大小即可），需要注意的是“非递减”的意思是有可能会有相等的元素。同时需要注意数组可能本身就是有序的（即数组头小于数组尾）。
 
 对普通情况，找到中间值，无论是任何的情况，中间值大于数组头，说明最小值在右边，中间值小于数组尾，说明最小值在左边，一定可以将数组化为一个只有一半规模的数组，此时重复查找即可。当前后两个指针相遇时说明找到了最小值。
+
+### 问题9 斐波那契数列
+**问题描述：大家都知道斐波那契数列，现在要求输入一个整数n，请你输出斐波那契数列的第n项。n<=39**
+
+没啥说的，经典问题，当n>1时，`f(n) = f(n-1) + f(n-2)`,其中 f(0) = 0, f(1) = 1。
+
+利用缓存，将已经求过的数存下来，而不是用递归,但其实时间复杂度还是O(n),
+```js
+function Fibonacci(n)
+{
+    let total = [0,1];
+    let tar = 2;
+
+    while(tar <= n){
+        total[tar] = total[tar-1] + total[tar-2];
+        tar++;
+    }
+    
+    return total[n];
+}
+```
+
+然后还有一个尾递归的方式：
+```js
+function Fibonacci(n)
+{
+    // 尾递归, 参考：https://blog.csdn.net/mr_listening/article/details/51106535
+    function tail(n, ret1, ret2){
+        if(n == 0){
+            return ret1;
+        }
+        return tail(n-1, ret2, ret1 + ret2);
+    }
+    
+    return tail(n, 0, 1);
+}
+```
+
+然后，还有一个比较牛逼的，直接用公式：比内公式, 具体参考[斐波那契数列](https://baike.baidu.com/item/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97#2)
+![比内公式](1.jpg)
+
+其实斐波那契数列也是其他类似问题的解答，
+相关题目：
+- 用2x1的小矩形去覆盖2x8的大矩形，问有多少种方法？
+![矩形覆盖问题](2.png)
+- 青蛙跳台阶问题，一次可以跳一阶或两阶，问n阶台阶有多少种跳法。解法就是斐波那契数列
+- 青蛙跳台阶问题扩展版：若它还是一次跳任意阶呢？问有多少种方法，这种时候f(n) = 2^(n-1)
