@@ -14,6 +14,7 @@ updated: 2018-03-23 15:35:38
 其他资料：
 - [学习JavaScript数据结构与算法笔记](/2017/02/21/js-data-structure/)
 - [JavaScript版剑指offer](https://blog.csdn.net/column/details/16574.html?&page=1)
+- [牛客网剑指在线测试](https://www.nowcoder.com/ta/coding-interviews?page=1) *在线编程、测试*
 
 ### 问题3 二维数组中的查找
 **问题描述：在二维数组中找到给定数是否存在，二维数组的行和列都是有序增大的。**
@@ -159,21 +160,24 @@ preOrder(root);
 ### 问题7 用两个栈实现队列
 **问题描述：用两个栈实现一个队列，队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead，分别完成在队列尾部插入和队列头部删除**
 ```js
-function CQueue(){
-  // 以数组模拟栈，仅对栈使用push和pop方法和length属性
-  this.stack1 = [];
-  this.stack2 = [];
+// 以数组模拟栈，仅对栈使用push和pop方法和length属性
+let stack1 = [],
+    stack2 = [];
+ 
+function push(node)
+{
+    // write code here
+    stack1.push(node);
 }
-
-// 插入key到队列尾部
-CQueue.prototype.appendTail = function(key){
-  // ...
-  console.log('appendTail');
-}
-// 返回队列头部元素
-CQueue.prototype.deleteHead = function(){
-    // ...
-  console.log('deleteHead');
+function pop()
+{
+    // write code here
+    if(stack2.length == 0){
+        while(stack1.length > 0){
+            stack2.push(stack1.pop());
+        }
+    }
+    return stack2.pop();
 }
 ```
 
@@ -184,7 +188,28 @@ CQueue.prototype.deleteHead = function(){
 
 思路：插入元素是仅插入到stack1中，每次需要删除队头元素时检查stack2，若stack2非空则直接弹出stack2中栈顶元素，否则先将stack1中全部元素弹出到stack2中，然后再弹出stack2栈顶元素。
 
-
 相关题目：
   - 用两个队列实现一个栈
     解法：插入时始终只在一个队列queue1操作，另一个队列queue2为空，弹出时将当前queue1内除最后一个元素外的其他元素依次弹入queue2，然后弹出最后一个元素即可，完成一次弹出操作后，queue1和queue2的角色互换即可复原原来的操作顺序了。
+
+### 问题8 旋转数组最小值
+**问题描述：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。 例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。**
+
+若套用js数组原生的Math.min则非常简单
+```js
+function minNumberInRotateArray(rotateArray)
+{
+    // write code here
+    if(rotateArray.length == 0){
+        return 0
+    }else{
+        return Math.min.apply(null,rotateArray)
+    }
+}
+```
+
+但若不使用原生提供的函数，则可以通过顺序遍历或二分法找到这个最小值。
+
+使用二分法的时候需要注意，数组不是完全有序的，而是一个类似凹形，所以最小值一定在中间（只要检查一下数组头和数组尾的大小即可），需要注意的是“非递减”的意思是有可能会有相等的元素。同时需要注意数组可能本身就是有序的（即数组头小于数组尾）。
+
+对普通情况，找到中间值，无论是任何的情况，中间值大于数组头，说明最小值在右边，中间值小于数组尾，说明最小值在左边，一定可以将数组化为一个只有一半规模的数组，此时重复查找即可。当前后两个指针相遇时说明找到了最小值。
