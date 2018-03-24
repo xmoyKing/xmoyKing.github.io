@@ -1,8 +1,8 @@
 ---
 title: 剑指Offer笔记JS版
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - algorithms
   - 剑指Offer
 date: 2018-03-23 15:35:38
@@ -260,8 +260,6 @@ function Fibonacci(n)
 
 $$f(n) = 2^{(n-1)}$$
 
-<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
 ### 问题10 二进制中1的个数
 **问题描述：输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。**
 
@@ -287,3 +285,6 @@ function NumberOf1(n)
 相关题目:
 - 判断一个数是否时2的整数方次幂，此时直接判断其二进制中是否仅有一个1即可
 - 输入两个整数m和n，计算需要改变m的二进制多少位才能得到n，如10与13的二进制分别为`1010`与`1101`，则需要改变3位可将两数互换。解法思想即要获取两个二进制中位不同的数量，即`m^n`(m与n异或)的结果。
+
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>

@@ -1,15 +1,15 @@
 ---
-title: javascript模块化
+title: JavaScript 模块化
 categories:
-  - js
+  - JavaScript
 tags:
-  - js
+  - JavaScript
   - module
 date: 2016-11-07 19:05:34
 updated: 2016-11-07 19:05:34
 ---
 
-了解javascript的模块化,以及AMD,CMD的异同, SeaJS, RequireJS的简单介绍和应用
+了解 JavaScript 的模块化,以及AMD,CMD的异同, SeaJS, RequireJS的简单介绍和应用
 
 起源于nodejs, 将所有js分块,每一个块标准相同(即接口相同), 用时如同乐高将每一个块组合起来即可.
 
