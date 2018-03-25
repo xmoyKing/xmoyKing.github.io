@@ -1,5 +1,5 @@
 ---
-title: 剑指Offer笔记JS版 - 2 高质量代码（完整性和robust）
+title: 剑指Offer笔记JS版 - 2 高质量代码（完整性和Robust）
 categories: JavaScript
 tags:
   - JavaScript
