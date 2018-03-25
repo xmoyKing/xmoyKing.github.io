@@ -17,11 +17,11 @@ updated: 2018-03-13 19:23:23
 
 In June last year we introduced [Intelligent Tracking Prevention][14] (ITP). ITP is a privacy feature that detects which domains have the ability to track the user cross-site and either partitions the domain’s cookies or purges its website data all together.
 
-去年6月，我们推出了 [Intelligent Tracking Prevention][14]（ITP）（智能防跟踪）。ITP 是一项隐私功能，可以跨站点检测哪些域可以跟踪用户，并分割该域的 cookie 或完全清除其网站数据。
+去年6月，我们推出了 [Intelligent Tracking Prevention][14]（ITP）（智能防跟踪）。ITP 是一项隐私功能，可以检测一些站点域（domains），那些可以跨站追踪用户的域，并隔离该域的 cookie 或完全清除其站点数据。
 
 The strongest developer feedback we got on ITP was that it needs to provide a way for embedded cross-site content to authenticate users who are already logged in to their first-party services. Today we are happy to provide a solution in the form of Storage Access API. It allows for authenticated embeds while continuing to protect customers’ privacy by default.
 
-在 ITP 上我们获得的最多的开发者反馈意见是，它需要为嵌入的跨站点内容提供一种方式来验证用户，而该用户已登录当前站点。今天，我们很高兴能以 Storage Access API 的方式提供一个解决方案。它允许对嵌入内容通过验证的同时默认保护客户的隐私。
+在 ITP 上我们获得的最多的开发者反馈意见是，它需要为嵌入的跨站点内容提供一种方式来验证用户，而该用户已登录当前站点。非常棒的是 Storage Access API 提供一个解决方案。它允许对嵌入内容通过验证的同时默认保护客户的隐私。
 
 ## Partitioned Cookies and Embedded Content
 ## 隔离 cookies 和嵌入内容
