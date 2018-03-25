@@ -259,10 +259,68 @@ function PrintFromTopToBottom(root)
         if(node.right){
             arr.push(node.right)
         }
-        
+
         rst.push(node.val);
     }
 
     return rst;
 }
+```
+
+### 问题24 二叉搜索树的后序遍历序列
+**问题描述：输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。**
+
+后续遍历根结点在最后，其前面的队列中左子树都小于根，右子树都大于根。先找到根节点，然后利用递归依次判断左右子树是否是搜索二叉树。
+
+关键是考虑特殊情况，仅有左右子树时的情况。
+
+```js
+function VerifySquenceOfBST(sequence)
+{
+    // console.log(sequence);
+
+    let len = sequence.length;
+    if(!sequence || !len){
+       return false;
+    }
+    // 若只有一个结点，则必然是有序的
+    if(len == 1){
+        return true;
+    }
+    
+    let root = sequence[len - 1];
+
+    // 从数组中找到右子树起始结点, 若没找到说明仅有左子树
+    let endLeft = sequence.findIndex((key)=>{
+        if(key > root){
+            return true;
+        }
+    });
+
+    // 若右子树有小于根的结点则返回false
+    for(let j = endLeft; j >= 0 && j < len - 1; ++j){
+        if(sequence[j] < root){
+            return false;
+        }
+    }
+    
+    let left = true;
+    if(endLeft > 0){ // 若存在左子树
+        left = VerifySquenceOfBST(sequence.slice(0, endLeft));
+    }else if(endLeft < 0){ // 仅有左子树
+        left = VerifySquenceOfBST(sequence.slice(0, len - 1));
+    }
+
+    let right = true;
+    if(endLeft >= 0){  // 若存在右子树
+        right = VerifySquenceOfBST(sequence.slice(endLeft, len - 1));
+    }
+    
+    return (left && right);
+}
+
+// console.log(VerifySquenceOfBST([4,8,6,12,16,14,10]));
+// console.log(VerifySquenceOfBST([4,6,7,5]));
+// console.log(VerifySquenceOfBST([6,7]));
+console.log(VerifySquenceOfBST([7,4,6,5]));
 ```
