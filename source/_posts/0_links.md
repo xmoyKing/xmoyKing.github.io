@@ -175,6 +175,8 @@ tags: [mixed, links]
 
 ## 零散知识点
 ### HTML&CSS
+[HTML5语义化](https://www.w3cplus.com/html5/semantics-tags.html)
+
 [css position 初解10步](http://blog.jobbole.com/49320/)
 
 [w3cplus-大漠:CSS Grid布局相关博客](https://www.w3cplus.com/blog/tags/356.html?page=2)
@@ -322,8 +324,6 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 ### 其他 & 综合
 [KING的小技巧/知识点贴](/2017/03/01/_mixed/)
 
-[前端优化带来的思考，浅谈前端工程化](http://www.cnblogs.com/yexiaochai/p/4901341.html)
-
 [前端性能优化----yahoo前端性能团队总结的35条黄金定律](http://www.ayqy.net/blog/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96%EF%BC%9A%E9%9B%85%E8%99%8E35%E6%9D%A1/?utm_source=tuicool&utm_medium=referral)
 
 [一次完整的HTTP请求过程（以chrome为例）](http://linux5588.blog.51cto.com/65280/1351007)*其中有谈到计算机网络，操作系统文件管理，浏览器渲染参考*
@@ -349,6 +349,11 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 [分享几个令人震撼的JS和HTML5游戏](http://www.oschina.net/news/30457/js-html5-games)
 
 [7款值得你心动的HTML5动画和游戏](http://www.html5tricks.com/7-mindful-html5-game-animation.html)
+
+#### 前端工程化
+[前端优化带来的思考，浅谈前端工程化](http://www.cnblogs.com/yexiaochai/p/4901341.html)
+
+
 
 ### 移动端 WebApp
 
