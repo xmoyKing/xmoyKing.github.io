@@ -1,5 +1,5 @@
 ---
-title: 剑指Offer笔记JS版 - 1 基础知识
+title: 剑指Offer笔记-JS语法 - 1 基础知识
 categories: JavaScript
 tags:
   - JavaScript
@@ -163,7 +163,7 @@ preOrder(root);
 // 以数组模拟栈，仅对栈使用push和pop方法和length属性
 let stack1 = [],
     stack2 = [];
- 
+
 function push(node)
 {
     stack1.push(node);
@@ -227,7 +227,7 @@ function Fibonacci(n)
         total[tar] = total[tar-1] + total[tar-2];
         tar++;
     }
-    
+
     return total[n];
 }
 ```
@@ -243,7 +243,7 @@ function Fibonacci(n)
         }
         return tail(n-1, ret2, ret1 + ret2);
     }
-    
+
     return tail(n, 0, 1);
 }
 ```
@@ -256,7 +256,7 @@ function Fibonacci(n)
 - 用2x1的小矩形去覆盖2x8的大矩形，问有多少种方法？需要注意初始条件，以及n为0时的特殊性
 ![矩形覆盖问题](2.png)
 - 青蛙跳台阶问题，一次可以跳一阶或两阶，问n阶台阶有多少种跳法。解法就是斐波那契数列，但需要注意f(0)的初始条件为1。
-- 青蛙跳台阶问题扩展版：若它还是一次跳任意阶（1~n）呢？问有多少种方法，答案为  
+- 青蛙跳台阶问题扩展版：若它还是一次跳任意阶（1~n）呢？问有多少种方法，答案为
 
 $$f(n) = 2^{(n-1)}$$
 
@@ -275,7 +275,7 @@ function NumberOf1(n)
         count++;
         n = (n-1) & n;
     }
-    
+
     return count;
 }
 ```

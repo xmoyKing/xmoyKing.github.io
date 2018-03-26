@@ -1,5 +1,5 @@
 ---
-title: 剑指Offer笔记JS版 - 2 高质量代码（完整性和Robust）
+title: 剑指Offer笔记-JS语法 - 2 高质量代码（完整性和Robust）
 categories: JavaScript
 tags:
   - JavaScript
@@ -15,7 +15,7 @@ updated: 2018-03-24 21:08:44
 
 若不允许直接使用内置的`Math.pow(base, exponent)`计算，则可以考虑使用二分法，
 
-$$ 
+$$
 a^n = a^{(n/2)} * a^{(n/2)}
 $$
 
@@ -45,7 +45,7 @@ function Power(base, exponent)
           rst *= base;
       }
       return rst;
-      
+
   }
 }
 ```
@@ -114,9 +114,9 @@ function reOrderArray(array)
         k%2 ? oddArray.push(k) : evenArray.push(k);
     });
     // 注意特殊情况：全为奇，偶
-    
-    return oddArray.length == 0 ? evenArray : 
-            evenArray.length == 0 ? oddArray : 
+
+    return oddArray.length == 0 ? evenArray :
+            evenArray.length == 0 ? oddArray :
             [oddArray, ...evenArray];
 }
 ```
@@ -141,7 +141,7 @@ function FindKthToTail(head, k)
     if(!head || k == 0){
         return null;
     }
-    
+
     let quick = head,
         slow = head;
     // 快结点先走k步
@@ -152,13 +152,13 @@ function FindKthToTail(head, k)
             return null;
         }
     }
-    
+
     // 依次遍历剩下所有结点
     while(quick && quick.next){
         slow = slow.next;
         quick = quick.next;
     }
-    
+
     return slow;
 }
 ```
@@ -170,13 +170,13 @@ function FindKthToTail(head, k)
     if(!head || k == 0){
         return null;
     }
-    
+
     let arr = [];
     while(head){
         arr.push(head);
         head = head.next;
     }
-    
+
     return arr[arr.length - k
 }
 ```
@@ -203,11 +203,11 @@ function ReverseList(pHead)
     if(!pHead || !pHead.next){
         return pHead
     }
-    
+
     let i = pHead,
         j = pHead.next,
         k = j.next;
-    
+
     while(j){
         j.next = i;
         i = j;
@@ -236,13 +236,13 @@ function ReverseList(pHead)
         arr.push(pointer.val);
         pointer = pointer.next;
     }
-    
+
     pointer = pHead;
     while(pointer){
         pointer.val = arr.pop();
         pointer = pointer.next;
     }
-    
+
     return pHead;
 }
 ```
@@ -265,7 +265,7 @@ function Merge(pHead1, pHead2)
             }else{ // 取pHead2
                 pointer =  pHead2;
                 pointer.next = buildOne(pHead1, pHead2.next);
-            }    
+            }
         }
 
         return pointer;
@@ -303,7 +303,7 @@ function HasSubtree(pRoot1, pRoot2)
     }
 
     return rst;
-    
+
     // 递归比较pRoot1, pRoot2， 若pRoot2为空说明此条pRoot2的路径已经比较到最后了，返回true
     function hasTree2(pRoot1, pRoot2){
         if(!pRoot2){
@@ -313,11 +313,11 @@ function HasSubtree(pRoot1, pRoot2)
         if(!pRoot1){
             return false;
         }
-    
+
         if(pRoot1.val != pRoot2.val){
             return false;
         }
-    
+
         return hasTree2(pRoot1.left, pRoot2.left) && hasTree2(pRoot1.right, pRoot2.right)
     }
 }
