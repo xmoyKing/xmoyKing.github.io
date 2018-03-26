@@ -1,5 +1,5 @@
 ---
-title: AngularJS巩固实践-28-需求分析
+title: AngularJS巩固实践-28-《AngularJS深度剖析与最佳实践》笔记-需求分析
 categories:
   - AngularJS
 tags:
