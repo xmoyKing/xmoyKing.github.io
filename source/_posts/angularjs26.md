@@ -1,10 +1,10 @@
 ---
-title: angularjs入门笔记-26-单元测试1
+title: AngularJS入门笔记-26-单元测试1
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
-  - jasmine
+  - AngularJS
+  - Jasmine
 date: 2017-07-15 09:17:43
 updated:
 ---
@@ -51,7 +51,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      
+
     ],
 
 
@@ -117,7 +117,7 @@ module.exports = function(config) {
         <div class="panel-body">
             <p>Counter: {{counter}}</p>
             <p>
-                <button class="btn btn-primary" 
+                <button class="btn btn-primary"
                     ng-click="incrementCounter()">Increment</button>
             </p>
         </div>
@@ -221,7 +221,7 @@ describe("Controller Test", function () {
     // 2.解决依赖，并注入服务，将作用域设置为mockScope
     beforeEach(angular.mock.inject(function ($controller, $rootScope) {
         mockScope = $rootScope.$new();
-        controller = $controller("defaultCtrl", { 
+        controller = $controller("defaultCtrl", {
             $scope: mockScope
         });
     }));

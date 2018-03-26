@@ -1,10 +1,10 @@
 ---
-title: angularjs入门笔记-21-ajax和promises
+title: AngularJS入门笔记-21-Ajax和Promise
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
-  - promises
+  - AngularJS
+  - promise
 date: 2017-06-28 10:24:24
 updated:
 ---
@@ -93,7 +93,7 @@ $http.get("productData.json").then(function (response) {
 $scope.loadData = function () {
     var config = {
         transformResponse: function (data, headers) {
-            if(headers("content-type") == "application/xml" 
+            if(headers("content-type") == "application/xml"
                     && angular.isString(data)) {
                 products = [];
                 var productElems = angular.element(data.trim()).find("product");

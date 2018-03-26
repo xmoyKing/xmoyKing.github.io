@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-48-常见“坑”-1-module函数的声明和获取重载
+title: AngularJS巩固实践-48-常见“坑”-1-module函数的声明和获取重载
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-09-7 23:38:53
 updated:
 ---
@@ -84,7 +84,7 @@ function setupModuleLoader(window){
           config(configFn); // 缓存模块配置函数
         }
         return moduleInstance;
-        
+
         function invokeLater(provider, method, insertMethod){
           return function(){
             invokeQueue[insertMethod || 'push']([provider, method. arguments]);

@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-31-Promise复习
+title: AngularJS巩固实践-31-Promise复习
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - promise
 date: 2017-07-28 22:36:56
 updated:

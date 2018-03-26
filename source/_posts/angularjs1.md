@@ -1,15 +1,14 @@
 ---
-title: angularjs入门笔记-1-知识点
+title: AngularJS入门笔记-1-知识点
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
-  - links
+  - AngularJS
 date: 2017-04-02 09:13:07
-updated: 
+updated:
 ---
 
-本文将持续更新angularjs相关的知识点或文字，作为入门笔记的总汇。
+本文将持续更新AngularJS相关的知识点或文字，作为入门笔记的总汇。
 
 ---
 > 真正的ng专家不仅仅是指对诸多技巧了然于胸，能够自如运用到项目中——只要熟悉就够了。
@@ -43,46 +42,46 @@ $injector [AngularJS API之$injector ---- 依赖注入](http://www.cnblogs.com/x
 
 $rootScope [(九)通过几段代码，理清angularJS中的$injector、$rootScope和$scope的概念和关联关系](http://blog.csdn.net/aitangyong/article/details/40267583)*系列博客，博客中对angular，做了类比java web中的一些概念*
 
-[(十一)通过angularjs的ng-repeat指令看scope的继承关系](http://blog.csdn.net/aitangyong/article/details/44086137)
+[(十一)通过AngularJS的ng-repeat指令看scope的继承关系](http://blog.csdn.net/aitangyong/article/details/44086137)
 关于js中的引用和基本传值的问题：
 ```js
-var obj = {"name":"aty"};  
-              
-wrongChangeName(obj);  
+var obj = {"name":"aty"};
+
+wrongChangeName(obj);
 alert(obj.name);//仍然是aty
-              
-rightChangeName(obj);  
+
+rightChangeName(obj);
 alert(obj.name);//hehe
-              
-function rightChangeName(obj)  
-{  
-    obj.name="hehe";  
-}  
-  
-function wrongChangeName(obj)  
-{  
-    obj = {"name":"hehe"};  
-}  
+
+function rightChangeName(obj)
+{
+    obj.name="hehe";
+}
+
+function wrongChangeName(obj)
+{
+    obj = {"name":"hehe"};
+}
 ```
 在其他作用域下修改一个对象，应该通过属性的方式修改而不是使用新的对象字面量覆盖
 
 $apply
 $scope.$digest() [(十五)在controller之外修改$scope中的数据，双向绑定特性失效，不能自动刷新](http://blog.csdn.net/aitangyong/article/details/45092271)*手动触发digest循环检测脏值*
 
-[ (十八)angularjs中模块bootstrap后,动态注册新的controller](http://blog.csdn.net/aitangyong/article/details/48135961)*18，19都没懂*
+[ (十八)AngularJS中模块bootstrap后,动态注册新的controller](http://blog.csdn.net/aitangyong/article/details/48135961)*18，19都没懂*
 
 [Think in AngularJS：对比jQuery和AngularJS的不同思维模式](http://damoqiongqiu.iteye.com/blog/1926475)
 
 compile
 link
 postLink
-[angularjs指令中的compile与link函数详解](http://www.jb51.net/article/58229.htm)
+[AngularJS指令中的compile与link函数详解](http://www.jb51.net/article/58229.htm)
 
 config
 run [ AngularJS模块详解](http://blog.csdn.net/woxueliuyun/article/details/50962645)*涉及ng的内部实现原理，没懂*
 
 $watch
-$apply [理解$watch ，$apply 和 $digest --- 理解数据绑定过程](http://www.angularjs.cn/A0a6)*很清晰很好懂，例子也很适合*
+$apply [理解$watch ，$apply 和 $digest --- 理解数据绑定过程](http://www.AngularJS.cn/A0a6)*很清晰很好懂，例子也很适合*
 
 $evalAsync
 $applyAsync [[AngularJS面面观] 5. scope中的两个异步方法 - $applyAsync以及$evalAsync](http://blog.csdn.net/dm_vincent/article/details/51607018)*源码分析，没懂*
@@ -93,7 +92,7 @@ $parse [ 浅谈AngularJS的$parse服务 这篇可以让你看明白](http://blog
 
 $cacheFactory [AngularJs $cacheFactory 缓存服务](http://www.cnblogs.com/ys-ys/p/4967404.html?utm_source=tuicool&utm_medium=referral)
 
-$q [angularjs系列之轻松使用$q进行异步编程](http://www.cnblogs.com/fliu/articles/5288531.html)*在没有promise的基础上不是很懂，应该需要先对promise有一定基础才行*
+$q [AngularJS系列之轻松使用$q进行异步编程](http://www.cnblogs.com/fliu/articles/5288531.html)*在没有promise的基础上不是很懂，应该需要先对promise有一定基础才行*
   promise [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
 $resource [angular $resource模块](http://blog.csdn.net/yangnianbing110/article/details/43163155)

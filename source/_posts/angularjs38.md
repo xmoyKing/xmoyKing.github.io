@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-38-移除不必要的$watch
+title: AngularJS巩固实践-38-移除不必要的$watch
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - $watch
 date: 2017-08-17 22:59:21
 updated:
@@ -22,7 +22,7 @@ HTML：
 ```html
 <body ng-app="com.ngnice.app" ng-controller="DemoController as demo">
   <div> hello: {{demo.count}} </div>
-  <button type="button" ng-click="demo.increase();">increase++</button> 
+  <button type="button" ng-click="demo.increase();">increase++</button>
 </body>
 ```
 
@@ -80,16 +80,16 @@ function addTextInterpolateDirective(directives, text){
             hasCompileParent = parent.length;
         if(hasCompileParent)
           safeAddClass(templateNode.parent(), 'ng-binding');
-        
+
         return function textInterpolateLinkFn(scope, node){
           var parent = node.parent(),
               bindings = parent.data('$binding') || [];
-            
+
             bindings.push(interpolateFn);
             parent.data('$binding', bindings);
             if(!hasCompileParent)
               safeAddClass(parent, 'ng-binding');
-            
+
             scope.$watch(interpolateFn, function interpolateFnWatchAction(value){
               node[0].nodeValue = value;
             });
@@ -221,9 +221,9 @@ ng1.3为ng表达式引入了新语法，以“::”作为前缀的表达式为on
 <ul>
   <li ng-repeat="session in sessions">
     <div class="info">
-      <span bo-text="session.name"></span> - 
-      <span bo-text="session.room"></span> - 
-      <span bo-text="session.hour"></span> - 
+      <span bo-text="session.name"></span> -
+      <span bo-text="session.room"></span> -
+      <span bo-text="session.hour"></span> -
       <span bo-text="session.speaker"></span>
     </div>
     <div class="likes">

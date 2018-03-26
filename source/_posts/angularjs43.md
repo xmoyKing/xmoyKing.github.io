@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-42-过滤器Filter
+title: AngularJS巩固实践-42-过滤器Filter
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - filter
 date: 2017-08-29 19:55:30
 updated:

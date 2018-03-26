@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-4-angularjs1,express4,
+title: AngularJS入门笔记-4-AngularJS,express4,
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - express4
 date: 2017-04-6 21:53:19
 updated: 2017-04-18 21:53:19
@@ -11,7 +11,7 @@ updated: 2017-04-18 21:53:19
 
 各种ng的依赖让人绝望，实在无法让人安心开发，折腾了好久， 还有bower的依赖问题也是很麻烦，下载需要很久。
 
-参考资料[快速搭建Web环境 Angularjs + Express3 + Bootstrap3](http://blog.fens.me/angularjs-express3-bootstrap3/)
+参考资料[快速搭建Web环境 Angularjs + Express3 + Bootstrap3](http://blog.fens.me/AngularJS-express3-bootstrap3/)
 
 使用`express init`命令创建一个项目，然后将目录结构改为如下：
 
@@ -61,7 +61,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
-// app.set('view engine', 'ejs'); 
+// app.set('view engine', 'ejs');
 app.set('view engine', 'html'); // 将ejs替换为html
 
 // uncomment after placing your favicon in /public
@@ -124,7 +124,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
 浏览器报如下错误，表示没有用到controller
 ```js
-Error: [$controller:ctrlreg] 
+Error: [$controller:ctrlreg]
 // 删除routeProvider中的controller解决报错，但是却没有加载controller
 ```
 
@@ -154,7 +154,7 @@ app/index.html代码如下：
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src="js/angular/controller.js"></script>
         <script src="js/angular/app.js"></script>
-        
+
     </head>
     <body ng-app="app">
         <div class="row">
@@ -184,4 +184,4 @@ app/views/tpl/welcome.html代码如下：
 
 ![生成的dom结构](3.png)
 
-关于angularjs1，jquery和bootstrap，个人感觉实在太笨重，本例仅仅作为入门折腾使用，开发环境还是不要使用这套搭配来的好。
+关于AngularJS1，jquery和bootstrap，个人感觉实在太笨重，本例仅仅作为入门折腾使用，开发环境还是不要使用这套搭配来的好。

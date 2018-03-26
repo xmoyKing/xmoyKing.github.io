@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-42-ng中的Ajax数据格式转换
+title: AngularJS巩固实践-42-ng中的Ajax数据格式转换
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - ajax
 date: 2017-08-27 08:24:42
 updated:
@@ -175,7 +175,7 @@ function $http(requestConfig){
 function transformData(data, headers, fns){
   if(isFunction(fns))
     return fns(data, headers);
-  
+
   forEach(fns, function(fn){
     data = fn(data, headers);
   });
@@ -193,7 +193,7 @@ function mergeHeaders(config){
   var defHeaders = defaults.headers,
       reqHeaders = extend({}, config.headers),
       defHeaderName, lowercaseDefHeaderName, reqHeaderName;
-  
+
   defHeaders = extend({}, defHeaders.common, defHeaders[lowercase(config.method)]);
 
   defaultHeadersIteration:
@@ -208,7 +208,7 @@ function mergeHeaders(config){
 
       reqHeaders[defHeaderName] = defHeaders[defHeaderName];
     }
-  
+
   execHeaders(reqHeaders);
   return reqHeaders;
 

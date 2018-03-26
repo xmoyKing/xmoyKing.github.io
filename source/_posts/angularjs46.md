@@ -1,10 +1,10 @@
 ---
-title: angularjs巩固实践-46-编码规范-1
+title: AngularJS巩固实践-46-编码规范-1
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
-  - code conventions
+  - AngularJS
+  - ng编码规范
 date: 2017-09-03 16:42:05
 updated:
 ---
@@ -205,7 +205,7 @@ angular.module('com.ngnice.app').controller('DemoController', function(){
 坚持以数组语法方式定义控制器和声明其依赖，对于ng自动解析参数形式的注入，会在js函数混淆的时候，参数名被简化改变，导致注入失败，程序出错。所以坚持以数组的方式或function.$inject方式注入是好的实践，由于使用function.$inject方式注入时需要声明特定的函数名，这样对只使用一次的js函数来说，显得冗余，所以推荐数组方式声明依赖。若使用ES6或CoffeeScript的class方式声明，更推荐function.$inject方式。
 ```js
 angular.module('com.ngnice.app').controller('DemoController', ['demoService', function(demoService){
-  // ... 
+  // ...
 }]);
 ```
 

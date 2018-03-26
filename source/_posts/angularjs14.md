@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-14-表单
+title: AngularJS入门笔记-14-表单
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-20 11:07:57
 updated:
 ---
@@ -175,7 +175,7 @@ $scope.addNewItem = function (newItem) {
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input name="agreed" type="checkbox" 
+                        <input name="agreed" type="checkbox"
                                ng-model="newUser.agreed" required>
                         I agree to the terms and conditions
                     </label>
@@ -273,8 +273,8 @@ ng校验用到的css类，当符合规则时，ng将自动添加如下的css类�
                     <label>Email:</label>
                     <input name="userEmail" type="email" class="form-control"
                            required ng-model="newUser.email">
-                    <div class="error" 
-                          ng-show="myForm.userEmail.$invalid && myForm.userEmail.$dirty">                        
+                    <div class="error"
+                          ng-show="myForm.userEmail.$invalid && myForm.userEmail.$dirty">
                         <span ng-show="myForm.userEmail.$error.email">
                             Please enter a valid email address
                         </span>
@@ -375,7 +375,7 @@ ng校验用到的css类，当符合规则时，ng将自动添加如下的css类�
                 $scope.addUser = function (userDetails) {
                     if (myForm.$valid) {
                         $scope.message = userDetails.name
-                            + " (" + userDetails.email + ") (" 
+                            + " (" + userDetails.email + ") ("
                             + userDetails.agreed + ")";
                     } else {
                         $scope.showValidation = true;
@@ -397,7 +397,7 @@ ng校验用到的css类，当符合规则时，ng将自动添加如下的css类�
     </script>
     <style>
         form.validate .ng-invalid-required.ng-dirty { background-color: lightpink; }
-        form.validate .ng-invalid-email.ng-dirty { 
+        form.validate .ng-invalid-email.ng-dirty {
             background-color: lightgoldenrodyellow; }
         div.error { color: red; font-weight: bold; }
     </style>
@@ -460,7 +460,7 @@ select有一些特别需要注意的地方，这一点与其他表单元素不�
             <div class="well">
                 <div class="form-group">
                     <label>Select an Action:</label>
-                    <select ng-model="selectValue" 
+                    <select ng-model="selectValue"
                             ng-options="item.id as item.action for item in todos">
                         <option value="">(Pick One)</option>
                     </select>

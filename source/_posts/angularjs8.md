@@ -1,14 +1,14 @@
 ---
-title: angularjs入门笔记-8-购物网站产品列表Demo
+title: AngularJS入门笔记-8-购物网站产品列表Demo
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-05 10:56:41
 updated: 2017-05-05 10:56:41
 ---
 
-延续上次学习的静态demo，angularjs6，本次做一个简单的实现分页，可分类展示产品的购物小demo
+延续上次学习的静态demo，本次做一个简单的实现分页，可分类展示产品的购物小demo
 
 产品列表界面效果如下图:
 ![产品列表Demo界面](1.png)
@@ -116,7 +116,7 @@ angular.module("sportsStore") // 此处仅是获取sportsStore模块（已在其
 });
 ```
 
-### 仅仅只用于展示产品的控制器productListController.js 
+### 仅仅只用于展示产品的控制器productListController.js
 之所以不在sportsStoreCtrl控制器中是由于考虑到还有其他模块及其对应的控制器，所以将产品列表的控制器独立出来
 ```js
 /// <reference path="../angular.js" />
@@ -157,7 +157,7 @@ angular.module("sportsStore") // 此处仅是获取sportsStore模块（已在其
     });
 ```
 
-#在该文件中定义所有的过滤器customFilters.js 
+#在该文件中定义所有的过滤器customFilters.js
 ```js
 /// <reference path="../angular.js" />
 
@@ -188,7 +188,7 @@ angular.module("customFilters", []) // 定义customFilters模块，作为过滤�
                 return [];
             } else {
                 // $filter("limitTo")(input, size)方法，选取input数组中的前size个记录，
-                return $filter("limitTo")(data.splice(start_index), size);                 
+                return $filter("limitTo")(data.splice(start_index), size);
             }
         } else {
             return data;

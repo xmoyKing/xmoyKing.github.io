@@ -1,16 +1,16 @@
 ---
-title: angularjs入门笔记-9-购物网站-添加购物车和路由功能
+title: AngularJS入门笔记-9-购物网站-添加购物车和路由功能
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-08 14:09:25
 updated: 2017-05-08 14:09:25
 ---
 
-一个网站不可能只在一个html文件就完成了的，一般都有多个html文件以及多个不同的组件或者模块，这就需要后端定义路由（即url地址）与组件代码片段，而angularjs有一个路由的插件可以将路由功能放在前端完成，同时提供了组件功能，在上一个篇的基础上，本次加上路由功能和购物车。
+一个网站不可能只在一个html文件就完成了的，一般都有多个html文件以及多个不同的组件或者模块，这就需要后端定义路由（即url地址）与组件代码片段，而AngularJS有一个路由的插件可以将路由功能放在前端完成，同时提供了组件功能，在上一个篇的基础上，本次加上路由功能和购物车。
 
-[接上一篇：angularjs入门笔记-8-静态购物网站产品列表Demo](https://xmoyking.github.io/2017/05/05/angularjs8/)
+[接上一篇：AngularJS入门笔记-8-静态购物网站产品列表Demo](https://xmoyking.github.io/2017/05/05/angularjs8/)
 
 
 有添加到购物车功能后的产品列表界面效果如下图:
@@ -136,32 +136,32 @@ angular.module("sportsStore")
 ### products.json
 此json数据多了一个id字段标识每一种产品，当加入购物车时以id字段作为标识
 ```js
-[{  
+[{
     "id": "ID1",
     "name": "Product #1",
     "description": "A product",
-    "category": "Category #1", 
+    "category": "Category #1",
     "price": 100
 },
 {
     "id": "ID2",
-    "name": "Product #2", 
+    "name": "Product #2",
     "description": "A product",
-    "category": "Category #1", 
+    "category": "Category #1",
     "price": 110
 },
 {
     "id": "ID3",
-    "name": "Product #3", 
+    "name": "Product #3",
     "description": "A product",
-    "category": "Category #2", 
+    "category": "Category #2",
     "price": 210
 },
 {
     "id": "ID4",
-    "name": "Product #4", 
+    "name": "Product #4",
     "description": "A product",
-    "category": "Category #3", 
+    "category": "Category #3",
     "price": 202
 }]
 ```

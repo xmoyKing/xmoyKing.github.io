@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-50-常见“坑”-3-锚点导航、ngRepeat问题、指令优先级
+title: AngularJS巩固实践-50-常见“坑”-3-锚点导航、ngRepeat问题、指令优先级
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-09-12 09:15:50
 updated:
 ---

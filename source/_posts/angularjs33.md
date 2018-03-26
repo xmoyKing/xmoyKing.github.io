@@ -1,9 +1,10 @@
 ---
-title: angularjs巩固实践-33-依赖注入
+title: AngularJS巩固实践-33-依赖注入
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
+  - 依赖注入
 date: 2017-08-04 17:25:26
 updated:
 ---

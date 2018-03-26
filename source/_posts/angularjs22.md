@@ -1,10 +1,10 @@
 ---
-title: angularjs入门笔记-22-RESTful
+title: AngularJS入门笔记-22-RESTful
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
-  - rest
+  - AngularJS
+  - RESTful
   - deployd
 date: 2017-07-02 22:58:23
 updated:
@@ -48,7 +48,7 @@ angular.module("exampleApp", [])
           $scope.displayMode = "list";
       });
     }
-    
+
     $scope.updateProduct = function (product) { // 修改
         $http({
             url: baseUrl + product.id,

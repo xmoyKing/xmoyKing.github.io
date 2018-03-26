@@ -1,15 +1,15 @@
 ---
-title: angularjs巩固实践-47-编码规范-2
+title: AngularJS巩固实践-47-编码规范-2
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
-  - code conventions
+  - AngularJS
+  - ng编码规范
 date: 2017-09-04 15:57:38
 updated:
 ---
 
-接上文[angularjs巩固实践-46-编码规范-1](/2017/09/03/angularjs46/)
+接上文[AngularJS巩固实践-46-编码规范-1](/2017/09/03/AngularJS46/)
 
 ### 服务
 #### 命名

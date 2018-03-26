@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-15-控制器和作用域
+title: AngularJS入门笔记-15-控制器和作用域
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-24 22:27:04
 updated:
 ---
@@ -162,7 +162,7 @@ controller -> scope -> view
 
                 $scope.setAddress = function (type, zip) {
                     $rootScope.$broadcast("zipCodeUpdated", {
-                        type: type, zipCode: zip 
+                        type: type, zipCode: zip
                     });
                     console.log("Type: " + type + " " + zip);
                 }
@@ -227,7 +227,7 @@ ng一般使用服务来调解作用域之间的通信，这种方法可减少重
                     setZipCode: function(type, zip) {
                         this[type] = zip;
                         $rootScope.$broadcast("zipCodeUpdated", {
-                            type: type, zipCode: zip 
+                            type: type, zipCode: zip
                         });
                     }
                 }
@@ -299,7 +299,7 @@ ng一般使用服务来调解作用域之间的通信，这种方法可减少重
         <h4>Top Level Controller</h4>
         <div class="input-group">
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button" 
+                <button class="btn btn-default" type="button"
                         ng-click="reverseText()">Reverse</button>
                 <button class="btn btn-default" type="button"
                         ng-click="changeCase()">Case</button>
@@ -319,7 +319,7 @@ ng一般使用服务来调解作用域之间的通信，这种方法可减少重
             </span>
             <input class="form-control" ng-model="dataValue">
         </div>
-    </div>    
+    </div>
 
     <div class="well" ng-controller="secondChildCtrl">
         <h4>Second Child Controller</h4>
@@ -334,7 +334,7 @@ ng一般使用服务来调解作用域之间的通信，这种方法可减少重
             </span>
             <input class="form-control" ng-model="dataValue">
         </div>
-    </div>    
+    </div>
 </body>
 </html>
 ```
@@ -488,7 +488,7 @@ app.controller("secondChildCtrl", function ($scope) {
 
 </head>
 <body>
-    <div id="angularRegion" class="well" ng-controller="simpleCtrl">            
+    <div id="angularRegion" class="well" ng-controller="simpleCtrl">
         <h4>AngularJS</h4>
         <div class="checkbox">
             <label>

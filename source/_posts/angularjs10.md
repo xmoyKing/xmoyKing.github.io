@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-10-使用deployd作为服务器，增加订单功能
+title: AngularJS入门笔记-10-使用deployd作为服务器，增加订单功能
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - deployd
 date: 2017-05-11 17:45:58
 updated: 2017-05-11 17:45:58
@@ -49,8 +49,8 @@ angularjs #项目目录
   resources #此目录保存deployd dashboard中创建的表的结构（严格来说不是表而是collection）
     orders #order表
       config.json #order表结构（字段类型）
-    products 
-      config.json    
+    products
+      config.json
   app.dpd
   server.js #启动deployd服务器脚本
 node_modules #node包目录
@@ -101,11 +101,11 @@ server.on('error', function(err) {
     .ng-invalid {
         background-color: lightpink;
     }
-    
+
     .ng-valid {
         background-color: lightgreen;
     }
-    
+
     span.error {
         color: red;
         font-weight: bold;

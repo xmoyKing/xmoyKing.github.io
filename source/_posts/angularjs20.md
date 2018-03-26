@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-20-针对错误、表达式、全局对象的服务
+title: AngularJS入门笔记-20-针对错误、表达式、全局对象的服务
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-27 15:27:49
 updated:
 ---
@@ -61,7 +61,7 @@ $location服务提供的一些方法：
 - host() 返回完整url的主机名称（host.com）
 - path(target) 获取或设置url路径
 - port() 返回端口号，默认为80
-- protocol() 返回协议，一般为http 
+- protocol() 返回协议，一般为http
 - replace() 跳转
 - search(term, params) 获取或设置搜索项
 - url(target) 或者或设置path、search、hash
@@ -116,7 +116,7 @@ $location服务提供的一些方法：
                 <button class="btn btn-primary" ng-click="setUrl('reset')">Reset</button>
                 <button class="btn btn-primary" ng-click="setUrl('path')">Path</button>
                 <button class="btn btn-primary" ng-click="setUrl('hash')">Hash</button>
-                <button class="btn btn-primary" 
+                <button class="btn btn-primary"
                      ng-click="setUrl('search')">Search</button>
                 <button class="btn btn-primary" ng-click="setUrl('url')">URL</button>
             </div>
@@ -168,7 +168,7 @@ $anchorScroll服务滚动浏览器窗口到显示id与$location.hash一致的元
             for (var i = 0; i < $scope.itemCount; i++) {
                 $scope.items[i] = "Item " + i;
             }
-                
+
             $scope.show = function(id) {
                 $location.hash(id);
                 if (id == "bottom") {
@@ -296,8 +296,8 @@ sce服务是默认开启的，预防不安全的值通过数据绑定被展示�
     <script>
         angular.module("exampleApp", [])
         .controller("defaultCtrl", function ($scope) {
-            $scope.htmlData 
-                = "<p>This is <b onmouseover=alert('Attack!')>dangerous</b> data</p>";            
+            $scope.htmlData
+                = "<p>This is <b onmouseover=alert('Attack!')>dangerous</b> data</p>";
         });
     </script>
 </head>
@@ -486,13 +486,13 @@ var result = expressionFn(scope);
                 link: function (scope, element, attrs) {
                     scope.$watch("amount", function (newValue) {
                         var localData = {
-                            total: Number(newValue) 
+                            total: Number(newValue)
                                + (Number(newValue) * (Number(scope.tax) /100))
                         }
                         element.text(expressionFn(scope, localData));
                     });
                 }
-            }            
+            }
         });
     </script>
 </head>
@@ -534,13 +534,13 @@ $interpolate服务和它的提供器$interpolateProvider，用于配置ng执行�
                 link: function (scope, element, attrs) {
                     scope.$watch("amount", function (newValue) {
                         var localData = {
-                            total: Number(newValue) 
+                            total: Number(newValue)
                                 + (Number(newValue) * (Number(scope.tax) /100))
                         }
                         element.text(interpolationFn(scope));
                     });
                 }
-            }            
+            }
         });
     </script>
 </head>

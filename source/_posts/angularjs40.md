@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-40-$timeout使用技巧
+title: AngularJS巩固实践-40-$timeout使用技巧
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - $timeout
 date: 2017-08-22 22:18:00
 updated:
@@ -35,7 +35,7 @@ function $TimeoutProvider(){
           promise = deferred.promise,
           skipApply = (isDefined(invokeApply) && !invokeApply),
           timeoutId;
-      
+
       timeoutId = $browser.defer(function(){
         try {
           deferred.resolve(fn());
@@ -46,7 +46,7 @@ function $TimeoutProvider(){
           delete deferreds[promise.$$timeoutId];
         }
 
-        if(!skipApply) 
+        if(!skipApply)
           $rootScope.$apply();
       }, delay);
 

@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-39-使用angualr-hint
+title: AngularJS巩固实践-39-使用angualr-hint
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - angular-hint
 date: 2017-08-19 17:33:35
 updated:

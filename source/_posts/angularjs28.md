@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-28-需求分析
+title: AngularJS巩固实践-28-需求分析
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-07-20 16:28:41
 updated:
 ---

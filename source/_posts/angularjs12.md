@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-12-绑定和模版指令
+title: AngularJS入门笔记-12-绑定和模版指令
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-17 19:15:19
 updated: 2017-05-17 19:15:19
 ---
@@ -58,8 +58,8 @@ ng中的各个部分都可以使用指令。
 <body>
     <div id="todoPanel" class="panel" ng-controller="defaultCtrl">
         <h3 class="panel-header">To Do List</h3>
-  
-        <div>There are {{todos.length}} items</div>      
+
+        <div>There are {{todos.length}} items</div>
 
         <div>
             There are <span ng-bind="todos.length"></span> items
@@ -71,7 +71,7 @@ ng中的各个部分都可以使用指令。
 
         <div ng-non-bindable>
             AngularJS uses {{ and }} characters for templates
-        </div>        
+        </div>
     </div>
 </body>
 </html>
@@ -90,7 +90,7 @@ ng中的各个部分都可以使用指令。
 <div class="form-group well">
     <label for="firstItem">Set First Item:</label>
     <input name="firstItem" class="form-control" ng-model="todos[0].action" />
-</div>    
+</div>
 ```
 
 ![example双向绑定](2.png)
@@ -222,7 +222,7 @@ $scope.viewFile = function () {
 <div class="well">
     <div class="radio" ng-repeat="button in ['None', 'Table', 'List']">
         <label>
-            <input type="radio" ng-model="data.mode" 
+            <input type="radio" ng-model="data.mode"
                     value="{{button}}" ng-checked="$first" />
             {{button}}
         </label>

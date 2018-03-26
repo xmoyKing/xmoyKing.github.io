@@ -1,27 +1,26 @@
 ---
-title: angularjs入门笔记-3-小试牛刀 ES6,angularjs,NodeJs,KOA
+title: AngularJS入门笔记-3-小试牛刀 ES6,AngularJS,NodeJs,KOA
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - ES6
-  - angularjs
   - NodeJs
   - KOA
 date: 2017-04-5 17:28:19
-updated: 
+updated:
 ---
 
-angularjs1的一个练习项目，全栈实战，涉及到ES6,angularjs1,NodeJs,KOA
+AngularJS1的一个练习项目，全栈实战，涉及到ES6,AngularJS1,NodeJs,KOA
 前端代码中，ng能让我们减少大量的重复劳动，比如绑定两个输入框，使用原生JS
 
-angularjs是一个框架，不是库，库是为了方便程序员，基本不会限制程序员，如jQuery，做一个轮播的插件，可以写出非常非常多的方式实现，非常灵活，但是无法完成大型项目，而框架限制了程序员按照约定的方式编写程序，能让完成大型项目，因为有相同规约。
+AngularJS是一个框架，不是库，库是为了方便程序员，基本不会限制程序员，如jQuery，做一个轮播的插件，可以写出非常非常多的方式实现，非常灵活，但是无法完成大型项目，而框架限制了程序员按照约定的方式编写程序，能让完成大型项目，因为有相同规约。
 
 来源自：[全栈 ES6、AngularJS、NodeJS与KOA实战](http://edu.csdn.net/course/detail/3181/53312?auto_start=1)
 
-### angularjs
+### AngularJS
 ```html
-<script>  
+<script>
 window.onload = function(){
   var oT1 = document.getElementById('t1');
   var oT2 = document.getElementById('t2');
@@ -29,7 +28,7 @@ window.onload = function(){
     oT2.value = oT1.value;
   }
 };
-</script> 
+</script>
 
 <input type="text" id="t1"/>
 <input type="text" id="t2"/>
@@ -111,7 +110,7 @@ server.on('error',function(err){ // 出错时，捕获错误
   console.error('error', err);
 })
 
-server.listen(8080); 
+server.listen(8080);
 // 直接打开浏览器localhost:8080 输出 abcd
 ```
 打开浏览器，若输入localhost:8080/* 能在www目录找到则返回静态文件，否则使用后面的,而其他目录输出abcd.

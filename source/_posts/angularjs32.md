@@ -1,9 +1,10 @@
 ---
-title: angularjs巩固实践-32-ng启动过程
+title: AngularJS巩固实践-32-ng启动过程
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
+  - ng启动
 date: 2017-07-31 22:56:53
 updated:
 ---
@@ -22,7 +23,7 @@ ng官方提供的开发指南中，给出了如下的启动过程图：
 #### 3. jqLite / jQuery初始化
   这些脚本中最先导入的jqLite(若没有在ng之前引入jquery，则为内嵌ng中的jqLite，否则为jquery)会进行初始化工作，在document对象上注册DOMContentLoaded事件，程序通过调用$.ready(callback)将回调函数注册到这个事件中，该回调在执行之前还需要加载其他脚本。
 
-#### 4. angualr初始化
+#### 4. angular初始化
   开始加载脚本中的angular或其子模块，包括自定义的app.js以及其他第三方模块，这些脚本会按引入的顺序开始各自的初始化过程。
   各种ng模块的初始化过程大致相同，比如angular内置的名为“ng”的模块，其初始化步骤为：
   1. 按名字创建一个模块、所谓模块就是一个对象，它是其他angular对象的注册表

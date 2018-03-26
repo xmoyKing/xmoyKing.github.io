@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-16-过滤器
+title: AngularJS入门笔记-16-过滤器
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-25 19:03:45
 updated:
 ---
@@ -44,7 +44,7 @@ updated:
                     { name: "Apples", category: "Fruit", price: 1.20, expiry: 10 },
                     { name: "Bananas", category: "Fruit", price: 2.42, expiry: 7 },
                     { name: "Pears", category: "Fruit", price: 2.02, expiry: 6 },
-             
+
                     // ...other data objects omitted for brevity...
                 ];
 
@@ -125,20 +125,20 @@ orderBy可对数组中的对象进行排序，指定一个表达式或函数，�
 
                 $scope.limitVal = "5";
                 $scope.limitRange = [];
-                for (var i = (0 - $scope.products.length); 
+                for (var i = (0 - $scope.products.length);
                         i <= $scope.products.length; i++) {
                     $scope.limitRange.push(i.toString());
                 }
 
-                
+
                 $scope.selectItems = function (item) {
                     return item.category == "Fish" || item.name == "Beer";
                 };
 
-                
+
                 $scope.myCustomSorter = function (item) {
                     return item.expiry < 5 ? 0 : item.price;
-                }      
+                }
             });
     </script>
 </head>
@@ -151,7 +151,7 @@ orderBy可对数组中的对象进行排序，指定一个表达式或函数，�
             </h3>
         </div>
         <div class="panel-body">
-            Limit: <select ng-model="limitVal" 
+            Limit: <select ng-model="limitVal"
                 ng-options="item for item in limitRange"></select>
         </div>
         <div class="panel-body">
@@ -172,7 +172,7 @@ orderBy可对数组中的对象进行排序，指定一个表达式或函数，�
                         <td>{{p.expiry}}</td>
                         <td class="text-right">{{p.price | currency }}</td>
                     </tr>
-                </tbody>          
+                </tbody>
             </table>
 <!--filter使用  -->
             <table class="table table-striped table-bordered table-condensed">
@@ -252,7 +252,7 @@ angular.module("exampleApp")
                 } else {
                     return data.slice(count);
                 }
-            } else { 
+            } else {
                 return data;
             }
         }

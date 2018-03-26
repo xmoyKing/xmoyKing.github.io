@@ -1,14 +1,14 @@
 ---
-title: angularjs入门笔记-6-做一个todo小程序
+title: AngularJS入门笔记-6-做一个todo小程序
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-01 14:34:50
 updated: 2017-05-01 14:34:50
 ---
 
-先做一个静态HTML程序，一个todo小程序（待办事项小应用）, angularjs版本为1.2
+先做一个静态HTML程序，一个todo小程序（待办事项小应用）, AngularJS版本为1.2
 
 界面效果如下图:
 ![todo列表](1.png)
@@ -168,7 +168,7 @@ todo.json中存储着一些数据，这些数据使用ajax动态加载到ng应�
             </span>
         </h1>
     </div>
-  
+
     <div class="panel">
         <div class="input-group">
             <input class="form-control" ng-model="actionText" />

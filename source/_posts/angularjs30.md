@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-30-服务复习
+title: AngularJS巩固实践-30-服务复习
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-07-25 22:00:40
 updated:
 ---
@@ -122,16 +122,16 @@ angular.module('com.ngnice.app').controller('SomeCtrl', function($scope, greetin
 
 在 Angular 源码中，它们的实现是这样的：
 ```js
-function factory(name, factoryFn) { 
-  return provider(name, { $get: factoryFn }); 
+function factory(name, factoryFn) {
+  return provider(name, { $get: factoryFn });
 }
 function service(name, constructor) {
   return factory(name, ['$injector', function($injector) {
     return $injector.instantiate(constructor);
   }]);
 }
-function value(name, val) { 
-  return factory(name, valueFn(val)); 
+function value(name, val) {
+  return factory(name, valueFn(val));
 }
 ```
 

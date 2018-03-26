@@ -1,9 +1,10 @@
 ---
-title: angularjs巩固实践-35-指令生命周期
+title: AngularJS巩固实践-35-指令生命周期
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
+  - ng指令生命周期
 date: 2017-08-09 20:36:50
 updated:
 ---
@@ -85,7 +86,7 @@ this.directive = function registerDIrective(name, directiveFactory){
 
   if(isString(name)){
     assertArg(directiveFactory, 'directiveFactory');
-    
+
     if(!hasDirectives.hasOwnProperty(name)){
       hasDirectives[name] = [];
       $provide.factory(name + Suffix, ['$injector', '$exceptionHandler', function($injector, $exceptionHandler){

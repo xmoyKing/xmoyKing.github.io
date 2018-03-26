@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-44-ng实现前端权限控制
+title: AngularJS巩固实践-44-ng实现前端权限控制
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-08-31 22:43:49
 updated:
 ---

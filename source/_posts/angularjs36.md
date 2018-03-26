@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-36-$parse和$eval、$observe和$watch
+title: AngularJS巩固实践-36-$parse和$eval、$observe和$watch
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-08-12 10:40:09
 updated:
 ---
@@ -113,7 +113,7 @@ scope.$watch(iAttrs.book, function(newValue, oldValue){
 ```
 
 #### 使用场景
-关于独立scope声明中的“@”，“&”,"="三种形式，一直没明白到底是如何使用的，可以先看下这个帖子，学习如何使用[AngularJS Directive 隔离 Scope 数据交互](https://blog.coding.net/blog/angularjs-directive-isolate-scope?type=early)
+关于独立scope声明中的“@”，“&”,"="三种形式，一直没明白到底是如何使用的，可以先看下这个帖子，学习如何使用[AngularJS Directive 隔离 Scope 数据交互](https://blog.coding.net/blog/AngularJS-directive-isolate-scope?type=early)
 
 先看最简单的“&”的实现，它将属性值传给$parse服务，在父scope上解析未一个可调用的计算函数，再包装成一个只需要locals参数的函数，然后存放在子scope上。它定义再父scope上，但可在子scope中被调用，这样就实现了子scope对父scope的回调。需要注意：参数中可以传入一个本地的上下文对象，用于覆盖或新增变量（原来上下文对象中不存在的）。
 所以，若在DOM中定义：

@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-7-AngularJS+MongoDB+Nodejs
+title: AngularJS入门笔记-7-AngularJS+MongoDB+Nodejs
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-03 15:56:41
 updated: 2017-05-03 15:56:41
 ---
@@ -42,7 +42,7 @@ var myCopy = angular.copy(myObj);
 - lowercase(string)
 - uppercase(string)
 
-一个基本的express + angularjs 的入门示例：
+一个基本的express + AngularJS 的入门示例：
 目录结构为：
 /app_server.js 项目启动入口
 /static/first.html 静态页面

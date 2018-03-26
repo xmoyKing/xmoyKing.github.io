@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-13-元素和事件指令
+title: AngularJS入门笔记-13-元素和事件指令
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-18 08:41:45
 updated:
 ---
@@ -13,7 +13,7 @@ updated:
 ### 对元素设置
 
 - ng-show和ng-hide， 显示或隐藏元素
-- ng-if， 从dom删除元素 
+- ng-if， 从dom删除元素
 - 带过滤器的ng-repeat， 在生成没有直接父元素的元素时避免嵌入包含问题
 - ng-class和ng-style，将元素添加到css类中，或设置某个css属性
 - ng-class-odd或ng-class-even， 对ng-repeat指令生成的奇数或偶数行添加不同的css类
@@ -70,7 +70,7 @@ ng-show、ng-hide指令在应用到ng-repeat生成的表格元素的时候会有
                 $scope.buttonNames = ["Red", "Green", "Blue"];
 
                 $scope.settings = {
-                    Rows: "Red", 
+                    Rows: "Red",
                     Columns: "Green"
                 };
             });
@@ -281,7 +281,7 @@ ng的事件虽然依赖jQuery,但依然不能兼容到所有情况，所以实�
                 Set the Data Value
             </label>
         </div>
-            
+
         <button class="btn btn-success" ng-disabled="dataValue">My Button</button>
     </div>
 </body>

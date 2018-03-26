@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-49-常见“坑”-2-ngModel绑定值不更新
+title: AngularJS巩固实践-49-常见“坑”-2-ngModel绑定值不更新
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-09-10 09:15:50
 updated:
 ---
@@ -25,7 +25,7 @@ ngModel是ng用来处理表单（form）的最重要的指令，它链接了页�
   <div ng-controller="DemoController as demo">
     <div ng-form="form" class="form-horizontal">
       <div class="form-group" ng-class="{'has-error': form.amount.$invalid}">
-        <label for="amount">Amount</label> 
+        <label for="amount">Amount</label>
         <!-- 此处会出问题 -->
         <input id="amount" name="amount" type="number" ng-model="demo.amount" class="form-control" placeholder="1 - 100" min="1" max="100"/>
       </div>

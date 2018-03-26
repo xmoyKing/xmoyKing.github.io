@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-37-使用Controller as Vm方式
+title: AngularJS巩固实践-37-使用Controller as Vm方式
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-08-14 22:12:44
 updated:
 ---

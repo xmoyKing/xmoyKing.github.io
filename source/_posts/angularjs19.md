@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-19-模块与服务协作
+title: AngularJS入门笔记-19-模块与服务协作
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-06-02 15:20:19
 updated:
 ---
@@ -22,7 +22,7 @@ updated:
 在实际项目中，代码和标签并不是仅在单个HTML文件中，那样会使应用变得笨拙，同时难以多人协同开发，解决的方案是分离应用的组件到单个文件中，并使用script元素在主html文件中引用那些文件。
 同时，使用统一的方式命名并组织文件可以让项目更合理，一般按类型将组件分类（比如控制器是一类，指令是一类）或（用户管理组件一类，内容管理组件是一类）
 ```js
-// directives.js 
+// directives.js
 angular.module("customDirectives", ["customServices"])
     .directive("triButton", function (logService) {
         return {

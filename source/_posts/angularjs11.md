@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-11-后台管理系统
+title: AngularJS入门笔记-11-后台管理系统
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - deployd
 date: 2017-05-14 13:28:21
 updated: 2017-05-14 13:28:21
@@ -45,7 +45,7 @@ angularjs #项目目录
       delete.js #对Ajax中的delete方法的设置
       get.js #同delete.js
       put.js #同delete.js
-    products 
+    products
       config.json
       delete.js #对Ajax中的delete方法的设置
       put.js #同delete.js

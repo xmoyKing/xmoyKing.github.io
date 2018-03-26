@@ -1,9 +1,10 @@
 ---
-title: angularjs巩固实践-29-指令复习
+title: AngularJS巩固实践-29-指令复习
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
+  - ng指令
 date: 2017-07-22 21:41:01
 updated:
 ---

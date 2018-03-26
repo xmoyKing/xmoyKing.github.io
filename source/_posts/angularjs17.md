@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-17-自定义指令1
+title: AngularJS入门笔记-17-自定义指令1
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-27 11:42:50
 updated:
 ---
@@ -37,7 +37,7 @@ angular.module("exampleApp", [])
 var data = scope[attrs["unorderedList"]];
 ```
 
-生成html元素：element参数其实是一个剪裁后jquery对象，ng称为jqLite，也可以通过angularjs.element获取这个jqLite对象。
+生成html元素：element参数其实是一个剪裁后jquery对象，ng称为jqLite，也可以通过AngularJS.element获取这个jqLite对象。
 ```js
 function (scope, element, attrs) {
     var data = scope[attrs["unorderedList"]];
@@ -50,7 +50,7 @@ function (scope, element, attrs) {
     }
 }
 ```
-上例的结果就是，在html元素上根据作用域中的数据生成一个列表。 
+上例的结果就是，在html元素上根据作用域中的数据生成一个列表。
 
 也可以在属性值中使用表达式，通过scope.$eval方法来计算。
 ```html
@@ -215,7 +215,7 @@ compile指定的编译函数应该只用于修改DOM，而link指定的链接函
 <body ng-controller="defaultCtrl">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>Products</h3> 
+            <h3>Products</h3>
         </div>
         <div class="panel-body">
             <div unordered-list="products">
@@ -224,7 +224,7 @@ compile指定的编译函数应该只用于修改DOM，而link指定的链接函
         </div>
     </div>
 </body>
-</html> 
+</html>
 ```
 
 ![template](1.png)
@@ -429,7 +429,7 @@ nameprop="data.name"
         <div class="panel-body">
             Direct Binding: <input ng-model="data.name" />
         </div>
-        <div class="panel-body" scope-demo 
+        <div class="panel-body" scope-demo
              city="getCity(data.name)" nameprop="data.name"></div>
     </div>
 </body>

@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-24-动画&触控（swipe)手势
+title: AngularJS入门笔记-24-动画&触控（swipe)手势
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-07-09 10:23:28
 updated:
 ---

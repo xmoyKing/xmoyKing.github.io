@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-41-Angular中的AOP机制
+title: AngularJS巩固实践-41-Angular中的AOP机制
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - AOP
 date: 2017-08-25 20:01:54
 updated:
@@ -212,7 +212,7 @@ var interceptorFactories = this.interceptors = [];
 
 var responseInterceptorFactories = this.responseInterceptors = [];
 
-  this.$get = ['$browser', '$httpBackend', '$$cookieReader', '$cacheFactory', '$rootScope', '$q', '$injector', 
+  this.$get = ['$browser', '$httpBackend', '$$cookieReader', '$cacheFactory', '$rootScope', '$q', '$injector',
       function($browser, $httpBackend, $$cookieReader, $cacheFactory, $rootScope, $q, $injector) {
 
     var defaultCache = $cacheFactory('$http');
@@ -241,7 +241,7 @@ var responseInterceptorFactories = this.responseInterceptors = [];
     // ...
 
     function $http(requestConfig) {
-      // ... 
+      // ...
       var chain = [serverRequesr, undefined];
       var promise = $q.when(config);
 
@@ -347,7 +347,7 @@ $provide服务是ng内部用于创建所有Provider服务的服务对象，可�
 function decorator(serviceName, decorFn){
   var origProvider = providerInjector.get(serviceName + providerSuffix),
       orig$get = origProvider.$get;
-    
+
   origProvider.$get = function(){
     var origInstance = instanceInjector.invoke(orig$get, origProvider);
 

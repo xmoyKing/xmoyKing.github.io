@@ -1,9 +1,10 @@
 ---
-title: angularjs巩固实践-34-脏检查机制
+title: AngularJS巩固实践-34-脏检查机制
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
+  - ng脏检查
 date: 2017-08-07 18:19:58
 updated:
 ---
@@ -37,7 +38,7 @@ $watch: function(watchExp, listener, objectEquality){
         exp: watchExp, // 监听表达式
         eq: !!objectEquality //是否需要深度对比
       };
-    
+
     lastDirtyWatch = null;
     ...
     if(!array){
@@ -132,7 +133,7 @@ $digest: function(){
                   watch.fn(value, ((last === initWatchVal)?value:last), current);
                   if(ttl < 5){
                     // ... log message
-                  }                  
+                  }
                 }else if(watch === lastDirtyWatch){
                   dirty = false;
                   break traverseScopeLoop;
@@ -158,7 +159,7 @@ $digest: function(){
     if((dirty || asyncQueue.length) && !(ttl--)){
       // 若超过默认10次digest循环，抛出异常，终止循环、
       clearPhase();
-      throw $rootScopeMinErr('infdig', '{0} $digest() iterations reached. Aborting!\n' + 'Watchers fired in the last 5 iterations: {1}', TTL, toJson(watchLog));      
+      throw $rootScopeMinErr('infdig', '{0} $digest() iterations reached. Aborting!\n' + 'Watchers fired in the last 5 iterations: {1}', TTL, toJson(watchLog));
     }
   }while(dirty || asyncQueue.length);
 

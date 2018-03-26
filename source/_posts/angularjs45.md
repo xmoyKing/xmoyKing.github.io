@@ -1,9 +1,9 @@
 ---
-title: angularjs巩固实践-45-依赖注入$injector
+title: AngularJS巩固实践-45-依赖注入$injector
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
   - $injector
 date: 2017-09-01 08:27:40
 updated:
@@ -30,7 +30,7 @@ function bootstrap(element, modules){
       throw ngMinErr(
         'btstrpd',
         'App Already Bootstrapped with this Element "{0}"',
-        tag.replace(/</,'&lt;').replace(/>/,'&gt;') 
+        tag.replace(/</,'&lt;').replace(/>/,'&gt;')
         );
       }
 
@@ -41,7 +41,7 @@ function bootstrap(element, modules){
       modules.unshift('ng');
 
       var injector = createInjector(modules);
-      injector.invoke(['$rootScope', '$rootElement', '$compile', '$injector', '$animate', 
+      injector.invoke(['$rootScope', '$rootElement', '$compile', '$injector', '$animate',
       function(scope, element, compile, injector, animate){
         scope.$apply(function(){
           element.data('$injector', injector);
@@ -70,7 +70,7 @@ function createInjector(modulesToLoad){
     instanceInjector.invoke(fn || noop);
   });
 
-  return instanceInjector;  
+  return instanceInjector;
 }
 ```
 

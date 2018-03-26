@@ -1,9 +1,9 @@
 ---
-title: angularjs入门笔记-18-自定义指令2
+title: AngularJS入门笔记-18-自定义指令2
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
+  - AngularJS
 date: 2017-05-28 10:17:34
 updated:
 ---
@@ -320,7 +320,7 @@ ng-model指令能以多种方法捕获输入数据，允许我们定义组件时
                         for (var i = 0; i < buttons.length; i++) {
                             if (buttons.eq(i).text() == value) {
                                 buttons.eq(i).addClass("btn-primary");
-                            } 
+                            }
                         }
                     }
 

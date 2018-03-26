@@ -1,10 +1,10 @@
 ---
-title: angularjs入门笔记-27-单元测试2
+title: AngularJS入门笔记-27-单元测试2
 categories:
-  - angularjs
+  - AngularJS
 tags:
-  - angularjs
-  - jasmine
+  - AngularJS
+  - Jasmine
 date: 2017-07-18 13:52:40
 updated:
 ---
@@ -13,7 +13,7 @@ updated:
 
 #### 仿造定时
 $interval和$timeout仿造服务定义的方法能明确的触发由测试代码注册的回调函数。
-- flush(millisecond) 使计时器快进的毫秒数，$timeout和$interval服务都提供此方法 
+- flush(millisecond) 使计时器快进的毫秒数，$timeout和$interval服务都提供此方法
 - verifyNoPendingTasks() 查看是否还有未被调用的回调函数，仅$timeout服务提供此方法
 
 在app.js中添加定时：
@@ -60,7 +60,7 @@ describe("Controller Test", function () {
         { "name": "Pears", "category": "Fruit", "price": 2.02 }]);
     }));
     // 1.准备定时器测试预设参数
-    beforeEach(angular.mock.inject(function ($controller, $rootScope, 
+    beforeEach(angular.mock.inject(function ($controller, $rootScope,
            $http, $interval, $timeout) {
         mockScope = $rootScope.$new();
         mockInterval = $interval;
@@ -365,7 +365,7 @@ describe("Directive Tests", function () {
         var compileFn = compileService("<div unordered-list='data'></div>");
         var elem = compileFn(mockScope);
 
-        expect(elem.children("ul").length).toEqual(1); 
+        expect(elem.children("ul").length).toEqual(1);
         expect(elem.find("li").length).toEqual(3);
         expect(elem.find("li").eq(0).text()).toEqual("Apples");
         expect(elem.find("li").eq(1).text()).toEqual("Bananas");
