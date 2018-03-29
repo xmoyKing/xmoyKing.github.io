@@ -1,10 +1,9 @@
 ---
 title: j2ee课程：理解并实现ssh核心原理 + ssh实践
-categories:
-  - java
+categories: Java
 tags:
-  - j2ee
-  - ssh
+  - J2EE
+  - SSH
 date: 2017-03-25 13:35:05
 updated: 2017-03-26 13:35:05
 ---

@@ -1,9 +1,8 @@
 ---
 title: Linux IPtables Practice
-categories:
-  - linux
+categories: Linux
 tags:
-  - linux
+  - Linux
   - 网络
   - 安全
   - iptables

@@ -1,7 +1,6 @@
 ---
 title: IP/ICMP Security
-categories:
-  - 网络
+categories: 网络
 tags:
   - 网络
   - 安全
