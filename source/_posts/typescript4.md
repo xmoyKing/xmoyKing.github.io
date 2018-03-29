@@ -2,8 +2,7 @@
 title: TypeScript入门-4-装饰器/泛型
 categories: TypeScript
 tags:
-  - js
-  - typescript
+  - TypeScript
 date: 2017-09-25 15:35:13
 updated:
 ---
@@ -160,8 +159,8 @@ TypeScript支持多个装饰器同时应用到一个声明上，实现多个装�
 // 从左到右书写
 @decoratorA @decoratorB param
 // 从上到下书写
-@decoratorA 
-@decoratorB 
+@decoratorA
+@decoratorB
 functionA
 ```
 当多个装饰器应用到同一个声明上时，处理步骤如下：
@@ -176,7 +175,7 @@ function Component(component){
   return (target: any) => {
     console.log('component call');
     return target;
-  } 
+  }
 }
 
 function Directive(directive){
@@ -184,7 +183,7 @@ function Directive(directive){
   return (target: any) => {
     console.log('directive call');
     return target;
-  } 
+  }
 }
 
 @Component({select: 'person', template: 'person.html'})

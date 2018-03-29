@@ -2,10 +2,10 @@
 title: Angular2入门-RxJs
 categories: Angular
 tags:
-  - JavaScript
   - rxjs
-  - typescript
-  - angular
+  - TypeScript
+  - Angular
+  - 揭秘 Angular2
 date: 2017-10-16 16:00:10
 updated:
 ---

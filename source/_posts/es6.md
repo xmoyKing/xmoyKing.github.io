@@ -1,10 +1,9 @@
 ---
 title: ES6入门笔记
-categories:
-  - js
+categories: JavaScript
 tags:
-  - js
-  - es6
+  - JavaScript
+  - ES6
 date: 2016-09-01 10:16:12
 updated:
 ---
@@ -15,7 +14,7 @@ updated:
 ### let和const
 
 #### 基本用法
-如果使用let，声明的变量仅在块级作用域内有效. 
+如果使用let，声明的变量仅在块级作用域内有效.
 
 `for (let i = 0; i < 10; i++)`
 
@@ -116,7 +115,7 @@ let x;
 codePointAt方法是测试一个字符由两个字节还是由四个字节组成的最简单方法。
 
 #### 实例：模板编译
-通过模板字符串，生成正式模板的实例。若无法直接看懂程序，则可以通过单步调试查看变量值的变化。 
+通过模板字符串，生成正式模板的实例。若无法直接看懂程序，则可以通过单步调试查看变量值的变化。
 ```js
 function compile(template){
   const evalExpr = /<%=(.+?)%>/g;
@@ -310,7 +309,7 @@ Promise 的最大问题是代码冗余，原来的任务被 Promise 包装了一
 ### Class 的继承
 需要理清__proto__和`prototype`属性的关系，可参考： [js中__proto__和prototype的区别和关系？](https://www.zhihu.com/question/34183746)
 
-同时ES6中可以对原生构造函数进行继承，如Array、String、Date等。 
+同时ES6中可以对原生构造函数进行继承，如Array、String、Date等。
 
 ### Module 的加载实现
 由于CommonJS(Node)规范和ES6 Module规范的差异，因为一个是静态导入一个是动态导入，最好不用混用，虽然其实可以相互调用。但有各种需要注意的地方。

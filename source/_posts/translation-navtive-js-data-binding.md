@@ -2,7 +2,7 @@
 title: 【译】原生JS数据绑定
 categories: Translation
 tags:
-  - js
+  - JavaScript
   - translation
 date: 2018-02-21 20:48:59
 updated: 2018-02-21 20:48:59

@@ -6,6 +6,7 @@ tags:
   - AngularJS
   - JavaScript
   - $timeout
+  - AngularJS深度剖析
 date: 2017-08-22 22:18:00
 updated:
 ---

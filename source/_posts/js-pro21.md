@@ -3,8 +3,8 @@ title: JavaScript高级程序设计-21-表单
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
-  - form
+  - JavaScript高级程序设计
+  - 表单
 date: 2016-09-04 16:57:13
 updated:
 ---

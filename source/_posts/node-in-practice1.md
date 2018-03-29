@@ -2,8 +2,8 @@
 title: Node 技巧笔记1 - Node 环境，全局变量
 categories: Nodejs
 tags:
-  - js
-  - nodejs
+  - JavaScript
+  - Nodejs
   - stream
   - process
 date: 2018-03-17 09:13:03

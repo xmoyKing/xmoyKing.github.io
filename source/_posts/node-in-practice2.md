@@ -2,7 +2,8 @@
 title: Node 技巧笔记2 - Buffer
 categories: Nodejs
 tags:
-  - js
+  - JavaScript
+  - Nodejs
   - buffer
 date: 2018-03-21 12:15:21
 updated: 2018-03-21 12:15:21

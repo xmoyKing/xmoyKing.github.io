@@ -2,9 +2,9 @@
 title: Angular2入门-组件-2
 categories: Angular
 tags:
-  - JavaScript
-  - typescript
-  - angular
+  - TypeScript
+  - Angular
+  - 揭秘 Angular2
 date: 2017-10-03 18:28:11
 updated:
 ---

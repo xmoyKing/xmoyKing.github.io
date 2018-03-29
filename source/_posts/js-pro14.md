@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-14-函数表达式2-模仿块级作用域/�
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-12 16:49:18
 updated:
 ---

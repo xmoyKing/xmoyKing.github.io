@@ -3,7 +3,7 @@ title: JavaScript框架设计笔记-1-种子模块
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
 date: 2016-12-16 16:15:31
 updated:
 ---

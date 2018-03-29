@@ -3,7 +3,9 @@ title: 精通CSS笔记-背景图片
 date: 2017-01-29 11:16:26
 updated: 2017-01-29
 categories: CSS
-tags: [CSS, CSS-Mastery]
+tags:
+  - CSS
+  - 精通CSS
 ---
 
 ## 学习目标： ##

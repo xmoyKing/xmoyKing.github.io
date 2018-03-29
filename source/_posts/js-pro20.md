@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-20-事件
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
   - events
 date: 2016-09-01 09:37:13
 updated:

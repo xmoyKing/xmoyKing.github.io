@@ -3,7 +3,7 @@ title: 精通CSS笔记-CSS代码结构和选择器
 date: 2017-01-28 11:04:43
 updated: 2017-01-28
 categories: CSS
-tags: [CSS, CSS-Mastery]
+tags: [CSS, 精通CSS]
 ---
 
 # CSS Mastery #

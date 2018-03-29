@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-3-基本概念1-数据类型
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-04 13:48:51
 updated:
 ---

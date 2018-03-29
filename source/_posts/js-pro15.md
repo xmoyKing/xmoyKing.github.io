@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-15-BOM
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-15 14:57:49
 updated:
 ---

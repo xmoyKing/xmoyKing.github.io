@@ -2,7 +2,7 @@
 title: Three.js入门-1
 categories: three.js
 tags:
-  - js
+  - JavaScript
   - three.js
   - webgl
 date: 2018-01-24 14:51:33

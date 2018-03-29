@@ -3,8 +3,8 @@ title: JavaScript高级程序设计-22-Canvas
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
-  - canvas
+  - JavaScript高级程序设计
+  - Canvas
 date: 2016-09-09 19:53:56
 updated:
 ---

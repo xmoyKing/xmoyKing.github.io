@@ -3,8 +3,8 @@ title: JavaScript框架设计笔记-14-动画引擎-2
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
-  - css3 animation
+  - JavaScript框架设计
+  - CSS3 animation
   - requestAnimationFrame
   - transition
 date: 2017-01-08 18:27:46

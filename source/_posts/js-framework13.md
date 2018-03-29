@@ -3,9 +3,9 @@ title: JavaScript框架设计笔记-13-动画引擎-1
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
-  - jquery
-  - css3 animation
+  - JavaScript框架设计
+  - jQuery
+  - CSS3 animation
   - easing
 date: 2017-01-08 10:20:33
 updated: 2017-01-08 10:20:33

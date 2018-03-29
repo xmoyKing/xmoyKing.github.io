@@ -3,7 +3,8 @@ title: 指尖上行，移动前端开发进阶之路笔记-4
 categories: WebApp
 tags:
   - webapp
-  - Webapp-API
+  - 移动设备API
+  - 指尖上行，移动前端
 date: 2018-01-15 16:28:08
 updated: 2018-01-15 16:28:08
 ---

@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-10-面向对象1-理解对象属性
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-10 21:36:01
 updated:
 ---

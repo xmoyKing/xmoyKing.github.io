@@ -1,10 +1,9 @@
 ---
-title: effective JavaScript笔记-1
+title: Effective JavaScript笔记-1
 categories: JavaScript
 tags:
   - JavaScript
-  - effective-javascript
-  - note
+  - Effective JavaScript
 date: 2017-02-24 11:43:18
 ---
 

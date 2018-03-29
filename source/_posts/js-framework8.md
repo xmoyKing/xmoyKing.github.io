@@ -3,7 +3,7 @@ title: JavaScript框架设计笔记-8-样式模块
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
 date: 2017-01-02 23:10:26
 updated: 2017-01-02 23:10:26
 ---

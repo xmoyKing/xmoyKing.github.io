@@ -3,7 +3,7 @@ title: JavaScript框架设计笔记-7-数据缓存系统
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
 date: 2016-12-30 15:24:04
 updated: 2016-12-30 15:24:04
 ---

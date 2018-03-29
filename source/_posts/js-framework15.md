@@ -3,7 +3,7 @@ title: JavaScript框架设计笔记-15-插件化
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
 date: 2017-01-10 15:43:40
 updated: 2017-01-10 15:43:40
 ---

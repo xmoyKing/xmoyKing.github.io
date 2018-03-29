@@ -3,7 +3,7 @@ title: JavaScript框架设计笔记-12-异步处理
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
   - deferred
   - promise
 date: 2017-01-07 14:53:49

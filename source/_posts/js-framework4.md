@@ -3,7 +3,7 @@ title: JavaScript框架设计笔记-4-选择器引擎
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
 date: 2016-12-21 20:04:03
 updated: 2016-12-21 20:04:03
 ---

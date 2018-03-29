@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-11-面向对象2-创建对象
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-10 18:32:09
 updated:
 ---

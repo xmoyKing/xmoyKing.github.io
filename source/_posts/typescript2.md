@@ -2,8 +2,7 @@
 title: TypeScript入门-2-函数/类
 categories: TypeScript
 tags:
-  - js
-  - typescript
+  - TypeScript
 date: 2017-09-20 13:59:53
 updated:
 ---
@@ -60,7 +59,7 @@ function sum(x: number, ...restOfNumber: number[]): number {
   return ret;
 }
 
-let ret = sum(1,2,3,4,5); 
+let ret = sum(1,2,3,4,5);
 console.log(ret); // 15
 ```
 注：剩余参数可以理解为个数不限的可选参数，即剩余参数包含的参数个数可以为零到多个。
@@ -233,6 +232,6 @@ class Male extends Person {
 let person: Person; // 创建一个抽象类引用
 person = new Person(); // 报错
 person = new Male(); // 通过
-person.speak(); 
-person.walking(); 
+person.speak();
+person.walking();
 ```

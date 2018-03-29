@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-17-DOM
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-20 14:25:36
 updated:
 ---

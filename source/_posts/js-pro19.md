@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-19-DOM2和DOM3
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-27 21:45:02
 updated:
 ---

@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-25-高级技巧
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-09-17 09:36:39
 updated:
 ---

@@ -2,9 +2,9 @@
 title: Angular2快速入门-通讯录Demo
 categories: Angular
 tags:
-  - JavaScript
-  - typescript
-  - angular
+  - TypeScript
+  - Angular
+  - 揭秘 Angular2
 date: 2017-10-01 17:45:46
 updated:
 ---

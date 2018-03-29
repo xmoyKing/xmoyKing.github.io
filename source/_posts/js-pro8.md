@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-8-引用类型2-RegExp/Function
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-08 17:37:19
 updated:
 ---

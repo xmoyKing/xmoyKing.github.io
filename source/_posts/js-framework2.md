@@ -3,7 +3,7 @@ title: JavaScript框架设计笔记-2-语言模块
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
 date: 2016-12-17 17:52:05
 updated:
 ---

@@ -3,7 +3,9 @@ title: 精通CSS笔记-对链接应用样式
 date: 2017-01-29 15:01:35
 updated: 2017-01-29
 categories: CSS
-tags: [CSS, CSS-Mastery]
+tags:
+  - CSS
+  - 精通CSS
 ---
 
 学习内容：

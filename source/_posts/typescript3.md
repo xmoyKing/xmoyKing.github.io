@@ -2,8 +2,7 @@
 title: TypeScript入门-3-模块/接口
 categories: TypeScript
 tags:
-  - js
-  - typescript
+  - TypeScript
 date: 2017-09-23 13:59:53
 updated:
 ---
@@ -212,7 +211,7 @@ printLabel(myObj);
 ```js
 interface encrypt{
   (val:string, salt:string):string
-} 
+}
 
 let md5: encrypt;
 md5 = function(val:string, salt:string){

@@ -1,8 +1,12 @@
 ---
 title: 精通CSS笔记-布局
 date: 2017-01-30 19:59:54
-categories: css
-tags: [css, CSS-Mastery, flex, layout]
+categories: CSS
+tags:
+  - CSS
+  - 精通CSS
+  - flex
+  - 布局
 ---
 
 学习内容：
@@ -78,4 +82,4 @@ Flex也有行内元素和块级元素的区别：`display:flex, display: inline-
 
 这篇博文无论是原文还是翻译都绝对算得上精品: [理解Flexbox：你需要知道的一切](https://www.w3cplus.com/css3/understanding-flexbox-everything-you-need-to-know.html)
 
-很长，详细探究了width、max/min-width、absolute 对flex-item的影响： [深入理解 flex 布局以及计算](https://www.w3cplus.com/css3/flexbox-layout-and-calculation.html) 
+很长，详细探究了width、max/min-width、absolute 对flex-item的影响： [深入理解 flex 布局以及计算](https://www.w3cplus.com/css3/flexbox-layout-and-calculation.html)

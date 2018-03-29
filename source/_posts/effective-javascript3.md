@@ -1,11 +1,11 @@
 ---
-title: effective-JavaScript笔记-3
-date: 2017-02-27 19:42:53
-updated: 2017-03-25
+title: Effective JavaScript笔记-3
 categories: JavaScript
 tags:
   - JavaScript
-  - effective-javascript
+  - Effective JavaScript
+date: 2017-02-27 19:42:53
+updated: 2017-03-25
 ---
 
 ## 使用函数

@@ -2,8 +2,10 @@
 title: 精通CSS笔记-盒模型&定位&浮动
 date: 2017-01-28 16:31:48
 updated: 2017-01-28
-categories: css
-tags: [css, CSS-Mastery, Note]
+categories: CSS
+tags:
+  - CSS
+  - 精通CSS
 ---
 
 最重要的三个css概念：浮动，定位，盒模型。他们控制在页面上安排和显示元素的方式，形成基本的布局。
@@ -49,9 +51,9 @@ tags: [css, CSS-Mastery, Note]
 ## 定位 ##
 
 1. 相对定位
-    - 若对一个元素进行相对定位，它将出现在它所在的位置上（未设置top或left等属性时），  
-    - 然后，通过设置垂直或水平位置，可以让这个元素”相对与“它的起点移动，  
-    - 若设置top:20, left：20，它将相对在原位置顶部向下移动20像素，同时右移20像素（即在左边创建20像素的空间）  
+    - 若对一个元素进行相对定位，它将出现在它所在的位置上（未设置top或left等属性时），
+    - 然后，通过设置垂直或水平位置，可以让这个元素”相对与“它的起点移动，
+    - 若设置top:20, left：20，它将相对在原位置顶部向下移动20像素，同时右移20像素（即在左边创建20像素的空间）
     - **注:** 使用相对定位时，无论是否移动，元素仍占据原来的空间，因此，移动元素会导致它覆盖其他框
     ```html
     <div style="padding: 5px; width: 200px; height: 50px;" class="test">
@@ -69,19 +71,19 @@ tags: [css, CSS-Mastery, Note]
         display: inline-block;
     }
     #d1 {
-        border-color: red; 
+        border-color: red;
         position: relative;
         top: 10px;
         left: 30px;
     }
     </style>
     ```
-    - EXAMPLE: <div class=test style=padding:5px;width:200px;height:50px><div class=test></div><div class=test id=d1></div><div class=test></div></div><style>div.test{width:20px;height:20px;border:1px solid #000;margin:5px;display:inline-block}#d1{border-color:red;position:relative;top:10px;left:30px}</style>  
+    - EXAMPLE: <div class=test style=padding:5px;width:200px;height:50px><div class=test></div><div class=test id=d1></div><div class=test></div></div><style>div.test{width:20px;height:20px;border:1px solid #000;margin:5px;display:inline-block}#d1{border-color:red;position:relative;top:10px;left:30px}</style>
     - 相对定位模型图：
 <img src="./1.png" alt="相对定位模型图"/>
 2. 绝对定位
-    - 相对定位实际上为普通流定位模型的一部分，而绝对定位使元素的位置与文档流无关，因此不占据空间。普通文档流中其他元素的布局就像绝对定位的元素不存在一样。  
-    - 绝对定位的元素的位置是相对与距离它最近的那个已定位的祖先元素确定的，若没有已定位的祖先元素，则相对于初始包含块，可能是画布或html元素 
+    - 相对定位实际上为普通流定位模型的一部分，而绝对定位使元素的位置与文档流无关，因此不占据空间。普通文档流中其他元素的布局就像绝对定位的元素不存在一样。
+    - 绝对定位的元素的位置是相对与距离它最近的那个已定位的祖先元素确定的，若没有已定位的祖先元素，则相对于初始包含块，可能是画布或html元素
 <img src="3.png" alt="绝对定位模型图"/>
 3. 固定定位
     - 固定定位是绝对定位的一种，固定元素的包含块是视口，所以总是出现在窗口中相同位置的浮动元素
@@ -103,16 +105,16 @@ tags: [css, CSS-Mastery, Note]
 <img src="6.png" alt="下降&卡住">
 
 ## 行框和清理 ##
-若浮动的元素后面有一个文档流中的元素，那么这个元素的框会表现得像浮动根本不存在一样。当时，框的文本内容会受到浮动元素的影响，会移动以留出空间。     
+若浮动的元素后面有一个文档流中的元素，那么这个元素的框会表现得像浮动根本不存在一样。当时，框的文本内容会受到浮动元素的影响，会移动以留出空间。
 即：浮动元素旁边的行框被缩短，从而给浮动元素留出空间，因此行框围绕浮动框。（创建浮动框使文本可以为围绕图像）
 <img src="7.png" alt="文本围绕图像">
 
-1. 要想阻止行框围绕在浮动框的外边，需要对包含这些行框的元素应用clear属性（值可以是left，right，both或none），对元素进行清理实际上为前面的浮动元素留出了垂直空间。  
+1. 要想阻止行框围绕在浮动框的外边，需要对包含这些行框的元素应用clear属性（值可以是left，right，both或none），对元素进行清理实际上为前面的浮动元素留出了垂直空间。
 clear让周围的元素为浮动元素留出空间。
 <img src="8.png" alt="清理元素的顶外边距">
 <img src="9.png" alt="用空div清理">
-2. overflow属性值为hidden或auto的时候，会自动清理包含的任何浮动元素，这种方法不用添加无意义的标签，  
-但并不适用所有情况，因为设置overflow属性会在某些情况下产生滚动条或截断内容。     
+2. overflow属性值为hidden或auto的时候，会自动清理包含的任何浮动元素，这种方法不用添加无意义的标签，
+但并不适用所有情况，因为设置overflow属性会在某些情况下产生滚动条或截断内容。
 3. 使用动态添加清理元素的方式，css配合javascrip，常常需要添加clear的类名
 ```html
 <div class="news clear">
@@ -121,9 +123,9 @@ clear让周围的元素为浮动元素留出空间。
 </div>
 ```
 4. 仅使用css的方法，结合伪类<code>:after</code>和内容声明，在指定的现有内容的末尾添加新的内容。
-如下实例中，添加一个点（比较小）  
-将height设置为0，visibility设置为hidden可使新内容不占据垂直空间且不在页面上显示  
-因为被清理元素在它们的顶外边距上添加了空间，所以生成的内容需要将它的display属性设置为block  
+如下实例中，添加一个点（比较小）
+将height设置为0，visibility设置为hidden可使新内容不占据垂直空间且不在页面上显示
+因为被清理元素在它们的顶外边距上添加了空间，所以生成的内容需要将它的display属性设置为block
 ```css
 .clear:after {
     content: ".";

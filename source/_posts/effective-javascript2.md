@@ -1,10 +1,10 @@
 ---
-title: effective-JavaScript笔记-2
-date: 2017-02-26 13:37:50
+title: Effective JavaScript笔记-2
 categories: JavaScript
 tags:
   - JavaScript
-  - effective-javascript
+  - Effective JavaScript
+date: 2017-02-26 13:37:50
 ---
 
 ## 变量作用域

@@ -1,11 +1,11 @@
 ---
-title: effective-JavaScript笔记-4
-date: 2017-03-01 11:30:28
-updated: 2017-03-25
+title: Effective JavaScript笔记-4
 categories: JavaScript
 tags:
   - JavaScript
-  - effective-javascript
+  - Effective JavaScript
+date: 2017-03-01 11:30:28
+updated: 2017-03-25
 ---
 
 ## 对象和原型

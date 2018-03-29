@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-12-面向对象3-继承
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-08-11 08:22:40
 updated:
 ---

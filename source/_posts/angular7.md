@@ -2,9 +2,9 @@
 title: Angular2入门-指令
 categories: Angular
 tags:
-  - JavaScript
-  - typescript
-  - angular
+  - TypeScript
+  - Angular
+  - 揭秘 Angular2
 date: 2017-10-11 11:30:06
 updated:
 ---

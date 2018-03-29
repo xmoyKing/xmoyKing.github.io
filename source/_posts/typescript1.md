@@ -2,8 +2,7 @@
 title: TypeScript入门-1-基本类型
 categories: TypeScript
 tags:
-  - js
-  - typescript
+  - TypeScript
 date: 2017-09-17 13:59:53
 updated:
 ---
@@ -33,10 +32,10 @@ tsc hello.ts
 ### 基本类型
 在TypeScript中声明变量需要加上类型声明，通过静态类型约束，在编译时执行类型检查，能避免类型混用或错误赋值等问题，比如当赋值给不对应的类型时会报错，基本类型包括10种
 
-#### 布尔类型 boolean 
+#### 布尔类型 boolean
 `let flag: boolean = true;`
 
-#### 数字类型 number 
+#### 数字类型 number
 TS中的数字都是浮点数，支持二（`let binaryNumber: number = 0b1010`）、八（`0b1010`）、十、十六（`0xf00d`）进制字面量。
 
 #### 字符串类型 string

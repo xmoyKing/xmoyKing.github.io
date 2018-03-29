@@ -3,9 +3,9 @@ title: JavaScript框架设计笔记-11-事件系统-2-jQuery事件系统
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
   - jquery.event
-  - jquery
+  - jQuery
 date: 2017-01-06 19:31:10
 updated: 2017-01-06 19:31:10
 ---

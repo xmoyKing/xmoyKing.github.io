@@ -3,8 +3,9 @@ title: 指尖上行，移动前端开发进阶之路笔记-3
 categories: WebApp
 tags:
   - webapp
-  - css3
-  - animate
+  - 动画
+  - CSS3
+  - 指尖上行，移动前端
 date: 2018-01-14 12:13:41
 updated: 2018-01-14 12:13:41
 ---

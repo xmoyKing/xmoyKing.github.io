@@ -2,9 +2,9 @@
 title: Angular2入门-模板-1
 categories: Angular
 tags:
-  - JavaScript
-  - typescript
-  - angular
+  - TypeScript
+  - Angular
+  - 揭秘 Angular2
 date: 2017-10-07 09:23:32
 updated:
 ---

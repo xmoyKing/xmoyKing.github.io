@@ -2,16 +2,16 @@
 title: Angular2快速入门-Hello World
 categories: Angular
 tags:
-  - JavaScript
   - TypeScript
-  - angular
+  - Angular
+  - 揭秘 Angular2
 date: 2017-10-01 17:04:53
 updated:
 ---
 
 一步一步的学习手动搭建简单的Angular2开发环境。
 
-本系列笔记来自[《揭秘 Angular 2》](https://github.com/angular-programming)一书。
+本系列笔记来自[《揭秘 Angular2》](https://github.com/angular-programming)一书。
 
 [DEMO源码](https://github.com/xmoyKing/Angular2-Demo-Hello-World)
 

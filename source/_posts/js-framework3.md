@@ -3,7 +3,7 @@ title: JavaScript框架设计笔记-3-类工厂
 categories: JavaScript
 tags:
   - JavaScript
-  - js-framework
+  - JavaScript框架设计
 date: 2016-12-18 17:25:38
 updated:
 ---

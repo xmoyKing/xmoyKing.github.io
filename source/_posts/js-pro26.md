@@ -3,7 +3,7 @@ title: JavaScript高级程序设计-26-最佳实践
 categories: JavaScript
 tags:
   - JavaScript
-  - js-pro
+  - JavaScript高级程序设计
 date: 2016-09-20 13:49:47
 updated:
 ---

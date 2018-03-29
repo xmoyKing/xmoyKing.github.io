@@ -2,9 +2,9 @@
 title: Angular2入门-服务
 categories: Angular
 tags:
-  - JavaScript
-  - typescript
-  - angular
+  - TypeScript
+  - Angular
+  - 揭秘 Angular2
 date: 2017-10-15 17:04:58
 updated:
 ---
