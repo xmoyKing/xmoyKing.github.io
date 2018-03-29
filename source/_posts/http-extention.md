@@ -1,5 +1,5 @@
 ---
-title: HTTP 扩展协议
+title: 基于 HTTP 的扩展协议
 categories: 网络
 tags:
   - HTTP
