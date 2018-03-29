@@ -1,8 +1,8 @@
 ---
 title: JavaScript框架设计笔记-13-动画引擎-1
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
   - jquery
   - css3 animation

@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-18-接口和面向接口编程
-categories: js
+categories: JavaScript
 tags:
-- js
-- design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-12-07 09:59:31
 updated: 2017-12-07 09:59:31
 ---
@@ -21,13 +21,13 @@ updated: 2017-12-07 09:59:31
 #### 回到Java的抽象类
 首先让回顾一下动物世界。目前我们有一个鸭子类Duck，还有一个让鸭子发出叫声的AnimalSound类，该类有一个makeSound方法，接收Duck类型的对象作为参数，这几个类一直合作得很愉快，代码如下：
 ```java
-public class Duck { // 鸭 子 类 
+public class Duck { // 鸭 子 类
   public void makeSound() {
     System.out.println("嘎 嘎 嘎");
   }
 }
 public class AnimalSound {
-  public void makeSound(Duck duck) { // (1) 只 接 受 Duck 类 型 的 参 数 
+  public void makeSound(Duck duck) { // (1) 只 接 受 Duck 类 型 的 参 数
     duck.makeSound();
   }
 }
@@ -35,7 +35,7 @@ public class Test {
   public static void main(String args[]) {
     AnimalSound animalSound = new AnimalSound();
     Duck duck = new Duck();
-    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎 
+    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎
   }
 }
 ```
@@ -63,7 +63,7 @@ public class Test {
 先创建一个Animal抽象类,然后让Duck类和Chicken类都继承自抽象类Animal：
 ```java
 public abstract class Animal {
-  abstract void makeSound(); // 抽 象 方 法 
+  abstract void makeSound(); // 抽 象 方 法
 }
 public class Chicken extends Animal {
   public void makeSound() {
@@ -79,17 +79,17 @@ public class Duck extends Animal {
 也可以把Animal定义为一个具体类而不是抽象类，但一般不这么做。Scott Meyers曾指出，只要有可能，不要从具体类继承。现在剩下的就是让AnimalSound类的makeSound方法接收Animal类型的参数，而不是具体的Duck类型或者Chicken类型：
 ```java
 public class AnimalSound {
-  public void makeSound(Animal animal) { // 接 收 Animal 类 型 的 参 数， 而 非 Duck 类 型 或 Chicken 类 型 
+  public void makeSound(Animal animal) { // 接 收 Animal 类 型 的 参 数， 而 非 Duck 类 型 或 Chicken 类 型
     animal.makeSound();
   }
 }
 public class Test {
   public static void main(String args[]) {
     AnimalSound animalSound = new AnimalSound();
-    Animal duck = new Duck(); // 向 上 转 型 Animal 
-    Chicken chicken = new Chicken(); // 向 上 转 型 
-    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎 
-    animalSound.makeSound(chicken); // 输 出： 咯 咯 咯 
+    Animal duck = new Duck(); // 向 上 转 型 Animal
+    Chicken chicken = new Chicken(); // 向 上 转 型
+    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎
+    animalSound.makeSound(chicken); // 输 出： 咯 咯 咯
   }
 }
 ```
@@ -131,12 +131,12 @@ public interface Animal {
   abstract void makeSound();
 }
 public class Duck implements Animal {
-  public void makeSound() { // 重 写 Animal 接 口 的 makeSound 抽 象 方 法 
+  public void makeSound() { // 重 写 Animal 接 口 的 makeSound 抽 象 方 法
     System.out.println("嘎 嘎 嘎");
   }
 }
 public class Chicken implements Animal {
-  public void makeSound() { // 重 写 Animal 接 口 的 makeSound 抽 象 方 法 
+  public void makeSound() { // 重 写 Animal 接 口 的 makeSound 抽 象 方 法
     System.out.println("咯 咯 咯");
   }
 }
@@ -150,8 +150,8 @@ public class Test {
     Animal duck = new Duck();
     Animal chicken = new Chicken();
     AnimalSound animalSound = new AnimalSound();
-    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎 
-    animalSound.makeSound(chicken); // 输 出： 咯 咯 咯 
+    animalSound.makeSound(duck); // 输 出： 嘎 嘎 嘎
+    animalSound.makeSound(chicken); // 输 出： 咯 咯 咯
   }
 }
 ```
@@ -163,15 +163,15 @@ public class Test {
 
 对于JavaScript而言，因为JavaScript是一门动态类型语言，类型本身在JavaScript中是一个相对模糊的概念。也就是说，不需要利用抽象类或者interface给对象进行“向上转型”。除了number、string、boolean等基本数据类型之外，其他的对象都可以被看成“天生”被“向上转型”成了Object类型：
 ```js
-var ary = new Array(); 
+var ary = new Array();
 var date = new Date();
 ```
 如果JavaScript是一门静态类型语言，上面的代码也许可以理解为：
 ```js
-Array ary = new Array(); 
+Array ary = new Array();
 Date date = new Date();
 // 或
-Object ary = new Array(); 
+Object ary = new Array();
 Object date = new Date();
 ```
 很少有人在JavaScript开发中去关心对象的真正类型。在动态类型语言中，对象的多态性是与生俱来的，但在另外一些静态类型语言中，对象类型之间的解耦非常重要，甚至有一些设计模式的主要目的就是专门隐藏对象的真正类型。
@@ -179,16 +179,16 @@ Object date = new Date();
 因为不需要进行向上转型，接口在JavaScript中的最大作用就退化到了检查代码的规范性。比如检查某个对象是否实现了某个方法，或者检查是否给函数传入了预期类型的参数。如果忽略了这两点，有可能会在代码中留下一些隐藏的bug。比如我们尝试执行obj对象的show方法，但是obj对象本身却没有实现这个方法，代码如下：
 ```js
 function show(obj) {
-  obj.show(); // Uncaught TypeError: undefined is not a function 
+  obj.show(); // Uncaught TypeError: undefined is not a function
 }
-var myObject = {}; // myObject 对 象 没 有 show 方 法 
+var myObject = {}; // myObject 对 象 没 有 show 方 法
 show(myObject);
 
 // 或
 function show(obj) {
-  obj.show(); // TypeError: number is not a function 
+  obj.show(); // TypeError: number is not a function
 }
-var myObject = { // myObject.show 不 是 Function 类 型 
+var myObject = { // myObject.show 不 是 Function 类 型
   show: 1
 };
 show(myObject);
@@ -207,10 +207,10 @@ function show(obj) {
     obj.show();
   } catch (e) {}
 }
-var myObject = {}; // myObject 对 象 没 有 show 方 法 
-// var myObject = { // myObject.show 不 是 Function 类 型 
-// show: 1 
-// }; 
+var myObject = {}; // myObject 对 象 没 有 show 方 法
+// var myObject = { // myObject.show 不 是 Function 类 型
+// show: 1
+// };
 show(myObject);
 ```
 如果JavaScript有编译器帮我们检查代码的规范性，那事情要比现在美好得多，不用在业务代码中到处插入一些跟业务逻辑无关的防御性代码。作为一门解释执行的动态类型语言，把希望寄托在编译器上是不可能了。如果要处理这类异常情况，只有手动编写一些接口检查的代码。
@@ -249,10 +249,10 @@ AddSubMenuCommand.prototype.execute = function() {
   console.log('增 加 子 菜 单');
 };
 
-var DelSubMenuCommand = function() {}; 
+var DelSubMenuCommand = function() {};
 /***** 没 有 实 现 DelSubMenuCommand.prototype.execute *****/
 // DelSubMenuCommand.prototype.execute = function(){
-// }; 
+// };
 
 var refreshMenuBarCommand = new RefreshMenuBarCommand(),
   addSubMenuCommand = new AddSubMenuCommand(),
@@ -265,7 +265,7 @@ var setCommand = function(command) {
   };
 
 setCommand(refreshMenuBarCommand); // 点 击 按 钮 后 输 出：" 刷 新 菜 单 界 面"
-setCommand(addSubMenuCommand); // 点 击 按 钮 后 输 出：" 增 加 子 菜 单" 
+setCommand(addSubMenuCommand); // 点 击 按 钮 后 输 出：" 增 加 子 菜 单"
 setCommand(delSubMenuCommand); // 点 击 按 钮 后 报 错。 Uncaught TypeError: undefined is not a function
 ```
 为了防止粗心的程序员忘记给某个子命令对象实现execute方法，我们只能在高层函数里添加一些防御性的代码，这样当程序在最终被执行的时候，有可能抛出异常来提醒我们，代码如下：
@@ -301,15 +301,15 @@ class AddSubMenuCommand implements Command {
   }
 }
 class DelSubMenuCommand implements Command {
-  constructor() {} // 忘 记 重 写 execute 方 法 
+  constructor() {} // 忘 记 重 写 execute 方 法
 }
 
 var refreshMenuBarCommand = new RefreshMenuBarCommand(),
   addSubMenuCommand = new AddSubMenuCommand(),
   delSubMenuCommand = new DelSubMenuCommand();
 
-refreshMenuBarCommand.execute(); // 输 出： 刷 新 菜 单 界 面 
-addSubMenuCommand.execute(); // 输 出： 增 加 子 菜 单 
+refreshMenuBarCommand.execute(); // 输 出： 刷 新 菜 单 界 面
+addSubMenuCommand.execute(); // 输 出： 增 加 子 菜 单
 delSubMenuCommand.execute(); // 输 出： Uncaught TypeError: undefined is not a function
 ```
 当我们忘记在DelSubMenuCommand类中重写execute方法时，TypeScript提供的编译器及时给出了错误提示。

@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-5-基本概念3-语句/函数
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-05 15:43:25
 updated:
@@ -166,7 +166,7 @@ function do2(num1, num2){
   num2 = 10;
   console.log(arguments[1], num2);
 }
-do2(1, 2); // 10, 10 
+do2(1, 2); // 10, 10
 // 理论上（JS高级程序设计 3.7.1）：修改命名参数则不会影响到arguments的值， 但实测为相等
 ```
 关于命名参数，没有传递值的命名参数将自动被赋值为undefined值，与定义了变量但未初始化一样。ES中所有的参数传递都是值，不可能通过引用传递参数。

@@ -1,8 +1,8 @@
 ---
 title: JavaScript框架设计笔记-6-节点模块
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
 date: 2016-12-26 15:24:04
 updated: 2016-12-26 15:24:04

@@ -1,8 +1,8 @@
 ---
 title: JavaScript框架设计笔记-9-属性模块
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
 date: 2017-01-05 14:53:31
 updated: 2017-01-05 14:53:31

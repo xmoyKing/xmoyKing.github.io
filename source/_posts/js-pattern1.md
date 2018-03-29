@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-1-基础复习-面向对象，this
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-01 20:15:13
 updated:
 ---
@@ -59,13 +59,13 @@ JavaScript没有提供传统面向对象语言中的类式继承，而是通过�
 但JavaScript并没有提供对这些关键字的支持，只能依赖变量的作用域来实现封装特性，而且只能模拟出public和private这两种封装性。
 除了ECMAScript6中提供的let之外，一般通过函数来创建作用域：
 ```js
-var myObject = (function(){ var __name = 'sven'; // 私 有（ private） 变 量 
-  return { getName: function(){ // 公 开（ public） 方 法 
-    return __name; 
-    } 
-  } 
-})(); 
-console.log( myObject.getName() ); // 输 出： sven 
+var myObject = (function(){ var __name = 'sven'; // 私 有（ private） 变 量
+  return { getName: function(){ // 公 开（ public） 方 法
+    return __name;
+    }
+  }
+})();
+console.log( myObject.getName() ); // 输 出： sven
 console.log( myObject.__name ) // 输 出： undefined
 ```
 在ECAMScript6中，还可以通过Symbol创建私有属性。
@@ -95,24 +95,24 @@ console.log( myObject.__name ) // 输 出： undefined
 
 原型模式的实现关键，是语言本身是否提供了clone方法。ECMAScript5提供了Object.create方法，可以用来克隆对象。
 ```js
-var Plane = function(){ 
-  this.blood = 100; 
-  this.attackLevel = 1; 
-  this.defenseLevel = 1; 
-}; 
-var plane = new Plane(); 
-    plane.blood = 500; 
-    plane.attackLevel = 10; 
-    plane.defenseLevel = 7; 
+var Plane = function(){
+  this.blood = 100;
+  this.attackLevel = 1;
+  this.defenseLevel = 1;
+};
+var plane = new Plane();
+    plane.blood = 500;
+    plane.attackLevel = 10;
+    plane.defenseLevel = 7;
 
-var clonePlane = Object.create( plane ); 
+var clonePlane = Object.create( plane );
 console.log( clonePlane ); // 输 出： Object {blood: 500, attackLevel: 10, defenseLevel: 7}
 
 // 在不支持Object.create方法的浏览器中，则可以使用以下代码：
-Object.create = Object.create | | function( obj ){ 
-  var F = function(){}; 
+Object.create = Object.create | | function( obj ){
+  var F = function(){};
   F.prototype = obj;
-  return new F(); 
+  return new F();
 }
 ```
 克隆是创建对象的手段，原型模式的真正目的并非在于需要得到一个一模一样的对象，而是提供了一种便捷的方式去创建某个类型的对象，克隆只是创建这个对象的过程和手段。
@@ -136,21 +136,21 @@ JavaScript的函数既可以作为普通函数被调用，也可以作为构造�
 
 在Chrome和Firefox等向外暴露了对象`__proto__`属性的浏览器下，可以通过下面这段代码来理解new运算的过程：
 ```js
-function Person( name ){ 
-  this.name = name; 
-}; 
-Person.prototype.getName = function(){ 
-  return this.name; 
-}; 
-var objectFactory = function(){ 
-  var obj = new Object(), // 从 Object.prototype 上 克 隆 一 个 空 的 对 象 
-  Constructor = [].shift.call( arguments ); // 取 得 外 部 传 入 的 构 造 器， 此 例 是 Person 
-  obj.__proto__ = Constructor.prototype; // 指 向 正 确 的 原 型 
-  var ret = Constructor.apply( obj, arguments ); // 借 用 外 部 传 入 的 构 造 器 给 obj 设 置 属 性 
-  return typeof ret === 'object' ? ret : obj; // 确 保 构 造 器 总 是 会 返 回 一 个 对 象 
-}; 
-var a = objectFactory( Person, 'sven' ); 
-console.log( a.name ); // 输 出： sven 
+function Person( name ){
+  this.name = name;
+};
+Person.prototype.getName = function(){
+  return this.name;
+};
+var objectFactory = function(){
+  var obj = new Object(), // 从 Object.prototype 上 克 隆 一 个 空 的 对 象
+  Constructor = [].shift.call( arguments ); // 取 得 外 部 传 入 的 构 造 器， 此 例 是 Person
+  obj.__proto__ = Constructor.prototype; // 指 向 正 确 的 原 型
+  var ret = Constructor.apply( obj, arguments ); // 借 用 外 部 传 入 的 构 造 器 给 obj 设 置 属 性
+  return typeof ret === 'object' ? ret : obj; // 确 保 构 造 器 总 是 会 返 回 一 个 对 象
+};
+var a = objectFactory( Person, 'sven' );
+console.log( a.name ); // 输 出： sven
 console.log( a.getName() ); // 输 出： sven
 ```
 如果请求可以在一个链条中依次往后传递，那么每个节点都必须知道它的下一个节点。同理，要完成JavaScript语言中的原型链查找机制，每个对象至少应该先记住它自己的原型。“对象的原型”，就JavaScript的真正实现来说，其实并不能说对象有原型，而只能说对象的构造器有原型。对于“对象把请求委托给它自己的原型”这句话，更好的说法是对象把请求委托给它的构造器的原型。那么对象如何把请求顺利地转交给它的构造器的原型呢？
@@ -163,9 +163,9 @@ JavaScript给对象提供了一个名为`__proto__`的隐藏属性，某个对�
 实际上，虽然JavaScript的对象最初都是由Object.prototype对象克隆而来的，但对象构造器的原型并不仅限于Object.prototype上，而是可以动态指向其他对象。这样一来，当对象a需要借用对象b的能力时，可以有选择性地把对象a的构造器的原型指向对象b，从而达到继承的效果。下面的代码是最常用的原型继承方式：
 ```js
 var obj = { name: 'sven' };
-var A = function(){}; 
-A.prototype = obj; 
-var a = new A(); 
+var A = function(){};
+A.prototype = obj;
+var a = new A();
 console.log( a.name ); // 输 出： sven
 ```
 来看看执行这段代码的时候，引擎做了哪些事情。
@@ -175,13 +175,13 @@ console.log( a.name ); // 输 出： sven
 
 当期望得到一个“类”继承自另外一个“类”的效果时，往往会用下面的代码来模拟实现：
 ```js
-var A = function(){}; 
-A.prototype = { name: 'sven' }; 
+var A = function(){};
+A.prototype = { name: 'sven' };
 
 var B = function(){};
 B.prototype = new A();
 
-var b = new B(); 
+var b = new B();
 console.log( b.name ); // 输 出： sven
 ```
 再看这段代码执行的时候，引擎做了什么事情。
@@ -231,12 +231,12 @@ console.log(dog.getName() + ' ' + dog.speak());
 **1. 作为对象的方法调用**
 当函数作为对象的方法被调用时，this指向该对象：
 ```js
-var obj = { 
-  a: 1, 
-  getA: function(){ alert ( this === obj ); // 输 出： true 
-  alert ( this.a ); // 输 出: 1 
-  } 
-}; 
+var obj = {
+  a: 1,
+  getA: function(){ alert ( this === obj ); // 输 出： true
+  alert ( this.a ); // 输 出: 1
+  }
+};
 obj.getA();
 ```
 
@@ -264,9 +264,9 @@ console.log(getName()); // globalName
 ```js
 window.id = 'window';
 document.getElementById('div1').onclick = function() {
-  alert(this.id); // 输 出：' div1' 
+  alert(this.id); // 输 出：' div1'
   var callback = function() {
-      alert(this.id); // 输 出：' window' 
+      alert(this.id); // 输 出：' window'
     }
   callback();
 };
@@ -277,17 +277,17 @@ window.id = 'window';
 document.getElementById('div1').onclick = function() {
   var that = this; // 保存div引用
   var callback = function() {
-      alert(that.id); // 输 出：' window' 
+      alert(that.id); // 输 出：' window'
     }
   callback();
 };
 ```
 在ECMAScript5的strict模式下，这种情况下的this已经被规定为不会指向全局对象，而是undefined：
 ```js
-function func(){ 
-  "use strict" 
-  alert ( this ); // 输 出： undefined 
-} 
+function func(){
+  "use strict"
+  alert ( this ); // 输 出： undefined
+}
 func();
 ```
 
@@ -296,16 +296,16 @@ JavaScript中没有类，但是可以从构造器中创建对象，同时也提�
 
 除了宿主提供的一些内置函数，大部分JavaScript函数都可以当作构造器使用。构造器的外表跟普通函数一模一样，它们的区别在于被调用的方式。当用new运算符调用函数时，该函数总会返回一个对象，通常情况下，构造器里的this就指向返回的这个对象，见如下代码：
 ```js
-var MyClass = function(){ this.name = 'sven'; }; 
+var MyClass = function(){ this.name = 'sven'; };
 
-var obj = new MyClass(); 
+var obj = new MyClass();
 alert ( obj.name ); // 输 出： sven
 ```
 但用new调用构造器时，还要注意一个问题，如果构造器显式地返回了一个object类型的对象，那么此次运算结果最终会返回这个对象，而不是之前期待的this：
 ```js
 var MyClass = function() {
     this.name = 'sven';
-    return { // 显 式 地 返 回 一 个 对 象 
+    return { // 显 式 地 返 回 一 个 对 象
       name: 'anne'
     }
   };
@@ -316,7 +316,7 @@ alert(obj.name); // 输 出： anne
 ```js
 var MyClass = function() {
     this.name = 'sven'
-    return 'anne'; // 返 回 string 类 型 
+    return 'anne'; // 返 回 string 类 型
   };
 var obj = new MyClass();
 alert(obj.name); // 输 出： sven
@@ -334,7 +334,7 @@ var obj1 = {
 var obj2 = {
   name: 'anne'
 };
-console.log(obj1.getName()); // 输 出: sven 
+console.log(obj1.getName()); // 输 出: sven
 console.log(obj1.getName.call(obj2)); // 输 出： anne
 ```
 call和apply方法能很好地体现JavaScript的函数式语言特性，在JavaScript中，几乎每一次编写函数式语言风格的代码，都离不开call和apply。在JavaScript诸多版本的设计模式中，也用到了call和apply
@@ -348,7 +348,7 @@ var obj = {
     return this.myName;
   }
 };
-console.log(obj.getName()); // 输 出：' sven' 
+console.log(obj.getName()); // 输 出：' sven'
 var getName2 = obj.getName;
 console.log(getName2()); // 输 出： undefined
 ```
@@ -358,12 +358,12 @@ console.log(getName2()); // 输 出： undefined
 
 再看另一个例子，document.getElementById这个方法名实在有点过长，大概尝试过用一个短的函数来代替它，如同prototype.js等一些框架所做过的事情：
 ```js
-var getId = function( id ){ return document.getElementById( id ); }; 
+var getId = function( id ){ return document.getElementById( id ); };
 getId( 'div1' );
 ```
 也许思考过为什么不能用下面这种更简单的方式：
 ```js
-var getId = document.getElementById; 
+var getId = document.getElementById;
 getId( 'div1' );
 ```
 在Chrome、Firefox、IE10中执行过后就会发现，这段代码抛出了一个异常。这是因为许多引擎的document.getElementById方法的内部实现中需要用到this。这个this本来被期望指向document，当getElementById方法作为document对象的属性被调用时，方法内部的this确实是指向document的。
@@ -389,7 +389,7 @@ Function.prototype.call和Function.prototype.apply都是非常常用的方法。
 apply接受两个参数，第一个参数指定了函数体内this对象的指向，第二个参数为一个带下标的集合，这个集合可以为数组，也可以为类数组，apply方法把这个集合中的元素作为参数传递给被调用的函数：
 ```js
 var func = function(a, b, c) {
-    alert([a, b, c]); // 输 出 [ 1, 2, 3 ] 
+    alert([a, b, c]); // 输 出 [ 1, 2, 3 ]
   };
 func.apply(null, [1, 2, 3]);
 ```
@@ -407,7 +407,7 @@ call是包装在apply上面的一颗语法糖，如果明确地知道函数接�
 当使用call或者apply的时候，如果传入的第一个参数为null，函数体内的this会指向默认的宿主对象，在浏览器中则是window：
 ```js
 var func = function(a, b, c) {
-    alert(this === window); // 输 出 true 
+    alert(this === window); // 输 出 true
   };
 func.apply(null, [1, 2, 3]);
 ```
@@ -434,8 +434,8 @@ window.name = 'window';
 var getName = function() {
     alert(this.name);
   };
-getName(); // 输 出: window 
-getName.call(obj1); // 输 出: sven 
+getName(); // 输 出: window
+getName.call(obj1); // 输 出: sven
 getName.call(obj2); // 输 出: anne
 ```
 当执行getName.call(obj1)这句代码时，getName函数体内的this就指向obj1对象，所以此处的
@@ -449,7 +449,7 @@ var getName = function(){ alert ( obj1. name );};
 在实际开发中，经常会遇到this指向被不经意改变的场景，比如有一个div节点，div节点的onclick事件中的this本来是指向这个div的：
 ```js
 document.getElementById('div1').onclick = function() {
-  alert(this.id); // 输 出： div1 
+  alert(this.id); // 输 出： div1
 };
 ```
 假如该事件函数中有一个内部函数func，在事件内部调用func函数时，func函数体内的this就指向了window，而不是预期的div，见如下代码：
@@ -457,7 +457,7 @@ document.getElementById('div1').onclick = function() {
 document.getElementById('div1').onclick = function() {
   alert(this.id); // 输 出： div1
   var func = function() {
-      alert(this.id); // 输 出： undefined 
+      alert(this.id); // 输 出： undefined
     }
   func();
 };
@@ -466,7 +466,7 @@ document.getElementById('div1').onclick = function() {
 ```js
 document.getElementById('div1').onclick = function() {
   var func = function() {
-      alert(this.id); // 输 出： div1 
+      alert(this.id); // 输 出： div1
     }
   func.call(this);
 };
@@ -487,8 +487,8 @@ alert(div.id); // 输 出： div1
 大部分高级浏览器都实现了内置的Function.prototype.bind，用来指定函数内部的this指向，即使没有原生的Function.prototype.bind实现，来模拟一个也不是难事，代码如下：
 ```js
 Function.prototype.bind = function(context) {
-  var self = this; // 保 存 原 函 数 
-  return function() { // 返 回 一 个 新 的 函 数 
+  var self = this; // 保 存 原 函 数
+  return function() { // 返 回 一 个 新 的 函 数
     return self.apply(context, arguments); // 执 行 新 的 函 数 的 时 候， 会 把 之 前 传 入 的 context 当 作 新 函 数 体 内 的 this
   }
 };
@@ -496,7 +496,7 @@ var obj = {
   name: 'sven'
 };
 var func = function() {
-    alert(this.name); // 输 出： sven 
+    alert(this.name); // 输 出： sven
   }.bind(obj);
 func();
 ```
@@ -508,22 +508,22 @@ func();
 ```js
 Function.prototype.bind = function() {
   var self = this,
-    // 保 存 原 函 数 
+    // 保 存 原 函 数
     context = [].shift.call(arguments),
-    // 需 要 绑 定 的 this 上 下 文 
+    // 需 要 绑 定 的 this 上 下 文
     args = [].slice.call(arguments); // 剩 余 的 参 数 转 成 数 组
-  return function() { // 返 回 一 个 新 的 函 数 
-	// 执 行 新 的 函 数 的 时 候， 会 把 之 前 传 入 的 context 当 作 新 函 数 体 内 的 this 
-	// 并 且 组 合 两 次 分 别 传 入 的 参 数， 作 为 新 函 数 的 参 数 
-    return self.apply(context, [].concat.call(args, [].slice.call(arguments))); 
+  return function() { // 返 回 一 个 新 的 函 数
+	// 执 行 新 的 函 数 的 时 候， 会 把 之 前 传 入 的 context 当 作 新 函 数 体 内 的 this
+	// 并 且 组 合 两 次 分 别 传 入 的 参 数， 作 为 新 函 数 的 参 数
+    return self.apply(context, [].concat.call(args, [].slice.call(arguments)));
   }
 };
 var obj = {
   name: 'sven'
 };
 var func = function(a, b, c, d) {
-    alert(this.name); // 输 出： sven 
-    alert([a, b, c, d]) // 输 出：[ 1, 2, 3, 4 ] 
+    alert(this.name); // 输 出： sven
+    alert([a, b, c, d]) // 输 出：[ 1, 2, 3, 4 ]
   }.bind(obj, 1, 2);
 func(3, 4);
 ```
@@ -549,7 +549,7 @@ console.log(b.getName()); // 输 出： 'sven'
 ```js
 (function() {
   Array.prototype.push.call(arguments, 3);
-  console.log(arguments); // 输 出[ 1,2,3] 
+  console.log(arguments); // 输 出[ 1,2,3]
 })(1, 2);
 ```
 在操作arguments的时候，经常非常频繁地找Array.prototype对象借用方法。
@@ -559,12 +559,12 @@ console.log(b.getName()); // 输 出： 'sven'
 这种机制的内部实现原理是什么呢？V8的引擎源码，以Array.prototype.push为例：
 ```js
 function ArrayPush() {
-  var n = TO_UINT32(this.length); // 被 push 的 对 象 的 length 
-  var m = % _ArgumentsLength(); // push 的 参 数 个 数 
+  var n = TO_UINT32(this.length); // 被 push 的 对 象 的 length
+  var m = % _ArgumentsLength(); // push 的 参 数 个 数
   for (var i = 0; i < m; i++) {
-    this[i + n] = % _Arguments(i); // 复 制 元 素 (1) 
+    this[i + n] = % _Arguments(i); // 复 制 元 素 (1)
   }
-  this.length = n + m; // 修 正 length 属 性 的 值 (2) 
+  this.length = n + m; // 修 正 length 属 性 的 值 (2)
   return this.length;
 };
 ```
@@ -574,7 +574,7 @@ function ArrayPush() {
 ```js
 var a = {};
 Array.prototype.push.call(a, 'first');
-alert(a.length); // 输 出： 1 
+alert(a.length); // 输 出： 1
 alert(a[0]); // first
 ```
 这段代码在绝大部分浏览器里都能顺利执行，但由于引擎的内部实现存在差异，如果在低版本的IE浏览器中执行，必须显式地给对象a设置length属性：

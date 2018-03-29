@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-前言
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-01 21:25:59
 updated:
 ---

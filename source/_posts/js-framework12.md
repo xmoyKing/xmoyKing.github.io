@@ -1,8 +1,8 @@
 ---
 title: JavaScript框架设计笔记-12-异步处理
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
   - deferred
   - promise

@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-11-享元模式
-categories: js
+categories: JavaScript
 tags:
-- js
-- design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-27 21:35:57
 updated:
 ---
@@ -87,10 +87,10 @@ for(vari=1;i<=50;i++){
 微云支持好几种上传方式，比如浏览器插件、Flash和表单上传等，为了简化例子，我们先假设只有插件和Flash这两种。不论是插件上传，还是Flash上传，原理都是一样的，当用户选择了文件之后，插件和Flash都会通知调用Window下的一个全局JavaScript函数，它的名字是startUpload，用户选择的文件列表被组合成一个数组files塞进该函数的参数列表里，代码如下：
 ```js
 var id = 0;
-window.startUpload = function(uploadType, files) { // uploadType 区 分 是 控 件 还 是 flash 
+window.startUpload = function(uploadType, files) { // uploadType 区 分 是 控 件 还 是 flash
   for (var i = 0, file; file = files[i++];) {
     var uploadObj = new Upload(uploadType, file.fileName, file.fileSize);
-    uploadObj.init(id++); // 给 upload 对 象 设 置 一 个 唯 一 的 id 
+    uploadObj.init(id++); // 给 upload 对 象 设 置 一 个 唯 一 的 id
   }
 };
 ```
@@ -173,7 +173,7 @@ var Upload = function( uploadType){ this.uploadType = uploadType; };
 Upload.prototype.init函数也不再需要，因为upload对象初始化的工作被放在了uploadManager.add函数里面，接下来只需要定义Upload.prototype.del函数即可：
 ```js
 Upload.prototype.delFile = function(id) {
-  uploadManager.setExternalState(id, this); // (1) 
+  uploadManager.setExternalState(id, this); // (1)
   if (this.fileSize < 3000) {
     return this.dom.parentNode.removeChild(this.dom);
   }
@@ -285,12 +285,12 @@ var UploadFactory = (function() {
 ##### 没有外部状态的享元
 网上许多资料中，经常把Java或者C#的字符串看成享元，这种说法是否正确呢？通过下面这段Java代码来分析一下：
 ```java
-// Java 代 码 
+// Java 代 码
 public class Test {
   public static void main(String args[]) {
     String a1 = new String("a").intern();
     String a2 = new String("a").intern();
-    System.out.println(a1 == a2); // true 
+    System.out.println(a1 == a2); // true
   }
 }
 ```
@@ -315,20 +315,20 @@ public class Test {
 先定义一个获取小气泡节点的工厂，作为对象池的数组成为私有属性被包含在工厂闭包里，这个工厂有两个暴露对外的方法，create表示获取一个div节点，recover表示回收一个div节点：
 ```js
 var toolTipFactory = (function() {
-  var toolTipPool = []; // toolTip 对 象 池 
+  var toolTipPool = []; // toolTip 对 象 池
   return {
 
     create: function() {
-      if (toolTipPool.length === 0) { // 如 果 对 象 池 为 空 
-        var div = document.createElement('div'); // 创 建 一 个 dom 
+      if (toolTipPool.length === 0) { // 如 果 对 象 池 为 空
+        var div = document.createElement('div'); // 创 建 一 个 dom
         document.body.appendChild(div);
         return div;
-      } else { // 如 果 对 象 池 里 不 为 空 
-        return toolTipPool.shift(); // 则 从 对 象 池 中 取 出 一 个 dom 
+      } else { // 如 果 对 象 池 里 不 为 空
+        return toolTipPool.shift(); // 则 从 对 象 池 中 取 出 一 个 dom
       }
     },
     recover: function(tooltipDom) {
-      return toolTipPool.push(tooltipDom); // 对 象 池 回 收 dom 
+      return toolTipPool.push(tooltipDom); // 对 象 池 回 收 dom
     }
   }
 })();
@@ -381,7 +381,7 @@ var iframeFactory = objectPoolFactory(function() {
   var iframe = document.createElement('iframe');
   document.body.appendChild(iframe);
   iframe.onload = function() {
-    iframe.onload = null; // 防 止 iframe 重 复 加 载 的 bug 
+    iframe.onload = null; // 防 止 iframe 重 复 加 载 的 bug
     iframeFactory.recover(iframe); // iframe 加 载 完 成 之 后 回 收 节 点
   }
   return iframe;

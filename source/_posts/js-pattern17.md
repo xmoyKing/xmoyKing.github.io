@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-17-设计原则：单一职责原则/最少知识原则/开放-封闭原则
-categories: js
+categories: JavaScript
 tags:
-- js
-- design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-12-06 09:37:10
 updated: 2017-12-06 09:37:10
 ---
@@ -75,8 +75,8 @@ appendDiv函数本来只是负责渲染数据，但是在这里它还承担了�
 var each = function(obj, callback) {
     var value, i = 0,
       length = obj.length,
-      isArray = isArraylike(obj); // isArraylike 函 数 未 实 现， 可 以 翻 阅 jQuery 源 代 码 
-    if (isArray) { // 迭 代 类 数 组 
+      isArray = isArraylike(obj); // isArraylike 函 数 未 实 现， 可 以 翻 阅 jQuery 源 代 码
+    if (isArray) { // 迭 代 类 数 组
       for (; i < length; i++) {
         callback.call(obj[i], i, obj[i]);
       }
@@ -121,13 +121,13 @@ var createLoginLayer = (function() {
 ```
 现在把管理单例的职责和创建登录浮窗的职责分别封装在两个方法里，这两个方法可以独立变化而互不影响，当它们连接在一起的时候，就完成了创建唯一登录浮窗的功能，下面的代码显然是更好的做法：
 ```js
-var getSingle = function(fn) { // 获 取 单 例 
+var getSingle = function(fn) { // 获 取 单 例
     var result;
     return function() {
       return result || (result = fn.apply(this, arguments));
     }
   };
-var createLoginLayer = function() { // 创 建 登 录 浮 窗 
+var createLoginLayer = function() { // 创 建 登 录 浮 窗
     var div = document.createElement('div');
     div.innerHTML = '我 是 登 录 浮 窗';
     document.body.appendChild(div);
@@ -225,9 +225,9 @@ gerneral.getColonel(c).getMajor(m).getCaptain(c).getSergeant(s).getPrivate(p).di
 
 最简单的外观模式应该是类似下面的代码：
 ```js
-var A = function(){ a1(); a2(); } 
-var B = function(){ b1(); b2(); } 
-var facade = function(){ A(); B(); } 
+var A = function(){ a1(); a2(); }
+var B = function(){ b1(); b2(); }
+var facade = function(){ A(); B(); }
 
 facade();
 ```
@@ -285,9 +285,9 @@ mult(1, 2, 3); // 输 出： 6
 
 不久后接到了一个新的需求，即在window.onload函数中打印出页面中的所有节点数量。于是搜索出window.onload函数在文件中的位置，在函数内部添加以下代码：
 ```js
-window.onload = function(){ 
-  // 原 有 代 码 略 
-  console.log( document.getElementsByTagName('*').length ); 
+window.onload = function(){
+  // 原 有 代 码 略
+  console.log( document.getElementsByTagName('*').length );
 };
 ```
 在项目需求变迁的过程中，经常会找到相关代码，然后改写它们。这似乎是理所当然的事情，不改动代码怎么满足新的需求呢？想要扩展一个模块，最常用的方式当然是修改它的源代码。如果一个模块不允许修改，那么它的行为常常是固定的。然而，改动代码是一种危险的行为，也许我们都遇到过bug越改越多的场景。刚刚改好了一个bug，但是又在不知不觉中引发了其他的bug。
@@ -354,8 +354,8 @@ var Chicken = function() {};
 Chicken.prototype.sound = function() {
   console.log('咯 咯 咯');
 };
-makeSound(new Duck()); // 嘎 嘎 嘎 
-makeSound(new Chicken()); // 咯 咯 咯 
+makeSound(new Duck()); // 嘎 嘎 嘎
+makeSound(new Chicken()); // 咯 咯 咯
 
 /********* 增 加 动 物 狗， 不 用 改 动 原 有 的 makeSound 函 数 ****************/
 var Dog = function() {};
@@ -423,7 +423,7 @@ var a = arrayMap([1, 2, 3], function(i, n) {
 var b = arrayMap([1, 2, 3], function(i, n) {
   return n * 3;
 });
-console.log(a); // 输 出：[ 2, 4, 6 ] 
+console.log(a); // 输 出：[ 2, 4, 6 ]
 console.log(b); // 输 出：[ 3, 6, 9 ]
 ```
 
@@ -451,18 +451,18 @@ console.log(b); // 输 出：[ 3, 6, 9 ]
 ##### 职责链模式
 例如把一个巨大的订单函数分别拆成了500元订单、200元订单以及普通订单的3个函数。这3个函数通过职责链连接在一起，客户的请求会在这条链条里面依次传递：
 ```js
-var order500yuan = new Chain( function( orderType, pay, stock ){ 
-  // 具 体 代 码 略 
-}); 
-var order200yuan = new Chain( function( orderType, pay, stock ){ 
-  // 具 体 代 码 略 
-}); 
-var orderNormal = new Chain( function( orderType, pay, stock ){ 
-  // 具 体 代 码 略 
-}); 
+var order500yuan = new Chain( function( orderType, pay, stock ){
+  // 具 体 代 码 略
+});
+var order200yuan = new Chain( function( orderType, pay, stock ){
+  // 具 体 代 码 略
+});
+var orderNormal = new Chain( function( orderType, pay, stock ){
+  // 具 体 代 码 略
+});
 
-order500yuan.setNextSuccessor( order200yuan ).setNextSuccessor( orderNormal ); 
-order500yuan.passRequest( 1, true, 10 ); // 500 元 定 金 预 购， 得 到 100 优 惠 券 
+order500yuan.setNextSuccessor( order200yuan ).setNextSuccessor( orderNormal );
+order500yuan.passRequest( 1, true, 10 ); // 500 元 定 金 预 购， 得 到 100 优 惠 券
 ```
 可以看到，当增加一个新类型的订单函数时，不需要改动原有的订单函数代码，只需要在链条中增加一个新的节点。
 

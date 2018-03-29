@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-16-适配器模式
-categories: js
+categories: JavaScript
 tags:
-- js
-- design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-12-04 23:02:47
 updated: 2017-12-04 23:02:47
 ---

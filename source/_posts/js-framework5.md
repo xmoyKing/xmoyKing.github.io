@@ -1,8 +1,8 @@
 ---
 title: JavaScript框架设计笔记-5-Sizzle引擎
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
   - sizzle
 date: 2016-12-22 18:57:46

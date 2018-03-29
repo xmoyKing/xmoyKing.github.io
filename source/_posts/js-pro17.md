@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-17-DOM
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-20 14:25:36
 updated:
@@ -26,7 +26,7 @@ DOM可以将任何HTML和XML文档描述成一个多层次节点构成的结构�
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-    
+
     </body>
 </html>
 
@@ -36,7 +36,7 @@ DOM可以将任何HTML和XML文档描述成一个多层次节点构成的结构�
 每一段标记都可以通过树中的一个节点来表示：HTML元素通过元素节点表示，特性（attribute）通过特性节点表示，文档类型通过文档类型节点表示，而注释则通过注释节点表示，总共有12种节点类型，这些节点类型都继承自一个基类型。
 
 #### Node类型
-DOM1级定义了一个Node接口，该接口将由DOM中的所有节点类型实现。这个Node接口在js是作为Node类型实现的，除了IE之外，在其他所有浏览器中都可以访问到这个类型。js中的所有节点类型都继承自Node类型，因此所有节点类型都共享相同的基本属性和方法。 
+DOM1级定义了一个Node接口，该接口将由DOM中的所有节点类型实现。这个Node接口在js是作为Node类型实现的，除了IE之外，在其他所有浏览器中都可以访问到这个类型。js中的所有节点类型都继承自Node类型，因此所有节点类型都共享相同的基本属性和方法。
 
 每个节点都有一个nodeType属性，用于表明节点的类型，节点类型由在Node类型中定义的12个数值常量来表示，任何节点类型必是其一。[nodeType](http://www.w3school.com.cn/jsref/prop_node_nodetype.asp)
 
@@ -117,7 +117,7 @@ Document类型可以表示HTML页面或其他基于XML的文档，不过最常�
 ```js
 <html>
     <body>
-    
+
     </body>
 </html>
 ```
@@ -289,7 +289,7 @@ IE解析时会认为ul元素有3个子节点，分别是3个li元素，而其他
 - 不支持子节点
 可通过nodeValue/data属性访问Text节点中包含的文本，这两个属性中包含的值相同，nodeValue/data相互映射，length属性保存节点中字符的数目，即：nodeValue.length和data.length相同。下列是其他可操作的方法：
 - appendData(text) 将text添加到节点的末尾
-- deleteData(offset, count) 从offset指定的位置开始删除count个字符 
+- deleteData(offset, count) 从offset指定的位置开始删除count个字符
 - insertData(offset, text) 从offset出开始插入text
 - replaceData(offset, count, text) 用text替代从offset位置开始到offset+count为止的文本。
 - splitText(offset) 从offset处将文本节点分为两个文本节点

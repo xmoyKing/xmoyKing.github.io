@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-9-组合模式
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-21 23:58:02
 updated:
 ---
@@ -13,25 +13,25 @@ updated:
 #### 回顾宏命令
 在命令模式中讲解过宏命令的结构和作用。宏命令对象包含了一组具体的子命令对象，不管是宏命令对象，还是子命令对象，都有一个execute方法负责执行命令。回顾万能遥控器上的宏命令代码：
 ```js
-var closeDoorCommand = { execute: function()console.log( '关 门' ); } }; 
-var openPcCommand = { execute: function()nsole.log( '开 电 脑' ); } }; 
-var openQQCommand = { execute: functio)console.log( '登 录 QQ' ); } }; 
-var MacroCommand = function( 
-  return { 
-    commandsList: [], 
-    add: function( command ){ this.commandsList.push( command ); }, 
+var closeDoorCommand = { execute: function()console.log( '关 门' ); } };
+var openPcCommand = { execute: function()nsole.log( '开 电 脑' ); } };
+var openQQCommand = { execute: functio)console.log( '登 录 QQ' ); } };
+var MacroCommand = function(
+  return {
+    commandsList: [],
+    add: function( command ){ this.commandsList.push( command ); },
     execute: function(){
-      for ( var i = 0, command; command = this.commandsList[ i++ ]; ){ 
-        command.execute(); 
-      } 
-    } 
-  } 
-}; 
+      for ( var i = 0, command; command = this.commandsList[ i++ ]; ){
+        command.execute();
+      }
+    }
+  }
+};
 
 var macroCommand = MacroCommand();
-macroCommand.add( closeDoorCommand ); 
-macroCommand.add( openPcCommand ); 
-macroCommand.add( openQQCommand ); 
+macroCommand.add( closeDoorCommand );
+macroCommand.add( openPcCommand );
+macroCommand.add( openQQCommand );
 macroCommand.execute();
 ```
 通过观察这段代码，我们很容易发现，宏命令中包含了一组子命令，它们组成了一个树形结构，这里是一棵结构非常简单的树。
@@ -78,7 +78,7 @@ var MacroCommand = function() {
   };
 var openAcCommand = {
   execute: function() {console.log('打 开 空 调');}
-}; 
+};
 /********** 家 里 的 电 视 和 音 响 是 连 接 在 一 起 的， 所 以 可 以 用 一 个 宏 命 令 来 组 合 打 开 电 视 和 打 开 音 响 的 命 令*********/
 var openTvCommand = {
   execute: function() {console.log('打 开 电 视');}
@@ -88,7 +88,7 @@ var openSoundCommand = {
 };
 var macroCommand1 = MacroCommand();
 macroCommand1.add(openTvCommand);
-macroCommand1.add(openSoundCommand); 
+macroCommand1.add(openSoundCommand);
 
 /********* 关 门、 打 开 电 脑 和 打 登 录 QQ 的 命 令****************/
 var closeDoorCommand = {
@@ -103,13 +103,13 @@ var openQQCommand = {
 var macroCommand2 = MacroCommand();
 macroCommand2.add(closeDoorCommand);
 macroCommand2.add(openPcCommand);
-macroCommand2.add(openQQCommand); 
+macroCommand2.add(openQQCommand);
 
 /********* 现 在 把 所 有 的 命 令 组 合 成 一 个“ 超 级 命 令”**********/
 var macroCommand = MacroCommand();
 macroCommand.add(openAcCommand);
 macroCommand.add(macroCommand1);
-macroCommand.add(macroCommand2); 
+macroCommand.add(macroCommand2);
 
 /********* 最 后 给 遥 控 器 绑 定“ 超 级 命 令”**********/
 var setCommand = (function(command) {
@@ -176,7 +176,7 @@ Folder.prototype.scan = function() {console.log('开 始 扫 描 文 件 夹: ' 
   for (var i = 0, file, files = ts.files; file = files[i++];) {
     file.scan();
   }
-}; 
+};
 /******************************* File ******************************/
 var File = function(name) {
     this.name = name;
@@ -209,7 +209,7 @@ var file5 = new File('JavaScript 语 言 精 髓 与 编 程 实 践');
 ```
 接下来就是把这些文件都添加到原有的树中：
 ```js
-folder.add( folder3 ); 
+folder.add( folder3 );
 folder.add( file5 );
 ```
 通过这个例子，我们再次看到客户是如何同等对待组合对象和叶对象。在添加一批文件的操作过程中，客户不用分辨它们到底是文件还是文件夹。新增加的文件和文件夹能够很容易地添加到原来的树结构中，和树里已有的对象一起工作。我们改变了树的结构，增加了新的数据，却不用修改任何一句原有的代码，这是符合开放-封闭原则的。运用了组合模式之后，扫描整个文件夹的操作也是轻而易举的，我们只需要操作树的最顶端对象：`folder.scan();`
@@ -234,48 +234,48 @@ folder.add( file5 );
 
 现在来改写扫描文件夹的代码，使得在扫描整个文件夹之前，我们可以先移除某一个具体的文件。首先改写Folder类和File类，在这两个类的构造函数中，增加this.parent属性，并且在调用add方法的时候，正确设置文件或者文件夹的父节点：
 ```js
-var Folder = function( name ){ 
-  this.name = name; 
-  this.parent = null; // 增 加 this.parent 属 性 
-  this.files = []; 
-}; 
-Folder.prototype.add = function( file ){ 
-  file.parent = this; // 设 置 父 对 象 
-  this.files.push( file ); 
-}; 
-Folder.prototype.scan = function(){ 
-  console.log( '开 始 扫 描 文 件 夹: ' + this.name ); 
-  for ( var i = 0, file, files = this.files; file = files[ i++ ]; ){ 
-    file.scan(); 
-  } 
+var Folder = function( name ){
+  this.name = name;
+  this.parent = null; // 增 加 this.parent 属 性
+  this.files = [];
+};
+Folder.prototype.add = function( file ){
+  file.parent = this; // 设 置 父 对 象
+  this.files.push( file );
+};
+Folder.prototype.scan = function(){
+  console.log( '开 始 扫 描 文 件 夹: ' + this.name );
+  for ( var i = 0, file, files = this.files; file = files[ i++ ]; ){
+    file.scan();
+  }
 };
 ```
 接下来增加Folder.prototype.remove方法，表示移除该文件夹：
 ```js
-Folder.prototype.remove = function(){ 
-  if ( !this.parent ){ // 根 节 点 或 者 树 外 的 游 离 节 点 
-    return; 
-  } 
+Folder.prototype.remove = function(){
+  if ( !this.parent ){ // 根 节 点 或 者 树 外 的 游 离 节 点
+    return;
+  }
   for ( var files = this.parent.files, l = files.length - 1; l >= 0; l-- ){
-    var file = files[ l ]; 
-    if ( file === this ){ files.splice( l, 1 ); } 
-  } 
+    var file = files[ l ];
+    if ( file === this ){ files.splice( l, 1 ); }
+  }
 };
 ```
 在File.prototype.remove方法里，首先会判断this.parent，如果this.parent为null，那么这个文件夹要么是树的根节点，要么是还没有添加到树的游离节点，这时候没有节点需要从树中移除，我们暂且让remove方法直接return，表示不做任何操作。如果this.parent不为null，则说明该文件夹有父节点存在，此时遍历父节点中保存的子节点列表，删除想要删除的子节点。
 
 File类的实现基本一致：
 ```js
-var File = function( name ){ this.name = name; this.parent = null; }; 
+var File = function( name ){ this.name = name; this.parent = null; };
 
-File.prototype.add = function(){ throw new Error( '不 能 添 加 在 文 件 下 面' ); }; 
-File.prototype.scan = function(){ console.log( '开 始 扫 描 文 件: ' + this.name ); }; 
-File.prototype.remove = function(){ 
-  if ( !this.parent ){ return; } 
+File.prototype.add = function(){ throw new Error( '不 能 添 加 在 文 件 下 面' ); };
+File.prototype.scan = function(){ console.log( '开 始 扫 描 文 件: ' + this.name ); };
+File.prototype.remove = function(){
+  if ( !this.parent ){ return; }
 
-  for ( var files = this.parent.files, l = files.length - 1; l >= 0; l-- ){ 
-    var file = files[ l ]; 
-    if ( file === this ){ files.splice( l, 1 ); } 
+  for ( var files = this.parent.files, l = files.length - 1; l >= 0; l-- ){
+    var file = files[ l ];
+    if ( file === this ){ files.splice( l, 1 ); }
   }
 
 };

@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-4-基本概念2-操作符
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-05 08:17:46
 updated:

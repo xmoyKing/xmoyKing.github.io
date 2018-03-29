@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-5-代理模式
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-12 22:13:53
 updated:
 ---
@@ -18,57 +18,57 @@ updated:
 下面从一个小例子开始熟悉代理模式的结构：
 小明遇见了他的女神A。两天之后，小明决定给A送一束花来表白。刚好小明打听到A和他有一个共同的朋友B，于是内向的小明决定让B来代替自己完成送花这件事情。
 ```js
-var Flower = function(){}; 
-var xiaoming = { 
-  sendFlower: function( target){ 
-    var flower = new Flower(); 
-    target.receiveFlower( flower ); 
-  } 
-}; 
+var Flower = function(){};
+var xiaoming = {
+  sendFlower: function( target){
+    var flower = new Flower();
+    target.receiveFlower( flower );
+  }
+};
 
-var B = { receiveFlower: function( flower ){ A.receiveFlower( flower ); } }; 
-var A = { receiveFlower: function( flower ){ console.log( '收 到 花 ' + flower ); } }; 
+var B = { receiveFlower: function( flower ){ A.receiveFlower( flower ); } };
+var A = { receiveFlower: function( flower ){ console.log( '收 到 花 ' + flower ); } };
 
 xiaoming.sendFlower( B );
 ```
 现在我们改变故事的背景设定，假设当A在心情好的时候收到花，小明表白成功的几率有60%，而当A在心情差的时候收到花，小明表白的成功率无限趋近于0。A的朋友B很了解A，所以小明只管把花交给B，B会监听A的心情变化，然后选择A心情好的时候把花转交给A，代码如下：
 ```js
-var Flower = function(){}; 
-var xiaoming = { 
-  sendFlower: function( target){ 
-    var flower = new Flower(); 
-    target.receiveFlower( flower ); 
-  } 
-}; 
-var B = { 
-  receiveFlower: function( flower ){ 
-    A.listenGoodMood( function(){ // 监 听 A 的 好 心 情 
-      A.receiveFlower( flower ); 
-    }); 
-  } 
-}; 
+var Flower = function(){};
+var xiaoming = {
+  sendFlower: function( target){
+    var flower = new Flower();
+    target.receiveFlower( flower );
+  }
+};
+var B = {
+  receiveFlower: function( flower ){
+    A.listenGoodMood( function(){ // 监 听 A 的 好 心 情
+      A.receiveFlower( flower );
+    });
+  }
+};
 
-var A = { 
-  receiveFlower: function( flower ){ 
-    console.log( '收 到 花 ' + flower ); 
-  }, 
-  listenGoodMood: function( fn ){ 
-    setTimeout( function(){ // 假 设 10 秒 之 后 A 的 心 情 变 好 
-      fn(); 
-    }, 10000 ); 
-  } 
-}; 
+var A = {
+  receiveFlower: function( flower ){
+    console.log( '收 到 花 ' + flower );
+  },
+  listenGoodMood: function( fn ){
+    setTimeout( function(){ // 假 设 10 秒 之 后 A 的 心 情 变 好
+      fn();
+    }, 10000 );
+  }
+};
 xiaoming.sendFlower( B );
 ```
 虽然这只是个虚拟的例子，但我们可以从中找到两种代理模式的身影。代理B可以帮助A过滤掉一些请求，比如送花的人中年龄太大的或者没有宝马的，这种请求就可以直接在代理B处被拒绝掉。这种代理叫作**保护代理**。A和B一个充当白脸，一个充当黑脸。白脸A继续保持良好的女神形象，不希望直接拒绝任何人，于是找了黑脸B来控制对A的访问。
 另外，假设现实中的花价格不菲，导致在程序世界里，newFlower也是一个代价昂贵的操作，那么我们可以把newFlower的操作交给代理B去执行，代理B会选择在A心情好时再执行newFlower，这是代理模式的另一种形式，叫作**虚拟代理**。虚拟代理把一些开销很大的对象，延迟到真正需要它的时候才去创建。代码如下：
 ```js
-var B = { 
-  receiveFlower: function( flower ){ 
+var B = {
+  receiveFlower: function( flower ){
     A.listenGoodMood( function(){ // 监 听 A 的 好 心 情
-      var flower = new Flower(); // 延 迟 创 建 flower 对 象 
-      A.receiveFlower( flower ); 
-    }); 
+      var flower = new Flower(); // 延 迟 创 建 flower 对 象
+      A.receiveFlower( flower );
+    });
   }
 };
 ```
@@ -78,37 +78,37 @@ var B = {
 在Web开发中，图片预加载是一种常用的技术，如果直接给某个img标签节点设置src属性，由于图片过大或者网络不佳，图片的位置往往有段时间会是一片空白。常见的做法是先用一张loading图片占位，然后用异步的方式加载图片，等图片加载好了再把它填充到img节点里，这种场景就很适合使用虚拟代理。
 实现这个虚拟代理，首先创建一个普通的本体对象，这个对象负责往页面中创建一个img标签，并且提供一个对外的setSrc接口，外界调用这个接口，便可以给该img标签设置src属性：
 ```js
-var myImage = (function(){ 
-  var imgNode = document.createElement( 'img' ); 
-  document.body.appendChild( imgNode ); 
-  return { 
-    setSrc: function( src ){ imgNode.src = src; } 
-  } 
-})(); 
+var myImage = (function(){
+  var imgNode = document.createElement( 'img' );
+  document.body.appendChild( imgNode );
+  return {
+    setSrc: function( src ){ imgNode.src = src; }
+  }
+})();
 myImage.setSrc( 'aaa.jpg' );
 ```
 把网速调至5KB/s，然后通过MyImage.setSrc给该img节点设置src，可以看到，在图片被加载好之前，页面中有一段长长的空白时间。
 
 现在开始引入代理对象proxyImage，通过这个代理对象，在图片被真正加载好之前，页面中将出现一张占位的菊花图loading.gif,来提示用户图片正在加载。代码如下：
 ```js
-var myImage = (function(){ 
-  var imgNode = document.createElement( 'img' ); 
+var myImage = (function(){
+  var imgNode = document.createElement( 'img' );
   document.body.appendChild( imgNode );
-  return { 
-    setSrc: function( src ){ imgNode.src = src; } 
-  } 
-})(); 
+  return {
+    setSrc: function( src ){ imgNode.src = src; }
+  }
+})();
 
-var proxyImage = (function(){ 
-  var img = new Image; 
-  img.onload = function(){ myImage.setSrc( this.src ); } 
-  return { 
-    setSrc: function( src ){ 
-      myImage.setSrc( 'loading.gif' ); 
-      img.src = src; 
-    } 
-  } 
-})(); 
+var proxyImage = (function(){
+  var img = new Image;
+  img.onload = function(){ myImage.setSrc( this.src ); }
+  return {
+    setSrc: function( src ){
+      myImage.setSrc( 'loading.gif' );
+      img.src = src;
+    }
+  }
+})();
 proxyImage.setSrc( 'Nk.jpg' );
 ```
 通过proxyImage间接地访问MyImage。proxyImage控制了客户对MyImage的访问，并且在此过程中加入一些额外的操作，比如在真正的图片加载好之前，先把img节点的src设置为一张本地的loading图片。
@@ -116,20 +116,20 @@ proxyImage.setSrc( 'Nk.jpg' );
 ####代理的意义
 不过是实现一个小小的图片预加载功能，即使不需要引入任何模式也能办到，那么引入代理模式的好处究竟在哪里呢？下面我们先抛开代理，编写一个更常见的图片预加载函数。不用代理的预加载图片函数实现如下：
 ```js
-var MyImage = (function(){ 
-  var imgNode = document.createElement( 'img' ); 
-  document.body.appendChild( imgNode ); 
-  var img = new Image; 
-  img.onload = function(){ 
-    imgNode.src = img.src; 
-  }; 
-  return { 
-    setSrc: function( src ){ 
-      imgNode.src = 'loading.gif'; 
-      img.src = src; 
+var MyImage = (function(){
+  var imgNode = document.createElement( 'img' );
+  document.body.appendChild( imgNode );
+  var img = new Image;
+  img.onload = function(){
+    imgNode.src = img.src;
+  };
+  return {
+    setSrc: function( src ){
+      imgNode.src = 'loading.gif';
+      img.src = src;
     }
-  } 
-})(); 
+  }
+})();
 MyImage.setSrc( 'Nk.jpg' );
 ```
 为了说明代理的意义，下面我们引入一个面向对象设计的原则——单一职责原则。单一职责原则指的是，就一个类（通常也包括对象和函数等）而言，应该仅有一个引起它变化的原因。如果一个对象承担了多项职责，就意味着这个对象将变得巨大，引起它变化的原因可能会有多个。面向对象设计鼓励将行为分布到细粒度的对象之中，如果一个对象承担的职责过多，等于把这些职责耦合到了一起，这种耦合会导致脆弱和低内聚的设计。当变化发生时，设计可能会遭到意外的破坏。
@@ -148,21 +148,21 @@ MyImage.setSrc( 'Nk.jpg' );
 
 另外值得一提的是，如果代理对象和本体对象都为一个函数（函数也是对象），函数必然都能被执行，则可以认为它们也具有一致的“接口”，代码如下：
 ```js
-var myImage = (function(){ 
-  var imgNode = document.createElement( 'img' ); 
-  document.body.appendChild( imgNode ); 
-  return function( src ){ imgNode.src = src; } 
-})(); 
+var myImage = (function(){
+  var imgNode = document.createElement( 'img' );
+  document.body.appendChild( imgNode );
+  return function( src ){ imgNode.src = src; }
+})();
 
-var proxyImage = (function(){ 
-  var img = new Image; 
-  img.onload = function(){ myImage( this.src ); } 
-  
-  return function( src ){ 
+var proxyImage = (function(){
+  var img = new Image;
+  img.onload = function(){ myImage( this.src ); }
+
+  return function( src ){
     myImage( 'loading.gif' );
-    img.src = src; 
-  } 
-})(); 
+    img.src = src;
+  }
+})();
 
 proxyImage( 'Nk.jpg' );
 ```
@@ -189,33 +189,33 @@ proxyImage( 'Nk.jpg' );
 
 解决方案是，我们可以通过一个代理函数proxySynchronousFile来收集一段时间之内的请求，最后一次性发送给服务器。比如我们等待2秒之后才把这2秒之内需要同步的文件ID打包发给服务器，如果不是对实时性要求非常高的系统，2秒的延迟不会带来太大副作用，却能大大减轻服务器的压力。代码如下：
 ```js
-var synchronousFile = function( id ){ 
+var synchronousFile = function( id ){
   console.log( '开 始 同 步 文 件， id 为: ' + id );
 };
-var proxySynchronousFile = (function(){ 
-  var cache = [], // 保 存 一 段 时 间 内 需 要 同 步 的 ID 
-  timer; // 定 时 器 
-  return function( id ){ 
-    cache.push( id ); 
-    if ( timer ){ // 保 证 不 会 覆 盖 已 经 启 动 的 定 时 器 
-      return; 
-    } 
-    timer = setTimeout( function(){ 
-      synchronousFile( cache.join( ',' ) ); // 2 秒 后 向 本 体 发 送 需 要 同 步 的 ID 集 合 
-      clearTimeout( timer ); // 清 空 定 时 器 
-      timer = null; 
-      cache.length = 0; // 清 空 ID 集 合 
-    }, 2000 ); 
-  } 
+var proxySynchronousFile = (function(){
+  var cache = [], // 保 存 一 段 时 间 内 需 要 同 步 的 ID
+  timer; // 定 时 器
+  return function( id ){
+    cache.push( id );
+    if ( timer ){ // 保 证 不 会 覆 盖 已 经 启 动 的 定 时 器
+      return;
+    }
+    timer = setTimeout( function(){
+      synchronousFile( cache.join( ',' ) ); // 2 秒 后 向 本 体 发 送 需 要 同 步 的 ID 集 合
+      clearTimeout( timer ); // 清 空 定 时 器
+      timer = null;
+      cache.length = 0; // 清 空 ID 集 合
+    }, 2000 );
+  }
 })();
 
-var checkbox = document.getElementsByTagName( 'input' ); 
-for ( var i = 0, c; c = checkbox[ i ++ ]; ){ 
-  c.onclick = function(){ 
-    if ( this.checked = = = true ){ 
-      proxySynchronousFile( this.id ); 
+var checkbox = document.getElementsByTagName( 'input' );
+for ( var i = 0, c; c = checkbox[ i ++ ]; ){
+  c.onclick = function(){
+    if ( this.checked = = = true ){
+      proxySynchronousFile( this.id );
     }
-  } 
+  }
 };
 ```
 #### 虚拟代理在惰性加载中的应用
@@ -231,38 +231,38 @@ miniConsole.js的代码量大概有1000行左右，也许我们并不想一开�
 
 未加载真正的miniConsole.js之前的代码如下：
 ```js
-var cache = []; 
-var miniConsole = { 
-  log: function(){ 
-    var args = arguments; 
-    cache.push( function(){ 
-      return miniConsole.log.apply( miniConsole, args ); 
-    }); 
-  } 
-}; 
+var cache = [];
+var miniConsole = {
+  log: function(){
+    var args = arguments;
+    cache.push( function(){
+      return miniConsole.log.apply( miniConsole, args );
+    });
+  }
+};
 miniConsole.log( 1);
 ```
 当用户按下F2时，开始加载真正的miniConsole.js，代码如下：
 ```js
-var handler = function( ev ){ 
-  if ( ev.keyCode = = = 113 ){ 
-    var script = document.createElement( 'script' ); 
-    script.onload = function(){ 
-      for ( var i = 0, fn; fn = cache[ i ++ ]; ){ 
-        fn(); 
-      } 
-    }; 
-    script.src = 'miniConsole.js'; 
-    document.getElementsByTagName( 'head' )[0].appendChild( script ); 
+var handler = function( ev ){
+  if ( ev.keyCode = = = 113 ){
+    var script = document.createElement( 'script' );
+    script.onload = function(){
+      for ( var i = 0, fn; fn = cache[ i ++ ]; ){
+        fn();
+      }
+    };
+    script.src = 'miniConsole.js';
+    document.getElementsByTagName( 'head' )[0].appendChild( script );
   }
 };
-document.body.addEventListener( 'keydown', handler, false ); 
+document.body.addEventListener( 'keydown', handler, false );
 
-// miniConsole.js 代 码： 
-miniConsole = { 
-  log: function(){ // 真 正 代 码 略 
-    console.log( Array.prototype.join.call( arguments ) ); 
-  } 
+// miniConsole.js 代 码：
+miniConsole = {
+  log: function(){ // 真 正 代 码 略
+    console.log( Array.prototype.join.call( arguments ) );
+  }
 };
 ```
 虽然我们没有给出miniConsole.js的真正代码，但这不影响我们理解其中的逻辑。当然这里还要注意一个问题，就是我们要保证在F2被重复按下的时候，miniConsole.js只被加载一次。
@@ -273,30 +273,30 @@ miniConsole = {
 #### 缓存代理的例子——计算乘积
 这里编写一个简单的求乘积的程序，请读者自行把它脑补为复杂的计算。先创建一个用于求乘积的函数：
 ```js
-var mult = function(){ 
-  console.log( '开 始 计 算 乘 积' ); 
-  var a = 1; 
-  for ( var i = 0, l = arguments.length; i < l; i ++ ){ 
-    a = a * arguments[ i]; 
-  } 
-  return a; 
-}; 
-mult( 2, 3 ); // 输 出： 6 
+var mult = function(){
+  console.log( '开 始 计 算 乘 积' );
+  var a = 1;
+  for ( var i = 0, l = arguments.length; i < l; i ++ ){
+    a = a * arguments[ i];
+  }
+  return a;
+};
+mult( 2, 3 ); // 输 出： 6
 mult( 2, 3, 4 ); // 输 出： 24
 ```
 现在加入缓存代理函数：
 ```js
-var proxyMult = (function(){ 
-  var cache = {}; 
-  return function(){ 
-    var args = Array.prototype.join.call( arguments, ',' ); 
-    if ( args in cache ){ 
-      return cache[ args ]; 
-    } 
-    return cache[ args ] = mult.apply( this, arguments ); 
-  } 
-})(); 
-proxyMult( 1, 2, 3, 4 ); // 输 出： 24 
+var proxyMult = (function(){
+  var cache = {};
+  return function(){
+    var args = Array.prototype.join.call( arguments, ',' );
+    if ( args in cache ){
+      return cache[ args ];
+    }
+    return cache[ args ] = mult.apply( this, arguments );
+  }
+})();
+proxyMult( 1, 2, 3, 4 ); // 输 出： 24
 proxyMult( 1, 2, 3, 4 ); // 输 出： 24
 ```
 当我们第二次调用proxyMult(1,2,3,4)的时候，本体mult函数并没有被计算，proxyMult直接返回了之前缓存好的计算结果。通过增加缓存代理的方式，mult函数可以继续专注于自身的职责——计算乘积，缓存的功能是由代理对象实现的。
@@ -308,39 +308,39 @@ proxyMult( 1, 2, 3, 4 ); // 输 出： 24
 #### 用高阶函数动态创建代理
 通过传入高阶函数这种更加灵活的方式，可以为各种计算方法创建缓存代理。现在这些计算方法被当作参数传入一个专门用于创建缓存代理的工厂中，这样一来，我们就可以为乘法、加法、减法等创建缓存代理，代码如下：
 ```js
-/**************** 计 算 乘 积 *****************/ 
-var mult = function(){ 
-  var a = 1; 
-  for ( var i = 0, l = arguments.length; i < l; i ++ ){ 
-    a = a * arguments[ i]; 
-  } 
-  return a; 
-}; 
-/**************** 计 算 加 和 *****************/ 
-var plus = function(){ 
-  var a = 0; 
-  for ( var i = 0, l = arguments.length; i < l; i ++ ){ 
-    a = a + arguments[ i]; 
-  } 
-  return a; 
-}; 
-/**************** 创 建 缓 存 代 理 的 工 厂 *****************/ 
-var createProxyFactory = function( fn ){ 
-  var cache = {}; 
+/**************** 计 算 乘 积 *****************/
+var mult = function(){
+  var a = 1;
+  for ( var i = 0, l = arguments.length; i < l; i ++ ){
+    a = a * arguments[ i];
+  }
+  return a;
+};
+/**************** 计 算 加 和 *****************/
+var plus = function(){
+  var a = 0;
+  for ( var i = 0, l = arguments.length; i < l; i ++ ){
+    a = a + arguments[ i];
+  }
+  return a;
+};
+/**************** 创 建 缓 存 代 理 的 工 厂 *****************/
+var createProxyFactory = function( fn ){
+  var cache = {};
   return function(){
-    var args = Array.prototype.join.call( arguments, ',' ); 
-    if ( args in cache ){ 
-      return cache[ args ]; 
-    } 
-    return cache[ args ] = fn.apply( this, arguments ); 
-  } 
-}; 
-var proxyMult = createProxyFactory( mult ), 
-    proxyPlus = createProxyFactory( plus ); 
+    var args = Array.prototype.join.call( arguments, ',' );
+    if ( args in cache ){
+      return cache[ args ];
+    }
+    return cache[ args ] = fn.apply( this, arguments );
+  }
+};
+var proxyMult = createProxyFactory( mult ),
+    proxyPlus = createProxyFactory( plus );
 
-alert( proxyMult( 1, 2, 3, 4 ) ); // 输 出： 24 
-alert( proxyMult( 1, 2, 3, 4 ) ); // 输 出： 24 
-alert( proxyPlus( 1, 2, 3, 4 ) ); // 输 出： 10 
+alert( proxyMult( 1, 2, 3, 4 ) ); // 输 出： 24
+alert( proxyMult( 1, 2, 3, 4 ) ); // 输 出： 24
+alert( proxyPlus( 1, 2, 3, 4 ) ); // 输 出： 10
 alert( proxyPlus( 1, 2, 3, 4 ) ); // 输 出： 10
 ```
 

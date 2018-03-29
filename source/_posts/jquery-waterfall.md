@@ -1,8 +1,8 @@
 ---
 title: jQuery实现图片瀑布流展示
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - jquery
   - waterfall
 date: 2016-11-01 16:21:34
@@ -85,7 +85,7 @@ function imgLocation(){
           $(e).css({
               position: 'absolute',
               top: minBoxHeight,
-              left: box.eq(minBoxIndex).position().left  
+              left: box.eq(minBoxIndex).position().left
           });
 
           // 更新添加图片后的当前列（最小高度列）的高度，加上本次容器的高度
@@ -110,7 +110,7 @@ function scrollSide(){
 }
 
 // 模拟获取到的img图片数据
-var imgdata = {} 
+var imgdata = {}
 window.onscroll = function(){
     if(scrollSide()){
         // 对图片数据遍历，构造图片html字符串

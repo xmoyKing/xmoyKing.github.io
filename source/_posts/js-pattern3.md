@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-3-单例模式
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-05 23:23:33
 updated:
 ---
@@ -37,16 +37,16 @@ alert( a === b); // true
 ```
 第二种写法：
 ```js
-var Singleton = function( name ){ this.name = name; }; 
+var Singleton = function( name ){ this.name = name; };
 
-Singleton.prototype.getName = function(){ alert ( this.name ); }; 
+Singleton.prototype.getName = function(){ alert ( this.name ); };
 
-Singleton.getInstance = (function(){ 
-  var instance = null; 
-  return function( name ){ 
-    if ( !instance ){ 
-      instance = new Singleton( name ); 
-    } return instance;} 
+Singleton.getInstance = (function(){
+  var instance = null;
+  return function( name ){
+    if ( !instance ){
+      instance = new Singleton( name );
+    } return instance;}
 })();
 ```
 我们通过Singleton.getInstance来获取Singleton类的唯一对象，这种方式相对简单，但有一个问题，就是增加了这个类的“不透明性”，Singleton类的使用者必须知道这是一个单例类，跟以往通过newXXX的方式来获取对象不同，这里偏要使用Singleton.getInstance来获取对象。
@@ -88,30 +88,30 @@ alert(a === b); // true
 
 现在我们通过引入代理类的方式，来解决上面提到的问题。首先在CreateDiv构造函数中，把负责管理单例的代码移除出去，使它成为一个普通的创建div的类：
 ```js
-var CreateDiv = function( html ){ 
-  this.html = html; 
-  this.init(); 
-}; 
+var CreateDiv = function( html ){
+  this.html = html;
+  this.init();
+};
 
-CreateDiv.prototype.init = function(){ 
-  var div = document.createElement( 'div' ); 
-  div.innerHTML = this.html; 
-  document.body.appendChild( div ); 
+CreateDiv.prototype.init = function(){
+  var div = document.createElement( 'div' );
+  div.innerHTML = this.html;
+  document.body.appendChild( div );
 };
 ```
 接下来引入代理类proxySingletonCreateDiv：
 ```js
-var ProxySingletonCreateDiv = (function(){ 
-  var instance; 
-  return function( html ){ 
-    if ( !instance ){ 
-      instance = new CreateDiv( html ); 
-    } 
-    return instance; 
-  } 
-})(); 
-var a = new ProxySingletonCreateDiv( 'sven1' ); 
-var b = new ProxySingletonCreateDiv( 'sven2' ); 
+var ProxySingletonCreateDiv = (function(){
+  var instance;
+  return function( html ){
+    if ( !instance ){
+      instance = new CreateDiv( html );
+    }
+    return instance;
+  }
+})();
+var a = new ProxySingletonCreateDiv( 'sven1' );
+var b = new ProxySingletonCreateDiv( 'sven2' );
 alert ( a === b );
 ```
 
@@ -134,42 +134,42 @@ var a = {};
 1.使用命名空间
 适当地使用命名空间，并不会杜绝全局变量，但可以减少全局变量的数量。最简单的方法依然是用对象字面量的方式：
 ```js
-var namespace1 = { 
-  a: function(){ alert (1); }, 
-  b: function(){ alert (2); } 
+var namespace1 = {
+  a: function(){ alert (1); },
+  b: function(){ alert (2); }
 };
 ```
 把a和b都定义为namespace1的属性，这样可以减少变量和全局作用域打交道的机会。另外我们还可以动态地创建命名空间，代码如下：
 ```js
-var MyApp = {}; 
-MyApp.namespace = function( name ){ 
-  var parts = name.split( '.' ); 
-  var current = MyApp; 
-  for ( var i in parts ){ 
-    if ( !current[ parts[ i ] ] ){ 
-      current[ parts[ i ] ] = {}; 
-    } 
-    current = current[ parts[ i ] ]; 
-  } 
-}; 
-MyApp.namespace( 'event' ); 
-MyApp.namespace( 'dom.style' ); 
-console.dir( MyApp ); 
-// 上 述 代 码 等 价 于： 
+var MyApp = {};
+MyApp.namespace = function( name ){
+  var parts = name.split( '.' );
+  var current = MyApp;
+  for ( var i in parts ){
+    if ( !current[ parts[ i ] ] ){
+      current[ parts[ i ] ] = {};
+    }
+    current = current[ parts[ i ] ];
+  }
+};
+MyApp.namespace( 'event' );
+MyApp.namespace( 'dom.style' );
+console.dir( MyApp );
+// 上 述 代 码 等 价 于：
 var MyApp = { event: {}, dom: { style: {} } };
 ```
 
 2.使用闭包封装私有变量
 这种方法把一些变量封装在闭包的内部，只暴露一些接口跟外界通信：
 ```js
-var user = (function(){ 
-  var __name = 'sven', 
-  __age = 29; 
-  return { 
-    getUserInfo: function(){ 
-      return __name + '-' + __age; 
-    } 
-  } 
+var user = (function(){
+  var __name = 'sven',
+  __age = 29;
+  return {
+    getUserInfo: function(){
+      return __name + '-' + __age;
+    }
+  }
 })();
 ```
 用下划线来约定私有变量`__name`和`__age`，它们被封装在闭包产生的作用域中，外部是访问不到这两个变量的，这就避免了对全局的命令污染。
@@ -184,20 +184,20 @@ var user = (function(){
 可以用一个变量来判断是否已经创建过登录浮窗，这也是本节第一段代码中的做法。
 ```js
 var createLoginLayer = (function(){
-  var div; 
+  var div;
   return function(){
-    if ( !div ){ 
-      div = document.createElement( 'div' ); 
-      div.innerHTML = '我 是 登 录 浮 窗'; 
-      div.style.display = 'none'; 
-      document.body.appendChild( div ); 
-    } 
-    return div; 
-  } 
-})(); 
-document.getElementById( 'loginBtn' ).onclick = function(){ 
-  var loginLayer = createLoginLayer(); 
-  loginLayer.style.display = 'block'; 
+    if ( !div ){
+      div = document.createElement( 'div' );
+      div.innerHTML = '我 是 登 录 浮 窗';
+      div.style.display = 'none';
+      document.body.appendChild( div );
+    }
+    return div;
+  }
+})();
+document.getElementById( 'loginBtn' ).onclick = function(){
+  var loginLayer = createLoginLayer();
+  loginLayer.style.display = 'block';
 };
 ```
 一个可用的惰性单例，但是我们发现它还有如下一些问题。
@@ -210,46 +210,46 @@ var obj; if ( !obj ){ obj = xxx; }
 ```
 现在我们就把如何管理单例的逻辑从原来的代码中抽离出来，这些逻辑被封装在getSingle函数内部，创建对象的方法fn被当成参数动态传入getSingle函数：
 ```js
-var getSingle = function( fn ){ 
-  var result; 
-  return function(){ 
-    return result | | ( result = fn.apply( this, arguments ) ); 
+var getSingle = function( fn ){
+  var result;
+  return function(){
+    return result | | ( result = fn.apply( this, arguments ) );
   }
 };
 ```
 
 接下来将用于创建登录浮窗的方法用参数fn的形式传入getSingle，我们不仅可以传入createLoginLayer，还能传入createScript、createIframe、createXhr等。之后再让getSingle返回一个新的函数，并且用一个变量result来保存fn的计算结果。result变量因为身在闭包中，它永远不会被销毁。在将来的请求中，如果result已经被赋值，那么它将返回这个值。代码如下：
 ```js
-var createLoginLayer = function(){ 
-  var div = document.createElement( 'div' ); 
-  div.innerHTML = '我 是 登 录 浮 窗'; 
-  div.style.display = 'none'; 
-  document.body.appendChild( div ); 
-  return div; 
-}; 
+var createLoginLayer = function(){
+  var div = document.createElement( 'div' );
+  div.innerHTML = '我 是 登 录 浮 窗';
+  div.style.display = 'none';
+  document.body.appendChild( div );
+  return div;
+};
 
-var createSingleLoginLayer = getSingle( createLoginLayer ); 
-document.getElementById( 'loginBtn' ).onclick = function(){ 
-  var loginLayer = createSingleLoginLayer(); 
-  loginLayer.style.display = 'block'; 
+var createSingleLoginLayer = getSingle( createLoginLayer );
+document.getElementById( 'loginBtn' ).onclick = function(){
+  var loginLayer = createSingleLoginLayer();
+  loginLayer.style.display = 'block';
 };
 ```
 在这个例子中，我们把创建实例对象的职责和管理单例的职责分别放置在两个方法里，这两个方法可以独立变化而互不影响，当它们连接在一起的时候，就完成了创建唯一实例对象的功能，看起来是一件挺奇妙的事情。
 
 这种单例模式的用途远不止创建对象，比如我们通常渲染完页面中的一个列表之后，接下来要给这个列表绑定click事件，如果是通过ajax动态往列表里追加数据，在使用事件代理的前提下，click事件实际上只需要在第一次渲染列表的时候被绑定一次，但是我们不想去判断当前是否是第一次渲染列表，如果借助于jQuery，我们通常选择给节点绑定one事件：
 ```js
-var bindEvent = function(){ 
-  $( 'div' ).one( 'click', function(){ 
+var bindEvent = function(){
+  $( 'div' ).one( 'click', function(){
     alert ( 'click' );
   });
-}; 
-var render = function(){ 
-  console.log( '开 始 渲 染 列 表' ); 
-  bindEvent(); 
-}; 
+};
+var render = function(){
+  console.log( '开 始 渲 染 列 表' );
+  bindEvent();
+};
 
-render(); 
-render(); 
+render();
+render();
 render();
 ```
 如果利用getSingle函数，也能达到一样的效果。代码如下：
@@ -257,18 +257,18 @@ render();
 ```js
 
 var bindEvent = getSingle( function(){
-  document.getElementById( 'div1' ).onclick = function(){ 
-    alert ( 'click' ); 
-  } 
-  return true; 
-}); 
+  document.getElementById( 'div1' ).onclick = function(){
+    alert ( 'click' );
+  }
+  return true;
+});
 
 var render = function(){
-  console.log( '开 始 渲 染 列 表' ); 
-  bindEvent(); 
-}; 
-render(); 
-render(); 
+  console.log( '开 始 渲 染 列 表' );
+  bindEvent();
+};
+render();
+render();
 render();
 ```
 render函数和bindEvent函数都分别执行了3次，但div实际上只被绑定了一个事件。

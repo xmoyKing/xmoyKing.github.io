@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-18-DOM扩展
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-25 14:49:14
 updated:

@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-12-职责链模式
-categories: js
+categories: JavaScript
 tags:
-- js
-- design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-28 15:58:27
 updated:
 ---
@@ -34,17 +34,17 @@ updated:
 下面我们把这个流程写成代码：
 ```js
 var order = function(orderType, pay, stock) {
-  if (orderType === 1) { // 500 元 定 金 购 买 模 式 
-    if (pay === true) { // 已 支 付 定 金 
+  if (orderType === 1) { // 500 元 定 金 购 买 模 式
+    if (pay === true) { // 已 支 付 定 金
       console.log('500 元 定 金 预 购, 得 到 100 优 惠 券');
-    } else { // 未 支 付 定 金， 降 级 到 普 通 购 买 模 式 
-      if (stock > 0) { // 用 于 普 通 购 买 的 手 机 还 有 库 存 
+    } else { // 未 支 付 定 金， 降 级 到 普 通 购 买 模 式
+      if (stock > 0) { // 用 于 普 通 购 买 的 手 机 还 有 库 存
         console.log('普 通 购 买, 无 优 惠 券');
       } else {
         console.log('手 机 库 存 不 足');
       }
     }
-  } else if (orderType === 2) { // 200 元 定 金 购 买 模 式 
+  } else if (orderType === 2) { // 200 元 定 金 购 买 模 式
     if (pay === true) {
       console.log('200 元 定 金 预 购, 得 到 50 优 惠 券');
     } else {
@@ -76,18 +76,18 @@ var order500 = function(orderType, pay, stock) {
     if (orderType === 1 && pay === true) {
       console.log('500 元 定 金 预 购, 得 到 100 优 惠 券');
     } else {
-      order200(orderType, pay, stock); // 将 请 求 传 递 给 200 元 订 单 
+      order200(orderType, pay, stock); // 将 请 求 传 递 给 200 元 订 单
     }
   };
-// 200 元 订 单 
+// 200 元 订 单
 var order200 = function(orderType, pay, stock) {
     if (orderType === 2 && pay === true) {
       console.log('200 元 定 金 预 购, 得 到 50 优 惠 券');
     } else {
-      orderNormal(orderType, pay, stock); // 将 请 求 传 递 给 普 通 订 单 
+      orderNormal(orderType, pay, stock); // 将 请 求 传 递 给 普 通 订 单
     }
   };
-// 普 通 购 买 订 单 
+// 普 通 购 买 订 单
 var orderNormal = function(orderType, pay, stock) {
     if (stock > 0) {
       console.log('普 通 购 买, 无 优 惠 券');
@@ -95,11 +95,11 @@ var orderNormal = function(orderType, pay, stock) {
       console.log('手 机 库 存 不 足');
     }
   };
-// 测 试 结 果： 
-order500(1, true, 500); // 输 出： 500 元 定 金 预 购, 得 到 100 优 惠 券 
-order500(1, false, 500); // 输 出： 普 通 购 买, 无 优 惠 券 
-order500(2, true, 500); // 输 出： 200 元 定 金 预 购, 得 到 50 优 惠 券 
-order500(3, false, 500); // 输 出： 普 通 购 买, 无 优 惠 券 
+// 测 试 结 果：
+order500(1, true, 500); // 输 出： 500 元 定 金 预 购, 得 到 100 优 惠 券
+order500(1, false, 500); // 输 出： 普 通 购 买, 无 优 惠 券
+order500(2, true, 500); // 输 出： 200 元 定 金 预 购, 得 到 50 优 惠 券
+order500(3, false, 500); // 输 出： 普 通 购 买, 无 优 惠 券
 order500(3, false, 0); // 输 出： 手 机 库 存 不 足
 ```
 可以看到，执行结果和前面那个巨大的order函数完全一样，但是代码的结构已经清晰了很多，我们把一个大函数拆分了3个小函数，去掉了许多嵌套的条件分支语句。
@@ -126,7 +126,7 @@ var order500 = function(orderType, pay, stock) {
     if (orderType === 1 && pay === true) {
       console.log('500 元 定 金 预 购， 得 到 100 优 惠 券');
     } else {
-      return 'nextSuccessor'; // 我 不 知 道 下 一 个 节 点 是 谁， 反 正 把 请 求 往 后 面 传 递 
+      return 'nextSuccessor'; // 我 不 知 道 下 一 个 节 点 是 谁， 反 正 把 请 求 往 后 面 传 递
     }
   };
 var order200 = function(orderType, pay, stock) {
@@ -146,8 +146,8 @@ var orderNormal = function(orderType, pay, stock) {
 ```
 接下来需要把函数包装进职责链节点，我们定义一个构造函数Chain，在`new Chain`的时候传递的参数即为需要被包装的函数，同时它还拥有一个实例属性this.successor，表示在链中的下一个节点。此外Chain的prototype中还有两个函数，它们的作用如下所示：
 ```js
-// Chain.prototype.setNextSuccessor 指 定 在 链 中 的 下 一 个 节 点 
-// Chain.prototype.passRequest 传 递 请 求 给 某 个 节 点 
+// Chain.prototype.setNextSuccessor 指 定 在 链 中 的 下 一 个 节 点
+// Chain.prototype.passRequest 传 递 请 求 给 某 个 节 点
 var Chain = function(fn) {
     this.fn = fn;
     this.successor = null;
@@ -165,29 +165,29 @@ Chain.prototype.passRequest = function() {
 ```
 现在我们把3个订单函数分别包装成职责链的节点：
 ```js
-var chainOrder500 = new Chain( order500 ); 
-var chainOrder200 = new Chain( order200 ); 
+var chainOrder500 = new Chain( order500 );
+var chainOrder200 = new Chain( order200 );
 var chainOrderNormal = new Chain( orderNormal );
 ```
 然后指定节点在职责链中的顺序：
 ```js
-chainOrder500.setNextSuccessor( chainOrder200 ); 
+chainOrder500.setNextSuccessor( chainOrder200 );
 chainOrder200.setNextSuccessor( chainOrderNormal );
 ```
 最后把请求传递给第一个节点：
 ```js
-chainOrder500.passRequest( 1, true, 500 ); // 输 出： 500 元 定 金 预 购， 得 到 100 优 惠 券 
-chainOrder500.passRequest( 2, true, 500 ); // 输 出： 200 元 定 金 预 购， 得 到 50 优 惠 券 
-chainOrder500.passRequest( 3, true, 500 ); // 输 出： 普 通 购 买， 无 优 惠 券 
+chainOrder500.passRequest( 1, true, 500 ); // 输 出： 500 元 定 金 预 购， 得 到 100 优 惠 券
+chainOrder500.passRequest( 2, true, 500 ); // 输 出： 200 元 定 金 预 购， 得 到 50 优 惠 券
+chainOrder500.passRequest( 3, true, 500 ); // 输 出： 普 通 购 买， 无 优 惠 券
 chainOrder500.passRequest( 1, false, 0 ); // 输 出： 手 机
 ```
 通过改进，我们可以自由灵活地增加、移除和修改链中的节点顺序，假如某天网站运营人员又想出了支持300元定金购买，那我们就在该链中增加一个节点即可：
 ```js
-var order300 = function(){ 
-  // 具 体 实 现 略 
-}; 
-chainOrder300 = new Chain( order300 ); 
-chainOrder500.setNextSuccessor( chainOrder300); 
+var order300 = function(){
+  // 具 体 实 现 略
+};
+chainOrder300 = new Chain( order300 );
+chainOrder500.setNextSuccessor( chainOrder300);
 chainOrder300.setNextSuccessor( chainOrder200);
 ```
 对于程序员来说，我们总是喜欢去改动那些相对容易改动的地方，就像改动框架的配置文件远比改动框架的源代码简单得多。在这里完全不用理会原来的订单函数代码，我们要做的只是增加一个节点，然后重新设置链中相关节点的顺序。
@@ -197,8 +197,8 @@ chainOrder300.setNextSuccessor( chainOrder200);
 
 这时候让节点函数同步返回"nextSuccessor"已经没有意义了，所以要给Chain类再增加一个原型方法Chain.prototype.next，表示手动传递请求给职责链中的下一个节点：
 ```js
-Chain.prototype.next = function(){ 
-  return this.successor && this.successor.passRequest.apply( this.successor, arguments ); 
+Chain.prototype.next = function(){
+  return this.successor && this.successor.passRequest.apply( this.successor, arguments );
 };
 ```
 来看一个异步职责链的例子：
@@ -255,8 +255,8 @@ Function.prototype.after = function(fn) {
   }
 };
 var order = order500yuan.after(order200yuan).after(orderNormal);
-order(1, true, 500); // 输 出： 500 元 定 金 预 购， 得 到 100 优 惠 券 
-order(2, true, 500); // 输 出： 200 元 定 金 预 购， 得 到 50 优 惠 券 
+order(1, true, 500); // 输 出： 500 元 定 金 预 购， 得 到 100 优 惠 券
+order(2, true, 500); // 输 出： 200 元 定 金 预 购， 得 到 50 优 惠 券
 order(1, false, 500); // 输 出： 普 通 购 买， 无 优 惠 券
 ```
 用AOP来实现职责链既简单又巧妙，但这种把函数叠在一起的方式，同时也叠加了函数的作用域，如果链条太长的话，也会对性能有较大的影响。
@@ -266,7 +266,7 @@ order(1, false, 500); // 输 出： 普 通 购 买， 无 优 惠 券
 ```js
 var getActiveUploadObj = function() {
     try {
-      return new ActiveXObject("TXFTNActiveX.FTNUpload"); // IE 上 传 控 件 
+      return new ActiveXObject("TXFTNActiveX.FTNUpload"); // IE 上 传 控 件
     } catch (e) {
       return 'nextSuccessor';
     }

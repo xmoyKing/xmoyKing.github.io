@@ -2,8 +2,10 @@
 title: 正则表达式基本运用
 date: 2017-01-22 12:43:59
 updated: 2017-01-22
-categories: js
-tags: RegExp
+categories: JavaScript
+tags:
+  - JavaScript
+  - RegExp
 ---
 
 推荐参考: [正则表达式30分钟入门教程](https://deerchao.net/tutorials/regex/regex.htm)

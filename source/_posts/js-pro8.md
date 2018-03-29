@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-8-引用类型2-RegExp/Function
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-08 17:37:19
 updated:
@@ -23,7 +23,7 @@ var expression = /pattern/flags; // 字面量语法
 - m 表示多行（multiline）模式，即在达到一行文本末尾时还会继续查找下一行中是否存在与模式匹配的项
 标志位可以任意组合。
 
-模式中使用的所有的**元字符**都必须转义，,这些元字符都至少1种特殊用途，因此需要转义, 正则表达式的元字符包括：`( ) [ ] { } \ ^ $ | * + .` 
+模式中使用的所有的**元字符**都必须转义，,这些元字符都至少1种特殊用途，因此需要转义, 正则表达式的元字符包括：`( ) [ ] { } \ ^ $ | * + .`
 
 由于构造函数的方式传入参数是字符串模式，所以需要对元字符进行双重转义，例如字符`\`在字符串中通常转义为`\\`,而在正则表达式字符串中就会变为`\\\\`。
 
@@ -44,7 +44,7 @@ var text = 'mom and dad and baby';
 var reg = /mom( and dad( and baby)?)?/gi;
 
 var matches = reg.exec(text);
-console.log(matches); 
+console.log(matches);
 // ["mom and dad and baby", " and dad and baby", " and baby", index: 0, input: "mom and dad and baby"]
 ```
 上例中模式包含两个捕获组，最内部的捕获组匹配"and baby"，而包含它的捕获组匹配"and dad"或"and dad and baby"。当字符串传入exec方法中后，发现了一个匹配项。因为整个字符串本身与模式匹配，所以返回的数组matches的index属性为0，数组的第一项是匹配的整个字符串，第二项包含与第一个匹配组匹配的内容，第三项包含与第二个捕获组匹配的内容。
@@ -73,7 +73,7 @@ var reg = /(.)hort/g;
 
 if(reg.test(text)){
   console.log(
-    RegExp.input, // this has been a short summer 
+    RegExp.input, // this has been a short summer
     RegExp.leftContext, // this has been a
     RegExp.rightContext, // summer
     RegExp.lastMatch, // short
@@ -113,7 +113,7 @@ function add(num){
 }
 var rst = add(100); // 300
 
-// 上述代码与下面代码等价 
+// 上述代码与下面代码等价
 var add = function(num){
   return num + 100;
 };

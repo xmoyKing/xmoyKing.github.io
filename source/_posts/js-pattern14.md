@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-14-装饰器模式
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-12-02 08:39:08
 updated:
 ---
@@ -19,7 +19,7 @@ updated:
 #### 模拟传统面向对象语言的装饰者模式
 首先要提出来的是，作为一门解释执行的语言，给JavaScript中的对象动态添加或者改变职责是一件再简单不过的事情，虽然这种做法改动了对象自身，跟传统定义中的装饰者模式并不一样，但这无疑更符合JavaScript的语言特色。代码如下：
 ```js
-var obj = { name: 'sven', address: '深 圳 市' }; 
+var obj = { name: 'sven', address: '深 圳 市' };
 obj.address = obj.address + '福 田 区';
 ```
 传统面向对象语言中的装饰者模式在JavaScript中适用的场景并不多，如上面代码所示，通常我们并不太介意改动对象自身。尽管如此，还是稍微模拟一下传统面向对象语言中的装饰者模式实现。
@@ -28,21 +28,21 @@ obj.address = obj.address + '福 田 区';
 
 下面来看代码实现，首先是原始的飞机类：
 ```js
-var Plane = function(){} 
+var Plane = function(){}
 Plane.prototype.fire = function(){ console.log( '发 射 普 通 子 弹' ); }
 ```
 接下来增加两个装饰类，分别是导弹和原子弹：
 ```js
 var MissileDecorator = function( plane ){ this.plane = plane; }
-MissileDecorator.prototype.fire = function(){ 
+MissileDecorator.prototype.fire = function(){
   this.plane.fire();
-  console.log( '发 射 导 弹' ); 
-} 
+  console.log( '发 射 导 弹' );
+}
 
 var AtomDecorator = function( plane ){ this.plane = plane; }
-AtomDecorator.prototype.fire = function(){ 
-  this.plane.fire(); 
-  console.log( '发 射 原 子 弹' ); 
+AtomDecorator.prototype.fire = function(){
+  this.plane.fire();
+  console.log( '发 射 原 子 弹' );
 }
 ```
 导弹类和原子弹类的构造函数都接受参数plane对象，并且保存好这个参数，在它们的fire方法中，除了执行自身的操作之外，还调用plane对象的fire方法。
@@ -54,9 +54,9 @@ AtomDecorator.prototype.fire = function(){
 
 测试：
 ```js
-var plane = new Plane(); 
-plane = new MissileDecorator( plane ); 
-plane = new AtomDecorator( plane ); 
+var plane = new Plane();
+plane = new MissileDecorator( plane );
+plane = new AtomDecorator( plane );
 
 plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹、 发 射 原 子 弹
 ```
@@ -68,15 +68,15 @@ plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹�
 #### 回到JavaScript的装饰者
 JavaScript语言动态改变对象相当容易，我们可以直接改写对象或者对象的某个方法，并不需要使用“类”来实现装饰者模式，代码如下：
 ```js
-var plane = { fire: function(){ console.log( '发 射 普 通 子 弹' ); } } 
-var missileDecorator = function(){ console.log( '发 射 导 弹' ); } 
-var atomDecorator = function(){ console.log( '发 射 原 子 弹' ); } 
+var plane = { fire: function(){ console.log( '发 射 普 通 子 弹' ); } }
+var missileDecorator = function(){ console.log( '发 射 导 弹' ); }
+var atomDecorator = function(){ console.log( '发 射 原 子 弹' ); }
 
-var fire1 = plane.fire; 
-plane.fire = function(){ fire1(); missileDecorator(); } 
+var fire1 = plane.fire;
+plane.fire = function(){ fire1(); missileDecorator(); }
 
-var fire2 = plane.fire; 
-plane.fire = function(){ fire2(); atomDecorator(); } 
+var fire2 = plane.fire;
+plane.fire = function(){ fire2(); atomDecorator(); }
 
 plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹、 发 射 原 子 弹
 ```
@@ -86,21 +86,21 @@ plane.fire(); // 分 别 输 出： 发 射 普 通 子 弹、 发 射 导 弹�
 
 要想为函数添加一些功能，最简单粗暴的方式就是直接改写该函数，但这是最差的办法，直接违反了开放-封闭原则：
 ```js
-var a = function(){ alert (1); } 
-// 改 成： 
+var a = function(){ alert (1); }
+// 改 成：
 var a = function(){ alert (1); alert (2); }
 ```
 很多时候我们不想去碰原函数，也许原函数是由其他同事编写的，里面的实现非常杂乱。现在需要一个办法，在不改变函数源代码的情况下，能给函数增加功能，这正是开放-封闭原则。
 
 其实通过保存原引用的方式就可以改写某个函数：
 ```js
-var _a = a; 
-a = function(){ _a(); alert (2); } 
+var _a = a;
+a = function(){ _a(); alert (2); }
 a();
 ```
 这是实际开发中很常见的一种做法，比如我们想给window绑定onload事件，但是又不确定这个事件是不是已经被其他人绑定过，为了避免覆盖掉之前的window.onload函数中的行为，我们一般都会先保存好原先的window.onload，把它放入新的window.onload里执行.
 ```js
-window.onload = function(){ alert (1); } 
+window.onload = function(){ alert (1); }
 
 var _onload = window.onload || function(){};
 window.onload = function(){ _onload(); alert (2); }
@@ -109,11 +109,11 @@ window.onload = function(){ _onload(); alert (2); }
 - 必须维护_onload这个中间变量，虽然看起来并不起眼，但如果函数的装饰链较长，或者需要装饰的函数变多，这些中间变量的数量也会越来越多。
 - 其实还遇到了this被劫持的问题，在window.onload的例子中没有这个烦恼，是因为调用普通函数_onload时，this也指向window，跟调用window.onload时一样（函数作为对象的方法被调用时，this指向该对象，所以此处this也只指向window）。现在把window.onload换成document.getElementById，代码如下:
 ```js
-var _getElementById = document.getElementById; 　 　 
-document.getElementById = function( id ){ 
-  alert (1); 
-  return _getElementById( id ); // (1) 
-} 　 　 
+var _getElementById = document.getElementById; 　 　
+document.getElementById = function( id ){
+  alert (1);
+  return _getElementById( id ); // (1)
+} 　 　
 var button = document.getElementById( 'button' );
 ```
 执行这段代码，我们看到在弹出alert(1)之后，紧接着控制台抛出了异常.
@@ -125,10 +125,10 @@ Uncaught TypeError: Illegal invocation
 
 改进后的代码可以满足需求，我们要手动把document当作上下文this传入_getElementById：
 ```js
-document.getElementById = function(){ 
-  alert (1); 
-  return _getElementById.apply( document, arguments ); 
-} 
+document.getElementById = function(){
+  alert (1);
+  return _getElementById.apply( document, arguments );
+}
 ```
 但这样做显然很不方便，引入AOP来提供一种完美的方法给函数动态增加功能。
 
@@ -136,12 +136,12 @@ document.getElementById = function(){
 首先给出Function.prototype.before方法和Function.prototype.after方法：
 ```js
 Function.prototype.before = function(beforefn) {
-  var __self = this; // 保 存 原 函 数 的 引 用 
-  return function() { // 返 回 包 含 了 原 函 数 和 新 函 数 的" 代 理" 函 数 
-    beforefn.apply(this, arguments); // 执 行 新 函 数， 且 保 证 this 不 被 劫 持， 新 函 数 接 受 的 参 数 
-    // 也 会 被 原 封 不 动 地 传 入 原 函 数， 新 函 数 在 原 函 数 之 前 执 行 
-    return __self.apply(this, arguments); // 执 行 原 函 数 并 返 回 原 函 数 的 执 行 结 果， 
-    // 并 且 保 证 this 不 被 劫 持 
+  var __self = this; // 保 存 原 函 数 的 引 用
+  return function() { // 返 回 包 含 了 原 函 数 和 新 函 数 的" 代 理" 函 数
+    beforefn.apply(this, arguments); // 执 行 新 函 数， 且 保 证 this 不 被 劫 持， 新 函 数 接 受 的 参 数
+    // 也 会 被 原 封 不 动 地 传 入 原 函 数， 新 函 数 在 原 函 数 之 前 执 行
+    return __self.apply(this, arguments); // 执 行 原 函 数 并 返 回 原 函 数 的 执 行 结 果，
+    // 并 且 保 证 this 不 被 劫 持
   }
 }
 Function.prototype.after = function(afterfn) {
@@ -241,7 +241,7 @@ var showLogin = function() {
 var log = function() {
     console.log('上 报 标 签 为: ' + this.getAttribute('tag'));
   }
-showLogin = showLogin.after(log); // 打 开 登 录 浮 层 之 后 上 报 数 据 
+showLogin = showLogin.after(log); // 打 开 登 录 浮 层 之 后 上 报 数 据
 document.getElementById('button').onclick = showLogin;
 ```
 
@@ -251,25 +251,25 @@ document.getElementById('button').onclick = showLogin;
 Function.prototype.before = function(beforefn) {
   var __self = this;
   return function() {
-    beforefn.apply(this, arguments); // (1) 
-    return __self.apply(this, arguments); // (2) 
+    beforefn.apply(this, arguments); // (1)
+    return __self.apply(this, arguments); // (2)
   }
 }
 ```
 从这段代码的(1)处和(2)处可以看到，beforefn和原函数`__self`共用一组参数列表arguments，当我们在beforefn的函数体内改变arguments的时候，原函数`__self`接收的参数列表自然也会变化。下面的例子展示了如何通过Function.prototype.before方法给函数func的参数param动态地添加属性b：
 ```js
-var func = function( param ){ 
-  console.log( param ); // 输 出： {a: "a", b: "b"} 
-  } 
+var func = function( param ){
+  console.log( param ); // 输 出： {a: "a", b: "b"}
+  }
 
-func = func.before( function( param ){ param.b = 'b'; }); 
+func = func.before( function( param ){ param.b = 'b'; });
 func( {a: 'a'} );
 ```
 现在有一个用于发起ajax请求的函数，这个函数负责项目中所有的ajax异步请求：
 ```js
-var ajax = function( type, url, param ){ 
-  console.dir( param); // 发 送 ajax 请 求 的 代 码 略 
-}; 
+var ajax = function( type, url, param ){
+  console.dir( param); // 发 送 ajax 请 求 的 代 码 略
+};
 
 ajax( 'get', 'http://xxx.com/userinfo', { name: 'sven' } );
 ```
@@ -281,9 +281,9 @@ var getToken = function(){ return 'Token'; }
 ```
 现在的任务是给每个ajax请求都加上Token参数：
 ```js
-var ajax = function( type, url, param ){ 
-  param = param || {}; 
-  Param.Token = getToken(); // 发 送 ajax 请 求 的 代 码 略... 
+var ajax = function( type, url, param ){
+  param = param || {};
+  Param.Token = getToken(); // 发 送 ajax 请 求 的 代 码 略...
 };
 ```
 虽然已经解决了问题，但我们的ajax函数相对变得僵硬了，每个从ajax函数里发出的请求都自动带上了Token参数，虽然在现在的项目中没有什么问题，但如果将来把这个函数移植到其他项目上，或者把它放到一个开源库中供其他人使用，Token参数都将是多余的。
@@ -292,9 +292,9 @@ var ajax = function( type, url, param ){
 
 为了解决这个问题，先把ajax函数还原成一个干净的函数,然后把Token参数通过Function.prototyte.before装饰到ajax函数的参数param对象中：
 ```js
-var ajax = function( type, url, param ){ 
-  console.dir( param); // 发 送 ajax 请 求 的 代 码 略 
-}; 
+var ajax = function( type, url, param ){
+  console.dir( param); // 发 送 ajax 请 求 的 代 码 略
+};
 
 var getToken = function() {
     return 'Token';
@@ -326,7 +326,7 @@ var formSubmit = function() {
       username: username.value,
       password: password.value
     }
-    ajax('http:// xxx.com/ login', param); // ajax 具 体 实 现 略 
+    ajax('http:// xxx.com/ login', param); // ajax 具 体 实 现 略
   }
 submitBtn.onclick = function() {
   formSubmit();
@@ -399,9 +399,9 @@ submitBtn.onclick = function() {
 
 注意，因为函数通过Function.prototype.before或者Function.prototype.after被装饰之后，返回的实际上是一个新的函数，如果在原函数上保存了一些属性，那么这些属性会丢失。代码如下：
 ```js
-var func = function(){ alert( 1 ); } 
-func.a = 'a'; 
-func = func.after( function(){ alert( 2 ); }); 
+var func = function(){ alert( 1 ); }
+func.a = 'a';
+func = func.after( function(){ alert( 2 ); });
 alert ( func.a ); // 输 出： undefined
 ```
 

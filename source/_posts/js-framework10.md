@@ -1,8 +1,8 @@
 ---
 title: JavaScript框架设计笔记-10-事件系统-1
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
 date: 2017-01-06 16:31:10
 updated: 2017-01-06 16:31:10

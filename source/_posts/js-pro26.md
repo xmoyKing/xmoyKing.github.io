@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-26-最佳实践
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-09-20 13:49:47
 updated:
@@ -64,7 +64,7 @@ var oPerson = {}; // 对象
 
 最后一种指定变量类型的方式是使用类型注释，类型注释放在变量名右边，但在初始化前面，这种方式是在变量旁边放一段指定类型的注释：
 ```js
-var count /*:int*/ = 1; 
+var count /*:int*/ = 1;
 var person; /*:object*/ = null;
 ```
 类型注释维持了代码整体的可读性，同时注入了类型信息，类型注释的缺点是你不能用多行注释依次注释大块的代码，因为类型注释也是多行注释，两者会冲突。

@@ -1,8 +1,8 @@
 ---
 title: JS异步错误处理
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - async-exception
 date: 2016-09-21 09:53:17
 updated: 2018-03-21 09:53:17

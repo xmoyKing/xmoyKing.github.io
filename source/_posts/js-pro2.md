@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-2-HTML中使用JS
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-02 08:57:39
 updated:
@@ -70,11 +70,11 @@ IE5.5引入了文档模式的概念，通过使用文档类型（doctype）切�
 准标准模式和标准模式非常接近，差异几乎忽略不计，同时在检测文档模式时也不会有什么不同，准标准模式则可以通过过渡型（transitional）或框架集型（frameset）文档类型来触发，例如：
 ```html
 <!-- HTML 4.01 过渡型 -->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 
 <!-- HTML 4.01 框架集型 -->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" 
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
 "http://www.w3.org/TR/html4/frameset.dtd">
 ```
 

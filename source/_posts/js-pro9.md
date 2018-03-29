@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-9-引用类型3-包装类型/内置单例对象
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-08 20:37:19
 updated:

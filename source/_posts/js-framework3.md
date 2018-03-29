@@ -1,11 +1,11 @@
 ---
 title: JavaScript框架设计笔记-3-类工厂
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
 date: 2016-12-18 17:25:38
-updated: 
+updated:
 ---
 
 直到ES6之前，JS没有真正传统的类，但可以模拟实现，所以类工厂是很多框架的标配，本篇主要学习各种类的实现。（PS:其实ES6中的`class`是一个语法糖，看着像传统的类而已，本质没变过，- -。）

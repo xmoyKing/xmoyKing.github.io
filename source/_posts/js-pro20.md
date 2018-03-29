@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-20-事件
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
   - events
 date: 2016-09-01 09:37:13
@@ -113,7 +113,7 @@ var EventUtil = {
 #### DOM中的事件对象
 兼容DOM的浏览器中，无论指定事件处理程序时使用什么方法（DOM0级或DOM2级）都会将一个event对象传入事件处理函数。
 ```js
-<input type="button" value="click me" onclick="alert(event.type)"/> 
+<input type="button" value="click me" onclick="alert(event.type)"/>
 
 btn.onclick = function(event){ // 此处的event用其他变量名也可以
   event.type; // ...
@@ -155,7 +155,7 @@ document.body.onclick = function(event){
 
 因为IE中事件处理程序的作用域是根据它的方法来确定的，所以不能认为this会始终等于事件目标，故最好使用event.srcElement比较好。
 ```js
-<input type="button" value="click me" onclick="alert(event.type)"/> 
+<input type="button" value="click me" onclick="alert(event.type)"/>
 
 btn.onclick = function(){
   var event = window.event;

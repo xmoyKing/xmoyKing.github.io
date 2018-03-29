@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-2-基础复习-闭包和高阶函数
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-03 20:15:13
 updated:
 ---
@@ -20,7 +20,7 @@ updated:
 ```js
 var func = function() {
     var a = 1;
-    alert(a); // 输 出: 1 
+    alert(a); // 输 出: 1
   };
 func();
 alert(a); // 输 出： Uncaught ReferenceError: a is not defined
@@ -34,11 +34,11 @@ var func1 = function() {
     var b = 2;
     var func2 = function() {
         var c = 3;
-        alert(b); // 输 出： 2 
+        alert(b); // 输 出： 2
         alert(a); // 输 出： 1
       }
     func2();
-    alert(c); // 输 出： Uncaught ReferenceError: c is not defined 
+    alert(c); // 输 出： Uncaught ReferenceError: c is not defined
   };
 func1();
 ```
@@ -59,7 +59,7 @@ var func = function() {
   };
 var f = func();
 f(); // 输 出： 2
-f(); // 输 出： 3 
+f(); // 输 出： 3
 f(); // 输 出： 4
 f(); // 输 出： 5
 ```
@@ -153,7 +153,7 @@ var mult = (function() {
 ```js
 var mult = (function() {
   var cache = {};
-  var calculate = function() { // 封 闭 calculate 函 数 
+  var calculate = function() { // 封 闭 calculate 函 数
       var a = 1;
       for (var i = 0, l = arguments.length; i < l; i++) {
         a = a * arguments[i];
@@ -207,7 +207,7 @@ var extent = function() {
   };
 var extent = extent();
 extent.call(); // 输 出： 1
-extent.call(); // 输 出： 2 
+extent.call(); // 输 出： 2
 extent.call(); // 输 出： 3
 ```
 面向对象写法：
@@ -247,17 +247,17 @@ var OpenTvCommand = function(receiver) {
     this.receiver = receiver;
   };
 OpenTvCommand.prototype.execute = function() {
-  this.receiver.open(); // 执 行 命 令， 打 开 电 视 机 
+  this.receiver.open(); // 执 行 命 令， 打 开 电 视 机
 };
 OpenTvCommand.prototype.undo = function() {
-  this.receiver.close(); // 撤 销 命 令， 关 闭 电 视 机 
+  this.receiver.close(); // 撤 销 命 令， 关 闭 电 视 机
 };
 var setCommand = function(command) {
     document.getElementById('execute').onclick = function() {
       command.execute(); // 输 出： 打 开 电 视 机
     }
     document.getElementById('undo').onclick = function() {
-      command.undo(); // 输 出： 关 闭 电 视 机 
+      command.undo(); // 输 出： 关 闭 电 视 机
     }
   };
 setCommand(new OpenTvCommand(Tv));
@@ -278,10 +278,10 @@ var Tv = {
 };
 var createCommand = function(receiver) {
     var execute = function() {
-        return receiver.open(); // 执 行 命 令， 打 开 电 视 机 
+        return receiver.open(); // 执 行 命 令， 打 开 电 视 机
       }
     var undo = function() {
-        return receiver.close(); // 执 行 命 令， 关 闭 电 视 机 
+        return receiver.close(); // 执 行 命 令， 关 闭 电 视 机
       }
     return {
       execute: execute,
@@ -290,10 +290,10 @@ var createCommand = function(receiver) {
   };
 var setCommand = function(command) {
     document.getElementById('execute').onclick = function() {
-      command.execute(); // 输 出： 打 开 电 视 机 
+      command.execute(); // 输 出： 打 开 电 视 机
     }
     document.getElementById('undo').onclick = function() {
-      command.undo(); // 输 出： 关 闭 电 视 机 
+      command.undo(); // 输 出： 关 闭 电 视 机
     }
   };
 setCommand(createCommand(Tv));
@@ -369,10 +369,10 @@ appendDiv(function(node) {
 **2.Array.prototype.sort**
 Array.prototype.sort接受一个函数当作参数，这个函数里面封装了数组元素的排序规则。从Array.prototype.sort的使用可以看到，的目的是对数组进行排序，这是不变的部分；而使用什么规则去排序，则是可变的部分。把可变的部分封装在函数参数里，动态传入Array.prototype.sort，使Array.prototype.sort方法成为了一个非常灵活的方法，代码如下：
 ```js
-// 从 小 到 大 排 列 
+// 从 小 到 大 排 列
 [1, 4, 3].sort(function(a, b) {
   return a - b;
-});// 输 出: [ 1, 3, 4 ] 
+});// 输 出: [ 1, 3, 4 ]
 
 // 从 大 到 小 排 列
 [1, 4, 3].sort(function(a, b) {
@@ -418,7 +418,7 @@ for (var i = 0, type; type = ['String', 'Array', 'Number'][i++];) {
     }
   })(type)
 };
-Type.isArray([]); // 输 出： true 
+Type.isArray([]); // 输 出： true
 Type.isString( "str" ); // 输 出： true
 ```
 
@@ -450,10 +450,10 @@ AOP（面向切面编程）的主要作用是把一些跟核心业务逻辑模�
 通常，在JavaScript中实现AOP，都是指把一个函数“动态织入”到另外一个函数之中，具体的实现技术有很多，本节通过扩展Function.prototype来做到这一点。代码如下：
 ```js
 Function.prototype.before = function(beforefn) {
-  var __self = this; // 保 存 原 函 数 的 引 用 
-  return function() { // 返 回 包 含 了 原 函 数 和 新 函 数 的" 代 理" 函 数 
-    beforefn.apply(this, arguments); // 执 行 新 函 数， 修 正 this 
-    return __self.apply(this, arguments); // 执 行 原 函 数 
+  var __self = this; // 保 存 原 函 数 的 引 用
+  return function() { // 返 回 包 含 了 原 函 数 和 新 函 数 的" 代 理" 函 数
+    beforefn.apply(this, arguments); // 执 行 新 函 数， 修 正 this
+    return __self.apply(this, arguments); // 执 行 原 函 数
   }
 };
 Function.prototype.after = function(afterfn) {
@@ -491,10 +491,10 @@ var monthlyCost = 0;
 var cost = function(money) {
     monthlyCost + = money;
   };
-cost(100); // 第 1 天 开 销 
+cost(100); // 第 1 天 开 销
 cost(200); // 第 2 天 开 销
 cost(300); // 第 3 天 开 销
-cost(700); // 第 30 天 开 销 
+cost(700); // 第 30 天 开 销
 alert(monthlyCost); // 输 出： 600
 ```
 通过这段代码可以看到，每天结束后都会记录并计算到今天为止花掉的钱。但其实并不太关心每天花掉了多少钱，而只想知道到月底的时候会花掉多少钱。也就是说，实际上只需要在月底计算一次。
@@ -516,9 +516,9 @@ var cost = (function() {
   }
 })();
 
-cost( 100 ); // 未 真 正 求 值 
-cost( 200 ); // 未 真 正 求 值 
-cost( 300 ); // 未 真 正 求 值 
+cost( 100 ); // 未 真 正 求 值
+cost( 200 ); // 未 真 正 求 值
+cost( 300 ); // 未 真 正 求 值
 console.log( cost() ); // 求 值 并 输 出： 600
 ```
 接下来编写一个通用的currying，接受一个参数表示即将要被currying的函数。在这个例子里，这个函数的作用遍历本月每天的开销并求出它们的总和。代码如下：
@@ -553,8 +553,8 @@ var cost = currying(cost); // 转 化 成 currying 函 数
 
 同理，一个对象也未必只能使用它自身的方法，那么有什么办法可以让对象去借用一个原本不属于它的方法呢？答案对于来说很简单，call和apply都可以完成这个需求：
 ```js
-var obj1 = { name: 'sven' }; 
-var obj2 = { getName: function(){ return this.name; } }; 
+var obj1 = { name: 'sven' };
+var obj2 = { getName: function(){ return this.name; } };
 
 console.log( obj2.getName.call( obj1 ) ); // 输 出： sven
 ```
@@ -591,10 +591,10 @@ var obj = {
   "1": 2,
   "2": 3
 };
-Array.push(obj, 4); // 向 对 象 中 添 加 一 个 元 素 
-console.log(obj.length); // 输 出： 4 
+Array.push(obj, 4); // 向 对 象 中 添 加 一 个 元 素
+console.log(obj.length); // 输 出： 4
 var first = Array.shift(obj); // 截 取 第 一 个 元 素
-console.log(first); // 输 出： 1 
+console.log(first); // 输 出： 1
 console.log(obj); // 输 出：{ 0: 2, 1: 3, 2: 4, length: 3}
 Array.forEach(obj, function(i, n) {
   console.log(n); // 分 别 输 出： 0, 1, 2
@@ -606,12 +606,12 @@ var call = Function.prototype.call.uncurrying();
 var fn = function(name) {
     console.log(name);
   };
-call(fn, window, 'sven'); // 输 出： sven 
+call(fn, window, 'sven'); // 输 出： sven
 
 var apply = Function.prototype.apply.uncurrying();
 var fn = function(name) {
-    console.log(this.name); // 输 出：" sven" 
-    console.log(arguments); // 输 出: [1, 2, 3] 
+    console.log(this.name); // 输 出：" sven"
+    console.log(arguments); // 输 出: [1, 2, 3]
   };
 apply(fn, {
   name: 'sven'
@@ -622,15 +622,15 @@ apply(fn, {
 调用Array.prototype.push.uncurrying()这句代码时发生了什么事情：
 ```js
 Function.prototype.uncurrying = function() {
-  var self = this; // self 此 时 是 Array.prototype.push 
+  var self = this; // self 此 时 是 Array.prototype.push
   return function() {
     var obj = Array.prototype.shift.call(arguments);
     // obj 是 {
-    // "length": 1, 
-    // "0": 1 
-    // } 
-    // arguments 对 象 的 第 一 个 元 素 被 截 去， 剩 下[2] 
-    return self.apply(obj, arguments); // 相 当 于 Array.prototype.push.apply( obj, 2 ) 
+    // "length": 1,
+    // "0": 1
+    // }
+    // arguments 对 象 的 第 一 个 元 素 被 截 去， 剩 下[2]
+    return self.apply(obj, arguments); // 相 当 于 Array.prototype.push.apply( obj, 2 )
   };
 };
 var push = Array.prototype.push.uncurrying();
@@ -643,10 +643,10 @@ console.log(obj); // 输 出：{ 0: 1, 1: 2, length: 2}
 ```
 除了刚刚提供的代码实现，下面的代码是uncurrying的另外一种实现方式：
 ```js
-Function.prototype.uncurrying = function(){ 
-  var self = this; 
-  return function(){ return Function.prototype.call.apply( self, arguments ); 
-  } 
+Function.prototype.uncurrying = function(){
+  var self = this;
+  return function(){ return Function.prototype.call.apply( self, arguments );
+  }
 };
 ```
 
@@ -671,9 +671,9 @@ JavaScript中的函数大多数情况下都是由用户主动调用触发的，�
 关于函数节流的代码实现有许多种，throttle函数的原理是，将即将被执行的函数用setTimeout延迟一段时间执行。如果该次延迟执行还没有完成，则忽略接下来调用该函数的请求。throttle函数接受2个参数，第一个参数为需要被延迟执行的函数，第二个参数为延迟执行的时间。具体实现代码如下：
 ```js
 var throttle = function(fn, interval) {
-    var __self = fn, // 保 存 需 要 被 延 迟 执 行 的 函 数 引 用 
-      timer, // 定 时 器 
-      firstTime = true; // 是 否 是 第 一 次 调 用 
+    var __self = fn, // 保 存 需 要 被 延 迟 执 行 的 函 数 引 用
+      timer, // 定 时 器
+      firstTime = true; // 是 否 是 第 一 次 调 用
     return function() {
       var args = arguments,
         __me = this;
@@ -681,10 +681,10 @@ var throttle = function(fn, interval) {
         __self.apply(__me, args);
         return firstTime = false;
       }
-      if (timer) { // 如 果 定 时 器 还 在， 说 明 前 一 次 延 迟 执 行 还 没 有 完 成 
+      if (timer) { // 如 果 定 时 器 还 在， 说 明 前 一 次 延 迟 执 行 还 没 有 完 成
         return false;
       }
-      timer = setTimeout(function() { // 延 迟 一 段 时 间 执 行 
+      timer = setTimeout(function() { // 延 迟 一 段 时 间 执 行
         clearTimeout(timer);
         timer = null;
         __self.apply(__me, args);
@@ -704,7 +704,7 @@ window.onresize = throttle(function() {
 ```js
 var ary = [];
 for (var i = 1; i < = 1000; i++) {
-  ary.push(i); // 假 设 ary 装 载 了 1000 个 好 友 的 数 据 
+  ary.push(i); // 假 设 ary 装 载 了 1000 个 好 友 的 数 据
 };
 var renderFriendList = function(data) {
     for (var i = 0, l = data.length; i < l; i++) {
@@ -734,7 +734,7 @@ var timeChunk = function(ary, fn, count) {
           return clearInterval(t);
         }
         start();
-      }, 200); // 分 批 执 行 的 时 间 间 隔， 也 可 以 用 参 数 的 形 式 传 入 
+      }, 200); // 分 批 执 行 的 时 间 间 隔， 也 可 以 用 参 数 的 形 式 传 入
     };
   };
 ```

@@ -1,12 +1,12 @@
 ---
 title: JavaScript高级程序设计-24-Ajax和Comet
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
-  - ajax
+  - Ajax
   - comet
-  - web sockets
+  - WebSockets
 date: 2016-09-14 19:07:57
 updated:
 ---

@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-6-迭代器模式
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-15 23:08:39
 updated:
 ---
@@ -52,7 +52,7 @@ var compare=function(ary1,ary2){
       throw new Error('ary1和ary2不相等');
     }
   });
-  alert('ary1和ary2相等'); 
+  alert('ary1和ary2相等');
 };
 compare([1,2,3],[1,2,4]);//thrownewError('ary1和ary2不相等');
 ```
@@ -74,17 +74,17 @@ var Iterator=function(obj){
 
 // 改写compare函数：
 
-var compare = function( iterator1, iterator2 ){ 
-  while( !iterator1.isDone() && !iterator2.isDone() ){ 
-    if ( iterator1.getCurrItem() !== iterator2.getCurrItem() ){ 
-      throw new Error( 'iterator1 和 iterator2 不 相 等' ); 
-    } 
-    iterator1.next(); 
-    iterator2.next(); 
-  } 
-  alert( 'iterator1 和 iterator2 相 等' ); 
-} 
-var iterator1 = Iterator( [ 1, 2, 3 ] ); 
+var compare = function( iterator1, iterator2 ){
+  while( !iterator1.isDone() && !iterator2.isDone() ){
+    if ( iterator1.getCurrItem() !== iterator2.getCurrItem() ){
+      throw new Error( 'iterator1 和 iterator2 不 相 等' );
+    }
+    iterator1.next();
+    iterator2.next();
+  }
+  alert( 'iterator1 和 iterator2 相 等' );
+}
+var iterator1 = Iterator( [ 1, 2, 3 ] );
 var iterator2 = Iterator( [ 1, 2, 3 ] );
 ```
 外部迭代器虽然调用方式相对复杂，但它的适用面更广，也能满足更多变的需求。内部迭代器和外部迭代器在实际生产中没有优劣之分，究竟使用哪个要根据需求场景而定。
@@ -94,25 +94,25 @@ var iterator2 = Iterator( [ 1, 2, 3 ] );
 
 在JavaScript中，for in语句可以用来迭代普通字面量对象的属性。jQuery中提供了$.each函数来封装各种迭代行为：
 ```js
-$.each = function( obj, callback ) { 
-  var value, 
-      i = 0, 
-      length = obj.length, 
-      isArray = isArraylike( obj ); 
-  if ( isArray ) { // 迭 代 类 数 组 
-    for ( ; i < length; i ++ ) { 
-      value = callback.call( obj[ i ], i, obj[ i ] ); 
-      if ( value === false ) { 
+$.each = function( obj, callback ) {
+  var value,
+      i = 0,
+      length = obj.length,
+      isArray = isArraylike( obj );
+  if ( isArray ) { // 迭 代 类 数 组
+    for ( ; i < length; i ++ ) {
+      value = callback.call( obj[ i ], i, obj[ i ] );
+      if ( value === false ) {
         break;
-      } 
-    } 
-  } else { 
-    for ( i in obj ) { // 迭 代 object 对 象 
-      value = callback.call( obj[ i ], i, obj[ i ] ); 
-      if ( value === false ) { break; } 
-    } 
-  } 
-  return obj; 
+      }
+    }
+  } else {
+    for ( i in obj ) { // 迭 代 object 对 象
+      value = callback.call( obj[ i ], i, obj[ i ] );
+      if ( value === false ) { break; }
+    }
+  }
+  return obj;
 };
 ```
 
@@ -122,35 +122,35 @@ $.each = function( obj, callback ) {
 #### 中止迭代器
 迭代器可以像普通for循环中的break一样，提供一种跳出循环的方法。jQuery的each函数里有这样一句：`if(value === false){break;}`这句代码的意思是，约定如果回调函数的执行结果返回false，则提前终止循环。下面我们把之前的each函数改写一下：
 ```js
-var each = function( ary, callback ){ 
-  for ( var i = 0, l = ary.length; i < l; i++ ){ 
-    if ( callback( i, ary[ i ] ) === false ){ // callback 的 执 行 结 果 返 回 false， 提 前 终 止 迭 代 
-      break; 
-    } 
-  } 
-}; 
-each( [ 1, 2, 3, 4, 5 ], function( i, n ){ if ( n > 3 ){ // n 大 于 3 的 时 候 终 止 循 环 
-  return false; 
+var each = function( ary, callback ){
+  for ( var i = 0, l = ary.length; i < l; i++ ){
+    if ( callback( i, ary[ i ] ) === false ){ // callback 的 执 行 结 果 返 回 false， 提 前 终 止 迭 代
+      break;
+    }
+  }
+};
+each( [ 1, 2, 3, 4, 5 ], function( i, n ){ if ( n > 3 ){ // n 大 于 3 的 时 候 终 止 循 环
+  return false;
 });
 
-console.log( n ); // 分 别 输 出： 1, 2, 3 
+console.log( n ); // 分 别 输 出： 1, 2, 3
 ```
 
 #### 迭代器模式的应用举例
 某个项目中文件上传模块的代码，它的目的是根据不同的浏览器获取相应的上传组件对象：
 ```js
-var getUploadObj = function(){ 
-  try{ 
-    return new ActiveXObject("TXFTNActiveX.FTNUpload"); // IE 上 传 控 件 
-  }catch( e){ 
-    if ( supportFlash() ){ // supportFlash 函 数 未 提 供 
+var getUploadObj = function(){
+  try{
+    return new ActiveXObject("TXFTNActiveX.FTNUpload"); // IE 上 传 控 件
+  }catch( e){
+    if ( supportFlash() ){ // supportFlash 函 数 未 提 供
       var str = '<object type=" application/x-shockwave-flash" > </object>';
-      return $( str ). appendTo( $('body') ); 
-    }else{ 
-      var str = '<input name=" file" type=" file" />'; // 表 单 上 传 
-      return $( str ).appendTo( $('body') ); 
-    } 
-  } 
+      return $( str ). appendTo( $('body') );
+    }else{
+      var str = '<input name=" file" type=" file" />'; // 表 单 上 传
+      return $( str ).appendTo( $('body') );
+    }
+  }
 };
 ```
 
@@ -162,25 +162,25 @@ var getUploadObj = function(){
 
 同样，我们把每种获取upload对象的方法都封装在各自的函数里，然后使用一个迭代器，迭代获取这些upload对象，直到获取到一个可用的为止：
 ```js
-var getActiveUploadObj = function(){ 
-  try{ 
-    return new ActiveXObject("TXFTNActiveX.FTNUpload" ); // IE 上 传 控 件 
-  }catch( e){ 
-    return false; 
-  } 
-}; 
-
-var getFlashUploadObj = function(){ 
-  if ( supportFlash() ){ // supportFlash 函 数 未 提 供 
-    var str = '<object type="application/x-shockwave-flash"> </object>'; 
-    return $( str ).appendTo( $('body') ); 
-  } 
-  return false; 
+var getActiveUploadObj = function(){
+  try{
+    return new ActiveXObject("TXFTNActiveX.FTNUpload" ); // IE 上 传 控 件
+  }catch( e){
+    return false;
+  }
 };
 
-var getFormUpladObj = function(){ 
-  var str = '<input name="file" type="file" />'; // 表 单 上 传 
-  return $( str ).appendTo( $('body') ); 
+var getFlashUploadObj = function(){
+  if ( supportFlash() ){ // supportFlash 函 数 未 提 供
+    var str = '<object type="application/x-shockwave-flash"> </object>';
+    return $( str ).appendTo( $('body') );
+  }
+  return false;
+};
+
+var getFormUpladObj = function(){
+  var str = '<input name="file" type="file" />'; // 表 单 上 传
+  return $( str ).appendTo( $('body') );
 };
 ```
 在getActiveUploadObj、getFlashUploadObj、getFormUpladObj这3个函数中都有同一个约定：如果该函数里面的upload对象是可用的，则让函数返回该对象，反之返回false，提示迭代器继续往后面进行迭代。
@@ -191,13 +191,13 @@ var getFormUpladObj = function(){
 
 迭代器代码如下：
 ```js
-var iteratorUploadObj = function(){ 
-  for ( var i = 0, fn; fn = arguments[ i++ ]; ){ 
-    var uploadObj = fn(); 
-    if ( uploadObj !== false ){ 
-      return uploadObj; 
-    } 
-  } 
+var iteratorUploadObj = function(){
+  for ( var i = 0, fn; fn = arguments[ i++ ]; ){
+    var uploadObj = fn();
+    if ( uploadObj !== false ){
+      return uploadObj;
+    }
+  }
 };
 var uploadObj = iteratorUploadObj( getActiveUploadObj, getFlashUploadObj, getFormUpladObj );
 ```
@@ -205,11 +205,11 @@ var uploadObj = iteratorUploadObj( getActiveUploadObj, getFlashUploadObj, getFor
 
 1.增加分别获取Webkit控件上传对象和HTML5上传对象的函数：
 ```js
-var getWebkitUploadObj = function(){ 
-  // 具 体 代 码 略 
-}; 　 
-var getHtml5UploadObj = function(){ 
-  // 具 体 代 码 略 
+var getWebkitUploadObj = function(){
+  // 具 体 代 码 略
+}; 　
+var getHtml5UploadObj = function(){
+  // 具 体 代 码 略
 };
 ```
 2.依照优先级把它们添加进迭代器：

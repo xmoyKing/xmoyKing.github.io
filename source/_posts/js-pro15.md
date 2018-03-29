@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-15-BOM
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-15 14:57:49
 updated:
@@ -167,7 +167,7 @@ location将URL解析为独立的片段，如href、hash、host、hostname、path
 虽然location.search能返回查询字符串，但并不方便，它返回的只是字符串，还需要解析。
 ```js
 function getQueryStringArgs(){
-  
+
   var qs = (location.search.length > 0 ? location.search.substring(1) : ''), // 取得查询字符串并去掉开头问号
       args = {}, // 存储对象
       items = qs.length ? qs.split('&') : [], // 取得每一项

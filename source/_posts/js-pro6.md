@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-6-变量、作用域和内存问题
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-06 17:18:11
 updated:

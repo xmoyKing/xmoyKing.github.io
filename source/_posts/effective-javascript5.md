@@ -1,12 +1,11 @@
 ---
-title: effective-javascript笔记-5
+title: effective-JavaScript笔记-5
 date: 2017-03-03 16:45:45
 updated: 2017-03-25
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - effective-javascript
-  - note
 ---
 
 ## 数组和字典
@@ -130,7 +129,7 @@ Dict.prototype.has = function(key){
 
 Dict.prototype.get = function(key){
     // 只返回自身的属性
-    return this.has(key) 
+    return this.has(key)
         ? this.elements[key]
         : undefined;
 };
@@ -170,12 +169,12 @@ Dict.prototype.has = function(key){
     return {}.hasOwnProperty.call(this.elements, key);
 };
 
-Dict.prototype.get = function(key){    
+Dict.prototype.get = function(key){
     if(key === "__proto__"){
         return this.specialProto;
     }
     // 只返回自身的属性
-    return this.has(key) 
+    return this.has(key)
         ? this.elements[key]
         : undefined;
 };
@@ -210,12 +209,12 @@ dict.has('__proto__'); // false
 4. **使用字典类避免将`__proto__`作为key使用**
 
 ### 46. 使用数组而不是使用字典来存储有序集合
-因为使用`for in`循环来枚举对象属性应该与顺序无关,而ES标准也没有对枚举对象属性的顺序做出定义. 
+因为使用`for in`循环来枚举对象属性应该与顺序无关,而ES标准也没有对枚举对象属性的顺序做出定义.
 
 所以一定确保枚举对象属性的时候, 操作的行为和顺序无关.
 
 ### 47. 绝不要在Object.prototype中增加可枚举的属性
-通过以上的一些例子,我们了解到,在`Object.prototype`中添加的方法或者属性能被子类用`for in`循环枚举出来. 
+通过以上的一些例子,我们了解到,在`Object.prototype`中添加的方法或者属性能被子类用`for in`循环枚举出来.
 ```js
 Object.prototype.allKeys = function(){
         var result = [];
@@ -394,7 +393,7 @@ pick方法是不确定的，因为`for in`循环的枚举顺序的不确定，�
 Member.prototype.inNetwork = function(other){
     var visited = {};
     var worklist = [this];
-    
+
     while(worklist.length > 0){
         var member = worklist.pop();
         if(member.name in visited){
@@ -428,7 +427,7 @@ for(var score in scores){
 var mean = total / scores.length;
 mean; // ?
 ```
-答案并不是88(正常的逻辑下), 也不是21(for in循环枚举的是key, 这里的key为 0, 1, 2, 3, 4, 5, 6). 
+答案并不是88(正常的逻辑下), 也不是21(for in循环枚举的是key, 这里的key为 0, 1, 2, 3, 4, 5, 6).
 
 *而是17636.571428571428, 因为字符串的`+=`操作,total变量最后的值为`"00123456"`, 而这里是将一个字符串按照8进制转化为十进制之后,再除以7得到的17636.571428571428*
 **经chrome测试，结果为`NaN`，total变量最后的值为`"00123456remove"`**
@@ -470,7 +469,7 @@ for(var i = n-1; i > 0; --i){...} // 跳过了最后一次循环
 ES5中,可以使用一些便利的方法,比如`forEach`, 能消除终止条件和任何数组索引.
 具体看: [你还在用for循环大法麽？](https://shimo.im/doc/VXqv2bxTlOUiJJqO/)
 
-上面的都是ES5中的默认方法, 我们完全可以定义自己的迭代抽象方法, 
+上面的都是ES5中的默认方法, 我们完全可以定义自己的迭代抽象方法,
 
 一般将这些方法称为谓词, 重复地对数组的每个元素应用**回调的谓词**.
 
@@ -530,7 +529,7 @@ forEach方法是一个Function对象, 它继承了Function.prototype中的call�
 与arguments对象一样, DOM中的NodeList类是web页面中的节点, 使用document.getElementsByTagName操作会返回一个NodeList作为结果.
 
 **关键为怎么使一个对象"看起来像数组"?** 数组对象的基本构成有两个简单的规则:
-1. 具有一个范围在0到2^32 - 1的整数length属性. 
+1. 具有一个范围在0到2^32 - 1的整数length属性.
 2. length属性大于该对象的最大索引, 所以是一个范围在0到2^32 - 2的整数, 它的字符串表示的是该对象的一个key.
 
 只要满足上述2点,即使是一个对象字面量也可以改造为一个类数组对象
@@ -588,7 +587,7 @@ var a = new Array(1,2,3,4);
 Array = String;
 new Array(1,2,3,4); // new String(1);
 ```
-同时还有一个特殊的情况,使用单数字参数来调用Array构造函数, 并不是构造只有一个元素的数组, 而是构造了一个没有元素的数组, 但其长度属性为给定的参数. 
+同时还有一个特殊的情况,使用单数字参数来调用Array构造函数, 并不是构造只有一个元素的数组, 而是构造了一个没有元素的数组, 但其长度属性为给定的参数.
 
 `["hello"]` 和 `new Array("hello")`行为相同, 但是 `[17]` 和 `new Array(17)`的行为却完全不同.
 

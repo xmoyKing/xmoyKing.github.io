@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-1-js简介
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-01 17:35:38
 updated:

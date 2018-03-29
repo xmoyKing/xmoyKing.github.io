@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-15-状态模式
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-12-04 19:28:59
 updated: 2017-12-04 19:28:59
 ---
@@ -20,9 +20,9 @@ updated: 2017-12-04 19:28:59
 ##### 第一个例子：电灯程序
 首先给出不用状态模式的电灯程序实现：
 ```js
-var Light = function(){ 
-  this.state = 'off'; // 给 电 灯 设 置 初 始 状 态 off 
-  this.button = null; // 电 灯 开 关 按 钮 
+var Light = function(){
+  this.state = 'off'; // 给 电 灯 设 置 初 始 状 态 off
+  this.button = null; // 电 灯 开 关 按 钮
 };
 ```
 接下来定义Light.prototype.init方法，该方法负责在页面中创建一个真实的button节点，假设这个button就是电灯的开关按钮，当button的onclick事件被触发时，就是电灯开关被按下的时候，代码如下：
@@ -82,30 +82,30 @@ Light.prototype.buttonWasPressed = function() {
 
 下面进入状态模式的代码编写阶段，首先将定义3个状态类，分别是OffLightState、WeakLightState、StrongLightState。这3个类都有一个原型方法buttonWasPressed，代表在各自状态下，按钮被按下时将发生的行为，代码如下：
 ```js
-// OffLightState： 
+// OffLightState：
 var OffLightState = function(light) {
   this.light = light;
 };
 OffLightState.prototype.buttonWasPressed = function() {
-  console.log('弱 光'); // offLightState 对 应 的 行 为 
-  this.light.setState(this.light.weakLightState); // 切 换 状 态 到 weakLightState 
+  console.log('弱 光'); // offLightState 对 应 的 行 为
+  this.light.setState(this.light.weakLightState); // 切 换 状 态 到 weakLightState
 };
 
-// WeakLightState： 
+// WeakLightState：
 var WeakLightState = function(light) {
   this.light = light;
 };
 WeakLightState.prototype.buttonWasPressed = function() {
-  console.log('强 光'); // weakLightState 对 应 的 行 为 
-  this.light.setState(this.light.strongLightState); // 切 换 状 态 到 strongLightState 
+  console.log('强 光'); // weakLightState 对 应 的 行 为
+  this.light.setState(this.light.strongLightState); // 切 换 状 态 到 strongLightState
 };
-// StrongLightState： 
+// StrongLightState：
 var StrongLightState = function(light) {
   this.light = light;
 };
 StrongLightState.prototype.buttonWasPressed = function() {
-  console.log('关 灯'); // strongLightState 对 应 的 行 为 
-  this.light.setState(this.light.offLightState); // 切 换 状 态 到 offLightState 
+  console.log('关 灯'); // strongLightState 对 应 的 行 为
+  this.light.setState(this.light.offLightState); // 切 换 状 态 到 offLightState
 };
 ```
 接下来改写Light类，现在不再使用一个字符串来记录当前的状态，而是使用更加立体化的状态对象。我们在Light类的构造函数里为每个状态类都创建一个状态对象，这样一来我们可以很明显地看到电灯一共有多少种状态，代码如下：
@@ -124,7 +124,7 @@ Light.prototype.init = function() {
     self = this;
   this.button = document.body.appendChild(button);
   this.button.innerHTML = '开 关';
-  this.currState = this.offLightState; // 设 置 当 前 状 态 
+  this.currState = this.offLightState; // 设 置 当 前 状 态
   this.button.onclick = function() {
     self.currState.buttonWasPressed();
   }
@@ -136,7 +136,7 @@ Light.prototype.setState = function( newState ){ this.currState = newState; };
 ```
 测试：
 ```js
-var light = new Light(); 
+var light = new Light();
 light.init();
 ```
 不出意外的话，执行结果跟之前的代码一致，但是使用状态模式的好处很明显，它可以使每一种状态和它对应的行为之间的关系局部化，这些行为被分散和封装在各自对应的状态类之中，便于阅读和管理代码。
@@ -159,15 +159,15 @@ var Light = function() {
     this.offLightState = new OffLightState(this);
     this.weakLightState = new WeakLightState(this);
     this.strongLightState = new StrongLightState(this);
-    this.superStrongLightState = new SuperStrongLightState(this); // 新 增 superStrongLightState 对 象 
+    this.superStrongLightState = new SuperStrongLightState(this); // 新 增 superStrongLightState 对 象
     this.button = null;
   };
 ```
 最后改变状态类之间的切换规则，从StrongLightState---->OffLightState变为StrongLightState---->SuperStrongLightState---->OffLightState：
 ```js
-StrongLightState.prototype.buttonWasPressed = function(){ 
-  console.log( '超 强 光' ); // strongLightState 对 应 的 行 为 
-  this.light.setState( this.light.superStrongLightState ); // 切 换 状 态 到 superStrongLightState 
+StrongLightState.prototype.buttonWasPressed = function(){
+  console.log( '超 强 光' ); // strongLightState 对 应 的 行 为
+  this.light.setState( this.light.superStrongLightState ); // 切 换 状 态 到 superStrongLightState
 };
 ```
 
@@ -184,7 +184,7 @@ StrongLightState.prototype.buttonWasPressed = function(){
 在前面的电灯例子中，完成了一个状态模式程序的编写。首先定义了Light类，Light类在这里也被称为上下文（Context）。随后在Light的构造函数中，要创建每一个状态类的实例对象，Context将持有这些状态对象的引用，以便把请求委托给状态对象。用户的请求，即点击button的动作也是实现在Context中的，代码如下：
 ```js
 var Light = function() {
-    this.offLightState = new OffLightState(this); // 持 有 状 态 对 象 的 引 用 
+    this.offLightState = new OffLightState(this); // 持 有 状 态 对 象 的 引 用
     this.weakLightState = new WeakLightState(this);
     this.strongLightState = new StrongLightState(this);
     this.superStrongLightState = new SuperStrongLightState(this);
@@ -195,19 +195,19 @@ Light.prototype.init = function() {
     self = this;
   this.button = document.body.appendChild(button);
   this.button.innerHTML = '开 关';
-  this.currState = this.offLightState; // 设 置 默 认 初 始 状 态 
-  this.button.onclick = function() { // 定 义 用 户 的 请 求 动 作 
+  this.currState = this.offLightState; // 设 置 默 认 初 始 状 态
+  this.button.onclick = function() { // 定 义 用 户 的 请 求 动 作
     self.currState.buttonWasPressed();
   }
 };
 ```
 接下来可能是个苦力活，要编写各种状态类，light对象被传入状态类的构造函数，状态对象也需要持有light对象的引用，以便调用light中的方法或者直接操作light对象：
 ```js
-var OffLightState = function( light ){ this.light = light; }; 
+var OffLightState = function( light ){ this.light = light; };
 
-OffLightState.prototype.buttonWasPressed = function(){ 
-  console.log( '弱 光' ); 
-  this.light.setState( this.light.weakLightState ); 
+OffLightState.prototype.buttonWasPressed = function(){
+  console.log( '弱 光' );
+  this.light.setState( this.light.weakLightState );
 };
 ```
 #### 缺少抽象类的变通方式
@@ -224,8 +224,8 @@ State.prototype.buttonWasPressed = function() {
 var SuperStrongLightState = function(light) {
     this.light = light;
   };
-SuperStrongLightState.prototype = new State(); // 继 承 抽 象 父 类 
-SuperStrongLightState.prototype.buttonWasPressed = function() { // 重 写 buttonWasPressed 方 法 
+SuperStrongLightState.prototype = new State(); // 继 承 抽 象 父 类
+SuperStrongLightState.prototype.buttonWasPressed = function() { // 重 写 buttonWasPressed 方 法
   console.log('关 灯');
   this.light.setState(this.light.offLightState);
 };
@@ -302,7 +302,7 @@ var Upload = function(fileName) {
     this.fileName = fileName;
     this.button1 = null;
     this.button2 = null;
-    this.state = 'sign'; // 设 置 初 始 状 态 为 waiting 
+    this.state = 'sign'; // 设 置 初 始 状 态 为 waiting
 };
 ```
 Upload.prototype.init方法会进行一些初始化工作，包括创建页面中的一些节点。在这些节点里，起主要作用的是两个用于控制上传流程的按钮，第一个按钮用于暂停和继续上传，第二个用于删除文件：
@@ -310,13 +310,13 @@ Upload.prototype.init方法会进行一些初始化工作，包括创建页面�
 Upload.prototype.init = function() {
   var that = this;
   this.dom = document.createElement('div');
-  this.dom.innerHTML = 
-  '<span> 文 件 名 称:' + this.fileName + ' </span>\ 
+  this.dom.innerHTML =
+  '<span> 文 件 名 称:' + this.fileName + ' </span>\
   <button data-action="button1"> 扫 描 中 </button>\
   <button data-action="button2"> 删 除 </button>';
   document.body.appendChild(this.dom);
-  this.button1 = this.dom.querySelector('[data-action="button1"]'); // 第 一 个 按 钮 
-  this.button2 = this.dom.querySelector('[data-action="button2"]'); // 第 二 个 按 钮 
+  this.button1 = this.dom.querySelector('[data-action="button1"]'); // 第 一 个 按 钮
+  this.button2 = this.dom.querySelector('[data-action="button2"]'); // 第 二 个 按 钮
   this.bindEvent();
 };
 ```
@@ -325,11 +325,11 @@ Upload.prototype.init = function() {
 Upload.prototype.bindEvent = function() {
   var self = this;
   this.button1.onclick = function() {
-    if (self.state === 'sign') { // 扫 描 状 态 下， 任 何 操 作 无 效 
+    if (self.state === 'sign') { // 扫 描 状 态 下， 任 何 操 作 无 效
       console.log('扫 描 中， 点 击 无 效...');
-    } else if (self.state === 'uploading') { // 上 传 中， 点 击 切 换 到 暂 停 
+    } else if (self.state === 'uploading') { // 上 传 中， 点 击 切 换 到 暂 停
       self.changeState('pause');
-    } else if (self.state === 'pause') { // 暂 停 中， 点 击 切 换 到 上 传 中 
+    } else if (self.state === 'pause') { // 暂 停 中， 点 击 切 换 到 上 传 中
       self.changeState('uploading');
     } else if (self.state === 'done') {
       console.log('文 件 已 完 成 上 传, 点 击 无 效');
@@ -338,7 +338,7 @@ Upload.prototype.bindEvent = function() {
     }
   };
   this.button2.onclick = function() {
-    if (self.state === 'done' || self.state === 'error' || self.state === 'pause') { // 上 传 完 成、 上 传 失 败 和 暂 停 状 态 下 可 以 删 除 
+    if (self.state === 'done' || self.state === 'error' || self.state === 'pause') { // 上 传 完 成、 上 传 失 败 和 暂 停 状 态 下 可 以 删 除
       self.changeState('del');
     } else if (self.state === 'sign') {
       console.log('文 件 正 在 扫 描 中， 不 能 删 除');
@@ -384,12 +384,12 @@ Upload.prototype.changeState = function(state) {
 ```js
 var uploadObj = new Upload('JavaScript 设 计 模 式 与 开 发 实 践');
 uploadObj.init();
-window.external.upload = function(state) { // 插 件 调 用 JavaScript 的 方 法 
+window.external.upload = function(state) { // 插 件 调 用 JavaScript 的 方 法
   uploadObj.changeState(state);
 };
-window.external.upload('sign'); // 文 件 开 始 扫 描 
+window.external.upload('sign'); // 文 件 开 始 扫 描
 setTimeout(function() {
-  window.external.upload('uploading'); // 1 秒 后 开 始 上 传 
+  window.external.upload('uploading'); // 1 秒 后 开 始 上 传
 }, 1000);
 setTimeout(function() {
   window.external.upload('done'); // 5 秒 后 上 传 完 成
@@ -411,7 +411,7 @@ var Upload = function(fileName) {
     this.fileName = fileName;
     this.button1 = null;
     this.button2 = null;
-    this.signState = new SignState(this); // 设 置 初 始 状 态 为 waiting 
+    this.signState = new SignState(this); // 设 置 初 始 状 态 为 waiting
     this.uploadingState = new UploadingState(this);
     this.pauseState = new PauseState(this);
     this.doneState = new DoneState(this);
@@ -424,9 +424,9 @@ var Upload = function(fileName) {
 Upload.prototype.init = function() {
   var that = this;
   this.dom = document.createElement('div');
-  this.dom.innerHTML = 
-  '<span> 文 件 名 称:' + this.fileName + ' </span>\ 
-  <button data-action="button1"> 扫 描 中 </button>\ 
+  this.dom.innerHTML =
+  '<span> 文 件 名 称:' + this.fileName + ' </span>\
+  <button data-action="button1"> 扫 描 中 </button>\
   <button data-action="button2"> 删 除 </button>';
   document.body.appendChild(this.dom);
   this.button1 = this.dom.querySelector('[data-action="button1"]');
@@ -595,7 +595,7 @@ Light.prototype.init = function() {
   button.innerHTML = '已 关 灯';
   this.button = document.body.appendChild(button);
   this.button.onclick = function() {
-    self.currState.buttonWasPressed.call(self); // 把 请 求 委 托 给 FSM 状 态 机 
+    self.currState.buttonWasPressed.call(self); // 把 请 求 委 托 给 FSM 状 态 机
   }
 };
 
@@ -606,7 +606,7 @@ light.init();
 ```js
 var delegate = function(client, delegation) {
   return {
-    buttonWasPressed: function() { // 将 客 户 的 操 作 委 托 给 delegation 对 象 
+    buttonWasPressed: function() { // 将 客 户 的 操 作 委 托 给 delegation 对 象
       return delegation.buttonWasPressed.apply(client, arguments);
     }
   }
@@ -615,7 +615,7 @@ var delegate = function(client, delegation) {
 var Light = function() {
     this.offState = delegate(this, FSM.off);
     this.onState = delegate(this, FSM.on);
-    this.currState = this.offState; // 设 置 初 始 状 态 为 关 闭 状 态 
+    this.currState = this.offState; // 设 置 初 始 状 态 为 关 闭 状 态
     this.button = null;
   };
 Light.prototype.init = function() {

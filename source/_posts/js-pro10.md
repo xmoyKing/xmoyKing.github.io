@@ -1,11 +1,11 @@
 ---
 title: JavaScript高级程序设计-10-面向对象1-理解对象属性
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-10 21:36:01
-updated: 
+updated:
 ---
 
 面向对象（OO，Object-Oriented）语言的标志就是它们都有类的概念，通过类可以创建任意多个具有相同属性和方法的对象，而ES中没有传统的类的概念，因此它的对象也与基于类的语言中的对象不同。

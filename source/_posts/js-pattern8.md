@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-8-命令模式
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-19 23:51:14
 updated:
 ---
@@ -44,34 +44,34 @@ var setCommand = function( button, command ){ button.onclick = function(){ comma
 ```
 最后，负责编写点击按钮之后的具体行为的程序员总算交上了他们的成果，他们完成了刷新菜单界面、增加子菜单和删除子菜单这几个功能，这几个功能被分布在MenuBar和SubMenu这两个对象中：
 ```js
-var MenuBar = { 
-  refresh: function(){ console.log( '刷 新 菜 单 目 录' ); } 
-}; 
+var MenuBar = {
+  refresh: function(){ console.log( '刷 新 菜 单 目 录' ); }
+};
 
-var SubMenu = { 
-  add: function(){ console.log( '增 加 子 菜 单' ); }, 
+var SubMenu = {
+  add: function(){ console.log( '增 加 子 菜 单' ); },
   del: function(){ console.log( '删 除 子 菜 单' ); }
 };
 ```
 在让button变得有用起来之前，我们要先把这些行为都封装在命令类中：
 ```js
-var RefreshMenuBarCommand = function( receiver ){ this.receiver = receiver; }; 
-RefreshMenuBarCommand.prototype.execute = function(){ this.receiver.refresh(); }; 
+var RefreshMenuBarCommand = function( receiver ){ this.receiver = receiver; };
+RefreshMenuBarCommand.prototype.execute = function(){ this.receiver.refresh(); };
 
-var AddSubMenuCommand = function( receiver ){ this.receiver = receiver; }; 
-AddSubMenuCommand.prototype.execute = function(){ this.receiver.add();}; 
+var AddSubMenuCommand = function( receiver ){ this.receiver = receiver; };
+AddSubMenuCommand.prototype.execute = function(){ this.receiver.add();};
 
-var DelSubMenuCommand = function( receiver ){ this.receiver = receiver; }; 
+var DelSubMenuCommand = function( receiver ){ this.receiver = receiver; };
 DelSubMenuCommand.prototype.execute = function(){ console.log( '删 除 子 菜 单' ); };
 ```
 最后就是把命令接收者传入到command对象中，并且把command对象安装到button上面：
 ```js
-var refreshMenuBarCommand = new RefreshMenuBarCommand( MenuBar ); 
-var addSubMenuCommand = new AddSubMenuCommand( SubMenu ); 
-var delSubMenuCommand = new DelSubMenuCommand( SubMenu ); 
+var refreshMenuBarCommand = new RefreshMenuBarCommand( MenuBar );
+var addSubMenuCommand = new AddSubMenuCommand( SubMenu );
+var delSubMenuCommand = new DelSubMenuCommand( SubMenu );
 
 setCommand( button1, refreshMenuBarCommand );
-setCommand( button2, addSubMenuCommand ); 
+setCommand( button2, addSubMenuCommand );
 setCommand( button3, delSubMenuCommand );
 ```
 以上只是一个很简单的命令模式示例，但从中可以看到我们是如何把请求发送者和请求接收者解耦开的。
@@ -79,16 +79,16 @@ setCommand( button3, delSubMenuCommand );
 #### JavaScript中的命令模式
 也许我们会感到很奇怪，所谓的命令模式，看起来就是给对象的某个方法取了execute的名字。引入command对象和receiver这两个无中生有的角色无非是把简单的事情复杂化了，即使不用什么模式，用下面寥寥几行代码就可以实现相同的功能：
 ```js
-var bindClick = function( button, func ){ button.onclick = func; }; 
-var MenuBar = { 
-  refresh: function(){ console.log( '刷 新 菜 单 界 面' ); } 
-}; 
-var SubMenu = { 
-  add: function(){ console.log( '增 加 子 菜 单' ); }, 
-  del: function(){ console.log( '删 除 子 菜 单' ); } 
-}; 
+var bindClick = function( button, func ){ button.onclick = func; };
+var MenuBar = {
+  refresh: function(){ console.log( '刷 新 菜 单 界 面' ); }
+};
+var SubMenu = {
+  add: function(){ console.log( '增 加 子 菜 单' ); },
+  del: function(){ console.log( '删 除 子 菜 单' ); }
+};
 
-bindClick( button1, MenuBar.refresh ); 
+bindClick( button1, MenuBar.refresh );
 bindClick( button2, SubMenu.add );
 bindClick( button3, SubMenu.del );
 ```
@@ -100,19 +100,19 @@ JavaScript作为将函数作为一等对象的语言，跟策略模式一样，�
 
 在面向对象设计中，命令模式的接收者被当成command对象的属性保存起来，同时约定执行命令的操作调用command.execute方法。在使用闭包的命令模式实现中，接收者被封闭在闭包产生的环境中，执行命令的操作可以更加简单，仅仅执行回调函数即可。无论接收者被保存为对象的属性，还是被封闭在闭包产生的环境中，在将来执行命令的时候，接收者都能被顺利访问。用闭包实现的命令模式如下代码所示：
 ```js
-var setCommand = function( button, func ){ button.onclick = function(){ func(); } }; 
-var MenuBar = { refresh: function(){ console.log( '刷 新 菜 单 界 面' ); } }; 
+var setCommand = function( button, func ){ button.onclick = function(){ func(); } };
+var MenuBar = { refresh: function(){ console.log( '刷 新 菜 单 界 面' ); } };
 
-var RefreshMenuBarCommand = function( receiver ){ return function(){ receiver.refresh(); } }; 
-var refreshMenuBarCommand = RefreshMenuBarCommand( MenuBar ); 
+var RefreshMenuBarCommand = function( receiver ){ return function(){ receiver.refresh(); } };
+var refreshMenuBarCommand = RefreshMenuBarCommand( MenuBar );
 
 setCommand( button1, refreshMenuBarCommand );
 ```
 当然，如果想更明确地表达当前正在使用命令模式，或者除了执行命令之外，将来有可能还要提供撤销命令等操作。那我们最好还是把执行函数改为调用execute方法：
 ```js
-var RefreshMenuBarCommand = function( receiver ){ return { execute: function(){ receiver.refresh(); } } }; 
-var setCommand = function( button, command ){ button.onclick = function(){ command.execute(); } }; 
-var refreshMenuBarCommand = RefreshMenuBarCommand( MenuBar ); 
+var RefreshMenuBarCommand = function( receiver ){ return { execute: function(){ receiver.refresh(); } } };
+var setCommand = function( button, command ){ button.onclick = function(){ command.execute(); } };
+var refreshMenuBarCommand = RefreshMenuBarCommand( MenuBar );
 
 setCommand( button1, refreshMenuBarCommand );
 ```
@@ -120,29 +120,29 @@ setCommand( button1, refreshMenuBarCommand );
 #### 撤销命令
 命令模式的作用不仅是封装运算块，而且可以很方便地给命令对象增加撤销操作。就像订餐时客人可以通过电话来取消订单一样。下面来看撤销命令的例子。本节的目标是利用Animate类来编写一个动画，这个动画的表现是让页面上的小球移动到水平方向的某个位置。现在页面中有一个input文本框和一个button按钮，文本框中可以输入一些数字，表示小球移动后的水平位置，小球在用户点击按钮后立刻开始移动，代码如下：
 ```js
-var ball = document.getElementById( 'ball' ); 
-var pos = document.getElementById( 'pos' ); 
-var moveBtn = document.getElementById( 'moveBtn' ); 
+var ball = document.getElementById( 'ball' );
+var pos = document.getElementById( 'pos' );
+var moveBtn = document.getElementById( 'moveBtn' );
 
 moveBtn.onclick = function(){
-  var animate = new Animate( ball ); 
-  animate.start( 'left', pos.value, 1000, 'strongEaseOut' ); 
+  var animate = new Animate( ball );
+  animate.start( 'left', pos.value, 1000, 'strongEaseOut' );
 };
 ```
 如果文本框输入200，然后点击moveBtn按钮，可以看到小球顺利地移动到水平方向200px的位置。现在我们需要一个方法让小球还原到开始移动之前的位置。当然也可以在文本框中再次输入-200，并且点击moveBtn按钮，这也是一个办法，不过显得很笨拙。页面上最好有一个撤销按钮，点击撤销按钮之后，小球便能回到上一次的位置。在给页面中增加撤销按钮之前，先把目前的代码改为用命令模式实现：
 ```js
 var ball = document.getElementById( 'ball' );
-var pos = document.getElementById( 'pos' ); 
-var moveBtn = document.getElementById( 'moveBtn' ); 
-var MoveCommand = function( receiver, pos ){ this.receiver = receiver; this.pos = pos; }; 
+var pos = document.getElementById( 'pos' );
+var moveBtn = document.getElementById( 'moveBtn' );
+var MoveCommand = function( receiver, pos ){ this.receiver = receiver; this.pos = pos; };
 
-MoveCommand.prototype.execute = function(){ this.receiver.start( 'left', this.pos, 1000, 'strongEaseOut' ); }; 
+MoveCommand.prototype.execute = function(){ this.receiver.start( 'left', this.pos, 1000, 'strongEaseOut' ); };
 
-var moveCommand; 
-moveBtn.onclick = function(){ 
-  var animate = new Animate( ball ); 
-  moveCommand = new MoveCommand( animate, pos.value ); 
-  moveCommand.execute(); 
+var moveCommand;
+moveBtn.onclick = function(){
+  var animate = new Animate( ball );
+  moveCommand = new MoveCommand( animate, pos.value );
+  moveCommand.execute();
 };
 ```
 接下来增加撤销按钮,撤销操作的实现一般是给命令对象增加一个名为unexecude或者undo的方法，在该方法里执行execute的反向操作。在command.execute方法让小球开始真正运动之前，我们需要先记录小球的当前位置，在unexecude或者undo操作中，再让小球回到刚刚记录下的位置，代码如下：
@@ -158,17 +158,17 @@ var MoveCommand = function(receiver, pos) {
 };
 MoveCommand.prototype.execute = function() {
   this.receiver.start('left', this.pos, 1000, 'strongEaseOut');
-  this.oldPos = this.receiver.dom.getBoundingClientRect()[this.receiver.propertyName]; // 记 录 小 球 开 始 移 动 前 的 位 置 
-}; 
-MoveCommand.prototype.undo = function(){ this.receiver.start( 'left', this.oldPos, 1000, 'strongEaseOut' ); // 回 到 小 球 移 动 前 记 录 的 位 置 
-}; 
-var moveCommand; moveBtn.onclick = function(){ 
-  var animate = new Animate( ball ); 
-  moveCommand = new MoveCommand( animate, pos.value ); 
-  moveCommand.execute(); 
-}; 
-cancelBtn.onclick = function(){ 
-  moveCommand.undo(); // 撤 销 命 令 
+  this.oldPos = this.receiver.dom.getBoundingClientRect()[this.receiver.propertyName]; // 记 录 小 球 开 始 移 动 前 的 位 置
+};
+MoveCommand.prototype.undo = function(){ this.receiver.start( 'left', this.oldPos, 1000, 'strongEaseOut' ); // 回 到 小 球 移 动 前 记 录 的 位 置
+};
+var moveCommand; moveBtn.onclick = function(){
+  var animate = new Animate( ball );
+  moveCommand = new MoveCommand( animate, pos.value );
+  moveCommand.execute();
+};
+cancelBtn.onclick = function(){
+  moveCommand.undo(); // 撤 销 命 令
 };
 ```
 现在通过命令模式轻松地实现了撤销功能。如果用普通的方法调用来实现，也许需要每次都手工记录小球的运动轨迹，才能让它还原到之前的位置。而命令模式中小球的原始位置在小球开始移动前已经作为command对象的属性被保存起来，所以只需要再提供一个undo方法，并且在undo方法中让小球回到刚刚记录的原始位置就可以了。撤销是命令模式里一个非常有用的功能，试想一下开发一个围棋程序的时候，我们把每一步棋子的变化都封装成命令，则可以轻而易举地实现悔棋功能。同样，撤销命令还可以用于实现文本编辑器的Ctrl+Z功能。
@@ -183,36 +183,36 @@ cancelBtn.onclick = function(){
 在HTML5版《街头霸王》游戏中，命令模式可以用来实现播放录像功能。原理跟Canvas画图的例子一样，我们把用户在键盘的输入都封装成命令，执行过的命令将被存放到堆栈中。播放录像的时候只需要从头开始依次执行这些命令便可，代码如下：
 ```js
 var Ryu = {
-  attack: function(){ console.log( '攻 击' ); }, 
-  defense: function(){ console.log( '防 御' ); }, 
-  jump: function(){ console.log( '跳 跃' ); }, 
+  attack: function(){ console.log( '攻 击' ); },
+  defense: function(){ console.log( '防 御' ); },
+  jump: function(){ console.log( '跳 跃' ); },
   crouch: function(){ console.log( '蹲 下' ); }
-}; 
-var makeCommand = function( receiver, state ){ // 创 建 命 令 
-  return function(){ receiver[ state ](); } 
-}; 
-var commands = { 
-  "119": "jump", // W 
-  "115": "crouch", // S 
-  "97": "defense", // A 
-  "100": "attack" // D 
 };
-var commandStack = []; // 保 存 命 令 的 堆 栈 
+var makeCommand = function( receiver, state ){ // 创 建 命 令
+  return function(){ receiver[ state ](); }
+};
+var commands = {
+  "119": "jump", // W
+  "115": "crouch", // S
+  "97": "defense", // A
+  "100": "attack" // D
+};
+var commandStack = []; // 保 存 命 令 的 堆 栈
 
-document.onkeypress = function( ev ){ 
-  var keyCode = ev.keyCode, 
+document.onkeypress = function( ev ){
+  var keyCode = ev.keyCode,
       command = makeCommand( Ryu, commands[ keyCode ] );
 
-  if ( command ){ 
-    command(); // 执 行 命 令 
-    commandStack.push( command ); // 将 刚 刚 执 行 过 的 命 令 保 存 进 堆 栈 
-  } 
-}; 
-document.getElementById( 'replay' ).onclick = function(){ // 点 击 播 放 录 像 
-  var command; 
-  while( command = commandStack.shift() ){ // 从 堆 栈 里 依 次 取 出 命 令 并 执 行 
-    command(); 
-  } 
+  if ( command ){
+    command(); // 执 行 命 令
+    commandStack.push( command ); // 将 刚 刚 执 行 过 的 命 令 保 存 进 堆 栈
+  }
+};
+document.getElementById( 'replay' ).onclick = function(){ // 点 击 播 放 录 像
+  var command;
+  while( command = commandStack.shift() ){ // 从 堆 栈 里 依 次 取 出 命 令 并 执 行
+    command();
+  }
 };
 ```
 
@@ -232,28 +232,28 @@ document.getElementById( 'replay' ).onclick = function(){ // 点 击 播 放 录
 
 下面我们看看如何逐步创建一个宏命令。首先，我们依然要创建好各种Command：
 ```js
-var closeDoorCommand = { execute: function(){ console.log( '关 门' ); } }; 
-var openPcCommand = { execute: function(){ console.log( '开 电 脑' ); } }; 
+var closeDoorCommand = { execute: function(){ console.log( '关 门' ); } };
+var openPcCommand = { execute: function(){ console.log( '开 电 脑' ); } };
 var openQQCommand = { execute: function(){ console.log( '登 录 QQ' ); } };
 ```
 接下来定义宏命令MacroCommand，它的结构也很简单。macroCommand.add方法表示把子命令添加进宏命令对象，当调用宏命令对象的execute方法时，会迭代这一组子命令对象，并且依次执行它们的execute方法：
 ```js
-var MacroCommand = function(){ 
-  return { 
-    commandsList: [], 
-    add: function( command ){ this.commandsList.push( command ); }, 
+var MacroCommand = function(){
+  return {
+    commandsList: [],
+    add: function( command ){ this.commandsList.push( command ); },
     execute: function(){
-      for ( var i = 0, command; command = this.commandsList[ i++ ]; ){ 
-        command.execute(); 
-      } 
-    } 
-  } 
-}; 
+      for ( var i = 0, command; command = this.commandsList[ i++ ]; ){
+        command.execute();
+      }
+    }
+  }
+};
 
 var macroCommand = MacroCommand();
-macroCommand.add( closeDoorCommand ); 
-macroCommand.add( openPcCommand ); 
-macroCommand.add( openQQCommand ); 
+macroCommand.add( closeDoorCommand );
+macroCommand.add( openPcCommand );
+macroCommand.add( openQQCommand );
 macroCommand.execute();
 ```
 当然我们还可以为宏命令添加撤销功能，跟macroCommand.execute类似，当调用macroCommand.undo方法时，宏命令里包含的所有子命令对象要依次执行各自的undo操作。宏命令是命令模式与组合模式的联用产物，关于组合模式，将在后面详细介绍。

@@ -2,8 +2,11 @@
 title: 学习JavaScript数据结构与算法笔记
 date: 2017-02-21 20:05:32
 updated: 2017-02-21
-categories: js
-tags: [js, data-structure, algorithms, note]
+categories: JavaScript
+tags:
+  - JavaScript
+  - data-structure
+  - algorithms
 ---
 
 《学习JavaScript数据结构与算法》 笔记，以下为使用ES5的语法

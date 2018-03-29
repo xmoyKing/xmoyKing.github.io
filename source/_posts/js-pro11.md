@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-11-面向对象2-创建对象
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-10 18:32:09
 updated:
@@ -205,7 +205,7 @@ Person.prototype = {
   name: "king",
   age: 22,
   job: "software engineer",
-  
+
   sayName: function(){
     console.log(this.name);
   }
@@ -224,7 +224,7 @@ Person.prototype = {
   name: "king",
   age: 22,
   job: "software engineer",
-  
+
   sayName: function(){
     console.log(this.name);
   }
@@ -252,7 +252,7 @@ Person.prototype = {
   name: "king",
   age: 22,
   job: "software engineer",
-  
+
   sayName: function(){
     console.log(this.name);
   }
@@ -280,7 +280,7 @@ Person.prototype = {
   name: "king",
   age: 22,
   job: "software engineer",
-  
+
   sayName: function(){
     console.log(this.name);
   }
@@ -311,7 +311,7 @@ Person.prototype = {
   age: 22,
   job: "software engineer",
   links: ['tom', 'jim', 'shally'],
-  
+
   sayName: function(){
     console.log(this.name);
   }
@@ -346,7 +346,7 @@ function Person(name, age, job){
 
 Person.prototype = {
   constructor: Person,
-  
+
   sayName: function(){
     console.log(this.name);
   }
@@ -410,7 +410,7 @@ function SpecialArray(){
   var a = new Array(); // 创建数组实例
   a.push.apply(a, arguments);   // 添加值
   a.toPipedSting = function(){ // 添加方法
-    return this.join('|'); 
+    return this.join('|');
   }
   return a;
 }

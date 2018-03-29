@@ -1,12 +1,11 @@
 ---
-title: effective-javascript笔记-4
+title: effective-JavaScript笔记-4
 date: 2017-03-01 11:30:28
 updated: 2017-03-25
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - effective-javascript
-  - note
 ---
 
 ## 对象和原型
@@ -39,7 +38,7 @@ var u = new User('ssss', '0ef678sdsg567afh8dadsadasd');
 
 构造函数的`prototype`属性用来设置新实例的原型关系.
 
-ES5中的函数`Object.getPrototypeOf()`可以用于检索现有对象的原型. 如:   
+ES5中的函数`Object.getPrototypeOf()`可以用于检索现有对象的原型. 如:
 ```js
 Object.gePrototypeOf(u) === User.prototype; // true
 ```
@@ -58,9 +57,9 @@ JS中的类 本质上是一个构造函数(`User`)与一个用于在该类(`User
 无论何时,`getPrototypeOf`函数都是有效的,而且它是提取对象原型更加标准,可移植的方法. 由于`__proto__`属性会污染所有的对象,因此会有一些它引发的错误.
 
 ### 32. 始终不要修改`__proto__`属性
-`__proto__`属性提供了修改对象原型链的能力,而`Object.getPrototypeOf()`方法却不能修改. 所以尽量不要修改此属性,会破坏程序的可移植问题. 
+`__proto__`属性提供了修改对象原型链的能力,而`Object.getPrototypeOf()`方法却不能修改. 所以尽量不要修改此属性,会破坏程序的可移植问题.
 
-另一个问题是性能, 所有的现代JS引擎都深度优化了获取和设置对象属性的行为, 因为这些都是一些最常见的JS程序的操作. 这些优化都是基于引擎在对象结构的认识上, 当修改对象的内部结构(如添加或删除该对象或其原型链中的对象的属性), 将会使一些优化失效. 
+另一个问题是性能, 所有的现代JS引擎都深度优化了获取和设置对象属性的行为, 因为这些都是一些最常见的JS程序的操作. 这些优化都是基于引擎在对象结构的认识上, 当修改对象的内部结构(如添加或删除该对象或其原型链中的对象的属性), 将会使一些优化失效.
 
 修改`__proto__`属性实际上改变了继承结构本身. 比起普通属性,修改`__proto__`会导致更多的优化失效.
 
@@ -76,7 +75,7 @@ u; // undefined
 this.name; // 'bbbb'
 this.pwHash; // '790af7657ds6ad45adsa'
 ```
-该函数不仅会返回无意义的`undefined`,而且会创建/修改全局变量`name`和`pwHash`. 
+该函数不仅会返回无意义的`undefined`,而且会创建/修改全局变量`name`和`pwHash`.
 
 若在严格模式下,那么它的接收者默认为`undefined`. 这种情况下,错误的调用会导致错误, `User`的第一行试图给`this.name`赋值时, 会抛出`TypeError`错误.
 ```js
@@ -110,7 +109,7 @@ y instanceof User; // true
 ```js
 function User(name, pwHash){
     var self = this instanceof User ? this : Object.create(User.prototype);
-                            
+
     self.name = name;
     self.pwHash = pwHash;
     return self;
@@ -130,7 +129,7 @@ if(typeof Object.create === 'undefined'){
 ```
 上述版本仅是单参数版本的, 完整版本的`Object.create()`函数还接受一个可选参数, 用于描述一组定义在新对象上的属性描述符.
 
-若使用`new`操作符调用该新版本的`User`函数会发生什么? 由于构造函数覆盖模式, 使用`new`操作符调用的行为就如函数调用它的行为一样. 
+若使用`new`操作符调用该新版本的`User`函数会发生什么? 由于构造函数覆盖模式, 使用`new`操作符调用的行为就如函数调用它的行为一样.
 
 构造函数覆盖模式即JS允许`new`表达式的结果可以被构造函数中的显示`return`语句所覆盖. 当`User`函数返回`self`对象时, `new` 表达式的结果就变成self对象, 该对象可能是另一个绑定到`this`的对象.
 
@@ -142,7 +141,7 @@ if(typeof Object.create === 'undefined'){
 ### 34. 在原型中存储方法
 JS完全有可能不借助原型链编程, 比如30条中的`User`类, 不在原型中定义方法.
 ```js
-function User(name, pwHash){    
+function User(name, pwHash){
     this.name = name;
     this.pwHash = pwHash;
 
@@ -183,7 +182,7 @@ JS提供了一种信息隐藏的机制——**闭包**.
 
 利用这种特性在对象中存储真正的私有数据, 不是将数据作为对象的属性存储,而是在构造函数中以变量的方式来存储, 并将对象的方法转变为引用这些变量的闭包.
 ```js
-function User(name, pwHash){    
+function User(name, pwHash){
     this.toString = function(){
         return '[User ' + name + ']';
     };
@@ -279,7 +278,7 @@ reader.read("a,b,c\nd,e,f\n"); // [["a,b,c"],["d,e,f"]]
 CSVReader.prototype.read = function(str){
     var lines = str.trim().split(/\n/);
     return lines.map(function(line){
-        return line.split(this.regexp); // 此时的this表示外部传入的实例对象 
+        return line.split(this.regexp); // 此时的this表示外部传入的实例对象
     }, this); // 将调用read方法的实例对象传入
 }
 
@@ -304,7 +303,7 @@ reader.read("a,b,c\nd,e,f\n"); // [["a","b","c"],["d","e","f"]]
 CSVReader.prototype.read = function(str){
     var lines = str.trim().split(/\n/);
     return lines.map(function(line){
-        return line.split(this.regexp); // 此时的this表示外部传入的实例对象 
+        return line.split(this.regexp); // 此时的this表示外部传入的实例对象
     }.bind(this)); // 使用bind方法绑定外部的实例对象
 }
 
@@ -377,7 +376,7 @@ Actor.prototype.height = function(){
 }
 ```
 所有的特定角色都是Actor的子类, 例如太空飞船,SpaceShip类
- 1. 先调用Actor的构造函数能保证通过Actor创建的所有实例属性都被添到新对象中, 
+ 1. 先调用Actor的构造函数能保证通过Actor创建的所有实例属性都被添到新对象中,
  2. 然后再定义自身的实例属性,比如分数,point
  3. 最后为了使SpaceShip成为Actor的一个正确子类, 原型必须继承自Actor.prototype, 这种扩展最好使用使用Object.create方法
 ```js
@@ -401,7 +400,7 @@ SpaceShip.prototype.right = function(){
 }
 ```
 
-若使用Actor的构造函数来创建SpaceShip的原型对象, 会有几个问题,没有任何合理的参数传递给Actor, 
+若使用Actor的构造函数来创建SpaceShip的原型对象, 会有几个问题,没有任何合理的参数传递给Actor,
 ```js
 SpaceShip.prototype = new Actor();
 ```
@@ -469,9 +468,9 @@ JS并不具备内部类系统, 不要被名字误导, [[class]]的值仅仅是�
 数组对象(通过Array构造函数或[]语法创建)被加上了值为"Array"的[[class]]属性, 函数被加上了值为"Function"的[[class]]属性, 以此类推...
 
 
-**[[class]]属性对length的作用为**: 
+**[[class]]属性对length的作用为**:
 
-length的行为值被定义在内部属性为[[class]]的值为"Array"的特殊对象中, JS保持length属性与该对象的索引属性的数量同步. 
+length的行为值被定义在内部属性为[[class]]的值为"Array"的特殊对象中, JS保持length属性与该对象的索引属性的数量同步.
 
 但当扩展Array类时, 子类的实例并不是通过`new Array()`或字面量`[]`语法创建的, 所以, Dir的实例的[[class]]属性值为"Object".
 
@@ -497,7 +496,7 @@ Dir.prototype.forEach = function(f, thisArg){
 }
 ```
 
-ES标准库的大多数构造函数都有类型的问题, 某些属性或方法需要有正确的内部属性, 而子类却无法提供. 
+ES标准库的大多数构造函数都有类型的问题, 某些属性或方法需要有正确的内部属性, 而子类却无法提供.
 
 所以, 最好避免继承标准类: Array, Boolean, Date, Function, Number, RegExp, String.
 

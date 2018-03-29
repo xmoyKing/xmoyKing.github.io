@@ -1,11 +1,11 @@
 ---
 title: JavaScript框架设计笔记-1-种子模块
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
 date: 2016-12-16 16:15:31
-updated: 
+updated:
 ---
 
 PS:本系列笔记来源于《JavaScript框架设计》一书，但是非常尴尬的是，我买的不是第二版的，= =！[《JavaScript框架设计（第2版）》](http://www.epubit.com.cn/book/details/4849)一书，学习JS框架底层库知识，一个框架应该提供那些功能，应该如何区分这些模块等等，第二版前2章在网上有公开的，可以免费阅读。

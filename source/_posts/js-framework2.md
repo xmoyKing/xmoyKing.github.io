@@ -1,11 +1,11 @@
 ---
 title: JavaScript框架设计笔记-2-语言模块
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
 date: 2016-12-17 17:52:05
-updated: 
+updated:
 ---
 
 浏览器提供的原生API总是不够的，因此各个框架都创造了许多方法来弥补这缺陷。这就是语言模块的来源，即添加许多对字符串、数组、函数...的方法来修复或增强语言的能力。主要介绍了一些非常底层的知识点，让我们更熟悉这门语言。

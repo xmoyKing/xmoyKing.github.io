@@ -1,8 +1,8 @@
 ---
 title: jQuery实现分页
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - jquery
   - pagination
 date: 2016-11-05 16:23:49
@@ -108,7 +108,7 @@ updated: 2016-11-05 16:23:49
                         args.backFn(current);
                     }
                 });
-                
+
                 obj.on("click","a.prevPage:not(.disabled)",function(){ //上一页
                     if(typeof(args.backFn)=="function"){
                         args.backFn(args.current-1);
@@ -228,7 +228,7 @@ var list = {
                 .replace('<%job_edu%>',n.job_edu)
                 .replace('<%job_desc%>', $(n.job_desc).text())
                 .replace('<%job_tags%>', tags( JSON.parse(n.job_tags)));
-            
+
             html += temp;
         });
 

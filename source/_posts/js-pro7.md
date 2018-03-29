@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-7-引用类型1-Object/Array/Date
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-08 11:00:14
 updated:

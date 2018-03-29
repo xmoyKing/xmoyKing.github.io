@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-12-面向对象3-继承
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-11 08:22:40
 updated:
@@ -251,7 +251,7 @@ var p1 = {
 };
 
 var p2 = createObj(p1);
-p2.sayHi(); // hi 
+p2.sayHi(); // hi
 ```
 若主要考虑对象而不是自定义类型和构造函数时，寄生式继承是一种有用的模式，任何能够返回新对象的函数都适用此模式。
 

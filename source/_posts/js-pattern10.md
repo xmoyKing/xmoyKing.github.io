@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-10-模板方法模式
-categories: js
+categories: JavaScript
 tags:
-  - js
-  - design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-24 21:06:31
 updated:
 ---
@@ -98,9 +98,9 @@ var Beverage = function() {};
 Beverage.prototype.boilWater = function() {
   console.log('把 水 煮 沸');
 };
-Beverage.prototype.brew = function() {}; // 空 方 法， 应 该 由 子 类 重 写 
-Beverage.prototype.pourInCup = function() {}; // 空 方 法， 应 该 由 子 类 重 写 
-Beverage.prototype.addCondiments = function() {}; // 空 方 法， 应 该 由 子 类 重 写 
+Beverage.prototype.brew = function() {}; // 空 方 法， 应 该 由 子 类 重 写
+Beverage.prototype.pourInCup = function() {}; // 空 方 法， 应 该 由 子 类 重 写
+Beverage.prototype.addCondiments = function() {}; // 空 方 法， 应 该 由 子 类 重 写
 Beverage.prototype.init = function() {
   this.boilWater();
   this.brew();
@@ -112,7 +112,7 @@ Beverage.prototype.init = function() {
 ##### 创建Coffee子类和Tea子类
 现在创建一个Beverage类的对象对我们来说没有意义，因为世界上能喝的东西没有一种真正叫“饮料”的，饮料在这里还只是一个抽象的存在。接下来我们要创建咖啡类和茶类，并让它们继承饮料类：
 ```js
-var Coffee = function(){}; 
+var Coffee = function(){};
 Coffee.prototype = new Beverage();
 ```
 接下来要重写抽象父类中的一些方法，只有“把水煮沸”这个行为可以直接使用父类Beverage中的boilWater方法，其他方法都需要在Coffee子类中重写，代码如下：
@@ -187,7 +187,7 @@ JavaScript并没有从语法层面提供对抽象类的支持。抽象类的第�
 1. 第1种方案是用鸭子类型来模拟接口检查，以便确保子类中确实重写了父类的方法。但模拟接口检查会带来不必要的复杂性，而且要求程序员主动进行这些接口检查，这就要求我们在业务代码中添加一些跟业务逻辑无关的代码。
 2. 第2种方案是让Beverage.prototype.brew等方法直接抛出一个异常，如果因为粗心忘记编写Coffee.prototype.brew方法，那么至少我们会在程序运行时得到一个错误：
 ```js
-Beverage.prototype.brew = function(){ throw new Error( '子 类 必 须 重 写 brew 方 法' ); }; 　 　 
+Beverage.prototype.brew = function(){ throw new Error( '子 类 必 须 重 写 brew 方 法' ); }; 　 　
 Beverage.prototype.pourInCup = function(){ throw new Error( '子 类 必 须 重 写 pourInCup 方 法' ); };
 ```
 第2种解决方案的优点是实现简单，付出的额外代价很少；缺点是我们得到错误信息的时间点太靠后。
@@ -233,13 +233,13 @@ Beverage.prototype.addCondiments = function() {
   throw new Error('子 类 必 须 重 写 addCondiments 方 法');
 };
 Beverage.prototype.customerWantsCondiments = function() {
-  return true; // 默 认 需 要 调 料 
+  return true; // 默 认 需 要 调 料
 };
 Beverage.prototype.init = function() {
   this.boilWater();
   this.brew();
   this.pourInCup();
-  if (this.customerWantsCondiments()) { // 如 果 挂 钩 返 回 true， 则 需 要 调 料 
+  if (this.customerWantsCondiments()) { // 如 果 挂 钩 返 回 true， 则 需 要 调 料
     this.addCondiments();
   }
 };

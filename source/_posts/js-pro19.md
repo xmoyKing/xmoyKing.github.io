@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-19-DOM2和DOM3
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-27 21:45:02
 updated:
@@ -67,7 +67,7 @@ function func(operation, key, value, src,dest){
 contentDocument属性是Document类型的实例，因此能使用document对象的所有属性和方法，在IE8前无效，但支持contentWindow属性，该属性返回框架的window对象。
 ```js
 var iframe = document.getElementById('myiframe');
-var framedoc = iframe.contentDocument || iframe.contentWindow.document; 
+var framedoc = iframe.contentDocument || iframe.contentWindow.document;
 ```
 
 ### 样式
@@ -106,7 +106,7 @@ getPropertyValue取得是连字符格式的原始css属性值而不是大驼峰�
 getPropertyCSSValue取得的CSSValue对象有2个属性，一个是cssText，与getPropertyValue值相同，另一个是cssValueType，表示值的类型，0表示继承的值，1表示基本值，2表示值列表，3表示自定义的值。
 ```js
 for(var i = 0, n = div.style.length; i < n; i++){
-  
+
   var prop = div.style[i];  // div.style.item(i);
   div.style.getPropertyValue(prop);
 

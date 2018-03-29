@@ -1,8 +1,8 @@
 ---
 title: JavaScript框架设计笔记-8-样式模块
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-framework
 date: 2017-01-02 23:10:26
 updated: 2017-01-02 23:10:26

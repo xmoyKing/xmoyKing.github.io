@@ -1,8 +1,8 @@
 ---
 title: js插件CountUp源码解析
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - countup
 date: 2017-12-13 18:50:19
 updated: 2017-12-13 18:50:19
@@ -48,7 +48,7 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 
 	var self = this; // 保存this变量的引用，后续闭包中this的指向需要用到，也是每个实例化CountUp后的实例对象
 	self.version = function () { return '1.9.3'; };
-	
+
 	// default options 默认配置
 	self.options = {
 		useEasing: true, // toggle easing 开启缓动效果
@@ -148,12 +148,12 @@ var CountUp = function(target, startVal, endVal, decimals, duration, options) {
 		return (typeof n === 'number' && !isNaN(n));
 	}
 	// 初始化
-	self.initialize = function() { 
+	self.initialize = function() {
 		if (self.initialized) return true; // 初始化标志
-		
+
 		self.error = '';
 		self.d = (typeof target === 'string') ? document.getElementById(target) : target; // 获取目标，支持ID或原生元素对象
-		if (!self.d) { 
+		if (!self.d) {
 			self.error = '[CountUp] target is null or undefined'
 			return false;
 		}

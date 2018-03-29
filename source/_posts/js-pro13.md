@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-13-函数表达式1-递归/闭包
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-12 13:52:47
 updated:

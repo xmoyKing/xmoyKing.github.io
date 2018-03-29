@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-14-函数表达式2-模仿块级作用域/私有变量
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-12 16:49:18
 updated:
@@ -260,7 +260,7 @@ var application = function(){
       components.push(component);
     }
   };
-  
+
   return app;
 }();
 ```

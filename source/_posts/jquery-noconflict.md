@@ -1,8 +1,8 @@
 ---
 title: jquery.noConflict无冲突函数原理
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - jquery
   - noConflict
 date: 2017-12-09 23:08:08

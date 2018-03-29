@@ -1,8 +1,8 @@
 ---
 title: JavaScript高级程序设计-16-客户端检测
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - js-pro
 date: 2016-08-17 09:14:05
 updated:

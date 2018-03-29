@@ -1,9 +1,9 @@
 ---
 title: JS设计模式-13-中介者模式
-categories: js
+categories: JavaScript
 tags:
-- js
-- design pattern
+  - JavaScript
+  - 设计模式
 date: 2017-11-30 16:50:39
 updated:
 ---
@@ -35,7 +35,7 @@ updated:
 ```js
 function Player(name) {
   this.name = name;
-  this.enemy = null; // 敌 人 
+  this.enemy = null; // 敌 人
 };
 Player.prototype.win = function() {
   console.log(this.name + ' won ');
@@ -50,13 +50,13 @@ Player.prototype.die = function() {
 ```
 接下来创建2个玩家对象：
 ```js
-var player1 = new Player( '皮 蛋' ); 
-var player2 = new Player( '小 乖' ); 
+var player1 = new Player( '皮 蛋' );
+var player2 = new Player( '小 乖' );
 ```
 给玩家相互设置敌人：
 ```js
-player1.enemy = player2; 
-player2.enemy = player1; 
+player1.enemy = player2;
+player2.enemy = player1;
 ```
 当玩家player1被泡泡炸死的时候，只需要调用这一句代码便完成了一局游戏：
 ```js
@@ -77,11 +77,11 @@ Player5.enemies = [player1, player2, player3, player4];
 var players = [];
 
 function Player(name, teamColor) {
-  this.partners = []; // 队 友 列 表 
+  this.partners = []; // 队 友 列 表
   this.enemies = []; // 敌 人 列 表
-  this.state = 'live'; // 玩 家 状 态 
-  this.name = name; // 角 色 名 字 
-  this.teamColor = teamColor; // 队 伍 颜 色 
+  this.state = 'live'; // 玩 家 状 态
+  this.name = name; // 角 色 名 字
+  this.teamColor = teamColor; // 队 伍 颜 色
 };
 ```
 玩家胜利和失败之后的展现依然很简单，只是在每个玩家的屏幕上简单地弹出提示：
@@ -91,20 +91,20 @@ Player.prototype.lose = function(){  console.log( 'loser: ' + this.name ); };
 ```
 玩家死亡的方法要变得稍微复杂一点，我们需要在每个玩家死亡的时候，都遍历其他队友的生存状况，如果队友全部死亡，则这局游戏失败，同时敌人队伍的所有玩家都取得胜利，代码如下：
 ```js
-Player.prototype.die = function() { // 玩 家 死 亡 
+Player.prototype.die = function() { // 玩 家 死 亡
   var all_dead = true;
-  this.state = 'dead'; // 设 置 玩 家 状 态 为 死 亡 
-  for (var i = 0, partner; partner = this.partners[i++];) { // 遍 历 队 友 列 表 
-    if (partner.state !== 'dead') { // 如 果 还 有 一 个 队 友 没 有 死 亡， 则 游 戏 还 未 失 败 
+  this.state = 'dead'; // 设 置 玩 家 状 态 为 死 亡
+  for (var i = 0, partner; partner = this.partners[i++];) { // 遍 历 队 友 列 表
+    if (partner.state !== 'dead') { // 如 果 还 有 一 个 队 友 没 有 死 亡， 则 游 戏 还 未 失 败
       all_dead = false;
       break;
     }
   }
-  if (all_dead === true) { // 如 果 队 友 全 部 死 亡 this.lose(); // 通 知 自 己 游 戏 失 败 
-    for (var i = 0, partner; partner = this.partners[i++];) { // 通 知 所 有 队 友 玩 家 游 戏 失 败 
+  if (all_dead === true) { // 如 果 队 友 全 部 死 亡 this.lose(); // 通 知 自 己 游 戏 失 败
+    for (var i = 0, partner; partner = this.partners[i++];) { // 通 知 所 有 队 友 玩 家 游 戏 失 败
       partner.lose();
     }
-    for (var i = 0, enemy; enemy = this.enemies[i++];) { // 通 知 所 有 敌 人 游 戏 胜 利 
+    for (var i = 0, enemy; enemy = this.enemies[i++];) { // 通 知 所 有 敌 人 游 戏 胜 利
       enemy.win();
     }
   }
@@ -113,13 +113,13 @@ Player.prototype.die = function() { // 玩 家 死 亡
 最后定义一个工厂来创建玩家：
 ```js
 var playerFactory = function(name, teamColor) {
-    var newPlayer = new Player(name, teamColor); // 创 建 新 玩 家 
-    for (var i = 0, player; player = players[i++];) { // 通 知 所 有 的 玩 家， 有 新 角 色 加 入 
-      if (player.teamColor === newPlayer.teamColor) { // 如 果 是 同 一 队 的 玩 家 
-        player.partners.push(newPlayer); // 相 互 添 加 到 队 友 列 表 
+    var newPlayer = new Player(name, teamColor); // 创 建 新 玩 家
+    for (var i = 0, player; player = players[i++];) { // 通 知 所 有 的 玩 家， 有 新 角 色 加 入
+      if (player.teamColor === newPlayer.teamColor) { // 如 果 是 同 一 队 的 玩 家
+        player.partners.push(newPlayer); // 相 互 添 加 到 队 友 列 表
         newPlayer.partners.push(player);
       } else {
-        player.enemies.push(newPlayer); // 相 互 添 加 到 敌 人 列 表 
+        player.enemies.push(newPlayer); // 相 互 添 加 到 敌 人 列 表
         newPlayer.enemies.push(player);
       }
     }
@@ -129,7 +129,7 @@ var playerFactory = function(name, teamColor) {
 ```
 创建8个玩家，并让红队玩家全部死亡，查看输出结果。
 ```js
-// 红 队： 
+// 红 队：
 var player1 = playerFactory('皮 蛋', 'red'),
   player2 = playerFactory('小 乖', 'red'),
   player3 = playerFactory('宝 宝', 'red'),
@@ -140,9 +140,9 @@ var player5 = playerFactory('黑 妞', 'blue'),
   player7 = playerFactory('胖 墩', 'blue'),
   player8 = playerFactory('海 盗', 'blue');
 
-player1.die(); 
-player2.die(); 
-player4.die(); 
+player1.die();
+player2.die();
+player4.die();
 player3.die();
 ```
 
@@ -155,35 +155,35 @@ player3.die();
 现在我们开始用中介者模式来改造上面的泡泡堂游戏，首先仍然是定义Player构造函数和player对象的原型方法，在player对象的这些原型方法中，不再负责具体的执行逻辑，而是把操作转交给中介者对象，我们把中介者对象命名为playerDirector：
 ```js
 function Player(name, teamColor) {
-  this.name = name; // 角 色 名 字 
-  this.teamColor = teamColor; // 队 伍 颜 色 
-  this.state = 'alive'; // 玩 家 生 存 状 态 
+  this.name = name; // 角 色 名 字
+  this.teamColor = teamColor; // 队 伍 颜 色
+  this.state = 'alive'; // 玩 家 生 存 状 态
 };
 Player.prototype.win = function() {
   console.log(this.name + ' won ');
 };
 Player.prototype.lose = function() {
   console.log(this.name + ' lost');
-}; 
+};
 /******************* 玩 家 死 亡*****************/
 Player.prototype.die = function() {
   this.state = 'dead';
-  playerDirector.ReceiveMessage('playerDead', this); // 给 中 介 者 发 送 消 息， 玩 家 死 亡 
-}; 
+  playerDirector.ReceiveMessage('playerDead', this); // 给 中 介 者 发 送 消 息， 玩 家 死 亡
+};
 /******************* 移 除 玩 家*****************/
 Player.prototype.remove = function() {
-  playerDirector.ReceiveMessage('removePlayer', this); // 给 中 介 者 发 送 消 息， 移 除 一 个 玩 家 
-}; 
-/******************* 玩 家 换 队*****************/ 
-Player.prototype.changeTeam = function( color ){ 
-  playerDirector.ReceiveMessage( 'changeTeam', this, color ); // 给 中 介 者 发 送 消 息， 玩 家 换 队 
+  playerDirector.ReceiveMessage('removePlayer', this); // 给 中 介 者 发 送 消 息， 移 除 一 个 玩 家
+};
+/******************* 玩 家 换 队*****************/
+Player.prototype.changeTeam = function( color ){
+  playerDirector.ReceiveMessage( 'changeTeam', this, color ); // 给 中 介 者 发 送 消 息， 玩 家 换 队
 };
 ```
 再继续改写之前创建玩家对象的工厂函数，可以看到，因为工厂函数里不再需要给创建的玩家对象设置队友和敌人，这个工厂函数几乎失去了工厂的意义：
 ```js
 var playerFactory = function(name, teamColor) {
     var newPlayer = new Player(name, teamColor); // 创 造 一 个 新 的 玩 家 对 象
-    playerDirector.ReceiveMessage('addPlayer', newPlayer); // 给 中 介 者 发 送 消 息， 新 增 玩 家 
+    playerDirector.ReceiveMessage('addPlayer', newPlayer); // 给 中 介 者 发 送 消 息， 新 增 玩 家
     return newPlayer;
   };
 ```
@@ -194,36 +194,36 @@ var playerFactory = function(name, teamColor) {
 这两种方式的实现没什么本质上的区别。在这里我们使用第二种方式，playerDirector开放一个对外暴露的接口ReceiveMessage，负责接收player对象发送的消息，而player对象发送消息的时候，总是把自身this作为参数发送给playerDirector，以便playerDirector识别消息来自于哪个玩家对象，代码如下：
 ```js
 var playerDirector = (function() {
-  var players = {}, // 保 存 所 有 玩 家 
-    operations = {}; // 中 介 者 可 以 执 行 的 操 作 
+  var players = {}, // 保 存 所 有 玩 家
+    operations = {}; // 中 介 者 可 以 执 行 的 操 作
 
   /**************** 新 增 一 个 玩 家***************************/
   operations.addPlayer = function(player) {
-    var teamColor = player.teamColor; // 玩 家 的 队 伍 颜 色 
-    players[teamColor] = players[teamColor] || []; // 如 果 该 颜 色 的 玩 家 还 没 有 成 立 队 伍， 则 新 成 立 一 个 队 伍 
-    players[teamColor].push(player); // 添 加 玩 家 进 队 伍 
-  }; 
+    var teamColor = player.teamColor; // 玩 家 的 队 伍 颜 色
+    players[teamColor] = players[teamColor] || []; // 如 果 该 颜 色 的 玩 家 还 没 有 成 立 队 伍， 则 新 成 立 一 个 队 伍
+    players[teamColor].push(player); // 添 加 玩 家 进 队 伍
+  };
 
   /**************** 移 除 一 个 玩 家***************************/
   operations.removePlayer = function(player) {
     var teamColor = player.teamColor,
-      // 玩 家 的 队 伍 颜 色 
-      teamPlayers = players[teamColor] || []; // 该 队 伍 所 有 成 员 
-    for (var i = teamPlayers.length - 1; i >= 0; i--) { // 遍 历 删 除 
+      // 玩 家 的 队 伍 颜 色
+      teamPlayers = players[teamColor] || []; // 该 队 伍 所 有 成 员
+    for (var i = teamPlayers.length - 1; i >= 0; i--) { // 遍 历 删 除
       if (teamPlayers[i] === player) {
         teamPlayers.splice(i, 1);
       }
     }
-  }; 
-  
-  /**************** 玩 家 换 队***************************/
-  operations.changeTeam = function(player, newTeamColor) { // 玩 家 换 队 
-    operations.removePlayer(player); // 从 原 队 伍 中 删 除 
-    player.teamColor = newTeamColor; // 改 变 队 伍 颜 色 
-    operations.addPlayer(player); // 增 加 到 新 队 伍 中 
   };
 
-  operations.playerDead = function(player) { // 玩 家 死 亡 
+  /**************** 玩 家 换 队***************************/
+  operations.changeTeam = function(player, newTeamColor) { // 玩 家 换 队
+    operations.removePlayer(player); // 从 原 队 伍 中 删 除
+    player.teamColor = newTeamColor; // 改 变 队 伍 颜 色
+    operations.addPlayer(player); // 增 加 到 新 队 伍 中
+  };
+
+  operations.playerDead = function(player) { // 玩 家 死 亡
     var teamColor = player.teamColor,
       teamPlayers = players[teamColor]; // 玩 家 所 在 队 伍
     var all_dead = true;
@@ -235,7 +235,7 @@ var playerDirector = (function() {
     }
     if (all_dead === true) { // 全 部 死 亡
       for (var i = 0, player; player = teamPlayers[i++];) {
-        player.lose(); // 本 队 所 有 玩 家 lose 
+        player.lose(); // 本 队 所 有 玩 家 lose
       }
       for (var color in players) {
         if (color !== teamColor) {
@@ -264,7 +264,7 @@ var playerDirector = (function() {
 
 这个需求是非常容易实现的，假设我们已经提前从后台获取到了所有颜色手机的库存量：
 ```js
-var goods = { // 手 机 库 存 
+var goods = { // 手 机 库 存
   "red": 3,
   "blue": 6
 };
@@ -288,26 +288,26 @@ var colorSelect = document.getElementById('colorSelect'),
   colorInfo = document.getElementById('colorInfo'),
   numberInfo = document.getElementById('numberInfo'),
   nextBtn = document.getElementById('nextBtn');
-var goods = { // 手 机 库 存 
+var goods = { // 手 机 库 存
   "red": 3,
   "blue": 6
 };
 colorSelect.onchange = function() {
-  var color = this.value,// 颜 色 
-    number = numberInput.value, // 数 量 
-    stock = goods[color]; // 该 颜 色 手 机 对 应 的 当 前 库 存 
+  var color = this.value,// 颜 色
+    number = numberInput.value, // 数 量
+    stock = goods[color]; // 该 颜 色 手 机 对 应 的 当 前 库 存
   colorInfo.innerHTML = color;
   if (!color) {
     nextBtn.disabled = true;
     nextBtn.innerHTML = '请 选 择 手 机 颜 色';
     return;
   }
-  if (((number - 0) | 0) !== number - 0) { // 用 户 输 入 的 购 买 数 量 是 否 为 正 整 数 
+  if (((number - 0) | 0) !== number - 0) { // 用 户 输 入 的 购 买 数 量 是 否 为 正 整 数
     nextBtn.disabled = true;
     nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
     return;
   }
-  if (number > stock) { // 当 前 选 择 数 量 超 过 库 存 量 
+  if (number > stock) { // 当 前 选 择 数 量 超 过 库 存 量
     nextBtn.disabled = true;
     nextBtn.innerHTML = '库 存 不 足';
     return;
@@ -324,22 +324,22 @@ colorSelect.onchange = function() {
 ```js
 numberInput.oninput = function() {
   var color = colorSelect.value,
-    // 颜 色 
+    // 颜 色
     number = this.value,
-    // 数 量 
-    stock = goods[color]; // 该 颜 色 手 机 对 应 的 当 前 库 存 
+    // 数 量
+    stock = goods[color]; // 该 颜 色 手 机 对 应 的 当 前 库 存
   numberInfo.innerHTML = number;
   if (!color) {
     nextBtn.disabled = true;
     nextBtn.innerHTML = '请 选 择 手 机 颜 色';
     return;
   }
-  if (((number - 0) | 0) !== number - 0) { // 输 入 购 买 数 量 是 否 为 正 整 数 
+  if (((number - 0) | 0) !== number - 0) { // 输 入 购 买 数 量 是 否 为 正 整 数
     nextBtn.disabled = true;
     nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
     return;
   }
-  if (number > stock) { // 当 前 选 择 数 量 没 有 超 过 库 存 量 
+  if (number > stock) { // 当 前 选 择 数 量 没 有 超 过 库 存 量
     nextBtn.disabled = true;
     nextBtn.innerHTML = '库 存 不 足';
     return;
@@ -361,7 +361,7 @@ numberInput.oninput = function() {
 ##### 引入中介者
 现在我们来引入中介者对象，所有的节点对象只跟中介者通信。当下拉选择框colorSelect、memorySelect和文本输入框numberInput发生了事件行为时，它们仅仅通知中介者它们被改变了，同时把自身当作参数传入中介者，以便中介者辨别是谁发生了改变。剩下的所有事情都交给中介者对象来完成，这样一来，无论是修改还是新增节点，都只需要改动中介者对象里的代码。
 ```js
-var goods = { // 手 机 库 存 
+var goods = { // 手 机 库 存
   "red | 32G": 3,
   "red | 16G": 0,
   "blue | 32G": 1,
@@ -377,12 +377,12 @@ var mediator = (function() {
     nextBtn = document.getElementById('nextBtn');
   return {
     changed: function(obj) {
-      var color = colorSelect.value, // 颜 色 
-        memory = memorySelect.value, // 内 存 
-        number = numberInput.value, // 数 量 
-        stock = goods[color + '|' + memory]; // 颜 色 和 内 存 对 应 的 手 机 库 存 数 量 
+      var color = colorSelect.value, // 颜 色
+        memory = memorySelect.value, // 内 存
+        number = numberInput.value, // 数 量
+        stock = goods[color + '|' + memory]; // 颜 色 和 内 存 对 应 的 手 机 库 存 数 量
 
-      if (obj === colorSelect) { // 如 果 改 变 的 是 选 择 颜 色 下 拉 框 
+      if (obj === colorSelect) { // 如 果 改 变 的 是 选 择 颜 色 下 拉 框
         colorInfo.innerHTML = color;
       } else if (obj === memorySelect) {
         memoryInfo.innerHTML = memory;
@@ -400,7 +400,7 @@ var mediator = (function() {
         nextBtn.innerHTML = '请 选 择 内 存 大 小';
         return;
       }
-      if (((number - 0) | 0) !== number - 0) { // 输 入 购 买 数 量 是 否 为 正 整 数 
+      if (((number - 0) | 0) !== number - 0) { // 输 入 购 买 数 量 是 否 为 正 整 数
         nextBtn.disabled = true;
         nextBtn.innerHTML = '请 输 入 正 确 的 购 买 数 量';
         return;
@@ -409,8 +409,8 @@ var mediator = (function() {
       nextBtn.innerHTML = '放 入 购 物 车';
     }
   }
-})(); 
-// 事 件 函 数： 
+})();
+// 事 件 函 数：
 colorSelect.onchange = function() {
   mediator.changed(this);
 };
@@ -423,26 +423,26 @@ numberInput.oninput = function() {
 ```
 可以想象，某天我们又要新增一些跟需求相关的节点，比如CPU型号，那我们只需要稍稍改动mediator对象即可：
 ```js
-var goods = { // 手 机 库 存 
+var goods = { // 手 机 库 存
   "red | 32G | 800": 3,
-  // 颜 色 red， 内 存 32G， cpu800， 对 应 库 存 数 量 为 3 
+  // 颜 色 red， 内 存 32G， cpu800， 对 应 库 存 数 量 为 3
   "red | 16G | 801": 0,
   "blue | 32G | 800": 1,
   "blue | 16G | 801": 6
 };
 var mediator = (function() {
-  // 略 
+  // 略
   var cpuSelect = document.getElementById('cpuSelect');
   return {
     change: function(obj) {
-      // 略 
+      // 略
       var cpu = cpuSelect.value,
         stock = goods[color + '|' + memory + '|' + cpu];
-        
+
       if (obj === cpuSelect) {
         cpuInfo.innerHTML = cpu;
       }
-      // 略 
+      // 略
     }
   }
 })();

@@ -1,18 +1,17 @@
 ---
-title: effective-javascript笔记-7
+title: effective-JavaScript笔记-7
 date: 2017-03-9 08:34:20
 updated: 2017-03-26
-categories: js
+categories: JavaScript
 tags:
-  - js
+  - JavaScript
   - effective-javascript
-  - note
 ---
 
 ## 并发
 JS是一种嵌入式的脚本语言, JS程序不是作为独立的应用程序运行的,而是作为大型应用程序环境下的脚本运行的. 比如Web浏览器, 具有多个窗体(Window)和标签(Tab), 没个程序需要响应不同的输入和事件, 如键盘,鼠标,网络,定时任务等.
 
-在JS中,编写响应多个并发事件的程序非常简单, 而且有时编写者甚至都不知道自己的代码是并发的. 这得益于JS的一个简单的执行模型, 即事件队列(事件循环并发) 和 异步API. 
+在JS中,编写响应多个并发事件的程序非常简单, 而且有时编写者甚至都不知道自己的代码是并发的. 这得益于JS的一个简单的执行模型, 即事件队列(事件循环并发) 和 异步API.
 
 但在官方ES标准中,并没有提及并发.
 
@@ -27,9 +26,9 @@ downloadAsync('http://example.com/file.txt', function(txt){
 
 所以JS并发的最重要的规则是不要在应用程序事件队列中使用阻塞I/O的API.
 
-异步的API在基于事件的环境中是安全的, 因为他们迫使应用程序逻辑在一个独立的事件循环"轮询"中继续处理. 
+异步的API在基于事件的环境中是安全的, 因为他们迫使应用程序逻辑在一个独立的事件循环"轮询"中继续处理.
 
-在上述下载文件的例子中, 假设下载资源需要一段时间, 在这段时间内, 有极其庞大的其他事件很可能发生. 在同步是实现中, 这些事件会堆积在事件队列中, 而事件循环将停留等待该JS代码执行完成, 这将阻塞任何其他事件的处理. 
+在上述下载文件的例子中, 假设下载资源需要一段时间, 在这段时间内, 有极其庞大的其他事件很可能发生. 在同步是实现中, 这些事件会堆积在事件队列中, 而事件循环将停留等待该JS代码执行完成, 这将阻塞任何其他事件的处理.
 
 但在异步版本中, JS代码注册一个事件处理程序并立即返回, 在下载完成之前, 允许其他事件处理程序处理这期间的事件.
 
@@ -55,7 +54,7 @@ downloadAsync('url1', function(url){
 });
 ```
 
-减少过多嵌套的方法之一是将回调函数作为命名函数, 并将它们需要的附加数据作为额外的参数传递. 
+减少过多嵌套的方法之一是将回调函数作为命名函数, 并将它们需要的附加数据作为额外的参数传递.
 
 # 此条笔记不完整,原因如下:
 现在已经有`Promise`能结构良好的定义异步嵌套以及顺序调用的问题了.
@@ -73,7 +72,7 @@ try{
 }
 ```
 
-对于异步的代码, 多步的处理通常被分割到事件队列的单独轮次中, 因此, 不可能将他们全部包在一个try语句中. 
+对于异步的代码, 多步的处理通常被分割到事件队列的单独轮次中, 因此, 不可能将他们全部包在一个try语句中.
 
 事实上, 异步API甚至根本不抛出异常, 因为当一个异步错误发生时, 没有一个明显的执行上下文来抛出异常! 相反, 异步API倾向于将错误表示为回调函数的特定参数, 或使用一个附加的错误处理回调函数(也被称为errbacks).
 ```js
@@ -165,7 +164,7 @@ function computerNextMove(userMove){
     ...
 }
 ```
-Worker这样的API有时传递消息的开销可能很昂贵. 而且若没有这样的API,则可以将算法分解为多个步骤, 每个步骤组成一个工作块. 
+Worker这样的API有时传递消息的开销可能很昂贵. 而且若没有这样的API,则可以将算法分解为多个步骤, 每个步骤组成一个工作块.
 ```js
 // 搜索社交网络图的工作表
 Member.prototype.inNetwork = function(other){
@@ -195,7 +194,7 @@ Member.prototype.inNetwork = function(other, callback){
             callback(false);
             return;
         }
-        
+
         var member = worklist.pop();
         // ...
         if(member === other){
@@ -248,7 +247,7 @@ function downloadAllAsync(urls, onsuccess, onerror){
         downloadAsync(url, function(text){
             if(result){
                 // 存在竞争条件, 可能会出错
-                result.push(text); 
+                result.push(text);
                 if(result.length === url.length){
                     onsuccess(result);
                 }
@@ -384,7 +383,7 @@ status.display('downloading '+ remaining[0] + '...');
 ```
 若同步调用该函数, 那么将显示错误的文件名的消息, 若队列为空时, 会显示undefined.
 
-同步的调用异步回调函数可能导致一些问题, 64条中解释了异步回调函数本质上是以空的调用栈来调用, 因此将异步的循环实现为递归函数是安全的, 完全没有累积超越调用栈空间的危险. 
+同步的调用异步回调函数可能导致一些问题, 64条中解释了异步回调函数本质上是以空的调用栈来调用, 因此将异步的循环实现为递归函数是安全的, 完全没有累积超越调用栈空间的危险.
 
 同步的调用不能保证这点, 因而会使得一个表面上异步循环很可能会耗尽调用栈空间. 另一个问题是异常,对于上述的downloadCachingAsync实现, 若回调函数抛出一个异常, 它将会在每轮的事件循环中, 也就是开始下载时而不是期望的一个分离的回合抛出该异常.
 
@@ -454,7 +453,7 @@ filesP.then(function(files){
 promise还有一个`when`方法, 用法与`then`类似.
 ```js
 var file1P = downloadP('file1.txt'),
-    file2P = downloadP('file2.txt'), 
+    file2P = downloadP('file2.txt'),
     file3P = downloadP('file3.txt') );
 
 when([file1P, file2P, file3P],function(files){
@@ -470,8 +469,8 @@ promise通过then方法的返回值来联系结果, 或通过join函数能构建
 
 数据竞争在某些情况下是有用的,promise也提供了这种应用场景. 比如当需要从多个不同服务器下载同一份文件, 选择最先完成的那份. `select(或choose)`函数接收几个promise并返回最先完成的那个文件的promise(即几个promise彼此竞争).
 ```js
-var fileP = select( downloadP('http://example1.com/file.txt'), 
-    downloadP('http://example2.com/file.txt'), 
+var fileP = select( downloadP('http://example1.com/file.txt'),
+    downloadP('http://example2.com/file.txt'),
     downloadP('http://example3.com/file.txt') );
 
 fileP.then(function(file){
