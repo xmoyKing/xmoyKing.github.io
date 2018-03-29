@@ -1,8 +1,9 @@
 ---
 title: 区块链3-术语集
-categories: blockchain
+categories: 区块链
 tags:
   - blockchain
+  - 区块链
 date: 2018-03-09 09:56:51
 updated: 2018-03-09 09:56:51
 ---

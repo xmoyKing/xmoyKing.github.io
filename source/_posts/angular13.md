@@ -2,7 +2,7 @@
 title: Angular2入门-路由-2
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-20 19:05:01
@@ -21,7 +21,7 @@ updated:
 // app.routes.ts
 export const rooRouterConfig: Routes = [
   {
-    path: 'detail/:id', 
+    path: 'detail/:id',
     component: DetailComponent,
     children: [
       { path: '', component: AnnotationComponent}, // `http://localhost:3000/detail/:id`
@@ -36,9 +36,9 @@ export const rooRouterConfig: Routes = [
 <detail>
   <!-- .... -->
   <router-outlet> </router-outlet>
-  <album> 
+  <album>
     <!-- .... -->
-  </album> 
+  </album>
 <detail>
 ```
 

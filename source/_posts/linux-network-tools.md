@@ -1,11 +1,11 @@
 ---
-title: Linux Network Tools 
+title: Linux Network Tools
 categories:
   - linux
 tags:
   - linux
-  - security
-  - network
+  - 安全
+  - 网络
   - natcat
   - nmap
 date: 2017-06-15 10:09:30
@@ -29,7 +29,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 ```
 `route -?` / `man route` - get help information
 
-#### `traceroute` 
+#### `traceroute`
 Determines connectivity to a remote host
 Uses UDP
 Options
@@ -41,11 +41,11 @@ Options
 
 like `Tracert` in Windows
 
-#### `nslookup` 
+#### `nslookup`
 online web tool to lookup and find IP address information in the DNS (Domain Name System)
-#### `host` 
-Forward and reverse DNS lookups 
-#### `whois` 
+#### `host`
+Forward and reverse DNS lookups
+#### `whois`
 whois is to discover who owns a website or domain name by searching WHOIS database.
 When you register a domain name, the Internet Corporation for Assigned Names and Numbers (ICANN) requires your domain name registrar to submit your personal contact information to the WHOIS database. Then the information will be public.
 #### `netstat`
@@ -58,13 +58,13 @@ netstat -a list all ports;
 netstat -at list all tcp port;
 netstat -au list all udp ports;
 netstat -l list all listening ports;
-netstat -lt; 
+netstat -lt;
 netstat -lu;
 netstat -r display routing information;
 netstat -i interface information;
 ```
 
-#### `tcpdump`    
+#### `tcpdump`
 Packet sniffer
 Installed with Linux
 Commonly used
@@ -111,7 +111,7 @@ nc the swiss armyknife
 nc -l 1234  (listen)
 nc localhost 1234
 ```
-which will establish a communication tunnel; 
+which will establish a communication tunnel;
 which is convenient way to talk to each other;when combined with redirection, it can be used to transfer file:
 ```
 nc -l 1234 > test
@@ -164,7 +164,7 @@ Nmap内部包含了2600多已知系统的指纹特征(在文件nmap-os-db文件�
 [端口扫描指南之Idle Scan](http://www.91ri.org/11758.html)
 
 
-#### `arp`	
+#### `arp`
 Address Resolution Protocol: ARP and RARP
 ```
 32 bit Internet address
@@ -180,10 +180,10 @@ ARP Protocol Flow：
 5. Machine A adds B’s address information to its ARP table
 6. Machine A deliver packet directly to B
 
-ARP caching: 
+ARP caching:
 - To reduce communication cost, ARP maintain a cache of recently acquired IP-to-physical address bindings.
 - Each entry has a timer (usually 20 minutes)
-- Sender’s IP-to-address binding is included in every broadcast; 
+- Sender’s IP-to-address binding is included in every broadcast;
 - receivers update the IP-to-physical address binding information in the cache before processing ARP packet
 - ARP is stateless: system will update with a reply, regardless of request
 

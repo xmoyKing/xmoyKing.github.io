@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - ES6
   - NodeJs
   - KOA

@@ -1,8 +1,8 @@
 ---
 title: CSS揭秘笔记2
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS3
   - css-secrets
 date: 2018-02-02 20:52:31
 updated: 2018-02-02 20:52:31
@@ -43,7 +43,7 @@ box-shadow: 0 0 0 10px #655;
 这并没有什么了不起的，因为你完全可以用 border 属性来生成完全一样的边框效果。不过 box-shadow 的好处在于，它支持逗号分隔语法，我们可以创建任意数量的投影。因此，我们可以非常轻松地在上面的示例中再加上一道 deeppink 颜色的“边框”：
 ```css
 background: yellowgreen;
-box-shadow: 0 0 0 10px #655, 
+box-shadow: 0 0 0 10px #655,
             0 0 0 15px deeppink;
 ```
 唯一需要注意的是， box-shadow 是层层叠加的，第一层投影位于最顶层，依次类推。因此，你需要按此规律调整扩张半径。比如说，在前面的代码中，我们想在外圈再加一道 5px 的外框，那就需要指定扩张半径的值为15px （ 10px+5px ）。如果你愿意，甚至还可以在这些“边框”的底下再加一层常规的投影：

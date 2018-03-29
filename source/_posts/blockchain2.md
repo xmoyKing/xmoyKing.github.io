@@ -1,8 +1,9 @@
 ---
 title: 区块链2-进阶概念
-categories: blockchain
+categories: 区块链
 tags:
   - blockchain
+  - 区块链
 date: 2018-03-06 18:35:07
 updated: 2018-03-06 18:35:07
 ---

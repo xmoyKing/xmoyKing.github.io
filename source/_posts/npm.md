@@ -3,7 +3,7 @@ title: npm常用命令及入门笔记
 categories:
   - Nodejs
 tags:
-  - npm
+  - NPM
 date: 2016-10-21 09:35:30
 updated: 2016-10-21 09:35:30
 ---

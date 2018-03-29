@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - $watch
 date: 2017-08-17 22:59:21
 updated:

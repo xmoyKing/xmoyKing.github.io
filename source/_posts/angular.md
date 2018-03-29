@@ -2,8 +2,8 @@
 title: Angular2快速入门-Hello World
 categories: Angular
 tags:
-  - js
-  - typescript
+  - JavaScript
+  - TypeScript
   - angular
 date: 2017-10-01 17:04:53
 updated:
@@ -16,7 +16,7 @@ updated:
 [DEMO源码](https://github.com/xmoyKing/Angular2-Demo-Hello-World)
 
 ### Hello World
-先从Hello World开始，一个字母一个字母的码~ 
+先从Hello World开始，一个字母一个字母的码~
 
 现有大局观，从项目目录结构开始：
 ```ts
@@ -158,10 +158,10 @@ Angular应用需要用模块来组织一些功能紧密相关的代码块，每�
 ```ts
 // app.module.ts
 import { NgModule } from '@angular/core'; // NgModule用于定义模块的装饰器
-import { BrowserModule } from '@angular/platform-browser'; 
-import { AppComponent } from './app.component'; 
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 
-@NgModule({ 
+@NgModule({
   declarations: [AppComponent], // declarations 导入模块依赖的组件、指令等
   imports: [BrowserModule], // imports导入其他所需的模块，在imports属性中配置，作为公用模块供全局调用。几乎每个应用都需要导入BrowserModule模块、其内注册了关键的Provider等通用指令
   bootstrap: [AppComponent] // bootstrap标记出引导组件，在Angular启动应用时，将被标记的组件渲染到模版中
@@ -225,7 +225,7 @@ module.exports = {
   module: {
     loaders: [ // 最关键的配置项，表明Webpack每一类文件需要使用加载器处理
       {
-        test: /\.ts$/, 
+        test: /\.ts$/,
         loader: 'ts-loader'
       }
     ]

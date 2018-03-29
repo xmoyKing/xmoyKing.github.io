@@ -2,7 +2,7 @@
 title: Angular2入门-指令
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-11 11:30:06
@@ -137,7 +137,7 @@ export interface ControlValueAccessor{
 以自定义一个属性指令BeautifulBackgroundDirective为例，在单击按钮时改变其背景色
 
 #### 实现属性指令
-一个属性指令需要一个控制器类，该控制器类使用@Directive装饰器来装饰，@Directive装饰器指定了用以标记指令所关联属性的选择器、控制器类则实现了指令所对应的特定行为。 
+一个属性指令需要一个控制器类，该控制器类使用@Directive装饰器来装饰，@Directive装饰器指定了用以标记指令所关联属性的选择器、控制器类则实现了指令所对应的特定行为。
 ```ts
 // beautifulBackground.directive.ts
 import { Directive, ElementRef } from '@angular/core';
@@ -205,7 +205,7 @@ export class BeautifulBackgroundDirective{
 
 若在装饰器中不指定别名，即：
 ```ts
-@Input() 
+@Input()
 backgroundColor: string
 ```
 则模板用法为：
@@ -231,7 +231,7 @@ import { Directive, ElementRef, Input } from '@angular/core';
 export class BeautifulBackgroundDirective{
   private _defaultColor = 'yellow';
   private el: HTMLElement;
-  
+
   // 重写backgroundColor属性的set方法
   @Input('myBeautifulBackground') set backgroundColor(colorName: string){
     this.setStyle(colorName);
@@ -278,7 +278,7 @@ import { Directive, ElementRef, Input } from '@angular/core';
 export class BeautifulBackgroundDirective{
   private _defaultColor = 'yellow';
   private el: HTMLElement;
-  
+
   // 重写backgroundColor属性的set方法
   @Input('myBeautifulBackground') set backgroundColor(colorName: string){
     this.setStyle(colorName);

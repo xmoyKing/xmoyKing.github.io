@@ -1,8 +1,8 @@
 ---
 title: CSS权威指南（3rd）笔记-查缺补漏2 - 基本视觉格式化
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS
   - display:block
   - display:inline
 date: 2016-11-08 18:46:18

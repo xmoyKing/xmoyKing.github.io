@@ -2,7 +2,7 @@
 title: Angular2快速入门-通讯录Demo
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-01 17:45:46
@@ -116,7 +116,7 @@ import { ListComponent, ListItemComponent } from './list';
 import { DetailComponent } from './detail';
 import { EditComponent } from './edit';
 
-import { ContactService, UtilService, FooterComponent, 
+import { ContactService, UtilService, FooterComponent,
         HeaderComponent, PhonePipe, BtnClickDirective } from './shared';
 
 // 将所涉及到的组件、路由、服务、管道等引入NgModule中，并组成一个整体可以运行起来的大模块AppModule
@@ -127,7 +127,7 @@ import { ContactService, UtilService, FooterComponent,
         DetailComponent,
         CollectionComponent,
         EditComponent,
-        HeaderComponent, FooterComponent, 
+        HeaderComponent, FooterComponent,
         PhonePipe, BtnClickDirective
     ],
     imports : [

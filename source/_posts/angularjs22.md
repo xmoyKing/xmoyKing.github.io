@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - RESTful
   - deployd
 date: 2017-07-02 22:58:23

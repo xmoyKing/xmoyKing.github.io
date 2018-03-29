@@ -2,7 +2,7 @@
 title: Angular2入门-模板-2
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-07 14:31:28
@@ -273,7 +273,7 @@ export class FormComponent{
 #### 自定义表单样式
 NgModel指令不仅仅能追踪表单控件的状态，还能根据表单控件的状态使用对应的CSS状态类来更新表单控件的类名，表单控件包括6个CSS状态类：
 
-| 状态 | 为true时的CSS类 | 为false时的CSS类 | 
+| 状态 | 为true时的CSS类 | 为false时的CSS类 |
 | - | - | - |
 | 控件是否已经被访问过 | ng-touched | ng-untouched |
 | 控件值是否已经变化 | ng-dirty | ng-prinstine |
@@ -310,7 +310,7 @@ export function validateUserName(c: FormControl){
   return (EMAIL_REGEXP.test(c.value) || TEL_REGEXP.test(c.value) ? null : {
     userName: {
       valid: false,
-      errorMsg: '用户名必须是邮箱或手机号' 
+      errorMsg: '用户名必须是邮箱或手机号'
     }
   });
 }

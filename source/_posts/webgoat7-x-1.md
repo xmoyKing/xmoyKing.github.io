@@ -1,11 +1,11 @@
 ---
 title: WebGoat7.x使用笔记1-环境搭建与基本解释
 categories:
-  - mixed
+  - 安全
 tags:
-  - security
+  - 安全
   - webgoat7
-  - java
+  - Java
 date: 2017-04-24 11:20:04
 updated: 2017-04-24 11:20:04
 ---

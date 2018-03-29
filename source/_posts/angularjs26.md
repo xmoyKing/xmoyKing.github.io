@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - Jasmine
 date: 2017-07-15 09:17:43
 updated:

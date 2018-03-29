@@ -1,8 +1,8 @@
 ---
 title: CSS揭秘笔记3
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS3
   - css-secrets
 date: 2018-02-07 23:12:05
 updated: 2018-02-07 23:12:05

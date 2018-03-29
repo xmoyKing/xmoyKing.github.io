@@ -1,9 +1,9 @@
 ---
 title: 如何设计友好的REST API
 categories:
-  - mixed
+  - 网络
 tags:
-  - rest
+  - RESTful
 date: 2017-09-14 21:59:04
 updated:
 ---

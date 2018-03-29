@@ -1,8 +1,8 @@
 ---
 title: CSS权威指南（3rd）笔记-查缺补漏6 - 表布局
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS
   - table
 date: 2016-11-15 15:20:05
 updated: 2018-03-20 15:20:05

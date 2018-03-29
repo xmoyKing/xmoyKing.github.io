@@ -1,8 +1,8 @@
 ---
 title: CSS垂直居中的各种方法
 date: 2017-03-18 15:41:52
-categories: css
-tags: [css, vertical-middle]
+categories: CSS
+tags: [CSS, vertical-middle]
 ---
 
 参考:[CSS垂直居中的11种实现方式](http://www.cnblogs.com/zhouhuan/p/vertical_center.html)

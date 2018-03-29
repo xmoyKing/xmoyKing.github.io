@@ -2,8 +2,8 @@
 title: 精通CSS笔记-CSS代码结构和选择器
 date: 2017-01-28 11:04:43
 updated: 2017-01-28
-categories: css
-tags: [css, CSS-Mastery, Note]
+categories: CSS
+tags: [CSS, CSS-Mastery]
 ---
 
 # CSS Mastery #
@@ -60,7 +60,7 @@ tags: [css, CSS-Mastery, Note]
     - 伪类，链接伪类（:link和:visited）只能用于锚元素（a标签）；动态伪类（:hover 、 :active和:focus）理论上可以用于任何元素
     - 通过伪类连接，可以创建更复杂的行为
     ```CSS
-    a:visited:hover {color:red;} 
+    a:visited:hover {color:red;}
     ```
     - *为通用选择器，作用就像通配符，匹配所有可用的元素。与其他选择器结合的时候，可以用来对某个元素的所有后代应用样式，或者跳过一级后代
 2. 高级选择器
@@ -82,7 +82,7 @@ tags: [css, CSS-Mastery, Note]
     /* 解释某些内容，如缩写词，当鼠标悬停在具有title属性的元素上时，显示提示 */
     acronym[title] {border-bottom: 1px dotted #999;}
     acronym[title]:hover, acronym[title]:focus {cursor:help;}
-    
+
     /* 使用rel属性值nofollow */
     a[rel="nofollow"] {padding-right:20px;}
 
@@ -147,16 +147,16 @@ tags: [css, CSS-Mastery, Note]
             * 各个页面
         - 特殊覆盖
 ```css
-/* @group general styles 
+/* @group general styles
 ------------------------*/
 
-/* @group helper styles 
+/* @group helper styles
 ------------------------*/
 
-/* @group page structure 
+/* @group page structure
 ------------------------*/
 
-/* @group page components 
+/* @group page components
 ------------------------*/
 
 /* @group override

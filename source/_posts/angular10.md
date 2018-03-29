@@ -2,7 +2,7 @@
 title: Angular2入门-依赖注入-1
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-17 09:30:04
@@ -37,7 +37,7 @@ export class Robot {
 }
 ```
 Robot类现在仅包含Head、Arms等组件，行为也不复杂，但上面代码的问题在于，Robot在它自身的构造函数中创建并引用了Head和Arms的实例，这使得Robot类的扩展性差且难以测试。具体在于：
-- 扩展性差 
+- 扩展性差
   Robot类通过Head和Arms创建了自己需要的组件，但若此时Head类的构造函数需要一个参数呢？只能通过`this.head = new Head(parameter);`的方式修改Robot类，或者需要给Robot类换一个OtherHead类。
 - 难以测试
   当需要测试Robot类时，需要考虑Robot类隐藏的其他依赖，比如Head组件本身是否依赖于其他组件，且它依赖的组件是否又依赖另外的组件，Head组件的实例是否需要发送异步请求等。这些都是Robot不能控制的隐藏依赖，所以Robot很难被测试。
@@ -219,7 +219,7 @@ import { UserService } from './user.service';
 export class ContactService{
   // 2. 构造函数中注入所依赖的服务
   constructor( _logger: LoggerService, _userService: UserService ){}
-  
+
   getCollections(){
     this._logger.log('Getting contacts ... ');
   }
@@ -408,7 +408,7 @@ import { LoggerService } from './shared/logger.service';
 //...
 export class ContactListComponent {
   constructor(
-    @Optional() 
+    @Optional()
     private logger: LoggerService
   ){
     if(this.logger){

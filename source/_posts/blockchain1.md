@@ -1,8 +1,9 @@
 ---
 title: 区块链1-基础概念
-categories: blockchain
+categories: 区块链
 tags:
   - blockchain
+  - 区块链
 date: 2018-03-06 16:03:27
 updated: 2018-03-06 16:03:27
 ---

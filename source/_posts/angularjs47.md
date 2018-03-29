@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - ng编码规范
 date: 2017-09-04 15:57:38
 updated:

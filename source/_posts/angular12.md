@@ -2,7 +2,7 @@
 title: Angular2入门-路由-1
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-20 18:19:08
@@ -235,7 +235,7 @@ export const ContactAppRouters: RouterConfig = [
 注意：只有当URL解析出来的分段数与Path属性的分段数一致时，才能匹配到该配置项。例如：
 - `http://localhost:3000/detail` 分段数为1
 - `http://localhost:3000/detail/1` 分段数为2
-- `http://localhost:3000/detail/1/segment` 分段数为3 
+- `http://localhost:3000/detail/1/segment` 分段数为3
 
 给路由参数赋值，除了可以直接在浏览器上输入URL外，还可以通过RouterLink指令或跳转方法来完成。
 ```ts
@@ -309,7 +309,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 假设当前URL为`http://localhost:3000/detail/1`,单击下一个联系人链接后，URL按照预期变成了`http://localhost:3000/detail/2`，但在页面上显示的仍然是原先联系人的信息，这个因为Angular在处理同一个页面内跳转时，不会重新创建组件的实例，所以组件的构造函数和ngOnInit()方法都没有被调用到，虽然Angular会将快照中参数id的值更新为2，但没有将这个更新通知到组件，为了解决这个问题，ActivatedRoute服务提供了Observable对象，允许对参数的更新进行订阅。
 ```ts
 // detail.component.ts
-// ... 
+// ...
 export class DetailComponent implements OnInit, OnDestory {
   contact_id: string;
   private sub: any;

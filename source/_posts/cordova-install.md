@@ -1,9 +1,9 @@
 ---
-title: cordova / ionic 安装配置出错解决办法集合
+title: Cordova / Ionic 安装配置出错解决办法集合
 categories: mixed
 tags:
-  - cordova
-  - ionic
+  - Cordova
+  - Ionic
 date: 2017-04-02 11:17:52
 updated: 2017-04-02 11:17:52
 ---
@@ -30,7 +30,7 @@ Failed to find 'android' command in your 'PATH'. Try update your 'PATH' to inclu
 andriod SDK环境变量配置没问题，然后用cmd执行`cordova run andriod`命令之后
 
 若发现报错：
-`Error: Could not find gradle wrapper within Android SDK. Might need to update your Android SDK.` 
+`Error: Could not find gradle wrapper within Android SDK. Might need to update your Android SDK.`
 则可以选择使用下载官方的sdk tools压缩文件，覆盖原sdk目录下的tools文件夹即可。参考如下链接：[cordova gradle wrapper问题](http://stackoverflow.com/questions/31310182/error-could-not-find-gradle-wrapper-within-android-sdk-might-need-to-update-yo)
 
 此时会下载大量的文件，耐心等待即可

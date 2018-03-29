@@ -2,17 +2,17 @@
 title: 11个纯CSS3实现的加载动画
 date: 2017-03-20 09:02:46
 updated: 2017-03-20
-categories: css
-tags: [css3, loading]
+categories: CSS
+tags: [CSS3, loading]
 ---
 
 ### 所有的CSS3动画演示
 其中**9.九宫格方块渐进** 由于有*未知名的影响（未解决）*出现闪烁。
 <script async src="//jsfiddle.net/xmoyking/mnbw60gx/embed/result,html,css/"></script>
 
-纯CSS3实现的动画相比gif图片虽然减少了一次http请求，降低了加载时间和动画“大小”（一段CSS3实现的动画的代码不到1kb，但gif图片一般都在几十至上百kb） 
+纯CSS3实现的动画相比gif图片虽然减少了一次http请求，降低了加载时间和动画“大小”（一段CSS3实现的动画的代码不到1kb，但gif图片一般都在几十至上百kb）
 
-但在兼容性上，gif动画基本通吃所有浏览器和设备，CSS3就只能在一些现代浏览器上。同时，一些复杂动画需要计算，所以偶尔会出现一些小问题，不如图片稳定。 
+但在兼容性上，gif动画基本通吃所有浏览器和设备，CSS3就只能在一些现代浏览器上。同时，一些复杂动画需要计算，所以偶尔会出现一些小问题，不如图片稳定。
 
 相对而言，移动端很适合使用CSS3动画。
 

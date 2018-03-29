@@ -2,7 +2,7 @@
 title: Angular2入门-组件-2
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-03 18:28:11
@@ -142,7 +142,7 @@ class ChangeDetectorRef {
     <li *ngFor="let contact of contacs">
       <list-item [contact]="contact"></list-item>
     </li>
-  </ul> 
+  </ul>
   `
 })
 export class ListComponent implements OnInit {
@@ -152,8 +152,8 @@ export class ListComponent implements OnInit {
     // ...
     private cd: ChangeDetectorRef
   ){
-    cd.detach(); 
-    
+    cd.detach();
+
     // 定时执行变化监测
     setInterval(()=>{
       this.cd.detactChanges();
@@ -215,7 +215,7 @@ import { Component } from '@angular/core';
 import Immutable from 'immutable';
 
 @Component({
-  // ... 
+  // ...
   template: `
     <lit-item [contact]="contactItem"></list-item>
     <button (click)="doUpdate()">更新</button>
@@ -249,7 +249,7 @@ export class ListComponent {
 | host | {[key: string]: string;} | 指定指令/组件的事件、动作和属性等 |
 | providers | any[] | 指定该组件及其所有子组件（含ContentChildren）可用的服务（依赖注入） |
 | exportsAs | string | 给指令分配一个变量，使得可以在模版中调用 |
-| moduleId | string | 包含该组件模块的id，它被用于解析模版和样式的相对路径 | 
+| moduleId | string | 包含该组件模块的id，它被用于解析模版和样式的相对路径 |
 | queries | {[key: string]: any;} | 设置需要被注入到组件的查询 |
 | viewProviders | any[] | 指定该组件及其所有子组件（不含ContentChildren）可用的服务 |
 | changeDetection | ChangeDetectionStrategy | 指定使用的变化监测策略 |

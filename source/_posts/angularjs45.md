@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - $injector
 date: 2017-09-01 08:27:40
 updated:

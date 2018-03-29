@@ -3,12 +3,11 @@ title: Raw Socket 原始套接字
 categories:
   - linux
 tags:
-  - network
   - linux
-  - security
-  - ip
-  - icmp
-  - ip/icmp
+  - 网络
+  - 安全
+  - IP
+  - ICMP
   - raw socket
   - ping
 date: 2017-06-17 15:26:35
@@ -16,37 +15,37 @@ updated: 2017-06-17 15:26:35
 ---
 
 ### Problems: Socket
-"sockets“ like that does not fit all our needs. lack some functionality some of which is given below: 
-- cannot read/write ICMP or IGMP protocols with normal sockets, ping(8) tool cannot be written using them. 
+"sockets“ like that does not fit all our needs. lack some functionality some of which is given below:
+- cannot read/write ICMP or IGMP protocols with normal sockets, ping(8) tool cannot be written using them.
 - For IPv4 protocols other than ICMP, IGMP, TCP or UDP, What if we have a proprietary protocol that we want to handle? How do we send/receive data using that protocol?
 - For hackers, how to construct special kind of packets for special purposes?
 
 #### What is raw socket?
-- A different mechanism is needed: packets WITHOUT TCP/IP processing -- raw packet 
+- A different mechanism is needed: packets WITHOUT TCP/IP processing -- raw packet
 - allow user to bypass partly how computer handles TCP/IP. the packets were sent to the raw sockets user defines rather than the TCP/IP stack
 - User should write program to wrap the data, e.g. to fill the headers, instead of kernel
-- Raw sockets provide "privileged users" with the ability to directly access raw protocol 
+- Raw sockets provide "privileged users" with the ability to directly access raw protocol
 
 #### Why Use Raw Socket?
 To conclude:
 - Using higher-layer socket programming (connect, bind, listen, read, write), user has no control over the packets
 - Raw sockets enables user to send spoofed IP packets, thus to build scanners etc.
 
-#### 4 layer network 
+#### 4 layer network
 ```
----------------------------------------------------------- 
-| 4. Application	 | telnet, ftp, dns etc. 	  | 
--------------------------------------------------------- 
-| 3. Transport 	 | TCP UDP	 		  | 
 ----------------------------------------------------------
-| 2. Network	 	 | IP ICMP IGMP 		  | 	
----------------------------------------------------------- 
-| 1. Link 		 | device driver, network adapter | 
----------------------------------------------------------- 
+| 4. Application	 | telnet, ftp, dns etc. 	  |
+--------------------------------------------------------
+| 3. Transport 	 | TCP UDP	 		  |
+----------------------------------------------------------
+| 2. Network	 	 | IP ICMP IGMP 		  |
+----------------------------------------------------------
+| 1. Link 		 | device driver, network adapter |
+----------------------------------------------------------
 ```
 
 #### Link Layer
-Very first of the TCP/IP layers. When the packet is received off the wire, the early processing is done in here. Duties include: 
+Very first of the TCP/IP layers. When the packet is received off the wire, the early processing is done in here. Duties include:
   1. send/receive datagrams for the IP protocol
   2. send/receive ARP requests and replies for the ARP protocol
   3. send/receive RARP request and replies for the RARP protocol
@@ -122,13 +121,13 @@ icmp->icmp_seq = 3;
 ```
 
 ### RAW SOCKET API
-Just like normal sockets, we create raw sockets with the socket(2) system call: 
-- int socket(int domain, int type, int protocol) 
-- type and protocol parameters are set to SOCK_RAW and protocol name accordingly: 
+Just like normal sockets, we create raw sockets with the socket(2) system call:
+- int socket(int domain, int type, int protocol)
+- type and protocol parameters are set to SOCK_RAW and protocol name accordingly:
 ```c
 if ((sd = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP)) < 0) {
-   .. 
-} 
+   ..
+}
 ```
 
 Write a simple ping:
@@ -178,11 +177,11 @@ int main(int argc, char * argv[]){
 
 	struct packet{struct iphdr ip; struct icmphdr icmp;}packet;
         bzero(&packet, sizeof(packet));
-	
+
 
 	if((sockfd=socket(AF_INET,SOCK_RAW,IPPROTO_RAW))<0)
 		{perror("socket()\n"); exit(1);}
-	
+
 	      packet.ip.version=4;
         packet.ip.ihl=5;
         packet.ip.tos=0;
@@ -207,9 +206,9 @@ int main(int argc, char * argv[]){
 while(1){
 	packet.icmp.un.echo.sequence = seq++;
 	packet.icmp.checksum = 0;
-	packet.icmp.checksum = in_cksum((unsigned short *)&packet.icmp,8);	
+	packet.icmp.checksum = in_cksum((unsigned short *)&packet.icmp,8);
 	sendto(sockfd, &packet, 28,0,(struct sockaddr *)&target,sizeof(target));
-	sleep(1);			
+	sleep(1);
 }
 	return 0;
 }

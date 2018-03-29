@@ -1,10 +1,10 @@
 ---
 title: 自建CA并将网站改为HTTPS协议网站
 categories:
-  - mixed
+  - 网络
 tags:
   - ca
-  - https
+  - HTTPS
   - openssl
 date: 2017-04-27 23:48:16
 updated: 2017-04-27 23:48:16

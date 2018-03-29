@@ -2,7 +2,7 @@
 title: Angular2入门-服务
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-15 17:04:58
@@ -330,7 +330,7 @@ addContact(contact: Contact){
 另外HTTP服务返回的Observable对象可以方便的转换成Promise对象，以下为ContactService服务的Promise版本：
 ```ts
 // Promise版本
-// contact.service.ts  
+// contact.service.ts
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions } from '@angular/http';
 import { Promise } from 'rxjs/Rx';
@@ -370,7 +370,7 @@ export class ContactService{
 
 HTTP服务中包含了JSONP服务，示例如下：
 ```ts
-// contact.service.ts  
+// contact.service.ts
 import { Injectable } from '@angular/core';
 import { Jsonp, URLSearchParams } from '@angular/http';
 
@@ -493,8 +493,8 @@ import { httpFactory } from './interceptor/http-factory';
     // ...
     HttpInterceptorBackend, HttpInterceptor,
     {
-      provide: Http, 
-      useFactory: httpFactory, 
+      provide: Http,
+      useFactory: httpFactory,
       deps: [HttpInterceptorBackend, RequestOptions]
     }
   ]

@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - deployd
 date: 2017-05-14 13:28:21
 updated: 2017-05-14 13:28:21

@@ -3,7 +3,7 @@ title: 正则表达式基本运用
 date: 2017-01-22 12:43:59
 updated: 2017-01-22
 categories: js
-tags: reg
+tags: RegExp
 ---
 
 推荐参考: [正则表达式30分钟入门教程](https://deerchao.net/tutorials/regex/regex.htm)
@@ -20,15 +20,15 @@ tags: reg
 - perl风格 —— `/a/i`
 
 ### search 字符串搜索 ###
-- 返回出现的位置  
-- 忽略大小写：`i`——ignore  
-- 判断浏览器类型  
+- 返回出现的位置
+- 忽略大小写：`i`——ignore
+- 判断浏览器类型
 
 ### match 获取匹配的项目 ###
 - 量词：`+`
-- 量词变化：`\d、\d\d`和`\d+`  
-- 全局匹配：`g`——global  
-- 例子：找出所有数字  
+- 量词变化：`\d、\d\d`和`\d+`
+- 全局匹配：`g`——global
+- 例子：找出所有数字
 
 ### replace 替换所有匹配 ###
 - 返回替换后的字符串
@@ -91,7 +91,7 @@ function getByClass(oParent, sClass)
     var aResult=[];
     var re=new RegExp('\\b'+sClass+'\\b', 'i');
     var i=0;
-    
+
     for(i=0;i<aEle.length;i++)
     {
         //if(aEle[i].className==sClass)
@@ -101,7 +101,7 @@ function getByClass(oParent, sClass)
             aResult.push(aEle[i]);
         }
     }
-    
+
     return aResult;
 }
 ```
@@ -111,7 +111,7 @@ function getByClass(oParent, sClass)
 
 输入框禁止输入非数字的正则匹配
 ```js
-onkeyup="value=value.replace(/[^\d]/g,'')" 
+onkeyup="value=value.replace(/[^\d]/g,'')"
 
 onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
 ```

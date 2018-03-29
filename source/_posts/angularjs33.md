@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - 依赖注入
 date: 2017-08-04 17:25:26
 updated:

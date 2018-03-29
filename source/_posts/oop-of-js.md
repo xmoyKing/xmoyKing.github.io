@@ -1,9 +1,9 @@
 ---
-title: js实现面向对象
+title: JavaScript实现面向对象
 date: 2017-01-21 14:57:06
 updated: 2017-01-21
-categories: js
-tags: [js, oop]
+categories: JavaScript
+tags: [JavaScript, OOP]
 ---
 
 js实现面向对象的方法
@@ -30,7 +30,7 @@ window.onload=function ()
 	aBtn=oDiv.getElementsByTagName('input');
 	aDiv=oDiv.getElementsByTagName('div');
 	var i=0;
-	
+
 	for(i=0;i<aBtn.length;i++)
 	{
 		aBtn[i].index=i;
@@ -63,9 +63,9 @@ function TabSwitch(id)
 	this.aBtn=oDiv.getElementsByTagName('input');
 	this.aDiv=oDiv.getElementsByTagName('div');
 	var i=0;
-	
+
 	var _this=this;
-	
+
 	for(i=0;i<this.aBtn.length;i++)
 	{
 		this.aBtn[i].index=i;
@@ -113,7 +113,7 @@ function Worker(name, sex, job)
 	//this->new出来的Worker对象
 	//构造函数伪装		调用父级的构造函数——为了继承属性
 	Person.call(this, name, sex);
-	
+
 	this.job=job;
 }
 
@@ -142,22 +142,22 @@ oW.showJob();
 ```
 
 ## 继承实现拖拽 ##
-能将一个物体拖拽,调用方式：	
+能将一个物体拖拽,调用方式：
 - `new Drag('div1');` 普通拖拽类
 - `new LimitDrag('div2');` 有限制的拖拽
 ```js
 function Drag(id)
 {
 	var _this=this;
-	
+
 	this.disX=0;
 	this.disY=0;
 	this.oDiv=document.getElementById(id);
-	
+
 	this.oDiv.onmousedown=function (ev)
 	{
 		_this.fnDown(ev);
-		
+
 		return false;
 	};
 }
@@ -168,12 +168,12 @@ Drag.prototype.fnDown=function (ev)
 	var oEvent=ev||event;
 	this.disX=oEvent.clientX-this.oDiv.offsetLeft;
 	this.disY=oEvent.clientY-this.oDiv.offsetTop;
-	
+
 	document.onmousemove=function (ev)
 	{
 		_this.fnMove(ev);
 	};
-	
+
 	document.onmouseup=function ()
 	{
 		_this.fnUp();
@@ -183,7 +183,7 @@ Drag.prototype.fnDown=function (ev)
 Drag.prototype.fnMove=function (ev)
 {
 	var oEvent=ev||event;
-	
+
 	this.oDiv.style.left=oEvent.clientX-this.disX+'px';
 	this.oDiv.style.top=oEvent.clientY-this.disY+'px';
 };
@@ -215,7 +215,7 @@ LimitDrag.prototype.fnMove=function (ev)
 	var oEvent=ev||event;
 	var l=oEvent.clientX-this.disX;
 	var t=oEvent.clientY-this.disY;
-	
+
 	if(l<0)
 	{
 		l=0;
@@ -224,7 +224,7 @@ LimitDrag.prototype.fnMove=function (ev)
 	{
 		l=document.documentElement.clientWidth-this.oDiv.offsetWidth;
 	}
-	
+
 	if(t<0)
 	{
 		t=0;
@@ -233,7 +233,7 @@ LimitDrag.prototype.fnMove=function (ev)
 	{
 		t=document.documentElement.clientHeight-this.oDiv.offsetHeight;
 	}
-	
+
 	this.oDiv.style.left=l+'px';
 	this.oDiv.style.top=t+'px';
 };

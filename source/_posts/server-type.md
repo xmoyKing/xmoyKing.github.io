@@ -3,8 +3,8 @@ title: 【转载/整理】关于某某服务器的术语的含义和理解
 categories:
   - mixed
 tags:
-  - it
-  - server-term
+  - VPS
+  - 
 date: 2016-08-03 14:07:40
 updated: 2016-08-03 14:07:40
 ---
@@ -27,7 +27,7 @@ updated: 2016-08-03 14:07:40
 综合来看，想要一个更好的云计算IAAS，还是要衡量你对这个云主机的要求。一般简单的建站需求，阿里云、盛大云都是不错的选择，甚至评价比较好的VPS都能应对要求不高的建站，重点看预算，能接受的话还是推荐云主机，注意别被VPS忽悠了就好。如果是需要企业级应用，公司里面跑ERP，CRM，甚至SAAS厂商，那就必须严格考量上面说的水管质量和衔接问题了，国内银行业数据中心供应商，除了自建外肯定是GDS最有名了，至于VMware的公有云IAAS，在亚太地区只有软银电信和新加坡电信有授权，目前GDS开始和软银合作这块业务，推出了基于VMware的云数据中心业务，应该属于国内中高端云主机（或者该叫云数据中心）的首选解决方案了。另外低端的云主机万国也有，还提供2周免费试用...与其四处浏览，何不申请试试？
 
 
-### web服务器和应用服务器有什么区别？ 
+### web服务器和应用服务器有什么区别？
 参考：https://zhidao.baidu.com/question/43745729.html?qbl=relate_question_3&word=%D4%C6%D3%A6%D3%C3%BA%CD%C6%D5%CD%A8%CD%F8%D5%BE
 
 #### web服务器(web server)
@@ -40,7 +40,7 @@ web服务器可以解析(handles)http协议。当web服务器接收到一个http
 应用程序服务器的客户端(包含有图形用户界面(gui)的)可能会运行在一台pc、一个web服务器或者甚至是其它的应用程序服务器上。在应用程序服务器与其客户端之间来回穿梭(traveling)的信息不仅仅局限于简单的显示标记。相反，这种信息就是程序逻辑(program logic)。正是由于这种逻辑取得了(takes)数据和方法调用(calls)的形式而不是静态html，所以客户端才可以随心所欲的使用这种被暴露的商业逻辑。
 在大多数情形下，应用程序服务器是通过组件(component)的应用程序接口(api)把商业逻辑暴露(expose)(给客户端应用程序)的，例如基于j2ee(java 2 platform, enterprise edition)应用程序服务器的ejb(enterprise javabean)组件模型。此外，应用程序服务器可以管理自己的资源，例如看大门的工作(gate-keeping duties)包括安全(security)，事务处理(transaction processing)，资源池(resource pooling)，和消息(messaging)。就象web服务器一样，应用程序服务器配置了多种可扩展(scalability)和容错(fault tolerance)技术。
 
-#### 例子 
+#### 例子
 例如，设想一个在线商店(网站)提供实时定价(real-time pricing)和有效性(availability)信息。这个站点(site)很可能会提供一个表单(form)让你来选择产品。当你提交查询 (query)后，网站会进行查找(lookup)并把结果内嵌在html页面中返回。网站可以有很多种方式来实现这种功能。我要介绍一个不使用应用程序服务器的情景和一个使用应用程序服务器的情景。观察一下这两中情景的不同会有助于你了解应用程序服务器的功能。
 
 - 情景1:不带应用程序服务器的web服务器

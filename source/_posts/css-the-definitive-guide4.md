@@ -1,8 +1,8 @@
 ---
 title: CSS权威指南（3rd）笔记-查缺补漏4 - 浮动
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS
   - float
 date: 2016-11-15 10:16:46
 updated: 2018-03-20 10:16:46

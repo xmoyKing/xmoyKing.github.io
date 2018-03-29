@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - $timeout
 date: 2017-08-22 22:18:00
 updated:

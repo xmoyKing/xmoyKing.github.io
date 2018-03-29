@@ -1,8 +1,8 @@
 ---
 title: CSS权威指南（3rd）笔记-查缺补漏3 - 边距/背景图片
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS
   - padding/margin
   - background-image
 date: 2016-11-10 09:22:32

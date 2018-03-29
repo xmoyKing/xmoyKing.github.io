@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - ng指令生命周期
 date: 2017-08-09 20:36:50
 updated:

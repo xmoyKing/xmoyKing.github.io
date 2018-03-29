@@ -53,12 +53,12 @@ var printDetails = function(data) {
 var paging = function(currPage) {
   if (currPage <= 0) {
     currPage = 0;
-    jump(currPage); // 跳 转 
+    jump(currPage); // 跳 转
   } else if (currPage >= totalPage) {
     currPage = totalPage;
-    jump(currPage); // 跳 转 
+    jump(currPage); // 跳 转
   } else {
-    jump(currPage); // 跳 转 
+    jump(currPage); // 跳 转
   }
 };
 ```
@@ -70,7 +70,7 @@ var paging = function(currPage) {
   } else if (currPage >= totalPage) {
     currPage = totalPage;
   }
-  jump(currPage); // 把 jump 函 数 独 立 出 来 
+  jump(currPage); // 把 jump 函 数 独 立 出 来
 };
 ```
 
@@ -79,7 +79,7 @@ var paging = function(currPage) {
 ```js
 var getPrice = function(price) {
   var date = new Date();
-  if (date.getMonth() >= 6 && date.getMonth() <= 9) { // 夏 天 
+  if (date.getMonth() >= 6 && date.getMonth() <= 9) { // 夏 天
     return price * 0.8;
   }
   return price;
@@ -94,7 +94,7 @@ var isSummer = function() {
   return date.getMonth() >= 6 && date.getMonth() <= 9;
 };
 var getPrice = function(price) {
-  if (isSummer()) { // 夏 天 
+  if (isSummer()) { // 夏 天
     return price * 0.8;
   }
   return price;
@@ -137,10 +137,10 @@ var xhr = createXHR();
 ```js
 var del = function(obj) {
   var ret;
-  if (!obj.isReadOnly) { // 不 为 只 读 的 才 能 被 删 除 
+  if (!obj.isReadOnly) { // 不 为 只 读 的 才 能 被 删 除
     if (obj.isFolder) { // 如 果 是 文 件 夹
       ret = deleteFolder(obj);
-    } else if (obj.isFile) { // 如 果 是 文 件 
+    } else if (obj.isFile) { // 如 果 是 文 件
       ret = deleteFile(obj);
     }
   }
@@ -152,7 +152,7 @@ var del = function(obj) {
 于是我们可以挑选一些条件分支，在进入这些条件分支之后，就立即让这个函数退出。要做到这一点，有一个常见的技巧，即在面对一个嵌套的if分支时，我们可以把外层if表达式进行反转。重构后的del函数如下：
 ```js
 var del = function(obj) {
-  if (obj.isReadOnly) { // 反 转 if 表 达 式 
+  if (obj.isReadOnly) { // 反 转 if 表 达 式
     return;
   }
   if (obj.isFolder) {
@@ -199,11 +199,11 @@ setUserInfo({
 #### 尽量减少参数数量
 如果调用一个函数时需要传入多个参数，那这个函数是让人望而生畏的，我们必须搞清楚这些参数代表的含义，必须小心翼翼地把它们按照顺序传入该函数。而如果一个函数不需要传入任何参数就可以使用，这种函数是深受人们喜爱的。在实际开发中，向函数传递参数不可避免，但我们应该尽量减少函数接收的参数数量。下面举个非常简单的示例。有一个画图函数draw，它现在只能绘制正方形，接收了3个参数，分别是图形的width、heigth以及square：
 ```js
-var draw = function( width, height, square ){}; 
+var draw = function( width, height, square ){};
 ```
 但实际上正方形的面积是可以通过width和height计算出来的，于是我们可以把参数square从draw函数中去掉：
 ```js
-var draw = function( width, height ){ var square = width * height; }; 
+var draw = function( width, height ){ var square = width * height; };
 ```
 假设以后这个draw函数开始支持绘制圆形，我们需要把参数width和height换成半径radius，但图形的面积square始终不应该由客户传入，而是应该在draw函数内部，由传入的参数加上一定的规则计算得来。此时，我们可以使用策略模式，让draw函数成为一个支持绘制多种图形的函数。
 
@@ -216,16 +216,16 @@ var draw = function( width, height ){ var square = width * height; };
 
 如果条件分支逻辑简单且清晰，这无碍我们使用三目运算符：
 ```js
-var global = typeof window !== "undefined" ? window : this; 
+var global = typeof window !== "undefined" ? window : this;
 ```
 但如果条件分支逻辑非常复杂，如下段代码所示，那我们最好的选择还是按部就班地编写if、else。if、else语句的好处很多，一是阅读相对容易，二是修改的时候比修改三目运算符周围的代码更加方便：
 ```js
 if (!aup || !bup) {
-  return a === doc ? -1 : 
-          b === doc ? 1 : 
-          aup ? -1 : 
-          bup ? 1 : 
-          sortInput ? (indexOf.call(sortInput, a) - indexOf.call(sortInput, b)) : 
+  return a === doc ? -1 :
+          b === doc ? 1 :
+          aup ? -1 :
+          bup ? 1 :
+          sortInput ? (indexOf.call(sortInput, a) - indexOf.call(sortInput, b)) :
           0;
 }
 ```
@@ -268,9 +268,9 @@ console.log(User.setId(1314).setName('sven'));
 
 如果该链条的结构相对稳定，后期不易发生修改，那么使用链式调用无可厚非。但如果该链条很容易发生变化，导致调试和维护困难，那么还是建议使用普通调用的形式：
 ```js
-var user = new User(); 
+var user = new User();
 
-user.setId( 1314 ); 
+user.setId( 1314 );
 user.setName( 'sven' );
 ```
 
@@ -280,7 +280,7 @@ user.setName( 'sven' );
 var Spirit = function(name) {
   this.name = name;
 };
-Spirit.prototype.attack = function(type) { // 攻 击 
+Spirit.prototype.attack = function(type) { // 攻 击
   if (type === 'waveBoxing') {
     console.log(this.name + ': 使 用 波 动 拳');
   } else if (type === 'whirlKick') {
@@ -288,7 +288,7 @@ Spirit.prototype.attack = function(type) { // 攻 击
   }
 };
 var spirit = new Spirit('RYU');
-spirit.attack('waveBoxing'); // 输 出： RYU: 使 用 波 动 拳 
+spirit.attack('waveBoxing'); // 输 出： RYU: 使 用 波 动 拳
 spirit.attack('whirlKick'); // 输 出： RYU: 使 用 旋 风 腿
 ```
 后来发现，Spirit.prototype.attack这个方法实现是太庞大了，实际上它完全有必要作为一个单独的类存在。面向对象设计鼓励将行为分布在合理数量的更小对象之中：
@@ -314,11 +314,11 @@ var Spirit = function(name) {
     this.name = name;
     this.attackObj = new Attack(this);
   };
-Spirit.prototype.attack = function(type) { // 攻 击 
+Spirit.prototype.attack = function(type) { // 攻 击
   this.attackObj.start(type);
 };
 var spirit = new Spirit('RYU');
-spirit.attack('waveBoxing'); // 输 出： RYU: 使 用 波 动 拳 
+spirit.attack('waveBoxing'); // 输 出： RYU: 使 用 波 动 拳
 spirit.attack('whirlKick'); // 输 出： RYU: 使 用 旋 风 腿
 ```
 

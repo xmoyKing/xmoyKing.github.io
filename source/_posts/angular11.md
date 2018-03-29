@@ -2,7 +2,7 @@
 title: Angular2入门-依赖注入-2
 categories: Angular
 tags:
-- js
+- JavaScript
 - typescript
 - angular
 date: 2017-10-17 18:13:49
@@ -85,15 +85,15 @@ useExisting用来指定一个别名Provider，有了别名Provider就可以在�
 假如有一个日志服务OldLoggerService，现有一个相同接口的新版服务NewLoggerService,考虑到重构代价等问题，并不去替换OldLoggerService服务被使用的地方，此时为了新旧服务同时可用，用于用useClass来积极这个问题：
 ```ts
 providers: [
-    {provide: NewLoggerService, useClass: NewLoggerService}, 
-    {provide: OldLoggerService, useClass: NewLoggerService}, 
+    {provide: NewLoggerService, useClass: NewLoggerService},
+    {provide: OldLoggerService, useClass: NewLoggerService},
 ]
 ```
 但是两个NewLoggerService却是不同的实例，而通过useExisting就可以将多个标识指向同一个实例。
 ```ts
 providers: [
-    {provide: NewLoggerService, useClass: NewLoggerService}, 
-    {provide: OldLoggerService, useExisting: NewLoggerService}, 
+    {provide: NewLoggerService, useClass: NewLoggerService},
+    {provide: OldLoggerService, useExisting: NewLoggerService},
 ]
 ```
 
@@ -109,8 +109,8 @@ let contactServiceFactory = (_logger: LoggerService, _userService: UserService) 
 }
 
 export let contactServiceProvider = {
-  provide: ContactService, 
-  useFactory: contactServiceFactory, 
+  provide: ContactService,
+  useFactory: contactServiceFactory,
   deps: [LoggerService, UserService]
 };
 ```
@@ -125,7 +125,7 @@ export let contactServiceProvider = {
   selector: 'parent',
   template: `
   <div>
-    {{ name }} 
+    {{ name }}
     <child></child>
   </div>
   `
@@ -145,7 +145,7 @@ import { ParentComponent } from './parent.component';
   selector: 'child',
   template: `
   <div>
-    {{ name }} 
+    {{ name }}
     <div>{{ parent ? '获取父组件引用' : ''}}</div>
   </div>
   `
@@ -174,7 +174,7 @@ export abstract class Parent{
   selector: 'parent',
   template: `
   <div>
-    {{ name }} 
+    {{ name }}
     <child></child>
   </div>
   `,

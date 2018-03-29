@@ -1,8 +1,9 @@
 ---
 title: 区块链0-图解入门&资源汇总
-categories: blockchain
+categories: 区块链
 tags:
   - blockchain
+  - 区块链
 date: 2018-03-05 23:23:30
 updated: 2018-03-05 23:23:30
 ---

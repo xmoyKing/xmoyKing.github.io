@@ -1,7 +1,7 @@
 ---
 title: Promise3-测试
 categories:
-  - js
+  - JavaScript
 tags:
   - promise
   - mocha

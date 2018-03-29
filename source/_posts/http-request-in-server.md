@@ -1,8 +1,8 @@
 ---
 title: 网络请求中，服务器端工作流程
-categories: mixed
+categories: 网络
 tags:
-  - http
+  - HTTP
 date: 2018-03-22 14:07:52
 updated: 2018-03-22 14:07:52
 ---

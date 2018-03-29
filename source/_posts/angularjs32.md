@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - ng启动
 date: 2017-07-31 22:56:53
 updated:

@@ -1,13 +1,12 @@
 ---
-title: j2ee + websocket + mysql 实现简单监控系统
+title: J2EE + WebSocket + MySQL 实现简单监控系统
 categories:
   - mixed
 tags:
-  - fe
-  - j2ee
-  - websocket
-  - socket
-  - wamp
+  - J2EE
+  - WebSocket
+  - 套接字
+  - WAMP
 date: 2017-03-24 12:44:44
 updated: 2017-03-24 12:44:44
 ---
@@ -59,7 +58,7 @@ Web服务器：Tomcat 7.0.47
 
 ![web服务器文件组织图](3.png)
 
-这个是Web服务器和Soket客户端的文件组织截图，其中DBConnector是数据库连接类，WebServer是Web服务器端用于登录，注册以及请求验证，转发等功能，WebSocket是WebSocket类，用于与前端保持socket长连接的并定时推送所有的设备状态到客户端。 
+这个是Web服务器和Soket客户端的文件组织截图，其中DBConnector是数据库连接类，WebServer是Web服务器端用于登录，注册以及请求验证，转发等功能，WebSocket是WebSocket类，用于与前端保持socket长连接的并定时推送所有的设备状态到客户端。
 SocketThreadServer是用多线程实现的一个Socket服务器端，主要工作是利用多线程接收多个客户端的心跳信息，然后判断其状态是否改变，若改变则将改变数据保存到数据库，若不变则不保存数据。
 前端展示设备的图标采用了font-awasome的css图标库。
 

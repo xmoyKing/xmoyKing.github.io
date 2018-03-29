@@ -1,8 +1,8 @@
 ---
 title: CSS权威指南（3rd）笔记-查缺补漏5 - 定位
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS
   - position
 date: 2016-11-15 11:10:43
 updated: 2018-03-20 11:10:43

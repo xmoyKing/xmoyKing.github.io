@@ -1,8 +1,8 @@
 ---
 title: CSS权威指南（3rd）笔记-查缺补漏1
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS
   - vertical-align
 date: 2016-11-05 10:17:30
 updated:

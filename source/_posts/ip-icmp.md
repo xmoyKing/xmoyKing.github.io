@@ -1,13 +1,12 @@
 ---
 title: IP/ICMP Security
 categories:
-  - linux
+  - 网络
 tags:
-  - network
-  - security
+  - 网络
+  - 安全
   - ip
   - icmp
-  - ip/icmp
 date: 2017-06-23 14:08:49
 updated: 2017-06-23 14:08:49
 ---

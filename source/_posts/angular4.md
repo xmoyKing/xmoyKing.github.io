@@ -2,7 +2,7 @@
 title: Angular2入门-模板-1
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-07 09:23:32
@@ -46,7 +46,7 @@ Angular提供了多种数据绑定的方式，根据数据流动的方向分为3
 | 定义方式 | 说明 |
 | - | - |
 | DOM对象属性（Property） | 以DOM元素为对象，其附加的内容，是在文档对象模型里定义的，如childNodes，firstChild等 |
-| HTML标签特性（Attribute） | 是DOM节点自带的属性，是在HTML里定义的，即只要是HTML标签中出现的属性（HTML代码）都是Attribute，例如HTML中常用的colspan，align等 | 
+| HTML标签特性（Attribute） | 是DOM节点自带的属性，是在HTML里定义的，即只要是HTML标签中出现的属性（HTML代码）都是Attribute，例如HTML中常用的colspan，align等 |
 
 大多数情况下，DOM对象属性与HTML标签特性不是一一对应的，但有少量属性既是DOM对象属性又是HTML标签特性，如id、title、class（CSS类）等。
 通常HTML标签特性代表着初始值，初始化后就不再发生改变，而DOM对象属性代表当前值，默认为初始值，它它会随着属性值而变化。
@@ -176,7 +176,7 @@ export class ListItemComponent {
 ```
 Angular提供NgModel指令可以更方便的进行双向绑定：
 ```html
-<input 
+<input
   [ngModel]="currentUser.phone"
   (ngModelChange)="currentUser.phone=$event"
 />
@@ -190,7 +190,7 @@ Angular提供NgModel指令可以更方便的进行双向绑定：
 ```
 但[()]语法只能简单的设置一个数据绑定数据，若想完成更多任务，就得采用分离的形式来实现，例如在联系人手机号码前加上区号：
 ```html
-<input 
+<input
   [ngModel]="currentUser.phone"
   (ngModelChange)="addCodeForPhone($event)"
 />

@@ -4,7 +4,6 @@ categories:
   - python
 tags:
   - python
-  - note
 date: 2017-08-02 08:36:58
 updated: 2017-08-02 08:36:58
 ---
@@ -31,7 +30,7 @@ print(x, y)
 151.96152422706632 70.0
 ```
 
-### 函数的参数 
+### 函数的参数
 参考：[函数的参数](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431752945034eb82ac80a3e64b9bb4929b16eeed1eb9000)
 
 一个函数,传入一个list，添加一个END再返回：

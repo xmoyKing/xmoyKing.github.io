@@ -1,8 +1,8 @@
 ---
 title: CSS权威指南（3rd）笔记-查缺补漏7 - 列表和生成内容
-categories: css
+categories: CSS
 tags:
-  - css
+  - CSS
   - list
 date: 2016-11-20 15:20:05
 updated: 2018-03-20 18:54:00

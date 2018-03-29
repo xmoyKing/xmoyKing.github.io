@@ -2,7 +2,7 @@
 title: Angular2入门-组件-1
 categories: Angular
 tags:
-  - js
+  - JavaScript
   - typescript
   - angular
 date: 2017-10-03 09:42:08
@@ -111,8 +111,8 @@ var ContactItemComponent = (function(){
 ```ts
 import { Component } from '@angular/core';
 
-@Component({ 
-  selector: 'contact-item', 
+@Component({
+  selector: 'contact-item',
   template: `
   <div>
     <input type="text" value="{{name}}" [(ngModel)]="name"/>
@@ -124,7 +124,7 @@ import { Component } from '@angular/core';
 export class ContactItemComponent {
   name: string = '张三';
   phone: string = '12341234123';
-} 
+}
 ```
 
 #### 组件与模块
@@ -138,7 +138,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ContactItemComponent } from './contactItem.component';
 
 @NgModule({
-  imports: [BrowserModule], 
+  imports: [BrowserModule],
   declarations: [ContactItemComponent],
   bootstrap: [ContactItemComponent]
 })
@@ -170,7 +170,7 @@ NgModule主要的元数据如下：
         DetailComponent,
         CollectionComponent,
         EditComponent,
-        HeaderComponent, FooterComponent, 
+        HeaderComponent, FooterComponent,
         PhonePipe, BtnClickDirective
     ]
     // ...
@@ -227,7 +227,7 @@ export class MessageModule {}
 以app.module.ts文件中，通过providers元数据注入了自定义的ContactService服务，ContactService服务是维护联系人数据的主服务，负责对联系人信息的相关操作：
 ```ts
 // app.module.ts
-import { ContactService, UtilService, FooterComponent, 
+import { ContactService, UtilService, FooterComponent,
         HeaderComponent, PhonePipe, BtnClickDirective } from './shared';
 // ...
 @NgModule({

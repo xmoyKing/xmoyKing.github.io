@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - angular-hint
 date: 2017-08-19 17:33:35
 updated:

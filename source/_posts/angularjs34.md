@@ -4,6 +4,7 @@ categories:
   - AngularJS
 tags:
   - AngularJS
+  - JavaScript
   - ng脏检查
 date: 2017-08-07 18:19:58
 updated:
