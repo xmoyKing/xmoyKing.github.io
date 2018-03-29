@@ -236,6 +236,7 @@ tags: [mixed, links]
 
 [再谈Retina下1px的解决方案,  0.5px线](https://www.w3cplus.com/css/fix-1px-for-retina.html)
 
+[css 重排与重绘](https://blog.csdn.net/zjjnwpu/article/details/56008466?locationNum=7&fps=1)
 
 ### JS
 [事件代理 & 什么是冒泡什么是捕获](http://www.cnblogs.com/owenChen/archive/2013/02/18/2915521.html)
