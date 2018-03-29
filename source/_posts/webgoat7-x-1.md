@@ -1,7 +1,6 @@
 ---
 title: WebGoat7.x使用笔记1-环境搭建与基本解释
-categories:
-  - 安全
+categories: 安全
 tags:
   - 安全
   - webgoat7

@@ -1,10 +1,9 @@
 ---
 title: Nodejs-HTTP模块
-categories:
-  - Nodejs
+categories: Nodejs
 tags:
-  - nodejs
-  - http
+  - Nodejs
+  - HTTP
 date: 2016-10-28 10:32:45
 updated: 2016-10-28 10:32:45
 ---
@@ -27,7 +26,7 @@ slashesDenoteHost 也是一个布尔值，true表示将格式为`//host/path`的
 ### URL 字符串与 URL 对象：
 urlObject.href 完整的URL字符串
 urlObject.protocol 协议，小写
-urlObject.slashes 
+urlObject.slashes
 urlObject.host 主机完整部分，包括端口，小写
 urlObject.auth 身份认证部分
 urlObject.hostname 主机部分的主机名，小写
@@ -58,7 +57,7 @@ Url {
   query: { query: 'string', quer2: '2' },
   pathname: '/resource/path',
   path: '/resource/path?query=string&quer2=2',
-  href: 'http://user:pass@host.com:80/resource/path?query=string&quer2=2#hash' 
+  href: 'http://user:pass@host.com:80/resource/path?query=string&quer2=2#hash'
 }
 
 'http://user:pass@host.com:80/resource/path?query=string&quer2=2#hash'
@@ -213,7 +212,7 @@ http.createServer(function (req, res){
     });
 }).listen(8080);
 ```
-在localhost:8080 即可打卡网站，然后输入对应的文件名称即可获取对应的文件，比如localhost:8080/index.html 
+在localhost:8080 即可打卡网站，然后输入对应的文件名称即可获取对应的文件，比如localhost:8080/index.html
 
 ### 静态HTTP客户端
 模拟浏览器发出http get请求，用on监听data读取服务器的响应
@@ -229,7 +228,7 @@ function handleResponse(response){
     var serverData = '';
     response.on('data', function(chunk){
         serverData += chunk;
-    }); 
+    });
     response.on('end', function(){
         console.log(serverData);
     });
@@ -272,7 +271,7 @@ function handleResponse(response){
     var serverData = '';
     response.on('data', function(chunk){
         serverData += chunk;
-    }); 
+    });
     response.on('end', function(){
         console.log('response status: ', response.statusCode);
         console.log('response headers: ', response.headers);
@@ -334,7 +333,7 @@ function readJSONResponse(response){
         var dataObj = JSON.parse(responseData);
         console.log('Raw responseData: ' + responseData);
         console.log('Message: ' + dataObj.message);
-        console.log('Question: ' + dataObj.question);        
+        console.log('Question: ' + dataObj.question);
     });
 }
 

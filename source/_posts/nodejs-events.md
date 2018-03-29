@@ -1,9 +1,8 @@
 ---
 title: Nodejs-事件、监听器、定时器、回调
-categories:
-  - Nodejs
+categories: Nodejs
 tags:
-  - nodejs
+  - Nodejs
   - events
 date: 2016-10-26 19:32:34
 updated: 2016-10-26 19:32:34

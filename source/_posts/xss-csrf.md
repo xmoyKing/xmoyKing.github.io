@@ -1,7 +1,6 @@
 ---
 title: 了解XSS/CSRF
-categories:
-  - 安全
+categories: 安全
 tags:
   - XSS
   - CSRF

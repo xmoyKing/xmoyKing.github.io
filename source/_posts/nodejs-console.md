@@ -1,9 +1,8 @@
 ---
 title: Nodejs-console模块
-categories:
-  - Nodejs
+categories: Nodejs
 tags:
-  - nodejs
+  - Nodejs
   - console
 date: 2016-09-26 19:14:37
 updated: 2016-09-26 19:14:37

@@ -1,9 +1,8 @@
 ---
 title: Nodejs-其他模块
-categories:
-  - Nodejs
+categories: Nodejs
 tags:
-  - nodejs
+  - Nodejs
   - os
   - util
 date: 2016-10-28 19:17:16
@@ -59,17 +58,17 @@ format参数可以包含占位符，
 当参数比占位符少时，多余的占位符不会被替换而是直接输出
 ```js
 const util  = require('util');
-var s = util.format('%s = %s', 'item'); 
+var s = util.format('%s = %s', 'item');
 console.log(s); // item = %s
 ```
 当参数多余占位符时，多余的参数被转换为字符串，然后用空格分隔
 ```js
-var s = util.format('%s = %s', 'item','aaaa', 'more', 'bbb'); 
+var s = util.format('%s = %s', 'item','aaaa', 'more', 'bbb');
 console.log(s); // item = aaaa more bbb
 ```
 若第一个参数不是格式字符串，则会自动转换为字符串，用空格分隔
 ```js
-var s = util.format(1, 2, 3, 'more', 'bbb'); 
+var s = util.format(1, 2, 3, 'more', 'bbb');
 console.log(s); // 1 2 3 'more' 'bbb'
 ```
 

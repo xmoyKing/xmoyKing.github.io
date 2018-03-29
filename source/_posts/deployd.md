@@ -1,9 +1,8 @@
 ---
 title: deployd入门安装
-categories:
-  - Nodejs
+categories: Nodejs
 tags:
-  - nodejs
+  - Nodejs
   - mongodb
   - deployd
 date: 2017-05-11 14:37:44

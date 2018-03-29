@@ -1,9 +1,8 @@
 ---
 title: Nodejs-文件系统
-categories:
-  - Nodejs
+categories: Nodejs
 tags:
-  - nodejs
+  - Nodejs
   - fs
 date: 2016-10-28 10:32:45
 updated: 2016-10-28 10:32:45
@@ -219,14 +218,14 @@ fileReadStream.on('close', function(){
 stats.isFile() // 是否为文件
 stats.isDirectory() // 是否为目录
 stats.isBlockDevice() // 是否为块设备
-stats.isCharacterDevice() 
+stats.isCharacterDevice()
 stats.isSymbolicLink() (仅对 fs.lstat() 有效)
 stats.isFIFO()
 stats.isSocket()
 // 属性
 {
   dev: 2114, // 文件所在设备ID
-  ino: 48064969, 
+  ino: 48064969,
   mode: 33188, // 访问模式
   nlink: 1,
   uid: 85,

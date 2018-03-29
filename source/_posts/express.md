@@ -1,11 +1,10 @@
 ---
 title: Express4-1入门配置
-categories:
-  - Nodejs
+categories: Nodejs
 tags:
-  - nodejs
-  - express
-  - express4
+  - Nodejs
+  - Express
+  - Express4
 date: 2017-04-30 11:53:55
 updated: 2017-04-30 11:53:55
 ---

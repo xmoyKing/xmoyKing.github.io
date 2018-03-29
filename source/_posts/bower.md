@@ -1,7 +1,6 @@
 ---
 title: bower入门使用
-categories:
-  - mixed
+categories: mixed
 tags:
   - bower
 date: 2016-09-18 21:40:53
