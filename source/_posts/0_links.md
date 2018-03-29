@@ -71,7 +71,7 @@ tags: [mixed, links]
 
 [Vue2.0 探索之路——生命周期和钩子函数的一些理解](https://segmentfault.com/a/1190000008010666) *虽然依然没有说明原理，但示例比上例要详细一些，涉及到了子组件及keep-alive的用法*
 
-[Vue源码解析](https://blog.csdn.net/u014641010/article/category/7048036)
+[Vue源码解析](https://github.com/answershuto/learnVue)
 
 ## Webpack
 
