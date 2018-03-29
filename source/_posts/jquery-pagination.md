@@ -3,8 +3,8 @@ title: jQuery实现分页
 categories: JavaScript
 tags:
   - JavaScript
-  - jquery
-  - pagination
+  - jQuery
+  - 分页
 date: 2016-11-05 16:23:49
 updated: 2016-11-05 16:23:49
 ---

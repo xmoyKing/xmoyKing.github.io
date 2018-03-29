@@ -3,7 +3,7 @@ title: jQuery实现图片瀑布流展示
 categories: JavaScript
 tags:
   - JavaScript
-  - jquery
+  - jQuery
   - waterfall
 date: 2016-11-01 16:21:34
 updated: 2016-11-01 16:21:34

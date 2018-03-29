@@ -3,7 +3,7 @@ title: jquery.noConflict无冲突函数原理
 categories: JavaScript
 tags:
   - JavaScript
-  - jquery
+  - jQuery
   - noConflict
 date: 2017-12-09 23:08:08
 updated:
