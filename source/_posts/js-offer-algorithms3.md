@@ -3,7 +3,7 @@ title: 剑指Offer笔记-JS语法 - 3 解题思路
 categories: JavaScript
 tags:
   - JavaScript
-  - algorithms
+  - 算法
   - 剑指Offer
 date: 2018-03-25 18:25:19
 updated: 2018-03-25 18:25:19

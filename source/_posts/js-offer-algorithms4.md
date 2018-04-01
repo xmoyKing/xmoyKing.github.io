@@ -3,7 +3,7 @@ title: 剑指Offer笔记-JS语法 - 4 优化时间和空间效率
 categories: JavaScript
 tags:
   - JavaScript
-  - algorithms
+  - 算法
   - 剑指Offer
 date: 2018-03-27 09:19:41
 updated: 2018-03-27 09:19:41

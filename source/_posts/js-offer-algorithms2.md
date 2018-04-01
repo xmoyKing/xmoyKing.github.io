@@ -3,7 +3,7 @@ title: 剑指Offer笔记-JS语法 - 2 高质量代码（完整性和Robust）
 categories: JavaScript
 tags:
   - JavaScript
-  - algorithms
+  - 算法
   - 剑指Offer
 date: 2018-03-24 21:08:44
 updated: 2018-03-24 21:08:44

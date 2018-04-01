@@ -3,7 +3,7 @@ title: 剑指Offer笔记-JS语法 - 1 基础知识
 categories: JavaScript
 tags:
   - JavaScript
-  - algorithms
+  - 算法
   - 剑指Offer
 date: 2018-03-23 15:35:38
 updated: 2018-03-23 15:35:38

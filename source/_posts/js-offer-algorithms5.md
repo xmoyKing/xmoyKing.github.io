@@ -3,7 +3,7 @@ title: 剑指Offer笔记-JS语法 - 5 综合能力
 categories: JavaScript
 tags:
   - JavaScript
-  - algorithms
+  - 算法
   - 剑指Offer
 date: 2018-03-27 19:37:57
 updated: 2018-03-27 19:37:57
