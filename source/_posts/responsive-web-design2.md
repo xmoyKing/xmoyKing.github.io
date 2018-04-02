@@ -1,6 +1,6 @@
 ---
 title: 响应式 Web 设计笔记-2-媒体查询
-categories: CSS
+categories: 响应式 Web 设计
 tags:
   - 响应式
   - CSS3
