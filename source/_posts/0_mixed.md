@@ -650,6 +650,8 @@ wechat1面纪要：
 [HTML5语义化](https://www.w3cplus.com/html5/semantics-tags.html)
 
 ##### 2018.3.27
-阿里一面，
+阿里一面，GG，回答得实在粗糙。
 
-##### 2018.3.28
+##### 2018.4.2
+W3C制定规范要走一个批准流程。官方流程文档：https://www.w3.org/2005/10/Process-20051014/tr。
+简单来说，所有规范都从WD（Working Draft，工作草案）开始，然后是CR（Candidate Recommendation，候选推荐），接着是PR（Proposed Recommendation，建议推荐），几年后才能成为W3C REC（Recommendation，推荐标准）。处于较成熟阶段的模块，通常使用起来也比较安全。比如，CSS Transforms Module Level 3（http://www.w3.org/TR/css3-3d-transforms/）在2009年3月就进入了WD阶段，但浏览器对它的支持度比处于CR阶段的媒体查询等模块差得多。

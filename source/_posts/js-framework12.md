@@ -5,7 +5,7 @@ tags:
   - JavaScript
   - JavaScript框架设计
   - deferred
-  - promise
+  - Promise
 date: 2017-01-07 14:53:49
 updated: 2017-01-07 14:53:49
 ---

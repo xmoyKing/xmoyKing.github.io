@@ -1,9 +1,9 @@
 ---
-title: Promise4-高级进阶(resolve,reject)
+title: Promise-4-高级进阶(resolve,reject)
 categories:
   - JavaScript
 tags:
-  - promise
+  - Promise
   - web notifications
 date: 2017-04-13 22:54:03
 updated:

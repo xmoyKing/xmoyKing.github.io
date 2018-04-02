@@ -1,9 +1,9 @@
 ---
-title: Promise2-实践练习
+title: Promise-2-实践练习
 categories:
   - JavaScript
 tags:
-  - promise
+  - Promise
 date: 2017-04-10 17:27:46
 updated: 2017-04-20 17:27:46
 ---

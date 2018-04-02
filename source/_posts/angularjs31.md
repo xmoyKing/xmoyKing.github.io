@@ -5,7 +5,7 @@ categories:
 tags:
   - AngularJS
   - JavaScript
-  - promise
+  - Promise
   - AngularJS深度剖析
 date: 2017-07-28 22:36:56
 updated:

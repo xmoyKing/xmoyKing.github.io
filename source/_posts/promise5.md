@@ -1,9 +1,9 @@
 ---
-title: Promise5-高级进阶(deferred,race)
+title: Promise-5-高级进阶(deferred,race)
 categories:
   - JavaScript
 tags:
-  - promise
+  - Promise
   - deferred
 date: 2017-04-14 08:36:26
 updated:

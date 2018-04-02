@@ -1,9 +1,9 @@
 ---
-title: Promise3-测试
+title: Promise-3-测试
 categories:
   - JavaScript
 tags:
-  - promise
+  - Promise
   - mocha
 date: 2017-04-11 17:20:43
 updated: 2017-04-21 17:20:43

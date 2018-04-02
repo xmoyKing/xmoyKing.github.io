@@ -1,9 +1,9 @@
 ---
-title: Promise1-相关知识点
+title: Promise-1-相关知识点
 categories:
   - JavaScript
 tags:
-  - promise
+  - Promise
 date: 2017-04-8 16:36:18
 updated:
 ---
