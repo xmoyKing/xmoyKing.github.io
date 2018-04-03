@@ -413,5 +413,47 @@ function LastRemaining_Solution(n, m)
 }
 ```
 
+### 问题46 求1+2+3+...+n
+**问题描述：求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。**
+
+利用递归，先求Sum(n) = Sum(n-1)+n; 退出条件使用逻辑表达式&&，当n为0时，不执行后面的加法。
+
+```js
+function Sum_Solution(n)
+{
+    // 使用递归、加、减法
+    let rst = n;
+    rst && (rst += Sum_Solution(n-1));
+    return rst
+}
+```
+
+### 问题47 不用加减乘除做加法
+**问题描述：写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。**
+
+利用二进制加法中的位运算，比如计算 5 + 17：
+5的二进制为101，17的二进制10001，将计算分为三步：
+1. 每个位相异或但不计进位，得到结果10100，换为十进制为10，
+1. 记录进位情况，先与操作，然后左移一位，即最后一位相加产生了进位，结果为二进制的10，
+1. 最后将前两步得到的二进制数相加，结果为二进制的10110，即为结果，十进制为22
+
+第三部其实使用的是循环或递归的方式，这样做是为了满足同时进位。比如111 + 899，
+
+```js
+function Add(num1, num2)
+{
+    // write code here
+    let sum, carry;
+    do{
+        sum = num1 ^ num2;
+        carry = (num1 & num2) << 1;
+
+        num1 = sum;
+        num2 = carry;
+    }while(num2 != 0);
+
+    return num1;
+}
+```
 
 <script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
