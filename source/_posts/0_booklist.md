@@ -92,6 +92,7 @@ updated: 2018-02-16 10:49:23
 1. 《Pro.CSS.for.High.Traffic.Websites-高流量网站CSS开发技术》
 1. 《Professional.Node.js-Node.js高级编程》
 1. 《 响应式 Web 设计：HTML5 与 CSS3 实战（第二版）(2017-02)》
+  - 前4章主要是介绍一些响应式设计的基础，如媒体查询、HTML5语义化
 1. 《 JavaScript 语言精粹（修订版）(2012-09)》
 1. 《 Node.js 硬实战：115个核心技巧 (2017-01)》
 

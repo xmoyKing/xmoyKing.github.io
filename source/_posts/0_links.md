@@ -102,6 +102,7 @@ tags: [mixed, links]
 [Three.js 现学现卖](http://web.jobbole.com/92335/)
 
 ## ES6
+[Babel是如何读懂JS代码的](https://zhuanlan.zhihu.com/p/27289600)
 
 [前端开发者必不得不知的ES6十大特性](http://www.alloyteam.com/2016/03/es6-front-end-developers-will-have-to-know-the-top-ten-properties/)
 *10种特性的简短介绍和使用方式*
@@ -114,7 +115,6 @@ tags: [mixed, links]
 [JavaScript Promise迷你书（中文版）](http://liubin.org/promises-book/)
 
 ## nodejs
-
 [从零开始nodejs系列文章](http://blog.fens.me/series-nodejs/)
 
 [Nodejs中文社区资料](https://cnodejs.org/getstart)
@@ -157,7 +157,8 @@ tags: [mixed, links]
 
 [前端实习生面试总结](http://www.cnblogs.com/xiaoruo/p/4665163.html)
 
-[前端面试经典题目合集介绍- 牛客网](https://www.nowcoder.com/ta/front-end-interview?query=&asc=true&order=&page=1)
+[前端面试经典题目合集介绍](https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers)
+- 某些题目未给出答案，需要自己搜索
 
 [Web前端面试题目汇总](http://www.cnblogs.com/bigboyLin/p/5272902.html)
 
@@ -283,6 +284,15 @@ tags: [mixed, links]
 
 [十大经典排序算法用javascript实现](http://blog.damonare.cn/2016/12/20/%E5%8D%81%E5%A4%A7%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%EF%BC%88javascript%E6%8F%8F%E8%BF%B0%EF%BC%89/)
 
+[FastClick 原理解析](https://segmentfault.com/a/1190000005850383)*没看明白，有时间还是自己读源码得好*
+
+[History API](https://blog.csdn.net/a460550542/article/details/78196183)
+
+[高性能JavaScript模板引擎原理解析](http://cdc.tencent.com/2012/06/15/%E9%AB%98%E6%80%A7%E8%83%BDjavascript%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/)
+
+[JavaScript模板引擎原理，几行代码的事儿](http://www.cnblogs.com/hustskyking/p/principle-of-javascript-template.html)
+
+
 #### JS 多线程
 了解js多线程，主要分为Concurrent.Thread.js（对不支持webwork的浏览器）和WebWork两部分
 
@@ -305,7 +315,6 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 [深入 HTML5 Web Worker 应用实践：多线程编程](https://www.ibm.com/developerworks/cn/web/1112_sunch_webworker/)
 
 [HTML5之Javascript多线程](http://blog.sina.com.cn/s/blog_63940ce201018lyh.html)*有讲共享型SharedWebWorker*
-
 
 #### jQuery分析
 
@@ -330,6 +339,8 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 [前端性能优化----yahoo前端性能团队总结的35条黄金定律](http://www.ayqy.net/blog/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96%EF%BC%9A%E9%9B%85%E8%99%8E35%E6%9D%A1/?utm_source=tuicool&utm_medium=referral)
 
 [一次完整的HTTP请求过程（以chrome为例）](http://linux5588.blog.51cto.com/65280/1351007)*其中有谈到计算机网络，操作系统文件管理，浏览器渲染参考*
+- [浏览器的渲染机制](https://blog.csdn.net/wozaixiaoximen/article/details/50640954##1)
+- [浏览器加载和渲染HTML的顺序](http://www.cnblogs.com/elegance/p/4233986.html)*后面jQuery部分可跳过不看*
 
 [HTTPS 为什么更安全](https://gold.xitu.io/post/58a8f3295c497d005fbd58b1)
 

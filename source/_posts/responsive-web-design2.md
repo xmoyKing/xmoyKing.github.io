@@ -6,7 +6,6 @@ tags:
   - CSS3
   - HTML5
   - 媒体查询
-  - mediaqueries
 date: 2018-02-02 11:13:22
 updated: 2018-02-02 11:13:22
 ---
