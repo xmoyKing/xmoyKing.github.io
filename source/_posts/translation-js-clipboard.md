@@ -1,9 +1,9 @@
 ---
-title: 【译】20行JS代码实现粘贴板功能
-categories: Translation
+title: 20行JS代码实现粘贴板功能
+categories: JavaScript
 tags:
   - JavaScript
-  - translation
+  - 翻译
 date: 2018-02-06 14:54:58
 updated: 2018-02-06 14:54:58
 ---

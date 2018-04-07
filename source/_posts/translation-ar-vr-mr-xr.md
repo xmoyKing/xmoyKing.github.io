@@ -1,8 +1,8 @@
 ---
-title: 【译】AR / MR / VR / XR有什么区别？
-categories: Translation
+title: AR / MR / VR / XR有什么区别？
+categories: mixed
 tags:
-  - translation
+  - 翻译
 date: 2018-02-06 15:07:17
 updated: 2018-02-06 15:07:17
 ---

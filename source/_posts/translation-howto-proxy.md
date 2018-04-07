@@ -1,8 +1,9 @@
 ---
-title: 【译】JavaScript：通过Web代理发起跨域请求
-categories: Translation
+title: JavaScript：通过Web代理发起跨域请求
+categories: JavaScript
 tags:
-  - translation
+  - JavaScript
+  - 翻译
 date: 2018-02-08 15:09:52
 updated: 2018-02-08 15:09:52
 ---

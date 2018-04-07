@@ -1,9 +1,9 @@
 ---
-title: 【译】CSS 实现三角形，非 Hack
-categories: Translation
+title: CSS 实现三角形，非 Hack
+categories: CSS
 tags:
-  - translation
-  - css
+  - 翻译
+  - CSS
 date: 2018-03-02 10:30:41
 updated: 2018-03-02 10:30:41
 ---

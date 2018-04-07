@@ -1,9 +1,10 @@
 ---
-title: 【译】第三方 CSS 并不安全
-categories: Translation
+title: 第三方 CSS 并不安全
+categories: CSS
 tags:
-  - translation
-  - css
+  - 翻译
+  - CSS
+  - 安全
 date: 2018-03-05 15:46:30
 updated: 2018-03-05 15:46:30
 ---

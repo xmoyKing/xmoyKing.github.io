@@ -1,10 +1,10 @@
 ---
-title: 【译】Web设计中网页字体排版指南
-categories: Translation
+title: Web设计中网页字体排版指南
+categories: CSS
 tags:
-  - css
-  - typographic
-  - translation
+  - CSS
+  - 字体排版
+  - 翻译
 date: 2017-06-21 17:21:48
 updated: 2017-06-21 17:21:48
 ---

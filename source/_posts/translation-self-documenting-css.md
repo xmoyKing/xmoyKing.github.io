@@ -1,9 +1,9 @@
 ---
-title: 【译】关于CSS自文档的思考
-categories: Translation
+title: 关于CSS自文档的思考
+categories: CSS
 tags:
-  - css
-  - translation
+  - CSS
+  - 翻译
 date: 2018-01-19 21:34:42
 updated: 2018-01-19 21:34:42
 ---
