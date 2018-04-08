@@ -74,7 +74,6 @@ tags: [mixed, links]
 [Vue源码解析](https://github.com/answershuto/learnVue)
 
 ## Webpack
-
 [搜罗一切webpack的好文章好工具](https://github.com/webpack-china/awesome-webpack-cn)
 
 [Webpack中文文档](https://doc.webpack-china.org)
@@ -86,6 +85,8 @@ tags: [mixed, links]
 [深入浅出webpack教程系列](http://www.cnblogs.com/ghostwu/p/7499237.html)*谈不上深入，很多细节和配置其实都没有涉及，但浅出算得上*
 
 [基于webpack的前端工程化方案（纯静态页面）](https://github.com/chenli1989/webpack-MultPage-static)
+
+[webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
 
 ## PWA
 
@@ -411,4 +412,3 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 
 [深入浅出 Webpack](http://webpack.wuhaolin.cn/)
 
-[webpack多页应用架构系列](https://segmentfault.com/a/1190000006843916)
