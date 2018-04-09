@@ -370,6 +370,8 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 #### 前端工程化
 [前端优化带来的思考，浅谈前端工程化](http://www.cnblogs.com/yexiaochai/p/4901341.html)
 
+[Fouber的博客](https://github.com/fouber/blog) *没有更新了，大都是14/15年关于前端工程化的文章，能看出很多前端工程化的前身和影子*
+
 
 
 ### 移动端 WebApp
@@ -405,8 +407,6 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 
 ## 未读
 [第一本 PWA 中文书](https://juejin.im/entry/5a1c394a5188255851326da5)
-
-[Fouber的博客](https://github.com/fouber/blog) *没有更新了，大都是14/15年关于前端工程化的文章，能看出很多前端工程化的前身和影子*
 
 [GitBook: http2讲解](https://ye11ow.gitbooks.io/http2-explained/content/)
 
