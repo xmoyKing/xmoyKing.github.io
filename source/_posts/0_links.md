@@ -13,7 +13,7 @@ tags: [mixed, links]
 1. 《Node》：Express、KOA2、NodeJS源码分析等
 1. 《前端工程化那些事儿》 ：Webpack3、Gulp、Rollup、FIS等
 1. 《性能优化与工程化》 ：直播平台、Webapp优化等
-1. 《MV*框架大集合》 ：Vue2、React、Angular5等
+1. 《MV*框架大集合》 ：Vue2、React、Angular等
 1. 《网页重构之道》 ：CSS3D、CSS工作流、渲染原理等
 1. 《前端工程师跨界之旅》 ：前端开发iOS、Android、iOT、PC
 1. 《前端图形学与游戏》 ：Cocos2d-JS、WebGL、Three.js等
@@ -44,9 +44,13 @@ tags: [mixed, links]
 
 [廖雪峰](https://www.liaoxuefeng.com/)
 
+[berwin](https://github.com/berwin/Blog)
+
 [前端回忆录](https://github.com/Wscats/Good-text-Share)
 
 [小青年博客](https://segmentfault.com/blog/zhaomenghuan) *一个专注于混合式开发和vue.js+node.js全栈开发的技术分享专栏。PS:东西不多，但是都很干货*
+
+[雄领IT的专栏](https://blog.csdn.net/lxcao)
 
 [移动web资源整理](http://www.cnblogs.com/PeunZhang/p/3407453.html)
 
@@ -242,6 +246,10 @@ tags: [mixed, links]
 
 [css 重排与重绘](https://blog.csdn.net/zjjnwpu/article/details/56008466?locationNum=7&fps=1)
 
+[defer和async的区别](https://segmentfault.com/q/1010000000640869)
+[彻底搞懂 async & defer](https://github.com/xiaoyu2er/blog/issues/8)
+
+
 ### JS
 [事件代理 & 什么是冒泡什么是捕获](http://www.cnblogs.com/owenChen/archive/2013/02/18/2915521.html)
 
@@ -294,6 +302,8 @@ tags: [mixed, links]
 [高性能JavaScript模板引擎原理解析](http://cdc.tencent.com/2012/06/15/%E9%AB%98%E6%80%A7%E8%83%BDjavascript%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/)
 
 [JavaScript模板引擎原理，几行代码的事儿](http://www.cnblogs.com/hustskyking/p/principle-of-javascript-template.html)
+
+[DOM 操作成本到底高在哪儿？](https://juejin.im/entry/5ac0a1ba6fb9a028c22ae6e2)
 
 
 #### JS 多线程
@@ -367,11 +377,12 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 
 [7款值得你心动的HTML5动画和游戏](http://www.html5tricks.com/7-mindful-html5-game-animation.html)
 
+[Travis CI助力Blog持续输出](http://palmer.arkstack.cn/2018/01/Travis%20CI%E5%8A%A9%E5%8A%9BBlog%E6%8C%81%E7%BB%AD%E8%BE%93%E5%87%BA/)
+
 #### 前端工程化
 [前端优化带来的思考，浅谈前端工程化](http://www.cnblogs.com/yexiaochai/p/4901341.html)
 
 [Fouber的博客](https://github.com/fouber/blog) *没有更新了，大都是14/15年关于前端工程化的文章，能看出很多前端工程化的前身和影子*
-
 
 
 ### 移动端 WebApp
