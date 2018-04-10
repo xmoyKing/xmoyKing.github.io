@@ -1,6 +1,6 @@
 ---
 title: jquery.noConflict无冲突函数原理
-categories: JavaScript
+categories: jQuery
 tags:
   - JavaScript
   - jQuery
