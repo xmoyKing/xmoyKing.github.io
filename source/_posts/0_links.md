@@ -77,6 +77,8 @@ tags: [mixed, links]
 
 [Vue源码解析](https://github.com/answershuto/learnVue)
 
+[vue源码分析 -- 基于 2.2.6版本](https://github.com/liutao/vue2.0-source)
+
 ## Webpack
 [搜罗一切webpack的好文章好工具](https://github.com/webpack-china/awesome-webpack-cn)
 
