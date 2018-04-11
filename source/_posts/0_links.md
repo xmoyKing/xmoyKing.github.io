@@ -196,6 +196,8 @@ tags: [mixed, links]
 
 [两列布局](https://segmentfault.com/q/1010000002709361?_ea=600759)
 
+[CSS垂直居中的各种方法](/2017/03/18/css-vertical-middle/)
+
 [去除inline-block元素间间距的N种方法 « 张鑫旭-鑫空间-鑫生活](http://www.zhangxinxu.com/wordpress/2012/04/inline-block-space-remove-%E5%8E%BB%E9%99%A4%E9%97%B4%E8%B7%9D/)
 
 [理解CSS布局和BFC_BFC, Layout, 布局, CSS 教程_w3cplus](https://www.w3cplus.com/css/understanding-css-layout-block-formatting-context.html)
