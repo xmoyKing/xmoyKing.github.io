@@ -70,6 +70,8 @@ tags: [mixed, links]
 ---
 
 ## Vue
+[vuejs/awesome-vue](https://github.com/vuejs/awesome-vue)*学习vue，基础看官网，进阶就看整个repo就行啦~*
+
 *对Vue实例/组件的生命周期了解多少？到底在每一个阶段都能做什么，vue又做了些什么？*
 [关于Vue.js2.0生命周期的研究与理解](https://segmentfault.com/a/1190000010336178) *没有非常详细的说明原理，但示例展示了el、data、template等在每个阶段的形态*
 
