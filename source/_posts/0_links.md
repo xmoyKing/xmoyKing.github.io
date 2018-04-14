@@ -309,8 +309,10 @@ tags: [mixed, links]
 
 [JavaScript模板引擎原理，几行代码的事儿](http://www.cnblogs.com/hustskyking/p/principle-of-javascript-template.html)
 
-[DOM 操作成本到底高在哪儿？](https://juejin.im/entry/5ac0a1ba6fb9a028c22ae6e2)
+[DOM 操作成本到底高在哪儿？](https://juejin.im/entry/5ac0a1ba6fb9a028c22ae6e2)*主要是因为一些DOM操作会导致页面的回流，所以不能频繁的进行这些DOM操作*
+*PS:重绘不一定导致回流，但回流一定导致重绘。重绘的成本则不那么高，同时在内存中操作也比直接通过DOM读取信息更快，所以推荐利用变量缓存一些只读信息或状态*
 
+[javascript原生一步步实现bind分析](https://segmentfault.com/a/1190000007342882)
 
 #### JS 多线程
 了解js多线程，主要分为Concurrent.Thread.js（对不支持webwork的浏览器）和WebWork两部分
