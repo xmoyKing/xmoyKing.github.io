@@ -20,6 +20,13 @@ tags: [mixed, links]
 1. 《数据结构和算法》 ：JavaScript实践数据结构和算法等
 1. 《设计模式与前端安全》 ：常用设计模式、网络安全等
 
+
+![](Web FE Plan.jpg)
+Web前端学习流程
+
+[Web Front End Stack 思维导图版](Web Front End Stack.png)
+
+
 [前端开发者手册](https://dwqs.gitbooks.io/frontenddevhandbook/content/)
 
 前端入门及学习路线，分两部分，一个是HTML和CSS基础，一个是Javascript。由于是译文，资源和链接都是英文的:
