@@ -22,10 +22,7 @@ tags: [mixed, links]
 
 
 ![](Web FE Plan.jpg)
-Web前端学习流程
-
-[Web Front End Stack 思维导图版](Web Front End Stack.png)
-
+Web前端学习流程，[Web Front End Stack 思维导图版](Web Front End Stack.png)
 
 [前端开发者手册](https://dwqs.gitbooks.io/frontenddevhandbook/content/)
 
@@ -176,8 +173,6 @@ Web前端学习流程
 [前端面试经典题目合集介绍](https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers)
 - 某些题目未给出答案，需要自己搜索
 
-[Web前端面试题目汇总](http://www.cnblogs.com/bigboyLin/p/5272902.html)
-
 [JavaScript Puzzlers!](http://javascript-puzzlers.herokuapp.com/)
 解析:
 - [44个 Javascript 变态题解析](http://www.admin10000.com/document/9203.html)
@@ -217,10 +212,6 @@ Web前端学习流程
 
 [CSS魔法堂：重新认识Box Model、IFC、BFC和Collapsing margins](http://www.cnblogs.com/fsjohnhuang/p/5259121.html)
 
-[css3动画的性能优化](https://segmentfault.com/a/1190000000490328)
-
-[CSS 性能优化笔记](https://segmentfault.com/a/1190000007336987) *内含其他性能优化链接*
-
 [clearfix清除浮动进化史](http://www.admin10000.com/document/6259.html)
 
 [使用 CSS3 实现超炫的 Loading（加载）动画效果](http://www.cnblogs.com/lhb25/p/loading-spinners-animated-with-css3.html)
@@ -236,10 +227,6 @@ Web前端学习流程
 [:after和:before炫酷用法总结](http://www.cnblogs.com/cheerful-queen/p/4971484.html)*最后给出的一些demo链接很有价值，尤其是链向tympanus.net的demo,最后引发了如下讲解CSS Counter的博文*
 
 [CSS Counters](http://www.w3cplus.com/css3/css-counters.html)
-
-[CSS Animations VS the Web Animations API：案例学习](http://www.cnblogs.com/yangyoucun/p/6849918.html)
-
-[关于CSS的will-change属性的介绍](http://www.w3cplus.com/css3/introduction-css-will-change-property.html)
 
 [多行文本溢出显示省略号(…)全攻略](http://www.css88.com/archives/5206)
 
@@ -259,11 +246,10 @@ Web前端学习流程
 
 [css 重排与重绘](https://blog.csdn.net/zjjnwpu/article/details/56008466?locationNum=7&fps=1)
 
+### JS
 [defer和async的区别](https://segmentfault.com/q/1010000000640869)
 [彻底搞懂 async & defer](https://github.com/xiaoyu2er/blog/issues/8)
 
-
-### JS
 [事件代理 & 什么是冒泡什么是捕获](http://www.cnblogs.com/owenChen/archive/2013/02/18/2915521.html)
 
 [javascript中0级DOM和2级DOM事件模型浅析](http://blog.csdn.net/sixwinds/article/details/5656413)
@@ -321,28 +307,24 @@ Web前端学习流程
 
 [javascript原生一步步实现bind分析](https://segmentfault.com/a/1190000007342882)
 
-#### JS 多线程
-了解js多线程，主要分为Concurrent.Thread.js（对不支持webwork的浏览器）和WebWork两部分
+#### JS 线程
+[从浏览器多进程到JS单线程，JS运行机制最全面的一次梳理](https://segmentfault.com/a/1190000012925872)
 
-[JavaScript多线程初步学习](http://www.cnblogs.com/fanfan-nancy/p/5722234.html)
+[浏览器进程？线程？傻傻分不清楚！](http://www.imweb.io/topic/58e3bfa845e5c13468f567d5)
 
 [拔开云雾见明月 透析JavaScript定时机制](http://developer.51cto.com/art/201007/211468_all.htm)
 
 [从JavaScript的单线程执行说起](http://www.raychase.net/1968)
 
-利用setTimeout和setInterval模拟多线程的一个库 [github备份地址](https://github.com/bringmehome/Concurrent.Thread.js)
-
+js多线程，主要分为Concurrent.Thread.js（对不支持webwork的浏览器）和WebWork两部分：
 [JavaScript 编写线程代码引用Concurrent.Thread.js](http://www.cnblogs.com/0banana0/archive/2011/06/01/2067402.html)
-
-阅读源码需对setTimeout和setInterval有相当的理解才行！
+ - 利用setTimeout和setInterval模拟多线程的一个库 [github备份地址](https://github.com/bringmehome/Concurrent.Thread.js)
+ - 阅读源码需对setTimeout和setInterval有相当的理解才行！
 
 H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作。
-
-[HTML5新功能之八 《web works多线程》](http://www.cnblogs.com/couxiaozi1983/p/3799898.html)
-
-[深入 HTML5 Web Worker 应用实践：多线程编程](https://www.ibm.com/developerworks/cn/web/1112_sunch_webworker/)
-
-[HTML5之Javascript多线程](http://blog.sina.com.cn/s/blog_63940ce201018lyh.html)*有讲共享型SharedWebWorker*
+- [HTML5新功能之八 《web works多线程》](http://www.cnblogs.com/couxiaozi1983/p/3799898.html)
+- [深入 HTML5 Web Worker 应用实践：多线程编程](https://www.ibm.com/developerworks/cn/web/1112_sunch_webworker/)
+- [HTML5之Javascript多线程](http://blog.sina.com.cn/s/blog_63940ce201018lyh.html)*有讲共享型SharedWebWorker*
 
 #### jQuery分析
 
@@ -363,12 +345,6 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 
 ### 其他 & 综合
 [KING的小技巧/知识点贴](/2017/03/01/_mixed/)
-
-[前端性能优化----yahoo前端性能团队总结的35条黄金定律](http://www.ayqy.net/blog/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96%EF%BC%9A%E9%9B%85%E8%99%8E35%E6%9D%A1/?utm_source=tuicool&utm_medium=referral)
-
-[一次完整的HTTP请求过程（以chrome为例）](http://linux5588.blog.51cto.com/65280/1351007)*其中有谈到计算机网络，操作系统文件管理，浏览器渲染参考*
-- [浏览器的渲染机制](https://blog.csdn.net/wozaixiaoximen/article/details/50640954##1)
-- [浏览器加载和渲染HTML的顺序](http://www.cnblogs.com/elegance/p/4233986.html)*后面jQuery部分可跳过不看*
 
 [HTTPS 为什么更安全](https://gold.xitu.io/post/58a8f3295c497d005fbd58b1)
 
@@ -393,6 +369,24 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 [7款值得你心动的HTML5动画和游戏](http://www.html5tricks.com/7-mindful-html5-game-animation.html)
 
 [Travis CI助力Blog持续输出](http://palmer.arkstack.cn/2018/01/Travis%20CI%E5%8A%A9%E5%8A%9BBlog%E6%8C%81%E7%BB%AD%E8%BE%93%E5%87%BA/)
+
+#### 性能优化
+CSS动画性能优化：
+- [css3动画的性能优化](https://segmentfault.com/a/1190000000490328)
+- [CSS 性能优化笔记](https://segmentfault.com/a/1190000007336987) *内含其他性能优化链接*
+- [CSS Animation性能优化](https://www.w3cplus.com/animation/animation-performance.html)
+  - [](http://taobaofed.org/blog/2016/04/25/performance-composite/)
+  - [渲染性能](http://www.wdshare.org/article/5770ed9753c50d1a18f64a97)
+- [CSS Animations VS the Web Animations API：案例学习](http://www.cnblogs.com/yangyoucun/p/6849918.html)
+- [关于CSS的will-change属性的介绍](http://www.w3cplus.com/css3/introduction-css-will-change-property.html)
+
+[前端性能优化----yahoo前端性能团队总结的35条黄金定律](http://www.ayqy.net/blog/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96%EF%BC%9A%E9%9B%85%E8%99%8E35%E6%9D%A1/?utm_source=tuicool&utm_medium=referral)
+
+[一次完整的HTTP请求过程（以chrome为例）](http://linux5588.blog.51cto.com/65280/1351007)*其中有谈到计算机网络，操作系统文件管理，浏览器渲染参考*
+- [浏览器的渲染机制](https://blog.csdn.net/wozaixiaoximen/article/details/50640954##1)
+- [浏览器加载和渲染HTML的顺序](http://www.cnblogs.com/elegance/p/4233986.html)*后面jQuery部分可跳过不看*
+
+[全新Chrome Devtool Performance使用指南](https://zhuanlan.zhihu.com/p/29879682)
 
 #### 前端工程化
 [前端优化带来的思考，浅谈前端工程化](http://www.cnblogs.com/yexiaochai/p/4901341.html)
