@@ -304,7 +304,8 @@ transform-origin: bottom;
 这个方案在结构层面是最佳选择：它只需要一个元素作为容器，而其他部分是由伪元素、变形属性和 CSS 渐变来实现的。
 
 ```html
-<div class="pie"></div>
+<div class="pie" style="animation-delay: -20s"></div>
+<div class="pie" style="animation-delay: -60s"></div>
 ```
 
 ```css
