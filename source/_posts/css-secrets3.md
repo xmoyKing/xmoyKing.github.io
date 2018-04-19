@@ -303,35 +303,150 @@ transform-origin: bottom;
 **基于 transform 的解决方案**
 这个方案在结构层面是最佳选择：它只需要一个元素作为容器，而其他部分是由伪元素、变形属性和 CSS 渐变来实现的。
 
-假设目前的需求是一个最简单的饼图，其展示的比率是固定的20%；稍后再来改进它的灵活性。首先把这个元素设置为一个圆形，以它作为背景
 ```html
 <div class="pie"></div>
-
-.pie {
-  width: 100px; height: 100px;
-  border-radius: 50%;
-  background: yellowgreen;
-}
 ```
 
-把圆形的左右两部分指定为上述两种颜色，然后用伪元素覆盖上去，通过旋转来决定露出多大的扇区。
-为了把圆形的右半部分设置为棕色，要用到一个简单的线性渐变：
 ```css
-background-image: linear-gradient(to right, transparent 50%, #655 0);
-
+.pie {
+  position: relative;
+  width: 100px;
+  line-height: 100px;
+  border-radius: 50%;
+  background: yellowgreen;
+  background-image: linear-gradient(to right, transparent 50%, #655 0);
+  color: transparent;
+  text-align: center;
+}
+@keyframes spin {
+  to { transform: rotate(.5turn); }
+}
+@keyframes bg {
+  50% { background: #655; }
+}
 .pie::before {
   content: '';
-  display: block;
-  margin-left: 50%;
-  height: 100%;
+  position: absolute;
+  top: 0; left: 50%;
+  width: 50%; height: 100%;
   border-radius: 0 100% 100% 0 / 50%;
   background-color: inherit;
   transform-origin: left;
+  animation: spin 50s linear infinite,
+             bg 100s step-end infinite;
+  animation-play-state: paused;
+  animation-delay: inherit;
 }
 ```
 
-伪元素现在相对于整个饼图进行了重叠。不过现在还没有设置任何样式，它还起不到遮盖的作用：暂时只是一个透明的矩形。
- - 希望它能遮盖圆形中的棕色部分，因此应该给它指定绿色背景。在这里使用 background-color: inherit 声明可以避免代码的重复，因为希望它的背景色与其宿主元素保持一致。
- - 希望它是绕着圆形的圆心来旋转的，对它自己来说，这个点就是它左边缘的中心点。因此应该把它的 transform-origin设置为 0 50% ，或者干脆写成 left 。
- - 不希望它呈现出矩形的形状，否则它会突破整个饼图的圆形范围。因此要么给 .pie 设置 overflow: hidden 的样式，要么给这个伪元素指定合适的 border-radius 属性来把它变成一个半圆。
 
+**SVG 解决方案**
+SVG可以用纯粹的矢量路径来绘制饼图，但需要一些复杂的计算，现在用巧妙的方法完成。
+
+从一个圆形开始：
+```html
+<svg width="100" height="100">
+  <circle r="30" cx="50" cy="50" />
+</svg>
+
+circle {
+  fill: yellowgreen;
+  stroke: #655;
+  stroke-width: 30;
+}
+```
+
+SVG 的描边效果并不仅仅由 stroke 和 stroke-width 组成。stroke-dasharray 为虚线描边而准备的。`stroke-dasharray: 20 10;`表示让虚线的线段长度为 20 且间隙长度为 10 ，
+
+当把这个虚线描边的线段长度指定为 0 ，并且把虚线间隙的长度设置为等于或大于整个圆周的长度时（圆形的周长 C = 2πr，因此在这里C=2π × 30 ≈ 189。）
+
+不同的 stroke-dasharray 值及其效果；从左到右分别是： 0189 、 40 189 、 95 189 和 150 189
+![](18.png)
+
+因为虚线的间隙太大，我们根本就看不到连续的虚线效果，只能得到虚线的第一段线段，而它在整个圆周上覆盖的长度正是我们给它指定的长度值。
+
+把这个圆形的半径减小到一定程度，它就会被描边完全覆盖，最终会得到一个非常接近饼图的图形。举例来说，当把圆形的半径设为 25 并且把 stroke-width指定为 50 时
+
+```html
+<svg width="100" height="100">
+  <circle r="25" cx="50" cy="50" />
+</svg>
+
+circle {
+  fill: yellowgreen;
+  stroke: #655;
+  stroke-width: 50;
+  stroke-dasharray: 60 158; /* 2π × 25 ≈ 158 */
+}
+```
+
+![](19.png)
+
+把它转换成前一种方案所呈现的那种饼图就非常简单了：只需要在描边的下层再绘制一个稍大些的圆形，然后把描边以逆时针方向旋转 90°，以便让扇区的起点出现在最顶部。由于 svg 元素本身也是一个 HTML 元素，可以给它设置样式：
+```css
+svg {
+  transform: rotate(-90deg);
+  background: yellowgreen;
+  border-radius: 50%;
+}
+```
+
+![](20.png)
+
+还可以让饼图从 0 到 100% 的动画变得更加简单。只需要新建一个 CSS 动画，并把 stroke-dasharray 属性从 0 158 变化到 158 158 就可以了：
+```css
+@keyframes fillup {
+  to { stroke-dasharray: 158 158; }
+}
+
+circle {
+  fill: yellowgreen;
+  stroke: #655;
+  stroke-width: 50;
+  stroke-dasharray: 0 158;
+  animation: fillup 5s linear infinite;
+}
+```
+
+可以给这个圆形指定一个特定的半径，从而让它的周长无限接近 100，这样就可以直接把比率的百分比值指定为 stroke-dasharray 的长度，不需要做任何计算了。因为周长是 2πr，半径就是 100/2π ≈ 15.915494309， 最终把这个值取整为 16。在 SVG 的viewBox 属性中指定其尺寸，而不再使用 width 和 height 属性，这样就可以让它自动适应容器的大小了。
+
+```html
+<svg viewBox="0 0 32 32">
+  <circle r="16" cx="16" cy="16" />
+</svg>
+
+svg {
+  width: 100px; height: 100px;
+  transform: rotate(-90deg);
+  background: yellowgreen;
+  border-radius: 50%;
+}
+circle {
+  fill: yellowgreen;
+  stroke: #655;
+  stroke-width: 32;
+  stroke-dasharray: 38 100; /* 可得到比率为38%的扇区 */
+}
+```
+
+SVG 的方案具有不少优点，而这恰恰是纯 CSS 方案存在不足的地方。
+- 增加第三种颜色是非常容易的：只要增加另一个圆形，并设置虚线描边，再用 stroke-dashoffset 来推后描边线段的起始位置即可。把它的描边长度添加到它下面那层描边的长度，也可以做到。
+- 不需要特别担心打印，因为 SVG 元素本身被视为页面内容，是会被打印出来的，在这方面它跟 img 元素类似。
+- 可以用内联样式来指定颜色，这意味着可以很容易地通过脚本来控制颜色（比如，我们想让用户输入来决定颜色）。
+
+**角向渐变方案**
+在生成饼图时只需要一个圆形元素，再配上一幅具有两个色标的角向渐变即可。
+```css
+.pie {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(#655 40%, yellowgreen 0);
+}
+```
+
+不仅如此，一旦 attr() 函数在[ CSS 值（第三版）](http://w3.org/TR/css3-values/#attr-notation)中的扩
+展定义得到广泛实现之后，将可以通过一个简单的 HTML 标签属性来控制饼图的比率显示。
+`background: conic-gradient(#655 attr(data-value %), yellowgreen 0);`
+
+在饼图中加入第三种颜色也会变得手到擒来。只再增加两个色标就可以了：
+`background: conic-gradient(deeppink 20%, #fb3 0, #fb3 30%, yellowgreen 0);`
