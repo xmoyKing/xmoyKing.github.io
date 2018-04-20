@@ -303,6 +303,9 @@ transform-origin: bottom;
 **基于 transform 的解决方案**
 这个方案在结构层面是最佳选择：它只需要一个元素作为容器，而其他部分是由伪元素、变形属性和 CSS 渐变来实现的。
 
+<p data-height="265" data-theme-id="0" data-slug-hash="VXNQQb" data-default-tab="css,result" data-user="xmoyking" data-embed-version="2" data-pen-title="基于 transform 的简单饼图-动画版本" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/VXNQQb/">基于 transform 的简单饼图-动画版本</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 ```html
 <div class="pie" style="animation-delay: -20s"></div>
 <div class="pie" style="animation-delay: -60s"></div>
@@ -339,6 +342,28 @@ transform-origin: bottom;
   animation-delay: inherit;
 }
 ```
+
+把圆形的左右两部分指定为上述两种颜色，然后用伪元素覆盖上去，通过旋转来决定露出多大的扇区。为了把圆形的右半部分设置为棕色，用线性渐变实现。
+ - 希望它能遮盖圆形中的棕色部分，因此应该给它指定绿色背景。在这里使用 background-color: inherit 声明可以避免代码的重复，因为希望它的背景色与其宿主元素保持一致。
+ - 希望它是绕着圆形的圆心来旋转的，对它自己来说，这个点就是它左边缘的中心点。因此应该把它的 transform-origin设置为 0 50% ，或者干脆写成 left 。
+ - 不希望它呈现出矩形的形状，否则它会突破整个饼图的圆形范围。因此要么给 .pie 设置 overflow: hidden 的样式，要么给这个伪元素指定合适的 border-radius 属性来把它变成一个半圆。
+
+可以通过一个 rotate() 变形属性来让这个伪元素转起来。如果要显示出 20% 的比率，可以指定旋转的值为 72deg （0.2 × 360 = 72），写成 .2turn 会更加直观一些。
+
+把 50%~100% 的比率看作另外一个问题，可以使用上述技巧的一个反向版本来实现这个范围内的比率：设置一个棕色的伪元素，让它在 0 至 .5turn 的范围内旋转。
+
+当需要制作出多个不同比率的静态饼图时，需要用内联样式来控制饼图的比率, 负责设置比率的 CSS 代码最终是要应用到伪元素身上的,但无法为伪元素设置内联样式，使用动画，但动画必须处于暂停状态。跟常规情形下让动画动起来的做法不一样，这里要用负的动画延时来直接跳至动画中的任意时间点，并且定格在那里。
+
+animation-delay 在规范中的解释。“一个负的延时值是合法的。与 0s 的延时类似，它意味着动画会立即开始播放，但会自动前进到延时值的绝对值处，就好像动画在过去已经播放了指定的时间一样。因此实际效果就是动画跳过指定时间而从中间开始播放了。”
+
+因为动画是暂停的，所以动画的第一帧（由负的 animation-delay 值定义）将是唯一显示出的那一帧。在饼图上显出的比率就是animation-delay 值在总的动画持续时间中所占的比率。举例来说，如果动画持续时间定为 6s ，只需要把 animation-delay 设置为 -1.2s ，就能显示出 20% 的比率。为了简化这个计算过程，可以设置一个长达 100s的持续时间。这里的动画是永远处在暂停状态的，因此指定的持续时间并不会产生其他副作用。
+
+现在还剩最后一个问题：动画是作用在伪元素上的，但希望最终内联样式可以设置在 .pie 元素上。不过，由于 `<div>` 上并没有任何动画效果，我们可以用内联样式的方式为其设置 animation-delay 属性，然后再在伪元素上应用 animation-delay: inherit; 属性。
+
+因为需要确保可访问性和可用性。可以利用 color: transparent 来把文字隐藏起来，同时还保证了可访问性，因为此时文字仍然是可以被选中和打印的。进一步优化，把比率文字放置在饼图的中心处，从而方便用户选中它。
+ - 把这个饼图的 height 换成 line-height （或者添加一个跟 height相等的 line-height 属性，但这会增加无意义的代码重复；其实line-height 本身就可以起到设置高度的作用）。
+ - 通过绝对定位来完成对伪元素的尺寸设置和定位操作，这样它就不会把文字推到下面了。
+ - 增加 text-align: center; 来实现文字的水平居中。
 
 
 **SVG 解决方案**
