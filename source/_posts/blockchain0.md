@@ -10,7 +10,6 @@ updated: 2018-03-05 23:23:30
 
 
 ## 图解区块链简化版（PPT）
-<iframe src="http://www.ipresst.com/w/jzccbm/play" height="500"></iframe>
 [在线PPT地址](http://www.ipresst.com/w/jzccbm/play)
 
 ## 区块链资源
