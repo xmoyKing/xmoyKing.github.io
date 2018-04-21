@@ -1,30 +1,28 @@
 ---
-title: Normalize.css v5.0.0源码解释
-categories: JavaScript
+title: Normalize.css v8.0.0源码翻译
+categories: CSS
 tags:
-  - JavaScript
+  - CSS
+  - 翻译
 date: 2018-04-21 11:18:14
 updated: 2018-04-21 11:18:14
 ---
 
-Normalize.css在默认的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的css reset，Normalize.css面向HTML5，且更优质，更现代。
+[Normalize.css](https://necolas.github.io/normalize.css/)在默认的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的css reset，Normalize.css面向HTML5，且更优质，更现代。
 
 ```css
-/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
-
-/**
- * 1. 修改在所有浏览器中的默认字体（自定义）。
- * 2. 纠正在所有浏览器中的行高。
- * 3. 在 Windows Phone 和 iOS 设备调整屏幕方向后，防止字体大小发生改变。
- */
+/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
 
 /* 文档
    ================================================================== */
 
+/**
+ * 1. 纠正在所有浏览器中的行高。
+ * 2. 在 iOS 设备调整屏幕方向后，防止字体大小发生改变。
+ */
+
 html {
-  font-family: sans-serif; /* 1 */
-  line-height: 1.15; /* 2 */
-  -ms-text-size-adjust: 100%; /* 3 */
+  line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 3 */
 }
 
@@ -32,24 +30,11 @@ html {
 ================================================================== */
 
 /**
- * 清除在所有浏览器中的 margin（自定义）。
+ * 清除在所有浏览器中的 margin。
  */
 
 body {
   margin: 0;
-}
-
-/**
- * 增加在 IE 9-浏览器中的正确显示方式。
- */
-
-article,
-aside,
-footer,
-header,
-nav,
-section {
-  display: block;
 }
 
 /**
@@ -63,25 +48,6 @@ h1 {
 
 /* 为内容分组
    ================================================================== */
-
-/**
- * 增加在 IE 9-浏览器中的正确显示方式。
- * 1. 增加在 IE 浏览器中的正确显示方式。
- */
-
-figcaption,
-figure,
-main { /* 1 */
-  display: block;
-}
-
-/**
- * 增加在 IE 8浏览器中的正确 margin 值。
- */
-
-figure {
-  margin: 1em 40px;
-}
 
 /**
  * 1. 增加在 Firefox 浏览器中应显示的盒子尺寸。
@@ -108,25 +74,14 @@ pre {
    ================================================================== */
 /**
  * 1. 清除 IE 10浏览器为激活的链接添加的灰色背景。
- * 2. 清除在 iOS 8+和 Safari 8+系统中为链接添加的下划线之间的间隔。
  */
 
 a {
    background-color: transparent; /* 1 */
-   -webkit-text-decoration-skip: objects; /* 2 */
 }
 
 /**
- * 所有浏览器中，当链接处于激活或鼠标悬浮状态的聚焦状态时，清除链接的轮廓（自定义）。
- */
-
-a:active,
-a:hover {
-  outline-width: 0;
-}
-
-/**
- * 1. 清除在 Firefox 39-浏览器中的下边框。
+ * 1. 清除在 Chrome 57-浏览器中的下边框。
  * 2. 增加在 Chrome、Edge、IE、Opera 和 Safari 浏览器中正确的文本修饰。
  */
 
@@ -134,15 +89,6 @@ abbr[title] {
   border-bottom: none; /* 1 */
   text-decoration: underline; /* 2 */
   text-decoration: underline dotted; /* 2 */
-}
-
-/**
- * 防止在 Safari 6浏览器中，因下一条样式规则而重复应用 border 属性。
- */
-
-b,
-strong {
-  font-weight: inherit;
 }
 
 /**
@@ -166,22 +112,6 @@ samp {
   font-size: 1em; /* 2 */
 }
 
-/**
- * 增加在 Android 4.3-中正确的字体样式。
- */
-
-dfn {
-  font-style: italic;
-}
-
-/**
- * 增加在 IE 9-浏览器中正确的背景色和文本的颜色。
- */
-
-mark {
-  background-color: #ff0;
-  color: #000;
-}
 
 /**
  * 增加在所有浏览器中正确的字体大小。
@@ -215,37 +145,11 @@ sup {
    ================================================================== */
 
 /**
- * 增加在 IE 9-浏览器中的正确显示方式。
- */
-
-audio,
-video {
-  display: inline-block;
-}
-
-/**
- * 增加在 iOS 4-7浏览器中的正确显示方式。
- */
-
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-
-/**
  * 清除 IE 10-浏览器中包裹在链接内部的图像的边框。
  */
 
 img {
   border-style: none;
-}
-
-/**
- * 在 IE 浏览器中隐藏溢出的部分。
- */
-
-svg:not(:root) {
-  overflow: hidden;
 }
 
 /* 表单
@@ -278,25 +182,14 @@ input { /* 1 */
 }
 
 /**
- * 在 Edge、Firefox 和 IE 浏览器中，清除对文本转换的继承。
- * 1.在 Firefox 浏览器中，清除对文本转换的继承。
+ * 纠正在 iOS 系统和 Safari 浏览器中无法为可点击类型添加样式的问题。
  */
 
 button,
-select { /* 1 */
-  text-transform: none;
-}
-
-/**
- * 1. 在 Android 4系统中，防止 WebKit 的一个 bug（下面第2点所描述的）破坏原生的 audio 和 video 控件。
- * 2. 纠正在 iOS 系统和 Safari 浏览器中无法为可点击类型添加样式的问题。
- */
-
-button,
-html [type="button"], /* 1 */
+[type="button"],
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: button; /* 2 */
+  -webkit-appearance: button;
 }
 
 /**
@@ -324,12 +217,10 @@ button:-moz-focusring,
 }
 
 /**
- * 修改在所有浏览器中的 border、margin 和 padding（自定义）。
+ * 修改在所有浏览器中的 padding（自定义）。
  */
 
 fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
 }
 
@@ -349,17 +240,15 @@ legend {
 }
 
 /**
- * 1. 增加在 IE 9-浏览器中的正确显示方式。
- * 2. 增加 Chrome、Firefox 和 Opera 浏览器中正确的垂直对齐方式。
+ * 增加 Chrome、Firefox 和 Opera 浏览器中正确的垂直对齐方式。
  */
 
 progress {
-  display: inline-block; /* 1 */
-  vertical-align: baseline; /* 2 */
+  vertical-align: baseline;
 }
 
 /**
- * 清除 IE 浏览器中默认的垂直滚动条。
+ * 清除 IE 10+浏览器中默认的垂直滚动条。
  */
 
 textarea {
@@ -397,7 +286,7 @@ textarea {
 }
 
 /**
- * 清除 macOS 系统下 Chrome 和 Safari 浏览器的内部 padding 和cancel button（取消按钮）样式。
+ * 清除 macOS 系统下 Chrome 和 Safari 浏览器的内部 padding 样式。
  */
 
 [type="search"]::-webkit-search-cancel-button,
@@ -419,12 +308,10 @@ textarea {
    ================================================================== */
 
 /*
- * 增加在 IE 9-浏览器中的正确显示方式。
- * 1. 增加在 Edge、IE 和 Firefox 浏览器中的正确显示方式。
+ * 增加在 Edge、IE 10+和 Firefox 浏览器中的正确显示方式。
  */
 
-details, /* 1 */
-menu {
+details{
   display: block;
 }
 
@@ -440,26 +327,15 @@ summary {
    ================================================================== */
 
 /**
- * 增加在 IE 9-浏览器中的正确显示方式。
- */
-
-canvas {
-  display: inline-block;
-}
-
-/**
- * 增加在 IE 浏览器中的正确显示方式。
+ * 增加在 IE 10+浏览器中的正确显示方式。
  */
 
 template {
   display: none;
 }
 
-/* 隐藏
-   ================================================================== */
-
 /**
- * 增加在 IE 10-浏览器中的正确显示方式。
+ * 增加在 IE 10浏览器中的正确显示方式。
  */
 
 [hidden] {
