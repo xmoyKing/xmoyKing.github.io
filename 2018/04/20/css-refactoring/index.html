@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            CSS重构笔记 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",CSS,重构">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="CSS重构笔记 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="CSS"> <meta property="og:article:tag" content="重构"> 
+
+    
+        <meta property="article:published_time" content="Fri Apr 20 2018 16:47:28 GMT+0800" />
+        <meta property="article:modified_time" content="Fri Apr 20 2018 16:47:28 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="CSS重构笔记 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2018/04/20/css-refactoring/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2018/04/20/css-refactoring/index.html",
+    "headline": "CSS重构笔记",
+    "datePublished": "Fri Apr 20 2018 16:47:28 GMT+0800",
+    "dateModified": "Fri Apr 20 2018 16:47:28 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",CSS,重构",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#什么是重构"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是重构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么是软件架构"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">什么是软件架构</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#优秀架构是可预测的"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">优秀架构是可预测的</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#优秀架构可提升代码复用性"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">优秀架构可提升代码复用性</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#优秀架构可扩展"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">优秀架构可扩展</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#优秀架构可维护"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">优秀架构可维护</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件架构和重构"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">软件架构和重构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#需要重构的原因"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">需要重构的原因</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#需求变更"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">需求变更</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#架构设计不合理"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">架构设计不合理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#低估困难"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">低估困难</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#忽视最佳实践"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">忽视最佳实践</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么情况下应该重构代码"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">什么情况下应该重构代码</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么情况下不应该重构代码"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">什么情况下不应该重构代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重构示例"><span class="post-toc-number">2.</span> <span class="post-toc-text">重构示例</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编写更优质的-CSS"><span class="post-toc-number">3.</span> <span class="post-toc-text">编写更优质的 CSS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#高性能选择器"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">高性能选择器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#从右向左匹配选择器"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">从右向左匹配选择器</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#关键选择器"><span class="post-toc-number">3.1.2.</span> <span class="post-toc-text">关键选择器</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分离CSS和JavaScript"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">分离CSS和JavaScript</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#在JavaScript中使用带前缀的类和ID"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">在JavaScript中使用带前缀的类和ID</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#用类修改元素样式"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">用类修改元素样式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#类名要有意义"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">类名要有意义</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#content-box或border-box"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">content-box或border-box</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为样式分类"><span class="post-toc-number">4.</span> <span class="post-toc-text">为样式分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#通用样式"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">通用样式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基础样式"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">基础样式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#将定义尺寸的任务交给结构化容器"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">将定义尺寸的任务交给结构化容器</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#结构化样式"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">结构化样式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#功能样式"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">功能样式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#浏览器特定样式"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">浏览器特定样式</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码的组织和重构策略"><span class="post-toc-number">5.</span> <span class="post-toc-text">代码的组织和重构策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#重构前审查-CSS"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">重构前审查 CSS</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#重构策略"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">重构策略</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#undefined"><span class="post-toc-number"></span> <span class="post-toc-text"> – ）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#undefined"><span class="post-toc-number">0.0.0.1.</span> <span class="post-toc-text">）</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#评估重构是否成功"><span class="post-toc-number">1.</span> <span class="post-toc-text">评估重构是否成功</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                CSS重构笔记
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Apr 20, 2018</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Apr 20, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/CSS/">CSS</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/重构/">重构</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=CSS重构笔记&url=https://github.com/xmoyKING/2018/04/20/css-refactoring/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=CSS重构笔记&url=https://github.com/xmoyKING/2018/04/20/css-refactoring/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2018/04/20/css-refactoring/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2018/04/20/css-refactoring/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h3 id="什么是重构"><a href="#什么是重构" class="headerlink" title="什么是重构"></a>什么是重构</h3><p><strong>重构</strong>是指在不改变代码行为的前提下，重写代码，使其更加简洁、易于复用。与软件架构之间有什么关系呢？</p>
+<h4 id="什么是软件架构"><a href="#什么是软件架构" class="headerlink" title="什么是软件架构"></a>什么是软件架构</h4><p>术语<strong>软件架构</strong>用来描述软件项目的各个不同部件之间的组合方式。就像生物一样，软件系统通常由很多较小的部件组成，每个部件擅长做一件事。将这些部件组合起来，一起工作，可形成更大的软件系统。</p>
+<h5 id="优秀架构是可预测的"><a href="#优秀架构是可预测的" class="headerlink" title="优秀架构是可预测的"></a>优秀架构是可预测的</h5><p>软件架构<strong>可预测</strong>是指可以对软件的工作方式和结构做出准确的假设。可预测性表明预先的规划是合理的，并有助于节省开发时间，可以避免下列问题：</p>
+<ul>
+<li>组件的功能是什么</li>
+<li>某一段代码在何处</li>
+<li>新代码加到何处</li>
+</ul>
+<p>在可预测的架构中，人们可以做出精确的假设，不熟悉代码的开发人员也能够更快地理解该架构。-</p>
+<h5 id="优秀架构可提升代码复用性"><a href="#优秀架构可提升代码复用性" class="headerlink" title="优秀架构可提升代码复用性"></a>优秀架构可提升代码复用性</h5><p>代码复用优势明显，不用重写已有代码，可以加快开发速度。同理，解决某一问题所需的代码越少，维护所有用该代码实现的功能所需的时间就越少。</p>
+<p>例如，在一段代码中发现了一处 bug，而由于项目多处用到该代码，故将 bug 带到了多处。你只需在一个位置修复该 bug，就可以相应修复其他各处的 bug。</p>
+<h5 id="优秀架构可扩展"><a href="#优秀架构可扩展" class="headerlink" title="优秀架构可扩展"></a>优秀架构可扩展</h5><p><strong>可扩展性</strong>是优秀架构所遵循的一项原则，在具备该特点的系统上增加新功能很容易。大多数软件无法在一天之内开发完成，因此软件架构适于增量开发，且不需要做大的结构性变化，这一点非常重要。</p>
+<h5 id="优秀架构可维护"><a href="#优秀架构可维护" class="headerlink" title="优秀架构可维护"></a>优秀架构可维护</h5><p>可维护性软件是指你修改一处代码时，没必要大规模改动其他代码。跟可扩展性非常类似，<strong>可维护性</strong>对于架构也很重要。对于可维护的优秀架构，修改其现有功能很容易。</p>
+<h4 id="软件架构和重构"><a href="#软件架构和重构" class="headerlink" title="软件架构和重构"></a>软件架构和重构</h4><p>概括来讲，重构有助于维护和提升软件架构。重构就是指调整代码结构、使其更具意义的一套技术。重构可使代码可预测、可复用、可扩展和可维护。</p>
+<h4 id="需要重构的原因"><a href="#需要重构的原因" class="headerlink" title="需要重构的原因"></a>需要重构的原因</h4><h5 id="需求变更"><a href="#需求变更" class="headerlink" title="需求变更"></a>需求变更</h5><p>软件系统随着需求的变动而进化。软件在编写时是为了满足一组需求，可能没有考虑另一组需求，因此，需求变更时，代码也必须随之改变。此外，如果软件开发还有时间要求，有时会为优先满足功能的实现而走“捷径”，进而可能会影响代码质量。</p>
+<h5 id="架构设计不合理"><a href="#架构设计不合理" class="headerlink" title="架构设计不合理"></a>架构设计不合理</h5><p>投入大量时间事先规划好一切并不总是可行的。开发之初，若不知道各组件的组合方式，开发过程也许需要重构。非常常见的做法是，快速开发一个新功能（可能会为实现功能而走“捷径”），以验证它对用户是否有吸引力。如确实能够吸引用户，再将代码整理干净；如达不到预期效果，则删除代码。</p>
+<h5 id="低估困难"><a href="#低估困难" class="headerlink" title="低估困难"></a>低估困难</h5><p>预估软件开发需要多长时间很难，但不幸的是，常常根据估计结果来安排开发计划。如果项目开发周期被低估，将迫使开发人员“为了完成而完成”，而不会花很多时间思考。</p>
+<h5 id="忽视最佳实践"><a href="#忽视最佳实践" class="headerlink" title="忽视最佳实践"></a>忽视最佳实践</h5><p>跟上每一种最佳实践的发展步伐很难，技术发展日新月异，因此之前的最佳实践也许优势不再。</p>
+<h4 id="什么情况下应该重构代码"><a href="#什么情况下应该重构代码" class="headerlink" title="什么情况下应该重构代码"></a>什么情况下应该重构代码</h4><p>结合代码的上下文重构代码会更加容易。因此，如果你修复的 bug 或开发的新功能用到了已有代码，处理小任务时顺便重构代码，重构是最好的选择。不断坚持重构代码，代码质量将达到卓越，前提是改动符合优秀架构的特点。</p>
+<p>然而，有时你会遇到一段有很多依赖的代码，也许需要决定是否对其重构。对于具有很多依赖的代码，你改动得越多，需要更新的依赖就越多。</p>
+<h4 id="什么情况下不应该重构代码"><a href="#什么情况下不应该重构代码" class="headerlink" title="什么情况下不应该重构代码"></a>什么情况下不应该重构代码</h4><p>知道什么情况下<strong>不应该</strong>重构，甚至比知道什么情况下应该重构更为重要。仅当重构能够改善架构或使代码符合编码规范时，才应进行重构。</p>
+<h3 id="重构示例"><a href="#重构示例" class="headerlink" title="重构示例"></a>重构示例</h3><p>重构 CSS 时，确保重写代码没有改变展示效果同样重要。但无法直接测试，因为重构 CSS 带来的是视觉上的变化，而不是明确的数值上的变化。</p>
+<p>简单的说，方式如下：<br>将样式抽取出来作为单独的文件，可提升代码的复用性，因为抽取出来的样式可用于多个文件。将 CSS 置于一个独立于 HTML 代码的文件后，HTML 和 CSS 都更加清晰易读，因为 HTML 中不会包含冗长的样式定义，并且 CSS 可以按照符合逻辑的方式以声明块的形式组织在一起。最后，测试重构是否改变了页面；可手动用浏览器重新加载页面，与重构前的截图进行对比。</p>
+<h3 id="编写更优质的-CSS"><a href="#编写更优质的-CSS" class="headerlink" title="编写更优质的 CSS"></a>编写更优质的 CSS</h3><h4 id="高性能选择器"><a href="#高性能选择器" class="headerlink" title="高性能选择器"></a>高性能选择器</h4><p>简单的选择器比起复杂的选择器性能更高；应该优先选用简单的选择器，这是因为简单的选择器复用程度高，易于理解，同时需要对选择器性能有个整体认识。</p>
+<h5 id="从右向左匹配选择器"><a href="#从右向左匹配选择器" class="headerlink" title="从右向左匹配选择器"></a>从右向左匹配选择器</h5><p>Web 浏览器需要快速选择并为元素应用样式，以便尽快为用户提供可用的网页。浏览器从右向左匹配选择器，因此它能够忽略前面不匹配的元素，而不必把时间浪费到确认元素是否匹配上。</p>
+<p>如下是一段层级结构简单的 HTML 代码<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Another Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">strong</span>&gt;</span>Not a Link<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"nav-link"</span>&gt;</span>Link<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果用 div &gt; nav &gt; ul &gt;li &gt; a 选择锚点标签，并且浏览器尝试从左向右匹配元素，它需要执行下列步骤。</p>
+<ol>
+<li>遍历每个元素，检查它是否是 <code>&lt;div&gt;</code> 元素。</li>
+<li>检查步骤 1 匹配到的每个 <code>&lt;div&gt;</code> 元素，确认它是否有子节点 <code>&lt;nav&gt;</code>。</li>
+<li>检查步骤 2 匹配到的每个 <code>&lt;nav&gt;</code> 元素，确认它是否有子节点 <code>&lt;ul&gt;</code>。</li>
+<li>检查步骤 3 匹配到的每个 <code>&lt;ul&gt;</code> 元素，确认它是否有子节点 <code>&lt;li&gt;</code>。</li>
+<li>检查步骤 4 匹配到的每个 <code>&lt;li&gt;</code> 元素，确认它是否有子节点 <code>&lt;a&gt;</code>。</li>
+<li>为找到的那一个 <code>&lt;a&gt;</code> 元素应用样式。</li>
+</ol>
+<p>反过来讲，如果同一选择器（div &gt; nav &gt; ul &gt; li &gt; a）从右向左匹配，浏览器需要执行下列步骤。</p>
+<ol>
+<li>遍历每个元素，检查它是否是 <code>&lt;a&gt;</code> 元素。</li>
+<li>检查步骤 1 匹配到的每个 <code>&lt;a&gt;</code> 元素，确认它是否有一个 <code>&lt;li&gt;</code> 父节点。</li>
+<li>检查步骤 2 匹配到的每个 <code>&lt;li&gt;</code> 元素，确认它是否有一个 <code>&lt;ul&gt;</code> 父节点。</li>
+<li>检查步骤 3 匹配到的每个 <code>&lt;ul&gt;</code> 元素，确认它是否有一个 <code>&lt;nav&gt;</code> 父节点。</li>
+<li>检查步骤 4 匹配到的每个 <code>&lt;nav&gt;</code> 元素，确认它是否有一个 <code>&lt;div&gt;</code> 父节点。</li>
+<li>为与选择器相匹配的 <code>&lt;a&gt;</code> 元素应用样式。</li>
+</ol>
+<p>虽然这两种顺序步骤数相同，但存在较大的区别：从左向右匹配时，两个 <code>&lt;div&gt;</code> 元素都需要匹配一遍。而从右向左匹配时，浏览器能够直接排除不包含锚点标签的整个 <code>&lt;div&gt;</code>。若要进一步提升性能，还可以用 .nav-link 类选择锚点标签，那么浏览器只需要遍历每个元素，检查它是否包含该类。</p>
+<h5 id="关键选择器"><a href="#关键选择器" class="headerlink" title="关键选择器"></a>关键选择器</h5><p>浏览器从右向左匹配元素，因此它能够及时排除与选择器不匹配的元素。选择器最右边的部分叫作关键选择器。</p>
+<p>分析一个更加极端的例子,以 body 为祖先元素的通用选择器。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> * &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>选择的是祖先元素为 <code>&lt;body&gt;</code> 标签的任意元素。从右向左解析该选择器，能够选择页面的每个元素，并向上回溯查看它是否有个 <code>&lt;body&gt;</code> 祖先元素。该选择器效率极低，因为几乎每个可见元素都是 <code>&lt;body&gt;</code> 元素的后代。</p>
+<p>单独使用通用选择器为所有元素（<code>* {}</code> ）应用样式，浏览器可以很快完成渲染工作，因为它只需要匹配页面的每个元素。然而，当通用选择器与另一个选择器和结合符配合使用时，浏览器匹配合适的元素所做的工作要更多。只使用通用选择器，不要将其与结合符和其他选择器配合使用可以解决该问题。</p>
+<h4 id="分离CSS和JavaScript"><a href="#分离CSS和JavaScript" class="headerlink" title="分离CSS和JavaScript"></a>分离CSS和JavaScript</h4><p>由于 JavaScript 和 CSS 两者都依赖于 HTML 元素的类和 ID，因此它们可能会混杂在一起。此外，因为 JavaScript 能够修改 HTML 元素的样式，所以这两种语言的职责可能会变得很混乱。为了区分 CSS 和 JavaScript 的职能，JavaScript 中用来选择元素的类和 ID，不应该再用来为元素添加样式。类似地，用 JavaScript 修改元素样式时，应该通过增加和删除类来实现。</p>
+<h5 id="在JavaScript中使用带前缀的类和ID"><a href="#在JavaScript中使用带前缀的类和ID" class="headerlink" title="在JavaScript中使用带前缀的类和ID"></a>在JavaScript中使用带前缀的类和ID</h5><p>HTML 中的类既用来为元素添加 CSS 样式，又在 JavaScript 用作选择器，这种情况很常见。同样很常见的是，添加到元素中的类和 ID 只用于选择元素，而不是为元素添加样式。HTML 中的类和 ID，若未在 CSS 中使用，这将使得我们难以找到能够修改元素样式的 CSS。类似地，如果为了让类名更切合它所作用的元素而修改了类名，却没有同步修改 JavaScript 中的类名，JavaScript 代码将不起作用。</p>
+<p>比较简单的修改方法是，在只用于 JavaScript 的类和 ID 前添加 js-。例如，如果我们要在 JavaScript 中选择与政策相关的一组选项卡，那么可以用 js-tab-group-policies 作为 ID。只用添加了 js- 前缀的类和 ID 作为 JavaScript 选择器，就可以消除 JavaScript 和 CSS 之间的依赖关系。</p>
+<p>在 JavaScript 中，选择元素的最快方式是 ID。</p>
+<h5 id="用类修改元素样式"><a href="#用类修改元素样式" class="headerlink" title="用类修改元素样式"></a>用类修改元素样式</h5><p>元素样式可以用 JavaScript 修改，很多库（像 jQuery）简化了具体的实现方法。然而，用 JavaScript 修改样式通常表示用 style 属性为元素增加行内样式，这将使得行内样式最精确。此外，在 JavaScript 中修改样式，表示 JavaScript 要为特定的 CSS 样式负责，这超出了它的职责范围。如遇到元素样式需要改动的情况，则不仅要在 CSS 文件中查找现有样式，还要在 JavaScript 文件中查找。</p>
+<p>因此，若要修改 HTML 元素样式，不要用 JavaScript 添加 style 属性，而是应该为元素增加或删除类。这样不仅可以应用合适的样式，该元素的 CSS 样式集也能跟其余的网站 CSS 合理地组织在一起。</p>
+<p>从实际应用来看，大多数情况下，类和 ID 在 CSS 性能方面没有明显的差别。</p>
+<h5 id="类名要有意义"><a href="#类名要有意义" class="headerlink" title="类名要有意义"></a>类名要有意义</h5><p>有意义的类名通过描述为什么元素增加样式，从而提供恰如其分的背景信息。这样既可以防止因细节过少而表意模糊，又可以避免因信息过多而妨碍代码重用。</p>
+<p><strong>避免使用过于模块化的类</strong><br>有意义的类名，描述的是应用样式的元素，而不是为元素应用的样式。过于模块化的类<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"font-bold uppercase blue-text margin-bottom-large no-padding"</span>&gt;</span></span><br><span class="line">  Too Many CSS Classes</span><br><span class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这些类描述的是怎样为元素增加样式，而不是为什么元素增加样式。此外，这些类存在过于模块化问题——因为每个类应用一种样式，它们总是需要一起使用。应该避免使用过于模块化的类，因为它们并不比行内样式更好<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">style</span>=<span class="string">"font-weight: bold; text-transform: uppercase; color: #1200FF;</span></span></span><br><span class="line"><span class="tag"><span class="string"> margin-bottom: 20px; padding: 0"</span>&gt;</span></span><br><span class="line">  Too Many CSS Classes</span><br><span class="line"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>这些样式应该放到一起，使用表意明确、能够描述为什么元素增加样式的类名，重构之后，HTML 可读性更强，因为它使用了非常简洁的类名。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"section-title"</span>&gt;</span></span><br><span class="line">  Too Many CSS Classes</span><br><span class="line"><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.section-title</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#1200FF</span>;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">text-transform</span>: uppercase;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="content-box或border-box"><a href="#content-box或border-box" class="headerlink" title="content-box或border-box"></a>content-box或border-box</h4><p>因为盒子尺寸有两种不同的计算方法，所以应该考虑其使用场景。content-box 和 border-box 两者没有优劣之分，但是很多人发现 border-box 更直观，因为它描述的是包括边框在内的元素的高度和宽度，而不只是内容区域的尺寸。</p>
+<p>任何元素都可以设置 box-sizing 属性，因此可以混用这两种盒子，但是为了保持一致性，通常选用其中一种并坚持使用。具体设置方法是，用通用选择器进行设置，指定盒子的类型：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*,</span><br><span class="line">*<span class="selector-pseudo">:after</span>,</span><br><span class="line">*<span class="selector-pseudo">:before</span> &#123;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="为样式分类"><a href="#为样式分类" class="headerlink" title="为样式分类"></a>为样式分类</h3><p>代码复用是优秀架构的一项基本原则，可以说它是编写高质量 CSS 代码所要重点考虑的原则之一。按照样式的功能对其进行分类和使用，代码的复用方式就会变得更加明显。按用途定义样式，有助于创建更优秀的架构，因为将样式组织成为不同的类别，促使代码可预测性更强、更易于复用。</p>
+<h4 id="通用样式"><a href="#通用样式" class="headerlink" title="通用样式"></a>通用样式</h4><p>浏览器自带的默认样式表叫作浏览器默认样式，它可为 HTML 元素应用默认的样式。因为不同厂商开发的浏览器不同，所以其默认样式表的某些属性和属性值可能有所差异。</p>
+<p><strong>通用样式</strong>是指为各种元素的属性设置默认值的样式，否则不同的浏览器将为其应用不同的样式。</p>
+<p>测试和记录浏览器默认设置的属性和属性值很难，最通用的样式表是<a href="http://necolas.github.io/normalize.css" target="_blank" rel="noopener">normalize.css</a>，开源通用样式表中的很多样式，它们的最大用途体现在解决传统浏览器的兼容问题方面，其中包含大量用不到的元素的样式，比如 <code>&lt;kbd&gt;</code> 如果不打算使用这些元素，应该考虑将其删除。</p>
+<h4 id="基础样式"><a href="#基础样式" class="headerlink" title="基础样式"></a>基础样式</h4><p><strong>基础样式</strong>旨在为设置更加细致的样式提供基础。基础样式很容易识别，因为它们用单类型选择器，或结合使用非常简单的类型选择器和结合符（例如，用 ul ul 在无序列表中选择无序列表），或使用任何伪类为 HTML 元素添加样式。跟通用样式一样，基础样式是最不精确的样式，</p>
+<p>一旦为 HTML 元素设置基础样式后，应该不需要重新声明，除非设置的基础样式不适合目标场景。编写基础样式所要遵循的基本原则是：为元素应用基础样式之外的其他样式时，不需要重写大量基础样式就能实现设计目标。</p>
+<p>基础样式应该只为最笼统的使用场景设置属性和属性值。通常为元素设置以下基础属性，它们都继承自祖先元素（除了 margin 和 padding）：</p>
+<ul>
+<li>color</li>
+<li>font-family</li>
+<li>font-size</li>
+<li>font-weight</li>
+<li>letter-spacing</li>
+<li>line-height</li>
+<li>margin</li>
+<li>padding</li>
+</ul>
+<p>记录元数据的标签包括 <code>&lt;head&gt;、&lt;title&gt;、&lt;base&gt;、&lt;link&gt; 和 &lt;meta&gt;</code>。因为不可见，故不为其添加样式。</p>
+<h4 id="将定义尺寸的任务交给结构化容器"><a href="#将定义尺寸的任务交给结构化容器" class="headerlink" title="将定义尺寸的任务交给结构化容器"></a>将定义尺寸的任务交给结构化容器</h4><p>可复用组件是指添加了样式的元素或元素组合。可复用组件的例子包括按钮、下拉菜单、模态窗口、进度条和选项卡。</p>
+<p>创建可复用组件的过程可以简化如下。</p>
+<ol>
+<li>创建组件之前，定义需要实现的行为。</li>
+<li>保持组件样式的粒度，设置合理的默认值。</li>
+<li>若需要重写组件组的可见样式，用容器元素将它们包起来，为该容器定义一个具有区别度的类。</li>
+<li>将定义元素尺寸的任务交给结构化容器。</li>
+</ol>
+<p>例如要创建选项卡组件。需求如下：</p>
+<ul>
+<li>选项卡组件一般有三个选项卡，但是该种组件应该能够支持两个及以上选项卡。</li>
+<li>选项卡激活时，该选项卡的底边框变为蓝色，背景变为白色。</li>
+<li>选项卡处于非激活状态时，背景为灰色。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"tab-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab active"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Tab One<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Tab Two<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Tab Three<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>保持组件样式的粒度是指为组件的每个元素添加样式，以便它们能够复用。将选项卡的样式抽象为一个可复用的类，定义了.active 类，可以根据选项卡状态添加它，以表示哪个选项卡处于激活状态。</p>
+<p>如要为选项卡应用不同样式，可将定义选项卡样式的任务交由父容器完成。例如实现了一个水平选项卡组件后，还可以实现垂直展示选项卡。</p>
+<p>创建一个新的 .tab-group-vertical 类，该类包含 .tab 元素，然后用 .tab-group 类将 .tab 元素组合在一起：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tab-group</span>,</span><br><span class="line"><span class="selector-class">.tab-group-vertical</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>.tab 类将只包含适用于所有选项卡的样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tab</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#F2F2F2</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#F9F9F9</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab</span><span class="selector-class">.active</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#FFFFFF</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>将 border、border-radius 和 display 样式交由合适的父容器，.tab-group、.tab-group-vertical 类各有各的边框样式:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 选项卡组件样式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#F2F2F2</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#F9F9F9</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab</span><span class="selector-class">.active</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#FFFFFF</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000000</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab</span> &gt; <span class="selector-tag">a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: inherit;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">12px</span>;</span><br><span class="line">  <span class="attribute">text-decoration</span>: none;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 选项卡组件容器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group</span>,</span><br><span class="line"><span class="selector-class">.tab-group-vertical</span> &#123;</span><br><span class="line">  <span class="attribute">list-style</span>: none;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding-left</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab</span>,</span><br><span class="line"><span class="selector-class">.tab-group</span>,</span><br><span class="line"><span class="selector-class">.tab-group-vertical</span> &#123;</span><br><span class="line">  <span class="attribute">border-color</span>: <span class="number">#EEEEEE</span>;</span><br><span class="line">  <span class="attribute">border-style</span>: solid;</span><br><span class="line">  <span class="attribute">border-width</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 水平选项卡组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group</span> &#123;</span><br><span class="line">  <span class="attribute">border-bottom-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group</span> <span class="selector-class">.tab</span> &#123;</span><br><span class="line">  <span class="attribute">border-bottom-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">border-top-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">bottom</span>: -<span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group</span> <span class="selector-class">.tab</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">  <span class="attribute">border-left-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">border-top-left-radius</span>: <span class="number">4px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group</span> <span class="selector-class">.tab</span><span class="selector-pseudo">:last-child</span> &#123;</span><br><span class="line">  <span class="attribute">border-right-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">border-top-right-radius</span>: <span class="number">4px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group</span> <span class="selector-class">.tab</span><span class="selector-class">.active</span> &#123;</span><br><span class="line">  <span class="attribute">border-bottom-color</span>: <span class="number">#2196F3</span>;</span><br><span class="line">  <span class="attribute">border-bottom-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 垂直选项卡组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group-vertical</span> &#123;</span><br><span class="line">  <span class="attribute">border-left-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group-vertical</span> <span class="selector-class">.tab</span> &#123;</span><br><span class="line">  <span class="attribute">border-left-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">border-right-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group-vertical</span> <span class="selector-class">.tab</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">  <span class="attribute">border-top-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">border-top-right-radius</span>: <span class="number">4px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group-vertical</span> <span class="selector-class">.tab</span><span class="selector-pseudo">:last-child</span> &#123;</span><br><span class="line">  <span class="attribute">border-bottom-width</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">border-bottom-right-radius</span>: <span class="number">4px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tab-group-vertical</span> <span class="selector-class">.tab</span><span class="selector-class">.active</span> &#123;</span><br><span class="line">  <span class="attribute">border-left-color</span>: <span class="number">#2196F3</span>;</span><br><span class="line">  <span class="attribute">border-left-width</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>组件能够复用固然很好，但是很难预测它出现在页面中的位置。这也正是为什么要将设置元素尺寸的任务交给盛放组件的元素。<br>比如如下html结构：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"global-nav"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"tab-group-vertical"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab active"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Policies &amp;amp; Fees<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Documents<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Billing<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">main</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"tabbed-pane"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"tab-group"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab active"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Policy One<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Policy Two<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Policy Three<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"tab-group"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab active"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Fee One<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Fee Two<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"tab"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>Fee Three<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="结构化样式"><a href="#结构化样式" class="headerlink" title="结构化样式"></a>结构化样式</h4><p>结构化样式包括组件及其容器，比如 .tabbed-pane 元素。既然需要为布局定义尺寸，可以用结构化样式设置尺寸，然后将其添加给组件和容器。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 选项卡组件容器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tabbed-pane</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tabbed-pane</span> <span class="selector-class">.tab-group</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">45%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tabbed-pane</span> <span class="selector-class">.tab-group</span><span class="selector-pseudo">:first-child</span> &#123;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">5%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.tabbed-pane</span> <span class="selector-class">.tab-group</span><span class="selector-pseudo">:last-child</span> &#123;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">5%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 结构化样式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.global-nav</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5%</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">10%</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.content</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">5%</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">80%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="功能样式"><a href="#功能样式" class="headerlink" title="功能样式"></a>功能样式</h4><p><strong>功能样式</strong>是指开发人员在定义 HTML 元素的类时为其指定的样式，或满足特定条件时，用 JavaScript 添加的样式。例如，如果按下按钮隐藏某个元素，可以通过添加下面这个类来实现：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hidden</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>添加 !important 能够确保不管为元素增加或删除其他的类，元素将一直处于隐藏状态。</p>
+<h4 id="浏览器特定样式"><a href="#浏览器特定样式" class="headerlink" title="浏览器特定样式"></a>浏览器特定样式</h4><p>由于老的浏览器有一些怪癖，可以使用Hack，以克服这些问题。例如，如果需要用支持老 IE 浏览器，那么应该将其放到单独的样式表中，并用<strong>条件注释（conditional comments）</strong>添加对该样式表的引用，只为特定版本的浏览器加载这些样式。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!–-[if</span> <span class="attr">IE</span> <span class="attr">7</span>]&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"ie7.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">![endif]–-</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>媒体查询要靠近相关声明块</strong><br>媒体查询用于根据条件为元素应用不同的样式，比如根据浏览器视口的宽度变化调整样式。应该将媒体查询写到它们所作用的声明块附近，而不是将其置于 CSS 文件的末尾或单独的文件中，因为这样做可以为样式是如何起作用的提供更多背景信息。</p>
+<h3 id="代码的组织和重构策略"><a href="#代码的组织和重构策略" class="headerlink" title="代码的组织和重构策略"></a>代码的组织和重构策略</h3><h4 id="重构前审查-CSS"><a href="#重构前审查-CSS" class="headerlink" title="重构前审查 CSS"></a>重构前审查 CSS</h4><p>从以下更高的角度来审查 CSS，将非常有助于重构：</p>
+<ul>
+<li>所用到的属性列表</li>
+<li>使用某一特定属性的声明块列表</li>
+<li>使用的颜色数量</li>
+<li>使用的最高和最低权重</li>
+<li>拥有最高和最低权重的选择器</li>
+<li>选择器的长度<br><a href="http://cssdig.com/" target="_blank" rel="noopener">CSS Dig</a> 是Chrome的一款插件，可以用它获取到以上信息。能够帮助调整好 CSS 代码。</li>
+</ul>
+<h4 id="重构策略"><a href="#重构策略" class="headerlink" title="重构策略"></a>重构策略</h4><p>要注意，条件允许的话，应该只对能够维护的小块代码进行重构，并做到经常评审和发布。如果一次重构和发布大量代码，引入错误的风险更大，因为改动的内容更多。重构大量代码还会延缓新功能的上线，如果处理不当，在源文件版本控制系统合并代码也将更加复杂，甚至将引入错误。如果对小块代码进行重构，可能引发错误问题的改动将会更少，代码测试更加容易。</p>
+<p><strong>保持规则结构的一致性</strong><br>比如确定好声明块的格式和声明语句的顺序。</p>
+<p><strong>删除僵尸代码</strong><br>CSS 代码库不能留有僵尸代码，比如没有使用的声明块、重复的声明块和声明语句。</p>
+<p><strong>分离 CSS 和 JavaScript</strong><br>为元素添加样式的类和 ID 不应该在 JavaScript 中用作选择器，CSS 和 JavaScript 应该尽早分离，因为类和 ID 很可能会调整，这可能会破坏 JavaScript 代码。</p>
+<p><strong>分离基础样式</strong><br>任何网站的基础样式都应该尽可能的简单，因为它们使用的是类型选择器。</p>
+<p>将基础样式分为以下不同类别：</p>
+<ul>
+<li>标题（<h1> – <h6>）</h6></h1></li>
+<li>文本（例如：<p>、<fig> 和 <code>）</code></fig></p></li>
+<li>超链接（<a>）</a></li>
+<li>列表（<dl>、<ol> 和 <ul>）</ul></ol></dl></li>
+<li>表单（例如：<form>、<legend>、<input> 和 <button>）</button></legend></form></li>
+<li>表格（例如：<table>、<thead>、<tbody>、<tfoot>、<tr> 和 <td>）</td></tr></tfoot></tbody></thead></table></li>
+<li>媒体（例如：<audio>、<object> 和 <video>）</video></object></audio></li>
+</ul>
+<p>分完类之后，可以用 CSS Dig 寻找某一特定类别的选择器。找到选择器的使用频率和使用位置之后，可以对它们进行比较，看看哪个属性更常用。如果一个类型选择器单独使用，且只用过一次，就可以放心将其删除。</p>
+<p>如果一个类型选择器用过多次，按以下步骤重构。</p>
+<ol>
+<li>对于样式要予以重构的类型选择器，在基础样式中新建一条规则。</li>
+<li>从所有用到该类型选择器的地方找到最常用的属性，将其添加到新规则中。</li>
+<li>从其他规则删除重复的属性，因为它们可以继承新定义的基础样式。</li>
+</ol>
+<p><strong>删除冗余的 ID</strong><br>CSS 文件中权重最高的选择器使用 ID。因为同一个 ID 在一个网页最多只能使用一次，一个选择器包含多个 ID 实属冗余。</p>
+<p><strong>将 ID 转化为类</strong><br>删除冗余 ID 之后，剩余的 ID 可以转化为类。最终得到的 CSS 权重更低、更易于复用。将 ID 改为类时，请记得使用意义明确的类名，切记不要使用晦涩或过于精确的名称。</p>
+<p><strong>区分功能性样式</strong><br>功能性样式是唯一应该使用 !important 声明的样式。若不得不使用 !important 的样式，且用途单一（如隐藏元素），应将其作为功能样式写到样式表的同一地方。</p>
+<p><strong>定义可复用组件</strong><br>定义可复用组件有助于删除重复的 CSS。删除多余的 ID 后，通常余下的那个 ID 用于为元素添加样式。可以用作可复用组件的界面。</p>
+<p>可以从经常重复使用的界面（例如：选项卡）着手，花点时间调研网站什么地方用到了类似的界面。记录该界面的各种变体，并判断它们是合理的，还是由于不一致的 CSS 而导致的。</p>
+<p>使用相同的组件样式可以防止出现代码重复问题，但是若要重新定义组件的样式，则要把样式添加到容器组上或使用结构化样式。</p>
+<p><strong>删除行内 CSS 和过于模块化的类</strong><br>删除行内 CSS 和过于模块化的类应该同时进行，因为它们在本质上是相同的，只不过用 style 属性添加的行内 CSS 其特指度更高，除非用 !important 声明覆盖了行内样式。</p>
+<p><strong>隔离面向特定浏览器的 CSS 样式</strong><br>浏览器之间存在差异，因此为了实现兼容，会在 CSS 中使用一些特定的“Hack”，而这些代码很容易污染其他 CSS，因此需要对其进行区分。但是在隔离之前，需判断是否能够放弃支持这些浏览器。如果无法放弃对一款浏览器的支持，那么使用条件注释专门针对该浏览器为某一元素添加样式即可。</p>
+<h3 id="评估重构是否成功"><a href="#评估重构是否成功" class="headerlink" title="评估重构是否成功"></a>评估重构是否成功</h3><p>判断代码重构之后成功与否的最主要且最明显的方式是确认网站的行为是否倒退。重构是指在不改变代码行为的前提下，重写代码使其更加简洁。</p>
+<p>若没问题，接下来需要考虑其他方面：</p>
+<ul>
+<li>低耦合度<br>高质量的 CSS 是指 CSS 与使用它的 HTML 结构分离开来。通过创建可复用组件和用容器包裹组件，可以实现 CSS 和 HTML 的分离。虽然一定程度的耦合度一直存在，但是还是要避免使用过于复杂的选择器。CSS Dig 这类工具能够嗅探出复杂和过于精确的选择器。审计网站并检查选择器以找出需要改进的地方。</li>
+<li>低权重<br>CSS 权重和规则顺序决定着元素所应用的样式。选择器的权重指标可用于度量代码库的权重，以判断代码库是否包含大量高权重的选择器，这些选择器将增加代码的维护成本。CSS Dig 这类工具可以按照选择器的权重为其排序。</li>
+<li>更少的文件数量和更小的文件<br>应该向终端用户提供合成和压缩过的 CSS 文件——合成可以减少需要下载的文件数量，压缩可以删除多余字符以减小文件体积。这两种处理方法都能提高下载速度，进而减少页面加载时间。</li>
+</ul>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/04/20/js-refactoring/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/04/05/node-in-practice5/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">July 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">June 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">May 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">April 2016<span class="sidebar_archives-count">5</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/AngularJS/">AngularJS<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/CSS/">CSS<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/JavaScript/">JavaScript<span class="sidebar_archives-count">93</span></a></li><li><a class="sidebar_archives-link" href="/categories/Linux/">Linux<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/jQuery/">jQuery<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/区块链/">区块链<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/响应式-Web-设计/">响应式 Web 设计<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/安全/">安全<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/网络/">网络<span class="sidebar_archives-count">10</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/01/01/0_links/" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2018/02/16/0_booklist/" title="Booklist">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Booklist
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/03/01/0_mixed/" title="Notes">
+                
+                    <i class="material-icons sidebar-material-icons">assignment</i>
+                
+                Notes
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">256</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
