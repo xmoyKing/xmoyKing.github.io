@@ -120,6 +120,25 @@ ms.on('readable', ()=>{
 
 **实现一个可写流**
 若想要使用一个流接口I/O输出数据，则可以继承stream.Writable，实现_write方法即可向底层发送数据。
+```js
+const stream = require('stream');
+
+// 使用ES6 Class继承一个可写流
+class GreeenStream extends stream.Writable {
+    constructor(option = {}){
+        super(option);
+    }
+
+    _write(chunk, encoding, callback){
+        // 通过ANSI编码序列给文本加上绿色颜色
+        process.stdout.write('u001b[32m' + chunk +'u001b[39m');
+        callback(); // 当文本被发送到标准输出流时执行回调
+    }
+}
+
+// 测试，通过管道将输入文本用绿色文本输出
+process.stdin.pipe(new GreeenStream());
+```
 
 **实现一个双工流**
 继承stream.Duplex并实现_read和_write方法即可。
