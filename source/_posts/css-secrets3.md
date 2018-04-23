@@ -307,8 +307,8 @@ transform-origin: bottom;
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 ```html
-<div class="pie" style="animation-delay: -20s"></div>
-<div class="pie" style="animation-delay: -60s"></div>
+<div class="pie" style="animation-delay: -20s">20%</div>
+<div class="pie" style="animation-delay: -60s">60%</div>
 ```
 
 ```css
