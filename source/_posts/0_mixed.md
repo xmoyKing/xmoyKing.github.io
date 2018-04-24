@@ -713,3 +713,17 @@ module.exports = function(arr1, arr2) {
 }
 
 ```
+
+---
+4. 核辐射警告标志是一个60度扇形黄、黑相间的圆，要求，使用html和css实现下面的效果：
+在网页中始终垂直、水平居中显示一个半径100的核辐射警告标志圆。
+
+实现DEMO地址：https://codepen.io/xmoyking/pen/qYOgMj
+
+<p data-height="265" data-theme-id="0" data-slug-hash="qYOgMj" data-default-tab="css,result" data-user="xmoyking" data-embed-version="2" data-pen-title="CSS实现核辐射警告标志" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/qYOgMj/">CSS实现核辐射警告标志</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+---
+5. 从[github 项目](https://github.com/75camp/2018-contest)获取内容，按要求实现一个 2048 游戏。
+
+[DEMO项目地址](https://github.com/xmoyKing/2018-contest)

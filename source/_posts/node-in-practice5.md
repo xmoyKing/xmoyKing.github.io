@@ -179,3 +179,106 @@ locker.lock(err=>{
 ### 技巧42 递归文件操作
 有时候需要像`rm -rf`那样删除一个目录以及它下面的所有子目录，或者创建一个目录的同时也创建所有中间目录。此时需要用到递归文件操作。递归操作易用，但也易错，尤其是在异步操作时。
 
+fs提供了一些基本方法：
+- fs.readdir/fs.readdirSync 通过输入的地址参数列出所有文件（包括目录）
+- fs.stat/fs.statSync 返回指定路径的文件信息，无论该路径是文件还是目录
+
+一般来说，同步递归遍历比异步递归快，但当碰到很大的文件目录时（包含的文件和子目录多），同步调用会执行失败，会栈溢出。若开启了尾递归则就可以。
+
+之所以同步较快是因为同步不会延迟执行，但同时会阻塞I/O和其他事件的执行。
+
+实现代码：
+```js
+import { stat } from 'fs';
+
+
+const fs = require('fs');
+const join = require('path').join;
+// nameRe为文件名正则，startPath表示开始搜索路径
+// 异步方法
+exports.findSync = function(nameRe, startPath) {
+    let rst = [];
+
+    function finder(path){
+        let files = fs.readdirSync(path);
+
+        for(let i = 0; i < files.length; i++){
+            let fpath = join(path, files[i]);
+            let stats = fs.statSync(fpath);
+
+            if(stats.isDirectory()) finder(fpath);
+            if(stats.isFile() && nameRe.test(files[i])) rst.push(fpath);
+        }
+    }
+
+    finder(startPath);
+
+    return rst;
+}
+
+// find方法接收一个回调函数
+exports.find = function(nameRe, startPath, cb) {
+    let rst = [],
+        asyncOps = 0, // 为了知道是否完成遍历，需要一个计数器，其在执行异步前加一，执行完后减一
+        errored = false; // 为了防止多个错误调用，可通过err追踪错误
+    // 处理错误的函数，用于确保多个错误，仅回调一次
+    function error(err){
+        if(!errored) cb(err);
+
+        errored = true;
+    }
+
+    function finder(path) {
+        asyncOps++; // 每一次异步操作都需要增加计数器
+        fs.readdir(path, (err, files)=>{
+            if(err) return error(err);
+
+            files.forEach(file=>{ // 此处需要闭包，防止丢失文件引用
+                let fpath = join(path, file);
+
+                asyncOps++;
+                fs.stat(fpath, (err,stats)=>{
+                    if(err) return error(err);
+
+                    if(stats.isDirectory()) finder(fpath);
+                    if(stats.isFile() && nameRe.test(file)) rst.push(fpath);
+
+                    asyncOps--; // 若计数器归零则说明没有错误，则执行回调
+                    if(asyncOps == 0) cb(null, rst);
+                });
+            });
+
+            asyncOps--;
+            if(asyncOps == 0) cb(null, rst);
+        });
+    }
+
+    finder(startPath);
+}
+```
+```js
+// 测试同步调用
+function testSync() {
+    const finder = require('./finder');
+
+    try {
+        let rst = finder.findSync(/file.*/, '/path/of/start');
+        console.log(rst);
+    }catch(err){
+        console.error(err);
+    }
+}
+// 测试异步调用
+function testFind() {
+    const finder = require('./finder');
+    finder.findSync(/file.*/, '/path/of/start', (err, rst)=>{
+        if(err) return console.error(err);
+
+        console.log(rst);
+    });
+}
+```
+
+### 技巧43 简单文件数据库
+通过Node的fs模块提供的功能，可以构建出复杂的递归操作的工具。同时也能完成其他复杂任务，比如创建一个简单的文件数据。通过追加日志的方式，使用内存数据库可以保证一致性。
+
