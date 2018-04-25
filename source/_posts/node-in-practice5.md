@@ -280,5 +280,155 @@ function testFind() {
 ```
 
 ### 技巧43 简单文件数据库
-通过Node的fs模块提供的功能，可以构建出复杂的递归操作的工具。同时也能完成其他复杂任务，比如创建一个简单的文件数据。通过追加日志的方式，使用内存数据库可以保证一致性。
+通过Node的fs模块提供的功能，可以构建出复杂的递归操作的工具。同时也能完成其他复杂任务，比如创建一个简单的文件数据。
+
+数据库存储的格式为key/value的JSON格式，每行一个记录，通过追加日志的方式，使用内存数据库可以保证一致性，且能简单通过复制文件备份数据库。
+
+需要简单易用，使用方式为：
+```js
+let Database = require('./database'); // 加载数据库模块
+let client = new Database('./test.db'); // 提供加载/创建的数据库文件路径
+
+client.on('load', ()=>{ // 当数据加载到内存中时，触发load事件
+    let foo = client.get('foo'); // 使用foo作为key获取存储值
+
+    client.set('bar', 'some value', err=>{ // 存储一个键为bar的值
+        if(err) return console.error(err); // 持久化到磁盘
+
+        console.log('write successful');
+    });
+
+    client.del('baz'); // 删除baz的值，回调函数可选
+    // 删除时并不会将磁盘中的记录都删除，而用{"key":"baz","value":null}表示删除
+});
+```
+
+Database模块继承自EventEmitter，并实现存储逻辑。
+```js
+const fs = require('fs');
+const EventEmitter = require('events').EventEmitter;
+
+// 从EventEmitter继承
+class Database extends EventEmitter{
+    constructor(path){
+        super();
+        this.path = path; // 设置数据库路径
+        this._records = Object.create(null); // 内存中所有记录的映射
+        // 仅用于添加模式的写入流处理磁盘写入
+        this._writeStream = fs.createWriteStream(this.path,{
+            encoding: 'utf8',
+            flags: 'a'
+        });
+        this._load();
+    }
+
+    // 存储流，并在完成后发出‘load’事件。
+    _load(){
+        let stream = fs.createReadStream(this.path, {encoding: 'utf8'});
+        let database = this;
+
+        let data = '';
+        stream.on('readable', ()=>{
+            data += stream.read();  // 读取可用数据
+            // 由于按行分割，所以记录的最后是一个空字符串''需要将这个空字符串单独处理
+            let records = data.split('\n'); // 按行分割
+            data = records.pop(); // 获取最后一个可能未完成的记录
+
+            records.forEach((v, i, arr)=>{
+                try {
+                    v = JSON.parse(v);
+                    if(v.value == null){
+                        delete database._records[v.key];
+                    }else{
+                        database._records[v.key] = v.value;
+                    }
+                } catch (e) {
+                    database.emit('error', `found invalid recod:${v}`);
+                }
+            });
+        });
+
+        stream.on('end', ()=>{
+            database.emit('load');
+        });
+    }
+
+    // get方法, 无key值则返回null
+    get(key){
+        return this._records[key] || null;
+    }
+
+    // set方法
+    set(key, value, cb){
+        // 将key/value转为JSON字符串并添加换行
+        let toWrite = JSON.stringify({key, value}) + '\n';
+        // 根据value来决定是删除还是设置
+        if(value == null){
+            delete this._records[key];
+        }else{
+            this._records[key] = value;
+        }
+        // 将记录写入磁盘，如有回调则执行回调
+        this._writeStream.write(toWrite, cb);
+    }
+
+    // del方法, 其实是set方法的语法糖
+    del(key, cb){
+        return this.set(key, null, cb);
+    }
+}
+
+module.exports = Database;
+```
+
+此简易数据库还有很多可优化的地方，比如[flushing writes](http://mng.bz/2g19), 失败重试等。可以参考一些基于Node的完善的数据库模块，如[node-dirty](https://github.com/felixge/node-dirty), [nstore](https://github.com/creationix/nstore)
+
+### 技巧44 监视文件夹以及文件
+有时候需要对文件或目录进行更改时执行一个操作，而Node对于文件监听有两个实现，分别是fs.watch和fs.watchFile。
+
+其中fs.watch不是跨平台的，而fs.watchFile是，同时官方推荐尽可能使用fs.watch。其中两者到底区别在哪儿呢？
+
+**fs.watch**
+为了在单线程的环境中实现异步I/O，Node的事件轮询渗入操作系统中，提高了性能，同时操作系统能够让进程立即知道什么时候需要对新的I/O进行处理，至于通知进程的方式有多种，大都由libuv提供。实现文件监听的核心方法就是fs.watch。
+
+其特性如下：
+- 更可靠，使得文件改变的事件总能被执行
+- 更快，当事件发生时能够立即通过到Node进程
+
+**fs.watchFile**
+此方法没有渗入到通知功能，而是在一个时间段内不停的轮询来看是否有文件发生改动。
+
+fs.watchFile不快而且有明显弊端，但优势是跨平台，并且可以在网络文件系统（如SMB和NFS）上使用。
+
+测试如下：
+```js
+const fs = require('fs');
+fs.watch('./dir', console.log);
+fs.watchFile('./dir', console.log);
+```
+先创建一个dir目录，然后执行上述语句，然后在dir中新建一个文件test.file时，会输出：
+```js
+rename test.file
+Stats {
+  dev: 1923457940,
+  mode: 16822,
+  nlink: 1,
+  uid: 0,
+  gid: 0,
+  rdev: 0,
+  blksize: undefined,
+  ino: 16044073672540964,
+  size: 0,
+  blocks: undefined,
+  atimeMs: 1524624615998.3296,
+  mtimeMs: 1524624615998.3296,
+  ctimeMs: 1524624615998.3296,
+  birthtimeMs: 1524624572124.3838,
+  atime: 2018-04-25T02:50:15.998Z,
+  mtime: 2018-04-25T02:50:15.998Z,
+  ctime: 2018-04-25T02:50:15.998Z,
+  birthtime: 2018-04-25T02:49:32.124Z
+}
+```
+当修改test.file文件时，会输出：`change test.file`
 
