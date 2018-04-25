@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Node 技巧笔记4 - 网络 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",JavaScript,Nodejs,HTTP,HTTPS,TCP,UDP,DNS">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Node 技巧笔记4 - 网络 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="JavaScript"> <meta property="og:article:tag" content="Nodejs"> <meta property="og:article:tag" content="HTTP"> <meta property="og:article:tag" content="HTTPS"> <meta property="og:article:tag" content="TCP"> <meta property="og:article:tag" content="UDP"> <meta property="og:article:tag" content="DNS"> 
+
+    
+        <meta property="article:published_time" content="Tue Apr 10 2018 11:15:36 GMT+0800" />
+        <meta property="article:modified_time" content="Tue Apr 10 2018 11:15:36 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Node 技巧笔记4 - 网络 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2018/04/10/node-in-practice6/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2018/04/10/node-in-practice6/index.html",
+    "headline": "Node 技巧笔记4 - 网络",
+    "datePublished": "Tue Apr 10 2018 11:15:36 GMT+0800",
+    "dateModified": "Tue Apr 10 2018 11:15:36 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",JavaScript,Nodejs,HTTP,HTTPS,TCP,UDP,DNS",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧45-创建TCP服务端和客户端"><span class="post-toc-number">1.</span> <span class="post-toc-text">技巧45 创建TCP服务端和客户端</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧46-使用客户端测试TCP服务器"><span class="post-toc-number">2.</span> <span class="post-toc-text">技巧46 使用客户端测试TCP服务器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧47-改进实时性底的应用"><span class="post-toc-number">3.</span> <span class="post-toc-text">技巧47 改进实时性底的应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧48-通过UDP传输文件"><span class="post-toc-number">4.</span> <span class="post-toc-text">技巧48 通过UDP传输文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧49-UDP客户端服务应用"><span class="post-toc-number">5.</span> <span class="post-toc-text">技巧49 UDP客户端服务应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧50-HTTP服务器"><span class="post-toc-number">6.</span> <span class="post-toc-text">技巧50 HTTP服务器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧51-重定向"><span class="post-toc-number">7.</span> <span class="post-toc-text">技巧51 重定向</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Node 技巧笔记4 - 网络
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Apr 10, 2018</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Apr 10, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/DNS/">DNS</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/HTTP/">HTTP</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/HTTPS/">HTTPS</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/JavaScript/">JavaScript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Nodejs/">Nodejs</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/TCP/">TCP</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/UDP/">UDP</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Node 技巧笔记4 - 网络&url=https://github.com/xmoyKING/2018/04/10/node-in-practice6/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Node 技巧笔记4 - 网络&url=https://github.com/xmoyKING/2018/04/10/node-in-practice6/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2018/04/10/node-in-practice6/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2018/04/10/node-in-practice6/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>学习Node的网络模块，包括dgram、dns、http、net等模块。其中http基于net、stream、buffer、events等模块，不仅封装良好，且易于扩展。</p>
+<h3 id="技巧45-创建TCP服务端和客户端"><a href="#技巧45-创建TCP服务端和客户端" class="headerlink" title="技巧45 创建TCP服务端和客户端"></a>技巧45 创建TCP服务端和客户端</h3><p>net模块构成了Node网络的基础，通过net.createServer创建一个服务，然后调用server.listen绑定一个端口；连接服务端则用net.conncet创建一个客户端或可以使用telnet连接。</p>
+<p>net.createServer方法返回一个对象，用来监听一个指定的TCP端口，当客户端连接上该server时，传递给net.createServer的回调函数将会执行，回调的参数是一个面向事件的对象。</p>
+<p>简单TCP服务器实现<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> clients = <span class="number">0</span>; <span class="comment">// 记录每一个连接的ID</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = net.createServer(<span class="function"><span class="params">client</span>=&gt;</span>&#123;</span><br><span class="line">  clients++;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> clientId = clients;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Client connected: <span class="subst">$&#123;clientId&#125;</span>`</span>);</span><br><span class="line">  <span class="comment">// 通过end事件，追踪用户断开连接</span></span><br><span class="line">  client.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Client disconnected: <span class="subst">$&#123;clientId&#125;</span>`</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  client.write(<span class="string">`Welcome client: <span class="subst">$&#123;clientId&#125;</span>`</span>);</span><br><span class="line">  client.pipe(client); <span class="comment">// 通过管道将客户端数据直接原样返回</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8000</span>, ()=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Server start on port 8000'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="技巧46-使用客户端测试TCP服务器"><a href="#技巧46-使用客户端测试TCP服务器" class="headerlink" title="技巧46 使用客户端测试TCP服务器"></a>技巧46 使用客户端测试TCP服务器</h3><p>使用net.connect连接服务端端口。</p>
+<p>由于TCP和UDP靠端口识别，所以完全能在一个进程中创建多个服务端和客户端。</p>
+<p>通过创建一个进程内服务的客户端链接，然后在数据通过网络发送时运行断言。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> assert = <span class="built_in">require</span>(<span class="string">'assert'</span>);</span><br><span class="line"><span class="keyword">const</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> clients = <span class="number">0</span>; <span class="comment">// 记录每一个连接的ID</span></span><br><span class="line"><span class="keyword">let</span> expectedAssertions = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = net.createServer(<span class="function"><span class="params">client</span>=&gt;</span>&#123;</span><br><span class="line">  clients++;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> clientId = clients;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Client connected: <span class="subst">$&#123;clientId&#125;</span>`</span>);</span><br><span class="line">  <span class="comment">// 通过end事件，追踪用户断开连接</span></span><br><span class="line">  client.on(<span class="string">'end'</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Client disconnected: <span class="subst">$&#123;clientId&#125;</span>`</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  client.write(<span class="string">`Welcome client: <span class="subst">$&#123;clientId&#125;</span> \r\n`</span>);</span><br><span class="line">  client.pipe(client); <span class="comment">// 通过管道将客户端数据直接原样返回</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8000</span>, ()=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Server start on port 8000'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 一旦服务端开始监听，则运行runTest函数，其接收预期的客户端ID，并触发回调</span></span><br><span class="line">  runTest(<span class="number">1</span>, ()=&gt;&#123;</span><br><span class="line">    runTest(<span class="number">2</span>, ()=&gt;&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'Test finished'</span>);</span><br><span class="line">      assert.equal(<span class="number">0</span>, expectedAssertions);</span><br><span class="line">      server.close();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// runTest函数接收一个回调，这样可以嵌套测试</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runTest</span>(<span class="params">expectedId, done</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// connect方法第一个参数为端口号，</span></span><br><span class="line">  <span class="comment">// 第二个参数为可选的IP地址或主机名，默认为localhost</span></span><br><span class="line">  <span class="comment">// TCP是双工的，所以client本身也可以接收/发送数据。</span></span><br><span class="line">  <span class="keyword">let</span> client = net.connect(<span class="number">8000</span>);</span><br><span class="line"></span><br><span class="line">  client.on(<span class="string">'data'</span>, data=&gt;&#123;</span><br><span class="line">    <span class="keyword">let</span> expected = <span class="string">`Welcome client: <span class="subst">$&#123;expectedId&#125;</span> \r\n`</span>;</span><br><span class="line"></span><br><span class="line">    assert.equal(data.toString(), expected);</span><br><span class="line"></span><br><span class="line">    expectedAssertions--;</span><br><span class="line">    client.end();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 当客户端断开链接时，触发注册的done回调函数，</span></span><br><span class="line">  client.on(<span class="string">'end'</span>, done);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果如下：<br>Server start on port 8000<br>Client connected: 1<br>Client disconnected: 1<br>Client connected: 2<br>Client disconnected: 2<br>Test finished</p>
+<h3 id="技巧47-改进实时性底的应用"><a href="#技巧47-改进实时性底的应用" class="headerlink" title="技巧47 改进实时性底的应用"></a>技巧47 改进实时性底的应用</h3><p>Node的net模块是相对高层的，其提供了一些底层的方法。比如通过TCP_NODELAY标识判断是否使用Nagle算法。</p>
+<p>Nagle算法是指当一个连接有未确定的数据时，小片段应该保留，直到足够的数据被接收，这些小片段将被分批成能够被传输的更大的片段。</p>
+<p>当网络中有很多小片段传输时，理想的应该将小片段集合起来一起发送减少拥堵，当若需要实时性高时，则需要关闭Nagle算法，直接传输小片段。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = net.createServer(<span class="function">(<span class="params">c</span>)=&gt;</span>&#123;</span><br><span class="line">  c.setNoDelay(<span class="literal">true</span>); <span class="comment">// 关闭Nagle算法</span></span><br><span class="line">  c.write(<span class="string">'1231321231313'</span>, <span class="string">'binary'</span>); <span class="comment">// 强制客户端使用二进制模式</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'server connected'</span>);</span><br><span class="line">  c.on(<span class="string">'end'</span>, ()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server disconnected'</span>);</span><br><span class="line">    server.unref(); <span class="comment">// 使用unref确保最后一个客户端断开连接</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  c.on(<span class="string">'data'</span>, data=&gt;&#123;</span><br><span class="line">    <span class="comment">// 将客户端的数据打印出来</span></span><br><span class="line">    process.stdout.write(data.toString());</span><br><span class="line">    c.write(data.toString());</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8000</span>, ()=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'server bound'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="技巧48-通过UDP传输文件"><a href="#技巧48-通过UDP传输文件" class="headerlink" title="技巧48 通过UDP传输文件"></a>技巧48 通过UDP传输文件</h3><p>使用dgram创建数据报socket并使用socket.send发送数据。</p>
+<p>因为UDP是无状态协议，所以客户端需要一次性写入一个数据报，而且数据报的大小必须小于65507字节，即小于最大传输单元MTU（Maximum Transimission Unit），其最大为64KB。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> dgram = <span class="built_in">require</span>(<span class="string">'dgram'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> port = <span class="number">34535</span>;</span><br><span class="line"><span class="keyword">let</span> defaultSize = <span class="number">16</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Client</span>(<span class="params">ip</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 从当前文件创建一个可读流</span></span><br><span class="line">  <span class="keyword">let</span> inStream = fs.createReadStream(__filename);</span><br><span class="line">  <span class="comment">// 创建一个新的数据流socket作为客户端</span></span><br><span class="line">  <span class="keyword">let</span> socket = dgram.createSocket(<span class="string">'udp4'</span>);</span><br><span class="line"></span><br><span class="line">  inStream.on(<span class="string">'readable'</span>, ()=&gt;&#123;</span><br><span class="line">    sendData();</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sendData</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> message = inStream.read(defaultSize);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(!message)&#123;</span><br><span class="line">      <span class="keyword">return</span> socket.unref();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    socket.send(message, <span class="number">0</span>, message.length, port, ip, (err, bytes)=&gt;&#123;</span><br><span class="line">      sendData();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务端</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Server</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> socket = dgram.createSocket(<span class="string">'udp4'</span>);</span><br><span class="line"></span><br><span class="line">  socket.on(<span class="string">'message'</span>, (msg, rinfo)=&gt;&#123;</span><br><span class="line">    process.stdout.write(msg.toString());</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  socket.on(<span class="string">'listening'</span>, ()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Server ready: <span class="subst">$&#123;socket.address()&#125;</span>`</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  socket.bind(port);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 检查命令行选项来确定是运行服务端还是客户端</span></span><br><span class="line"><span class="keyword">if</span>(process.argv[<span class="number">2</span>] === <span class="string">'client'</span>)&#123;</span><br><span class="line">  <span class="keyword">new</span> Client(process.argv[<span class="number">3</span>]); <span class="comment">// 可选择接受其他可选的IP地址</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">new</span> Server();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="技巧49-UDP客户端服务应用"><a href="#技巧49-UDP客户端服务应用" class="headerlink" title="技巧49 UDP客户端服务应用"></a>技巧49 UDP客户端服务应用</h3><p>UDP常用于查询-响应协议，比如DNS、DHCP，且都需要将消息发送会客户端。</p>
+<p>UDP和TCP不一样，TCP是双工的，所以一旦连接则可以使用client.write写入消息，通过监听data事件获取消息。而UDP是非面向连接的，即不需要连接就可以接收消息。</p>
+<p>下例实现了一个简单的客户端-服务端聊天室，允许客户端通过UDP连接到一个中心服务器，并相互通信，服务端在一个数组里保存了每一个客户端，因此能独立映射每一个。通过保存的客户端地址和端口，甚至可以在一个机器运行多个客户端，在同一个电脑多次运行这个程序。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> assert = <span class="built_in">require</span>(<span class="string">'assert'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> dgram = <span class="built_in">require</span>(<span class="string">'dgram'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> port = <span class="number">34535</span>;</span><br><span class="line"><span class="keyword">let</span> defaultSize = <span class="number">16</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Client</span>(<span class="params">ip</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>); <span class="comment">// 使用readline模块处理用户输入</span></span><br><span class="line">    <span class="keyword">let</span> rl = readline.createInterface(process.stdin, process.stdout);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> socket = dgram.createSocket(<span class="string">'udp4'</span>);</span><br><span class="line">    socket.send(<span class="keyword">new</span> Buffer(<span class="string">'&lt;JOIN&gt;'</span>), <span class="number">0</span>, <span class="number">6</span>, port, ip);</span><br><span class="line"></span><br><span class="line">    rl.setPrompt(<span class="string">'Message&gt; '</span>);</span><br><span class="line">    rl.prompt();</span><br><span class="line"></span><br><span class="line">    rl.on(<span class="string">'line'</span>, line =&gt; &#123;</span><br><span class="line">        sendData(line);</span><br><span class="line">    &#125;).on(<span class="string">'close'</span>, () =&gt; &#123; <span class="comment">// 每当用户回车就将消息发送出去</span></span><br><span class="line">        process.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 监听其他用户消息</span></span><br><span class="line">    socket.on(<span class="string">'message'</span>, (msg, rinfo) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`\n&lt;<span class="subst">$&#123;rinfo.address&#125;</span>:<span class="subst">$&#123;rinfo.port&#125;</span>&gt; <span class="subst">$&#123;msg.toString()&#125;</span>`</span>);</span><br><span class="line">        rl.prompt();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sendData</span>(<span class="params">message</span>) </span>&#123;</span><br><span class="line">        socket.send(</span><br><span class="line">            <span class="keyword">new</span> Buffer(message), <span class="number">0</span>, message.length, port, ip, (err, bytes) =&gt; &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`Send: <span class="subst">$&#123;message&#125;</span>`</span>);</span><br><span class="line">            rl.prompt();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务端</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Server</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> clients = &#123;&#125;;</span><br><span class="line">    <span class="keyword">let</span> server = dgram.createSocket(<span class="string">'udp4'</span>);</span><br><span class="line"></span><br><span class="line">    server.on(<span class="string">'message'</span>, (msg, rinfo)=&gt;&#123;</span><br><span class="line">        <span class="keyword">let</span> clientId = <span class="string">`<span class="subst">$&#123;rinfo.address&#125;</span>:<span class="subst">$&#123;rinfo.port&#125;</span>`</span>;</span><br><span class="line">        msg = msg.toString();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 若不存在当前clientId，则保存其连接信息</span></span><br><span class="line">        <span class="keyword">if</span>(!clients[clientId])&#123;</span><br><span class="line">            clients[clientId] = rinfo;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 若消息没有使用尖括号包裹，则表示是控制信息</span></span><br><span class="line">        <span class="keyword">if</span>(msg.match(<span class="regexp">/^&lt;/</span>))&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`Control message: <span class="subst">$&#123;msg&#125;</span>`</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将消息发送给其他所有客户端</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> client <span class="keyword">in</span> clients)&#123;</span><br><span class="line">            <span class="keyword">if</span>(client !== clientId)&#123;</span><br><span class="line">                client = clients[client];</span><br><span class="line">                server.send(</span><br><span class="line">                    <span class="keyword">new</span> Buffer(msg), <span class="number">0</span>, msg.length, client.port, client.address, (err, bytes) =&gt; &#123;</span><br><span class="line">                        <span class="keyword">if</span>(err) <span class="built_in">console</span>.error(err);</span><br><span class="line">                        <span class="built_in">console</span>.log(<span class="string">`Bytes send: <span class="subst">$&#123;bytes&#125;</span>`</span>);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    server.on(<span class="string">'listening'</span>, ()=&gt;&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Server ready: <span class="subst">$&#123;server.address().port&#125;</span>`</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    server.bind(port);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;Client, Server&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!<span class="built_in">module</span>.parent)&#123;</span><br><span class="line">    <span class="keyword">switch</span>(process.argv[<span class="number">2</span>])&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'client'</span>:</span><br><span class="line">            <span class="keyword">new</span> Client(process.argv[<span class="number">3</span>]);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">'server'</span>:</span><br><span class="line">            <span class="keyword">new</span> Server();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Unknown option'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="技巧50-HTTP服务器"><a href="#技巧50-HTTP服务器" class="headerlink" title="技巧50 HTTP服务器"></a>技巧50 HTTP服务器</h3><p>HTTP协议基于TCP协议，也是无状态的，而Node的http模块则更新是直接基于TCP模块构造的。</p>
+<p>HTTP服务器被扩展成为支持多种HTTP协议的元素，解析头部信息，处理响应码，并且设置sockets上的各种事件，Node HTTP处理响应码的重点是解析，本质是一个经过C++封装后的C解析库，这个库能提取头部信息和值，Content-Length、请求方法、响应状态码等。</p>
+<p>可以在一个进程中使用http.createServer、http.createClient构建HTTP服务器并进行测试。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> assert = <span class="built_in">require</span>(<span class="string">'assert'</span>);</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>, &#123;<span class="string">'Content-Type'</span>: <span class="string">'text/plain'</span>&#125;);</span><br><span class="line">    res.write(<span class="string">'Hello, world~\r\n'</span>);</span><br><span class="line">    res.end();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8000</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Listening on port 8000'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用http.request创建请求</span></span><br><span class="line"><span class="keyword">let</span> req = http.request(&#123;<span class="attr">port</span>: <span class="number">8000</span>&#125;, res =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`HTTP headers: <span class="subst">$&#123;res.headers&#125;</span>`</span>);</span><br><span class="line">    res.on(<span class="string">'data'</span>, data =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Body: <span class="subst">$&#123;data.toString()&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">        assert.equal(<span class="string">'Hello, world~\r\n'</span>, data.toString());</span><br><span class="line">        assert.equal(<span class="number">200</span>, res.statusCode);</span><br><span class="line"></span><br><span class="line">        server.unref();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">req.end();</span><br></pre></td></tr></table></figure></p>
+<h3 id="技巧51-重定向"><a href="#技巧51-重定向" class="headerlink" title="技巧51 重定向"></a>技巧51 重定向</h3><p>Node http模块提供了处理HTTP请求的API，但其无法处理重定向，比如下载页面。如何维护跨多个请求的状态，即重定向如何被正确执行而无需创建重定向循环或其他什么。</p>
+<p>HTTP标准定义了表示重定向发生时的状态码，而且它也指出客户端应该检测无限循环。</p>
+<p>通过一个简单的类来保留每个请求的状态、重定向和重定向检测循环。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Request</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123;</span><br><span class="line">        <span class="keyword">this</span>.maxRedirects = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">this</span>.redirects = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    get(href, cb)&#123;</span><br><span class="line">        <span class="keyword">let</span> uri = url.parse(href);</span><br><span class="line">        <span class="keyword">let</span> opt = &#123;<span class="attr">host</span>: uri.host, <span class="attr">path</span>: uri.path&#125;;</span><br><span class="line">        <span class="keyword">let</span> httpGet = uri.protocol === <span class="string">'http:'</span> ? http.get : https.get;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`GET: <span class="subst">$&#123;href&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">processResponse</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(res.statusCode &gt;= <span class="number">300</span> &amp;&amp; res.statusCode &lt; <span class="number">400</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">this</span>.redirects &gt;= <span class="keyword">this</span>.maxRedirects)&#123;</span><br><span class="line">                    <span class="keyword">this</span>.error = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Too many redirects for: <span class="subst">$&#123;href&#125;</span>`</span>);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">this</span>.redirects++;</span><br><span class="line">                    href = url.resolve(opt.host, res.headers.location);</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">this</span>.get(href, cb);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            res.url = href;</span><br><span class="line">            res.redirects = <span class="keyword">this</span>.redirects;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">`Redirects: <span class="subst">$&#123;href&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">end</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'Connection ended'</span>);</span><br><span class="line">                cb(<span class="keyword">this</span>.error, res);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            res.on(<span class="string">'data'</span>, data =&gt; &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">`Got data, length: <span class="subst">$&#123;data.length&#125;</span>`</span>);</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            res.on(<span class="string">'end'</span>, end.bind(<span class="keyword">this</span>));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        httpGet(opt, processResponse.bind(<span class="keyword">this</span>))</span><br><span class="line">        .on(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">            cb(err);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试访问</span></span><br><span class="line"><span class="keyword">let</span> request = <span class="keyword">new</span> Request();</span><br><span class="line">request.get(<span class="string">'http://baidu.com/'</span>, (err, res) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Fetched URL: <span class="subst">$&#123;res.url&#125;</span> with <span class="subst">$&#123;res.redirects&#125;</span> redirects`</span>);</span><br><span class="line">        process.exit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/04/20/css-refactoring/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/04/05/node-in-practice5/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">July 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">June 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">May 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">April 2016<span class="sidebar_archives-count">5</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/AngularJS/">AngularJS<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/CSS/">CSS<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/JavaScript/">JavaScript<span class="sidebar_archives-count">93</span></a></li><li><a class="sidebar_archives-link" href="/categories/Linux/">Linux<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/jQuery/">jQuery<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/区块链/">区块链<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/响应式-Web-设计/">响应式 Web 设计<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/安全/">安全<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/网络/">网络<span class="sidebar_archives-count">10</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/01/01/0_links/" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2018/02/16/0_booklist/" title="Booklist">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Booklist
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/03/01/0_mixed/" title="Notes">
+                
+                    <i class="material-icons sidebar-material-icons">assignment</i>
+                
+                Notes
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">257</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
