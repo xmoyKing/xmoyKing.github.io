@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            Node 技巧笔记7 - child_process | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",JavaScript,Nodejs,child_process">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Node 技巧笔记7 - child_process | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="JavaScript"> <meta property="og:article:tag" content="Nodejs"> <meta property="og:article:tag" content="child_process"> 
+
+    
+        <meta property="article:published_time" content="Mon Apr 16 2018 11:10:31 GMT+0800" />
+        <meta property="article:modified_time" content="Mon Apr 16 2018 11:10:31 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Node 技巧笔记7 - child_process | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2018/04/16/node-in-practice7/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2018/04/16/node-in-practice7/index.html",
+    "headline": "Node 技巧笔记7 - child_process",
+    "datePublished": "Mon Apr 16 2018 11:10:31 GMT+0800",
+    "dateModified": "Mon Apr 16 2018 11:10:31 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",JavaScript,Nodejs,child_process",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧56-执行外部程序"><span class="post-toc-number">1.</span> <span class="post-toc-text">技巧56 执行外部程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧57-流和外部程序"><span class="post-toc-number">2.</span> <span class="post-toc-text">技巧57 流和外部程序</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧58-在shell中执行命令"><span class="post-toc-number">3.</span> <span class="post-toc-text">技巧58 在shell中执行命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧59-分离子进程"><span class="post-toc-number">4.</span> <span class="post-toc-text">技巧59 分离子进程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧61-Fork-Node模块"><span class="post-toc-number">5.</span> <span class="post-toc-text">技巧61 Fork Node模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#技巧62-运行作业"><span class="post-toc-number">6.</span> <span class="post-toc-text">技巧62 运行作业</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Node 技巧笔记7 - child_process
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>Apr 16, 2018</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>Apr 16, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/JavaScript/">JavaScript</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/Nodejs/">Nodejs</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/child-process/">child_process</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Node 技巧笔记7 - child_process&url=https://github.com/xmoyKING/2018/04/16/node-in-practice7/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Node 技巧笔记7 - child_process&url=https://github.com/xmoyKING/2018/04/16/node-in-practice7/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2018/04/16/node-in-practice7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2018/04/16/node-in-practice7/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>任何一个平台都不是孤立的，在Node中，child_process模块允许在Node程序中执行一些外部程序，如Java、shell、PHP等（也包括其他利用Node开发的应用），这样能避免重复造轮子。</p>
+<p>child_process模块提供四种不同的方法来执行外部程序，分别是：</p>
+<ul>
+<li>execFile 执行外部程序，需提供一组参数，以及一个在进程退出后的缓存输出的回调</li>
+<li>spawn 执行外部程序，需提供一组参数，以及一个在进程退出后的输入输出和事件的数据流接口</li>
+<li>exec 在一个命令行窗口中执行一个或多个命令，以及一个在进程退出后缓冲输出的回调</li>
+<li>fork 在一个独立的进程中执行一个Node模块，需要提供一组参数，以及一个类似spawn方法里的数据流和事件式的接口，同时设置好父进程和子进程之间的通信</li>
+</ul>
+<p>选择时的考虑如下：<br><img src="1.png" alt=""></p>
+<p>这些方法都是异步的,其有对应的同步版本，分别是execFileSync、spawnSync、execSync。在同步中用try-catch捕获异常。</p>
+<h3 id="技巧56-执行外部程序"><a href="#技巧56-执行外部程序" class="headerlink" title="技巧56 执行外部程序"></a>技巧56 执行外部程序</h3><p>若想要运行一个外部程序，然后获取其输出结果，那么使用execFile方法是最直接的方式，它会将输出结果自动缓存，并且通过一个回调函数返回最后的结果或异常信息。</p>
+<p>以一个脚本命令为例，test.js的内容如下：<code>console.log(111);</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第一个参数是程序命名名，第二个参数为数组类型，表示命令的输入</span></span><br><span class="line">cp.execFile(<span class="string">'node'</span>, [<span class="string">'test.js'</span>], (err, stdout, stderr) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span>(err) <span class="built_in">console</span>.error(err);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`stdout: <span class="subst">$&#123;stdout&#125;</span>`</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`stderr: <span class="subst">$&#123;stderr&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>外部程序的执行都需要一个执行路径，否则是无法找到对应的可执行文件的。Node通过PATH环境变量找到需要执行的外部程序，若程序的路径在PATH中，那么则可以不使用路径。</p>
+<p>若调用的外部程序不存在，则可能遇到 ENOENT 错误，通常是由于输入的的程序的可执行文件名或路径错误导致的。除了找不到可执行文件，还有可能是由于无权限，此时将遇到 EACCES 或 EPERM 错误。</p>
+<p>当被调用执行的外部程序退出返回的状态码非零时，则表示该程序不能在当前环境下执行。此时Node会将该返回的状态码作为异常对象和其他一切可能返回的数据传入到stdout和stderr中。其中的状态码code保存在err对象中。</p>
+<h3 id="技巧57-流和外部程序"><a href="#技巧57-流和外部程序" class="headerlink" title="技巧57 流和外部程序"></a>技巧57 流和外部程序</h3><p>若有一个Web应用，其需要使用外部程序的输出，当外部程序输出的数据可用时，此时可以选择马上将数据输出到客户端，通过流、可以使用正通过子进程输出的数据，相反，而不是等到将所有数据缓存好之后再将其输出。</p>
+<p>这样一来，对于调用一个可能有大数据量输出的外部应用，流就是非常好的选择，使用流可以提高数据的响应效率。</p>
+<p>spawn方法和execFile类似，但spawn方法依赖流。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> child = cp.spawn(<span class="string">'node'</span>, [<span class="string">'test.js'</span>]);</span><br><span class="line">child.on(<span class="string">'error'</span>, <span class="built_in">console</span>.error);</span><br><span class="line">child.stdout.pipe(process.stdout);</span><br><span class="line">child.stderr.pipe(process.stderr);</span><br></pre></td></tr></table></figure></p>
+<p>而且由于spawn基于流，所以可以将多个spawn方法串联使用。在UNIX系统下，cat命令用来读取一个文件，并且输出其内容，然后使用sort命令将前面的输出作为新的输入，对内容排序后再输出，最后uniq命令接收sort的输出将重复行删除。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> cat = cp.spawn(<span class="string">'cat'</span>, [<span class="string">'messy.txt'</span>]);</span><br><span class="line"><span class="keyword">let</span> sort = cp.spawn(<span class="string">'sort'</span>);</span><br><span class="line"><span class="keyword">let</span> uniq = cp.spawn(<span class="string">'uniq'</span>);</span><br><span class="line"></span><br><span class="line">cat.stdout.pipe(sort.stdin);</span><br><span class="line">sort.stdout.pipe(uniq.stdin);</span><br><span class="line">uniq.stdout.pipe(process.stdout);</span><br></pre></td></tr></table></figure></p>
+<p>其中messy.txt内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Apple</span><br><span class="line">Box</span><br><span class="line">Race</span><br><span class="line">Choose</span><br><span class="line">Borard</span><br><span class="line">Borard</span><br><span class="line">Dash</span><br></pre></td></tr></table></figure></p>
+<h3 id="技巧58-在shell中执行命令"><a href="#技巧58-在shell中执行命令" class="headerlink" title="技巧58 在shell中执行命令"></a>技巧58 在shell中执行命令</h3><p>Shell编程是构建工具类脚本和命令行程序的最常见方式。当想要通过一些系统已有的基础命令（如管道、重定向、大对象文件相关命令）得到结果时，就可以使用exec方法。</p>
+<p>如下方式得到的结果和上面使用spawn的结果一样。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"></span><br><span class="line">cp.exec(<span class="string">'cat messy.txt | sort | uniq'</span>, (err, stdout, stdin) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(stdout);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>直接对命令进行解析并执行的能力非常方便，而且非常强大，但此时需要注意，你需要对输入进行过滤，防止执行一些危险的命令，如<code>;rm -rf /;</code>这样的命令，也就是需要防范代码恶意注入，此时最好使用execFile，其不会直接解析命令执行。</p>
+<h3 id="技巧59-分离子进程"><a href="#技巧59-分离子进程" class="headerlink" title="技巧59 分离子进程"></a>技巧59 分离子进程</h3><p>一般来说，通过Node打开一个外部程序，然后让其独立运行，非常有用。比如Node需要运行一个长时间运行的外部进程，并且在其运行后，Node不需要对其进行管理，类似打开一个后台同步上传的应用，当关闭Node后，其依然能继续同步上传。当Node主程序意外崩溃时，独立外部进程不会受影响。</p>
+<p>正常情况下，当父进程结束时，所有子进程都会被终结，因为子进程被认为是附加到父进程上的，但spawn方法可以做到分离一个子进程，从而时子进程和父进程一样的独立运行。</p>
+<p>具体是操作方式为使用detached配置选项。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> child = cp.spawn(<span class="string">'./longrun'</span>, [], &#123;<span class="attr">detached</span>: <span class="literal">true</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>中断I/O</strong><br>在将子进程独立运行后，此时即使父进程什么都不做，父进程也是活跃状态的，指导子进程终结，因为子进程的I/O和父进程是相互连接的，此时可以配置stdio来中断I/O。</p>
+<p>stdio选项定义了子进程的I/O连接位置，其值类型可以是字符串，也可以是数组，字符串参数是为了简便，最后会被改写为数组。默认stdio的配置为：<code>stdio: &#39;pipe&#39;</code>, 改写为数组形式为：<code>stdio: [&#39;pipe&#39;,&#39;pipe&#39;,&#39;pipe&#39;]</code></p>
+<p>这个数组的结构顺序需要特别注意，其元素位置对应特定的子进程的文件描述符所指向的I/O。其中0~2号文件解析器都可以在子进程中作为流（child.stdio[0]、child.stdio[1]、child.stdio[2]）同时，0~2号的文件描述符分别对应stdin、stdout、stderr，所以等价于child.stdin、child.stdout、child.stderr。如此，stdio的值pipe就连接了父进程和子进程，并随时待命。</p>
+<p>中断一个连接可以使用destroy方法，例如<code>child.stdin.destroy()</code>。但最好的方式就是一开始就不创建这些流，所以也可以使用ignore放弃使用这个流或者直接将其文件描述符赋值指向其他地方。</p>
+<p>如下，将子进程和父进程的I/O中断掉，同时为stdout和stderr指定了日志文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打开两个日志文件，分别用于stdout和stderr的流的地址</span></span><br><span class="line"><span class="keyword">let</span> outFd = fs.openSync(<span class="string">'./longrun.out.log'</span>, <span class="string">'a'</span>);</span><br><span class="line"><span class="keyword">let</span> errFd = fs.openSync(<span class="string">'./longrun.err.log'</span>, <span class="string">'a'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> child = cp.spawn(<span class="string">'./longrun'</span>, [], &#123;</span><br><span class="line">  detached: <span class="literal">true</span>,</span><br><span class="line">  stdio: [<span class="string">'ignore'</span>, outFd, errFd] <span class="comment">// 将第一个stdin忽略</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// child.unref(); 打开注释，则关闭引用计数</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>引用计数</strong><br>由于子进程会继续存在，尽管其被分离了并且和父进程的I/O也中断了，但父进程仍然会有一个对子进程的内部引用，并且只要父进程没有终结且这个引用没有被移除，父进程就不会终结。</p>
+<p>通过child.unref()方法来关闭对子进程的引用计数，</p>
+<h3 id="技巧61-Fork-Node模块"><a href="#技巧61-Fork-Node模块" class="headerlink" title="技巧61 Fork Node模块"></a>技巧61 Fork Node模块</h3><p>在处理大数据量计算的任务时，web worker为浏览器和JS提供了一种脱离主线程的方式，可以通过使用内置的message事件进行交互。类似的，Node中可通过fork命令创建独立进程，同时在父进程和子进程间创建一个IPC通信通道。</p>
+<p>使用fork方法创建的IPC通道，在子进程中，其会暴露出<code>process.on(&#39;message&#39;)</code>和<code>process.send()</code>用来接收和发送消息。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process.on(<span class="string">'message'</span>, msg =&gt; &#123; <span class="comment">// 当子进程收到消息时，此回调被被调用</span></span><br><span class="line">  process.send(msg); <span class="comment">// 将消息原样发给父进程</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>父进程这边则使用<code>child.on(&#39;message&#39;)</code>和<code>child.send()</code>方法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> child = cp.fork(<span class="string">'./child'</span>);</span><br><span class="line"></span><br><span class="line">child.on(<span class="string">'message'</span>, msg =&gt; &#123; <span class="comment">// 当父进程收到消息时，此回调被被调用</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`got message from child: <span class="subst">$&#123;msg&#125;</span>`</span>); <span class="comment">// 将子进程给的消息打印出来</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">child.send(<span class="string">'sending a msg to child'</span>); <span class="comment">// 发送一个消息给子进程。</span></span><br></pre></td></tr></table></figure></p>
+<p>进程间的通信的数据格式不会被自动转换，即发送的JSON值在接收时仍然是JSON值。</p>
+<p>由于打开了父进程和子进程间的IPC通道，只要子进程不中断，父进程也会保持活跃状态，若需要中断IPC通道，则可以在父进程中调用disconnect方法：<code>child.disconnect()</code>。</p>
+<h3 id="技巧62-运行作业"><a href="#技巧62-运行作业" class="headerlink" title="技巧62 运行作业"></a>技巧62 运行作业</h3><p>通过fork内置的IPC通道，父进程将处理计算量大的作业分配给子进程，同时父进程需要获取返回的结果。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doWork</span>(<span class="params">job, cb</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> child = cp.fork(<span class="string">'./worker'</span>);</span><br><span class="line">    <span class="keyword">let</span> cbTriggered = <span class="literal">false</span>; <span class="comment">// 防止回调多次运行</span></span><br><span class="line"></span><br><span class="line">    child.once(<span class="string">'message'</span>, rst =&gt; &#123; <span class="comment">// 期待子进程返回的结果</span></span><br><span class="line">        cb(<span class="literal">null</span>, rst);</span><br><span class="line">        cbTriggered = <span class="literal">true</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">    .once(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">        <span class="comment">// 子进程可能会运行错误或因为其他原因退出，此时需要监听错误事件</span></span><br><span class="line">        <span class="keyword">if</span>(!cbTriggered)&#123;</span><br><span class="line">            cb(err);</span><br><span class="line">            cbTriggered = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        child.kill(); <span class="comment">// 当异常发生时，在不可用时杀死进程</span></span><br><span class="line">    &#125;)</span><br><span class="line">    .once(<span class="string">'exit'</span>, (code, signal) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(!cbTriggered)</span><br><span class="line">            cb(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`child exited with code: <span class="subst">$&#123;code&#125;</span>`</span>));</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    child.send(job); <span class="comment">// 将作业发送给子进程</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的doWork函数在每次需要执行工作时都创建新的子进程，而创建的子进程不能太多，不仅仅是因为创建新进程需要内存开销，其还需要启动时间。</p>
+<p>当需要频繁运行一个例行的计算作业任务时，每次都立即fork进程将会耗尽CPU资源，最好的方法是构建一个可用的作业池，在池中可以存有足够多的进程并且可以随时等待分配使用。</p>
+<p>所以现在需要一个模块来创建工作池：</p>
+<ul>
+<li>根据机器的CPU数量来尽可能fork多的工作进程</li>
+<li>确保一个新的任务可以拿到一个可用的进程，而不是抢占已使用的进程</li>
+<li>当没有工作进程空闲时，维护一个工作队列，当有工作进程时，排队处理</li>
+<li>按需fork进程</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pooler模块</span></span><br><span class="line"><span class="keyword">const</span> cp = <span class="built_in">require</span>(<span class="string">'child_process'</span>);</span><br><span class="line"><span class="keyword">const</span> cpus = <span class="built_in">require</span>(<span class="string">'os'</span>).cpus().length; <span class="comment">// 获取CPU数量</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">workModule</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> awaiting = [];</span><br><span class="line">    <span class="keyword">let</span> readyPool = [];</span><br><span class="line">    <span class="keyword">let</span> poolSize = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">doWork</span>(<span class="params">job, cb</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 无可用子进程，需排队</span></span><br><span class="line">        <span class="keyword">if</span>(!readyPool.length &amp;&amp; poolSize &gt; cpus)&#123;</span><br><span class="line">            <span class="keyword">return</span> awaiting.push([doWork, job, cb]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 取一个可用的子进程，或fork一个新的子进程（此时工作池最大值小于cpus，可增加工作池大小）</span></span><br><span class="line">        <span class="keyword">let</span> child = readyPool.length</span><br><span class="line">                    ? readyPool.shift()</span><br><span class="line">                    : (poolSize++, cp.fork(workModule));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> cbTriggered = <span class="literal">false</span>; <span class="comment">// 防止回调多次运行</span></span><br><span class="line"></span><br><span class="line">        child</span><br><span class="line">        .removeAllListenners() <span class="comment">// 取出子进程上的所有监听，保证每一个子进程每次只有一次监听</span></span><br><span class="line">        .once(<span class="string">'message'</span>, rst =&gt; &#123; <span class="comment">// 期待子进程返回的结果</span></span><br><span class="line">            cb(<span class="literal">null</span>, rst);</span><br><span class="line">            cbTriggered = <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">// 当子进程完成任务后，进入就绪状态，此时加回readyPool</span></span><br><span class="line">            readyPool.push(child);</span><br><span class="line">            <span class="comment">// 若此时有等待的任务，则直接执行此等待任务</span></span><br><span class="line">            <span class="keyword">if</span>(awaiting.length) setImmediate.apply(<span class="literal">null</span>, awaiting.shift());</span><br><span class="line">        &#125;)</span><br><span class="line">        .once(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">            <span class="comment">// 子进程可能会运行错误或因为其他原因退出，此时需要监听错误事件</span></span><br><span class="line">            <span class="keyword">if</span>(!cbTriggered)&#123;</span><br><span class="line">                cb(err);</span><br><span class="line">                cbTriggered = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            child.kill(); <span class="comment">// 当异常发生时，在不可用时杀死进程</span></span><br><span class="line">        &#125;)</span><br><span class="line">        .once(<span class="string">'exit'</span>, (code, signal) =&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span>(!cbTriggered) cb(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`child exited with code: <span class="subst">$&#123;code&#125;</span>`</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将退出子进程在pool中移除</span></span><br><span class="line">            poolSize--;</span><br><span class="line">            <span class="keyword">let</span> childIdx = readyPool.indexOf(child);</span><br><span class="line">            <span class="keyword">if</span>(childIdx &gt; <span class="number">-1</span>) readyPool.splice(childIdx, <span class="number">1</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        child.send(job); <span class="comment">// 将作业发送给子进程</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> doWork;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用于模拟高负荷任务的 worker：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// worker内容</span></span><br><span class="line">process.on(<span class="string">'message'</span>, job =&gt; &#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++);</span><br><span class="line"></span><br><span class="line">  process.send(<span class="string">`finished: <span class="subst">$&#123;job&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>测试 pooler 和 worker<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> pooler = <span class="built_in">require</span>(<span class="string">'./pooler'</span>);</span><br><span class="line"><span class="keyword">const</span> worker = <span class="built_in">require</span>(<span class="string">'./worker'</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  pooler(worker, (err, data) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">return</span> res.end(<span class="string">`got error: <span class="subst">$&#123;err.message&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">    res.send(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;).listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/04/20/css-refactoring/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Newer
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/04/10/node-in-practice6/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">July 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">June 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">May 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">April 2016<span class="sidebar_archives-count">5</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/AngularJS/">AngularJS<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/CSS/">CSS<span class="sidebar_archives-count">23</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/JavaScript/">JavaScript<span class="sidebar_archives-count">93</span></a></li><li><a class="sidebar_archives-link" href="/categories/Linux/">Linux<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/jQuery/">jQuery<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/区块链/">区块链<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/响应式-Web-设计/">响应式 Web 设计<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/安全/">安全<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/网络/">网络<span class="sidebar_archives-count">10</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/01/01/0_links/" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2018/02/16/0_booklist/" title="Booklist">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Booklist
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/03/01/0_mixed/" title="Notes">
+                
+                    <i class="material-icons sidebar-material-icons">assignment</i>
+                
+                Notes
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">258</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
