@@ -1,5 +1,5 @@
 ---
-title: Node 技巧笔记4 - fs模块
+title: Node 技巧笔记5 - fs模块
 categories: Nodejs
 tags:
   - JavaScript

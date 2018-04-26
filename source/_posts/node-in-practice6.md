@@ -1,5 +1,5 @@
 ---
-title: Node 技巧笔记4 - 网络
+title: Node 技巧笔记6 - 网络
 categories: Nodejs
 tags:
   - JavaScript
@@ -367,7 +367,7 @@ class Request{
         let httpGet = uri.protocol === 'http:' ? http.get : https.get;
 
         console.log(`GET: ${href}`);
-
+        // 检查是否是需要重定向
         function processResponse(res) {
             if(res.statusCode >= 300 && res.statusCode < 400){
                 if(this.redirects >= this.maxRedirects){
@@ -402,15 +402,108 @@ class Request{
         });
     }
 }
+```
 
-// 测试访问
+访问京东的老地址来测试重定向
+```js
 let request = new Request();
-request.get('http://baidu.com/', (err, res) => {
+request.get('http://www.360buy.com/', (err, res) => {
     if(err) {
         console.error(err);
     }else{
         console.log(`Fetched URL: ${res.url} with ${res.redirects} redirects`);
         process.exit();
     }
+});
+```
+输出：
+```
+GET: http://www.360buy.com/
+GET: http://www.jd.com/
+GET: https://www.jd.com/
+Redirects: https://www.jd.com/
+Got data, length: 15992
+Got data, length: 16384
+Got data, length: 16384
+Got data, length: 16384
+Got data, length: 16384
+Got data, length: 16384
+Got data, length: 14238
+Connection ended
+Fetched URL: https://www.jd.com/ with 2 redirects
+```
+
+### 技巧52 HTTP代理
+HTTP代理很常用，比如ISP通过透明代理使网络更高效，系统缓存代理减少带宽，DevOps利用代理提高应用程序性能。代理服务器可提供一定程度的重定向，可用在多处，比如缓存、日志、安全等。
+
+最简单的代理的功能就是：获取HTTP请求和响应，然后将其发送到对应的地址。
+```js
+const http = require('http');
+const url = require('url');
+
+http.createServer((req, res) => {
+    console.log(`Start request: ${req.url}`);
+
+    let opts = url.parse(req.url);
+    opts.headers = req.headers;
+
+    // 复制原始请求为代理请求
+    let proxyReq = http.request(opts, proxyRes => {
+        // 监听数据，然后返回给浏览器
+        proxyRes.on('data', chunk => {
+            console.log(`proxyResponse length: ${chunk.length}`);
+            res.write(chunk, 'binary');
+        });
+        // 追踪代理请求结束事件
+        proxyRes.on('end', () => {
+            console.log('proxied request ended');
+            res.end();
+        });
+        // 发送头部信息给服务器
+        res.writeHead(proxyRes.statusCode, proxyRes.headers);
+    });
+    // 监听浏览器发出的数据
+    req.on('data', chunk => {
+        console.log(`in request length: ${chunk.length}`);
+        proxyReq.write(chunk, 'binary');
+    });
+    // 追踪原始请求结束事件
+    req.on('end', () => {
+        console.log('original request ended');
+        proxyReq.end();
+    });
+}).listen(8080);
+```
+
+在系统本地设置代理，将地址和端口分别设置为localhost和8080，然后在CLI启动这个简单代理服务器，然后访问网页就可以看到代理每一个请求和响应了。
+
+比如在Window上设置系统代理：
+![](1.png)
+
+注意，此代理仅在访问http协议地址有效。对https协议无法代理。
+
+### 技巧53 创建DNS请求
+Node的DNS模块是独立的，当使用http或net模块连接远程服务时，其内部将会使用dns.lookup查找IP地址。
+
+当查询一个DNS记录时，结果可能包含不同的记录类型，DNS时一个分布式数据库，因此不仅仅可用来解析IP地址，还提供其他功能。具体的记录类型及其功能如下：
+
+| 类型 | 方法 | 描述 |
+| - | - | - |
+| A | dns.resolve | 一个A记录存储IP地址，其关联的TTL表示该记录多久需要更新 |
+| TXT | dns.resolveTxt | 文本值用于在DNS上构建其他服务 |
+| SRV | dns.resolveSrv | 服务器记录定义服务的定位数据，通常包括主机名和端口 |
+| NS | dns.resolveNs | 用于指定域名服务器 |
+| CNAME | dns.resolveCname | 相关的域名记录，设置域名而不是IP地址 |
+
+dns.lookup可以用来查找IPv4和IPv6地址，当找到多个地址时，能够自动替换为更快的dns.resolve。dns.lookup内部有一个线程池，且API更友好，内部使用getaddrinfo与其他程序一致，而dns.resolve关心性能。
+
+```js
+const dns = require('dns');
+
+// 使用lookup方法，可将lookup方法替换为resolve方法，使用接口不变
+dns.lookup('www.google.com', (err, address) => {
+  if(err) console.error(`Error: ${err}`);
+
+  console.log(`Addresses: ${address}`);
 });
 ```
