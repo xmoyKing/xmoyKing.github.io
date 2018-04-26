@@ -632,7 +632,7 @@ hexo报错：hexo FATAL Cannot set property 'lastIndex' of undefined
 而对`body`获取滚动高度是不对的，始终为0。
 
 ##### 2018.3.15
-wechat1面纪要：
+wechat 1面纪要：
 1. Angular/AngularJS与Vue相关
     - 两者双向绑定机制
     - scoped-slot，ng-translucent
@@ -674,6 +674,8 @@ W3C制定规范要走一个批准流程。官方流程文档：https://www.w3.or
 1. 标签的使用场景：比如导航栏用nav标签，footer用于联系信息、figure用于包裹多媒体内容、main用于主要内容、aside用于侧栏、article用于文档内容等。
 2. 属性的使用场景：img标签需要加上alt属性，作为图片加载失败的备用文案，不仅能告诉用户此次图片的内容，还能供让屏幕阅读器读取文案内容。类似的，对audio、video等媒体标签也需要附上友好的不支持信息
 
+**点评：语义化对搜索引擎也会更友好。**
+
 ---
 
 2. 我们说，前端开发是结构、表现、行为分离的，HTML、CSS和JS分别负责结构、表现和行为。结合你在前端的实践，谈谈你对结构、表现、行为分离原则的理解，试举出你在这一原则下实践的一个例子。
@@ -686,7 +688,7 @@ W3C制定规范要走一个批准流程。官方流程文档：https://www.w3.or
 
 同时，还需要对CSS类名做一些规约，比如需要设定样式的类名不要再当作JS的选择器，用特定的前缀或后缀类名或ID作为JS选择器，消除JS和CSS之间的类名耦合。
 
-
+**点评：除了考虑代码维护性，还可以考虑对机器浏览器的解析影响。**
 
 ---
 
@@ -723,7 +725,13 @@ module.exports = function(arr1, arr2) {
 <p data-height="265" data-theme-id="0" data-slug-hash="qYOgMj" data-default-tab="css,result" data-user="xmoyking" data-embed-version="2" data-pen-title="CSS实现核辐射警告标志" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/qYOgMj/">CSS实现核辐射警告标志</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
+**点评：圆的大小不符合要求。可用nth-child选择器代替类名。**
+正确答案
+本题的思路之一是使用border构造相间的三角形，然后使用overflow-hidden和border-radius剪裁成圆。另外注意水平、垂直居中的实现方式。https://code.h5jun.com/livi/edit?html,css,output
+
 ---
 5. 从[github 项目](https://github.com/75camp/2018-contest)获取内容，按要求实现一个 2048 游戏。
 
 [DEMO项目地址](https://github.com/xmoyKing/2018-contest)
+
+**点评：代码结构不是很清晰。**
