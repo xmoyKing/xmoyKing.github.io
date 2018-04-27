@@ -18,12 +18,15 @@ updated: 2018-03-20 09:22:32
 不仅其左右两边的外边距会根据父元素的宽度改变，上下外边距也会随之改变。在CSS中这是期望行为。再来看属性定义，可以看到，百分数值定义为相对于父元素的width。这不仅应用于左右外边距，也应用于上下外边距。因此，给定以下样式和标记，段落的上外边距将是50px:
 ```html
 div p{margin-top:10%;}
+
 <div style="width:500px;">
-<p>This is a paragraph,and its top margin is 10%the width of its parent e1ement.</p>
+  <p>This is a paragraph,and its top margin is 10%the width of its parent e1ement.</p>
 </div>
 ```
 
 如果div的width改变，段落的上外边距也会改变。看上去有些奇怪，是不是？这样来考虑，我们认为，正常流中的大多数元素都会足够高以包含其后代元素（包括其外边距）。如果一个元素的上下外边距是父元素的height的一个百分数，就可能导致一个无限循环，父元素的height会增加，以适应后代元素上下外边距的增加，而相应地，上下外边距又必须增加，以适应新的父元素height，如此继续。规范的作者没有简单地忽略上下外边距百分数，而是决定让它与父元素的width相关，不会根据其后代元素的width而改变。
+
+*PS：我觉得这个答案并不是很满意，因为其实这样连带影响的属性有很多，为何margin就特殊？个人推荐看这个博客：[margin系列之百分比](http://www.ituring.com.cn/article/64581)*
 
 注意：对于定位元素，上下外边距如果是百分数值，其处理会有所不同。
 
@@ -40,6 +43,7 @@ div p{margin-top:10%;}
 重申一句，这个语法在规范中是允许的，不过它对行高绝对没有任何影响。但是，由于边框是可见的，所以将会绘制出来，如下图所示。
 
 ![行内非替换元素的边框](1.png)
+
 边框该放在哪里就会放在哪里。
 
 同样地，所有这些只是对行内元素的上下边成立，左右边则是另一回事。如果应用一个左边框或右边框，不仅该边框可见，而且文本会在其旁边显示（即不会覆盖）。
@@ -100,18 +104,20 @@ background-position:center;}
 #### 关键字
 图像放置关键字最容易理解。其作用如其名所表明的，例如，top right使原图像放在元素内边距区的右上角。
 ```css
-p {background-image:url(yinyang.gif);
-background-repeat:no-repeat;
-background-position:top right;}
+p {
+  background-image:url(yinyang.gif);
+  background-repeat:no-repeat;
+  background-position:top right;
+}
 ```
 这会在每个段落内边距右上角放置一个不重复的原图像。其结果与将位置声明为right top是一样的。（根据规范）位置关键字可以按任何顺序出现，只要保证不能超过两个关键字个对应水平方向，另一个对应垂直方向。
 
-如果只出现了一个关键字，则认为另一个关键字是center。表9-1显示了等价的关键字。
+如果只出现了一个关键字，则认为另一个关键字是center。下表显示了等价的关键字。
 
 等价的位置关键字
 
-| - | - |
 | 单个关键字 | 等价关键字 |
+| - | - |
 | center | center center |
 | top | top center center top |
 | bottom | bottom center center bottom |
@@ -119,14 +125,22 @@ background-position:top right;}
 | left | center left left center |
 
 所以，如果希望每个段落的中部上方出现一个图像，只需如下声明：
-`p{background-image:url(yinyang.gif)；background-repeat:no-repeat;background-position:top;}`
+```css
+p{
+  background-image:url(yinyang.gif);
+  background-repeat:no-repeat;
+  background-position:top;
+}
+```
 
 #### 百分数值
 百分数值与关键字紧密相关，不过其表现方式更为复杂。假设你希望用百分数值将原图像在其元素中居中。
 ```css
-p{background-image:url(bigyinyang.gif);
-background-repeat:no-repeat;
-background-position:50% 50%;}
+p{
+  background-image:url(bigyinyang.gif);
+  background-repeat:no-repeat;
+  background-position:50% 50%;
+}
 ```
 这会导致原图像适当放置，其中心与其元素的中心对齐。换句话说，百分数值同时应用于元素和原图像。
 
@@ -136,17 +150,21 @@ background-position:50% 50%;}
 
 因此，如果你想将一个原图像放在水平方向1/3。垂直方向2/3处，可以声明如下：
 ```css
-p{background-image:url(bigyinyang.gif);
-background-repeat:no-repeat;
-background-position:33% 66%;}
+p{
+  background-image:url(bigyinyang.gif);
+  background-repeat:no-repeat;
+  background-position:33% 66%;
+}
 ```
 利用这些规则，原图像中从图像左上角水平向右1/3、垂直向下2/3处的点将与离包含元素左上角最远的点对齐。注意，如果用百分数设置位置，水平值总是先出现。如果在上例中将百分数值的顺序换一下，图像将放在元素中水平向右2/3、垂直向下丨/3处。
 
 如果只提供了一个百分数值，所提供的这个值将用作为水平值，垂直值假设为50%，这与关键字类似，即如果只指定了一个关键字，另一个关键字则假设为center。例如：
 ```css
-p{background-image:url(yinyang.gif);
-background-repeat:no-repeat;
-background-position:25%;}
+p{
+  background-image:url(yinyang.gif);
+  background-repeat:no-repeat;
+  background-position:25%;
+}
 ```
 原图像位于元素内容区和内边距区水平向右1/4，垂直向下1/2处:
 ![只声明一个百分数值意味着垂直位置等于50%](5.png)
@@ -158,28 +176,34 @@ background-position:25%;}
 
 这与百分数值大不相同，因为偏移只是从一个左上角到另一个左上量角的偏移。换句话说，原图像的左上角与background-position声明中指定的点对齐。不过，可以结合使用长度和百分数值，得到“二者兼俱”的效果。假设你需要一个背景图像，它要一直延伸到元素的右边，并且要从顶部向下延伸10像素。像以往一样，先指定水平值：
 ```css
-p {background-image:url(bg23.gif);
-background-repeat:no-repeat;
-background-position:100% l0px;
-border:1px dotted gray;}
+p {
+  background-image:url(bg23.gif);
+  background-repeat:no-repeat;
+  background-position:100% l0px;
+  border:1px dotted gray;
+}
 ```
 
 如果使用长度值或百分数值，可以使用负值将原图像拉出元素的背景区。考虑一个例子，使用一个很大的“阴阳”符号作为背景。有时可能要将其居中，不过如果你只希望其中一部分在元素内边距区的左上角可见，该怎么做呢？没问题，至少从理论上讲是可以做到的。
 
 首先，假设原图像为300像素高300像素宽。再假设只有其右下方1/3的部分可见。可以如下得到所需的效果：
 ```css
-p{background-image:url(bigyinyang.gif);
-background-repeat:no-repeat;
-background-position:-200px-200px;
-border:1px dotted gray;}
+p{
+  background-image:url(bigyinyang.gif);
+  background-repeat:no-repeat;
+  background-position:-200px-200px;
+  border:1px dotted gray;
+}
 ```
 
 理论上负百分数值也是允许的，不过对此存在两个问题。第一个问题是用户代理可能有限制，无法识别负的background-position值。另一个问题是，负百分数值计算起来很有意思。比方说，原图像和元素很可能大小不同而这会导致意想不到的后果。例如，考虑以下规则，其结果见下图:
 ```css
-p{background-image:url(pix/bxgyinyang.gif);
-background-repeat:no-repeat;
-background-position:-10%-10%;
-border:1px dotted gray;width:500px;}
+p{
+  background-image:url(pix/bxgyinyang.gif);
+  background-repeat:no-repeat;
+  background-position:-10%-10%;
+  border:1px dotted gray;width:500px;
+}
 ```
 ![负百分数值的不同效果](6.png)
 
@@ -194,7 +218,11 @@ border:1px dotted gray;width:500px;}
 
 要介绍这个内容，最容易的办法就是先提供一个例子，再作相应的解释。考虑以下标记，其结果如下图所示：
 ```css
-p {background-image:url(yinyang.gif);background-position:center;border:1px dotted gray;}
+p {
+  background-image:url(yinyang.gif);
+  background-position:center;
+  border:1px dotted gray;
+}
 p.cl {background-repeat:repeat-y;}
 p.c2 {background-repeat:repeat-x;}
 ```
@@ -225,10 +253,12 @@ background-attachment
 
 通过使用属性background-attachment，可以声明原图像相对于可视区是固定的（fixed），因此不会受滚动的影响：
 ```css
-body{background-image:url(bigyinyang.gif);
-background-repeat:no-repeat;
-background-position:center;
-background-attachment:fixed;}
+body{
+  background-image:url(bigyinyang.gif);
+  background-repeat:no-repeat;
+  background-position:center;
+  background-attachment:fixed;
+}
 ```
 这样做有两个直接后果。首先，原图像不会随文档滚动/其次，原图像的放置由可视区的大小确定，而不是由包含该图像的元素的大小（或在可视区中的位置）决定。
 
@@ -240,13 +270,17 @@ background-attachment:fixed;}
 从技术上讲。如果一个背景图像已经固定（fixed），它会相对于可视区定位，而不是相对于包含该图像的元素定位，不过，背景将只在其包含元素中可见。这带来一个很有意思的后果。
 假设有一个文档，其中有一个看上去像是平铺的砖块背景，还有一个有相同模式的h1元素，只不过颜色不同。body和h1元素都设置为有固定（fixed）背景，这会得到如下图所示的结果：
 ```css
-body {background-image:url(gridl.gif);
-background-repeat:repeat;
-background-attachment:fixed;}
+body {
+  background-image:url(gridl.gif);
+  background-repeat:repeat;
+  background-attachment:fixed;
+}
 
-h1 {background-image:url(grid2.gif);
-background-repeat:repeat;
-background-attachment:fixed;}
+h1 {
+  background-image:url(grid2.gif);
+  background-repeat:repeat;
+  background-attachment:fixed;
+}
 ```
 ![背景的理想对齐](9.png)
 这种理想的对齐是怎么做到的呢？要记住，一个背景如果是固定的（fixed），原元素会根据视窗定位。因此，背景模式都从视窗的左上角开始平铺，而不是从单个元素的左上角开始。对于body，可以看到整个重复模式。不过，对于h1，只是在h1本身的内边距和内容区能看到它的背景。由于两个背景图像大小相同，而且它们有相同的起点，所以看上去就会像上图那样“对齐”。

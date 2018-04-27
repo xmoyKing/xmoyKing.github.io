@@ -66,10 +66,14 @@ Web前端学习流程，[Web Front End Stack 思维导图版](Web Front End Stac
 
 [汤姆大叔:深入理解JavaScript系列](http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html)
 
+[doyoe](http://blog.doyoe.com/)*最近更新是在16年4月了，但其内有好多博客值得学习*
+
 ### 其他
 [DocsChina印记](https://docschina.org/home/doc)
 
 [H5BP](https://h5bp.github.io/)
+
+[CSS参考手册](http://css.doyoe.com/)
 
 ---
 
@@ -190,6 +194,10 @@ Web前端学习流程，[Web Front End Stack 思维导图版](Web Front End Stac
 [【前端面试】前端面试题300道](https://blog.csdn.net/qq_22944825/article/details/78169321)
 
 ## 零散知识点
+关于 HTML/CSS/JavaScript 的知识点，看似繁多，其实其框架和脉络都是在W3C的规范内写出了，直接看规范才是最最系统而全面的学习，但往往由于规范太长太术语太官方导致无法坚持看完，初看往往都是无法一次性掌握的。
+
+所以推荐看书、看一些精品博客，最后若遇到一些问题无法解决或希望刨根问底，那么唯有溯源从规范中找答案了。当然有的时候也许规范并没有直接给出答案，此时可能就需要善用搜索引擎了（搜索引擎是遇到问题的第一步也是最后一步）。
+
 ### HTML&CSS
 [HTML5语义化](https://www.w3cplus.com/html5/semantics-tags.html)
 
@@ -222,7 +230,9 @@ Web前端学习流程，[Web Front End Stack 思维导图版](Web Front End Stac
 
 [CSS background 属性](http://www.cnblogs.com/darcrand-blog/p/5770181.html)
 
-[margin系列](http://www.ituring.com.cn/space/personalarticle/161000?pcid=370)*看完才知道从前的自己对margin一无所知，由于博主链接的个人博客地址挂掉了，所以图片和外链无法访问，有机会帮忙重新复写一遍*
+[margin系列](http://www.ituring.com.cn/space/personalarticle/161000?pcid=370)*看完才知道从前的自己对margin一无所知*
+
+[深入理解CSS中的margin负值](https://www.cnblogs.com/xiaohuochai/p/5314289.html)*此博客可在线测试margin与其他属性的关系，但是建议自己手动写DEMO*
 
 [:after和:before炫酷用法总结](http://www.cnblogs.com/cheerful-queen/p/4971484.html)*最后给出的一些demo链接很有价值，尤其是链向tympanus.net的demo,最后引发了如下讲解CSS Counter的博文*
 
@@ -230,6 +240,9 @@ Web前端学习流程，[Web Front End Stack 思维导图版](Web Front End Stac
 
 [多行文本溢出显示省略号(…)全攻略](http://www.css88.com/archives/5206)
 
+[自定义浏览器滚动条的样式，打造属于你的滚动条风格](https://www.lyblog.net/detail/314.html)
+
+[如何优雅的选择字体(font-family)](https://segmentfault.com/a/1190000006110417)
 [自定义浏览器滚动条的样式，打造属于你的滚动条风格](https://www.lyblog.net/detail/314.html)
 
 [如何优雅的选择字体(font-family)](https://segmentfault.com/a/1190000006110417)
