@@ -234,6 +234,8 @@ Web前端学习流程，[Web Front End Stack 思维导图版](Web Front End Stac
 
 [深入理解CSS中的margin负值](https://www.cnblogs.com/xiaohuochai/p/5314289.html)*此博客可在线测试margin与其他属性的关系，但是建议自己手动写DEMO*
 
+[关于「圣杯布局」](http://cnodejs.org/topic/56d70d5f4dfa4031185aabbf)
+
 [:after和:before炫酷用法总结](http://www.cnblogs.com/cheerful-queen/p/4971484.html)*最后给出的一些demo链接很有价值，尤其是链向tympanus.net的demo,最后引发了如下讲解CSS Counter的博文*
 
 [CSS Counters](http://www.w3cplus.com/css3/css-counters.html)
@@ -414,6 +416,8 @@ CSS动画性能优化：
 [移动端web开发技巧](http://liujinkai.com/2015/06/06/mobile-web-skill/) *各种林散知识点*
 
 [TAT.tennylv 移动web问题小结](http://www.alloyteam.com/2015/06/yi-dong-web-wen-ti-xiao-jie/)
+
+[移动前端开发经验指南](https://github.com/doyoe/trip)
 
 *2014年12月左右，时间有点老了：*
 [跨终端响应式页面设计入门](http://www.cnblogs.com/vajoy/p/3903591.html) *其中的关于chrome字体的问题已经解决，可以允许小于12px的字体了*
