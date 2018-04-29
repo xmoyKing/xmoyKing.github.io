@@ -749,3 +749,14 @@ module.exports = function(arr1, arr2) {
 [DEMO项目地址](https://github.com/xmoyKing/2018-contest)
 
 **点评：代码结构不是很清晰。**
+
+##### 2018.4.29
+HTML，doctype、meta标签，语义化和文本标签的正确使用，比如figure、dl。以及对html标签的分类。
+
+对img图片，需要单独设置width、height，而不仅仅是CSS，因为当图片未加载的情况下，其宽高无法用css控制。
+
+对a链接标签，target的真正用处：当需要多次打开新的tab时，可以指定一个target打开。
+
+表格：对表格而言，margin无效，同时需要注意其html的嵌套正确，th、tr、colspan、rowspan、colgroup、capital的使用，
+
+对表单而言，注意METHOD中get、post、options的区别。
