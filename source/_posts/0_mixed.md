@@ -759,4 +759,11 @@ HTML，doctype、meta标签，语义化和文本标签的正确使用，比如fi
 
 表格：对表格而言，margin无效，同时需要注意其html的嵌套正确，th、tr、colspan、rowspan、colgroup、capital的使用，
 
-对表单而言，注意METHOD中get、post、options的区别。
+对表单而言，注意METHOD中get、post、options的区别。对表单控件的状态有所了解，比如readonly、disabled。对回车提交需要特别注意，button标签其type默认值submit。
+
+表单设计时需要遵守的原则：
+- 帮助用户不出错，确定控件输入内容的范围和区间，简单的说：能选的不填。
+- 尽早提示错误
+- 控件较多时需要分组
+- 扩大选择/可点击区域
+- 分清主要和次要操作

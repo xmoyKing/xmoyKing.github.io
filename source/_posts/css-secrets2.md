@@ -1,5 +1,5 @@
 ---
-title: CSS揭秘笔记2
+title: CSS揭秘笔记2-背景和边框
 categories: CSS
 tags:
   - CSS3

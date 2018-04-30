@@ -1,5 +1,5 @@
 ---
-title: CSS揭秘笔记1
+title: CSS揭秘笔记1-CSS版本及编程技巧
 categories: CSS
 tags:
   - CSS3
