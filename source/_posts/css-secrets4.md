@@ -50,6 +50,11 @@ box-shadow: 5px 0 5px -5px black,
             -5px 0 5px -5px black;
 ```
 
+示例DEMO：
+<p data-height="265" data-theme-id="0" data-slug-hash="qYrYrZ" data-default-tab="css,result" data-user="xmoyking" data-embed-version="2" data-pen-title="单侧、双侧、邻边投影" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/qYrYrZ/">单侧、双侧、邻边投影</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
 ### 不规则投影
 当想给一个矩形或其他能用 border-radius 生成的形状加投影时， box-shadow 的表现都堪称完美。但是，当元素添加了一些伪元素或半透明的装饰之后，它就有些力不从心了，因为 border-radius 会地忽视透明部分。这类情况包括：
 - 半透明图像、背景图像、或者 border-image （比如老式的金质像框）；
@@ -77,6 +82,10 @@ CSS 滤镜最大的好处在于，它们可以平稳退化：当浏览器不支�
 filter: url(drop-shadow.svg#drop-shadow);
 filter: drop-shadow(2px 2px 10px rgba(0,0,0,.5));
 ```
+
+示例DEMO：
+<p data-height="265" data-theme-id="0" data-slug-hash="ELWLZa" data-default-tab="css,result" data-user="xmoyking" data-embed-version="2" data-pen-title="不规则投影" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/ELWLZa/">不规则投影</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
 
 如果 SVG 滤镜是存放在一个独立文件里的，那它就无法像一个简洁易用的函数那样在 CSS 代码中进行随意配置；如果它是内联的，则又会搅乱你的代码。参数需要写死在文件内部，因此每当新加一种哪怕是大同小异的投影效果时，都需要多准备一个文件，这显然是难以接受的。当然，还可以使用 data URI（它也会省掉额外的 HTTP 请求），但这个方法仍然会带来文件体积的增长。总的来说，这个方法只是一种回退方案，因此只要把SVG 滤镜控制在一定数量以内，哪怕它们的效果大同小异，也是说得过去的。
 
@@ -236,29 +245,64 @@ main::before {
 #### 45°折角的解决方案
 从一个右上角具有斜面切角的元素开始，这个切角是由“切角效果”中的渐变方案实现。要用这个技巧在右上角创建一个大小为 1em的斜面切角。
 
+![](5.png)
+
 接下来所需要做的就是增加一个暗色的三角形来实现翻折效果。实现方法是增加另一层渐变来生成这个三角形并将其定位在右上角，这样就可以通过 background-size 来控制折角的大小。
 
 为了生成这个三角形，我们所需要的就是一个有角度的线性渐变，而这个渐变的两个色标需要在正中央重合：
 ```css
 background: #58a; /* 回退样式 */
 background:
-  linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.4) 0)
-  no-repeat 100% 0 / 2em 2em,
+  linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.4) 0) no-repeat 100% 0 / 2em 2em,
   linear-gradient(-135deg, transparent 1.5em, #58a 0);
 ```
 
+<p data-height="265" data-theme-id="0" data-slug-hash="jxBxWv" data-default-tab="css,result" data-user="xmoyking" data-embed-version="2" data-pen-title="45°折角" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/jxBxWv/">45°折角</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
 #### 其他角度的解决方案
+![](6.png)
+
 现实生活中的折角往往不是精确的 45°。如果希望它看起来更真实一些，可以稍稍改变一下角度，比如 -150deg 可以产生 30°的切角。不过，如果只是改变斜面切角的角度，那么表示翻折部分的三角形并不会跟着改变，这将导致整体效果被破坏，此外，调整这个三角形的尺寸并不容易。它的尺寸并不是由角度来定义的，而是由宽度和高度来定义的。怎样才能得到需要的宽度和高度呢？好的，这回该请出三角函数了！
+
+![](7.png)
 
 当知道这两个 30-60-90 直角三角形的某一条直角边的长度时，基本上就可以算出斜边的长度。只要知道了直角三角形的角度和某一条边的长度，就可以通过正弦函数、余弦函数以及勾股定理计算出另外两条边的长度。
 
+![](8.png)
+
 折页三角形是需要微微旋转的，它的尺寸跟从元素角上“切”下来的那个三角形应该是一致的。
+```css
+.note {
+  position: relative;
+  background: #58a; /* 回退样式 */
+  background: linear-gradient(-150deg, transparent 1.5em, #58a 0);
+  border-radius: .5em;
+}
+.note::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  background: linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.2) 0, rgba(0,0,0,.4)) 100% 0 no-repeat;
+  width: 1.73em;
+  height: 3em;
+  transform: translateY(-1.3em) rotate(-30deg);
+  transform-origin: bottom right;
+  border-bottom-left-radius: inherit;
+  box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.15);
+}
+```
+
+演示DEMO：
+<p data-height="265" data-theme-id="0" data-slug-hash="deveMp" data-default-tab="css,result" data-user="xmoyking" data-embed-version="2" data-pen-title="任意角度折角" class="codepen">See the Pen <a href="https://codepen.io/xmoyking/pen/deveMp/">任意角度折角</a> by XmoyKing (<a href="https://codepen.io/xmoyking">@xmoyking</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+使用预处理器的mixin：
 ```less
 @mixin folded-corner($background, $size, $angle: 30deg) {
   position: relative;
   background: $background; /* 回退样式 */
-  background:
-  linear-gradient($angle - 180deg, transparent $size, $background 0);
+  background: linear-gradient($angle - 180deg, transparent $size, $background 0);
   border-radius: .5em;
   $x: $size / sin($angle);
   $y: $size / cos($angle);
@@ -269,15 +313,14 @@ background:
     top: 0; right: 0;
     background: linear-gradient(to left bottom, transparent 50%, rgba(0,0,0,.2) 0, rgba(0,0,0,.4)) 100% 0 no-repeat;
     width: $y; height: $x;
-    transform: translateY($y - $x)
-    rotate(2*$angle - 90deg);
+    transform: translateY($y - $x) rotate(2*$angle - 90deg);
     transform-origin: bottom right;
     border-bottom-left-radius: inherit;
     box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.2);
   }
 }
 
-/* 当调用时... */
+/* 调用... */
 .note {
   @include folded-corner(#58a, 2em, 40deg);
 }

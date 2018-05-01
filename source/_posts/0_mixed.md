@@ -690,6 +690,25 @@ n==1时则 F(1) = Sh
 
 **点评：语义化对搜索引擎也会更友好。**
 
+**2018.4.30补充：同时提升无障碍性。**
+定义：HTML中元素、属性及属性值都拥有某些含义，开发者应该遵循语义编写HTML。
+
+WHY:
+- 提升代码可维护性，可读性
+- SEO
+- 提升无障碍性
+
+WCAG（Web Conent Accessibility Guidelines）2.0，08年的指南，主要是对页面内容可访问性的指南。
+ARIA（Accessible Rich Internet Applications），通过在HTML标签上添加role、aria-*等隐藏属性来告知该标签的使用方式和作用。
+
+提升无障碍性（从友好提示和回退方案上考虑）：
+- img的alt属性，
+- noscript，无JS的友好提示和回退方案
+- input和label对应，扩大选取和友好提示
+- 图形验证码和语言验证码
+- 文本和背景的对比度
+- 键盘可操作
+
 ---
 
 2. 我们说，前端开发是结构、表现、行为分离的，HTML、CSS和JS分别负责结构、表现和行为。结合你在前端的实践，谈谈你对结构、表现、行为分离原则的理解，试举出你在这一原则下实践的一个例子。
@@ -750,6 +769,10 @@ module.exports = function(arr1, arr2) {
 
 **点评：代码结构不是很清晰。**
 
+
+#### 奇舞学院-前端特训营公开课笔记（2017年3月）
+地址：http://t.75team.com
+
 ##### 2018.4.29
 HTML，doctype、meta标签，语义化和文本标签的正确使用，比如figure、dl。以及对html标签的分类。
 
@@ -767,3 +790,25 @@ HTML，doctype、meta标签，语义化和文本标签的正确使用，比如fi
 - 控件较多时需要分组
 - 扩大选择/可点击区域
 - 分清主要和次要操作
+
+##### 2018.4.30
+HTML补充知识点：
+一些全局HTML标签属性，比如contentediable、lang、itemscope、tabindex、accesskey等
+
+扩展HTML：
+- meta标签：W3C规范+厂商自定义，比如http-equiv指其meta属性的设置同等于HTTP headers
+- data-*：通过 ele.dataset 设置
+- microdata：HTML5规范，将格式化数据写在标签上，当作自定义属性，浏览器不识别该系列属性，供搜索引擎、浏览器插件使用
+- JSON-LD：microdata的JSON版本，写在script标签内
+- RDFa：类似microdata，但支持XHTML，W3C推荐标准
+
+编码规范：GCS（Google Coding Style)、W3C Validator
+
+##### 2018.5.1
+李松峰分享：技术书籍的事儿。
+- 做专业读者
+    - 内容
+    - 编校（标点、字词使用等）
+    - 设计（版权页、扉页等）
+    - 印刷
+- 做专业译者
