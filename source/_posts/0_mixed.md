@@ -815,3 +815,40 @@ HTML补充知识点：
  - 信
  - 达
  - 雅
+
+##### 2018.5.3
+关键渲染路径性能优化：
+1. 延迟或异步加载资源，从而减少关键资源数量
+1. 减少资源大小
+1. 针对关键资源，减少网络请求时间
+
+学习资源：
+- 关键资源呈现路径 by Chrome Developer
+- 使用Chrome Devtool检查性能
+- [资源优化汇总](perf.rocks)
+
+
+减少内容大小：
+- 避免返回无用内容
+- 针对特定语言的源码压缩
+- 通用文本压缩（gzip）
+- 图片压缩
+- ...
+
+减少请求来回时间
+- 服务器优化
+  - chunked encoding
+  - 尽早返回数据
+  - 服务端渲染
+  - ...
+- 合理利用缓存
+  - Cache Control
+  - ETag
+  - localStorage
+  - Service worker
+- 优化网络
+  - HTTP2
+  - CDN
+  - 域名分割
+  - 减少重定向
+  - resource-hint
