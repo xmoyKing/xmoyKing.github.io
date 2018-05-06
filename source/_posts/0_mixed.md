@@ -702,9 +702,9 @@ WCAG（Web Conent Accessibility Guidelines）2.0，08年的指南，主要是对
 ARIA（Accessible Rich Internet Applications），通过在HTML标签上添加role、aria-*等隐藏属性来告知该标签的使用方式和作用。
 
 提升无障碍性（从友好提示和回退方案上考虑）：
-- img的alt属性，
+- img的alt属性
 - noscript，无JS的友好提示和回退方案
-- input和label对应，扩大选取和友好提示
+- input和label对应，扩大选区和友好提示
 - 图形验证码和语言验证码
 - 文本和背景的对比度
 - 键盘可操作
@@ -799,7 +799,7 @@ HTML补充知识点：
 - meta标签：W3C规范+厂商自定义，比如http-equiv指其meta属性的设置同等于HTTP headers
 - data-*：通过 ele.dataset 设置
 - microdata：HTML5规范，将格式化数据写在标签上，当作自定义属性，浏览器不识别该系列属性，供搜索引擎、浏览器插件使用
-- JSON-LD：microdata的JSON版本，写在script标签内
+- JSON-LD：microdata的JSON版本，写在script标签内,目前主流
 - RDFa：类似microdata，但支持XHTML，W3C推荐标准
 
 编码规范：GCS（Google Coding Style)、W3C Validator
@@ -852,3 +852,154 @@ HTML补充知识点：
   - 域名分割
   - 减少重定向
   - resource-hint
+
+---
+
+### 2018.5.6 360FEStar
+#### AM
+##### 月影：为何选择前端行业。
+- 行业发展快速，近10年发展最为快速的互联网领域之一。
+- 前端工程化，AI不会导致前端职业的消失，相反应该去做人和项目的桥梁。因为人和项目的多变性，不确定性。
+- 前端职业化，解决问题，不盲目追求新框架，而要理解 Why、How，专业化。
+    - 如何做到专业化？同样的页面，看产品要深入到背后，而不仅仅是表面的页面。该在哪些地方/领域继续深入，优化。
+- 7天内以小组形式做一个项目，项目自拟，最后一个分享。
+
+##### 赵文博：基础
+1. 什么是前端
+    - 界面/交互相关，是用户能接触产品的入口
+    - Web标准：HTML、CSS、JS、SVG ...
+    - 相关要求：
+        - 功能
+        - 美观
+        - 安全
+        - 无障碍
+        - 性能
+        - 兼容性
+        - 体验
+1. 前端的边界
+    - Node
+    - Electron
+    - RN
+    - WebRTC
+    - WebGL
+    - WebAssembly
+
+HTML doctype：
+    1. 指定解析HTML的版本，标准
+    1. 决定使用的渲染模式：
+        - 怪异模式、标准模式的区别：比如盒模型
+
+语义化/HTML标签分类: whatwg 
+![](2018.5.6.1.png)
+
+link标签：
+- rel：relationship缩写，表示当前页面与其所指的外部资源的关系
+    - stylesheet: 指定CSS
+    - 预加载：dns-prefetch、prefetch、prerender
+    - 图标：icon，type:images/png
+    - RSS：alternate, tyoe:application/rss+xml
+
+HTMl标签的顺序和类型会影响HTML Parsing
+
+一般框架本身会对HTML语义化和无障碍性做出考量。
+
+**深入CSS**
+属性选择器：
+- 属性存在 [disabled]
+- 属性为指定值 [type="checkbox"]
+- 属性包含某字符串 [href*="example"]
+- 属性以字符串开头 [href^="http:"]
+- 属性以字符串结尾 [src$=".png"]
+- 属性有某个值，类似class [class~="ckass1"]
+
+伪类, 表示状态的改变，DOM无法表示HTML标签的状态：
+对标签:link, :actived, :focus, :disabled等
+结构性伪类:first-child, :nth-of-type等
+
+组合器（Combinator）：后代`E F`、亲子`E > F`、兄弟`E ~ F`、相邻兄弟`E + F`
+
+伪元素，伪造了一个单独拥有盒子模型的元素，并不真实存在该DOM结构：
+::before, ::after, ::first-letter, ::first-line
+
+CSS样式来源：
+- 开发者
+- 用户对浏览器的设置（如字体、字号）
+- 浏览器预设
+
+注：当出现!important时，用户设置样式比开发者设置的!important样式权重更高
+
+#### PM
+CSS继承过程：
+继承的是父级元素对应样式的"计算值"
+
+显式继承：inherit
+
+初始值：initial，在CSS中，每一个属性都有一个默认的初始值。可以显示的将某属性设置为原始的初始值。
+
+CSS样式计算过程：
+![](2018.5.6.2.png)
+
+视觉格式化模型
+块级盒子中对子盒子：不在行级的内容会生成匿名块级盒子
+
+行级盒子只能单独包含行/块级元素，若混合块级盒，则会将其他行级元素用匿名块级元素包裹
+
+Generated Content：
+- display:list-item
+- ::before, ::after
+
+BFC的特性：
+- BFC内的浮动不会影响BFC外的元素
+- BFC高度会计算内部浮动元素
+- BFC不会和其他浮动元素重叠
+
+堆叠（z-index)：比较时，仅在同级的堆叠上下文内比较
+
+堆叠上下文的创建：
+- root元素
+- position为relative或absolute且z-index不为auto的元素
+- position为fixed、sticky
+- flexbox的子元素且z-index不为auto的元素
+- 某些CSS3的属性：opacity、transform、animation、will-change
+
+堆叠上下文绘制层级：
+1. 形成该上下文的元素的border和background
+1. z-index为负值的子堆叠上下文
+1. 常规流内的块级元素非浮动子元素
+1. 非定位的浮动元素
+1. 常规流内非定位行级元素
+1. z-index为0的子元素或子堆叠上下文
+1. z-index为正数的子堆叠上下文
+
+line-height：两个行间baseline的距离
+
+行级元素需要注意行框的高度计算，以及当前行内元素的默认排版为baseline，通过vertical-align的设置可以改变。
+
+text-align-last:justify
+
+--- 
+月影：
+**1. 如何写好JS**
+- 代码语义化、需要利于维护
+- 代码不能直接修改样式
+- 写代码前需要思考是否可以不需要JS，JS需要思考应该做哪些，不应该做哪些
+
+**2. 复杂UI组件的设计**
+例如一个轮播组件，需要考虑到：
+1. 组件内部的接口
+1. 组件与组件之间的接口
+1. 组件的扩展
+
+具体步骤：
+1. HTML结构、CSS样式、基本的动画方式
+1. API设计
+1. 控制流设计
+    - 控制结构：button、item
+    - 自定义事件：解决耦合问题，同时能方便扩展
+    - 插件机制：利用依赖注入，将一些逻辑独立出来，
+    - 同时将HTML结构抽出，将插件所需的标签模板化
+
+整个组件的设计是一个不断抽象，不断封装的过程。
+
+**3. 局部细节控制**
+过程抽象
