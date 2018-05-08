@@ -385,6 +385,8 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 
 [Travis CI助力Blog持续输出](http://palmer.arkstack.cn/2018/01/Travis%20CI%E5%8A%A9%E5%8A%9BBlog%E6%8C%81%E7%BB%AD%E8%BE%93%E5%87%BA/)
 
+[界面之下：还原真实的 MV* 模式](https://segmentfault.com/a/1190000003871577)
+
 #### 性能优化
 CSS动画性能优化：
 - [css3动画的性能优化](https://segmentfault.com/a/1190000000490328)

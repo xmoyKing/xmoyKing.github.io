@@ -1066,3 +1066,63 @@ Meta-Programming
  - 书籍
     - 数据可视化 陈为
     - 数据可视化之美
+
+### 2018.5.8
+#### AM
+##### 马奇：可视化之魂，算法
+力导向图
+
+力导向图优化性能：
+1. SVG -> Canvas，提高渲染性能
+1. 2D -> 3D, 扩大空间
+1. 外部tick函数执行节流
+
+月影：前端是需要算法的，在做一些work时，数学思维也许能让work更出色
+
+#### PM
+##### 李喆明 SVG Animation in Action
+1. ViewPort & ViewBox
+可以参考：[理解SVG viewport,viewBox,preserveAspectRatio缩放](http://www.zhangxinxu.com/wordpress/2014/08/svg-viewport-viewbox-preserveaspectratio/)
+
+[SVG基础 | SVG Viewport、View Box和preserveAspectRatio](http://www.htmleaf.com/ziliaoku/qianduanjiaocheng/201506182064.html)
+
+##### 纪立民 大话设计模式
+如何写出可复用易扩展的代码
+1. 面向X
+    - 面向过程 OPP
+    - 面向对象 OOP
+    - 面向切面 AOP
+    - 面向组件
+1. 常用模式
+    - 生产者消费者模型：解决调度问题
+    - 适配器模式
+    - 拦截器模式
+    - 工厂模式
+    - 观察者模式
+
+
+
+小飞机项目可扩展功能（包括分工结果）：
+1. 项目架构 => 欧勇
+1. 鼠标/键盘操作模块 => 史玉涵
+1. 碰撞检测模块 => 申锦辉
+1. 其他界面元素模块 => 刘钰
+1. 子弹样式变动模块 => 倪语希
+1. 飞机升级机制模块 => 上官衍鹏
+1. 标识模块（例如不可通过目标，需多次攻击目标） => 刘哲
+1. 瞄准辅助线（待定+1）
+1. 道具机制（待定+2）
+1. 移动端（待定+3）
+
+参考源码：https://github.com/erkie/erkie.github.com
+
+D3 homework https://ppt.baomitu.com/d/7772d311#/66
+
+参考资料：https://github.com/tianxuzhang/d3.v4-API-Translation
+1. 第一题：树图
+    - http://mbostock.github.io/d3/talk/20111018/cluster.html
+    - http://www.findtheconversation.com/concept-map/
+    - http://bl.ocks.org/robschmuecker/7880033
+1. 第二题，平行坐标图
+    - https://bl.ocks.org/mbostock/4060954
+    - http://mbostock.github.io/d3/talk/20111116/iris-parallel.html
