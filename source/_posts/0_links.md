@@ -387,6 +387,8 @@ H5标准规范，是真正的多线程，但是切记，不能对DOM进行操作
 
 [界面之下：还原真实的 MV* 模式](https://segmentfault.com/a/1190000003871577)
 
+[Git从fork分支开始的过程整理](https://www.cnblogs.com/chercher/p/5587979.html)
+
 #### 性能优化
 CSS动画性能优化：
 - [css3动画的性能优化](https://segmentfault.com/a/1190000000490328)
