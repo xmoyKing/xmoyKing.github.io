@@ -322,6 +322,8 @@ Web前端学习流程，[Web Front End Stack 思维导图版](Web Front End Stac
 
 [javascript原生一步步实现bind分析](https://segmentfault.com/a/1190000007342882)
 
+[理解 JavaScript 的 async/await](https://segmentfault.com/a/1190000007535316)
+
 #### JS 线程
 [从浏览器多进程到JS单线程，JS运行机制最全面的一次梳理](https://segmentfault.com/a/1190000012925872)
 
