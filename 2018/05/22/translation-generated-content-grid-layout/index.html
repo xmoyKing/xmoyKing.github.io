@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.0 -->
+    <script>
+        window.materialVersion = "1.5.0"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Title -->
+    
+    <title>
+        
+            通过生成内容和CSS网格布局为空单元格添加样式 | 
+        
+        KING · NOTE
+    </title>
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="KING">
+    <meta name="description" itemprop="description" content="Loneliness is the carnival of one single soul.">
+    <meta name="keywords" content=",CSS">
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(window.oldVersion){var remove=window.oldVersion.reduce(function(p,c){return p||data.indexOf("/*"+c+"*/")!==-1},false);if(remove){lsloader.removeLS(key)}}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload,isJs){if(typeof cssonload==="boolean"){isJs=cssonload;cssonload=undefined}isJs=isJs||false;cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload,isJs);return}code=code.split(versionString)[1];if(isJs){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload,isJs)}};lsloader.requestResource=function(name,path,cssonload,isJs){var that=this;if(isJs){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else{this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="KING · NOTE">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/material.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/css/style.min.css",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+<!-- add By KING 2017.11.16 -->
+<link rel="stylesheet" href="/css/highlightjs/vs.css">
+<style>
+  #scheme-Paradox .material-layout .highlight .meta{
+    display: initial;
+    padding: initial;
+  }
+</style>
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icon -->
+
+    <style>
+        @font-face {
+            font-family: 'Material Icons';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Material Icons'),
+            local('MaterialIcons-Regular'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.woff) format('woff'),
+            url(https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/fonts/MaterialIcons-Regular.ttf) format('truetype');
+        }
+    </style>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/jquery.min.js", true)</script>
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://github.com/xmoyKING">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="通过生成内容和CSS网格布局为空单元格添加样式 | KING · NOTE">
+    <meta property="og:image" content="https://github.com/xmoyKING/img/favicon.png" />
+    <meta property="og:description" content="Loneliness is the carnival of one single soul.">
+    <meta property="og:article:tag" content="CSS"> 
+
+    
+        <meta property="article:published_time" content="Tue May 22 2018 23:23:03 GMT+0800" />
+        <meta property="article:modified_time" content="Tue May 22 2018 23:23:03 GMT+0800" />
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="通过生成内容和CSS网格布局为空单元格添加样式 | KING · NOTE">
+    <meta name="twitter:description" content="Loneliness is the carnival of one single soul.">
+    <meta name="twitter:image" content="https://github.com/xmoyKING/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://github.com/xmoyKING" />
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://github.com/xmoyKING/2018/05/22/translation-generated-content-grid-layout/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://github.com/xmoyKING/2018/05/22/translation-generated-content-grid-layout/index.html",
+    "headline": "通过生成内容和CSS网格布局为空单元格添加样式",
+    "datePublished": "Tue May 22 2018 23:23:03 GMT+0800",
+    "dateModified": "Tue May 22 2018 23:23:03 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "KING",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.png"
+        },
+        "description": "Loneliness is the carnival of one single soul."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "KING · NOTE",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.png"
+        }
+    },
+    "keywords": ",CSS",
+    "description": "Loneliness is the carnival of one single soul.",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Why-Can’t-We-Style-Empty-Areas-Already"><span class="post-toc-number">1.</span> <span class="post-toc-text">Why Can’t We Style Empty Areas Already?</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什么不能对空区域设置样式？"><span class="post-toc-number">2.</span> <span class="post-toc-text">为什么不能对空区域设置样式？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Using-Redundant-Elements-As-A-Styling-Hook"><span class="post-toc-number">3.</span> <span class="post-toc-text">Using Redundant Elements As A Styling Hook</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用多余元素作为样式钩子"><span class="post-toc-number">4.</span> <span class="post-toc-text">使用多余元素作为样式钩子</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Using-Generated-Content-As-A-Styling-Hook"><span class="post-toc-number">5.</span> <span class="post-toc-text">Using Generated Content As A Styling Hook</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用生成内容作为样式钩子"><span class="post-toc-number">6.</span> <span class="post-toc-text">使用生成内容作为样式钩子</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Limitations-Of-The-Generated-Content-Approach"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">Limitations Of The Generated Content Approach</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#生成内容方法的局限"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">生成内容方法的局限</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Fancy-Headings"><span class="post-toc-number">7.</span> <span class="post-toc-text">Fancy Headings</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Adding-Backgrounds-And-Borders-To-Areas-Of-Your-Design"><span class="post-toc-number">8.</span> <span class="post-toc-text">Adding Backgrounds And Borders To Areas Of Your Design</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Controlling-The-Stack-With-z-index"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">Controlling The Stack With z-index</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Is-This-Something-That-The-Specification-Might-Solve-In-The-Future"><span class="post-toc-number">9.</span> <span class="post-toc-text">Is This Something That The Specification Might Solve In The Future?</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#More-Examples-Please"><span class="post-toc-number">10.</span> <span class="post-toc-text">More Examples, Please!</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                通过生成内容和CSS网格布局为空单元格添加样式
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>KING</strong>
+        <span>May 22, 2018</span>
+        <!-- Updated Time , add By KING 2017.11.16 -->
+        <span>May 22, 2018 UPDATED</span> 
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/CSS/">CSS</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=通过生成内容和CSS网格布局为空单元格添加样式&url=https://github.com/xmoyKING/2018/05/22/translation-generated-content-grid-layout/index.html&pic=https://github.com/xmoyKING/img/favicon.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Weibo
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=通过生成内容和CSS网格布局为空单元格添加样式&url=https://github.com/xmoyKING/2018/05/22/translation-generated-content-grid-layout/index.html&via=KING" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/xmoyKING/2018/05/22/translation-generated-content-grid-layout/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=https://github.com/xmoyKING/2018/05/22/translation-generated-content-grid-layout/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                Share to Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>A common Grid Layout gotcha is when a newcomer to the layout method wonders how to style a grid cell which doesn’t contain any content. In the current Level 1 specification, this isn’t possible since there is no way to target an empty Grid Cell or Grid Area and apply styling. This means that to apply styling, you need to insert an element.</p>
+<p>新手在网格布局时常见的一个问题是：如何对一个不包含任何内容的单元格添加样式。在当前的Level 1规范中还无法做到，因为无法选定空单元格或网格区域并对其添加样式。也就是说，想要设置样式必须插入一个元素。</p>
+<p>In this article, I am going to take a look at how to use CSS Generated Content to achieve styling of empty cells without adding redundant empty elements and show some use cases where this technique makes sense.</p>
+<p>本文我将会介绍如何使用CSS生成内容为空单元格添加样式，而不添加多余的空元素，同时会给出一些样例。</p>
+<h3 id="Why-Can’t-We-Style-Empty-Areas-Already"><a href="#Why-Can’t-We-Style-Empty-Areas-Already" class="headerlink" title="Why Can’t We Style Empty Areas Already?"></a>Why Can’t We Style Empty Areas Already?</h3><h3 id="为什么不能对空区域设置样式？"><a href="#为什么不能对空区域设置样式？" class="headerlink" title="为什么不能对空区域设置样式？"></a>为什么不能对空区域设置样式？</h3><p>The opening paragraph of the <a href="https://www.w3.org/TR/css-grid-1/" target="_blank" rel="noopener">Grid Specification</a> says,</p>
+<blockquote>
+<p>“This CSS module defines a two-dimensional grid-based layout system, optimized for user interface design. In the grid layout model, the children of a grid container can be positioned into arbitrary slots in a predefined flexible or fixed-size layout grid.”</p>
+</blockquote>
+<p><a href="https://www.w3.org/TR/css-grid-1/" target="_blank" rel="noopener">网格规范</a>中开头有提到：</p>
+<blockquote>
+<p>“本CSS模块定义了一个优化UI设计的基于网格的二维布局系统。在网格布局模型中，网格容器的子节点可以定位到预定义的弹性或固定大小的网格中的任意位置。“</p>
+</blockquote>
+<p>The key phrase here is “children of a grid container.” The specification defines the creation of a grid on the parent element, which child items can be positioned into. It doesn’t define any styling of that grid, not even going as far as to implement something like the <code>column-rule</code> property we have in Multi-column Layout. We style the child items, and not the grid itself, which leaves us needing to have an element of some sort to apply that style to.</p>
+<p>注意关键词”网格容器的子节点“。该规范定义了在父元素上创建网格的哪些子节点能够定位。其没有定义任何网格的样式，也没有像多列布局的 <code>column-rule</code> 属性。我们是对子项目添加样式，而不是网格本身，即需要有某个元素来应用样式。</p>
+<h3 id="Using-Redundant-Elements-As-A-Styling-Hook"><a href="#Using-Redundant-Elements-As-A-Styling-Hook" class="headerlink" title="Using Redundant Elements As A Styling Hook"></a>Using Redundant Elements As A Styling Hook</h3><h3 id="使用多余元素作为样式钩子"><a href="#使用多余元素作为样式钩子" class="headerlink" title="使用多余元素作为样式钩子"></a>使用多余元素作为样式钩子</h3><p>One way to insert something to style is to insert a redundant element into the document, for example, a span or a div. Developers tend to dislike this idea, despite the fact that they have been adding additional redundant “row wrappers” for years in order to achieve grid layouts using floats. Perhaps that obviously empty element is more distasteful than the somewhat hidden redundancy of the wrapper element!</p>
+<p>添加样式的方法之一是在文档中添加多余的元素，如 span 或 div。一般来说程序员都不喜欢这个方法，虽然多年来一直是通过多余的“行包裹元素”，然后通过浮动实现网格布局。而明显的空元素比某些隐式的多余包裹元素更让人觉得不爽。</p>
+<p>Completely empty elements become grid items and can have backgrounds and borders added just like an element that contains content, as this example demonstrates.</p>
+<p>如下例所示，将空元素变成网格项，并对其添加背景和边框，就像包含内容的元素一样。</p>
+<p>查看 Rachel Andrew (<a href="https://codepen.io/rachelandrew" target="_blank" rel="noopener">@rachelandrew</a>) 的 <a href="https://codepen.io/rachelandrew/pen/mXymBJ" target="_blank" rel="noopener">Empty elements become Grid Items</a> 。</p>
+<p>Eric Meyer, in his A List Apart article <a href="https://alistapart.com/article/faux-grid-tracks" target="_blank" rel="noopener">Faux Grid Tracks</a>, advocates for using the <code>b</code> element as your redundant element of choice, as it confers no semantic meaning, is short and also fairly obvious in the markup as a hook.</p>
+<p>Eric Meyer在他的个人网站A List Apart 的文章 <a href="https://alistapart.com/article/faux-grid-tracks" target="_blank" rel="noopener">Faux Grid Tracks</a> 中提倡使用 <code>b</code> 元素作为冗余元素，因为它没有任何语义，在标签中作为一个钩子很短而且很明显。</p>
+<p>Inserting an additional few <code>div</code> or <code>b</code> elements is unlikely to be the greatest crime against good markup you have ever committed, so I wouldn’t lose any sleep over choosing that approach if needed. Web development very often involves picking the least suboptimal approach to getting the job done until a better solution is devised. I do prefer however to keep my styling in one place if possible, safely in the stylesheet. If nothing else, it makes it easier to reuse styles, not needing to worry about the additional required markup. It is for this reason, I tend to look to generated content, something I’m very familiar with from the work I’ve done <a href="https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/" target="_blank" rel="noopener">formatting books with CSS</a>, where you spend most of your time working with this feature.</p>
+<p>插入额外的 <code>div</code> 或 <code>b</code> 元素不算是什么大问题，所以若有需要，我不会因觉得有什么不好的。在 Web 开发中通常选择无优化的方法完成任务，直到有更好的解决方案。我一般将样式放在统一的地方，若无其他问题，这样的样式更易于重用，而不需要担心额外需要的标记。正是出于这个原因，我倾向用生成内容的方法，在我的 <a href="https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/" target="_blank" rel="noopener">formatting books with CSS</a> 一书中，生成内容的使用频率非常高。</p>
+<h3 id="Using-Generated-Content-As-A-Styling-Hook"><a href="#Using-Generated-Content-As-A-Styling-Hook" class="headerlink" title="Using Generated Content As A Styling Hook"></a>Using Generated Content As A Styling Hook</h3><h3 id="使用生成内容作为样式钩子"><a href="#使用生成内容作为样式钩子" class="headerlink" title="使用生成内容作为样式钩子"></a>使用生成内容作为样式钩子</h3><p>CSS Generated Content uses the <code>::before</code> and <code>::after</code> CSS pseudo-classes along with the <code>content</code> property to insert some kind of content into the document. The idea of inserting <em>content</em> might lead you to think that this is for inserting text, and while this is possible, for our purposes we are interested in inserting an empty <em>element</em> as a direct child of our Grid Container. With an element inserted we can style it.</p>
+<p>CSS生成内容使用 <code>::before</code> 和 <code>::after</code> CSS伪类以及 <code>content</code> 属性在文档中插入内容。插入内容可能会用于插入文本，虽然这是可能的，但此处我们的目标是插入空元素作为网格容器的直接子元素。同时插入一个可以添加样式的元素。</p>
+<p>In the below example I have a containing element, which will become my Grid Container, with another element nested inside. This single direct child will become a Grid Item. I’ve defined a three column, three-row grid on the container and then positioned the single item using Grid Lines, so it sits in the middle Grid Cell.</p>
+<p>在下面的例子中，有一个包含元素作为网格容器，在其中嵌套了另一个元素。这个单独的子元素作为网格项。我在容器上定义了三列三行的网格，然后使用网格线对其定位，因此它位于中间的网格单元格中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;div&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: <span class="number">100px</span> <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">grid-gap</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="selector-class">.grid</span> &gt; * &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="built_in">rgb</span>(137,153,175);</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">2</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>If we take a look at this example, using the Firefox Grid Inspector to overlay the Grid Lines, we can see how the other empty cells of the grid exist, however, to add a background or border to them we would need to add additional child elements. Which is exactly what Generated Content enables.</p>
+<p>使用 Firefox Grid Inspector 查看这个示例，其上覆盖着网格线，这样虽然能看到其他空单元格的位置，但若想要对其添加背景或边框，则需要添加的子元素，通过生成内容可以实现。</p>
+<p> <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/3d0676c5-529d-4385-b80e-2f66fb9efcea/single-grid-item.png" target="_blank" rel="noopener"><img src="https://p0.ssl.qhimg.com/t0110682a6bf614f263.png" alt="A single item in the center cell of a grid"></a> </p>
+<p>A single grid item, with the tracks highlighted with the Firefox Grid Inspector</p>
+<p>单个网格项，通过 Firefox Grid Inspector 突出显示</p>
+<p>In my CSS I add an empty string, <code>::before</code> and <code>::after</code> my Grid Container. These will immediately become Grid Items and stretch to fill their container. I then add the styling I need for the boxes, in this case adding a background color, and position them as I would any regular Grid Item.</p>
+<p>在CSS中，对网格容器的伪元素 <code>::before</code> and <code>::after</code> 添加了一个空字符串。他们将作为网格项并填充在容器中。然后对其添加样式，添加了背景色，如同普通的网格项一样对其设置定位。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(214,232,182);</span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">3</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="selector-class">.grid</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(214,232,182);</span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/8e9cca88-1933-4788-95f0-5d37328ce9f1/single-grid-item-generated-content.png" target="_blank" rel="noopener"><img src="https://p0.ssl.qhimg.com/t01ef2785d75f9ddc1a.png" alt="A single item in the center cell of a grid, with two green items in the corners"></a> </p>
+<p>A single grid item, and the two items which are generated content</p>
+<p>单个网格项，有两个生成内容作为网格项</p>
+<p>In the document we still only have one child element, the redundant styling elements are contained within the CSS, which seems perfectly reasonable as they are only there for styling purposes.</p>
+<p>在文档中，我们仍然有一个多余的子元素，其他的样式元素则在CSS中，这看起来挺合理的，因为这些元素的目的就是用于添加样式。</p>
+<h4 id="Limitations-Of-The-Generated-Content-Approach"><a href="#Limitations-Of-The-Generated-Content-Approach" class="headerlink" title="Limitations Of The Generated Content Approach"></a>Limitations Of The Generated Content Approach</h4><h4 id="生成内容方法的局限"><a href="#生成内容方法的局限" class="headerlink" title="生成内容方法的局限"></a>生成内容方法的局限</h4><p>The obvious issue with this approach will become apparent if you decide you would like to also style the top right and bottom left Grid Cells. You can only apply one piece of generated content to the top and one to the bottom of the container, multiple <code>::before</code> and <code>::after</code> pseudo elements are not allowed. The method isn’t going to work if you want to create yourself a CSS Grid chequerboard! If you find that you do need to do a lot of empty cell styling then for the foreseeable future, the “Filler B’s” approach explained above is likely to be your best bet.</p>
+<p>若你想要对右上或左下的网格项设置样式那么就有一个问题了，因为生成内容是有限的，多次重复设置 <code>::before</code>和<code>::after</code>伪元素是无效的。例如，无法通过伪元素来生成CSS 网格棋盘。若你确实需要对很多空单元格添加样式，那么在将来，你也许能通过”Filler B”的方式实现。</p>
+<p>The generated content method could also confuse a future developer working on your project. As we are targeting the container, if you reuse that class elsewhere it will bring along the generated content, this is useful if that is what you want. In the next example, we have added decorative lines either side of a heading, it would be reasonable that every instance of an <code>h1</code> would have those lines. It would, however, be very confusing if you were not aware this was going to happen! A comment line above the container rules will help here. I tend to work these days in a pattern library, which really does help these components neatly in one place, making it more obvious what happens when a class is applied to an element.</p>
+<p>生成内容方法也可能会让项目以后的开发人员感到困惑。由于选择器目标是容器，如果在其他地方重复使用该类，将会产生生成内容，如果这是想要的内容，则就是有用的。在下面的例子中，在标题的任一侧添加一个装饰线，每个 <code>h1</code> 都有这些线是合理的。但是，如果不知道有这个伪类，则装饰线会令人感到困惑！在CSS中添加注释将对此有所帮助。我一般会将他们作为一个库使用，在统一的地方定义组件，清晰的说明了当类被应用到元素时会发生什么。</p>
+<h3 id="Fancy-Headings"><a href="#Fancy-Headings" class="headerlink" title="Fancy Headings"></a>Fancy Headings</h3><p>One of my favorite generated content tricks is to style headings. In the past, I had to push back on heading styles that would require additional wrappers and absolute positioning tracks to achieve. When content comes from a CMS, it is often impossible to add those redundant wrappers.</p>
+<p>With Grid and generated content, we can add a line either side of our heading without adding any additional markup. The line will grow and shrink according to available space and will fall back elegantly to a plain centered header when Grid is not available in browsers.</p>
+<p> <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/8a77172d-c1fd-4474-b4c3-b4d31221bdd8/heading-example.png" target="_blank" rel="noopener"><img src="https://p0.ssl.qhimg.com/t01e1e1d89e14f011a8.png" alt="A heading with lines either side, followed by text"></a> </p>
+<p>The heading style we want to achieve</p>
+<p>Our markup is a simple <code>h1</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;My heading&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+<p>In the rules for the <code>h1</code> I create a three column grid. The value of <code>grid-template-columns</code> gives a track of <code>1fr</code> then one of <code>auto</code> and a final track of <code>1fr</code>. The two <code>1fr</code> tracks will share the available space left over after the heading has taken the space it needs to be sat inside the <code>auto</code> sized track.</p>
+<p>I added the <code>text-align</code> property with a value of <code>center</code> in order than my heading is entered in browsers without grid.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr auto <span class="number">1</span>fr;</span><br><span class="line">    <span class="attribute">grid-gap</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>We now add our generated content, to add a line before and after the heading text. I wrap these rules in a Feature Query, so we don’t get any weird generated content in browsers without grid layout.</p>
+<p>The line itself is a border on the generated item.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">supports</span> (display: grid) &#123;</span><br><span class="line">    <span class="selector-tag">h1</span><span class="selector-pseudo">:before</span>,</span><br><span class="line">    <span class="selector-tag">h1</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">        <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">        <span class="attribute">align-self</span>: center;</span><br><span class="line">        <span class="attribute">border-top</span>: <span class="number">1px</span> solid <span class="number">#999</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>That’s all you need to do! You could use the same technique to add any styling, or even an icon on both sides of an element, above or below the element. By placing your item into a separate track you know there is no chance that the item could end up overlapping your heading text, which tended to be the problem when trying to do this kind of thing with absolute positioning. You also have the benefit of the precise ways items can be aligned against each other in grid.</p>
+<p>See the Pen <a href="https://codepen.io/rachelandrew/pen/NyPNyj" target="_blank" rel="noopener">Generated Content heading example</a> by Rachel Andrew (<a href="https://codepen.io/rachelandrew" target="_blank" rel="noopener">@rachelandrew</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p>
+<p>This is a nice example of an enhancement possible using grid layout which you could take advantage of even if you are not ready to head right into a major redesign using grid yet. It falls back very nicely to a straightforward heading, people with supporting browsers get the extra touch, and everyone gets the content. A similar approach was taken by Eric Meyer, using generated content to <a href="http://meyerweb.com/eric/thoughts/2017/04/10/grid-drop-quotes-revisited/" target="_blank" rel="noopener">add easily styleable and positionable quotes to a blockquote element</a>.</p>
+<p>With these small features, I often don’t start out thinking that I’m going to use Grid Layout. It is as I start to figure out how to implement my design I realize it is the layout method to choose. It’s for this reason that I encourage people not to think of Grid as being for page layout over components if you do so you might miss plenty of opportunities where it can help.</p>
+<h3 id="Adding-Backgrounds-And-Borders-To-Areas-Of-Your-Design"><a href="#Adding-Backgrounds-And-Borders-To-Areas-Of-Your-Design" class="headerlink" title="Adding Backgrounds And Borders To Areas Of Your Design"></a>Adding Backgrounds And Borders To Areas Of Your Design</h3><p>We can also use generated content to stack up items; the fact is, more than one item can occupy a particular grid cell. This can include those items inserted with generated content.</p>
+<p>In the next example, I have a design with two sections of content and a full-width item. Behind the content is a background which also runs underneath the full-width item.</p>
+<p> <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/3a86054a-a8be-4610-89ef-662c7bfba928/final-layout.png" target="_blank" rel="noopener"><img src="https://p0.ssl.qhimg.com/t018bdb1290b9098f82.png" alt="A single column layout, with a full width image"></a> </p>
+<p>The layout we are aiming for</p>
+<p>The markup has a container with the sections and full-width element as direct children, and I’m using line-based placement to place my items onto the grid.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;article&gt;</span><br><span class="line">    &lt;section&gt;</span><br><span class="line">        &lt;p&gt;…&lt;/p&gt;</span><br><span class="line">    &lt;/section&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;img src alt=&quot;“Placeholder”&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;section&gt;</span><br><span class="line">        &lt;p&gt;…&lt;/p&gt;</span><br><span class="line">    &lt;/section&gt;</span><br><span class="line">&lt;/article&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-class">.grid</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: grid;</span><br><span class="line">    <span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr <span class="number">20px</span> <span class="number">4</span>fr <span class="number">20px</span> <span class="number">1</span>fr;</span><br><span class="line">    <span class="attribute">grid-template-rows</span>: auto <span class="number">300px</span> auto;</span><br><span class="line">    <span class="attribute">grid-row-gap</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="selector-class">.section1</span> &#123;</span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">3</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="selector-class">.section2</span> &#123;</span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">3</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="selector-class">.full-width</span> &#123;</span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">1</span> / -<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">2</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(214,232,182,.5);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This gives me the layout with the full-width image and two sections of content placed; however, if I add the background to the sections, it will stop above the <code>row-gap</code> between <code>section</code> and the full-width image.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.section</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(214,232,182,.3);</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="built_in">rgb</span>(214,232,182);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/28feafe9-0576-41c3-9098-6ce245e178bb/background-behind-grid-areas.png" target="_blank" rel="noopener"><img src="https://p0.ssl.qhimg.com/t01d73b485a79268c9d.png" alt="A single column layout, with a full width image, background colour behind the content areas"></a> </p>
+<p>The background is now behind the content areas</p>
+<p>If we removed the <code>grid-row-gap</code> and used padding to make the space, it still wouldn’t enable the effect of the background running underneath the full-width panel.</p>
+<p>This is where we can use generated content. I add generated content <code>::before</code> the grid container and give it a background color. If I do nothing else, this will position the content in the first cell of the grid.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(214,232,182,.3);</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="built_in">rgb</span>(214,232,182);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <a href="https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/b33c1461-935b-4d13-83d0-bd3b609c3ce9/before-positioning-generated-content.png" target="_blank" rel="noopener"><img src="https://p0.ssl.qhimg.com/t019bb82aad286e6448.png" alt="A square of colour in the top left corner of the layout"></a> </p>
+<p>The generated content goes into the first empty cell of the grid</p>
+<p>I can then position the content using line-based positioning to stretch over the area that should show the background color.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span><span class="selector-pseudo">::before</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(214,232,182,.3);</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="built_in">rgb</span>(214,232,182);</span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">2</span> / <span class="number">5</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">1</span> / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You can see the complete example in this CodePen.</p>
+<p>See the Pen <a href="https://codepen.io/rachelandrew/pen/jZEqeY" target="_blank" rel="noopener">Generated Content background example</a> by Rachel Andrew (<a href="https://codepen.io/rachelandrew" target="_blank" rel="noopener">@rachelandrew</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p>
+<h4 id="Controlling-The-Stack-With-z-index"><a href="#Controlling-The-Stack-With-z-index" class="headerlink" title="Controlling The Stack With z-index"></a>Controlling The Stack With <code>z-index</code></h4><p>In the example above, the generated content is inserted with <code>::before</code>. This means that the other elements come after it, it is at the bottom of the stack and so will display behind the rest of the content which is where I want it. You can also use <code>z-index</code> to control the stack. Try changing the <code>::before</code> selector to <code>::after</code>. The generated content background now sits on top of everything, as you can see from the way the border runs over the image. This is because it has now become the last thing in the grid container, it is painted last and so appears “on top.”</p>
+<p>To change this, you need to give this element a lower <code>z-index</code> property than everything else. If nothing else has a <code>z-index</code> value, the simplest thing to do is to give your generated content a <code>z-index</code> of <code>-1</code>. This will cause it to be the first thing in the stack, as the item with the lowest <code>z-index</code>.</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.grid</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">z-index</span>: -<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">""</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(214,232,182,.3);</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="built_in">rgb</span>(214,232,182);</span><br><span class="line">    <span class="attribute">grid-column</span>: <span class="number">2</span> / <span class="number">5</span>;</span><br><span class="line">    <span class="attribute">grid-row</span>: <span class="number">1</span> / <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Adding backgrounds in this way doesn’t need to be limited to dropping a background completely behind your content. Being able to pop blocks of color behind part of your design could create some interesting effects.</p>
+<h3 id="Is-This-Something-That-The-Specification-Might-Solve-In-The-Future"><a href="#Is-This-Something-That-The-Specification-Might-Solve-In-The-Future" class="headerlink" title="Is This Something That The Specification Might Solve In The Future?"></a>Is This Something That The Specification Might Solve In The Future?</h3><p>Adding backgrounds and borders does feel like a missing feature of the CSS Grid specification and one which the Working Group have discussed along with many members of the community (<a href="https://github.com/w3c/csswg-drafts/issues/499">the discussion thread is on GitHub</a>).</p>
+<p>If you have use cases not easily solved with generated content, then add your thoughts to that thread. Your comments and use cases help to demonstrate there is developer interest in the feature and also ensure that any proposal covers the sort of things that you need to do.</p>
+<h3 id="More-Examples-Please"><a href="#More-Examples-Please" class="headerlink" title="More Examples, Please!"></a>More Examples, Please!</h3><p>If this article encourages you to experiment with generated content or, if you already have an example, please add it to the comments. Everyone is new to using Grid in production, so there are plenty of, “<em>I never thought of that!</em>” moments to be had, as we combine Grid with other layout methods.</p>
+
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/05/12/festar2018/" id="post_nav-older" class="next-content">
+            Older
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+    <!-- modified By KING 2017.11.16 -->
+    <!-- Sidebar Avatar
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="KING's avatar">
+    </div> -->
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        xmoyking@gmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="https://github.com/xmoyKing/xmoyKing.github.io" target="_blank" title="Star Me on GitHub">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">star</i>
+                        
+                        Star Me on GitHub
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                Home
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    Archives
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/05/">May 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">April 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">March 2018<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">February 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">January 2018<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">December 2017<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">November 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">October 2017<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">September 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">August 2017<span class="sidebar_archives-count">13</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">July 2017<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">June 2017<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">May 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">April 2017<span class="sidebar_archives-count">15</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">March 2017<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/02/">February 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/01/">January 2017<span class="sidebar_archives-count">18</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">December 2016<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">November 2016<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">October 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/09/">September 2016<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/08/">August 2016<span class="sidebar_archives-count">20</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">July 2016<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">June 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">May 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">April 2016<span class="sidebar_archives-count">5</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                Categories
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/Angular/">Angular<span class="sidebar_archives-count">14</span></a></li><li><a class="sidebar_archives-link" href="/categories/AngularJS/">AngularJS<span class="sidebar_archives-count">50</span></a></li><li><a class="sidebar_archives-link" href="/categories/CSS/">CSS<span class="sidebar_archives-count">27</span></a></li><li><a class="sidebar_archives-link" href="/categories/Java/">Java<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/JavaScript/">JavaScript<span class="sidebar_archives-count">95</span></a></li><li><a class="sidebar_archives-link" href="/categories/Linux/">Linux<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/Nodejs/">Nodejs<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/categories/TypeScript/">TypeScript<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/WebApp/">WebApp<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/categories/jQuery/">jQuery<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/mixed/">mixed<span class="sidebar_archives-count">11</span></a></li><li><a class="sidebar_archives-link" href="/categories/mongodb/">mongodb<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/python/">python<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/three-js/">three.js<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/区块链/">区块链<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/响应式-Web-设计/">响应式 Web 设计<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/安全/">安全<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/categories/网络/">网络<span class="sidebar_archives-count">10</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="Tags">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                Tags
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="About">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                About
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/01/01/0_links/" title="Links">
+                
+                    <i class="material-icons sidebar-material-icons">polymer</i>
+                
+                Links
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2018/02/16/0_booklist/" title="Booklist">
+                
+                    <i class="material-icons sidebar-material-icons">code</i>
+                
+                Booklist
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/2017/03/01/0_mixed/" title="Notes">
+                
+                    <i class="material-icons sidebar-material-icons">assignment</i>
+                
+                Notes
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                Number of articles
+                <span class="sidebar-badge">264</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+        <a href="https://plus.google.com/114920706759690760782" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-gplus">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/p/1005052419772155" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="http://github.com/xmoyking" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>KING · NOTE
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/lazyload.min.js", true)</script>
+
+
+
+    <script>lsloader.load("js_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/js.min.js", true)</script>
+
+
+
+    <script>lsloader.load("np_js","https://cdn.jsdelivr.net/npm/hexo-material@1.4.0/source/js/nprogress.js", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
