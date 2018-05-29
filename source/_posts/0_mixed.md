@@ -773,3 +773,18 @@ module.exports = function(arr1, arr2) {
 最近两天开始看《鹅厂wo谈会》，确实是好东西呀，不仅仅是对腾讯各种BG、工作情况的宣传，还有简历、面试笔试的一些干活分享。
 
 看完wo谈会，确实能对整个腾讯有一个大体的了解。准备在二刷的时候把简历、面试的一些东西记下来。
+
+连看了3季卧谈会，发现其实核心的内容都是类似。比如一些腾讯的福利、流程等。
+
+##### 2018.5.24
+Vue是好东西呀，真得必须得好好学习，认真的看。。关于双向绑定，付子组件间的通信本质上还是props+自定义事件。
+
+[.sync修饰符DEMO](https://codepen.io/xmoyking/pen/RyXWNe?editors=1010)
+
+需要注意的有3点，
+1. 父组件内一定要记得加上.sync修饰符，
+2. 父子组件传递的props的命名，若出现大小写混合的情况是，需要注意书写方式，具体参考：[Prop 的大小写 (camelCase vs kebab-case)](https://cn.vuejs.org/v2/guide/components-props.html#Prop-%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%86%99-camelCase-vs-kebab-case)
+3. 在子组件中$emit的调用时方法的第一个参数一定是'update:props变量名' 这样的形式
+
+##### 2018.5.29
+准备找个时间把博客重构一波，换一个主题和框架。
