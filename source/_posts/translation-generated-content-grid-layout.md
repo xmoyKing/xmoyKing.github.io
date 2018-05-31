@@ -4,7 +4,7 @@ categories: CSS
 tags:
   - CSS
 date: 2018-05-22 23:23:03
-updated: 2018-05-22 23:23:03
+updated: 
 ---
 
 A common Grid Layout gotcha is when a newcomer to the layout method wonders how to style a grid cell which doesn’t contain any content. In the current Level 1 specification, this isn’t possible since there is no way to target an empty Grid Cell or Grid Area and apply styling. This means that to apply styling, you need to insert an element.
@@ -146,15 +146,25 @@ The generated content method could also confuse a future developer working on yo
 
 ### Fancy Headings
 
+### 花边标题
+
 One of my favorite generated content tricks is to style headings. In the past, I had to push back on heading styles that would require additional wrappers and absolute positioning tracks to achieve. When content comes from a CMS, it is often impossible to add those redundant wrappers.
 
+我最喜欢的运用生成内容的技巧之一是对标题设置样式。过去，对标题设置样式需要通过额外的包裹元素和绝对定位来实现。但当页面内容来自CMS时，通常是无法添加额外的包装元素的。
+
 With Grid and generated content, we can add a line either side of our heading without adding any additional markup. The line will grow and shrink according to available space and will fall back elegantly to a plain centered header when Grid is not available in browsers.
+
+而使用网格和生成内容，我们可以在标题的任意一侧添加一条横线，而无需添加任何附加标签。该线将根据可用空间增长和缩小，并且当网格在浏览器中不可用时，该线将优雅地回退到普通的居中标题。
 
  [![A heading with lines either side, followed by text](https://p0.ssl.qhimg.com/t01e1e1d89e14f011a8.png)](https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/8a77172d-c1fd-4474-b4c3-b4d31221bdd8/heading-example.png) 
 
 The heading style we want to achieve
 
+我们需要实现的标题样式
+
 Our markup is a simple `h1`.
+
+标签为一个简单的`h1`。
 
 ```
 <h1>My heading</h1>
@@ -162,7 +172,11 @@ Our markup is a simple `h1`.
 
 In the rules for the `h1` I create a three column grid. The value of `grid-template-columns` gives a track of `1fr` then one of `auto` and a final track of `1fr`. The two `1fr` tracks will share the available space left over after the heading has taken the space it needs to be sat inside the `auto` sized track.
 
+在`h1`的样式中，我创建了一个三列网格。`grid-template-columns`的值表示一列为`1fr`，一列为`auto`，最后一列为`1fr`。两个`1fr`的列的宽度将会自适应，在标题占据`auto`大小的空间之后，平分剩余可用空间。
+
 I added the `text-align` property with a value of `center` in order than my heading is entered in browsers without grid.
+
+我设置`text-align`属性为`center`以便在不支持网格的浏览器中水平居中标题。
 
 ```css
 h1 {
@@ -176,7 +190,11 @@ h1 {
 
 We now add our generated content, to add a line before and after the heading text. I wrap these rules in a Feature Query, so we don’t get any weird generated content in browsers without grid layout.
 
+现在添加生成内容，在标题文本前后各添加一行。同时将其对应样式规则包含在特性查询（Feature Query）中，因此不会在不支持网格布局的浏览器中出错。
+
 The line itself is a border on the generated item.
+
+横线其实是生产内容的边框之一。
 
 ```css
 @supports (display: grid) {
@@ -192,23 +210,43 @@ The line itself is a border on the generated item.
 
 That’s all you need to do! You could use the same technique to add any styling, or even an icon on both sides of an element, above or below the element. By placing your item into a separate track you know there is no chance that the item could end up overlapping your heading text, which tended to be the problem when trying to do this kind of thing with absolute positioning. You also have the benefit of the precise ways items can be aligned against each other in grid.
 
+如此，你能使用类似的方式添加任何样式，甚至在元素周围添加图标。若将生产内容放入一个单独的列中时则无法做到将该内容与标题重叠。而通过绝对定位也无法解决该问题。所以，你需要确实你想要实现的效果是否可通过此方法实现。
+
+
 See the Pen [Generated Content heading example](https://codepen.io/rachelandrew/pen/NyPNyj) by Rachel Andrew ([@rachelandrew](https://codepen.io/rachelandrew)) on [CodePen](https://codepen.io).
+
+参考Rachel Andrew ([@rachelandrew](https://codepen.io/rachelandrew)) 的 [Generated Content heading example](https://codepen.io/rachelandrew/pen/NyPNyj) 。
 
 This is a nice example of an enhancement possible using grid layout which you could take advantage of even if you are not ready to head right into a major redesign using grid yet. It falls back very nicely to a straightforward heading, people with supporting browsers get the extra touch, and everyone gets the content. A similar approach was taken by Eric Meyer, using generated content to [add easily styleable and positionable quotes to a blockquote element](http://meyerweb.com/eric/thoughts/2017/04/10/grid-drop-quotes-revisited/).
 
+这是通过网格布局实现渐进增强的一个很好的例子，即使是在你不准备将网格作为主要布局方式，也可以使用。倒退时的简单明了的标题很好，对支持的浏览器也可以获取额外的效果，无论如何都可以正常查看内容。Eric Meyer 也采用了类似的方法，使用生成的内容[为blockquote元素添加方便定位的引号](http://meyerweb.com/eric/thoughts/2017/04/10/grid-drop-quotes-revisited/)。
+
 With these small features, I often don’t start out thinking that I’m going to use Grid Layout. It is as I start to figure out how to implement my design I realize it is the layout method to choose. It’s for this reason that I encourage people not to think of Grid as being for page layout over components if you do so you might miss plenty of opportunities where it can help.
+
+我常常不会在一开始就确定要使用网格布局。一般是在思考如何实现设计稿时才会做选择。基于此，我推荐大家不要将网格布局仅看作页面组件布局的工具，因为有可能会在细节实现时忽略掉此方法。
+
 
 ### Adding Backgrounds And Borders To Areas Of Your Design
 
+### 添加背景和边框
+
 We can also use generated content to stack up items; the fact is, more than one item can occupy a particular grid cell. This can include those items inserted with generated content.
 
+我们也可以使用生成内容来堆叠网格项; 其实，一个网格项可以占据不止一个单元格。包括通过生成内容插入的项目。
+
 In the next example, I have a design with two sections of content and a full-width item. Behind the content is a background which also runs underneath the full-width item.
+
+在下一个例子中，我设计了两段内容区域和一个全宽网格项。内容区域有一个背景，在全宽网格项也有相同的背景。
 
  [![A single column layout, with a full width image](https://p0.ssl.qhimg.com/t018bdb1290b9098f82.png)](https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/3a86054a-a8be-4610-89ef-662c7bfba928/final-layout.png) 
 
 The layout we are aiming for
 
+我们的目标布局
+
 The markup has a container with the sections and full-width element as direct children, and I’m using line-based placement to place my items onto the grid.
+
+代码中有一个包含元素，内容区域和全宽网格项为其子元素，通过基于行的定位来设置网格项的位置。
 
 ```
 <article>
@@ -254,6 +292,8 @@ The markup has a container with the sections and full-width element as direct ch
 
 This gives me the layout with the full-width image and two sections of content placed; however, if I add the background to the sections, it will stop above the `row-gap` between `section` and the full-width image.
 
+这样就能将布局设置为目标那样了，但若对网格项设置背景，则背景不会出现在`section`和全宽图片之间的`row-gap`区域。
+
 ```css
 .section {
     background-color: rgba(214,232,182,.3);
@@ -266,9 +306,15 @@ This gives me the layout with the full-width image and two sections of content p
 
 The background is now behind the content areas
 
+背景仅出现在内容区之下
+
 If we removed the `grid-row-gap` and used padding to make the space, it still wouldn’t enable the effect of the background running underneath the full-width panel.
 
+若将`grid-row-gap`属性移除，而用padding模拟也无法实现将背景置于全宽项之下。
+
 This is where we can use generated content. I add generated content `::before` the grid container and give it a background color. If I do nothing else, this will position the content in the first cell of the grid.
+
+此时就是使用生产内容的最佳场景了，通过`::before`在网格包裹元素之前添加一个生成内容，同时对其设置一个背景色，若什么都不做，那么此生产内容默认放置在网格的第一个单元格中。
 
 ```css
 .grid::before {
@@ -283,7 +329,11 @@ This is where we can use generated content. I add generated content `::before` t
 
 The generated content goes into the first empty cell of the grid
 
+生成内容占了网格的第一个空单元格
+
 I can then position the content using line-based positioning to stretch over the area that should show the background color.
+
+然后，使用基于行的定位来定位生成内容，将其扩展到所有应显示背景色的区域。
 
 ```css
 .grid::before {
@@ -298,13 +348,23 @@ I can then position the content using line-based positioning to stretch over the
 
 You can see the complete example in this CodePen.
 
+完整演示在CodePen上。
+
 See the Pen [Generated Content background example](https://codepen.io/rachelandrew/pen/jZEqeY) by Rachel Andrew ([@rachelandrew](https://codepen.io/rachelandrew)) on [CodePen](https://codepen.io).
+
+参考Rachel Andrew ([@rachelandrew](https://codepen.io/rachelandrew)) 的 [Generated Content background example](https://codepen.io/rachelandrew/pen/jZEqeY) 。
 
 #### Controlling The Stack With `z-index`
 
+#### 通过`z-index`控制层叠
+
 In the example above, the generated content is inserted with `::before`. This means that the other elements come after it, it is at the bottom of the stack and so will display behind the rest of the content which is where I want it. You can also use `z-index` to control the stack. Try changing the `::before` selector to `::after`. The generated content background now sits on top of everything, as you can see from the way the border runs over the image. This is because it has now become the last thing in the grid container, it is painted last and so appears “on top.”
 
+在上面的例子中，生成内容是通过插入`::before`实现的。这意味着其他元素在它之后，它位于层叠的底部，因此将显示在想要的其余内容的后面。也可以通过`z-index`来控制层叠。将`::before`选择器更改为`::after`。生成内容背景则位于所有内容的顶部，如同从边框在图像上那样。这是因为它现在已经成为网格容器中的最后一项，它是最后被绘制的，因此出现在“顶部”。
+
 To change this, you need to give this element a lower `z-index` property than everything else. If nothing else has a `z-index` value, the simplest thing to do is to give your generated content a `z-index` of `-1`. This will cause it to be the first thing in the stack, as the item with the lowest `z-index`.
+
+要改变这一点，需要给这个元素一个比所有元素更低的`z-index`值。若没有设置过`z-index`值，则最简单的做法是给生成内容`z-index`设为`-1`。这会导致它成为层叠中的第一项，因为它的`z-index`最低。
 
 ```css
 .grid::after {
@@ -320,12 +380,24 @@ To change this, you need to give this element a lower `z-index` property than ev
 
 Adding backgrounds in this way doesn’t need to be limited to dropping a background completely behind your content. Being able to pop blocks of color behind part of your design could create some interesting effects.
 
+以这种方式添加的背景并不会被限制在能将背景完全放在内容的最后。而仅在部分元素后突出背景则可以产生一些有趣的效果。
+
 ### Is This Something That The Specification Might Solve In The Future?
+
+### 规范未来会解决这个问题么？
 
 Adding backgrounds and borders does feel like a missing feature of the CSS Grid specification and one which the Working Group have discussed along with many members of the community ([the discussion thread is on GitHub](https://github.com/w3c/csswg-drafts/issues/499)).
 
+CSS网格规范确实没有说明如何为单元格添加背景和边框。工作组与社区的讨论：[GitHub上讨论分支](https://github.com/w3c/csswg-drafts/issues/499)
+
 If you have use cases not easily solved with generated content, then add your thoughts to that thread. Your comments and use cases help to demonstrate there is developer interest in the feature and also ensure that any proposal covers the sort of things that you need to do.
+
+如果你的用例场景不好用生成内容解决，那么可以将你的想法添加到该分支。你的意见和用例有助于呈现开发者对该特性的关注点，同时请确定你的意见和用例的准确度。
 
 ### More Examples, Please!
 
+### 请帮忙添加更多示例！
+
 If this article encourages you to experiment with generated content or, if you already have an example, please add it to the comments. Everyone is new to using Grid in production, so there are plenty of, “_I never thought of that!_” moments to be had, as we combine Grid with other layout methods.
+
+如果通过本文让你尝试使用了生成内容，或者如果你已有示例，请将其添加到评论中。在生成环境中用到的网格布局的都是全新的示例，所以，当我们将网格与其他布局方法结合在一起使用时，会有很多“意外之喜”。
