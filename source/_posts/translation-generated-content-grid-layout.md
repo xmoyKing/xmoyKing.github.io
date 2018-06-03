@@ -7,6 +7,12 @@ date: 2018-05-22 23:23:03
 updated: 
 ---
 
+本文翻译自[Styling Empty Cells With Generated Content And CSS Grid Layout](https://www.smashingmagazine.com/2018/02/generated-content-grid-layout/?utm_source=frontendfocus&utm_medium=email)，将会同时发布在众成翻译，地址：[通过生成内容和CSS网格布局为空单元格添加样式](https://zcfy.cc/article/styling-empty-cells-with-generated-content-and-css-grid-layout)。
+
+作者：[Rachel Andrew](https://www.smashingmagazine.com/author/rachel-andrew)
+
+===============================================================================================
+
 新手在使用网格布局时常见的一个问题是：如何对一个不包含任何内容的单元格添加样式。在当前的Level 1规范中还无法做到，因为无法选定空单元格或网格区域并对其添加样式。也就是说，想要设置样式必须插入一个元素。
 
 本文我将会介绍如何使用CSS生成内容为空单元格添加样式，而不添加多余的空元素，同时会给出一些示例。
